@@ -1,28 +1,52 @@
 static class Menu
 {
+    static private UserAccountService _userAccountService = new UserAccountService();
 
-    //This shows the menu. You can call back to this method to show the menu again
-    //after another presentation method is completed.
-    //You could edit this to show different menus depending on the user's role
     static public void Start()
     {
-        Console.WriteLine("Enter 1 to login");
-        Console.WriteLine("Enter 2 to do something else in the future");
+        while (true)
+        {
+            Console.WriteLine("\nMain Menu:");
+            Console.WriteLine("1. Login");
+            Console.WriteLine("2. Create Account");
+            Console.WriteLine("3. Exit");
 
-        string input = Console.ReadLine();
-        if (input == "1")
-        {
-            UserLogin.Start();
+            string input = Console.ReadLine();
+            switch (input)
+            {
+                case "1":
+                    UserLogin.Start();
+                    break;
+                case "2":
+                    CreateAccount();
+                    break;
+                case "3":
+                    Console.WriteLine("Thank you for using our service. Goodbye!");
+                    return;
+                default:
+                    Console.WriteLine("Invalid input. Please try again.");
+                    break;
+            }
         }
-        else if (input == "2")
+    }
+
+    static private void CreateAccount()
+    {
+        Console.WriteLine("Create a new account");
+        Console.WriteLine("Enter your email address:");
+        string email = Console.ReadLine();
+        Console.WriteLine("Enter your password:");
+        string password = Console.ReadLine();
+        Console.WriteLine("Enter your full name:");
+        string fullName = Console.ReadLine();
+
+        if (_userAccountService.CreateAccount(email, password, fullName))
         {
-            Console.WriteLine("This feature is not yet implemented");
+            Console.WriteLine("Account created successfully. Please login.");
         }
         else
         {
-            Console.WriteLine("Invalid input");
-            Start();
+            Console.WriteLine("Failed to create account. Email may already be in use.");
         }
-
     }
 }
