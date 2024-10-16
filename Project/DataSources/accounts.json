@@ -16,5 +16,11 @@
     "emailAddress": "test05@gmail.com",
     "password": "test05!",
     "fullName": "test testing"
+  },
+  {
+    "id": 4,
+    "emailAddress": "test",
+    "password": "test",
+    "fullName": "test testing"
   }
 ]

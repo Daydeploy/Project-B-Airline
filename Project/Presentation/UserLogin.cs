@@ -36,7 +36,8 @@ static class UserLogin
             Console.WriteLine("3. Modify Booking");
             Console.WriteLine("4. Manage Account");
             Console.WriteLine("5. View Airport Information");
-            Console.WriteLine("6. Logout");
+            Console.WriteLine("6. View Destination Information");
+            Console.WriteLine("7. Logout");
 
             string choice = Console.ReadLine();
 
@@ -58,6 +59,9 @@ static class UserLogin
                     ViewAirportInformation();
                     break;
                 case "6":
+                    ViewDestinationInformation();
+                    break;
+                case "7":
                     Console.WriteLine("Logging out...");
                     Menu.Start();
                     return;
@@ -207,5 +211,16 @@ static class UserLogin
 
         Console.WriteLine("\nPress any key to return to the menu...");
         Console.ReadKey();
+    }
+
+    private static void ViewDestinationInformation()
+    {
+        var airportLogic = new AirportLogic();
+        var airports = airportLogic.GetAllAirports();
+
+        foreach (var airport in airports)
+        {
+            Console.WriteLine($"{airport.City}, {airport.Country}");
+        }
     }
 }
