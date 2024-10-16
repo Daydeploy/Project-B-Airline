@@ -1,0 +1,42 @@
+[
+  {
+    "id": 7237,
+    "origin": "Dublin",
+    "destination": "London",
+    "departureTime": "2024-10-14T17:26:46",
+    "price": 500,
+    "availableSeats": 100
+  },
+  {
+    "id": 9013,
+    "origin": "Dublin",
+    "destination": "London",
+    "departureTime": "2024-10-15T01:26:46",
+    "price": 500,
+    "availableSeats": 100
+  },
+  {
+    "id": 2111,
+    "origin": "London",
+    "destination": "Unknown",
+    "departureTime": "2024-10-16T07:26:46",
+    "price": 500,
+    "availableSeats": 100
+  },
+  {
+    "id": 1039,
+    "origin": "Unknown",
+    "destination": "Rotterdam",
+    "departureTime": "2024-10-16T00:26:46",
+    "price": 500,
+    "availableSeats": 100
+  },
+  {
+    "id": 7301,
+    "origin": "Unknown",
+    "destination": "London",
+    "departureTime": "2024-10-15T13:26:46",
+    "price": 500,
+    "availableSeats": 100
+  }
+]
