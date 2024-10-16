@@ -59,9 +59,6 @@ static class UserLogin
                     ViewAirportInformation();
                     break;
                 case "6":
-                    ViewDestinationInformation();
-                    break;
-                case "7":
                     Console.WriteLine("Logging out...");
                     Menu.Start();
                     return;
@@ -213,14 +210,5 @@ static class UserLogin
         Console.ReadKey();
     }
 
-    private static void ViewDestinationInformation()
-    {
-        var airportLogic = new AirportLogic();
-        var airports = airportLogic.GetAllAirports();
-
-        foreach (var airport in airports)
-        {
-            Console.WriteLine($"{airport.City}, {airport.Country}");
-        }
-    }
+    
 }

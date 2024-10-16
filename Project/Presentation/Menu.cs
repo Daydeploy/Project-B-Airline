@@ -9,8 +9,9 @@ static class Menu
             Console.WriteLine("\nMain Menu:");
             Console.WriteLine("1. Login");
             Console.WriteLine("2. Create Account");
-            Console.WriteLine("3. Show Airport Information");
-            Console.WriteLine("4. Exit");
+            Console.WriteLine("3. Show available Flights");
+            Console.WriteLine("4. View Destination Information");
+            Console.WriteLine("5. Exit");
 
             string input = Console.ReadLine();
             switch (input)
@@ -22,11 +23,13 @@ static class Menu
                     CreateAccount();
                     break;
                 case "3":
-                    DisplayAirportInformation();
-                    break;
-                case "4":
                     Console.WriteLine("Thank you for using our service. Goodbye!");
                     return;
+                case "4":
+                    ViewDestinationInformation();
+                    break;
+                case "5":
+                    break;
                 default:
                     Console.WriteLine("Invalid input. Please try again.");
                     break;
@@ -53,7 +56,19 @@ static class Menu
             Console.WriteLine("Failed to create account. Email may already be in use.");
         }
     }
-    static private void DisplayAirportInformation(){
-        Console.WriteLine("Airport Information:");
+
+    private static void ViewDestinationInformation()
+    {
+        var airportLogic = new AirportLogic();
+        var airports = airportLogic.GetAllAirports();
+
+        foreach (var airport in airports)
+        {
+            if (airport.Type == "Public")
+            {
+                Console.WriteLine($"{airport.City}, {airport.Country}");
+                Console.WriteLine($"    - {airport.Name}");
+            }
+        }
     }
 }
