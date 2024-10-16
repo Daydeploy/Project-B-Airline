@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 static class UserLogin
 {
     static private UserAccountService _userAccountService = new UserAccountService();
@@ -32,7 +35,8 @@ static class UserLogin
             Console.WriteLine("2. Check-in for a Flight");
             Console.WriteLine("3. Modify Booking");
             Console.WriteLine("4. Manage Account");
-            Console.WriteLine("5. Logout");
+            Console.WriteLine("5. View Airport Information");
+            Console.WriteLine("6. Logout");
 
             string choice = Console.ReadLine();
 
@@ -51,6 +55,9 @@ static class UserLogin
                     ManageAccount(account);
                     break;
                 case "5":
+                    ViewAirportInformation();
+                    break;
+                case "6":
                     Console.WriteLine("Logging out...");
                     Menu.Start();
                     return;
@@ -185,5 +192,20 @@ static class UserLogin
                 Console.WriteLine("Invalid choice.");
                 break;
         }
+    }
+
+    private static void ViewAirportInformation()
+    {
+        var airportLogic = new AirportLogic();
+        var airports = airportLogic.GetAllAirports();
+
+        Console.WriteLine("\nAirport Information:");
+        foreach (var airport in airports)
+        {
+            Console.WriteLine($"ID: {airport.AirportID}, Name: {airport.Name}, Type: {airport.Type}, Luxurious: {airport.IsLuxurious}");
+        }
+
+        Console.WriteLine("\nPress any key to return to the menu...");
+        Console.ReadKey();
     }
 }

@@ -1,0 +1,32 @@
+[
+    {
+      "AirportID": 1,
+      "Name": "John F. Kennedy International Airport",
+      "Type": "Public",
+      "IsLuxurious": true
+    },
+    {
+      "AirportID": 2,
+      "Name": "LaGuardia Airport",
+      "Type": "Public",
+      "IsLuxurious": false
+    },
+    {
+      "AirportID": 3,
+      "Name": "Teterboro Airport",
+      "Type": "Private",
+      "IsLuxurious": true
+    },
+    {
+      "AirportID": 4,
+      "Name": "Newark Liberty International Airport",
+      "Type": "Public",
+      "IsLuxurious": false
+    },
+    {
+      "AirportID": 5,
+      "Name": "East Hampton Airport",
+      "Type": "Private",
+      "IsLuxurious": true
+    }
+  ]
