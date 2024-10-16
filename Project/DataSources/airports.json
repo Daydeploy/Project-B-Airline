@@ -5,7 +5,9 @@
         "City": "Rotterdam",
         "Name": "Rotterdam The Hague Airport | RTM / EHRD",
         "Type": "Public",
-        "IsLuxurious": true
+        "IsLuxurious": true,
+        "PhoneNumber": "+31 10 446 3444",
+        "Address": "Rotterdam Airportplein 60, 3045 AP Rotterdam, Netherlands"
     },
     {
         "AirportID": 2,
@@ -13,7 +15,9 @@
         "City": "Dublin",
         "Name": "Dublin Airport | DUB / EIDW",
         "Type": "Public",
-        "IsLuxurious": false
+        "IsLuxurious": false,
+        "PhoneNumber": "+353 1 814 1111",
+        "Address": "Dublin Airport, Co. Dublin, Ireland"
     },
     {
         "AirportID": 3,
@@ -21,7 +25,9 @@
         "City": "London",
         "Name": "London City Airport | LCY / EGLC",
         "Type": "Public",
-        "IsLuxurious": false
+        "IsLuxurious": false,
+        "PhoneNumber": "+44 20 7646 0088",
+        "Address": "Hartmann Rd, Royal Docks, London E16 2PX, United Kingdom"
     },
     {
         "AirportID": 4,
@@ -29,7 +35,9 @@
         "City": "Unknown",
         "Name": "Private field 1",
         "Type": "Private",
-        "IsLuxurious": true
+        "IsLuxurious": true,
+        "PhoneNumber": "Unknown",
+        "Address": "Unknown"
     },
     {
         "AirportID": 5,
@@ -37,6 +45,8 @@
         "City": "Unknown",
         "Name": "Private field 2",
         "Type": "Private",
-        "IsLuxurious": true
+        "IsLuxurious": true,
+        "PhoneNumber": "Unknown",
+        "Address": "Unknown"
     }
 ]
