@@ -15,28 +15,25 @@ public class FlightsLogic
         AirportModel originAirport = airports[random.Next(airports.Count)];
         string origin = originAirport.City;
 
-
         // Randomly select destination airport (ensuring it's different from origin)
         AirportModel destinationAirport;
-
         do
         {
             destinationAirport = airports[random.Next(airports.Count)];
         } while (destinationAirport == originAirport);
-
         string destination = destinationAirport.City;
 
-        // Generate a departure time in the past
-        DateTime dateTime = DateTime.Now;
-        DateTime departureTime = dateTime.AddHours(-random.Next(1, 48));
-        string formattedDepartureTime = departureTime.ToString("yyyy-MM-ddTHH:mm:ss");
+        // Generate a departure time in the future
+        DateTime departureTime = DateTime.Now.AddHours(random.Next(1, 48));
+        
+        // Generate an arrival time after the departure time
+        DateTime arrivalTime = departureTime.AddHours(random.Next(1, 8));
 
-        // 
         int price = 500;
         int availableSeats = 100;
+        string flightNumber = $"FL{random.Next(1000, 9999)}";
 
-        return new FlightModel(flightId, origin, destination, formattedDepartureTime, price, availableSeats);
-
+        return new FlightModel(flightId, origin, destination, departureTime, arrivalTime, price, availableSeats, flightNumber);
     }
 
     public static void AppendFlights()
@@ -50,4 +47,8 @@ public class FlightsLogic
         FlightsAccess.WriteAll(AvailableFlights);
     }
 
+    public List<FlightModel> GetAllFlights()
+    {
+        return FlightsAccess.LoadAll();
+    }
 }

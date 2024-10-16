@@ -5,10 +5,12 @@ using System.Linq;
 public class UserAccountService
 {
     private AccountsLogic _accountsLogic;
+    private List<BookingModel> _bookings;
 
     public UserAccountService()
     {
         _accountsLogic = new AccountsLogic();
+        _bookings = BookingAccess.LoadAll();
     }
 
     public bool CreateAccount(string email, string password, string fullName)
@@ -65,19 +67,44 @@ public class UserAccountService
 
     public List<FlightBooking> GetBookedFlights(int userId)
     {
-        // Placeholder implementation
-        return new List<FlightBooking>();
+        var userBookings = _bookings.Where(b => b.UserId == userId).ToList();
+        var flightsLogic = new FlightsLogic();
+        var flights = flightsLogic.GetAllFlights();
+
+        return userBookings.Select(booking => {
+            var flight = flights.FirstOrDefault(f => f.FlightId == booking.FlightId);
+            return new FlightBooking
+            {
+                FlightId = booking.FlightId,
+                FlightNumber = flight?.FlightNumber ?? "Unknown",
+                DepartureTime = flight?.DepartureTime ?? DateTime.MinValue,
+                ArrivalTime = flight?.ArrivalTime ?? DateTime.MinValue
+            };
+        }).ToList();
     }
 
     public bool CheckIn(int flightId)
     {
-        // Placeholder implementation
+        // For now, we'll just return true to simulate a successful check-in
+        // In a real application, you'd want to update the booking status
         return true;
     }
 
     public bool ModifyBooking(int flightId, BookingDetails newDetails)
     {
-        // Placeholder implementation
+        var booking = _bookings.FirstOrDefault(b => b.FlightId == flightId);
+        if (booking == null)
+        {
+            return false;
+        }
+
+        // Update the booking details
+        booking.SeatNumber = newDetails.SeatNumber;
+        booking.HasCheckedBaggage = newDetails.HasCheckedBaggage;
+
+        // Save the updated bookings
+        BookingAccess.WriteAll(_bookings);
+
         return true;
     }
 }

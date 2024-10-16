@@ -5,19 +5,28 @@ public class BookingModel
     [JsonPropertyName("bookingId")]
     public int BookingId { get; set; }
 
-    // [JsonPropertyName("passengers")]
-    // public List<PassengerModel> Passengers { get; set; }
+    [JsonPropertyName("userId")]
+    public int UserId { get; set; }
 
-    [JsonPropertyName("flighId")]
+    [JsonPropertyName("flightId")]
     public int FlightId { get; set; }
 
     [JsonPropertyName("totalPrice")]
     public int TotalPrice { get; set; }
 
-    public BookingModel(int bookingId, FlightModel flight, int totalPrice)
+    [JsonPropertyName("seatNumber")]
+    public string SeatNumber { get; set; }
+
+    [JsonPropertyName("hasCheckedBaggage")]
+    public bool HasCheckedBaggage { get; set; }
+
+    public BookingModel(int bookingId, int userId, int flightId, int totalPrice, string seatNumber, bool hasCheckedBaggage)
     {
         BookingId = bookingId;
-        FlightId = flight.FlightId;
+        UserId = userId;
+        FlightId = flightId;
         TotalPrice = totalPrice;
+        SeatNumber = seatNumber;
+        HasCheckedBaggage = hasCheckedBaggage;
     }
 }
