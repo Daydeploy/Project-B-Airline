@@ -9,7 +9,8 @@ static class Menu
             Console.WriteLine("\nMain Menu:");
             Console.WriteLine("1. Login");
             Console.WriteLine("2. Create Account");
-            Console.WriteLine("3. Exit");
+            Console.WriteLine("3. Show available Flights");
+            Console.WriteLine("4. Exit");
 
             string input = Console.ReadLine();
             switch (input)

@@ -6,6 +6,8 @@ using System.Text.Json;
 public class AirportModel
 {
     public int AirportID { get; set; }
+    public string Country { get; set; }
+    public string City { get; set; }
     public string Name { get; set; }
     public string Type { get; set; }
     public bool IsLuxurious { get; set; }
