@@ -1,31 +1,31 @@
 [
     {
       "AirportID": 1,
-      "Name": "John F. Kennedy International Airport",
+      "Name": "Rotterdam The Hague Airport | RTM / EHRD",
       "Type": "Public",
       "IsLuxurious": true
     },
     {
       "AirportID": 2,
-      "Name": "LaGuardia Airport",
+      "Name": "Dublin Airport | DUB / EIDW",
       "Type": "Public",
       "IsLuxurious": false
     },
     {
       "AirportID": 3,
-      "Name": "Teterboro Airport",
-      "Type": "Private",
-      "IsLuxurious": true
-    },
-    {
-      "AirportID": 4,
-      "Name": "Newark Liberty International Airport",
+      "Name": "London City Airport | LCY / EGLC",
       "Type": "Public",
       "IsLuxurious": false
     },
     {
+      "AirportID": 4,
+      "Name": "Private field 1",
+      "Type": "Private",
+      "IsLuxurious": true
+    },
+    {
       "AirportID": 5,
-      "Name": "East Hampton Airport",
+      "Name": "Private field 2",
       "Type": "Private",
       "IsLuxurious": true
     }
