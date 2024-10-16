@@ -29,7 +29,7 @@ public class FlightsLogic
         // Generate an arrival time after the departure time
         DateTime arrivalTime = departureTime.AddHours(random.Next(1, 8));
 
-        int price = 500;
+        int price = Math.Max(random.Next(50, 500), random.Next(50, 500));
         int availableSeats = 100;
         string flightNumber = $"FL{random.Next(1000, 9999)}";
 
@@ -50,5 +50,17 @@ public class FlightsLogic
     public List<FlightModel> GetAllFlights()
     {
         return FlightsAccess.LoadAll();
+    }
+
+    public List<FlightModel> FilterFlightsByPriceUp(){
+        return AvailableFlights.OrderBy(f => f.Price).ToList();
+    }
+
+    public List<FlightModel> FilterFlightsByPriceDown(){
+        return AvailableFlights.OrderByDescending(f => f.Price).ToList();
+    }
+    
+    public List<FlightModel> FilterFlightsByPriceRange(int minPrice, int maxPrice){
+        return AvailableFlights.Where(f => f.Price >= minPrice && f.Price <= maxPrice).ToList();
     }
 }

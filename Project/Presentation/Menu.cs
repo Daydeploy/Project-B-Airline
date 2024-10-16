@@ -23,7 +23,7 @@ static class Menu
                     CreateAccount();
                     break;
                 case "3":
-                    Console.WriteLine("Thank you for using our service. Goodbye!");
+                    ShowAvailableFlights();
                     return;
                 case "4":
                     ViewDestinationInformation();
@@ -70,5 +70,54 @@ static class Menu
                 Console.WriteLine($"    - {airport.Name}");
             }
         }
+    }
+
+    static private void ShowAvailableFlights(){
+        FlightsLogic flights = new FlightsLogic();
+        Console.WriteLine("Available Flights:");
+        foreach (var flight in flights.GetAllFlights()){
+            // Display all flight information
+            Console.WriteLine(flight.Origin + " to " + flight.Destination + " at " + flight.DepartureTime + " for " + flight.Price + " EUR");
+        }
+        Console.WriteLine("Do you want to filter the flights (y/n)");
+        string input = Console.ReadLine();
+        if (input == "y"){
+            FilterFlightsByPriceUI();
+        }
+    }
+
+    static private void FilterFlightsByPriceUI(){
+        FlightsLogic flights = new FlightsLogic();
+
+        Console.WriteLine("Filter: ");
+        Console.WriteLine("1: low-high");
+        Console.WriteLine("2: high-low");
+        Console.WriteLine("3: input range");
+        string input = Console.ReadLine();
+        switch (input){
+            case "1":
+                foreach (var flight in flights.FilterFlightsByPriceUp()){
+                    Console.WriteLine(flight.Origin + " to " + flight.Destination + " at " + flight.DepartureTime + " for " + flight.Price + " EUR");
+                }
+                break;
+            case "2":
+                foreach (var flight in flights.FilterFlightsByPriceDown()){
+                    Console.WriteLine(flight.Origin + " to " + flight.Destination + " at " + flight.DepartureTime + " for " + flight.Price + " EUR");
+                }
+                break;
+            case "3":
+                Console.WriteLine("Enter minimum price: ");
+                int min = int.Parse(Console.ReadLine());
+                Console.WriteLine("Enter maximum price: ");
+                int max = int.Parse(Console.ReadLine());
+                foreach (var flight in flights.FilterFlightsByPriceRange(min, max)){
+                    Console.WriteLine(flight.Origin + " to " + flight.Destination + " at " + flight.DepartureTime + " for " + flight.Price + " EUR");
+                };
+                break;
+            default:
+                Console.WriteLine("Invalid input. Please try again.");
+                break;
+        }
+
     }
 }

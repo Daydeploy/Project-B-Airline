@@ -1,42 +1,52 @@
 [
   {
-    "id": 7237,
-    "origin": "Dublin",
-    "destination": "London",
-    "departureTime": "2024-10-14T17:26:46",
-    "price": 500,
-    "availableSeats": 100
-  },
-  {
-    "id": 9013,
-    "origin": "Dublin",
-    "destination": "London",
-    "departureTime": "2024-10-15T01:26:46",
-    "price": 500,
-    "availableSeats": 100
-  },
-  {
-    "id": 2111,
+    "id": 3677,
     "origin": "London",
     "destination": "Unknown",
-    "departureTime": "2024-10-16T07:26:46",
-    "price": 500,
-    "availableSeats": 100
+    "departureTime": "2024-10-18T22:53:00.4512704+02:00",
+    "arrivalTime": "2024-10-19T02:53:00.4512704+02:00",
+    "price": 391,
+    "availableSeats": 100,
+    "flightNumber": "FL4538"
   },
   {
-    "id": 1039,
-    "origin": "Unknown",
-    "destination": "Rotterdam",
-    "departureTime": "2024-10-16T00:26:46",
-    "price": 500,
-    "availableSeats": 100
-  },
-  {
-    "id": 7301,
-    "origin": "Unknown",
+    "id": 7420,
+    "origin": "Rotterdam",
     "destination": "London",
-    "departureTime": "2024-10-15T13:26:46",
-    "price": 500,
-    "availableSeats": 100
+    "departureTime": "2024-10-17T23:53:00.4577254+02:00",
+    "arrivalTime": "2024-10-18T00:53:00.4577254+02:00",
+    "price": 384,
+    "availableSeats": 100,
+    "flightNumber": "FL5607"
+  },
+  {
+    "id": 7498,
+    "origin": "Rotterdam",
+    "destination": "Dublin",
+    "departureTime": "2024-10-19T08:53:00.4577343+02:00",
+    "arrivalTime": "2024-10-19T14:53:00.4577343+02:00",
+    "price": 291,
+    "availableSeats": 100,
+    "flightNumber": "FL3198"
+  },
+  {
+    "id": 1211,
+    "origin": "Unknown",
+    "destination": "Dublin",
+    "departureTime": "2024-10-18T16:53:00.4577354+02:00",
+    "arrivalTime": "2024-10-18T21:53:00.4577354+02:00",
+    "price": 424,
+    "availableSeats": 100,
+    "flightNumber": "FL3559"
+  },
+  {
+    "id": 8048,
+    "origin": "Dublin",
+    "destination": "Unknown",
+    "departureTime": "2024-10-19T03:53:00.4577359+02:00",
+    "arrivalTime": "2024-10-19T04:53:00.4577359+02:00",
+    "price": 232,
+    "availableSeats": 100,
+    "flightNumber": "FL8198"
   }
 ]
