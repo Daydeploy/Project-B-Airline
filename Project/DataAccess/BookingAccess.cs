@@ -1,4 +1,5 @@
 using System.Text.Json;
+using System.IO;
 
 static class BookingAccess
 {
@@ -7,8 +8,13 @@ static class BookingAccess
 
     public static List<BookingModel> LoadAll()
     {
+        if (!File.Exists(path))
+        {
+            WriteAll(new List<BookingModel>());
+        }
+
         string json = File.ReadAllText(path);
-        return JsonSerializer.Deserialize<List<BookingModel>>(json);
+        return JsonSerializer.Deserialize<List<BookingModel>>(json) ?? new List<BookingModel>();
     }
 
 
@@ -16,6 +22,9 @@ static class BookingAccess
     {
         var options = new JsonSerializerOptions { WriteIndented = true };
         string json = JsonSerializer.Serialize(bookings, options);
+        
+        Directory.CreateDirectory(Path.GetDirectoryName(path));
+        
         File.WriteAllText(path, json);
     }
 }
