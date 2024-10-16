@@ -9,7 +9,7 @@ static class Menu
             Console.WriteLine("\nMain Menu:");
             Console.WriteLine("1. Login");
             Console.WriteLine("2. Create Account");
-            Console.WriteLine("3. Show available Flights");
+            Console.WriteLine("3. Show Airport Information");
             Console.WriteLine("4. Exit");
 
             string input = Console.ReadLine();
@@ -22,6 +22,9 @@ static class Menu
                     CreateAccount();
                     break;
                 case "3":
+                    DisplayAirportInformation();
+                    break;
+                case "4":
                     Console.WriteLine("Thank you for using our service. Goodbye!");
                     return;
                 default:
@@ -49,5 +52,8 @@ static class Menu
         {
             Console.WriteLine("Failed to create account. Email may already be in use.");
         }
+    }
+    static private void DisplayAirportInformation(){
+        Console.WriteLine("Airport Information:");
     }
 }
