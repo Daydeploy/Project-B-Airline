@@ -11,23 +11,21 @@ public class FlightsLogic
         // Randomly generate a Flight ID
         int flightId = random.Next(1000, 10000);
 
-        // Randomly select one of the available destinations and assign city to the origin
-        AirportModel originAirport = airports[random.Next(airports.Count)];
-        string origin = originAirport.City;
+        // Planes always take off from Rotterdam The Hague airport.
+        string origin = "Rotterdam";
+        AirportModel originAirport = airports.FirstOrDefault(x => x.City.Equals(origin, StringComparison.OrdinalIgnoreCase));
 
         // Randomly select destination airport (ensuring it's different from origin)
         AirportModel destinationAirport;
         do
         {
             destinationAirport = airports[random.Next(airports.Count)];
-        } while (destinationAirport == originAirport);
+        } while (destinationAirport.City.Equals(originAirport.City, StringComparison.OrdinalIgnoreCase));
         string destination = destinationAirport.City;
 
         // Generate a departure time in the future
-        DateTime departureTime = DateTime.Now.AddHours(random.Next(1, 48));
-        
-        // Generate an arrival time after the departure time
-        DateTime arrivalTime = departureTime.AddHours(random.Next(1, 8));
+        DateTime _departureTime = DateTime.Now.AddHours(random.Next(1, 48));
+        string departureTime = _departureTime.ToString("yyyy-MM-ddTHH:mm:ss");
 
         int price = Math.Max(random.Next(50, 500), random.Next(50, 500));
         int availableSeats = 100;
@@ -52,15 +50,18 @@ public class FlightsLogic
         return FlightsAccess.LoadAll();
     }
 
-    public List<FlightModel> FilterFlightsByPriceUp(){
+    public List<FlightModel> FilterFlightsByPriceUp()
+    {
         return AvailableFlights.OrderBy(f => f.Price).ToList();
     }
 
-    public List<FlightModel> FilterFlightsByPriceDown(){
+    public List<FlightModel> FilterFlightsByPriceDown()
+    {
         return AvailableFlights.OrderByDescending(f => f.Price).ToList();
     }
-    
-    public List<FlightModel> FilterFlightsByPriceRange(int minPrice, int maxPrice){
+
+    public List<FlightModel> FilterFlightsByPriceRange(int minPrice, int maxPrice)
+    {
         return AvailableFlights.Where(f => f.Price >= minPrice && f.Price <= maxPrice).ToList();
     }
 }

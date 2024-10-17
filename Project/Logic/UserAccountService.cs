@@ -98,14 +98,15 @@ public class UserAccountService
         var flightsLogic = new FlightsLogic();
         var flights = flightsLogic.GetAllFlights();
 
-        return userBookings.Select(booking => {
+        return userBookings.Select(booking =>
+        {
             var flight = flights.FirstOrDefault(f => f.FlightId == booking.FlightId);
             return new FlightBooking
             {
                 FlightId = booking.FlightId,
                 FlightNumber = flight?.FlightNumber ?? "Unknown",
-                DepartureTime = flight?.DepartureTime ?? DateTime.MinValue,
-                ArrivalTime = flight?.ArrivalTime ?? DateTime.MinValue
+                DepartureTime = flight?.DepartureTime ?? DateTime.MinValue.ToString(),
+                ArrivalTime = flight?.ArrivalTime ?? DateTime.MinValue.ToString()
             };
         }).ToList();
     }
@@ -141,8 +142,8 @@ public class FlightBooking
 {
     public int FlightId { get; set; }
     public string FlightNumber { get; set; }
-    public DateTime DepartureTime { get; set; }
-    public DateTime ArrivalTime { get; set; }
+    public string DepartureTime { get; set; }
+    public string ArrivalTime { get; set; }
 }
 
 public class BookingDetails

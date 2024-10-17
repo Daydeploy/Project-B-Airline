@@ -12,10 +12,10 @@ public class FlightModel
     public string Destination { get; set; }
 
     [JsonPropertyName("departureTime")]
-    public DateTime DepartureTime { get; set; }
+    public string DepartureTime { get; set; }
 
     [JsonPropertyName("arrivalTime")]
-    public DateTime ArrivalTime { get; set; }
+    public string ArrivalTime { get; set; }
 
     [JsonPropertyName("price")]
     public int Price { get; set; }
@@ -26,7 +26,7 @@ public class FlightModel
     [JsonPropertyName("flightNumber")]
     public string FlightNumber { get; set; }
 
-    public FlightModel(int flightId, string origin, string destination, DateTime departureTime, DateTime arrivalTime, int price, int availableSeats, string flightNumber)
+    public FlightModel(int flightId, string origin, string destination, string departureTime, string arrivalTime, int price, int availableSeats, string flightNumber)
     {
         FlightId = flightId;
         Origin = origin;
