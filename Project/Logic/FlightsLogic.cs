@@ -27,6 +27,9 @@ public class FlightsLogic
         DateTime _departureTime = DateTime.Now.AddHours(random.Next(1, 48));
         string departureTime = _departureTime.ToString("yyyy-MM-ddTHH:mm:ss");
 
+        DateTime _arrivalTime = _departureTime.AddHours(random.Next(1, 8));
+        string arrivalTime = _arrivalTime.ToString("yyyy-MM-ddTHH:mm:ss");
+
         int price = Math.Max(random.Next(50, 500), random.Next(50, 500));
         int availableSeats = 100;
         string flightNumber = $"FL{random.Next(1000, 9999)}";
