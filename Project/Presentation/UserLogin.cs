@@ -35,8 +35,9 @@ static class UserLogin
             Console.WriteLine("2. Check-in for a Flight");
             Console.WriteLine("3. Modify Booking");
             Console.WriteLine("4. Manage Account");
-            Console.WriteLine("5. View Airport Information");
-            Console.WriteLine("6. View Destination Information");
+            Console.WriteLine("5. Show available Flights");
+            Console.WriteLine("6. View Airport Information");
+            // Console.WriteLine("7. View Destination Information");
             Console.WriteLine("7. Logout");
 
             string choice = Console.ReadLine();
@@ -56,9 +57,12 @@ static class UserLogin
                     ManageAccount(account);
                     break;
                 case "5":
-                    ViewAirportInformation();
+                    ShowAvailableFlights();
                     break;
                 case "6":
+                    ViewAirportInformation();
+                    break;
+                case "7":
                     Console.WriteLine("Logging out...");
                     Menu.Start();
                     return;
@@ -81,7 +85,8 @@ static class UserLogin
             Console.WriteLine("Your booked flights:");
             foreach (var flight in bookedFlights)
             {
-                Console.WriteLine($"Flight ID: {flight.FlightId}, Number: {flight.FlightNumber}, Departure: {flight.DepartureTime}, Arrival: {flight.ArrivalTime}");
+                Console.WriteLine(
+                    $"Flight ID: {flight.FlightId}, Number: {flight.FlightNumber}, Departure: {flight.DepartureTime}, Arrival: {flight.ArrivalTime}");
             }
         }
     }
@@ -162,6 +167,7 @@ static class UserLogin
                 {
                     Console.WriteLine("Failed to update email.");
                 }
+
                 break;
             case "2":
                 Console.WriteLine("Enter new password:");
@@ -174,6 +180,7 @@ static class UserLogin
                 {
                     Console.WriteLine("Failed to update password.");
                 }
+
                 break;
             case "3":
                 Console.WriteLine("Enter new full name:");
@@ -186,6 +193,7 @@ static class UserLogin
                 {
                     Console.WriteLine("Failed to update full name.");
                 }
+
                 break;
             case "4":
                 return;
@@ -203,12 +211,72 @@ static class UserLogin
         Console.WriteLine("\nAirport Information:");
         foreach (var airport in airports)
         {
-            Console.WriteLine($"ID: {airport.AirportID}, Name: {airport.Name}, Type: {airport.Type}, Luxurious: {airport.IsLuxurious}");
+            Console.WriteLine(
+                $"ID: {airport.AirportID}, Name: {airport.Name}, Type: {airport.Type}, Luxurious: {airport.IsLuxurious}");
         }
 
         Console.WriteLine("\nPress any key to return to the menu...");
         Console.ReadKey();
     }
 
-    
+    static public void ShowAvailableFlights()
+    {
+        FlightsLogic flights = new FlightsLogic();
+        Console.WriteLine("Available Flights:");
+        foreach (var flight in flights.GetAllFlights())
+        {
+            // Display all flight information
+            Console.WriteLine("ID: " + flight.FlightId + flight.Origin + " to " + flight.Destination + " at " +
+                              flight.DepartureTime + " for " + flight.Price + " EUR");
+        }
+
+        Console.WriteLine("Do you want to filter the flights (y/n)");
+        string input = Console.ReadLine();
+        if (input == "y" || input == "Y" || input == "yes" || input == "Yes")
+        {
+            Menu.FilterFlightsByPriceUI();
+        }
+
+        // If user is logged allow the user to book a flight
+        if (_userAccountService.IsLoggedIn == true)
+        {
+            Console.WriteLine("Do you want to book a flight (y/n)");
+            string input2 = Console.ReadLine();
+            int price = 0;
+            if (input2 == "y" || input2 == "Y" || input2 == "yes" || input2 == "Yes")
+            {
+                Console.WriteLine("Enter the Flight ID to book:");
+                int flightId = int.Parse(Console.ReadLine());
+                {
+                    bool flightExists = false;
+                    foreach (var flight in flights.GetAllFlights())
+                    {
+                        if (flight.FlightId == flightId)
+                        {
+                            price = flight.Price;
+                            bool success = _userAccountService.BookFlight(_userAccountService.CurrentUserId, flightId,
+                                price, "placeholder", false);
+                            if (success)
+                            {
+                                Console.WriteLine("Flight booked successfully.");
+                                flightExists = true;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Failed to book flight. Please try again or contact support.");
+                            }
+                        }                     
+                    }
+                    if (!flightExists)
+                    {
+                        Console.WriteLine("Flight does not exist.");
+                    }
+                }
+
+
+                Console.WriteLine("\nPress any key to return to the menu...");
+                Console.ReadKey();
+            }
+        }
+    }
 }

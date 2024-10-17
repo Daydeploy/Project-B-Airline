@@ -1,0 +1,26 @@
+[
+  {
+    "bookingId": 1,
+    "userId": 4,
+    "flightId": 3095,
+    "totalPrice": 434,
+    "seatNumber": "placeholder",
+    "hasCheckedBaggage": false
+  },
+  {
+    "bookingId": 2,
+    "userId": 4,
+    "flightId": 4919,
+    "totalPrice": 407,
+    "seatNumber": "placeholder",
+    "hasCheckedBaggage": false
+  },
+  {
+    "bookingId": 3,
+    "userId": 4,
+    "flightId": 4119,
+    "totalPrice": 215,
+    "seatNumber": "placeholder",
+    "hasCheckedBaggage": false
+  }
+]

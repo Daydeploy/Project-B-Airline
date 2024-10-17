@@ -23,8 +23,8 @@ static class Menu
                     CreateAccount();
                     break;
                 case "3":
-                    ShowAvailableFlights();
-                    return;
+                    UserLogin.ShowAvailableFlights();
+                    break;
                 case "4":
                     ViewDestinationInformation();
                     break;
@@ -72,27 +72,13 @@ static class Menu
         }
     }
 
-    static private void ShowAvailableFlights(){
-        FlightsLogic flights = new FlightsLogic();
-        Console.WriteLine("Available Flights:");
-        foreach (var flight in flights.GetAllFlights()){
-            // Display all flight information
-            Console.WriteLine(flight.Origin + " to " + flight.Destination + " at " + flight.DepartureTime + " for " + flight.Price + " EUR");
-        }
-        Console.WriteLine("Do you want to filter the flights (y/n)");
-        string input = Console.ReadLine();
-        if (input == "y"){
-            FilterFlightsByPriceUI();
-        }
-    }
-
-    static private void FilterFlightsByPriceUI(){
+    static public void FilterFlightsByPriceUI(){
         FlightsLogic flights = new FlightsLogic();
 
         Console.WriteLine("Filter: ");
-        Console.WriteLine("1: low-high");
-        Console.WriteLine("2: high-low");
-        Console.WriteLine("3: input range");
+        Console.WriteLine("1: price from low-high");
+        Console.WriteLine("2: price from high-low");
+        Console.WriteLine("3: frice between input range");
         string input = Console.ReadLine();
         switch (input){
             case "1":

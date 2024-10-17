@@ -7,6 +7,9 @@ public class UserAccountService
     private AccountsLogic _accountsLogic;
     private List<BookingModel> _bookings;
 
+    public bool IsLoggedIn { get; set; }
+    public int CurrentUserId { get; set; }
+
     public UserAccountService()
     {
         _accountsLogic = new AccountsLogic();
@@ -27,14 +30,26 @@ public class UserAccountService
         }
 
         int newId = _accountsLogic._accounts.Max(a => a.Id) + 1;
+        CurrentUserId = newId;
         var newAccount = new AccountModel(newId, email, password, fullName);
         _accountsLogic.UpdateList(newAccount);
         return true;
     }
 
     public AccountModel Login(string email, string password)
-    {
-        return _accountsLogic.CheckLogin(email, password);
+    {   
+        // Set current user id
+        CurrentUserId = _accountsLogic._accounts.FirstOrDefault(a => a.EmailAddress == email)?.Id ?? -1; // Set to -1 if not found
+        var account = _accountsLogic.CheckLogin(email, password);
+        if (account != null)
+        {
+            IsLoggedIn = true;
+        }
+        else
+        {
+            IsLoggedIn = false;
+        }
+        return account;
     }
 
     public bool ManageAccount(int userId, string newEmail = null, string newPassword = null, string newFullName = null)
@@ -65,6 +80,18 @@ public class UserAccountService
     // Note: The following methods are placeholders and would need to be implemented
     // with actual flight booking data and logic.
 
+    public bool BookFlight(int userId, int flightId, int totalPrice, string seatNumber, bool hasCheckedBaggage)
+    {   
+        // Generate a new booking ID (this should be handled by the database in a real application)
+        int bookingId = _bookings.Count > 0 ? _bookings.Max(b => b.BookingId) + 1 : 1;
+        // For now, we'll just add a new booking to the list
+        _bookings.Add(new BookingModel(bookingId, userId, flightId, totalPrice, seatNumber, hasCheckedBaggage));
+
+        // Save the updated bookings
+        BookingAccess.WriteAll(_bookings);
+
+        return true;
+    }
     public List<FlightBooking> GetBookedFlights(int userId)
     {
         var userBookings = _bookings.Where(b => b.UserId == userId).ToList();
