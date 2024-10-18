@@ -2,7 +2,8 @@ using System.Text.Json;
 
 static class FlightsAccess
 {
-    static string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/flights.json"));
+    static string path =
+        System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/flights.json"));
 
     public static List<FlightModel> LoadAll()
     {

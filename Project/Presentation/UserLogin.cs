@@ -37,7 +37,6 @@ static class UserLogin
             Console.WriteLine("4. Manage Account");
             Console.WriteLine("5. Show available Flights");
             Console.WriteLine("6. View Airport Information");
-            // Console.WriteLine("7. View Destination Information");
             Console.WriteLine("7. Logout");
 
             string choice = Console.ReadLine();
@@ -212,7 +211,7 @@ static class UserLogin
         foreach (var airport in airports)
         {
             Console.WriteLine(
-                $"ID: {airport.AirportID}, Name: {airport.Name}, Type: {airport.Type}, Luxurious: {airport.IsLuxurious}");
+                $"ID: {airport.AirportID}, Name: {airport.Name}, Type: {airport.Type}");
         }
 
         Console.WriteLine("\nPress any key to return to the menu...");
@@ -226,8 +225,8 @@ static class UserLogin
         foreach (var flight in flights.GetAllFlights())
         {
             // Display all flight information
-            Console.WriteLine("ID: " + flight.FlightId + flight.Origin + " to " + flight.Destination + " at " +
-                              flight.DepartureTime + " for " + flight.Price + " EUR");
+            Console.WriteLine(
+                $"ID: {flight.FlightId} {flight.Origin} to {flight.Destination} at {flight.DepartureTime} for {flight.Price} EUR");
         }
 
         Console.WriteLine("Do you want to filter the flights (y/n)");
@@ -265,8 +264,9 @@ static class UserLogin
                             {
                                 Console.WriteLine("Failed to book flight. Please try again or contact support.");
                             }
-                        }                     
+                        }
                     }
+
                     if (!flightExists)
                     {
                         Console.WriteLine("Flight does not exist.");

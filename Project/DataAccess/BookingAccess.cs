@@ -3,7 +3,8 @@ using System.IO;
 
 static class BookingAccess
 {
-    static string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/bookings.json"));
+    static string path =
+        System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/bookings.json"));
 
 
     public static List<BookingModel> LoadAll()
@@ -22,9 +23,9 @@ static class BookingAccess
     {
         var options = new JsonSerializerOptions { WriteIndented = true };
         string json = JsonSerializer.Serialize(bookings, options);
-        
+
         Directory.CreateDirectory(Path.GetDirectoryName(path));
-        
+
         File.WriteAllText(path, json);
     }
 }

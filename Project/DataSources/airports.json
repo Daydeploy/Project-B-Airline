@@ -43,5 +43,41 @@
         "Type": "Private",
         "PhoneNumber": "Unknown",
         "Address": "Unknown"
+    },
+    {
+        "AirportID": 6,
+        "Country": "France",
+        "City": "Nice",
+        "Name": "Nice Côte d'Azur Airport | NCE / LFMN",
+        "Type": "Public",
+        "PhoneNumber": "+33 820 423 333",
+        "Address": "Rue Costes et Bellonte, 06206 Nice, France"
+    },
+    {
+        "AirportID": 7,
+        "Country": "Spain",
+        "City": "Málaga",
+        "Name": "Málaga–Costa del Sol Airport | AGP / LEMG",
+        "Type": "Public",
+        "PhoneNumber": "+34 913 211 000",
+        "Address": "Av. del Comandante García Morato, s/n, 29004 Málaga, Spain"
+    },
+    {
+        "AirportID": 8,
+        "Country": "Greece",
+        "City": "Mykonos",
+        "Name": "Mykonos International Airport | JMK / LGMK",
+        "Type": "Public",
+        "PhoneNumber": "+30 2289 079100",
+        "Address": "Mykonos Airport, 846 00 Mykonos, Greece"
+    },
+    {
+        "AirportID": 9,
+        "Country": "Italy",
+        "City": "Milan",
+        "Name": "Milan Malpensa Airport | MXP / LIMC",
+        "Type": "Public",
+        "PhoneNumber": "+39 02 232323",
+        "Address": "21010 Ferno Varese, Italy"
     }
 ]

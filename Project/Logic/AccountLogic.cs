@@ -25,6 +25,7 @@ public class AccountsLogic
         {
             _accounts.Add(acc);
         }
+
         AccountsAccess.WriteAll(_accounts);
     }
 
@@ -39,7 +40,9 @@ public class AccountsLogic
         {
             return null;
         }
-        CurrentAccount = _accounts.Find(i => i.EmailAddress.Equals(email, StringComparison.OrdinalIgnoreCase) && i.Password == password);
+
+        CurrentAccount = _accounts.Find(i =>
+            i.EmailAddress.Equals(email, StringComparison.OrdinalIgnoreCase) && i.Password == password);
         return CurrentAccount;
     }
 }

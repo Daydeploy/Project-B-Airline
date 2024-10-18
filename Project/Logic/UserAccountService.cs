@@ -18,12 +18,15 @@ public class UserAccountService
 
     public bool CreateAccount(string email, string password, string fullName)
     {
-        if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password) || string.IsNullOrWhiteSpace(fullName))
+        if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password) ||
+            string.IsNullOrWhiteSpace(fullName))
         {
             return false;
         }
 
-        var existingAccount = _accountsLogic._accounts.FirstOrDefault(a => a.EmailAddress.Equals(email, StringComparison.OrdinalIgnoreCase));
+        var existingAccount =
+            _accountsLogic._accounts.FirstOrDefault(a =>
+                a.EmailAddress.Equals(email, StringComparison.OrdinalIgnoreCase));
         if (existingAccount != null)
         {
             return false; // Account with this email already exists
@@ -37,9 +40,10 @@ public class UserAccountService
     }
 
     public AccountModel Login(string email, string password)
-    {   
+    {
         // Set current user id
-        CurrentUserId = _accountsLogic._accounts.FirstOrDefault(a => a.EmailAddress == email)?.Id ?? -1; // Set to -1 if not found
+        CurrentUserId =
+            _accountsLogic._accounts.FirstOrDefault(a => a.EmailAddress == email)?.Id ?? -1; // Set to -1 if not found
         var account = _accountsLogic.CheckLogin(email, password);
         if (account != null)
         {
@@ -49,6 +53,7 @@ public class UserAccountService
         {
             IsLoggedIn = false;
         }
+
         return account;
     }
 
@@ -64,10 +69,12 @@ public class UserAccountService
         {
             account.EmailAddress = newEmail;
         }
+
         if (!string.IsNullOrWhiteSpace(newPassword))
         {
             account.Password = newPassword;
         }
+
         if (!string.IsNullOrWhiteSpace(newFullName))
         {
             account.FullName = newFullName;
@@ -81,7 +88,7 @@ public class UserAccountService
     // with actual flight booking data and logic.
 
     public bool BookFlight(int userId, int flightId, int totalPrice, string seatNumber, bool hasCheckedBaggage)
-    {   
+    {
         // Generate a new booking ID (this should be handled by the database in a real application)
         int bookingId = _bookings.Count > 0 ? _bookings.Max(b => b.BookingId) + 1 : 1;
         // For now, we'll just add a new booking to the list
@@ -92,6 +99,7 @@ public class UserAccountService
 
         return true;
     }
+
     public List<FlightBooking> GetBookedFlights(int userId)
     {
         var userBookings = _bookings.Where(b => b.UserId == userId).ToList();

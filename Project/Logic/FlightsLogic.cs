@@ -6,21 +6,20 @@ public class FlightsLogic
     public static List<FlightModel> AvailableFlights = new List<FlightModel>();
     public const int FlightsCount = 5;
 
-    public static FlightModel CreateRadomFlight()
+    public static FlightModel CreateRandomFlight()
     {
         // Randomly generate a Flight ID
         int flightId = random.Next(1000, 10000);
 
         // Planes always take off from Rotterdam The Hague airport.
         string origin = "Rotterdam";
-        AirportModel originAirport = airports.FirstOrDefault(x => x.City.Equals(origin, StringComparison.OrdinalIgnoreCase));
+        AirportModel originAirport = airports.FirstOrDefault(x => x.City == origin);
 
-        // Randomly select destination airport (ensuring it's different from origin)
-        AirportModel destinationAirport;
-        do
-        {
-            destinationAirport = airports[random.Next(airports.Count)];
-        } while (destinationAirport.City.Equals(originAirport.City, StringComparison.OrdinalIgnoreCase));
+        // Filter the airports to exclude the origin and only include public airports
+        var potentialDestinations = airports.Where(a => a.City != originAirport.City && a.Type == "Public").ToList();
+
+        // Select a random airport from the filtered list
+        AirportModel destinationAirport = potentialDestinations[random.Next(potentialDestinations.Count)];
         string destination = destinationAirport.City;
 
         // Generate a departure time in the future
@@ -30,18 +29,21 @@ public class FlightsLogic
         DateTime _arrivalTime = _departureTime.AddHours(random.Next(1, 8));
         string arrivalTime = _arrivalTime.ToString("yyyy-MM-ddTHH:mm:ss");
 
+        // Generate random price and seats
         int price = Math.Max(random.Next(50, 500), random.Next(50, 500));
         int availableSeats = 100;
         string flightNumber = $"FL{random.Next(1000, 9999)}";
 
-        return new FlightModel(flightId, origin, destination, departureTime, arrivalTime, price, availableSeats, flightNumber);
+        // Return the new FlightModel
+        return new FlightModel(flightId, origin, destination, departureTime, arrivalTime, price, availableSeats,
+            flightNumber);
     }
 
     public static void AppendFlights()
     {
         for (int i = 0; i < FlightsCount; i++)
         {
-            FlightModel flight = CreateRadomFlight();
+            FlightModel flight = CreateRandomFlight();
             AvailableFlights.Add(flight);
         }
 

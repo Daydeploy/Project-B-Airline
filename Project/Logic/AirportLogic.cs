@@ -15,11 +15,6 @@ public class AirportLogic
         return _airports;
     }
 
-    public List<AirportModel> GetLuxuriousAirports()
-    {
-        return _airports.Where(a => a.IsLuxurious).ToList();
-    }
-
     public AirportModel GetAirportById(int id)
     {
         return _airports.FirstOrDefault(a => a.AirportID == id);
