@@ -69,4 +69,9 @@ public class FlightsLogic
     {
         return AvailableFlights.Where(f => f.Price >= minPrice && f.Price <= maxPrice).ToList();
     }
+
+    public List<FlightModel> FilterFlightsByDestination(string destination)
+    {
+        return AvailableFlights.Where(f => f.Destination == destination).ToList();
+    }
 }

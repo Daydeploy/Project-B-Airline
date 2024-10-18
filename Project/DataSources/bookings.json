@@ -22,5 +22,13 @@
     "totalPrice": 215,
     "seatNumber": "placeholder",
     "hasCheckedBaggage": false
+  },
+  {
+    "bookingId": 4,
+    "userId": 4,
+    "flightId": 1467,
+    "totalPrice": 398,
+    "seatNumber": "ap",
+    "hasCheckedBaggage": false
   }
 ]

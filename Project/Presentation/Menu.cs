@@ -29,7 +29,7 @@ static class Menu
                     ShowDestinations();
                     break;
                 case "5":
-                    break;
+                    return;
                 default:
                     Console.WriteLine("Invalid input. Please try again.");
                     break;
@@ -127,6 +127,7 @@ static class Menu
         Console.WriteLine("1: Price from low-high");
         Console.WriteLine("2: Price from high-low");
         Console.WriteLine("3: Price between input range");
+        Console.WriteLine("4: Filter by destination");
         string input = Console.ReadLine();
         switch (input)
         {
@@ -152,6 +153,17 @@ static class Menu
                 Console.WriteLine("Enter maximum price: ");
                 int max = int.Parse(Console.ReadLine());
                 foreach (var flight in flights.FilterFlightsByPriceRange(min, max))
+                {
+                    Console.WriteLine(
+                        $"{flight.Origin} to {flight.Destination} at {flight.DepartureTime} for {flight.Price} EUR");
+                }
+                break;
+            case "4":
+                Console.WriteLine("Enter destination: ");
+                string destination = Console.ReadLine();
+                // turn first letter to uppercase
+                destination = char.ToUpper(destination[0]) + destination.Substring(1);
+                foreach (var flight in flights.FilterFlightsByDestination(destination))
                 {
                     Console.WriteLine(
                         $"{flight.Origin} to {flight.Destination} at {flight.DepartureTime} for {flight.Price} EUR");
