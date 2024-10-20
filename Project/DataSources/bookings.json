@@ -1,34 +1,20 @@
 [
   {
-    "bookingId": 1,
+    "bookingId": 9844,
     "userId": 4,
-    "flightId": 3095,
-    "totalPrice": 434,
-    "seatNumber": "placeholder",
-    "hasCheckedBaggage": false
-  },
-  {
-    "bookingId": 2,
-    "userId": 4,
-    "flightId": 4919,
-    "totalPrice": 407,
-    "seatNumber": "placeholder",
-    "hasCheckedBaggage": false
-  },
-  {
-    "bookingId": 3,
-    "userId": 4,
-    "flightId": 4119,
-    "totalPrice": 215,
-    "seatNumber": "placeholder",
-    "hasCheckedBaggage": false
-  },
-  {
-    "bookingId": 4,
-    "userId": 4,
-    "flightId": 1467,
-    "totalPrice": 398,
-    "seatNumber": "ap",
-    "hasCheckedBaggage": false
+    "flightId": 6191,
+    "totalPrice": 5,
+    "passengers": [
+      {
+        "Name": "D",
+        "SeatNumber": "12 a",
+        "HasCheckedBaggage": true
+      },
+      {
+        "Name": "B",
+        "SeatNumber": "12 b",
+        "HasCheckedBaggage": false
+      }
+    ]
   }
 ]

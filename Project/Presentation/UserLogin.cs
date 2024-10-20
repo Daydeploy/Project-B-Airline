@@ -116,25 +116,56 @@ static class UserLogin
         Console.WriteLine("Enter the Flight ID to modify:");
         if (int.TryParse(Console.ReadLine(), out int flightId))
         {
-            Console.WriteLine("Enter new seat number:");
-            string seatNumber = Console.ReadLine();
-            Console.WriteLine("Do you have checked baggage? (y/n):");
-            bool hasCheckedBaggage = Console.ReadLine().ToLower() == "y";
+            // Get the booking first to show existing passengers
+            var bookings = BookingAccess.LoadAll();
+            var booking = bookings.FirstOrDefault(b => b.FlightId == flightId);
 
-            var newDetails = new BookingDetails
+            if (booking == null)
             {
-                SeatNumber = seatNumber,
-                HasCheckedBaggage = hasCheckedBaggage
-            };
+                Console.WriteLine("No booking found for this flight ID.");
+                return;
+            }
 
-            bool success = _userAccountService.ModifyBooking(flightId, newDetails);
-            if (success)
+            // Display current passengers
+            Console.WriteLine("\nCurrent passengers:");
+            for (int i = 0; i < booking.Passengers.Count; i++)
             {
-                Console.WriteLine("Booking modified successfully.");
+                var passenger = booking.Passengers[i];
+                Console.WriteLine($"{i + 1}. {passenger.Name} - Seat: {passenger.SeatNumber} - Checked Baggage: {(passenger.HasCheckedBaggage ? "Yes" : "No")}");
+            }
+
+            Console.WriteLine("\nEnter passenger number to modify (1-" + booking.Passengers.Count + "):");
+            if (int.TryParse(Console.ReadLine(), out int passengerNumber) &&
+                passengerNumber > 0 &&
+                passengerNumber <= booking.Passengers.Count)
+            {
+                int passengerId = passengerNumber - 1; // Convert to 0-based index
+
+                Console.WriteLine("Enter new seat number:");
+                string seatNumber = Console.ReadLine();
+
+                Console.WriteLine("Do you have checked baggage? (y/n):");
+                bool hasCheckedBaggage = Console.ReadLine().ToLower() == "y";
+
+                var newDetails = new BookingDetails
+                {
+                    SeatNumber = seatNumber,
+                    HasCheckedBaggage = hasCheckedBaggage
+                };
+
+                bool success = _userAccountService.ModifyBooking(flightId, passengerId, newDetails);
+                if (success)
+                {
+                    Console.WriteLine("Booking modified successfully.");
+                }
+                else
+                {
+                    Console.WriteLine("Failed to modify booking. Please try again or contact support.");
+                }
             }
             else
             {
-                Console.WriteLine("Failed to modify booking. Please try again or contact support.");
+                Console.WriteLine("Invalid passenger number.");
             }
         }
         else
@@ -239,41 +270,95 @@ static class UserLogin
         // If user is logged allow the user to book a flight
         if (_userAccountService.IsLoggedIn == true)
         {
+            Console.Clear();
             Console.WriteLine("Do you want to book a flight (y/n)");
-            string input2 = Console.ReadLine();
-            int price = 0;
-            if (input2 == "y" || input2 == "Y" || input2 == "yes" || input2 == "Yes")
+
+            string input2 = Console.ReadLine().ToLower();
+
+            foreach (var flight in flights.GetAllFlights())
+            {
+                // Display all flight information
+                Console.WriteLine(
+                    $"ID: {flight.FlightId} {flight.Origin} to {flight.Destination} at {flight.DepartureTime} for {flight.Price} EUR");
+            }
+
+            if (input2 == "y" || input2 == "yes")
             {
                 Console.WriteLine("Enter the Flight ID to book:");
-                int flightId = int.Parse(Console.ReadLine());
+                if (int.TryParse(Console.ReadLine(), out int flightId))
                 {
-                    bool flightExists = false;
-                    foreach (var flight in flights.GetAllFlights())
+                    var selectedFlight = flights.GetAllFlights().FirstOrDefault(f => f.FlightId == flightId);
+                    if (selectedFlight != null)
                     {
-                        if (flight.FlightId == flightId)
+                        Console.WriteLine("How many passengers? (1-8):");
+                        if (int.TryParse(Console.ReadLine(), out int passengerCount) && passengerCount > 0 && passengerCount <= 8)
                         {
-                            price = flight.Price;
-                            bool success = _userAccountService.BookFlight(_userAccountService.CurrentUserId, flightId,
-                                price, "placeholder", false);
-                            if (success)
+                            var passengerDetails = new List<PassengerModel>();
+
+                            for (int i = 0; i < passengerCount; i++)
                             {
-                                Console.WriteLine("Flight booked successfully.");
-                                flightExists = true;
+                                Console.WriteLine($"\nPassenger {i + 1} Details:");
+
+                                Console.WriteLine("Enter passenger name:");
+                                string name = Console.ReadLine();
+
+                                Console.WriteLine("Enter desired seat number:");
+                                string seatNumber = Console.ReadLine();
+
+                                Console.WriteLine("Does this passenger have checked baggage? (y/n):");
+                                bool hasCheckedBaggage = Console.ReadLine().ToLower().StartsWith("y");
+
+                                // Create PassengerModel using the constructor
+                                passengerDetails.Add(new PassengerModel(
+                                    name: name,
+                                    seatNumber: seatNumber,
+                                    hasCheckedBaggage: hasCheckedBaggage
+                                ));
                             }
-                            else
+
+                            Console.Clear();
+                            try
                             {
-                                Console.WriteLine("Failed to book flight. Please try again or contact support.");
+                                BookingModel booking = BookingLogic.CreateBooking(
+                                    _userAccountService.CurrentUserId,
+                                    selectedFlight.Destination,
+                                    passengerDetails
+                                );
+
+                                Console.WriteLine("\nFlight booked successfully!\n");
+                                Console.WriteLine($"Booking ID: {booking.BookingId}");
+                                Console.WriteLine($"Flight: {selectedFlight.Origin} to {selectedFlight.Destination}");
+                                Console.WriteLine($"Departure: {selectedFlight.DepartureTime}");
+                                Console.WriteLine("\nPassengers:");
+
+                                foreach (var passenger in booking.Passengers)
+                                {
+                                    Console.WriteLine($"\nName: {passenger.Name}");
+                                    Console.WriteLine($"Seat Number: {passenger.SeatNumber}");
+                                    Console.WriteLine($"Checked Baggage: {(passenger.HasCheckedBaggage ? "Yes" : "No")}");
+                                }
+
+                                Console.WriteLine($"\nTotal Price: {booking.TotalPrice} EUR");
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine($"Error creating booking: {ex.Message}");
                             }
                         }
+                        else
+                        {
+                            Console.WriteLine("Invalid number of passengers.");
+                        }
                     }
-
-                    if (!flightExists)
+                    else
                     {
-                        Console.WriteLine("Flight does not exist.");
+                        Console.WriteLine("Flight not found with the specified ID.");
                     }
                 }
-
-
+                else
+                {
+                    Console.WriteLine("Invalid Flight ID format.");
+                }
                 Console.WriteLine("\nPress any key to return to the menu...");
                 Console.ReadKey();
             }
