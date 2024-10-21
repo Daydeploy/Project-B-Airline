@@ -5,6 +5,8 @@ static class UserLogin
 {
     static private UserAccountService _userAccountService = new UserAccountService();
 
+    private static bool _isLoggedIn = true;
+
     public static void Start()
     {
         Console.WriteLine("Welcome to the login page");
@@ -28,7 +30,7 @@ static class UserLogin
 
     private static void ShowLoggedInMenu(AccountModel account)
     {
-        while (true)
+        while (_isLoggedIn)
         {
             Console.WriteLine("\nLogged In Menu:");
             Console.WriteLine("1. View Booked Flights");
@@ -63,8 +65,9 @@ static class UserLogin
                     break;
                 case "7":
                     Console.WriteLine("Logging out...");
+                    _isLoggedIn = false;
                     Menu.Start();
-                    return;
+                    break;
                 default:
                     Console.WriteLine("Invalid choice. Please try again.");
                     break;
