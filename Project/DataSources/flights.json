@@ -1,52 +1,52 @@
 [
   {
-    "id": 3769,
+    "id": 9803,
+    "origin": "Rotterdam",
+    "destination": "Dublin",
+    "departureTime": "2024-10-23T04:13:02",
+    "arrivalTime": "2024-10-23T07:13:02",
+    "price": 75,
+    "availableSeats": 100,
+    "flightNumber": "FL1415"
+  },
+  {
+    "id": 5265,
     "origin": "Rotterdam",
     "destination": "Mykonos",
-    "departureTime": "2024-10-21T23:50:25",
-    "arrivalTime": "2024-10-22T02:50:25",
-    "price": 351,
+    "departureTime": "2024-10-22T09:13:02",
+    "arrivalTime": "2024-10-22T15:13:02",
+    "price": 468,
     "availableSeats": 100,
-    "flightNumber": "FL2575"
+    "flightNumber": "FL4914"
   },
   {
-    "id": 9301,
+    "id": 3848,
     "origin": "Rotterdam",
     "destination": "Dublin",
-    "departureTime": "2024-10-22T22:50:25",
-    "arrivalTime": "2024-10-23T03:50:25",
-    "price": 128,
+    "departureTime": "2024-10-23T08:13:02",
+    "arrivalTime": "2024-10-23T15:13:02",
+    "price": 434,
     "availableSeats": 100,
-    "flightNumber": "FL8338"
+    "flightNumber": "FL3104"
   },
   {
-    "id": 3681,
+    "id": 8901,
     "origin": "Rotterdam",
-    "destination": "Dublin",
-    "departureTime": "2024-10-22T20:50:25",
-    "arrivalTime": "2024-10-22T21:50:25",
-    "price": 339,
+    "destination": "Milan",
+    "departureTime": "2024-10-23T13:13:02",
+    "arrivalTime": "2024-10-23T18:13:02",
+    "price": 434,
     "availableSeats": 100,
-    "flightNumber": "FL9799"
+    "flightNumber": "FL3905"
   },
   {
-    "id": 6499,
+    "id": 5673,
     "origin": "Rotterdam",
-    "destination": "M\u00E1laga",
-    "departureTime": "2024-10-22T03:50:25",
-    "arrivalTime": "2024-10-22T06:50:25",
-    "price": 482,
+    "destination": "Milan",
+    "departureTime": "2024-10-23T03:13:02",
+    "arrivalTime": "2024-10-23T07:13:02",
+    "price": 342,
     "availableSeats": 100,
-    "flightNumber": "FL4857"
-  },
-  {
-    "id": 5604,
-    "origin": "Rotterdam",
-    "destination": "M\u00E1laga",
-    "departureTime": "2024-10-22T03:50:25",
-    "arrivalTime": "2024-10-22T04:50:25",
-    "price": 307,
-    "availableSeats": 100,
-    "flightNumber": "FL6205"
+    "flightNumber": "FL5763"
   }
 ]
