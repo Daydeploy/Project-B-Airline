@@ -1,52 +1,52 @@
 [
   {
-    "id": 9639,
-    "origin": "Rotterdam",
-    "destination": "Nice",
-    "departureTime": "2024-10-22T17:02:46",
-    "arrivalTime": "2024-10-22T21:02:46",
-    "price": 487,
-    "availableSeats": 100,
-    "flightNumber": "FL1437"
-  },
-  {
-    "id": 5076,
+    "id": 8076,
     "origin": "Rotterdam",
     "destination": "Dublin",
-    "departureTime": "2024-10-22T20:02:46",
-    "arrivalTime": "2024-10-23T01:02:46",
-    "price": 457,
+    "departureTime": "2024-10-22T16:09:47",
+    "arrivalTime": "2024-10-22T20:09:47",
+    "price": 346,
     "availableSeats": 100,
-    "flightNumber": "FL5656"
+    "flightNumber": "FL1744"
   },
   {
-    "id": 5672,
-    "origin": "Rotterdam",
-    "destination": "London",
-    "departureTime": "2024-10-22T12:02:46",
-    "arrivalTime": "2024-10-22T13:02:46",
-    "price": 403,
-    "availableSeats": 100,
-    "flightNumber": "FL1765"
-  },
-  {
-    "id": 7463,
+    "id": 3295,
     "origin": "Rotterdam",
     "destination": "Nice",
-    "departureTime": "2024-10-22T09:02:46",
-    "arrivalTime": "2024-10-22T12:02:46",
-    "price": 255,
+    "departureTime": "2024-10-23T04:09:47",
+    "arrivalTime": "2024-10-23T07:09:47",
+    "price": 435,
     "availableSeats": 100,
-    "flightNumber": "FL1693"
+    "flightNumber": "FL9429"
   },
   {
-    "id": 6026,
+    "id": 9810,
+    "origin": "Rotterdam",
+    "destination": "London",
+    "departureTime": "2024-10-22T01:09:47",
+    "arrivalTime": "2024-10-22T07:09:47",
+    "price": 248,
+    "availableSeats": 100,
+    "flightNumber": "FL4590"
+  },
+  {
+    "id": 8228,
+    "origin": "Rotterdam",
+    "destination": "Nice",
+    "departureTime": "2024-10-23T13:09:47",
+    "arrivalTime": "2024-10-23T15:09:47",
+    "price": 482,
+    "availableSeats": 100,
+    "flightNumber": "FL6619"
+  },
+  {
+    "id": 4989,
     "origin": "Rotterdam",
     "destination": "M\u00E1laga",
-    "departureTime": "2024-10-21T19:02:46",
-    "arrivalTime": "2024-10-21T23:02:46",
-    "price": 192,
+    "departureTime": "2024-10-23T13:09:47",
+    "arrivalTime": "2024-10-23T18:09:47",
+    "price": 326,
     "availableSeats": 100,
-    "flightNumber": "FL6972"
+    "flightNumber": "FL8189"
   }
 ]
