@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public class AirportService
+public class AirportServiceLogic
 {
     private List<AirportModel> _airports;
 
-    public AirportService(List<AirportModel> airports)
+    public AirportServiceLogic(List<AirportModel> airports)
     {
         _airports = airports;
     }
@@ -53,4 +53,4 @@ public class AirportService
                $"Our world-class facilities and exclusive services ensure an unforgettable journey. " +
                $"From VIP lounges to personalized concierge, we redefine air travel.";
     }
-}
+}     
