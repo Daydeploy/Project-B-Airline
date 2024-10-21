@@ -26,7 +26,7 @@ public class UserAccountService
 
         var existingAccount =
             _accountsLogic._accounts.FirstOrDefault(a =>
-                a.EmailAddress.Equals(email, StringComparison.OrdinalIgnoreCase));
+                a.EmailAddress.Equals(email     , StringComparison.OrdinalIgnoreCase));
         if (existingAccount != null)
         {
             return false; // Account with this email already exists
