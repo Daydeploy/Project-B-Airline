@@ -139,6 +139,8 @@ static class Menu
 
         var availableFlights = FlightsLogic.AvailableFlights;
 
+        Console.WriteLine(availableFlights.Count);
+        
         foreach (var airport in airports)
         {
             var flightAvailable = availableFlights.FirstOrDefault(f => f.Destination == airport.City);
@@ -164,7 +166,7 @@ static class Menu
                 if (flightDictionary.TryGetValue(selectedAirport.AirportID, out var flight))
                 {
                     Console.WriteLine($"Flight from {flight.Origin} to {flight.Destination}");
-                    Console.WriteLine($"Departure: {flight.DepartureTime}, Arrival: {flight.ArrivalTime}");
+                    Console.WriteLine($"Departure: {flight.DepartureTime}\nArrival: {flight.ArrivalTime}");
                     Console.WriteLine($"Price: {flight.Price} EUR");
                     Console.WriteLine("Proceeding with the booking process...");
                     // todo: proceed with booking
