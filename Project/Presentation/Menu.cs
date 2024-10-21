@@ -1,39 +1,96 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
 static class Menu
 {
     static private UserAccountService _userAccountService = new UserAccountService();
 
     static public void Start()
     {
-        while (true)
-        {
-            Console.WriteLine("\nMain Menu:");
-            Console.WriteLine("1. Login");
-            Console.WriteLine("2. Create Account");
-            Console.WriteLine("3. Show available Flights");
-            Console.WriteLine("4. View Available Flights by Destination");
-            Console.WriteLine("5. Exit");
+        Console.CursorVisible = false; // Hide the cursor
+        string[] menuItems = 
+        { 
+            "Login", 
+            "Create Account", 
+            "Show available Flights", 
+            "View Available Flights by Destination", 
+            "Filter Flights by Price", 
+            "Exit" 
+        };
 
-            string input = Console.ReadLine();
-            switch (input)
+        int selectedIndex = 0;
+        bool exit = false;
+
+        while (!exit)
+        {
+            Console.Clear();
+            DisplayMenu(menuItems, selectedIndex);
+
+            ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+            switch (keyInfo.Key)
             {
-                case "1":
-                    UserLogin.Start();
+                case ConsoleKey.UpArrow:
+                    selectedIndex = (selectedIndex > 0) ? selectedIndex - 1 : menuItems.Length - 1;
                     break;
-                case "2":
-                    CreateAccount();
+                case ConsoleKey.DownArrow:
+                    selectedIndex = (selectedIndex < menuItems.Length - 1) ? selectedIndex + 1 : 0;
                     break;
-                case "3":
-                    UserLogin.ShowAvailableFlights();
-                    break;
-                case "4":
-                    ShowDestinations();
-                    break;
-                case "5":
-                    return;
-                default:
-                    Console.WriteLine("Invalid input. Please try again.");
+                case ConsoleKey.Enter:
+                    HandleSelection(menuItems[selectedIndex], ref exit);
                     break;
             }
+        }
+    }
+
+    static private void DisplayMenu(string[] menuItems, int selectedIndex)
+    {
+        for (int i = 0; i < menuItems.Length; i++)
+        {
+            if (i == selectedIndex)
+            {
+                Console.BackgroundColor = ConsoleColor.DarkGray;
+                Console.ForegroundColor = ConsoleColor.White;
+            }
+
+            Console.WriteLine(menuItems[i]);
+
+            Console.ResetColor(); // Reset the colors
+        }
+    }
+
+    static private void HandleSelection(string selectedOption, ref bool exit)
+    {
+        Console.Clear();
+        switch (selectedOption)
+        {
+            case "Login":
+                UserLogin.Start();
+                break;
+            case "Create Account":
+                CreateAccount();
+                break;
+            case "Show available Flights":
+                UserLogin.ShowAvailableFlights();
+                break;
+            case "View Available Flights by Destination":
+                ShowDestinations();
+                break;
+            case "Filter Flights by Price":
+                FilterFlightsByPriceUI();
+                break;
+            case "Exit":
+                exit = true;
+                break;
+            default:
+                Console.WriteLine("Invalid input. Please try again.");
+                break;
+        }
+
+        if (!exit)
+        {
+            Console.WriteLine("\nPress any key to return to the menu...");
+            Console.ReadKey(true);
         }
     }
 
@@ -57,7 +114,7 @@ static class Menu
         }
     }
 
-    private static void ShowDestinations()
+    static public void ShowDestinations()
     {
         var airportLogic = new AirportLogic();
         var airports = airportLogic.GetAllAirports()
@@ -68,24 +125,19 @@ static class Menu
         var validAirports = new List<AirportModel>(); // List of destinations that have flights available
         var flightDictionary = new Dictionary<int, FlightModel>(); // Store flights by AirportID
 
-        // Assuming FlightsLogic.AvailableFlights is a list of FlightModel that contains all available flights
         var availableFlights = FlightsLogic.AvailableFlights;
 
         foreach (var airport in airports)
         {
-            // Find a flight that matches the current airport's city
             var flightAvailable = availableFlights.FirstOrDefault(f => f.Destination == airport.City);
-
-            // If a flight exists and matches the destination, show it to the user
             if (flightAvailable != null)
             {
-                validAirports.Add(airport); // Add to valid destinations
-                flightDictionary[airport.AirportID] = flightAvailable; // Store the flight by AirportID
+                validAirports.Add(airport);
+                flightDictionary[airport.AirportID] = flightAvailable;
                 Console.WriteLine($"{airport.AirportID}. {airport.City}, {airport.Country} - {airport.Name}");
             }
         }
 
-        // Allow the user to select a destination
         Console.WriteLine("\nPlease select a destination by entering the Airport ID:");
         int selectedId = int.Parse(Console.ReadLine());
         var selectedAirport = validAirports.FirstOrDefault(a => a.AirportID == selectedId);
@@ -97,14 +149,13 @@ static class Menu
             string confirmation = Console.ReadLine().ToLower();
             if (confirmation == "y")
             {
-                // Retrieve the flight from the dictionary based on the selected AirportID
                 if (flightDictionary.TryGetValue(selectedAirport.AirportID, out var flight))
                 {
                     Console.WriteLine($"Flight from {flight.Origin} to {flight.Destination}");
                     Console.WriteLine($"Departure: {flight.DepartureTime}, Arrival: {flight.ArrivalTime}");
                     Console.WriteLine($"Price: {flight.Price} EUR");
                     Console.WriteLine("Proceeding with the booking process...");
-                    // todo: zet booking 
+                    // todo: proceed with booking
                 }
             }
             else
@@ -117,7 +168,6 @@ static class Menu
             Console.WriteLine("Invalid selection. Returning to the menu.");
         }
     }
-
 
     static public void FilterFlightsByPriceUI()
     {
@@ -137,7 +187,6 @@ static class Menu
                     Console.WriteLine(
                         $"{flight.Origin} to {flight.Destination} at {flight.DepartureTime} for {flight.Price} EUR");
                 }
-
                 break;
             case "2":
                 foreach (var flight in flights.FilterFlightsByPriceDown())
@@ -145,7 +194,6 @@ static class Menu
                     Console.WriteLine(
                         $"{flight.Origin} to {flight.Destination} at {flight.DepartureTime} for {flight.Price} EUR");
                 }
-
                 break;
             case "3":
                 Console.WriteLine("Enter minimum price: ");
@@ -161,15 +209,12 @@ static class Menu
             case "4":
                 Console.WriteLine("Enter destination: ");
                 string destination = Console.ReadLine();
-                // turn first letter to uppercase
                 destination = char.ToUpper(destination[0]) + destination.Substring(1);
                 foreach (var flight in flights.FilterFlightsByDestination(destination))
                 {
                     Console.WriteLine(
                         $"{flight.Origin} to {flight.Destination} at {flight.DepartureTime} for {flight.Price} EUR");
                 }
-
-                ;
                 break;
             default:
                 Console.WriteLine("Invalid input. Please try again.");
