@@ -62,12 +62,12 @@ static class Menu
             if (i == selectedIndex)
             {
                 Console.BackgroundColor = ConsoleColor.DarkGray;
-                Console.ForegroundColor = ConsoleColor.Red;
+                Console.ForegroundColor = ConsoleColor.White;
             }
 
             Console.WriteLine(menuItems[i]);
 
-            // Console.ResetColor(); // Reset the colors
+            Console.ResetColor(); // Reset the colors
         }
     }
 
