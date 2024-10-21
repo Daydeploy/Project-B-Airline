@@ -11,9 +11,9 @@ static class UserLogin
     {
         Console.WriteLine("Welcome to the login page");
         Console.WriteLine("Please enter your email address");
-        string email = Console.ReadLine();
+        string email = Console.ReadLine() ?? string.Empty;
         Console.WriteLine("Please enter your password");
-        string password = Console.ReadLine();
+        string password = Console.ReadLine() ?? string.Empty;
         AccountModel acc = _userAccountService.Login(email, password);
         if (acc != null)
         {
@@ -39,9 +39,12 @@ static class UserLogin
             Console.WriteLine("4. Manage Account");
             Console.WriteLine("5. Show available Flights");
             Console.WriteLine("6. View Airport Information");
-            Console.WriteLine("7. Logout");
+            Console.WriteLine("7. Browse Destinations");
+            Console.WriteLine("8. Search Flights by Destination");
+            Console.WriteLine("9. View Direct vs. Connecting Flights");
+            Console.WriteLine("10. Logout");
 
-            string choice = Console.ReadLine();
+            string? choice = Console.ReadLine();
 
             switch (choice)
             {
@@ -64,6 +67,15 @@ static class UserLogin
                     ViewAirportInformation();
                     break;
                 case "7":
+                    BrowseDestinations();
+                    break;
+                case "8":
+                    SearchFlightsByDestination();
+                    break;
+                case "9":
+                    ViewDirectVsConnectingFlights();
+                    break;
+                case "10":
                     Console.WriteLine("Logging out...");
                     _isLoggedIn = false;
                     Menu.Start();
@@ -236,6 +248,7 @@ static class UserLogin
         }
     }
 
+
     private static void ViewAirportInformation()
     {
         var airportLogic = new AirportLogic();
@@ -264,8 +277,8 @@ static class UserLogin
         }
 
         Console.WriteLine("Do you want to filter the flights (y/n)");
-        string input = Console.ReadLine();
-        if (input == "y" || input == "Y" || input == "yes" || input == "Yes")
+        string input = Console.ReadLine()?.ToLower() ?? "";
+        if (input == "y" || input == "yes")
         {
             Menu.FilterFlightsByPriceUI();
         }
@@ -276,14 +289,7 @@ static class UserLogin
             Console.Clear();
             Console.WriteLine("Do you want to book a flight (y/n)");
 
-            string input2 = Console.ReadLine().ToLower();
-
-            foreach (var flight in flights.GetAllFlights())
-            {
-                // Display all flight information
-                Console.WriteLine(
-                    $"ID: {flight.FlightId} {flight.Origin} to {flight.Destination} at {flight.DepartureTime} for {flight.Price} EUR");
-            }
+            string input2 = Console.ReadLine()?.ToLower() ?? "";
 
             if (input2 == "y" || input2 == "yes")
             {
@@ -303,13 +309,13 @@ static class UserLogin
                                 Console.WriteLine($"\nPassenger {i + 1} Details:");
 
                                 Console.WriteLine("Enter passenger name:");
-                                string name = Console.ReadLine();
+                                string name = Console.ReadLine() ?? string.Empty;
 
                                 Console.WriteLine("Enter desired seat number:");
-                                string seatNumber = Console.ReadLine();
+                                string seatNumber = Console.ReadLine() ?? string.Empty;
 
                                 Console.WriteLine("Does this passenger have checked baggage? (y/n):");
-                                bool hasCheckedBaggage = Console.ReadLine().ToLower().StartsWith("y");
+                                bool hasCheckedBaggage = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
 
                                 // Create PassengerModel using the constructor
                                 passengerDetails.Add(new PassengerModel(
@@ -366,5 +372,74 @@ static class UserLogin
                 Console.ReadKey();
             }
         }
+    }
+
+    private static void BrowseDestinations()
+    {
+        FlightsLogic flightsLogic = new FlightsLogic();
+        var destinations = flightsLogic.GetAllDestinations();
+
+        Console.WriteLine("\nAvailable Destinations:");
+        foreach (var destination in destinations)
+        {
+            Console.WriteLine(destination);
+        }
+
+        Console.WriteLine("\nPress any key to return to the menu...");
+        Console.ReadKey();
+    }
+
+    private static void SearchFlightsByDestination()
+    {
+        Console.WriteLine("\nEnter the destination you want to search for:");
+        string? destination = Console.ReadLine();
+
+        if (!string.IsNullOrWhiteSpace(destination))
+        {
+            FlightsLogic flightsLogic = new FlightsLogic();
+            var flights = flightsLogic.SearchFlightsByDestination(destination);
+
+            if (flights.Count == 0)
+            {
+                Console.WriteLine($"No flights found for destination: {destination}");
+            }
+            else
+            {
+                Console.WriteLine($"\nFlights to {destination}:");
+                foreach (var flight in flights)
+                {
+                    Console.WriteLine($"Flight ID: {flight.FlightId}, From: {flight.Origin}, Departure: {flight.DepartureTime}, Price: {flight.Price} EUR");
+                }
+            }
+        }
+        else
+        {
+            Console.WriteLine("Invalid destination.");
+        }
+
+        Console.WriteLine("\nPress any key to return to the menu...");
+        Console.ReadKey();
+    }
+
+    private static void ViewDirectVsConnectingFlights()
+    {
+        FlightsLogic flightsLogic = new FlightsLogic();
+        var directFlights = flightsLogic.GetDirectFlights();
+        var connectingFlights = flightsLogic.GetConnectingFlights();
+
+        Console.WriteLine("\nDirect Flights:");
+        foreach (var flight in directFlights)
+        {
+            Console.WriteLine($"Flight ID: {flight.FlightId}, From: {flight.Origin}, To: {flight.Destination}, Departure: {flight.DepartureTime}, Price: {flight.Price} EUR");
+        }
+
+        Console.WriteLine("\nConnecting Flights:");
+        foreach (var flight in connectingFlights)
+        {
+            Console.WriteLine($"Flight ID: {flight.FlightId}, From: {flight.Origin}, To: {flight.Destination}, Departure: {flight.DepartureTime}, Price: {flight.Price} EUR");
+        }
+
+        Console.WriteLine("\nPress any key to return to the menu...");
+        Console.ReadKey();
     }
 }

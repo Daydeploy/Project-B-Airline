@@ -13,13 +13,26 @@ public class FlightsLogic
 
         // Planes always take off from Rotterdam The Hague airport.
         string origin = "Rotterdam";
-        AirportModel originAirport = airports.FirstOrDefault(x => x.City == origin);
+        AirportModel originAirport = airports.FirstOrDefault(x => x.City == origin) ??
+            throw new InvalidOperationException("Origin airport not found");
 
         // Filter the airports to exclude the origin and only include public airports
         var potentialDestinations = airports.Where(a => a.City != originAirport.City && a.Type == "Public").ToList();
 
-        // Select a random airport from the filtered list
-        AirportModel destinationAirport = potentialDestinations[random.Next(potentialDestinations.Count)];
+        // Ensure Dublin and London are always included
+        var mandatoryDestinations = new List<string> { "Dublin", "London" };
+        var randomDestinations = potentialDestinations.Where(a => !mandatoryDestinations.Contains(a.City)).ToList();
+
+        AirportModel destinationAirport;
+        if (random.Next(2) == 0 && mandatoryDestinations.Count > 0)
+        {
+            string mandatoryCity = mandatoryDestinations[random.Next(mandatoryDestinations.Count)];
+            destinationAirport = airports.First(a => a.City == mandatoryCity);
+        }
+        else
+        {
+            destinationAirport = randomDestinations[random.Next(randomDestinations.Count)];
+        }
         string destination = destinationAirport.City;
 
         // Generate a departure time in the future
@@ -73,5 +86,48 @@ public class FlightsLogic
     public List<FlightModel> FilterFlightsByDestination(string destination)
     {
         return AvailableFlights.Where(f => f.Destination == destination).ToList();
+    }
+
+    public List<string> GetAllDestinations()
+    {
+        return GetAllFlights().Select(f => f.Destination).Distinct().ToList();
+    }
+
+    public List<FlightModel> SearchFlightsByDestination(string destination)
+    {
+        return GetAllFlights().Where(f => f.Destination.Equals(destination, StringComparison.OrdinalIgnoreCase)).ToList();
+    }
+
+    public List<FlightModel> GetDirectFlights()
+    {
+        // Assuming all flights in AvailableFlights are direct flights
+        return AvailableFlights;
+    }
+
+    public List<FlightModel> GetConnectingFlights()
+    {
+        // For this example, we'll simulate connecting flights by combining two direct flights
+        var connectingFlights = new List<FlightModel>();
+        var allFlights = GetAllFlights();
+
+        foreach (var flight1 in allFlights)
+        {
+            foreach (var flight2 in allFlights.Where(f => f.Origin == flight1.Destination))
+            {
+                var connectingFlight = new FlightModel(
+                    flightId: random.Next(10000, 99999),
+                    origin: flight1.Origin,
+                    destination: flight2.Destination,
+                    departureTime: flight1.DepartureTime,
+                    arrivalTime: flight2.ArrivalTime,
+                    price: flight1.Price + flight2.Price,
+                    availableSeats: Math.Min(flight1.AvailableSeats, flight2.AvailableSeats),
+                    flightNumber: $"{flight1.FlightNumber}-{flight2.FlightNumber}"
+                );
+                connectingFlights.Add(connectingFlight);
+            }
+        }
+
+        return connectingFlights;
     }
 }
