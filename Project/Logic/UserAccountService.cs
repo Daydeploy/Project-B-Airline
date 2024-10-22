@@ -4,7 +4,7 @@ using System.Linq;
 
 public class UserAccountService
 {
-    private AccountsLogic _accountsLogic;
+    public AccountsLogic _accountsLogic;
     private List<BookingModel> _bookings;
 
     public bool IsLoggedIn { get; set; }
