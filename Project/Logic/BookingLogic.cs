@@ -1,6 +1,6 @@
 public class BookingLogic
 {
-    private static readonly Random random = new Random(123);
+    private static readonly Random random = new Random();
 
     private static readonly List<FlightModel> _flights = FlightsAccess.LoadAll();
     private static readonly List<AccountModel> _accounts = AccountsAccess.LoadAll();
@@ -10,11 +10,11 @@ public class BookingLogic
     {
 
         // Generate a new booking ID
-        int bookingId = random.Next(0, 9999);
+        int bookingId = GenerateBookingId();
 
         int userId = GetUserId(id);
         int flightId = GetFlightId(destination);
-        int totalPrice = GetTotalPrice();
+        int totalPrice = GetTotalPrice(destination, passengerDetails.Count);
 
         List<PassengerModel> passengers = passengerDetails.Select(p => new PassengerModel(p.Name, p.SeatNumber, p.HasCheckedBaggage)).ToList();
 
@@ -24,6 +24,16 @@ public class BookingLogic
         return newBooking;
     }
 
+    private static int GenerateBookingId()
+    {
+        int bookingId;
+        do
+        {
+            bookingId = random.Next(0, 9999);
+        } while (_bookings.Any(i => i.BookingId.Equals(bookingId)));
+
+        return bookingId;
+    }
 
     public static int GetUserId(int id)
     {
@@ -41,9 +51,9 @@ public class BookingLogic
         return $"{seat}";
     }
 
-    public static int GetTotalPrice()
+    public static int GetTotalPrice(string destination, int passengersCount)
     {
-        return 5;
+        int base_price = _flights.FirstOrDefault(f => f.Destination.Equals(destination, StringComparison.OrdinalIgnoreCase)).Price;
+        return base_price * passengersCount;
     }
-
 }
