@@ -9,14 +9,14 @@ static class Menu
     static public void Start()
     {
         Console.CursorVisible = false; // Hide the cursor
-        string[] menuItems = 
-        { 
-            "Login", 
-            "Create Account", 
-            "Show available Flights", 
-            "View Available Flights by Destination", 
-            "Filter Flights by Price", 
-            "Exit" 
+        string[] menuItems =
+        {
+            "Login",
+            "Create Account",
+            "Show available Flights",
+            "View Available Flights by Destination",
+            "Filter Flights by Price",
+            "Exit"
         };
 
         int selectedIndex = 0;
@@ -24,21 +24,19 @@ static class Menu
 
         while (!exit)
         {
-            Console.Clear();
-            System.Console.WriteLine(@"
- --------------------------------------------------------------------------------------------------------------------------------------------------------
-|                                                                                                                                                        |
-| d8888b.  .d88b.  d888888b d888888b d88888b d8888b. d8888b.  .d8b.  .88b  d88.       .d8b.  d888888b d8888b. db      d888888b d8b   db d88888b .d8888.  |
-| 88  `8D .8P  Y8. `~~88~~' `~~88~~' 88'     88  `8D 88  `8D d8' `8b 88'YbdP`88      d8' `8b   `88'   88  `8D 88        `88'   888o  88 88'     88'  YP  | 
-| 88oobY' 88    88    88       88    88ooooo 88oobY' 88   88 88ooo88 88  88  88      88ooo88    88    88oobY' 88         88    88V8o 88 88ooooo `8bo.    |
-| 88`8b   88    88    88       88    88~~~~~ 88`8b   88   88 88~~~88 88  88  88      88~~~88    88    88`8b   88         88    88 V8o88 88~~~~~   `Y8b.  | 
-| 88 `88. `8b  d8'    88       88    88.     88 `88. 88  .8D 88   88 88  88  88      88   88   .88.   88 `88. 88booo.   .88.   88  V888 88.     db   8D  |
-| 88   YD  `Y88P'     YP       YP    Y88888P 88   YD Y8888D' YP   YP YP  YP  YP      YP   YP Y888888P 88   YD Y88888P Y888888P VP   V8P Y88888P `8888Y'  |
-|                                                                                                                                                        |
- --------------------------------------------------------------------------------------------------------------------------------------------------------
-");
-            DisplayMenu(menuItems, selectedIndex);
-
+            DisplayMenu(menuItems, selectedIndex, "Main Menu");
+//             System.Console.WriteLine(@"
+//  --------------------------------------------------------------------------------------------------------------------------------------------------------
+// |                                                                                                                                                        |
+// | d8888b.  .d88b.  d888888b d888888b d88888b d8888b. d8888b.  .d8b.  .88b  d88.       .d8b.  d888888b d8888b. db      d888888b d8b   db d88888b .d8888.  |
+// | 88  `8D .8P  Y8. `~~88~~' `~~88~~' 88'     88  `8D 88  `8D d8' `8b 88'YbdP`88      d8' `8b   `88'   88  `8D 88        `88'   888o  88 88'     88'  YP  | 
+// | 88oobY' 88    88    88       88    88ooooo 88oobY' 88   88 88ooo88 88  88  88      88ooo88    88    88oobY' 88         88    88V8o 88 88ooooo `8bo.    |
+// | 88`8b   88    88    88       88    88~~~~~ 88`8b   88   88 88~~~88 88  88  88      88~~~88    88    88`8b   88         88    88 V8o88 88~~~~~   `Y8b.  | 
+// | 88 `88. `8b  d8'    88       88    88.     88 `88. 88  .8D 88   88 88  88  88      88   88   .88.   88 `88. 88booo.   .88.   88  V888 88.     db   8D  |
+// | 88   YD  `Y88P'     YP       YP    Y88888P 88   YD Y8888D' YP   YP YP  YP  YP      YP   YP Y888888P 88   YD Y88888P Y888888P VP   V8P Y88888P `8888Y'  |
+// |                                                                                                                                                        |
+//  --------------------------------------------------------------------------------------------------------------------------------------------------------
+// ");
             ConsoleKeyInfo keyInfo = Console.ReadKey(true);
             switch (keyInfo.Key)
             {
@@ -55,8 +53,19 @@ static class Menu
         }
     }
 
-    static private void DisplayMenu(string[] menuItems, int selectedIndex)
+    // Reusable DisplayMenu method with a title
+    static public void DisplayMenu(string[] menuItems, int selectedIndex, string title = "")
     {
+        Console.Clear();
+
+        // Display the title, if provided
+        if (!string.IsNullOrEmpty(title))
+        {
+            Console.WriteLine(title);
+            Console.WriteLine(new string('-', title.Length)); // Underline the title
+        }
+
+        // Display the menu items
         for (int i = 0; i < menuItems.Length; i++)
         {
             if (i == selectedIndex)
@@ -66,7 +75,6 @@ static class Menu
             }
 
             Console.WriteLine(menuItems[i]);
-
             Console.ResetColor(); // Reset the colors
         }
     }
@@ -133,14 +141,11 @@ static class Menu
             .Where(a => a.Type == "Public" && a.City != "Rotterdam")
             .ToList(); // Filter out Rotterdam and private airfield 
 
-        Console.WriteLine("\nAvailable Destinations with Flights:");
         var validAirports = new List<AirportModel>(); // List of destinations that have flights available
         var flightDictionary = new Dictionary<int, FlightModel>(); // Store flights by AirportID
 
         var availableFlights = FlightsLogic.AvailableFlights;
 
-        Console.WriteLine(availableFlights.Count);
-        
         foreach (var airport in airports)
         {
             var flightAvailable = availableFlights.FirstOrDefault(f => f.Destination == airport.City);
@@ -148,91 +153,159 @@ static class Menu
             {
                 validAirports.Add(airport);
                 flightDictionary[airport.AirportID] = flightAvailable;
-                Console.WriteLine($"{airport.AirportID}. {airport.City}, {airport.Country} - {airport.Name}");
             }
         }
 
-        Console.WriteLine("\nPlease select a destination by entering the Airport ID:");
-        int selectedId = int.Parse(Console.ReadLine());
-        var selectedAirport = validAirports.FirstOrDefault(a => a.AirportID == selectedId);
+        int selectedIndex = 0;
+        bool destinationSelected = false;
 
-        if (selectedAirport != null)
+        string[] destinationMenuItems = validAirports
+            .Select(a => $"{a.AirportID}. {a.City}, {a.Country} - {a.Name}")
+            .ToArray();
+
+        while (!destinationSelected)
         {
-            Console.WriteLine($"\nYou selected: {selectedAirport.City}, {selectedAirport.Country}");
-            Console.WriteLine("Do you want to confirm this destination? (y/n)");
-            string confirmation = Console.ReadLine().ToLower();
-            if (confirmation == "y")
+            DisplayMenu(destinationMenuItems, selectedIndex, "Available Destinations with Flights");
+
+            ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+            switch (keyInfo.Key)
             {
-                if (flightDictionary.TryGetValue(selectedAirport.AirportID, out var flight))
-                {
-                    Console.WriteLine($"Flight from {flight.Origin} to {flight.Destination}");
-                    Console.WriteLine($"Departure: {flight.DepartureTime}\nArrival: {flight.ArrivalTime}");
-                    Console.WriteLine($"Price: {flight.Price} EUR");
-                    Console.WriteLine("Proceeding with the booking process...");
-                    // todo: proceed with booking
-                }
+                case ConsoleKey.UpArrow:
+                    selectedIndex = (selectedIndex > 0) ? selectedIndex - 1 : validAirports.Count - 1;
+                    break;
+                case ConsoleKey.DownArrow:
+                    selectedIndex = (selectedIndex < validAirports.Count - 1) ? selectedIndex + 1 : 0;
+                    break;
+                case ConsoleKey.Enter:
+                    var selectedAirport = validAirports[selectedIndex];
+                    Console.Clear();
+                    Console.WriteLine($"\nYou selected: {selectedAirport.City}, {selectedAirport.Country}");
+
+                    if (flightDictionary.TryGetValue(selectedAirport.AirportID, out var flight))
+                    {
+                        Console.WriteLine($"Flight from {flight.Origin} to {flight.Destination}");
+
+                        // If they are strings, parse them into DateTime
+                        DateTime departureDateTime = DateTime.Parse(flight.DepartureTime);
+                        DateTime arrivalDateTime = DateTime.Parse(flight.ArrivalTime);
+
+                        // Now format them as needed
+                        string formattedDepartureTime = departureDateTime.ToString("dddd, dd MMMM yyyy HH:mm");
+                        string formattedArrivalTime = arrivalDateTime.ToString("dddd, dd MMMM yyyy HH:mm");
+
+                        Console.WriteLine($"Departure: {formattedDepartureTime}");
+                        Console.WriteLine($"Arrival: {formattedArrivalTime}");
+                        Console.WriteLine($"Price: {flight.Price} EUR");
+                        Console.WriteLine("Proceeding with the booking process...");
+                        // todo: proceed with booking
+                    }
+
+                    destinationSelected = true;
+                    break;
+                case ConsoleKey.Escape:
+                    destinationSelected = true; // Exit without selecting
+                    break;
             }
-            else
-            {
-                Console.WriteLine("Selection canceled.");
-            }
-        }
-        else
-        {
-            Console.WriteLine("Invalid selection. Returning to the menu.");
         }
     }
+
 
     static public void FilterFlightsByPriceUI()
     {
         FlightsLogic flights = new FlightsLogic();
-
-        Console.WriteLine("Filter: ");
-        Console.WriteLine("1: Price from low-high");
-        Console.WriteLine("2: Price from high-low");
-        Console.WriteLine("3: Price between input range");
-        Console.WriteLine("4: Filter by destination");
-        string input = Console.ReadLine();
-        switch (input)
+        string[] filterOptions = new[]
         {
-            case "1":
-                foreach (var flight in flights.FilterFlightsByPriceUp())
-                {
-                    Console.WriteLine(
-                        $"{flight.Origin} to {flight.Destination} at {flight.DepartureTime} for {flight.Price} EUR");
-                }
-                break;
-            case "2":
-                foreach (var flight in flights.FilterFlightsByPriceDown())
-                {
-                    Console.WriteLine(
-                        $"{flight.Origin} to {flight.Destination} at {flight.DepartureTime} for {flight.Price} EUR");
-                }
-                break;
-            case "3":
-                Console.WriteLine("Enter minimum price: ");
-                int min = int.Parse(Console.ReadLine());
-                Console.WriteLine("Enter maximum price: ");
-                int max = int.Parse(Console.ReadLine());
-                foreach (var flight in flights.FilterFlightsByPriceRange(min, max))
-                {
-                    Console.WriteLine(
-                        $"{flight.Origin} to {flight.Destination} at {flight.DepartureTime} for {flight.Price} EUR");
-                }
-                break;
-            case "4":
-                Console.WriteLine("Enter destination: ");
-                string destination = Console.ReadLine();
-                destination = char.ToUpper(destination[0]) + destination.Substring(1);
-                foreach (var flight in flights.FilterFlightsByDestination(destination))
-                {
-                    Console.WriteLine(
-                        $"{flight.Origin} to {flight.Destination} at {flight.DepartureTime} for {flight.Price} EUR");
-                }
-                break;
-            default:
-                Console.WriteLine("Invalid input. Please try again.");
-                break;
+            "Price from low-high",
+            "Price from high-low",
+            "Price between input range",
+            "Filter by destination",
+            "Back to Main Menu"
+        };
+
+        int selectedIndex = 0; // Start at the first option
+
+        while (true) // Loop until a valid selection is made
+        {
+            Console.Clear(); // Clear the console for a fresh display
+            Console.WriteLine("Filter Flights: ");
+            DisplayMenu(filterOptions, selectedIndex);
+
+            var key = Console.ReadKey(intercept: true).Key; // Read key input without displaying it
+
+            switch (key)
+            {
+                case ConsoleKey.UpArrow:
+                    selectedIndex =
+                        (selectedIndex == 0) ? filterOptions.Length - 1 : selectedIndex - 1; // Loop to the end
+                    break;
+                case ConsoleKey.DownArrow:
+                    selectedIndex =
+                        (selectedIndex == filterOptions.Length - 1) ? 0 : selectedIndex + 1; // Loop to the beginning
+                    break;
+                case ConsoleKey.Enter:
+                    switch (selectedIndex)
+                    {
+                        case 0:
+                            // Price from low to high
+                            foreach (var flight in flights.FilterFlightsByPriceUp())
+                            {
+                                Console.WriteLine(
+                                    $"{flight.Origin} to {flight.Destination} at {flight.DepartureTime} for {flight.Price} EUR");
+                            }
+
+                            break;
+                        case 1:
+                            // Price from high to low
+                            foreach (var flight in flights.FilterFlightsByPriceDown())
+                            {
+                                Console.WriteLine(
+                                    $"{flight.Origin} to {flight.Destination} at {flight.DepartureTime} for {flight.Price} EUR");
+                            }
+
+                            break;
+                        case 2:
+                            // Price between input range
+                            Console.WriteLine("Enter minimum price: ");
+                            if (int.TryParse(Console.ReadLine(), out int min))
+                            {
+                                Console.WriteLine("Enter maximum price: ");
+                                if (int.TryParse(Console.ReadLine(), out int max))
+                                {
+                                    foreach (var flight in flights.FilterFlightsByPriceRange(min, max))
+                                    {
+                                        Console.WriteLine(
+                                            $"{flight.Origin} to {flight.Destination} at {flight.DepartureTime} for {flight.Price} EUR");
+                                    }
+                                }
+                            }
+
+                            break;
+                        case 3:
+                            // Filter by destination
+                            Console.WriteLine("Enter destination: ");
+                            string destination = Console.ReadLine();
+                            if (!string.IsNullOrWhiteSpace(destination))
+                            {
+                                destination = char.ToUpper(destination[0]) + destination.Substring(1);
+                                foreach (var flight in flights.FilterFlightsByDestination(destination))
+                                {
+                                    Console.WriteLine(
+                                        $"{flight.Origin} to {flight.Destination} at {flight.DepartureTime} for {flight.Price} EUR");
+                                }
+                            }
+
+                            break;
+                        case 4:
+                            // Back to main menu
+                            return; // Exit the loop and return to the main menu
+                    }
+
+                    Console.WriteLine("\nPress any key to continue...");
+                    Console.ReadKey();
+                    break;
+                default:
+                    break; // Ignore any other keys
+            }
         }
     }
 }

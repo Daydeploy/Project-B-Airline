@@ -30,62 +30,88 @@ static class UserLogin
 
     private static void ShowLoggedInMenu(AccountModel account)
     {
+        string[] menuItems = new[]
+        {
+            "View Booked Flights",
+            "Check-in for a Flight",
+            "Modify Booking",
+            "Manage Account",
+            "Show Available Flights",
+            "View Airport Information",
+            "Browse Destinations",
+            "Search Flights by Destination",
+            "View Direct vs. Connecting Flights",
+            "Logout"
+        };
+
+        int selectedIndex = 0; // Start at the first menu item
+
         while (_isLoggedIn)
         {
-            Console.WriteLine("\nLogged In Menu:");
-            Console.WriteLine("1. View Booked Flights");
-            Console.WriteLine("2. Check-in for a Flight");
-            Console.WriteLine("3. Modify Booking");
-            Console.WriteLine("4. Manage Account");
-            Console.WriteLine("5. Show available Flights");
-            Console.WriteLine("6. View Airport Information");
-            Console.WriteLine("7. Browse Destinations");
-            Console.WriteLine("8. Search Flights by Destination");
-            Console.WriteLine("9. View Direct vs. Connecting Flights");
-            Console.WriteLine("10. Logout");
+            // Display the menu
+            Menu.DisplayMenu(menuItems, selectedIndex, "Logged In Menu");
 
-            string? choice = Console.ReadLine();
+            // Handle user input
+            var key = Console.ReadKey(intercept: true).Key; // Read key input without displaying it
 
-            switch (choice)
+            switch (key)
             {
-                case "1":
-                    ViewBookedFlights(account.Id);
+                case ConsoleKey.UpArrow:
+                    selectedIndex = (selectedIndex == 0) ? menuItems.Length - 1 : selectedIndex - 1; // Loop to the end
                     break;
-                case "2":
-                    CheckInForFlight();
+                case ConsoleKey.DownArrow:
+                    selectedIndex =
+                        (selectedIndex == menuItems.Length - 1) ? 0 : selectedIndex + 1; // Loop to the beginning
                     break;
-                case "3":
-                    ModifyBooking();
+                case ConsoleKey.Enter:
+                    switch (selectedIndex)
+                    {
+                        case 0:
+                            ViewBookedFlights(account.Id);
+                            break;
+                        case 1:
+                            CheckInForFlight();
+                            break;
+                        case 2:
+                            ModifyBooking();
+                            break;
+                        case 3:
+                            ManageAccount(account);
+                            break;
+                        case 4:
+                            ShowAvailableFlights();
+                            break;
+                        case 5:
+                            ViewAirportInformation();
+                            break;
+                        case 6:
+                            BrowseDestinations();
+                            break;
+                        case 7:
+                            SearchFlightsByDestination();
+                            break;
+                        case 8:
+                            ViewDirectVsConnectingFlights();
+                            break;
+                        case 9:
+                            Console.WriteLine("Logging out...");
+                            _isLoggedIn = false;
+                            Menu.Start();
+                            break;
+                    }
+
                     break;
-                case "4":
-                    ManageAccount(account);
-                    break;
-                case "5":
-                    ShowAvailableFlights();
-                    break;
-                case "6":
-                    ViewAirportInformation();
-                    break;
-                case "7":
-                    BrowseDestinations();
-                    break;
-                case "8":
-                    SearchFlightsByDestination();
-                    break;
-                case "9":
-                    ViewDirectVsConnectingFlights();
-                    break;
-                case "10":
-                    Console.WriteLine("Logging out...");
-                    _isLoggedIn = false;
+                case ConsoleKey.Escape:
+                    Console.WriteLine("Exiting menu...");
+                    _isLoggedIn = false; // or you can implement another way to exit
                     Menu.Start();
                     break;
                 default:
-                    Console.WriteLine("Invalid choice. Please try again.");
-                    break;
+                    break; // Ignore any other keys
             }
         }
     }
+
 
     private static void ViewBookedFlights(int userId)
     {
@@ -146,7 +172,8 @@ static class UserLogin
             for (int i = 0; i < booking.Passengers.Count; i++)
             {
                 var passenger = booking.Passengers[i];
-                Console.WriteLine($"{i + 1}. {passenger.Name} - Seat: {passenger.SeatNumber} - Checked Baggage: {(passenger.HasCheckedBaggage ? "Yes" : "No")}");
+                Console.WriteLine(
+                    $"{i + 1}. {passenger.Name} - Seat: {passenger.SeatNumber} - Checked Baggage: {(passenger.HasCheckedBaggage ? "Yes" : "No")}");
             }
 
             Console.WriteLine("\nEnter passenger number to modify (1-" + booking.Passengers.Count + "):");
@@ -300,7 +327,8 @@ static class UserLogin
                     if (selectedFlight != null)
                     {
                         Console.WriteLine("How many passengers? (1-8):");
-                        if (int.TryParse(Console.ReadLine(), out int passengerCount) && passengerCount > 0 && passengerCount <= 8)
+                        if (int.TryParse(Console.ReadLine(), out int passengerCount) && passengerCount > 0 &&
+                            passengerCount <= 8)
                         {
                             var passengerDetails = new List<PassengerModel>();
 
@@ -344,7 +372,8 @@ static class UserLogin
                                 {
                                     Console.WriteLine($"\nName: {passenger.Name}");
                                     Console.WriteLine($"Seat Number: {passenger.SeatNumber}");
-                                    Console.WriteLine($"Checked Baggage: {(passenger.HasCheckedBaggage ? "Yes" : "No")}");
+                                    Console.WriteLine(
+                                        $"Checked Baggage: {(passenger.HasCheckedBaggage ? "Yes" : "No")}");
                                 }
 
                                 Console.WriteLine($"\nTotal Price: {booking.TotalPrice} EUR");
@@ -368,6 +397,7 @@ static class UserLogin
                 {
                     Console.WriteLine("Invalid Flight ID format.");
                 }
+
                 Console.WriteLine("\nPress any key to return to the menu...");
                 Console.ReadKey();
             }
@@ -408,7 +438,8 @@ static class UserLogin
                 Console.WriteLine($"\nFlights to {destination}:");
                 foreach (var flight in flights)
                 {
-                    Console.WriteLine($"Flight ID: {flight.FlightId}, From: {flight.Origin}, Departure: {flight.DepartureTime}, Price: {flight.Price} EUR");
+                    Console.WriteLine(
+                        $"Flight ID: {flight.FlightId}, From: {flight.Origin}, Departure: {flight.DepartureTime}, Price: {flight.Price} EUR");
                 }
             }
         }
@@ -430,13 +461,15 @@ static class UserLogin
         Console.WriteLine("\nDirect Flights:");
         foreach (var flight in directFlights)
         {
-            Console.WriteLine($"Flight ID: {flight.FlightId}, From: {flight.Origin}, To: {flight.Destination}, Departure: {flight.DepartureTime}, Price: {flight.Price} EUR");
+            Console.WriteLine(
+                $"Flight ID: {flight.FlightId}, From: {flight.Origin}, To: {flight.Destination}, Departure: {flight.DepartureTime}, Price: {flight.Price} EUR");
         }
 
         Console.WriteLine("\nConnecting Flights:");
         foreach (var flight in connectingFlights)
         {
-            Console.WriteLine($"Flight ID: {flight.FlightId}, From: {flight.Origin}, To: {flight.Destination}, Departure: {flight.DepartureTime}, Price: {flight.Price} EUR");
+            Console.WriteLine(
+                $"Flight ID: {flight.FlightId}, From: {flight.Origin}, To: {flight.Destination}, Departure: {flight.DepartureTime}, Price: {flight.Price} EUR");
         }
 
         Console.WriteLine("\nPress any key to return to the menu...");
