@@ -284,8 +284,26 @@ static class UserLogin
         Console.WriteLine("\nAirport Information:");
         foreach (var airport in airports)
         {
-            Console.WriteLine(
-                $"ID: {airport.AirportID}, Name: {airport.Name}, Type: {airport.Type}");
+            Console.WriteLine($"Name: {airport.Name}");
+            Console.WriteLine($"Address: {airport.Address}");
+            Console.WriteLine($"Phone Number: {airport.PhoneNumber}");
+            Console.WriteLine($"Country: {airport.Country}");
+            Console.WriteLine($"City: {airport.City}");
+            Console.WriteLine();
+
+            // Show transportation options
+            var airportService = new AirportService(new List<AirportModel> { airport });
+            Console.WriteLine("Transportation Options: " + airportService.GetAirportTransportationOptions(airport));
+
+            // Show nearby hotels
+            Console.WriteLine("Nearby Hotels: " + airportService.GetNearbyHotels(airport));
+
+            // Show additional services
+            Console.WriteLine("Additional Services: " + airportService.GetAdditionalServices(airport));
+
+            // Make the page more interesting
+            Console.WriteLine($"Description: {airportService.GetAirportDescription(airport)}");
+            Console.WriteLine(new string('-', 50)); // Separator for clarity
         }
 
         Console.WriteLine("\nPress any key to return to the menu...");
