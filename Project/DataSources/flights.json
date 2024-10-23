@@ -1,52 +1,52 @@
 [
   {
-    "id": 8076,
+    "id": 9377,
     "origin": "Rotterdam",
-    "destination": "Dublin",
-    "departureTime": "2024-10-22T16:09:47",
-    "arrivalTime": "2024-10-22T20:09:47",
-    "price": 346,
+    "destination": "Mykonos",
+    "departureTime": "2024-10-24T02:02:44",
+    "arrivalTime": "2024-10-24T05:02:44",
+    "price": 397,
     "availableSeats": 100,
-    "flightNumber": "FL1744"
+    "flightNumber": "FL5857"
   },
   {
-    "id": 3295,
-    "origin": "Rotterdam",
-    "destination": "Nice",
-    "departureTime": "2024-10-23T04:09:47",
-    "arrivalTime": "2024-10-23T07:09:47",
-    "price": 435,
-    "availableSeats": 100,
-    "flightNumber": "FL9429"
-  },
-  {
-    "id": 9810,
+    "id": 6122,
     "origin": "Rotterdam",
     "destination": "London",
-    "departureTime": "2024-10-22T01:09:47",
-    "arrivalTime": "2024-10-22T07:09:47",
-    "price": 248,
+    "departureTime": "2024-10-24T12:02:44",
+    "arrivalTime": "2024-10-24T19:02:44",
+    "price": 435,
     "availableSeats": 100,
-    "flightNumber": "FL4590"
+    "flightNumber": "FL9781"
   },
   {
-    "id": 8228,
+    "id": 6662,
     "origin": "Rotterdam",
-    "destination": "Nice",
-    "departureTime": "2024-10-23T13:09:47",
-    "arrivalTime": "2024-10-23T15:09:47",
-    "price": 482,
+    "destination": "London",
+    "departureTime": "2024-10-25T00:02:44",
+    "arrivalTime": "2024-10-25T04:02:44",
+    "price": 188,
     "availableSeats": 100,
-    "flightNumber": "FL6619"
+    "flightNumber": "FL8846"
   },
   {
-    "id": 4989,
+    "id": 9899,
     "origin": "Rotterdam",
-    "destination": "M\u00E1laga",
-    "departureTime": "2024-10-23T13:09:47",
-    "arrivalTime": "2024-10-23T18:09:47",
-    "price": 326,
+    "destination": "London",
+    "departureTime": "2024-10-24T10:02:44",
+    "arrivalTime": "2024-10-24T16:02:44",
+    "price": 382,
     "availableSeats": 100,
-    "flightNumber": "FL8189"
+    "flightNumber": "FL4568"
+  },
+  {
+    "id": 5324,
+    "origin": "Rotterdam",
+    "destination": "Mykonos",
+    "departureTime": "2024-10-24T22:02:44",
+    "arrivalTime": "2024-10-24T23:02:44",
+    "price": 185,
+    "availableSeats": 100,
+    "flightNumber": "FL3709"
   }
 ]

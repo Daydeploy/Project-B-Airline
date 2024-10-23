@@ -116,22 +116,45 @@ static class Menu
 
     static private void CreateAccount()
     {
+        // Inform user about F2 toggle
+        Console.WriteLine("Note: You can press F2 to toggle password visibility while typing.\n");
         Console.WriteLine("Create a new account");
-        Console.WriteLine("Enter your email address:");
-        string email = Console.ReadLine();
-        Console.WriteLine("Enter your password:");
-        string password = Console.ReadLine();
         Console.WriteLine("Enter your full name:");
         string fullName = Console.ReadLine();
+        Console.WriteLine("Enter your email address:");
+        string email = Console.ReadLine();
+        string password = "";
+        string confirmPassword = "";
+        bool showPassword = false;
+        ConsoleKeyInfo key;
 
-        if (_userAccountService.CreateAccount(email, password, fullName))
+        // Password input
+        Console.Write("Enter your password: ");
+        password = UserLogin.ReadPassword(ref showPassword);
+
+        // Confirm password input
+        Console.Write("Confirm your password: ");
+        confirmPassword = UserLogin.ReadPassword(ref showPassword);
+        
+        // Check if passwords match
+        if (password == confirmPassword)
         {
-            Console.WriteLine("Account created successfully. Please login.");
+            Console.WriteLine("\nPasswords match!");
+            
+            if (_userAccountService.CreateAccount(email, password, fullName))
+            {
+                Console.WriteLine("Account created successfully. Please login.");
+            }
+            else
+            {
+                Console.WriteLine("Failed to create account. Email may already be in use.");
+            }
         }
         else
         {
-            Console.WriteLine("Failed to create account. Email may already be in use.");
+            Console.WriteLine("\nPasswords do not match. Please try again.");
         }
+        
     }
 
     static public void ShowDestinations()

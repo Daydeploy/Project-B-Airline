@@ -9,12 +9,27 @@ static class UserLogin
 
     public static void Start()
     {
+        AccountModel acc = null;
         Console.WriteLine("Welcome to the login page");
-        Console.WriteLine("Please enter your email address");
+        Console.WriteLine("Note: You can press F2 to toggle password visibility while typing.");
+        Console.Write("Please enter your login details:\nEmail: ");
         string email = Console.ReadLine() ?? string.Empty;
-        Console.WriteLine("Please enter your password");
-        string password = Console.ReadLine() ?? string.Empty;
-        AccountModel acc = _userAccountService.Login(email, password);
+        // Console.WriteLine("Please enter your password");
+        // string password = Console.ReadLine() ?? string.Empty;
+        
+        string password = "";
+        bool showPassword = false;
+        ConsoleKeyInfo key; // 
+
+        Console.Write("Enter your password: ");
+        password = ReadPassword(ref showPassword); // Pass showPassword by reference to allow toggling visibility within ReadPassword
+
+        Console.Write("Confirm your password: ");
+        
+
+        Console.WriteLine("\nPasswords match!");
+        acc = _userAccountService.Login(email, password);
+        
         if (acc != null)
         {
             Console.WriteLine("Welcome back " + acc.FullName);
@@ -26,6 +41,47 @@ static class UserLogin
             Console.WriteLine("No account found with that email and password");
             Menu.Start();
         }
+    }
+
+    public static string ReadPassword(ref bool showPassword)
+    {
+        string pass = "";
+        ConsoleKeyInfo key;
+
+        do
+        {
+            key = Console.ReadKey(true);
+
+            if (key.Key == ConsoleKey.F2) // Toggle password visibility on F2 key press
+            {
+                showPassword = !showPassword; // Toggle visibility
+                Console.Write("\r" + new string(' ', Console.WindowWidth) + "\r"); // Clear current line
+                Console.Write("Enter your password: " + (showPassword ? pass : new string('*', pass.Length)));
+            }
+            // Handle backspace
+            else if (key.Key == ConsoleKey.Backspace && pass.Length > 0)
+            {
+                pass = pass.Substring(0, pass.Length - 1);
+                Console.Write("\b \b"); // Erase the last character or asterisk
+            }
+            // Normal character input
+            else if (key.Key != ConsoleKey.Enter)
+            {
+                pass += key.KeyChar;
+                if (showPassword)
+                {
+                    Console.Write(key.KeyChar); // Show actual character
+                }
+                else
+                {
+                    Console.Write("*");
+                }
+            }
+        }
+        while (key.Key != ConsoleKey.Enter); // Stop on Enter key
+
+        Console.WriteLine();
+        return pass;
     }
 
     private static void ShowLoggedInMenu(AccountModel account)
