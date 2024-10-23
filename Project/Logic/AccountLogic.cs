@@ -27,6 +27,8 @@ public class AccountsLogic
         }
 
         AccountsAccess.WriteAll(_accounts);
+
+        _accounts = AccountsAccess.LoadAll();
     }
 
     public AccountModel GetById(int id)
