@@ -1,0 +1,83 @@
+[
+    {
+        "AirportID": 1,
+        "Country": "Netherlands",
+        "City": "Rotterdam",
+        "Name": "Rotterdam The Hague Airport | RTM / EHRD",
+        "Type": "Public",
+        "PhoneNumber": "+31 10 446 3444",
+        "Address": "Rotterdam Airportplein 60, 3045 AP Rotterdam, Netherlands"
+    },
+    {
+        "AirportID": 2,
+        "Country": "Ireland",
+        "City": "Dublin",
+        "Name": "Dublin Airport | DUB / EIDW",
+        "Type": "Public",
+        "PhoneNumber": "+353 1 814 1111",
+        "Address": "Dublin Airport, Co. Dublin, Ireland"
+    },
+    {
+        "AirportID": 3,
+        "Country": "United Kingdom",
+        "City": "London",
+        "Name": "London City Airport | LCY / EGLC",
+        "Type": "Public",
+        "PhoneNumber": "+44 20 7646 0088",
+        "Address": "Hartmann Rd, Royal Docks, London E16 2PX, United Kingdom"
+    },
+    {
+        "AirportID": 4,
+        "Country": "Unknown",
+        "City": "Unknown",
+        "Name": "Private field 1",
+        "Type": "Private",
+        "PhoneNumber": "Unknown",
+        "Address": "Unknown"
+    },
+    {
+        "AirportID": 5,
+        "Country": "Unknown",
+        "City": "Unknown",
+        "Name": "Private field 2",
+        "Type": "Private",
+        "PhoneNumber": "Unknown",
+        "Address": "Unknown"
+    },
+    {
+        "AirportID": 6,
+        "Country": "France",
+        "City": "Nice",
+        "Name": "Nice Côte d'Azur Airport | NCE / LFMN",
+        "Type": "Public",
+        "PhoneNumber": "+33 820 423 333",
+        "Address": "Rue Costes et Bellonte, 06206 Nice, France"
+    },
+    {
+        "AirportID": 7,
+        "Country": "Spain",
+        "City": "Málaga",
+        "Name": "Málaga–Costa del Sol Airport | AGP / LEMG",
+        "Type": "Public",
+        "PhoneNumber": "+34 913 211 000",
+        "Address": "Av. del Comandante García Morato, s/n, 29004 Málaga, Spain"
+    },
+    {
+        "AirportID": 8,
+        "Country": "Greece",
+        "City": "Mykonos",
+        "Name": "Mykonos International Airport | JMK / LGMK",
+        "Type": "Public",
+        "PhoneNumber": "+30 2289 079100",
+        "Address": "Mykonos Airport, 846 00 Mykonos, Greece"
+    },
+    {
+        "AirportID": 9,
+        "Country": "Italy",
+        "City": "Milan",
+        "Name": "Milan Malpensa Airport | MXP / LIMC",
+        "Type": "Public",
+        "PhoneNumber": "+39 02 232323",
+        "Address": "21010 Ferno Varese, Italy"
+    }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "bookingId": 9844,
+    "userId": 4,
+    "flightId": 8076,
+    "totalPrice": 692,
+    "passengers": [
+      {
+        "Name": "Test_Name_3",
+        "SeatNumber": "24A",
+        "HasCheckedBaggage": true
+      },
+      {
+        "Name": "Test_Name_4",
+        "SeatNumber": "24B",
+        "HasCheckedBaggage": true
+      }
+    ]
+  },
+  {
+    "bookingId": 1399,
+    "userId": 4,
+    "flightId": 8076,
+    "totalPrice": 692,
+    "passengers": [
+      {
+        "Name": "Test_Name_1",
+        "SeatNumber": "12A",
+        "HasCheckedBaggage": false
+      },
+      {
+        "Name": "Test_Name_2",
+        "SeatNumber": "12B",
+        "HasCheckedBaggage": true
+      }
+    ]
+  }
+]

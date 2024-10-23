@@ -1,0 +1,52 @@
+[
+  {
+    "id": 8076,
+    "origin": "Rotterdam",
+    "destination": "Dublin",
+    "departureTime": "2024-10-22T16:09:47",
+    "arrivalTime": "2024-10-22T20:09:47",
+    "price": 346,
+    "availableSeats": 100,
+    "flightNumber": "FL1744"
+  },
+  {
+    "id": 3295,
+    "origin": "Rotterdam",
+    "destination": "Nice",
+    "departureTime": "2024-10-23T04:09:47",
+    "arrivalTime": "2024-10-23T07:09:47",
+    "price": 435,
+    "availableSeats": 100,
+    "flightNumber": "FL9429"
+  },
+  {
+    "id": 9810,
+    "origin": "Rotterdam",
+    "destination": "London",
+    "departureTime": "2024-10-22T01:09:47",
+    "arrivalTime": "2024-10-22T07:09:47",
+    "price": 248,
+    "availableSeats": 100,
+    "flightNumber": "FL4590"
+  },
+  {
+    "id": 8228,
+    "origin": "Rotterdam",
+    "destination": "Nice",
+    "departureTime": "2024-10-23T13:09:47",
+    "arrivalTime": "2024-10-23T15:09:47",
+    "price": 482,
+    "availableSeats": 100,
+    "flightNumber": "FL6619"
+  },
+  {
+    "id": 4989,
+    "origin": "Rotterdam",
+    "destination": "M\u00E1laga",
+    "departureTime": "2024-10-23T13:09:47",
+    "arrivalTime": "2024-10-23T18:09:47",
+    "price": 326,
+    "availableSeats": 100,
+    "flightNumber": "FL8189"
+  }
+]
