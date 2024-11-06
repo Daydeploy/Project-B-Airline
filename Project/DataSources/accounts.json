@@ -1,44 +1,19 @@
 [
   {
     "id": 1,
-    "emailAddress": "n@b.c",
-    "password": "xyz",
-    "fullName": "Nikola Tesla"
-  },
-  {
-    "id": 2,
-    "emailAddress": "t@b.c",
-    "password": "xyz",
-    "fullName": "Thomas Edison"
-  },
-  {
-    "id": 3,
-    "emailAddress": "test05@gmail.com",
-    "password": "test05!",
-    "fullName": "test testing"
-  },
-  {
-    "id": 4,
-    "emailAddress": "test",
+    "firstName": "Test",
+    "lastName": "Testing",
+    "dateOfBirth": "1985-05-15",
+    "gender": "Male",
+    "nationality": "Dutch",
+    "phoneNumber": "+31201234567",
+    "email": "test",
     "password": "test",
-    "fullName": "test testing"
-  },
-  {
-    "id": 5,
-    "emailAddress": "abc",
-    "password": "def",
-    "fullName": "N--"
-  },
-  {
-    "id": 6,
-    "emailAddress": "a@b.com",
-    "password": "test",
-    "fullName": "test"
-  },
-  {
-    "id": 7,
-    "emailAddress": "sil",
-    "password": "paul",
-    "fullName": "paul"
+    "passportDetails": {
+      "passportNumber": "NL123456789",
+      "issueDate": "2000-01-01",
+      "expirationDate": "2030-01-01",
+      "countryOfIssue": "Netherlands"
+    }
   }
 ]
