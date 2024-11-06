@@ -19,7 +19,7 @@ static class UserLogin
         
         string password = "";
         bool showPassword = false;
-        ConsoleKeyInfo key; // 
+        ConsoleKeyInfo key; 
 
         Console.Write("Enter your password: ");
         password = ReadPassword(ref showPassword); // Pass showPassword by reference to allow toggling visibility within ReadPassword
