@@ -16,6 +16,7 @@ static class Menu
             "Show available Flights",
             "View Available Flights by Destination",
             "Filter Flights by Price",
+            "Show Seat Upgrade Options",
             "Exit"
         };
 
@@ -98,6 +99,9 @@ static class Menu
                 break;
             case "Filter Flights by Price":
                 FilterFlightsByPriceUI();
+                break;
+            case "Show Seat Upgrade Options":
+                ShowSeatUpgradeOptions();
                 break;
             case "Exit":
                 exit = true;
@@ -343,5 +347,14 @@ static class Menu
                     break; // Ignore any other keys
             }
         }
+    }
+
+    static public void ShowSeatUpgradeOptions()
+    {
+        Console.WriteLine("1. View Available Upgrades");
+        Console.WriteLine("2. Request Upgrade");
+        Console.WriteLine("3. Use Miles for Upgrade");
+        Console.WriteLine("4. Confirm Upgrade");
+        Console.WriteLine("5. View Upgrade Benefits");
     }
 }

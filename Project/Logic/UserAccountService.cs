@@ -210,6 +210,16 @@ public class UserAccountService
 
         return true;
     }
+
+    public int GetCurrentMiles(int userId)
+    {
+        var account = AccountsLogic.CurrentAccount; // Assuming you have a way to get the current account
+        if (account != null)
+        {
+            return account.Miles; // Ensure that the AccountModel has a 'Miles' property
+        }
+        return 0; // Return 0 if no account is found
+    }
 }
 
 // Placeholder classes for flight-related functionality

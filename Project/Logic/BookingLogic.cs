@@ -56,4 +56,22 @@ public class BookingLogic
         int base_price = _flights.FirstOrDefault(f => f.Destination.Equals(destination, StringComparison.OrdinalIgnoreCase)).Price;
         return base_price * passengersCount;
     }
+
+    public bool ModifyBooking(int flightId, int passengerId, BookingDetails newDetails)
+    {
+        var booking = _bookings.FirstOrDefault(b => b.FlightId == flightId);
+        if (booking == null || booking.Passengers == null || passengerId >= booking.Passengers.Count)
+        {
+            return false; // Handle null booking or passengers
+        }
+
+        // Proceed with modifying the booking...
+        var passenger = booking.Passengers[passengerId];
+        passenger.SeatNumber = newDetails.SeatNumber; // Assuming newDetails has a SeatNumber property
+        passenger.HasCheckedBaggage = newDetails.HasCheckedBaggage; // Assuming newDetails has a HasCheckedBaggage property
+
+        // Save changes to the booking
+        BookingAccess.WriteAll(_bookings); // Ensure you save the updated bookings
+        return true; // Return true if modification was successful
+    }
 }
