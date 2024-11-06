@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
 
 static class UserLogin
 {
@@ -97,6 +98,7 @@ static class UserLogin
             "Browse Destinations",
             "Search Flights by Destination",
             "View Direct vs. Connecting Flights",
+            "Show Seat Upgrade Options",
             "Logout"
         };
 
@@ -150,6 +152,10 @@ static class UserLogin
                             ViewDirectVsConnectingFlights();
                             break;
                         case 9:
+                            Console.WriteLine("Seat Upgrade Options:");
+                            ShowSeatUpgradeOptions();
+                            break;
+                        case 10:
                             Console.WriteLine("Logging out...");
                             _isLoggedIn = false;
                             Menu.Start();
@@ -208,6 +214,18 @@ static class UserLogin
         }
     }
 
+    private static void ShowSeatUpgradeOptions()
+    {
+        Console.WriteLine("1. View Available Upgrades");
+        Console.WriteLine("2. Request Upgrade");
+        Console.WriteLine("3. Use Miles for Upgrade");
+        Console.WriteLine("4. Confirm Upgrade");
+        Console.WriteLine("5. View Upgrade Benefits");
+
+        Console.WriteLine("\nPress any key to return to the menu...");
+        Console.ReadKey();
+    }
+    
     private static void ModifyBooking()
     {
         var bookings = BookingAccess.LoadAll();

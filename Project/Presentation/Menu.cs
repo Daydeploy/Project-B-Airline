@@ -100,9 +100,6 @@ static class Menu
             case "Filter Flights by Price":
                 FilterFlightsByPriceUI();
                 break;
-            case "Show Seat Upgrade Options":
-                ShowSeatUpgradeOptions();
-                break;
             case "Exit":
                 exit = true;
                 break;
@@ -349,12 +346,4 @@ static class Menu
         }
     }
 
-    static public void ShowSeatUpgradeOptions()
-    {
-        Console.WriteLine("1. View Available Upgrades");
-        Console.WriteLine("2. Request Upgrade");
-        Console.WriteLine("3. Use Miles for Upgrade");
-        Console.WriteLine("4. Confirm Upgrade");
-        Console.WriteLine("5. View Upgrade Benefits");
-    }
 }
