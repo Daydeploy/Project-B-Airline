@@ -1,22 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
-
 public static class AirportAccess
 {
-    private static string path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/airports.json"));
+    private static string _filePath = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/airports.json"));
+    private static GenericJsonAccess<AirportModel> _airportAccess = new GenericJsonAccess<AirportModel>(_filePath);
 
     public static List<AirportModel> LoadAllAirports()
     {
-        string json = File.ReadAllText(path);
-        return JsonSerializer.Deserialize<List<AirportModel>>(json);
+        return _airportAccess.LoadAll();
     }
 
     public static void WriteAllAirports(List<AirportModel> airports)
     {
-        var options = new JsonSerializerOptions { WriteIndented = true };
-        string json = JsonSerializer.Serialize(airports, options);
-        File.WriteAllText(path, json);
+        _airportAccess.WriteAll(airports);
     }
 }
