@@ -16,24 +16,25 @@ static class UserLogin
         string email = Console.ReadLine() ?? string.Empty;
         // Console.WriteLine("Please enter your password");
         // string password = Console.ReadLine() ?? string.Empty;
-        
+
         string password = "";
         bool showPassword = false;
         ConsoleKeyInfo key; 
 
         Console.Write("Enter your password: ");
-        password = ReadPassword(ref showPassword); // Pass showPassword by reference to allow toggling visibility within ReadPassword
+        password = ReadPassword(
+            ref showPassword); // Pass showPassword by reference to allow toggling visibility within ReadPassword
 
         Console.Write("Confirm your password: ");
-        
+
 
         Console.WriteLine("\nPasswords match!");
         acc = _userAccountService.Login(email, password);
-        
+
         if (acc != null)
         {
-            Console.WriteLine("Welcome back " + acc.FullName);
-            Console.WriteLine("Your email is " + acc.EmailAddress);
+            Console.WriteLine($"Welcome back {acc.FirstName} {acc.LastName}");
+            Console.WriteLine($"Your email is {acc.EmailAddress}");
             ShowLoggedInMenu(acc);
         }
         else
@@ -77,8 +78,7 @@ static class UserLogin
                     Console.Write("*");
                 }
             }
-        }
-        while (key.Key != ConsoleKey.Enter); // Stop on Enter key
+        } while (key.Key != ConsoleKey.Enter); // Stop on Enter key
 
         Console.WriteLine();
         return pass;
@@ -210,125 +210,287 @@ static class UserLogin
 
     private static void ModifyBooking()
     {
-        Console.WriteLine("Enter the Flight ID to modify:");
-        if (int.TryParse(Console.ReadLine(), out int flightId))
-        {
-            // Get the booking first to show existing passengers
-            var bookings = BookingAccess.LoadAll();
-            var booking = bookings.FirstOrDefault(b => b.FlightId == flightId);
+        var bookings = BookingAccess.LoadAll();
+        if (!DisplayBookings(bookings)) return;
 
-            if (booking == null)
-            {
-                Console.WriteLine("No booking found for this flight ID.");
-                return;
-            }
+        int bookingNumber = GetBookingSelection(bookings.Count);
+        if (bookingNumber == -1) return;
 
-            // Display current passengers
-            Console.WriteLine("\nCurrent passengers:");
-            for (int i = 0; i < booking.Passengers.Count; i++)
-            {
-                var passenger = booking.Passengers[i];
-                Console.WriteLine(
-                    $"{i + 1}. {passenger.Name} - Seat: {passenger.SeatNumber} - Checked Baggage: {(passenger.HasCheckedBaggage ? "Yes" : "No")}");
-            }
+        var booking = bookings[bookingNumber - 1];
+        if (!DisplayPassengers(booking)) return;
 
-            Console.WriteLine("\nEnter passenger number to modify (1-" + booking.Passengers.Count + "):");
-            if (int.TryParse(Console.ReadLine(), out int passengerNumber) &&
-                passengerNumber > 0 &&
-                passengerNumber <= booking.Passengers.Count)
-            {
-                int passengerId = passengerNumber - 1; // Convert to 0-based index
+        int passengerNumber = GetPassengerSelection(booking.Passengers.Count);
+        if (passengerNumber == -1) return;
 
-                Console.WriteLine("Enter new seat number:");
-                string seatNumber = Console.ReadLine();
-
-                Console.WriteLine("Do you have checked baggage? (y/n):");
-                bool hasCheckedBaggage = Console.ReadLine().ToLower() == "y";
-
-                var newDetails = new BookingDetails
-                {
-                    SeatNumber = seatNumber,
-                    HasCheckedBaggage = hasCheckedBaggage
-                };
-
-                bool success = _userAccountService.ModifyBooking(flightId, passengerId, newDetails);
-                if (success)
-                {
-                    Console.WriteLine("Booking modified successfully.");
-                }
-                else
-                {
-                    Console.WriteLine("Failed to modify booking. Please try again or contact support.");
-                }
-            }
-            else
-            {
-                Console.WriteLine("Invalid passenger number.");
-            }
-        }
-        else
-        {
-            Console.WriteLine("Invalid Flight ID.");
-        }
+        ModifyPassengerDetails(booking.FlightId, passengerNumber - 1);
     }
+
+    private static bool DisplayBookings(List<BookingModel> bookings)
+    {
+        if (bookings.Count == 0)
+        {
+            Console.WriteLine("No bookings available.");
+            return false;
+        }
+
+        Console.WriteLine("\nAvailable bookings:");
+        for (int i = 0; i < bookings.Count; i++)
+        {
+            var booking = bookings[i];
+            Console.WriteLine($"{i + 1}. Flight ID: {booking.FlightId}");
+        }
+
+        return true;
+    }
+
+    private static int GetBookingSelection(int bookingCount)
+    {
+        Console.WriteLine("\nEnter the number of the booking you want to modify:");
+        if (int.TryParse(Console.ReadLine(), out int bookingNumber) &&
+            bookingNumber > 0 && bookingNumber <= bookingCount)
+        {
+            return bookingNumber;
+        }
+
+        Console.WriteLine("Invalid booking selection.");
+        return -1;
+    }
+
+    private static bool DisplayPassengers(BookingModel booking)
+    {
+        Console.WriteLine("\nCurrent passengers:");
+        for (int i = 0; i < booking.Passengers.Count; i++)
+        {
+            var passenger = booking.Passengers[i];
+            Console.WriteLine(
+                $"{i + 1}. {passenger.Name} - Seat: {passenger.SeatNumber} - Checked Baggage: {(passenger.HasCheckedBaggage ? "Yes" : "No")}");
+        }
+
+        return true;
+    }
+
+    private static int GetPassengerSelection(int passengerCount)
+    {
+        Console.WriteLine("\nEnter passenger number to modify (1-" + passengerCount + "):");
+        if (int.TryParse(Console.ReadLine(), out int passengerNumber) &&
+            passengerNumber > 0 && passengerNumber <= passengerCount)
+        {
+            return passengerNumber;
+        }
+
+        Console.WriteLine("Invalid passenger number.");
+        return -1;
+    }
+
+    private static void ModifyPassengerDetails(int flightId, int passengerId)
+    {
+        Console.WriteLine("Enter new seat number:");
+        string seatNumber = Console.ReadLine();
+
+        Console.WriteLine("Do you have checked baggage? (y/n):");
+        bool hasCheckedBaggage = Console.ReadLine().ToLower() == "y";
+
+        var newDetails = new BookingDetails
+        {
+            SeatNumber = seatNumber,
+            HasCheckedBaggage = hasCheckedBaggage
+        };
+
+        bool success = _userAccountService.ModifyBooking(flightId, passengerId, newDetails);
+        Console.WriteLine(success
+            ? "Booking modified successfully."
+            : "Failed to modify booking. Please try again or contact support.");
+    }
+
 
     private static void ManageAccount(AccountModel account)
     {
-        Console.WriteLine("Manage Account:");
-        Console.WriteLine("1. Change Email");
-        Console.WriteLine("2. Change Password");
-        Console.WriteLine("3. Change Full Name");
-        Console.WriteLine("4. Back to Main Menu");
-
-        string choice = Console.ReadLine();
-
-        switch (choice)
+        string[] options =
         {
-            case "1":
+            "Change Email",
+            "Change Password",
+            "Change First Name",
+            "Change Last Name",
+            "Change Date of Birth",
+            "Change Gender",
+            "Change Nationality",
+            "Change Phone Number",
+            "Change Passport Details",
+            "View Account Details",
+            "Back to Main Menu"
+        };
+        int selectedIndex = 0;
+
+        while (true)
+        {
+            Menu.DisplayMenu(options, selectedIndex, "Manage Account");
+
+            // Read key input for navigation
+            ConsoleKey key = Console.ReadKey(true).Key;
+
+            switch (key)
+            {
+                case ConsoleKey.UpArrow:
+                    selectedIndex = (selectedIndex > 0) ? selectedIndex - 1 : options.Length - 1;
+                    break;
+                case ConsoleKey.DownArrow:
+                    selectedIndex = (selectedIndex < options.Length - 1) ? selectedIndex + 1 : 0;
+                    break;
+                case ConsoleKey.Enter:
+                    if (selectedIndex == 10) return; // Exit immediately on "Back to Main Menu"
+                    if (selectedIndex == 9) DisplayAccountDetails(account); // View Account Details
+                    else HandleManageAccountOption(selectedIndex, account); // Handle other options
+                    break;
+            }
+        }
+    }
+
+
+    private static void DisplayAccountDetails(AccountModel account)
+    {
+        Console.WriteLine("\n--- Account Details ---");
+        Console.WriteLine($"Email: {account.EmailAddress}");
+        Console.WriteLine($"First Name: {account.FirstName}");
+        Console.WriteLine($"Last Name: {account.LastName}");
+        Console.WriteLine(
+            $"Date of Birth: {account.DateOfBirth:yyyy-MM-dd}");
+        Console.WriteLine($"Gender: {account.Gender ?? "Not provided"}");
+        Console.WriteLine($"Nationality: {account.Nationality ?? "Not provided"}");
+        Console.WriteLine($"Phone Number: {account.PhoneNumber ?? "Not provided"}");
+
+        if (account.PassportDetails != null)
+        {
+            Console.WriteLine("Passport Details:");
+            Console.WriteLine($"  Passport Number: {account.PassportDetails.PassportNumber ?? "Not provided"}");
+            Console.WriteLine(
+                $"  Issue Date: {account.PassportDetails.IssueDate?.ToString("yyyy-MM-dd") ?? "Not provided"}");
+            Console.WriteLine(
+                $"  Expiration Date: {account.PassportDetails.ExpirationDate?.ToString("yyyy-MM-dd") ?? "Not provided"}");
+            Console.WriteLine($"  Country of Issue: {account.PassportDetails.CountryOfIssue ?? "Not provided"}");
+        }
+        else
+        {
+            Console.WriteLine("Passport Details: Not provided");
+        }
+
+        Console.WriteLine("\nPress any key to continue...");
+        Console.ReadKey();
+    }
+
+
+    private static void HandleManageAccountOption(int optionIndex, AccountModel account)
+    {
+        bool updateSuccessful = false;
+
+        switch (optionIndex)
+        {
+            case 0: // Change Email
+                Console.WriteLine($"Current Email: {account.EmailAddress}");
                 Console.WriteLine("Enter new email:");
-                string newEmail = Console.ReadLine();
-                if (_userAccountService.ManageAccount(account.Id, newEmail: newEmail))
-                {
-                    Console.WriteLine("Email updated successfully.");
-                }
-                else
-                {
-                    Console.WriteLine("Failed to update email.");
-                }
-
+                updateSuccessful = _userAccountService.ManageAccount(account.Id, newEmail: Console.ReadLine());
+                Console.WriteLine(updateSuccessful ? "Email updated successfully." : "Failed to update email.");
                 break;
-            case "2":
+
+            case 1: // Change Password
                 Console.WriteLine("Enter new password:");
-                string newPassword = Console.ReadLine();
-                if (_userAccountService.ManageAccount(account.Id, newPassword: newPassword))
+                updateSuccessful = _userAccountService.ManageAccount(account.Id, newPassword: Console.ReadLine());
+                Console.WriteLine(updateSuccessful ? "Password updated successfully." : "Failed to update password.");
+                break;
+
+            case 2: // Change First Name
+                Console.WriteLine($"Current First Name: {account.FirstName}");
+                Console.WriteLine("Enter new first name:");
+                updateSuccessful = _userAccountService.ManageAccount(account.Id, newFirstName: Console.ReadLine());
+                Console.WriteLine(
+                    updateSuccessful ? "First name updated successfully." : "Failed to update first name.");
+                break;
+
+            case 3: // Change Last Name
+                Console.WriteLine($"Current Last Name: {account.LastName}");
+                Console.WriteLine("Enter new last name:");
+                updateSuccessful = _userAccountService.ManageAccount(account.Id, newLastName: Console.ReadLine());
+                Console.WriteLine(updateSuccessful ? "Last name updated successfully." : "Failed to update last name.");
+                break;
+
+            case 4: // Change Date of Birth
+                Console.WriteLine($"Current Date of Birth: {account.DateOfBirth:yyyy-MM-dd}");
+                Console.WriteLine("Enter new date of birth (yyyy-mm-dd):");
+                if (DateTime.TryParse(Console.ReadLine(), out DateTime newDateOfBirth))
                 {
-                    Console.WriteLine("Password updated successfully.");
+                    updateSuccessful = _userAccountService.ManageAccount(account.Id, newDateOfBirth: newDateOfBirth);
+                    Console.WriteLine(updateSuccessful
+                        ? "Date of birth updated successfully."
+                        : "Failed to update date of birth.");
                 }
                 else
                 {
-                    Console.WriteLine("Failed to update password.");
+                    Console.WriteLine("Invalid date format. Date of birth not updated.");
                 }
 
                 break;
-            case "3":
-                Console.WriteLine("Enter new full name:");
-                string newFullName = Console.ReadLine();
-                if (_userAccountService.ManageAccount(account.Id, newFullName: newFullName))
-                {
-                    Console.WriteLine("Full name updated successfully.");
-                }
-                else
-                {
-                    Console.WriteLine("Failed to update full name.");
-                }
 
+            case 5: // Change Gender
+                Console.WriteLine($"Current Gender: {account.Gender ?? "Not provided"}");
+                Console.WriteLine("Enter new gender:");
+                updateSuccessful = _userAccountService.ManageAccount(account.Id, newGender: Console.ReadLine());
+                Console.WriteLine(updateSuccessful ? "Gender updated successfully." : "Failed to update gender.");
                 break;
-            case "4":
-                return;
+
+            case 6: // Change Nationality
+                Console.WriteLine($"Current Nationality: {account.Nationality ?? "Not provided"}");
+                Console.WriteLine("Enter new nationality:");
+                updateSuccessful = _userAccountService.ManageAccount(account.Id, newNationality: Console.ReadLine());
+                Console.WriteLine(updateSuccessful
+                    ? "Nationality updated successfully."
+                    : "Failed to update nationality.");
+                break;
+
+            case 7: // Change Phone Number
+                Console.WriteLine($"Current Phone Number: {account.PhoneNumber ?? "Not provided"}");
+                Console.WriteLine("Enter new phone number:");
+                updateSuccessful = _userAccountService.ManageAccount(account.Id, newPhoneNumber: Console.ReadLine());
+                Console.WriteLine(updateSuccessful
+                    ? "Phone number updated successfully."
+                    : "Failed to update phone number.");
+                break;
+
+            case 8: // Change Passport Details
+                Console.WriteLine(
+                    $"Current Passport Number: {account.PassportDetails?.PassportNumber ?? "Not provided"}");
+                Console.WriteLine("Enter new passport number:");
+                string passportNumber = Console.ReadLine();
+
+                Console.WriteLine(
+                    $"Current Issue Date: {account.PassportDetails?.IssueDate?.ToString("yyyy-MM-dd") ?? "Not provided"}");
+                Console.WriteLine("Enter new passport issue date (yyyy-mm-dd):");
+                DateTime.TryParse(Console.ReadLine(), out DateTime issueDate);
+
+                Console.WriteLine(
+                    $"Current Expiration Date: {account.PassportDetails?.ExpirationDate?.ToString("yyyy-MM-dd") ?? "Not provided"}");
+                Console.WriteLine("Enter new passport expiration date (yyyy-mm-dd):");
+                DateTime.TryParse(Console.ReadLine(), out DateTime expirationDate);
+
+                Console.WriteLine(
+                    $"Current Country of Issue: {account.PassportDetails?.CountryOfIssue ?? "Not provided"}");
+                Console.WriteLine("Enter new country of issue:");
+                string countryOfIssue = Console.ReadLine();
+
+                var newPassportDetails =
+                    new PassportDetailsModel(passportNumber, issueDate, expirationDate, countryOfIssue);
+                updateSuccessful =
+                    _userAccountService.ManageAccount(account.Id, newPassportDetails: newPassportDetails);
+                Console.WriteLine(updateSuccessful
+                    ? "Passport details updated successfully."
+                    : "Failed to update passport details.");
+                break;
+
             default:
-                Console.WriteLine("Invalid choice.");
+                Console.WriteLine("Invalid option selected.");
                 break;
         }
+
+        Console.WriteLine("\nPress any key to continue...");
+        Console.ReadKey();
     }
 
 

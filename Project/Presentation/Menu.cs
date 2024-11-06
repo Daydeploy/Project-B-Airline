@@ -119,43 +119,56 @@ static class Menu
         // Inform user about F2 toggle
         Console.WriteLine("Note: You can press F2 to toggle password visibility while typing.\n");
         Console.WriteLine("Create a new account");
-        Console.WriteLine("Enter your full name:");
-        string fullName = Console.ReadLine();
+
+        // Get first and last names separately
+        Console.WriteLine("Enter your first name:");
+        string firstName = Console.ReadLine();
+        Console.WriteLine("Enter your last name:");
+        string lastName = Console.ReadLine();
+
+        // Get email address
         Console.WriteLine("Enter your email address:");
         string email = Console.ReadLine();
+
+        // Password input with toggle functionality
         string password = "";
         string confirmPassword = "";
         bool showPassword = false;
-        ConsoleKeyInfo key;
 
-        // Password input
         Console.Write("Enter your password: ");
         password = UserLogin.ReadPassword(ref showPassword);
 
-        // Confirm password input
         Console.Write("Confirm your password: ");
         confirmPassword = UserLogin.ReadPassword(ref showPassword);
-        
+
         // Check if passwords match
-        if (password == confirmPassword)
+        if (password != confirmPassword)
         {
-            Console.WriteLine("\nPasswords match!");
-            
-            if (_userAccountService.CreateAccount(email, password, fullName))
-            {
-                Console.WriteLine("Account created successfully. Please login.");
-            }
-            else
-            {
-                Console.WriteLine("Failed to create account. Email may already be in use.");
-            }
+            Console.WriteLine("\nPasswords do not match. Please try again.");
+            return;
+        }
+
+        // Get date of birth
+        Console.WriteLine("Enter your date of birth (yyyy-mm-dd):");
+        if (!DateTime.TryParse(Console.ReadLine(), out DateTime dateOfBirth))
+        {
+            Console.WriteLine("Invalid date format. Please try again.");
+            return;
+        }
+
+        // Attempt to create the account
+        bool accountCreated = _userAccountService.CreateAccount(email, password, firstName, lastName, dateOfBirth);
+
+        if (accountCreated)
+        {
+            Console.WriteLine("Account created successfully. Please login.");
         }
         else
         {
-            Console.WriteLine("\nPasswords do not match. Please try again.");
+            Console.WriteLine("Failed to create account. Email may already be in use.");
         }
-        
     }
+
 
     static public void ShowDestinations()
     {
