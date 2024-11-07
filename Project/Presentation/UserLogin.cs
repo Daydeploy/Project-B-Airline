@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Text.Json;
 
 static class UserLogin
 {
@@ -10,7 +9,7 @@ static class UserLogin
 
     public static void Start()
     {
-        AccountModel acc = null;
+        AccountModel? acc = null;
         Console.WriteLine("Welcome to the login page");
         Console.WriteLine("Note: You can press F2 to toggle password visibility while typing.");
         Console.Write("Please enter your login details:\nEmail: ");
@@ -20,7 +19,7 @@ static class UserLogin
 
         string password = "";
         bool showPassword = false;
-        ConsoleKeyInfo key; 
+        // ConsoleKeyInfo key; // Removed unused variable
 
         Console.Write("Enter your password: ");
         password = ReadPassword(
@@ -98,8 +97,8 @@ static class UserLogin
             "Browse Destinations",
             "Search Flights by Destination",
             "View Direct vs. Connecting Flights",
-            "Show Seat Upgrade Options",
-            "Logout"
+            "Logout",
+            "Show Seat Upgrade Options"
         };
 
         int selectedIndex = 0; // Start at the first menu item
@@ -152,13 +151,12 @@ static class UserLogin
                             ViewDirectVsConnectingFlights();
                             break;
                         case 9:
-                            Console.WriteLine("Seat Upgrade Options:");
-                            ShowSeatUpgradeOptions();
-                            break;
-                        case 10:
                             Console.WriteLine("Logging out...");
                             _isLoggedIn = false;
                             Menu.Start();
+                            break;
+                        case 10:
+                            ShowSeatUpgradeOptions();
                             break;
                     }
 
@@ -214,18 +212,6 @@ static class UserLogin
         }
     }
 
-    private static void ShowSeatUpgradeOptions()
-    {
-        Console.WriteLine("1. View Available Upgrades");
-        Console.WriteLine("2. Request Upgrade");
-        Console.WriteLine("3. Use Miles for Upgrade");
-        Console.WriteLine("4. Confirm Upgrade");
-        Console.WriteLine("5. View Upgrade Benefits");
-
-        Console.WriteLine("\nPress any key to return to the menu...");
-        Console.ReadKey();
-    }
-    
     private static void ModifyBooking()
     {
         var bookings = BookingAccess.LoadAll();
@@ -241,6 +227,121 @@ static class UserLogin
         if (passengerNumber == -1) return;
 
         ModifyPassengerDetails(booking.FlightId, passengerNumber - 1);
+    }
+
+    static public void ShowSeatUpgradeOptions()
+    {
+        string[] upgradeOptions = new[]
+        {
+            "View Available Upgrades",
+            "Request Upgrade",
+            "Use Miles for Upgrade",
+            "Confirm Upgrade",
+            "View Upgrade Benefits",
+            "Back to Main Menu"
+        };
+
+        int selectedIndex = 0;
+        bool exit = false;
+
+        while (!exit)
+        {
+            Menu.DisplayMenu(upgradeOptions, selectedIndex, "Seat Upgrade Options");
+            ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+            switch (keyInfo.Key)
+            {
+                case ConsoleKey.UpArrow:
+                    selectedIndex = (selectedIndex > 0) ? selectedIndex - 1 : upgradeOptions.Length - 1;
+                    break;
+                case ConsoleKey.DownArrow:
+                    selectedIndex = (selectedIndex < upgradeOptions.Length - 1) ? selectedIndex + 1 : 0;
+                    break;
+                case ConsoleKey.Enter:
+                    switch (selectedIndex)
+                    {
+                        case 0:
+                            ViewAvailableUpgrades();
+                            break;
+                        case 1:
+                            RequestUpgrade();
+                            break;
+                        case 2:
+                            UseMilesForUpgrade();
+                            break;
+                        case 3:
+                            ConfirmUpgrade();
+                            break;
+                        case 4:
+                            ViewUpgradeBenefits();
+                            break;
+                        case 5:
+                            exit = true; // Exit to main menu
+                            break;
+                    }
+                    break;
+            }
+        }
+    }
+
+    // New method to view available upgrades
+    private static void ViewAvailableUpgrades()
+    {
+        Console.WriteLine("Enter your flight ID to view available upgrades:");
+        if (int.TryParse(Console.ReadLine(), out int flightId))
+        {
+            var seatUpgradeService = new SeatUpgradeService();
+            var availableUpgrades = seatUpgradeService.ViewAvailableUpgrades(flightId);
+
+            if (availableUpgrades.Count > 0)
+            {
+                Console.WriteLine("Available upgrades:");
+                foreach (var upgrade in availableUpgrades)
+                {
+                    Console.WriteLine(upgrade);
+                }
+            }
+            else
+            {
+                Console.WriteLine("No available upgrades for this flight.");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Invalid flight ID.");
+        }
+    }
+
+    // New method to request an upgrade
+    private static void RequestUpgrade()
+    {
+        Console.WriteLine("Enter your desired upgrade class:");
+        string newSeatClass = Console.ReadLine() ?? string.Empty;
+        bool upgradeSuccess = _userAccountService.RequestUpgrade(_userAccountService.CurrentUserId, newSeatClass); // Use the existing instance
+
+        Console.WriteLine(upgradeSuccess ? "Upgrade request successful!" : "Upgrade request failed. Please check your miles or payment options.");
+    }
+
+    // New method to confirm the upgrade
+    private static void ConfirmUpgrade()
+    {
+        Console.WriteLine("Confirming upgrade...");
+        // Logic to confirm the upgrade can be added here
+        Console.WriteLine("Upgrade confirmed successfully!");
+    }
+
+    // New method to view upgrade benefits
+    private static void ViewUpgradeBenefits()
+    {
+        string seatClass;
+        do
+        {
+            Console.WriteLine("Enter the class you want to view benefits for:");
+            seatClass = Console.ReadLine() ?? string.Empty;
+        } while (string.IsNullOrWhiteSpace(seatClass)); // Ensure seatClass is not null or empty
+
+        var seatUpgradeService = new SeatUpgradeService();
+        string benefits = seatUpgradeService.ViewUpgradeBenefits(seatClass);
+        Console.WriteLine(benefits);
     }
 
     private static bool DisplayBookings(List<BookingModel> bookings)
@@ -303,14 +404,14 @@ static class UserLogin
     private static void ModifyPassengerDetails(int flightId, int passengerId)
     {
         Console.WriteLine("Enter new seat number:");
-        string seatNumber = Console.ReadLine();
+        string seatNumber = Console.ReadLine() ?? string.Empty;
 
         Console.WriteLine("Do you have checked baggage? (y/n):");
-        bool hasCheckedBaggage = Console.ReadLine().ToLower() == "y";
+        bool hasCheckedBaggage = Console.ReadLine()?.ToLower() == "y";
 
         var newDetails = new BookingDetails
         {
-            SeatNumber = seatNumber,
+            SeatNumber = seatNumber ?? string.Empty,
             HasCheckedBaggage = hasCheckedBaggage
         };
 
@@ -476,7 +577,7 @@ static class UserLogin
                 Console.WriteLine(
                     $"Current Passport Number: {account.PassportDetails?.PassportNumber ?? "Not provided"}");
                 Console.WriteLine("Enter new passport number:");
-                string passportNumber = Console.ReadLine();
+                string passportNumber = Console.ReadLine() ?? string.Empty;
 
                 Console.WriteLine(
                     $"Current Issue Date: {account.PassportDetails?.IssueDate?.ToString("yyyy-MM-dd") ?? "Not provided"}");
@@ -491,7 +592,7 @@ static class UserLogin
                 Console.WriteLine(
                     $"Current Country of Issue: {account.PassportDetails?.CountryOfIssue ?? "Not provided"}");
                 Console.WriteLine("Enter new country of issue:");
-                string countryOfIssue = Console.ReadLine();
+                string countryOfIssue = Console.ReadLine() ?? string.Empty;
 
                 var newPassportDetails =
                     new PassportDetailsModel(passportNumber, issueDate, expirationDate, countryOfIssue);
@@ -676,7 +777,7 @@ static class UserLogin
     private static void SearchFlightsByDestination()
     {
         Console.WriteLine("\nEnter the destination you want to search for:");
-        string? destination = Console.ReadLine();
+        string? destination = Console.ReadLine() ?? string.Empty;
 
         if (!string.IsNullOrWhiteSpace(destination))
         {
@@ -728,5 +829,22 @@ static class UserLogin
 
         Console.WriteLine("\nPress any key to return to the menu...");
         Console.ReadKey();
+    }
+
+    private static void UseMilesForUpgrade()
+    {
+        Console.WriteLine("Enter the number of miles you want to use for the upgrade:");
+        if (int.TryParse(Console.ReadLine(), out int miles) && miles > 0)
+        {
+            var seatUpgradeService = new SeatUpgradeService();
+            var userAccountService = new UserAccountService();
+            bool upgradeSuccess = seatUpgradeService.UseMilesForUpgrade(userAccountService.CurrentUserId, miles);
+
+            Console.WriteLine(upgradeSuccess ? "Upgrade using miles successful!" : "Failed to use miles for upgrade. Please check your balance.");
+        }
+        else
+        {
+            Console.WriteLine("Invalid number of miles.");
+        }
     }
 }
