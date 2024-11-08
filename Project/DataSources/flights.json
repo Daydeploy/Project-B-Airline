@@ -1,52 +1,5392 @@
 [
   {
-    "id": 7596,
+    "id": 1000,
+    "flightNumber": "FL3366",
     "origin": "Rotterdam",
-    "destination": "Nice",
-    "departureTime": "2024-11-08T03:12:05",
-    "arrivalTime": "2024-11-08T04:12:05",
-    "price": 287,
-    "availableSeats": 100,
-    "flightNumber": "FL5894"
+    "originCode": "RTM",
+    "destination": "Nice C\u00f4te d'Azur",
+    "destinationCode": "NCE",
+    "departureTime": "2024-11-01T20:52:00",
+    "arrivalTime": "2024-11-01T22:42:00",
+    "distance": 980,
+    "availableSeats": 285,
+    "planeType": "Boeing 787",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A1",
+    "arrivalGate": "B3",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 134
+      },
+      {
+        "class": "Business",
+        "price": 356
+      },
+      {
+        "class": "First",
+        "price": 616
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
   },
   {
-    "id": 6633,
+    "id": 1001,
+    "flightNumber": "FL6868",
     "origin": "Rotterdam",
-    "destination": "Milan",
-    "departureTime": "2024-11-07T03:12:05",
-    "arrivalTime": "2024-11-07T08:12:05",
-    "price": 379,
-    "availableSeats": 100,
-    "flightNumber": "FL2208"
+    "originCode": "RTM",
+    "destination": "M\u00e1laga",
+    "destinationCode": "AGP",
+    "departureTime": "2024-11-02T16:53:00",
+    "arrivalTime": "2024-11-02T19:38:00",
+    "distance": 1800,
+    "availableSeats": 285,
+    "planeType": "Boeing 787",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A18",
+    "arrivalGate": "B17",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 171
+      },
+      {
+        "class": "Business",
+        "price": 308
+      },
+      {
+        "class": "First",
+        "price": 909
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
   },
   {
-    "id": 4964,
+    "id": 1002,
+    "flightNumber": "FL5107",
     "origin": "Rotterdam",
-    "destination": "Nice",
-    "departureTime": "2024-11-08T13:12:05",
-    "arrivalTime": "2024-11-08T20:12:05",
-    "price": 349,
-    "availableSeats": 100,
-    "flightNumber": "FL7973"
+    "originCode": "RTM",
+    "destination": "Nice C\u00f4te d'Azur",
+    "destinationCode": "NCE",
+    "departureTime": "2024-11-03T22:19:00",
+    "arrivalTime": "2024-11-04T00:09:00",
+    "distance": 980,
+    "availableSeats": 285,
+    "planeType": "Boeing 787",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A14",
+    "arrivalGate": "B14",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 140
+      },
+      {
+        "class": "Business",
+        "price": 373
+      },
+      {
+        "class": "First",
+        "price": 816
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
   },
   {
-    "id": 8661,
+    "id": 1003,
+    "flightNumber": "FL6767",
     "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Nice C\u00f4te d'Azur",
+    "destinationCode": "NCE",
+    "departureTime": "2024-11-04T06:33:00",
+    "arrivalTime": "2024-11-04T08:23:00",
+    "distance": 980,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A3",
+    "arrivalGate": "B3",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 148
+      },
+      {
+        "class": "Business",
+        "price": 244
+      },
+      {
+        "class": "First",
+        "price": 821
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1004,
+    "flightNumber": "FL1506",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Milan Malpensa",
+    "destinationCode": "MXP",
+    "departureTime": "2024-11-05T09:42:00",
+    "arrivalTime": "2024-11-05T11:12:00",
+    "distance": 850,
+    "availableSeats": 285,
+    "planeType": "Boeing 787",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A5",
+    "arrivalGate": "B8",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 118
+      },
+      {
+        "class": "Business",
+        "price": 466
+      },
+      {
+        "class": "First",
+        "price": 669
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1005,
+    "flightNumber": "FL2544",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Mykonos",
+    "destinationCode": "JMK",
+    "departureTime": "2024-11-06T16:04:00",
+    "arrivalTime": "2024-11-06T19:19:00",
+    "distance": 2250,
+    "availableSeats": 285,
+    "planeType": "Boeing 787",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A4",
+    "arrivalGate": "B12",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 215
+      },
+      {
+        "class": "Business",
+        "price": 746
+      },
+      {
+        "class": "First",
+        "price": 813
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1006,
+    "flightNumber": "FL8814",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Mykonos",
+    "destinationCode": "JMK",
+    "departureTime": "2024-11-07T10:31:00",
+    "arrivalTime": "2024-11-07T13:46:00",
+    "distance": 2250,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A14",
+    "arrivalGate": "B7",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 207
+      },
+      {
+        "class": "Business",
+        "price": 688
+      },
+      {
+        "class": "First",
+        "price": 1104
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1007,
+    "flightNumber": "FL3902",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "M\u00e1laga",
+    "destinationCode": "AGP",
+    "departureTime": "2024-11-07T11:30:00",
+    "arrivalTime": "2024-11-07T14:15:00",
+    "distance": 1800,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A18",
+    "arrivalGate": "B6",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 155
+      },
+      {
+        "class": "Business",
+        "price": 302
+      },
+      {
+        "class": "First",
+        "price": 907
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1008,
+    "flightNumber": "FL4949",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
     "destination": "Dublin",
-    "departureTime": "2024-11-07T22:12:05",
-    "arrivalTime": "2024-11-08T04:12:05",
-    "price": 351,
-    "availableSeats": 100,
-    "flightNumber": "FL2280"
+    "destinationCode": "DUB",
+    "departureTime": "2024-11-08T21:43:00",
+    "arrivalTime": "2024-11-08T23:23:00",
+    "distance": 915,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A9",
+    "arrivalGate": "B16",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 122
+      },
+      {
+        "class": "Business",
+        "price": 236
+      },
+      {
+        "class": "First",
+        "price": 468
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
   },
   {
-    "id": 8343,
+    "id": 1009,
+    "flightNumber": "FL1000",
     "origin": "Rotterdam",
-    "destination": "M\u00E1laga",
-    "departureTime": "2024-11-06T18:12:05",
-    "arrivalTime": "2024-11-06T20:12:05",
-    "price": 474,
-    "availableSeats": 100,
-    "flightNumber": "FL5617"
+    "originCode": "RTM",
+    "destination": "London City",
+    "destinationCode": "LCY",
+    "departureTime": "2024-11-08T18:12:00",
+    "arrivalTime": "2024-11-08T19:12:00",
+    "distance": 320,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A10",
+    "arrivalGate": "B3",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 94
+      },
+      {
+        "class": "Business",
+        "price": 292
+      },
+      {
+        "class": "First",
+        "price": 373
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1010,
+    "flightNumber": "FL8580",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Nice C\u00f4te d'Azur",
+    "destinationCode": "NCE",
+    "departureTime": "2024-11-09T15:15:00",
+    "arrivalTime": "2024-11-09T17:05:00",
+    "distance": 980,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A17",
+    "arrivalGate": "B10",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 121
+      },
+      {
+        "class": "Business",
+        "price": 409
+      },
+      {
+        "class": "First",
+        "price": 759
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1011,
+    "flightNumber": "FL9890",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Mykonos",
+    "destinationCode": "JMK",
+    "departureTime": "2024-11-10T22:16:00",
+    "arrivalTime": "2024-11-11T01:31:00",
+    "distance": 2250,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A11",
+    "arrivalGate": "B7",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 231
+      },
+      {
+        "class": "Business",
+        "price": 667
+      },
+      {
+        "class": "First",
+        "price": 965
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1012,
+    "flightNumber": "FL6646",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "London City",
+    "destinationCode": "LCY",
+    "departureTime": "2024-11-11T07:27:00",
+    "arrivalTime": "2024-11-11T08:27:00",
+    "distance": 320,
+    "availableSeats": 285,
+    "planeType": "Boeing 787",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A11",
+    "arrivalGate": "B1",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 93
+      },
+      {
+        "class": "Business",
+        "price": 191
+      },
+      {
+        "class": "First",
+        "price": 477
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1013,
+    "flightNumber": "FL8068",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Dublin",
+    "destinationCode": "DUB",
+    "departureTime": "2024-11-12T11:44:00",
+    "arrivalTime": "2024-11-12T13:24:00",
+    "distance": 915,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A12",
+    "arrivalGate": "B3",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 149
+      },
+      {
+        "class": "Business",
+        "price": 311
+      },
+      {
+        "class": "First",
+        "price": 520
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1014,
+    "flightNumber": "FL2681",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Milan Malpensa",
+    "destinationCode": "MXP",
+    "departureTime": "2024-11-13T14:52:00",
+    "arrivalTime": "2024-11-13T16:22:00",
+    "distance": 850,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A2",
+    "arrivalGate": "B1",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 111
+      },
+      {
+        "class": "Business",
+        "price": 436
+      },
+      {
+        "class": "First",
+        "price": 612
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1015,
+    "flightNumber": "FL6777",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Mykonos",
+    "destinationCode": "JMK",
+    "departureTime": "2024-11-14T10:09:00",
+    "arrivalTime": "2024-11-14T13:24:00",
+    "distance": 2250,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A11",
+    "arrivalGate": "B7",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 233
+      },
+      {
+        "class": "Business",
+        "price": 713
+      },
+      {
+        "class": "First",
+        "price": 918
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1016,
+    "flightNumber": "FL9869",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Nice C\u00f4te d'Azur",
+    "destinationCode": "NCE",
+    "departureTime": "2024-11-15T13:43:00",
+    "arrivalTime": "2024-11-15T15:33:00",
+    "distance": 980,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A8",
+    "arrivalGate": "B17",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 130
+      },
+      {
+        "class": "Business",
+        "price": 331
+      },
+      {
+        "class": "First",
+        "price": 619
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1017,
+    "flightNumber": "FL5236",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Dublin",
+    "destinationCode": "DUB",
+    "departureTime": "2024-11-16T17:25:00",
+    "arrivalTime": "2024-11-16T19:05:00",
+    "distance": 915,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A20",
+    "arrivalGate": "B10",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 109
+      },
+      {
+        "class": "Business",
+        "price": 275
+      },
+      {
+        "class": "First",
+        "price": 725
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1018,
+    "flightNumber": "FL6905",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Dublin",
+    "destinationCode": "DUB",
+    "departureTime": "2024-11-17T19:54:00",
+    "arrivalTime": "2024-11-17T21:34:00",
+    "distance": 915,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A11",
+    "arrivalGate": "B9",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 122
+      },
+      {
+        "class": "Business",
+        "price": 429
+      },
+      {
+        "class": "First",
+        "price": 558
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1019,
+    "flightNumber": "FL1954",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "M\u00e1laga",
+    "destinationCode": "AGP",
+    "departureTime": "2024-11-17T10:53:00",
+    "arrivalTime": "2024-11-17T13:38:00",
+    "distance": 1800,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A15",
+    "arrivalGate": "B2",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 164
+      },
+      {
+        "class": "Business",
+        "price": 346
+      },
+      {
+        "class": "First",
+        "price": 859
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1020,
+    "flightNumber": "FL2425",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "M\u00e1laga",
+    "destinationCode": "AGP",
+    "departureTime": "2024-11-18T17:42:00",
+    "arrivalTime": "2024-11-18T20:27:00",
+    "distance": 1800,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A2",
+    "arrivalGate": "B11",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 159
+      },
+      {
+        "class": "Business",
+        "price": 307
+      },
+      {
+        "class": "First",
+        "price": 983
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1021,
+    "flightNumber": "FL9569",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Nice C\u00f4te d'Azur",
+    "destinationCode": "NCE",
+    "departureTime": "2024-11-19T18:29:00",
+    "arrivalTime": "2024-11-19T20:19:00",
+    "distance": 980,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A3",
+    "arrivalGate": "B12",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 121
+      },
+      {
+        "class": "Business",
+        "price": 297
+      },
+      {
+        "class": "First",
+        "price": 603
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1022,
+    "flightNumber": "FL5028",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Mykonos",
+    "destinationCode": "JMK",
+    "departureTime": "2024-11-20T10:06:00",
+    "arrivalTime": "2024-11-20T13:21:00",
+    "distance": 2250,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A9",
+    "arrivalGate": "B20",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 231
+      },
+      {
+        "class": "Business",
+        "price": 584
+      },
+      {
+        "class": "First",
+        "price": 1146
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1023,
+    "flightNumber": "FL2502",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "M\u00e1laga",
+    "destinationCode": "AGP",
+    "departureTime": "2024-11-21T21:16:00",
+    "arrivalTime": "2024-11-22T00:01:00",
+    "distance": 1800,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A11",
+    "arrivalGate": "B3",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 190
+      },
+      {
+        "class": "Business",
+        "price": 430
+      },
+      {
+        "class": "First",
+        "price": 907
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1024,
+    "flightNumber": "FL3801",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Nice C\u00f4te d'Azur",
+    "destinationCode": "NCE",
+    "departureTime": "2024-11-22T17:37:00",
+    "arrivalTime": "2024-11-22T19:27:00",
+    "distance": 980,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A7",
+    "arrivalGate": "B15",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 163
+      },
+      {
+        "class": "Business",
+        "price": 244
+      },
+      {
+        "class": "First",
+        "price": 488
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1025,
+    "flightNumber": "FL7374",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Dublin",
+    "destinationCode": "DUB",
+    "departureTime": "2024-11-23T19:51:00",
+    "arrivalTime": "2024-11-23T21:31:00",
+    "distance": 915,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A20",
+    "arrivalGate": "B19",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 101
+      },
+      {
+        "class": "Business",
+        "price": 409
+      },
+      {
+        "class": "First",
+        "price": 640
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1026,
+    "flightNumber": "FL8000",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Mykonos",
+    "destinationCode": "JMK",
+    "departureTime": "2024-11-23T21:42:00",
+    "arrivalTime": "2024-11-24T00:57:00",
+    "distance": 2250,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A8",
+    "arrivalGate": "B20",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 247
+      },
+      {
+        "class": "Business",
+        "price": 422
+      },
+      {
+        "class": "First",
+        "price": 831
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1027,
+    "flightNumber": "FL4049",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Milan Malpensa",
+    "destinationCode": "MXP",
+    "departureTime": "2024-11-24T12:03:00",
+    "arrivalTime": "2024-11-24T13:33:00",
+    "distance": 850,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A12",
+    "arrivalGate": "B3",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 144
+      },
+      {
+        "class": "Business",
+        "price": 431
+      },
+      {
+        "class": "First",
+        "price": 670
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1028,
+    "flightNumber": "FL4806",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "London City",
+    "destinationCode": "LCY",
+    "departureTime": "2024-11-25T17:45:00",
+    "arrivalTime": "2024-11-25T18:45:00",
+    "distance": 320,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A1",
+    "arrivalGate": "B10",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 97
+      },
+      {
+        "class": "Business",
+        "price": 243
+      },
+      {
+        "class": "First",
+        "price": 436
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1029,
+    "flightNumber": "FL9769",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Nice C\u00f4te d'Azur",
+    "destinationCode": "NCE",
+    "departureTime": "2024-11-26T09:11:00",
+    "arrivalTime": "2024-11-26T11:01:00",
+    "distance": 980,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A6",
+    "arrivalGate": "B2",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 158
+      },
+      {
+        "class": "Business",
+        "price": 271
+      },
+      {
+        "class": "First",
+        "price": 636
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1030,
+    "flightNumber": "FL8853",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Milan Malpensa",
+    "destinationCode": "MXP",
+    "departureTime": "2024-11-26T09:15:00",
+    "arrivalTime": "2024-11-26T10:45:00",
+    "distance": 850,
+    "availableSeats": 285,
+    "planeType": "Boeing 787",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A19",
+    "arrivalGate": "B15",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 115
+      },
+      {
+        "class": "Business",
+        "price": 341
+      },
+      {
+        "class": "First",
+        "price": 646
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1031,
+    "flightNumber": "FL5568",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "London City",
+    "destinationCode": "LCY",
+    "departureTime": "2024-11-27T09:10:00",
+    "arrivalTime": "2024-11-27T10:10:00",
+    "distance": 320,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A3",
+    "arrivalGate": "B14",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 89
+      },
+      {
+        "class": "Business",
+        "price": 283
+      },
+      {
+        "class": "First",
+        "price": 474
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1032,
+    "flightNumber": "FL5310",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Nice C\u00f4te d'Azur",
+    "destinationCode": "NCE",
+    "departureTime": "2024-11-27T22:18:00",
+    "arrivalTime": "2024-11-28T00:08:00",
+    "distance": 980,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A4",
+    "arrivalGate": "B12",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 157
+      },
+      {
+        "class": "Business",
+        "price": 276
+      },
+      {
+        "class": "First",
+        "price": 792
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1033,
+    "flightNumber": "FL7904",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "London City",
+    "destinationCode": "LCY",
+    "departureTime": "2024-11-28T07:07:00",
+    "arrivalTime": "2024-11-28T08:07:00",
+    "distance": 320,
+    "availableSeats": 285,
+    "planeType": "Boeing 787",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A18",
+    "arrivalGate": "B8",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 112
+      },
+      {
+        "class": "Business",
+        "price": 185
+      },
+      {
+        "class": "First",
+        "price": 346
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1034,
+    "flightNumber": "FL6184",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "M\u00e1laga",
+    "destinationCode": "AGP",
+    "departureTime": "2024-11-29T18:08:00",
+    "arrivalTime": "2024-11-29T20:53:00",
+    "distance": 1800,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A1",
+    "arrivalGate": "B5",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 183
+      },
+      {
+        "class": "Business",
+        "price": 484
+      },
+      {
+        "class": "First",
+        "price": 659
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1035,
+    "flightNumber": "FL4828",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Dublin",
+    "destinationCode": "DUB",
+    "departureTime": "2024-11-30T14:59:00",
+    "arrivalTime": "2024-11-30T16:39:00",
+    "distance": 915,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A18",
+    "arrivalGate": "B4",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 148
+      },
+      {
+        "class": "Business",
+        "price": 375
+      },
+      {
+        "class": "First",
+        "price": 723
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1036,
+    "flightNumber": "FL4092",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Nice C\u00f4te d'Azur",
+    "destinationCode": "NCE",
+    "departureTime": "2024-11-30T20:33:00",
+    "arrivalTime": "2024-11-30T22:23:00",
+    "distance": 980,
+    "availableSeats": 285,
+    "planeType": "Boeing 787",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A4",
+    "arrivalGate": "B16",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 132
+      },
+      {
+        "class": "Business",
+        "price": 386
+      },
+      {
+        "class": "First",
+        "price": 558
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1037,
+    "flightNumber": "FL9055",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Mykonos",
+    "destinationCode": "JMK",
+    "departureTime": "2024-12-01T08:08:00",
+    "arrivalTime": "2024-12-01T11:23:00",
+    "distance": 2250,
+    "availableSeats": 285,
+    "planeType": "Boeing 787",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A1",
+    "arrivalGate": "B17",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 216
+      },
+      {
+        "class": "Business",
+        "price": 555
+      },
+      {
+        "class": "First",
+        "price": 1087
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1038,
+    "flightNumber": "FL6048",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Milan Malpensa",
+    "destinationCode": "MXP",
+    "departureTime": "2024-12-02T12:17:00",
+    "arrivalTime": "2024-12-02T13:47:00",
+    "distance": 850,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A3",
+    "arrivalGate": "B11",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 155
+      },
+      {
+        "class": "Business",
+        "price": 338
+      },
+      {
+        "class": "First",
+        "price": 485
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1039,
+    "flightNumber": "FL2576",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Milan Malpensa",
+    "destinationCode": "MXP",
+    "departureTime": "2024-12-03T09:56:00",
+    "arrivalTime": "2024-12-03T11:26:00",
+    "distance": 850,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A4",
+    "arrivalGate": "B18",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 149
+      },
+      {
+        "class": "Business",
+        "price": 256
+      },
+      {
+        "class": "First",
+        "price": 675
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1040,
+    "flightNumber": "FL2451",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Milan Malpensa",
+    "destinationCode": "MXP",
+    "departureTime": "2024-12-04T08:12:00",
+    "arrivalTime": "2024-12-04T09:42:00",
+    "distance": 850,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A16",
+    "arrivalGate": "B3",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 160
+      },
+      {
+        "class": "Business",
+        "price": 220
+      },
+      {
+        "class": "First",
+        "price": 719
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1041,
+    "flightNumber": "FL9229",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Dublin",
+    "destinationCode": "DUB",
+    "departureTime": "2024-12-04T22:07:00",
+    "arrivalTime": "2024-12-04T23:47:00",
+    "distance": 915,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A1",
+    "arrivalGate": "B14",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 143
+      },
+      {
+        "class": "Business",
+        "price": 349
+      },
+      {
+        "class": "First",
+        "price": 463
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1042,
+    "flightNumber": "FL7446",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "London City",
+    "destinationCode": "LCY",
+    "departureTime": "2024-12-05T13:56:00",
+    "arrivalTime": "2024-12-05T14:56:00",
+    "distance": 320,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A1",
+    "arrivalGate": "B10",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 99
+      },
+      {
+        "class": "Business",
+        "price": 304
+      },
+      {
+        "class": "First",
+        "price": 447
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1043,
+    "flightNumber": "FL8652",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "M\u00e1laga",
+    "destinationCode": "AGP",
+    "departureTime": "2024-12-06T13:27:00",
+    "arrivalTime": "2024-12-06T16:12:00",
+    "distance": 1800,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A2",
+    "arrivalGate": "B15",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 197
+      },
+      {
+        "class": "Business",
+        "price": 425
+      },
+      {
+        "class": "First",
+        "price": 609
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1044,
+    "flightNumber": "FL6674",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "London City",
+    "destinationCode": "LCY",
+    "departureTime": "2024-12-07T11:13:00",
+    "arrivalTime": "2024-12-07T12:13:00",
+    "distance": 320,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A17",
+    "arrivalGate": "B15",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 119
+      },
+      {
+        "class": "Business",
+        "price": 268
+      },
+      {
+        "class": "First",
+        "price": 375
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1045,
+    "flightNumber": "FL3711",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "London City",
+    "destinationCode": "LCY",
+    "departureTime": "2024-12-08T15:42:00",
+    "arrivalTime": "2024-12-08T16:42:00",
+    "distance": 320,
+    "availableSeats": 285,
+    "planeType": "Boeing 787",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A1",
+    "arrivalGate": "B2",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 98
+      },
+      {
+        "class": "Business",
+        "price": 181
+      },
+      {
+        "class": "First",
+        "price": 552
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1046,
+    "flightNumber": "FL5230",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Dublin",
+    "destinationCode": "DUB",
+    "departureTime": "2024-12-09T21:14:00",
+    "arrivalTime": "2024-12-09T22:54:00",
+    "distance": 915,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A5",
+    "arrivalGate": "B18",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 128
+      },
+      {
+        "class": "Business",
+        "price": 434
+      },
+      {
+        "class": "First",
+        "price": 660
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1047,
+    "flightNumber": "FL5221",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "M\u00e1laga",
+    "destinationCode": "AGP",
+    "departureTime": "2024-12-10T20:48:00",
+    "arrivalTime": "2024-12-10T23:33:00",
+    "distance": 1800,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A14",
+    "arrivalGate": "B20",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 192
+      },
+      {
+        "class": "Business",
+        "price": 487
+      },
+      {
+        "class": "First",
+        "price": 849
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1048,
+    "flightNumber": "FL4861",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Milan Malpensa",
+    "destinationCode": "MXP",
+    "departureTime": "2024-12-11T17:19:00",
+    "arrivalTime": "2024-12-11T18:49:00",
+    "distance": 850,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A13",
+    "arrivalGate": "B10",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 137
+      },
+      {
+        "class": "Business",
+        "price": 226
+      },
+      {
+        "class": "First",
+        "price": 563
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1049,
+    "flightNumber": "FL4967",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Nice C\u00f4te d'Azur",
+    "destinationCode": "NCE",
+    "departureTime": "2024-12-12T16:55:00",
+    "arrivalTime": "2024-12-12T18:45:00",
+    "distance": 980,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A20",
+    "arrivalGate": "B16",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 148
+      },
+      {
+        "class": "Business",
+        "price": 358
+      },
+      {
+        "class": "First",
+        "price": 810
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1050,
+    "flightNumber": "FL3395",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "London City",
+    "destinationCode": "LCY",
+    "departureTime": "2024-12-13T15:47:00",
+    "arrivalTime": "2024-12-13T16:47:00",
+    "distance": 320,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A11",
+    "arrivalGate": "B8",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 95
+      },
+      {
+        "class": "Business",
+        "price": 161
+      },
+      {
+        "class": "First",
+        "price": 451
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1051,
+    "flightNumber": "FL1776",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Milan Malpensa",
+    "destinationCode": "MXP",
+    "departureTime": "2024-12-13T19:15:00",
+    "arrivalTime": "2024-12-13T20:45:00",
+    "distance": 850,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A17",
+    "arrivalGate": "B16",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 145
+      },
+      {
+        "class": "Business",
+        "price": 311
+      },
+      {
+        "class": "First",
+        "price": 574
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1052,
+    "flightNumber": "FL2723",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "London City",
+    "destinationCode": "LCY",
+    "departureTime": "2024-12-14T21:03:00",
+    "arrivalTime": "2024-12-14T22:03:00",
+    "distance": 320,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A2",
+    "arrivalGate": "B18",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 94
+      },
+      {
+        "class": "Business",
+        "price": 258
+      },
+      {
+        "class": "First",
+        "price": 380
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1053,
+    "flightNumber": "FL7486",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Nice C\u00f4te d'Azur",
+    "destinationCode": "NCE",
+    "departureTime": "2024-12-15T14:28:00",
+    "arrivalTime": "2024-12-15T16:18:00",
+    "distance": 980,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A19",
+    "arrivalGate": "B13",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 130
+      },
+      {
+        "class": "Business",
+        "price": 265
+      },
+      {
+        "class": "First",
+        "price": 810
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1054,
+    "flightNumber": "FL9983",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "M\u00e1laga",
+    "destinationCode": "AGP",
+    "departureTime": "2024-12-16T14:25:00",
+    "arrivalTime": "2024-12-16T17:10:00",
+    "distance": 1800,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A6",
+    "arrivalGate": "B5",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 180
+      },
+      {
+        "class": "Business",
+        "price": 444
+      },
+      {
+        "class": "First",
+        "price": 909
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1055,
+    "flightNumber": "FL3830",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "London City",
+    "destinationCode": "LCY",
+    "departureTime": "2024-12-17T16:41:00",
+    "arrivalTime": "2024-12-17T17:41:00",
+    "distance": 320,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A8",
+    "arrivalGate": "B20",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 101
+      },
+      {
+        "class": "Business",
+        "price": 168
+      },
+      {
+        "class": "First",
+        "price": 448
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1056,
+    "flightNumber": "FL1136",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Dublin",
+    "destinationCode": "DUB",
+    "departureTime": "2024-12-17T07:01:00",
+    "arrivalTime": "2024-12-17T08:41:00",
+    "distance": 915,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A5",
+    "arrivalGate": "B11",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 113
+      },
+      {
+        "class": "Business",
+        "price": 224
+      },
+      {
+        "class": "First",
+        "price": 625
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1057,
+    "flightNumber": "FL5484",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "London City",
+    "destinationCode": "LCY",
+    "departureTime": "2024-12-18T06:48:00",
+    "arrivalTime": "2024-12-18T07:48:00",
+    "distance": 320,
+    "availableSeats": 285,
+    "planeType": "Boeing 787",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A15",
+    "arrivalGate": "B14",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 98
+      },
+      {
+        "class": "Business",
+        "price": 344
+      },
+      {
+        "class": "First",
+        "price": 408
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1058,
+    "flightNumber": "FL8273",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Milan Malpensa",
+    "destinationCode": "MXP",
+    "departureTime": "2024-12-18T06:59:00",
+    "arrivalTime": "2024-12-18T08:29:00",
+    "distance": 850,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A15",
+    "arrivalGate": "B12",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 154
+      },
+      {
+        "class": "Business",
+        "price": 373
+      },
+      {
+        "class": "First",
+        "price": 790
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1059,
+    "flightNumber": "FL1835",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "London City",
+    "destinationCode": "LCY",
+    "departureTime": "2024-12-19T11:35:00",
+    "arrivalTime": "2024-12-19T12:35:00",
+    "distance": 320,
+    "availableSeats": 285,
+    "planeType": "Boeing 787",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A3",
+    "arrivalGate": "B19",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 92
+      },
+      {
+        "class": "Business",
+        "price": 310
+      },
+      {
+        "class": "First",
+        "price": 563
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1060,
+    "flightNumber": "FL6556",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Nice C\u00f4te d'Azur",
+    "destinationCode": "NCE",
+    "departureTime": "2024-12-19T19:29:00",
+    "arrivalTime": "2024-12-19T21:19:00",
+    "distance": 980,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A17",
+    "arrivalGate": "B10",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 142
+      },
+      {
+        "class": "Business",
+        "price": 420
+      },
+      {
+        "class": "First",
+        "price": 672
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1061,
+    "flightNumber": "FL1933",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Mykonos",
+    "destinationCode": "JMK",
+    "departureTime": "2024-12-20T12:41:00",
+    "arrivalTime": "2024-12-20T15:56:00",
+    "distance": 2250,
+    "availableSeats": 285,
+    "planeType": "Boeing 787",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A16",
+    "arrivalGate": "B2",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 203
+      },
+      {
+        "class": "Business",
+        "price": 744
+      },
+      {
+        "class": "First",
+        "price": 1154
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1062,
+    "flightNumber": "FL6352",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "London City",
+    "destinationCode": "LCY",
+    "departureTime": "2024-12-21T15:06:00",
+    "arrivalTime": "2024-12-21T16:06:00",
+    "distance": 320,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A15",
+    "arrivalGate": "B19",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 81
+      },
+      {
+        "class": "Business",
+        "price": 322
+      },
+      {
+        "class": "First",
+        "price": 377
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1063,
+    "flightNumber": "FL5882",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Milan Malpensa",
+    "destinationCode": "MXP",
+    "departureTime": "2024-12-22T18:59:00",
+    "arrivalTime": "2024-12-22T20:29:00",
+    "distance": 850,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A11",
+    "arrivalGate": "B20",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 121
+      },
+      {
+        "class": "Business",
+        "price": 356
+      },
+      {
+        "class": "First",
+        "price": 724
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1064,
+    "flightNumber": "FL3419",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Milan Malpensa",
+    "destinationCode": "MXP",
+    "departureTime": "2024-12-22T13:07:00",
+    "arrivalTime": "2024-12-22T14:37:00",
+    "distance": 850,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A9",
+    "arrivalGate": "B10",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 136
+      },
+      {
+        "class": "Business",
+        "price": 281
+      },
+      {
+        "class": "First",
+        "price": 591
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1065,
+    "flightNumber": "FL4679",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Dublin",
+    "destinationCode": "DUB",
+    "departureTime": "2024-12-23T11:16:00",
+    "arrivalTime": "2024-12-23T12:56:00",
+    "distance": 915,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A7",
+    "arrivalGate": "B14",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 137
+      },
+      {
+        "class": "Business",
+        "price": 375
+      },
+      {
+        "class": "First",
+        "price": 466
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1066,
+    "flightNumber": "FL6048",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Milan Malpensa",
+    "destinationCode": "MXP",
+    "departureTime": "2024-12-24T06:02:00",
+    "arrivalTime": "2024-12-24T07:32:00",
+    "distance": 850,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A18",
+    "arrivalGate": "B9",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 145
+      },
+      {
+        "class": "Business",
+        "price": 451
+      },
+      {
+        "class": "First",
+        "price": 719
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1067,
+    "flightNumber": "FL8973",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Dublin",
+    "destinationCode": "DUB",
+    "departureTime": "2024-12-25T20:00:00",
+    "arrivalTime": "2024-12-25T21:40:00",
+    "distance": 915,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A3",
+    "arrivalGate": "B5",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 103
+      },
+      {
+        "class": "Business",
+        "price": 394
+      },
+      {
+        "class": "First",
+        "price": 614
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1068,
+    "flightNumber": "FL9248",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "London City",
+    "destinationCode": "LCY",
+    "departureTime": "2024-12-26T10:51:00",
+    "arrivalTime": "2024-12-26T11:51:00",
+    "distance": 320,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A14",
+    "arrivalGate": "B10",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 86
+      },
+      {
+        "class": "Business",
+        "price": 262
+      },
+      {
+        "class": "First",
+        "price": 494
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1069,
+    "flightNumber": "FL2137",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Dublin",
+    "destinationCode": "DUB",
+    "departureTime": "2024-12-27T17:37:00",
+    "arrivalTime": "2024-12-27T19:17:00",
+    "distance": 915,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A1",
+    "arrivalGate": "B10",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 150
+      },
+      {
+        "class": "Business",
+        "price": 258
+      },
+      {
+        "class": "First",
+        "price": 618
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1070,
+    "flightNumber": "FL1471",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Nice C\u00f4te d'Azur",
+    "destinationCode": "NCE",
+    "departureTime": "2024-12-28T16:44:00",
+    "arrivalTime": "2024-12-28T18:34:00",
+    "distance": 980,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A5",
+    "arrivalGate": "B5",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 140
+      },
+      {
+        "class": "Business",
+        "price": 490
+      },
+      {
+        "class": "First",
+        "price": 770
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1071,
+    "flightNumber": "FL7721",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Nice C\u00f4te d'Azur",
+    "destinationCode": "NCE",
+    "departureTime": "2024-12-29T11:01:00",
+    "arrivalTime": "2024-12-29T12:51:00",
+    "distance": 980,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A16",
+    "arrivalGate": "B12",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 146
+      },
+      {
+        "class": "Business",
+        "price": 317
+      },
+      {
+        "class": "First",
+        "price": 607
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1072,
+    "flightNumber": "FL4609",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "M\u00e1laga",
+    "destinationCode": "AGP",
+    "departureTime": "2024-12-30T08:48:00",
+    "arrivalTime": "2024-12-30T11:33:00",
+    "distance": 1800,
+    "availableSeats": 285,
+    "planeType": "Boeing 787",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A11",
+    "arrivalGate": "B2",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 179
+      },
+      {
+        "class": "Business",
+        "price": 569
+      },
+      {
+        "class": "First",
+        "price": 941
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1073,
+    "flightNumber": "FL1797",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Dublin",
+    "destinationCode": "DUB",
+    "departureTime": "2024-12-30T06:27:00",
+    "arrivalTime": "2024-12-30T08:07:00",
+    "distance": 915,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A11",
+    "arrivalGate": "B6",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 116
+      },
+      {
+        "class": "Business",
+        "price": 212
+      },
+      {
+        "class": "First",
+        "price": 691
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1074,
+    "flightNumber": "FL1926",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "M\u00e1laga",
+    "destinationCode": "AGP",
+    "departureTime": "2024-12-31T13:16:00",
+    "arrivalTime": "2024-12-31T16:01:00",
+    "distance": 1800,
+    "availableSeats": 285,
+    "planeType": "Boeing 787",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A20",
+    "arrivalGate": "B5",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 152
+      },
+      {
+        "class": "Business",
+        "price": 490
+      },
+      {
+        "class": "First",
+        "price": 729
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1075,
+    "flightNumber": "FL7000",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Dublin",
+    "destinationCode": "DUB",
+    "departureTime": "2025-01-01T21:00:00",
+    "arrivalTime": "2025-01-01T22:40:00",
+    "distance": 915,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A20",
+    "arrivalGate": "B7",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 141
+      },
+      {
+        "class": "Business",
+        "price": 248
+      },
+      {
+        "class": "First",
+        "price": 633
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1076,
+    "flightNumber": "FL8844",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Nice C\u00f4te d'Azur",
+    "destinationCode": "NCE",
+    "departureTime": "2025-01-02T19:59:00",
+    "arrivalTime": "2025-01-02T21:49:00",
+    "distance": 980,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A15",
+    "arrivalGate": "B9",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 138
+      },
+      {
+        "class": "Business",
+        "price": 418
+      },
+      {
+        "class": "First",
+        "price": 719
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1077,
+    "flightNumber": "FL3082",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Dublin",
+    "destinationCode": "DUB",
+    "departureTime": "2025-01-02T17:53:00",
+    "arrivalTime": "2025-01-02T19:33:00",
+    "distance": 915,
+    "availableSeats": 285,
+    "planeType": "Boeing 787",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A18",
+    "arrivalGate": "B16",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 116
+      },
+      {
+        "class": "Business",
+        "price": 264
+      },
+      {
+        "class": "First",
+        "price": 583
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1078,
+    "flightNumber": "FL7409",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Mykonos",
+    "destinationCode": "JMK",
+    "departureTime": "2025-01-03T11:26:00",
+    "arrivalTime": "2025-01-03T14:41:00",
+    "distance": 2250,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A16",
+    "arrivalGate": "B12",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 207
+      },
+      {
+        "class": "Business",
+        "price": 585
+      },
+      {
+        "class": "First",
+        "price": 806
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1079,
+    "flightNumber": "FL8639",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "London City",
+    "destinationCode": "LCY",
+    "departureTime": "2025-01-04T21:30:00",
+    "arrivalTime": "2025-01-04T22:30:00",
+    "distance": 320,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A14",
+    "arrivalGate": "B19",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 95
+      },
+      {
+        "class": "Business",
+        "price": 322
+      },
+      {
+        "class": "First",
+        "price": 552
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1080,
+    "flightNumber": "FL6190",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Nice C\u00f4te d'Azur",
+    "destinationCode": "NCE",
+    "departureTime": "2025-01-05T11:08:00",
+    "arrivalTime": "2025-01-05T12:58:00",
+    "distance": 980,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A3",
+    "arrivalGate": "B1",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 130
+      },
+      {
+        "class": "Business",
+        "price": 393
+      },
+      {
+        "class": "First",
+        "price": 813
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1081,
+    "flightNumber": "FL9946",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Mykonos",
+    "destinationCode": "JMK",
+    "departureTime": "2025-01-06T08:54:00",
+    "arrivalTime": "2025-01-06T12:09:00",
+    "distance": 2250,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A12",
+    "arrivalGate": "B4",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 244
+      },
+      {
+        "class": "Business",
+        "price": 519
+      },
+      {
+        "class": "First",
+        "price": 1116
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1082,
+    "flightNumber": "FL2075",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "M\u00e1laga",
+    "destinationCode": "AGP",
+    "departureTime": "2025-01-07T19:48:00",
+    "arrivalTime": "2025-01-07T22:33:00",
+    "distance": 1800,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A6",
+    "arrivalGate": "B4",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 198
+      },
+      {
+        "class": "Business",
+        "price": 519
+      },
+      {
+        "class": "First",
+        "price": 727
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1083,
+    "flightNumber": "FL2267",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Mykonos",
+    "destinationCode": "JMK",
+    "departureTime": "2025-01-08T07:47:00",
+    "arrivalTime": "2025-01-08T11:02:00",
+    "distance": 2250,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A9",
+    "arrivalGate": "B3",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 213
+      },
+      {
+        "class": "Business",
+        "price": 445
+      },
+      {
+        "class": "First",
+        "price": 1227
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1084,
+    "flightNumber": "FL2997",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Milan Malpensa",
+    "destinationCode": "MXP",
+    "departureTime": "2025-01-09T19:43:00",
+    "arrivalTime": "2025-01-09T21:13:00",
+    "distance": 850,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A6",
+    "arrivalGate": "B19",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 111
+      },
+      {
+        "class": "Business",
+        "price": 465
+      },
+      {
+        "class": "First",
+        "price": 710
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1085,
+    "flightNumber": "FL9320",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Milan Malpensa",
+    "destinationCode": "MXP",
+    "departureTime": "2025-01-10T22:36:00",
+    "arrivalTime": "2025-01-11T00:06:00",
+    "distance": 850,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A13",
+    "arrivalGate": "B14",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 160
+      },
+      {
+        "class": "Business",
+        "price": 410
+      },
+      {
+        "class": "First",
+        "price": 570
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1086,
+    "flightNumber": "FL6760",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Mykonos",
+    "destinationCode": "JMK",
+    "departureTime": "2025-01-11T20:57:00",
+    "arrivalTime": "2025-01-12T00:12:00",
+    "distance": 2250,
+    "availableSeats": 285,
+    "planeType": "Boeing 787",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A14",
+    "arrivalGate": "B7",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 229
+      },
+      {
+        "class": "Business",
+        "price": 607
+      },
+      {
+        "class": "First",
+        "price": 1054
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1087,
+    "flightNumber": "FL6547",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Milan Malpensa",
+    "destinationCode": "MXP",
+    "departureTime": "2025-01-12T09:13:00",
+    "arrivalTime": "2025-01-12T10:43:00",
+    "distance": 850,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A16",
+    "arrivalGate": "B10",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 131
+      },
+      {
+        "class": "Business",
+        "price": 326
+      },
+      {
+        "class": "First",
+        "price": 749
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1088,
+    "flightNumber": "FL2090",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Mykonos",
+    "destinationCode": "JMK",
+    "departureTime": "2025-01-13T12:51:00",
+    "arrivalTime": "2025-01-13T16:06:00",
+    "distance": 2250,
+    "availableSeats": 285,
+    "planeType": "Boeing 787",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A12",
+    "arrivalGate": "B15",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 211
+      },
+      {
+        "class": "Business",
+        "price": 541
+      },
+      {
+        "class": "First",
+        "price": 936
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1089,
+    "flightNumber": "FL4098",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "London City",
+    "destinationCode": "LCY",
+    "departureTime": "2025-01-14T08:03:00",
+    "arrivalTime": "2025-01-14T09:03:00",
+    "distance": 320,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A20",
+    "arrivalGate": "B20",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 89
+      },
+      {
+        "class": "Business",
+        "price": 322
+      },
+      {
+        "class": "First",
+        "price": 569
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1090,
+    "flightNumber": "FL4765",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "London City",
+    "destinationCode": "LCY",
+    "departureTime": "2025-01-14T20:16:00",
+    "arrivalTime": "2025-01-14T21:16:00",
+    "distance": 320,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A4",
+    "arrivalGate": "B19",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 87
+      },
+      {
+        "class": "Business",
+        "price": 353
+      },
+      {
+        "class": "First",
+        "price": 428
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1091,
+    "flightNumber": "FL6067",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "London City",
+    "destinationCode": "LCY",
+    "departureTime": "2025-01-15T22:14:00",
+    "arrivalTime": "2025-01-15T23:14:00",
+    "distance": 320,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A7",
+    "arrivalGate": "B9",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 95
+      },
+      {
+        "class": "Business",
+        "price": 251
+      },
+      {
+        "class": "First",
+        "price": 403
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1092,
+    "flightNumber": "FL9209",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Milan Malpensa",
+    "destinationCode": "MXP",
+    "departureTime": "2025-01-16T12:20:00",
+    "arrivalTime": "2025-01-16T13:50:00",
+    "distance": 850,
+    "availableSeats": 285,
+    "planeType": "Boeing 787",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A12",
+    "arrivalGate": "B13",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 140
+      },
+      {
+        "class": "Business",
+        "price": 379
+      },
+      {
+        "class": "First",
+        "price": 641
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1093,
+    "flightNumber": "FL8793",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "London City",
+    "destinationCode": "LCY",
+    "departureTime": "2025-01-16T19:52:00",
+    "arrivalTime": "2025-01-16T20:52:00",
+    "distance": 320,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A9",
+    "arrivalGate": "B3",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 99
+      },
+      {
+        "class": "Business",
+        "price": 340
+      },
+      {
+        "class": "First",
+        "price": 363
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1094,
+    "flightNumber": "FL9472",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Nice C\u00f4te d'Azur",
+    "destinationCode": "NCE",
+    "departureTime": "2025-01-17T17:59:00",
+    "arrivalTime": "2025-01-17T19:49:00",
+    "distance": 980,
+    "availableSeats": 285,
+    "planeType": "Boeing 787",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A1",
+    "arrivalGate": "B9",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 140
+      },
+      {
+        "class": "Business",
+        "price": 405
+      },
+      {
+        "class": "First",
+        "price": 548
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1095,
+    "flightNumber": "FL6913",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Milan Malpensa",
+    "destinationCode": "MXP",
+    "departureTime": "2025-01-17T22:55:00",
+    "arrivalTime": "2025-01-18T00:25:00",
+    "distance": 850,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A6",
+    "arrivalGate": "B16",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 143
+      },
+      {
+        "class": "Business",
+        "price": 448
+      },
+      {
+        "class": "First",
+        "price": 621
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1096,
+    "flightNumber": "FL9746",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Mykonos",
+    "destinationCode": "JMK",
+    "departureTime": "2025-01-18T06:46:00",
+    "arrivalTime": "2025-01-18T10:01:00",
+    "distance": 2250,
+    "availableSeats": 285,
+    "planeType": "Boeing 787",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A11",
+    "arrivalGate": "B5",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 231
+      },
+      {
+        "class": "Business",
+        "price": 440
+      },
+      {
+        "class": "First",
+        "price": 1140
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1097,
+    "flightNumber": "FL3261",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Milan Malpensa",
+    "destinationCode": "MXP",
+    "departureTime": "2025-01-18T20:00:00",
+    "arrivalTime": "2025-01-18T21:30:00",
+    "distance": 850,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A4",
+    "arrivalGate": "B18",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 143
+      },
+      {
+        "class": "Business",
+        "price": 265
+      },
+      {
+        "class": "First",
+        "price": 446
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1098,
+    "flightNumber": "FL4616",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Mykonos",
+    "destinationCode": "JMK",
+    "departureTime": "2025-01-19T09:00:00",
+    "arrivalTime": "2025-01-19T12:15:00",
+    "distance": 2250,
+    "availableSeats": 285,
+    "planeType": "Boeing 787",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A16",
+    "arrivalGate": "B20",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 205
+      },
+      {
+        "class": "Business",
+        "price": 483
+      },
+      {
+        "class": "First",
+        "price": 976
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1099,
+    "flightNumber": "FL5270",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "M\u00e1laga",
+    "destinationCode": "AGP",
+    "departureTime": "2025-01-19T06:49:00",
+    "arrivalTime": "2025-01-19T09:34:00",
+    "distance": 1800,
+    "availableSeats": 285,
+    "planeType": "Boeing 787",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A3",
+    "arrivalGate": "B9",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 193
+      },
+      {
+        "class": "Business",
+        "price": 520
+      },
+      {
+        "class": "First",
+        "price": 981
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1100,
+    "flightNumber": "FL5791",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "London City",
+    "destinationCode": "LCY",
+    "departureTime": "2025-01-20T12:51:00",
+    "arrivalTime": "2025-01-20T13:51:00",
+    "distance": 320,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A14",
+    "arrivalGate": "B3",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 120
+      },
+      {
+        "class": "Business",
+        "price": 264
+      },
+      {
+        "class": "First",
+        "price": 373
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1101,
+    "flightNumber": "FL5828",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Nice C\u00f4te d'Azur",
+    "destinationCode": "NCE",
+    "departureTime": "2025-01-21T12:16:00",
+    "arrivalTime": "2025-01-21T14:06:00",
+    "distance": 980,
+    "availableSeats": 285,
+    "planeType": "Boeing 787",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A14",
+    "arrivalGate": "B1",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 148
+      },
+      {
+        "class": "Business",
+        "price": 282
+      },
+      {
+        "class": "First",
+        "price": 520
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1102,
+    "flightNumber": "FL3846",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "M\u00e1laga",
+    "destinationCode": "AGP",
+    "departureTime": "2025-01-22T07:54:00",
+    "arrivalTime": "2025-01-22T10:39:00",
+    "distance": 1800,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A5",
+    "arrivalGate": "B20",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 184
+      },
+      {
+        "class": "Business",
+        "price": 523
+      },
+      {
+        "class": "First",
+        "price": 617
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1103,
+    "flightNumber": "FL6892",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Nice C\u00f4te d'Azur",
+    "destinationCode": "NCE",
+    "departureTime": "2025-01-22T15:56:00",
+    "arrivalTime": "2025-01-22T17:46:00",
+    "distance": 980,
+    "availableSeats": 285,
+    "planeType": "Boeing 787",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A17",
+    "arrivalGate": "B7",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 166
+      },
+      {
+        "class": "Business",
+        "price": 382
+      },
+      {
+        "class": "First",
+        "price": 688
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1104,
+    "flightNumber": "FL8896",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "M\u00e1laga",
+    "destinationCode": "AGP",
+    "departureTime": "2025-01-23T11:12:00",
+    "arrivalTime": "2025-01-23T13:57:00",
+    "distance": 1800,
+    "availableSeats": 285,
+    "planeType": "Boeing 787",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A13",
+    "arrivalGate": "B20",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 196
+      },
+      {
+        "class": "Business",
+        "price": 322
+      },
+      {
+        "class": "First",
+        "price": 868
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1105,
+    "flightNumber": "FL8240",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Nice C\u00f4te d'Azur",
+    "destinationCode": "NCE",
+    "departureTime": "2025-01-23T14:26:00",
+    "arrivalTime": "2025-01-23T16:16:00",
+    "distance": 980,
+    "availableSeats": 285,
+    "planeType": "Boeing 787",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A9",
+    "arrivalGate": "B17",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 153
+      },
+      {
+        "class": "Business",
+        "price": 398
+      },
+      {
+        "class": "First",
+        "price": 646
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1106,
+    "flightNumber": "FL2130",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Nice C\u00f4te d'Azur",
+    "destinationCode": "NCE",
+    "departureTime": "2025-01-24T06:44:00",
+    "arrivalTime": "2025-01-24T08:34:00",
+    "distance": 980,
+    "availableSeats": 285,
+    "planeType": "Boeing 787",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A15",
+    "arrivalGate": "B17",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 130
+      },
+      {
+        "class": "Business",
+        "price": 397
+      },
+      {
+        "class": "First",
+        "price": 569
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1107,
+    "flightNumber": "FL1500",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Dublin",
+    "destinationCode": "DUB",
+    "departureTime": "2025-01-24T22:23:00",
+    "arrivalTime": "2025-01-25T00:03:00",
+    "distance": 915,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A12",
+    "arrivalGate": "B11",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 107
+      },
+      {
+        "class": "Business",
+        "price": 330
+      },
+      {
+        "class": "First",
+        "price": 604
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1108,
+    "flightNumber": "FL6373",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Milan Malpensa",
+    "destinationCode": "MXP",
+    "departureTime": "2025-01-25T17:14:00",
+    "arrivalTime": "2025-01-25T18:44:00",
+    "distance": 850,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A4",
+    "arrivalGate": "B12",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 143
+      },
+      {
+        "class": "Business",
+        "price": 321
+      },
+      {
+        "class": "First",
+        "price": 654
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1109,
+    "flightNumber": "FL1177",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Mykonos",
+    "destinationCode": "JMK",
+    "departureTime": "2025-01-26T12:01:00",
+    "arrivalTime": "2025-01-26T15:16:00",
+    "distance": 2250,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A8",
+    "arrivalGate": "B5",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 210
+      },
+      {
+        "class": "Business",
+        "price": 554
+      },
+      {
+        "class": "First",
+        "price": 1010
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1110,
+    "flightNumber": "FL5689",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "London City",
+    "destinationCode": "LCY",
+    "departureTime": "2025-01-27T08:13:00",
+    "arrivalTime": "2025-01-27T09:13:00",
+    "distance": 320,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A4",
+    "arrivalGate": "B17",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 99
+      },
+      {
+        "class": "Business",
+        "price": 345
+      },
+      {
+        "class": "First",
+        "price": 475
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1111,
+    "flightNumber": "FL3494",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "M\u00e1laga",
+    "destinationCode": "AGP",
+    "departureTime": "2025-01-28T19:54:00",
+    "arrivalTime": "2025-01-28T22:39:00",
+    "distance": 1800,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A18",
+    "arrivalGate": "B16",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 198
+      },
+      {
+        "class": "Business",
+        "price": 463
+      },
+      {
+        "class": "First",
+        "price": 891
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1112,
+    "flightNumber": "FL1140",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "M\u00e1laga",
+    "destinationCode": "AGP",
+    "departureTime": "2025-01-29T17:47:00",
+    "arrivalTime": "2025-01-29T20:32:00",
+    "distance": 1800,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A20",
+    "arrivalGate": "B12",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 177
+      },
+      {
+        "class": "Business",
+        "price": 575
+      },
+      {
+        "class": "First",
+        "price": 736
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1113,
+    "flightNumber": "FL1506",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Nice C\u00f4te d'Azur",
+    "destinationCode": "NCE",
+    "departureTime": "2025-01-30T11:28:00",
+    "arrivalTime": "2025-01-30T13:18:00",
+    "distance": 980,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A2",
+    "arrivalGate": "B15",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 120
+      },
+      {
+        "class": "Business",
+        "price": 383
+      },
+      {
+        "class": "First",
+        "price": 562
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1114,
+    "flightNumber": "FL7481",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Mykonos",
+    "destinationCode": "JMK",
+    "departureTime": "2025-01-31T12:26:00",
+    "arrivalTime": "2025-01-31T15:41:00",
+    "distance": 2250,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A19",
+    "arrivalGate": "B9",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 247
+      },
+      {
+        "class": "Business",
+        "price": 484
+      },
+      {
+        "class": "First",
+        "price": 979
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1115,
+    "flightNumber": "FL4313",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Milan Malpensa",
+    "destinationCode": "MXP",
+    "departureTime": "2025-01-31T10:51:00",
+    "arrivalTime": "2025-01-31T12:21:00",
+    "distance": 850,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A16",
+    "arrivalGate": "B12",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 119
+      },
+      {
+        "class": "Business",
+        "price": 322
+      },
+      {
+        "class": "First",
+        "price": 630
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1116,
+    "flightNumber": "FL2388",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Nice C\u00f4te d'Azur",
+    "destinationCode": "NCE",
+    "departureTime": "2025-02-01T12:03:00",
+    "arrivalTime": "2025-02-01T13:53:00",
+    "distance": 980,
+    "availableSeats": 285,
+    "planeType": "Boeing 787",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A17",
+    "arrivalGate": "B19",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 129
+      },
+      {
+        "class": "Business",
+        "price": 510
+      },
+      {
+        "class": "First",
+        "price": 536
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1117,
+    "flightNumber": "FL9998",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "M\u00e1laga",
+    "destinationCode": "AGP",
+    "departureTime": "2025-02-02T07:21:00",
+    "arrivalTime": "2025-02-02T10:06:00",
+    "distance": 1800,
+    "availableSeats": 285,
+    "planeType": "Boeing 787",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A15",
+    "arrivalGate": "B7",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 167
+      },
+      {
+        "class": "Business",
+        "price": 589
+      },
+      {
+        "class": "First",
+        "price": 624
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1118,
+    "flightNumber": "FL4717",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "M\u00e1laga",
+    "destinationCode": "AGP",
+    "departureTime": "2025-02-03T10:39:00",
+    "arrivalTime": "2025-02-03T13:24:00",
+    "distance": 1800,
+    "availableSeats": 285,
+    "planeType": "Boeing 787",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A13",
+    "arrivalGate": "B16",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 188
+      },
+      {
+        "class": "Business",
+        "price": 370
+      },
+      {
+        "class": "First",
+        "price": 970
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1119,
+    "flightNumber": "FL6467",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "London City",
+    "destinationCode": "LCY",
+    "departureTime": "2025-02-04T17:58:00",
+    "arrivalTime": "2025-02-04T18:58:00",
+    "distance": 320,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A13",
+    "arrivalGate": "B3",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 117
+      },
+      {
+        "class": "Business",
+        "price": 201
+      },
+      {
+        "class": "First",
+        "price": 422
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1120,
+    "flightNumber": "FL8479",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Dublin",
+    "destinationCode": "DUB",
+    "departureTime": "2025-02-04T21:00:00",
+    "arrivalTime": "2025-02-04T22:40:00",
+    "distance": 915,
+    "availableSeats": 285,
+    "planeType": "Boeing 787",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A18",
+    "arrivalGate": "B5",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 108
+      },
+      {
+        "class": "Business",
+        "price": 409
+      },
+      {
+        "class": "First",
+        "price": 645
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1121,
+    "flightNumber": "FL2526",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Nice C\u00f4te d'Azur",
+    "destinationCode": "NCE",
+    "departureTime": "2025-02-05T13:56:00",
+    "arrivalTime": "2025-02-05T15:46:00",
+    "distance": 980,
+    "availableSeats": 285,
+    "planeType": "Boeing 787",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A13",
+    "arrivalGate": "B5",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 162
+      },
+      {
+        "class": "Business",
+        "price": 446
+      },
+      {
+        "class": "First",
+        "price": 779
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1122,
+    "flightNumber": "FL5503",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "M\u00e1laga",
+    "destinationCode": "AGP",
+    "departureTime": "2025-02-06T11:12:00",
+    "arrivalTime": "2025-02-06T13:57:00",
+    "distance": 1800,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A1",
+    "arrivalGate": "B1",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 167
+      },
+      {
+        "class": "Business",
+        "price": 324
+      },
+      {
+        "class": "First",
+        "price": 781
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1123,
+    "flightNumber": "FL9725",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Nice C\u00f4te d'Azur",
+    "destinationCode": "NCE",
+    "departureTime": "2025-02-07T09:12:00",
+    "arrivalTime": "2025-02-07T11:02:00",
+    "distance": 980,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A17",
+    "arrivalGate": "B10",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 150
+      },
+      {
+        "class": "Business",
+        "price": 478
+      },
+      {
+        "class": "First",
+        "price": 584
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1124,
+    "flightNumber": "FL3375",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Nice C\u00f4te d'Azur",
+    "destinationCode": "NCE",
+    "departureTime": "2025-02-08T13:39:00",
+    "arrivalTime": "2025-02-08T15:29:00",
+    "distance": 980,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A7",
+    "arrivalGate": "B16",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 136
+      },
+      {
+        "class": "Business",
+        "price": 388
+      },
+      {
+        "class": "First",
+        "price": 812
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1125,
+    "flightNumber": "FL4798",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Milan Malpensa",
+    "destinationCode": "MXP",
+    "departureTime": "2025-02-09T20:31:00",
+    "arrivalTime": "2025-02-09T22:01:00",
+    "distance": 850,
+    "availableSeats": 285,
+    "planeType": "Boeing 787",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A1",
+    "arrivalGate": "B7",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 155
+      },
+      {
+        "class": "Business",
+        "price": 423
+      },
+      {
+        "class": "First",
+        "price": 457
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1126,
+    "flightNumber": "FL7422",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Dublin",
+    "destinationCode": "DUB",
+    "departureTime": "2025-02-10T14:02:00",
+    "arrivalTime": "2025-02-10T15:42:00",
+    "distance": 915,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A11",
+    "arrivalGate": "B12",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 100
+      },
+      {
+        "class": "Business",
+        "price": 371
+      },
+      {
+        "class": "First",
+        "price": 470
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1127,
+    "flightNumber": "FL4168",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "M\u00e1laga",
+    "destinationCode": "AGP",
+    "departureTime": "2025-02-11T17:45:00",
+    "arrivalTime": "2025-02-11T20:30:00",
+    "distance": 1800,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A19",
+    "arrivalGate": "B18",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 179
+      },
+      {
+        "class": "Business",
+        "price": 533
+      },
+      {
+        "class": "First",
+        "price": 780
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1128,
+    "flightNumber": "FL9700",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "London City",
+    "destinationCode": "LCY",
+    "departureTime": "2025-02-11T08:07:00",
+    "arrivalTime": "2025-02-11T09:07:00",
+    "distance": 320,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A1",
+    "arrivalGate": "B7",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 105
+      },
+      {
+        "class": "Business",
+        "price": 280
+      },
+      {
+        "class": "First",
+        "price": 448
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1129,
+    "flightNumber": "FL7650",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Milan Malpensa",
+    "destinationCode": "MXP",
+    "departureTime": "2025-02-12T17:01:00",
+    "arrivalTime": "2025-02-12T18:31:00",
+    "distance": 850,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A19",
+    "arrivalGate": "B2",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 127
+      },
+      {
+        "class": "Business",
+        "price": 369
+      },
+      {
+        "class": "First",
+        "price": 763
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1130,
+    "flightNumber": "FL8418",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "London City",
+    "destinationCode": "LCY",
+    "departureTime": "2025-02-12T08:26:00",
+    "arrivalTime": "2025-02-12T09:26:00",
+    "distance": 320,
+    "availableSeats": 285,
+    "planeType": "Boeing 787",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A3",
+    "arrivalGate": "B11",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 90
+      },
+      {
+        "class": "Business",
+        "price": 191
+      },
+      {
+        "class": "First",
+        "price": 450
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1131,
+    "flightNumber": "FL6284",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Dublin",
+    "destinationCode": "DUB",
+    "departureTime": "2025-02-13T07:18:00",
+    "arrivalTime": "2025-02-13T08:58:00",
+    "distance": 915,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A4",
+    "arrivalGate": "B11",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 124
+      },
+      {
+        "class": "Business",
+        "price": 398
+      },
+      {
+        "class": "First",
+        "price": 669
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1132,
+    "flightNumber": "FL4229",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Dublin",
+    "destinationCode": "DUB",
+    "departureTime": "2025-02-13T22:26:00",
+    "arrivalTime": "2025-02-14T00:06:00",
+    "distance": 915,
+    "availableSeats": 285,
+    "planeType": "Boeing 787",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A17",
+    "arrivalGate": "B13",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 107
+      },
+      {
+        "class": "Business",
+        "price": 437
+      },
+      {
+        "class": "First",
+        "price": 518
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1133,
+    "flightNumber": "FL3607",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Milan Malpensa",
+    "destinationCode": "MXP",
+    "departureTime": "2025-02-14T09:52:00",
+    "arrivalTime": "2025-02-14T11:22:00",
+    "distance": 850,
+    "availableSeats": 285,
+    "planeType": "Boeing 787",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A11",
+    "arrivalGate": "B10",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 136
+      },
+      {
+        "class": "Business",
+        "price": 462
+      },
+      {
+        "class": "First",
+        "price": 641
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1134,
+    "flightNumber": "FL6778",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Milan Malpensa",
+    "destinationCode": "MXP",
+    "departureTime": "2025-02-14T16:26:00",
+    "arrivalTime": "2025-02-14T17:56:00",
+    "distance": 850,
+    "availableSeats": 285,
+    "planeType": "Boeing 787",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A12",
+    "arrivalGate": "B18",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 129
+      },
+      {
+        "class": "Business",
+        "price": 415
+      },
+      {
+        "class": "First",
+        "price": 588
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1135,
+    "flightNumber": "FL4343",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Milan Malpensa",
+    "destinationCode": "MXP",
+    "departureTime": "2025-02-15T10:58:00",
+    "arrivalTime": "2025-02-15T12:28:00",
+    "distance": 850,
+    "availableSeats": 285,
+    "planeType": "Boeing 787",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A2",
+    "arrivalGate": "B16",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 158
+      },
+      {
+        "class": "Business",
+        "price": 279
+      },
+      {
+        "class": "First",
+        "price": 788
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1136,
+    "flightNumber": "FL3573",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "London City",
+    "destinationCode": "LCY",
+    "departureTime": "2025-02-15T16:32:00",
+    "arrivalTime": "2025-02-15T17:32:00",
+    "distance": 320,
+    "availableSeats": 285,
+    "planeType": "Boeing 787",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A1",
+    "arrivalGate": "B14",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 95
+      },
+      {
+        "class": "Business",
+        "price": 301
+      },
+      {
+        "class": "First",
+        "price": 541
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1137,
+    "flightNumber": "FL1223",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Nice C\u00f4te d'Azur",
+    "destinationCode": "NCE",
+    "departureTime": "2025-02-16T17:57:00",
+    "arrivalTime": "2025-02-16T19:47:00",
+    "distance": 980,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A5",
+    "arrivalGate": "B5",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 166
+      },
+      {
+        "class": "Business",
+        "price": 363
+      },
+      {
+        "class": "First",
+        "price": 700
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1138,
+    "flightNumber": "FL5067",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "London City",
+    "destinationCode": "LCY",
+    "departureTime": "2025-02-17T14:09:00",
+    "arrivalTime": "2025-02-17T15:09:00",
+    "distance": 320,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A1",
+    "arrivalGate": "B9",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 101
+      },
+      {
+        "class": "Business",
+        "price": 284
+      },
+      {
+        "class": "First",
+        "price": 414
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1139,
+    "flightNumber": "FL7666",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Mykonos",
+    "destinationCode": "JMK",
+    "departureTime": "2025-02-18T21:08:00",
+    "arrivalTime": "2025-02-19T00:23:00",
+    "distance": 2250,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A11",
+    "arrivalGate": "B8",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 205
+      },
+      {
+        "class": "Business",
+        "price": 593
+      },
+      {
+        "class": "First",
+        "price": 808
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1140,
+    "flightNumber": "FL8400",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Mykonos",
+    "destinationCode": "JMK",
+    "departureTime": "2025-02-19T10:50:00",
+    "arrivalTime": "2025-02-19T14:05:00",
+    "distance": 2250,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A20",
+    "arrivalGate": "B7",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 200
+      },
+      {
+        "class": "Business",
+        "price": 490
+      },
+      {
+        "class": "First",
+        "price": 970
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1141,
+    "flightNumber": "FL4372",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Mykonos",
+    "destinationCode": "JMK",
+    "departureTime": "2025-02-20T09:23:00",
+    "arrivalTime": "2025-02-20T12:38:00",
+    "distance": 2250,
+    "availableSeats": 285,
+    "planeType": "Boeing 787",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A4",
+    "arrivalGate": "B17",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 232
+      },
+      {
+        "class": "Business",
+        "price": 553
+      },
+      {
+        "class": "First",
+        "price": 925
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1142,
+    "flightNumber": "FL5304",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "M\u00e1laga",
+    "destinationCode": "AGP",
+    "departureTime": "2025-02-20T22:44:00",
+    "arrivalTime": "2025-02-21T01:29:00",
+    "distance": 1800,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A9",
+    "arrivalGate": "B4",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 196
+      },
+      {
+        "class": "Business",
+        "price": 447
+      },
+      {
+        "class": "First",
+        "price": 964
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1143,
+    "flightNumber": "FL2311",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "London City",
+    "destinationCode": "LCY",
+    "departureTime": "2025-02-21T09:34:00",
+    "arrivalTime": "2025-02-21T10:34:00",
+    "distance": 320,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A20",
+    "arrivalGate": "B12",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 97
+      },
+      {
+        "class": "Business",
+        "price": 301
+      },
+      {
+        "class": "First",
+        "price": 588
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1144,
+    "flightNumber": "FL7609",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Milan Malpensa",
+    "destinationCode": "MXP",
+    "departureTime": "2025-02-21T07:55:00",
+    "arrivalTime": "2025-02-21T09:25:00",
+    "distance": 850,
+    "availableSeats": 285,
+    "planeType": "Boeing 787",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A9",
+    "arrivalGate": "B14",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 123
+      },
+      {
+        "class": "Business",
+        "price": 322
+      },
+      {
+        "class": "First",
+        "price": 760
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1145,
+    "flightNumber": "FL6112",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Dublin",
+    "destinationCode": "DUB",
+    "departureTime": "2025-02-22T22:50:00",
+    "arrivalTime": "2025-02-23T00:30:00",
+    "distance": 915,
+    "availableSeats": 285,
+    "planeType": "Boeing 787",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A10",
+    "arrivalGate": "B13",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 103
+      },
+      {
+        "class": "Business",
+        "price": 297
+      },
+      {
+        "class": "First",
+        "price": 583
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
+  },
+  {
+    "id": 1146,
+    "flightNumber": "FL4978",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Milan Malpensa",
+    "destinationCode": "MXP",
+    "departureTime": "2025-02-23T12:35:00",
+    "arrivalTime": "2025-02-23T14:05:00",
+    "distance": 850,
+    "availableSeats": 285,
+    "planeType": "Boeing 787",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A19",
+    "arrivalGate": "B16",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 128
+      },
+      {
+        "class": "Business",
+        "price": 326
+      },
+      {
+        "class": "First",
+        "price": 711
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1147,
+    "flightNumber": "FL1029",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Mykonos",
+    "destinationCode": "JMK",
+    "departureTime": "2025-02-23T13:56:00",
+    "arrivalTime": "2025-02-23T17:11:00",
+    "distance": 2250,
+    "availableSeats": 285,
+    "planeType": "Boeing 787",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A3",
+    "arrivalGate": "B1",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 205
+      },
+      {
+        "class": "Business",
+        "price": 680
+      },
+      {
+        "class": "First",
+        "price": 819
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1148,
+    "flightNumber": "FL4854",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Mykonos",
+    "destinationCode": "JMK",
+    "departureTime": "2025-02-24T21:15:00",
+    "arrivalTime": "2025-02-25T00:30:00",
+    "distance": 2250,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A6",
+    "arrivalGate": "B14",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 230
+      },
+      {
+        "class": "Business",
+        "price": 495
+      },
+      {
+        "class": "First",
+        "price": 1183
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1149,
+    "flightNumber": "FL3676",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "M\u00e1laga",
+    "destinationCode": "AGP",
+    "departureTime": "2025-02-25T12:26:00",
+    "arrivalTime": "2025-02-25T15:11:00",
+    "distance": 1800,
+    "availableSeats": 285,
+    "planeType": "Boeing 787",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A13",
+    "arrivalGate": "B11",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 155
+      },
+      {
+        "class": "Business",
+        "price": 352
+      },
+      {
+        "class": "First",
+        "price": 735
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1150,
+    "flightNumber": "FL5695",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Mykonos",
+    "destinationCode": "JMK",
+    "departureTime": "2025-02-25T13:15:00",
+    "arrivalTime": "2025-02-25T16:30:00",
+    "distance": 2250,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A19",
+    "arrivalGate": "B14",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 205
+      },
+      {
+        "class": "Business",
+        "price": 663
+      },
+      {
+        "class": "First",
+        "price": 800
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Dinner"
+    ]
+  },
+  {
+    "id": 1151,
+    "flightNumber": "FL4086",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Mykonos",
+    "destinationCode": "JMK",
+    "departureTime": "2025-02-26T20:32:00",
+    "arrivalTime": "2025-02-26T23:47:00",
+    "distance": 2250,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A2",
+    "arrivalGate": "B8",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 243
+      },
+      {
+        "class": "Business",
+        "price": 521
+      },
+      {
+        "class": "First",
+        "price": 1078
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1152,
+    "flightNumber": "FL8505",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "Milan Malpensa",
+    "destinationCode": "MXP",
+    "departureTime": "2025-02-27T17:59:00",
+    "arrivalTime": "2025-02-27T19:29:00",
+    "distance": 850,
+    "availableSeats": 170,
+    "planeType": "Boeing 737",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A18",
+    "arrivalGate": "B6",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 145
+      },
+      {
+        "class": "Business",
+        "price": 476
+      },
+      {
+        "class": "First",
+        "price": 492
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
+    "id": 1153,
+    "flightNumber": "FL1311",
+    "origin": "Rotterdam",
+    "originCode": "RTM",
+    "destination": "London City",
+    "destinationCode": "LCY",
+    "departureTime": "2025-02-28T12:45:00",
+    "arrivalTime": "2025-02-28T13:45:00",
+    "distance": 320,
+    "availableSeats": 275,
+    "planeType": "Airbus A330",
+    "departureTerminal": "T1",
+    "arrivalTerminal": "T3",
+    "departureGate": "A9",
+    "arrivalGate": "B16",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 92
+      },
+      {
+        "class": "Business",
+        "price": 179
+      },
+      {
+        "class": "First",
+        "price": 548
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Breakfast"
+    ]
   }
 ]

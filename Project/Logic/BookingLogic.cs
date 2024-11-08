@@ -53,8 +53,9 @@ public class BookingLogic
 
     public static int GetTotalPrice(string destination, int passengersCount)
     {
-        int base_price = _flights.FirstOrDefault(f => f.Destination.Equals(destination, StringComparison.OrdinalIgnoreCase)).Price;
-        return base_price * passengersCount;
+        // int base_price = _flights.FirstOrDefault(f => f.Destination.Equals(destination, StringComparison.OrdinalIgnoreCase)).Price;
+        // return base_price * passengersCount;
+        return 0;
     }
 
     public bool ModifyBooking(int flightId, int passengerId, BookingDetails newDetails)

@@ -1,33 +1,99 @@
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 public class FlightModel
 {
-    [JsonPropertyName("id")] public int FlightId { get; set; }
+    [JsonPropertyName("id")]
+    public int FlightId { get; set; }
 
-    [JsonPropertyName("origin")] public string Origin { get; set; }
+    [JsonPropertyName("flightNumber")]
+    public string FlightNumber { get; set; }
 
-    [JsonPropertyName("destination")] public string Destination { get; set; }
+    [JsonPropertyName("origin")]
+    public string Origin { get; set; } = "Rotterdam"; // Default to Rotterdam as per your system setup
 
-    [JsonPropertyName("departureTime")] public string DepartureTime { get; set; }
+    [JsonPropertyName("originCode")]
+    public string OriginCode { get; set; } = "RTM"; // Default origin code
 
-    [JsonPropertyName("arrivalTime")] public string ArrivalTime { get; set; }
+    [JsonPropertyName("destination")]
+    public string Destination { get; set; }
 
-    [JsonPropertyName("price")] public int Price { get; set; }
+    [JsonPropertyName("destinationCode")]
+    public string DestinationCode { get; set; }
 
-    [JsonPropertyName("availableSeats")] public int AvailableSeats { get; set; }
+    [JsonPropertyName("departureTime")]
+    public string DepartureTime { get; set; }
 
-    [JsonPropertyName("flightNumber")] public string FlightNumber { get; set; }
+    [JsonPropertyName("arrivalTime")]
+    public string ArrivalTime { get; set; }
 
-    public FlightModel(int flightId, string origin, string destination, string departureTime, string arrivalTime,
-        int price, int availableSeats, string flightNumber)
+    [JsonPropertyName("distance")]
+    public int Distance { get; set; }
+
+    [JsonPropertyName("availableSeats")]
+    public int AvailableSeats { get; set; }
+
+    [JsonPropertyName("planeType")]
+    public string PlaneType { get; set; }
+
+    [JsonPropertyName("departureTerminal")]
+    public string DepartureTerminal { get; set; }
+
+    [JsonPropertyName("arrivalTerminal")]
+    public string ArrivalTerminal { get; set; }
+
+    [JsonPropertyName("departureGate")]
+    public string DepartureGate { get; set; }
+
+    [JsonPropertyName("arrivalGate")]
+    public string ArrivalGate { get; set; }
+
+    [JsonPropertyName("seatClassOptions")]
+    public List<SeatClassOption> SeatClassOptions { get; set; }
+
+    [JsonPropertyName("status")]
+    public string Status { get; set; }
+
+    [JsonPropertyName("mealService")]
+    public List<string> MealService { get; set; }
+
+    public FlightModel(
+        int flightId, string flightNumber, string destination, string destinationCode,
+        string departureTime, string arrivalTime, int distance, int availableSeats, string planeType,
+        string departureTerminal, string arrivalTerminal, string departureGate, string arrivalGate,
+        List<SeatClassOption> seatClassOptions, string status, List<string> mealService)
     {
         FlightId = flightId;
-        Origin = origin;
+        FlightNumber = flightNumber;
         Destination = destination;
+        DestinationCode = destinationCode;
         DepartureTime = departureTime;
         ArrivalTime = arrivalTime;
-        Price = price;
+        Distance = distance;
         AvailableSeats = availableSeats;
-        FlightNumber = flightNumber;
+        PlaneType = planeType;
+        DepartureTerminal = departureTerminal;
+        ArrivalTerminal = arrivalTerminal;
+        DepartureGate = departureGate;
+        ArrivalGate = arrivalGate;
+        SeatClassOptions = seatClassOptions;
+        Status = status;
+        MealService = mealService;
+    }
+}
+
+public class SeatClassOption
+{
+    [JsonPropertyName("class")]
+    public string Class { get; set; }
+
+    [JsonPropertyName("price")]
+    public int Price { get; set; }
+
+    // Constructor parameters now match the property names exactly
+    public SeatClassOption(string @class, int price)
+    {
+        Class = @class;
+        Price = price;
     }
 }
