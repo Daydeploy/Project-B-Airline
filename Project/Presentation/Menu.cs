@@ -8,6 +8,7 @@ static class Menu
 
     static public void Start()
     {
+        Console.OutputEncoding = System.Text.Encoding.UTF8;
         Console.CursorVisible = false; // Hide the cursor
         string[] menuItems =
         {
@@ -66,7 +67,6 @@ static class Menu
 
         while (true)
         {
-            // Clear and display the menu with highlight
             Console.Clear();
             if (!string.IsNullOrEmpty(title))
             {
@@ -88,7 +88,6 @@ static class Menu
                 }
             }
 
-            // Handle key input for navigation
             ConsoleKeyInfo keyInfo = Console.ReadKey(true);
             switch (keyInfo.Key)
             {
@@ -214,22 +213,7 @@ static class Menu
 
         if (flightDictionary.TryGetValue(selectedAirport.AirportID, out var flight))
         {
-            Console.WriteLine($"Flight from {flight.Origin} to {flight.Destination}");
-
-            DateTime departureDateTime = DateTime.Parse(flight.DepartureTime);
-            DateTime arrivalDateTime = DateTime.Parse(flight.ArrivalTime);
-
-            Console.WriteLine($"Departure: {departureDateTime:dddd, dd MMMM yyyy HH:mm}");
-            Console.WriteLine($"Arrival: {arrivalDateTime:dddd, dd MMMM yyyy HH:mm}");
-
-            Console.WriteLine("Available Prices:");
-            foreach (var seatOption in flight.SeatClassOptions)
-            {
-                Console.WriteLine($"Class: {seatOption.Class}, Price: {seatOption.Price} EUR");
-            }
-
-            Console.WriteLine("Proceeding with the booking process...");
-            // todo: proceed with booking
+            DisplayFlightDetails(flight);
         }
     }
 
@@ -247,65 +231,77 @@ static class Menu
 
         int selectedIndex = NavigateMenu(filterOptions, "Filter Flights:");
 
+        string[] seatClassOptions = { "Economy", "Business", "First" };
+
         switch (selectedIndex)
         {
             case 0:
-                Console.WriteLine("Enter seat class (Economy, Business, First): ");
-                string seatClassAsc = Console.ReadLine();
-                foreach (var flight in flights.FilterFlightsByPriceUp(seatClassAsc))
-                {
-                    Console.WriteLine(
-                        $"{flight.Origin} to {flight.Destination} at {flight.DepartureTime} for {flight.SeatClassOptions.FirstOrDefault(option => option.Class == seatClassAsc)?.Price ?? 0} EUR");
-                }
-
+                int seatClassAscIndex = NavigateMenu(seatClassOptions, "Seat Class");
+                string seatClassAsc = seatClassOptions[seatClassAscIndex];
+                DisplayFlights(flights.FilterFlightsByPriceUp(seatClassAsc));
                 break;
+
             case 1:
-                Console.WriteLine("Enter seat class (Economy, Business, First): ");
-                string seatClassDesc = Console.ReadLine();
-                foreach (var flight in flights.FilterFlightsByPriceDown(seatClassDesc))
-                {
-                    Console.WriteLine(
-                        $"{flight.Origin} to {flight.Destination} at {flight.DepartureTime} for {flight.SeatClassOptions.FirstOrDefault(option => option.Class == seatClassDesc)?.Price ?? 0} EUR");
-                }
-
+                int seatClassDescIndex = NavigateMenu(seatClassOptions, "Seat Class");
+                string seatClassDesc = seatClassOptions[seatClassDescIndex];
+                DisplayFlights(flights.FilterFlightsByPriceDown(seatClassDesc));
                 break;
+
             case 2:
-                Console.WriteLine("Enter seat class (Economy, Business, First): ");
-                string seatClassRange = Console.ReadLine();
+                int seatClassRangeIndex = NavigateMenu(seatClassOptions, "Seat Class");
+                string seatClassRange = seatClassOptions[seatClassRangeIndex];
                 Console.WriteLine("Enter minimum price: ");
                 if (int.TryParse(Console.ReadLine(), out int min))
                 {
                     Console.WriteLine("Enter maximum price: ");
                     if (int.TryParse(Console.ReadLine(), out int max))
                     {
-                        foreach (var flight in flights.FilterFlightsByPriceRange(seatClassRange, min, max))
-                        {
-                            Console.WriteLine(
-                                $"{flight.Origin} to {flight.Destination} at {flight.DepartureTime} for {flight.SeatClassOptions.FirstOrDefault(option => option.Class == seatClassRange)?.Price ?? 0} EUR");
-                        }
+                        DisplayFlights(flights.FilterFlightsByPriceRange(seatClassRange, min, max));
                     }
                 }
-
                 break;
+
             case 3:
-                Console.WriteLine("Enter destination: ");
-                string destination = Console.ReadLine();
-                if (!string.IsNullOrWhiteSpace(destination))
-                {
-                    destination = char.ToUpper(destination[0]) + destination.Substring(1);
-                    foreach (var flight in flights.FilterFlightsByDestination(destination))
-                    {
-                        Console.WriteLine(
-                            $"{flight.Origin} to {flight.Destination} at {flight.DepartureTime} for {flight.SeatClassOptions.FirstOrDefault()?.Price ?? 0} EUR");
-                    }
-                }
-
+                var destinations = flights.GetAllDestinations().ToArray();
+                int destinationIndex = NavigateMenu(destinations, "Select Destination");
+                string selectedDestination = destinations[destinationIndex];
+                DisplayFlights(flights.FilterFlightsByDestination(selectedDestination));
                 break;
+
             case 4:
                 return;
         }
 
         Console.WriteLine("\nPress any key to continue...");
         Console.ReadKey();
+    }
+
+    static private void DisplayFlights(List<FlightModel> flights)
+    {
+        foreach (var flight in flights)
+        {
+            DisplayFlightDetails(flight);
+        }
+    }
+
+    static private void DisplayFlightDetails(FlightModel flight)
+    {
+        DateTime departureDateTime = DateTime.Parse(flight.DepartureTime);
+        DateTime arrivalDateTime = DateTime.Parse(flight.ArrivalTime);
+
+        Console.WriteLine($"Flight ID : {flight.FlightId}");
+        Console.WriteLine($"Route     : {flight.Origin} ➔ {flight.Destination}");
+        Console.WriteLine($"Departure : {departureDateTime:yyyy-MM-dd HH:mm}");
+        Console.WriteLine($"Arrival   : {arrivalDateTime:yyyy-MM-dd HH:mm}");
+        Console.WriteLine("\nPrices:");
+        
+        for (int i = 0; i < flight.SeatClassOptions.Count; i++)
+        {
+            var seatOption = flight.SeatClassOptions[i];
+            string prefix = (i == flight.SeatClassOptions.Count - 1) ? "└─" : "├─";
+            Console.WriteLine($"  {prefix} Class: {seatOption.Class,-9} | Price: {seatOption.Price} EUR");
+        }
+
+        Console.WriteLine(new string('-', 40));
     }
 }

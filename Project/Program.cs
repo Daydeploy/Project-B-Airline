@@ -1,6 +1,4 @@
 ﻿Console.ForegroundColor = ConsoleColor.Green;
 Console.WriteLine("Welcome to this amazing program");
-FlightsLogic.AppendFlights(); 
+FlightsLogic.AppendFlights();
 Menu.Start();
-
-
