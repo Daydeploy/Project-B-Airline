@@ -535,19 +535,12 @@ static class UserLogin
     static public void ShowAvailableFlights()
     {
         FlightsLogic flights = new FlightsLogic();
-        Console.WriteLine("Available Flights:");
-        foreach (var flight in flights.GetAllFlights())
-        {
-            Console.WriteLine(
-                $"ID: {flight.FlightId} {flight.Origin} to {flight.Destination} at {flight.DepartureTime}");
-            Console.WriteLine("Prices:");
-            foreach (var seatOption in flight.SeatClassOptions)
-            {
-                Console.WriteLine($"Class: {seatOption.Class}, Price: {seatOption.Price} EUR");
-            }
-        }
+        var flightsList = flights.GetAllFlights().ToList();
+        
+        // Display flights in a formatted table
+        DisplayFlights(flightsList);
 
-        Console.WriteLine("Do you want to filter the flights (y/n)");
+        Console.WriteLine("\nDo you want to filter the flights (y/n)");
         string input = Console.ReadLine()?.ToLower() ?? "";
         if (input == "y" || input == "yes")
         {
@@ -565,7 +558,7 @@ static class UserLogin
                 Console.WriteLine("Enter the Flight ID to book:");
                 if (int.TryParse(Console.ReadLine(), out int flightId))
                 {
-                    var selectedFlight = flights.GetAllFlights().FirstOrDefault(f => f.FlightId == flightId);
+                    var selectedFlight = flightsList.FirstOrDefault(f => f.FlightId == flightId);
                     if (selectedFlight != null)
                     {
                         Console.WriteLine("How many passengers? (1-8):");
@@ -643,6 +636,94 @@ static class UserLogin
                 Console.ReadKey();
             }
         }
+    }
+
+    static public void DisplayFlights(List<FlightModel> flights)
+    {
+        if (!flights.Any())
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\nNo flights found matching your criteria.");
+            Console.ResetColor();
+            return;
+        }
+
+        Console.WriteLine($"\nFound {flights.Count} flights matching your criteria:\n");
+
+        // Draw header
+        DrawTableHeader();
+
+        foreach (var flight in flights)
+        {
+            DisplayFlightDetails(flight);
+        }
+
+        // Draw footer
+        Console.WriteLine(new string('─', Console.WindowWidth - 1));
+    }
+
+    static private void DrawTableHeader()
+    {
+        // Top border
+        Console.WriteLine(new string('─', Console.WindowWidth - 1));
+
+        // Header
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.WriteLine($"{"Flight ID",-10} {"Route",-30} {"Departure",-18} {"Arrival",-18} {"Duration",-12} {"Prices (EUR)"}");
+        Console.ResetColor();
+
+        // Header-content separator
+        Console.WriteLine(new string('─', Console.WindowWidth - 1));
+    }
+
+    static private void DisplayFlightDetails(FlightModel flight)
+    {
+        DateTime departureDateTime = DateTime.Parse(flight.DepartureTime);
+        DateTime arrivalDateTime = DateTime.Parse(flight.ArrivalTime);
+        TimeSpan duration = arrivalDateTime - departureDateTime;
+
+        // Flight basic info with route formatting
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.Write($"{flight.FlightId,-10} ");
+        Console.ResetColor();
+
+        // Route with arrow
+        Console.Write($"{flight.Origin} ");
+        Console.ForegroundColor = ConsoleColor.DarkCyan;
+        Console.Write("→");
+        Console.ResetColor();
+        Console.Write($" {flight.Destination,-22} ");
+
+        // Times
+        Console.Write($"{departureDateTime:HH:mm dd MMM} ");
+        Console.ForegroundColor = ConsoleColor.DarkCyan;
+        Console.Write("→");
+        Console.ResetColor();
+        Console.Write($" {arrivalDateTime:HH:mm dd MMM} ");
+
+        // Duration
+        string durationStr = $"{duration.Hours}h {duration.Minutes}m";
+        Console.Write($"{durationStr,-12} ");
+
+        // Price information
+        foreach (var seatOption in flight.SeatClassOptions)
+        {
+            Console.ForegroundColor = GetPriceColor(seatOption.Class);
+            Console.Write($"{seatOption.Class}: {seatOption.Price,4} ");
+            Console.ResetColor();
+        }
+        Console.WriteLine();
+    }
+
+    static private ConsoleColor GetPriceColor(string seatClass)
+    {
+        return seatClass switch
+        {
+            "Economy" => ConsoleColor.Green,
+            "Business" => ConsoleColor.Blue,
+            "First" => ConsoleColor.Magenta,
+            _ => ConsoleColor.Gray
+        };
     }
 
     private static void BrowseDestinations()

@@ -220,13 +220,13 @@ static class Menu
             case 0:
                 int seatClassAscIndex = NavigateMenu(seatClassOptions, "Seat Class");
                 string seatClassAsc = seatClassOptions[seatClassAscIndex];
-                DisplayFlights(flights.FilterFlightsByPriceUp(seatClassAsc));
+                UserLogin.DisplayFlights(flights.FilterFlightsByPriceUp(seatClassAsc));
                 break;
 
             case 1:
                 int seatClassDescIndex = NavigateMenu(seatClassOptions, "Seat Class");
                 string seatClassDesc = seatClassOptions[seatClassDescIndex];
-                DisplayFlights(flights.FilterFlightsByPriceDown(seatClassDesc));
+                UserLogin.DisplayFlights(flights.FilterFlightsByPriceDown(seatClassDesc));
                 break;
 
             case 2:
@@ -238,7 +238,7 @@ static class Menu
                     Console.WriteLine("Enter maximum price: ");
                     if (int.TryParse(Console.ReadLine(), out int max))
                     {
-                        DisplayFlights(flights.FilterFlightsByPriceRange(seatClassRange, min, max));
+                        UserLogin.DisplayFlights(flights.FilterFlightsByPriceRange(seatClassRange, min, max));
                     }
                 }
 
@@ -248,14 +248,14 @@ static class Menu
                 var destinations = flights.GetAllDestinations().ToArray();
                 int destinationIndex = NavigateMenu(destinations, "Select Destination");
                 string selectedDestination = destinations[destinationIndex];
-                DisplayFlights(flights.FilterFlightsByDestination(selectedDestination));
+                UserLogin.DisplayFlights(flights.FilterFlightsByDestination(selectedDestination));
                 break;
                 
 
              case 4:
                 var calendarUI = new CalendarUI();
                 var (startDate, endDate) = calendarUI.SelectDateRange();
-                DisplayFlights(flights.FilterByDateRange(startDate, endDate));
+                UserLogin.DisplayFlights(flights.FilterByDateRange(startDate, endDate));
                 break;
 
             case 5:
@@ -268,7 +268,7 @@ static class Menu
                 var filteredFlights = flights.FilterByDateRange(startDate2, endDate2)
                     .Where(f => f.Destination == selectedDestination2)
                     .ToList();
-                DisplayFlights(filteredFlights);
+                UserLogin.DisplayFlights(filteredFlights);
                 break;
             case 6:
                 return;
@@ -278,15 +278,7 @@ static class Menu
         // Console.ReadKey();
     }
 
-    static private void DisplayFlights(List<FlightModel> flights)
-    {
-        foreach (var flight in flights)
-        {
-            DisplayFlightDetails(flight);
-        }
-    }
-
-    static private void DisplayFlightDetails(FlightModel flight)
+        static private void DisplayFlightDetails(FlightModel flight)
     {
         DateTime departureDateTime = DateTime.Parse(flight.DepartureTime);
         DateTime arrivalDateTime = DateTime.Parse(flight.ArrivalTime);
