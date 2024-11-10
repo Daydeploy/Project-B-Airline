@@ -252,33 +252,23 @@ static class Menu
                 break;
                 
 
-            case 4:
-                Console.WriteLine("Enter start date (yyyy-mm-dd): ");
-                if (DateTime.TryParse(Console.ReadLine(), out DateTime startDate))
-                {
-                    Console.WriteLine("Enter end date (yyyy-mm-dd): ");
-                    if (DateTime.TryParse(Console.ReadLine(), out DateTime endDate))
-                    {
-                        DisplayFlights(flights.FilterByDateRange(startDate, endDate));
-                    }
-                }
+             case 4:
+                var calendarUI = new CalendarUI();
+                var (startDate, endDate) = calendarUI.SelectDateRange();
+                DisplayFlights(flights.FilterByDateRange(startDate, endDate));
                 break;
+
             case 5:
                 var destinations2 = flights.GetAllDestinations().ToArray();
                 int destinationIndex2 = NavigateMenu(destinations2, "Select Destination");
                 string selectedDestination2 = destinations2[destinationIndex2];
-                Console.WriteLine("Enter start date (yyyy-mm-dd): ");
-                if (DateTime.TryParse(Console.ReadLine(), out DateTime startDate2))
-                {
-                    Console.WriteLine("Enter end date (yyyy-mm-dd): ");
-                    if (DateTime.TryParse(Console.ReadLine(), out DateTime endDate2))
-                    {
-                        var filteredFlights = flights.FilterByDateRange(startDate2, endDate2)
-                            .Where(f => f.Destination == selectedDestination2)
-                            .ToList();
-                        DisplayFlights(filteredFlights);
-                    }
-                }
+                
+                var calendarUI2 = new CalendarUI();
+                var (startDate2, endDate2) = calendarUI2.SelectDateRange();
+                var filteredFlights = flights.FilterByDateRange(startDate2, endDate2)
+                    .Where(f => f.Destination == selectedDestination2)
+                    .ToList();
+                DisplayFlights(filteredFlights);
                 break;
             case 6:
                 return;
