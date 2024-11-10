@@ -69,6 +69,21 @@ public class FlightsLogic
         return AvailableFlights;
     }
 
+    public List<FlightModel> FilterByDateRange(DateTime startDate, DateTime endDate)
+    {
+        return AvailableFlights.Where(flight => DateTime.Parse(flight.DepartureTime) >= startDate &&
+                                        DateTime.Parse(flight.DepartureTime) <= endDate).ToList();
+    }
+
+    public List<FlightModel> FilterFlights(string destination, DateTime startDate, DateTime endDate, string startPoint, string endPoint)
+    {
+        return AvailableFlights.Where(flight => flight.Destination.Equals(destination, StringComparison.OrdinalIgnoreCase) &&
+                                        DateTime.Parse(flight.DepartureTime) >= startDate &&
+                                        DateTime.Parse(flight.DepartureTime) <= endDate &&
+                                        flight.Origin.Equals(startPoint, StringComparison.OrdinalIgnoreCase) &&
+                                        flight.Destination.Equals(endPoint, StringComparison.OrdinalIgnoreCase)).ToList();
+    }
+    
     // public List<FlightModel> GetConnectingFlights()
     // {
     //     // For this example, we'll simulate connecting flights by combining two direct flights
