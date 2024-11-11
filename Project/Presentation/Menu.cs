@@ -5,40 +5,78 @@ using System.Linq;
 static class Menu
 {
     static private UserAccountService _userAccountService = new UserAccountService();
-    private static MenuNavigationService _menuNavigationService = new MenuNavigationService();
 
     static public void Start()
     {
         Console.OutputEncoding = System.Text.Encoding.UTF8;
         Console.CursorVisible = false; // Hide the cursor
-        List<string> menuItems = new List<string>
+        string[] menuItems =
         {
             "Login",
             "Create Account",
-            "Show Available Flights",
+            "Show available Flights",
+            // "Show Seat Upgrade Options",
             "Exit"
         };
 
+        bool exit = false;
+
+        while (!exit)
+        {
+            System.Console.WriteLine();
+            int selectedIndex = NavigateMenu(menuItems, AirlineLogo());
+            HandleSelection(menuItems[selectedIndex], ref exit);
+        }
+    }
+
+    static public int NavigateMenu(string[] options, string title = "")
+    {
+        int selectedIndex = 0;
+
         while (true)
         {
-            _menuNavigationService.DisplayMenu(menuItems);
-            if (int.TryParse(Console.ReadLine(), out int userInput))
+            Console.Clear();
+            if (!string.IsNullOrEmpty(title))
             {
-                int selection = _menuNavigationService.HandleMenuSelection(userInput, menuItems);
-                if (selection == -1) continue; // Invalid selection, prompt again
-                if (selection == 0) // Go back
+                if (title.Contains("d8888b.  .d88b.  d888888b"))
                 {
-                    _menuNavigationService.NavigateBack();
-                    continue;
+                    Console.WriteLine(title);
+                    string menuTitle = "Main Menu";
+                    Console.WriteLine(menuTitle);
+                    Console.WriteLine(new string('-', menuTitle.Length));
                 }
-                // Handle valid selection
-                // Call the corresponding method based on selection
-                // Example: HandleSelection(menuItems[selection - 1]);
-                _menuNavigationService.ClearScreen();
+                else
+                {
+                    Console.WriteLine(title);
+                    Console.WriteLine(new string('-', title.Length));
+                }
             }
-            else
+
+            for (int i = 0; i < options.Length; i++)
             {
-                Console.WriteLine("Please enter a valid number.");
+                if (i == selectedIndex)
+                {
+                    Console.ForegroundColor = ConsoleColor.Cyan; // Highlight color
+                    Console.WriteLine($"{options[i]}");
+                    Console.ResetColor();
+                }
+                else
+                {
+                    Console.WriteLine($"{options[i]}");
+                }
+            }
+
+            ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+            switch (keyInfo.Key)
+            {
+                case ConsoleKey.UpArrow:
+                    selectedIndex = (selectedIndex > 0) ? selectedIndex - 1 : options.Length - 1;
+                    break;
+                case ConsoleKey.DownArrow:
+                    selectedIndex = (selectedIndex < options.Length - 1) ? selectedIndex + 1 : 0;
+                    break;
+                case ConsoleKey.Enter:
+                    return selectedIndex;
             }
         }
     }
@@ -59,6 +97,7 @@ static class Menu
                 break;
             case "Exit":
                 exit = true;
+                Environment.Exit(0);
                 break;
             default:
                 Console.WriteLine("Invalid input. Please try again.");
@@ -204,9 +243,9 @@ static class Menu
                 string selectedDestination = destinations[destinationIndex];
                 UserLogin.DisplayFlights(flights.FilterFlightsByDestination(selectedDestination));
                 break;
-                
 
-             case 4:
+
+            case 4:
                 var calendarUI = new CalendarUI();
                 var (startDate, endDate) = calendarUI.SelectDateRange();
                 UserLogin.DisplayFlights(flights.FilterByDateRange(startDate, endDate));
@@ -216,7 +255,7 @@ static class Menu
                 var destinations2 = flights.GetAllDestinations().ToArray();
                 int destinationIndex2 = NavigateMenu(destinations2, "Select Destination");
                 string selectedDestination2 = destinations2[destinationIndex2];
-                
+
                 var calendarUI2 = new CalendarUI();
                 var (startDate2, endDate2) = calendarUI2.SelectDateRange();
                 var filteredFlights = flights.FilterByDateRange(startDate2, endDate2)
@@ -229,7 +268,7 @@ static class Menu
         }
     }
 
-        static private void DisplayFlightDetails(FlightModel flight)
+    static private void DisplayFlightDetails(FlightModel flight)
     {
         DateTime departureDateTime = DateTime.Parse(flight.DepartureTime);
         DateTime arrivalDateTime = DateTime.Parse(flight.ArrivalTime);
@@ -266,5 +305,3 @@ static class Menu
 ";
     }
 }
-
-// test
