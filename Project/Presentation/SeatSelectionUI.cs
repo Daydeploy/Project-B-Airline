@@ -90,7 +90,7 @@ public class SeatSelectionUI
                 bool isSelected = row == selectedRow && seat == selectedSeat;
                 bool isOccupied = occupiedSeats.ContainsKey(seatNumber);
 
-                // Set color based on seat class
+                // color based on seat class
                 if (row <= seatClasses[0].EndRow)
                     Console.ForegroundColor = ConsoleColor.Magenta;  // First Class
                 else if (row <= seatClasses[1].EndRow)
@@ -98,11 +98,11 @@ public class SeatSelectionUI
                 else
                     Console.ForegroundColor = ConsoleColor.Cyan;     // Economy Class
 
-                // Override color if seat is occupied
+                
                 if (isOccupied)
                     Console.ForegroundColor = ConsoleColor.Red;
 
-                // Display seat
+                
                 if (isSelected)
                 {
                     Console.BackgroundColor = ConsoleColor.DarkGray;
@@ -128,7 +128,6 @@ public class SeatSelectionUI
         }
     }
 
-    // Method to mark a seat as occupied
     public void SetSeatOccupied(string seatNumber, bool occupied = true)
     {
         if (occupied)
@@ -137,7 +136,6 @@ public class SeatSelectionUI
             occupiedSeats.Remove(seatNumber);
     }
 
-    // Method to check if a seat is within a specific class
     public string GetSeatClass(string seatNumber)
     {
         int row = int.Parse(new string(seatNumber.Where(char.IsDigit).ToArray()));

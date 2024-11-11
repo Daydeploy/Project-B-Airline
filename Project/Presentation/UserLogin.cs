@@ -310,6 +310,7 @@ static class UserLogin
         }
     }
 
+    //weghalen
     private static void ModifyBooking()
     {
         var bookings = BookingAccess.LoadAll();
@@ -431,7 +432,7 @@ static class UserLogin
         return -1;
     }
 
-    private static void ModifyPassengerDetails(int flightId, int passengerId)
+    public static void ModifyPassengerDetails(int flightId, int passengerId)
     {
         Console.WriteLine("Enter new seat number:");
         string seatNumber = Console.ReadLine() ?? string.Empty;

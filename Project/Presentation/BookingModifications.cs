@@ -100,22 +100,22 @@ public static class BookingModifications
             }
         }
     }
-    private static void ModifyBooking()
-    {
-        var bookings = BookingAccess.LoadAll();
-        if (!DisplayBookings(bookings)) return;
+    // private static void ModifyBooking()
+    // {
+    //     var bookings = BookingAccess.LoadAll();
+    //     if (!DisplayBookings(bookings)) return;
 
-        int bookingNumber = GetBookingSelection(bookings.Count);
-        if (bookingNumber == -1) return;
+    //     int bookingNumber = GetBookingSelection(bookings.Count);
+    //     if (bookingNumber == -1) return;
 
-        var booking = bookings[bookingNumber - 1];
-        if (!DisplayPassengers(booking)) return;
+    //     var booking = bookings[bookingNumber - 1];
+    //     if (!DisplayPassengers(booking)) return;
 
-        int passengerNumber = GetPassengerSelection(booking.Passengers.Count);
-        if (passengerNumber == -1) return;
+    //     int passengerNumber = GetPassengerSelection(booking.Passengers.Count);
+    //     if (passengerNumber == -1) return;
 
-        ModifyPassengerDetails(booking.FlightId, passengerNumber - 1);
-    }
+    //     ModifyPassengerDetails(booking.FlightId, passengerNumber - 1);
+    // }
 
     private static void ModifySeatAssignment(BookingModel booking)
     {
@@ -146,21 +146,21 @@ public static class BookingModifications
         {
             foreach (var passenger in existingBooking.Passengers)
             {
-                if (passenger != booking.Passengers[passengerChoice - 1]) // Don't block current passenger's seat
+                if (passenger != booking.Passengers[passengerChoice - 1]) // Skip the current passenger
                 {
                     seatSelector.SetSeatOccupied(passenger.SeatNumber);
                 }
             }
         }
 
-        Console.WriteLine("\nSelect new seat:");
+        // Console.WriteLine("\nSelect new seat:");
         string newSeat = seatSelector.SelectSeat();
         
         if (newSeat != null)
         {
             var passenger = booking.Passengers[passengerChoice - 1];
             passenger.SeatNumber = newSeat;
-            BookingAccess.WriteAll(BookingAccess.LoadAll());
+            UserLogin.ModifyPassengerDetails(booking.FlightId, passengerChoice -1);	
             Console.WriteLine($"\nSeat successfully changed to {newSeat}");
         }
         
