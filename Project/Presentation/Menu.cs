@@ -15,8 +15,6 @@ static class Menu
             "Login",
             "Create Account",
             "Show available Flights",
-            // "View Available Flights by Destination",
-            // "Filter Flights by Price",
             "Show Seat Upgrade Options",
             "Exit"
         };
@@ -97,12 +95,6 @@ static class Menu
             case "Show available Flights":
                 UserLogin.ShowAvailableFlights();
                 break;
-            // case "View Available Flights by Destination":
-            //     ShowDestinations();
-            //     break;
-            // case "Filter Flights by Price":
-            //     FilterFlightsByPriceUI();
-            //     break;
             case "Exit":
                 exit = true;
                 break;
@@ -273,9 +265,6 @@ static class Menu
             case 6:
                 return;
         }
-
-        // Console.WriteLine("\nPress any key to continue...");
-        // Console.ReadKey();
     }
 
         static private void DisplayFlightDetails(FlightModel flight)
