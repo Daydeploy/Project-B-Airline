@@ -97,6 +97,7 @@ static class Menu
                 break;
             case "Exit":
                 exit = true;
+                Environment.Exit(0);
                 break;
             default:
                 Console.WriteLine("Invalid input. Please try again.");
@@ -242,9 +243,9 @@ static class Menu
                 string selectedDestination = destinations[destinationIndex];
                 UserLogin.DisplayFlights(flights.FilterFlightsByDestination(selectedDestination));
                 break;
-                
 
-             case 4:
+
+            case 4:
                 var calendarUI = new CalendarUI();
                 var (startDate, endDate) = calendarUI.SelectDateRange();
                 UserLogin.DisplayFlights(flights.FilterByDateRange(startDate, endDate));
@@ -254,7 +255,7 @@ static class Menu
                 var destinations2 = flights.GetAllDestinations().ToArray();
                 int destinationIndex2 = NavigateMenu(destinations2, "Select Destination");
                 string selectedDestination2 = destinations2[destinationIndex2];
-                
+
                 var calendarUI2 = new CalendarUI();
                 var (startDate2, endDate2) = calendarUI2.SelectDateRange();
                 var filteredFlights = flights.FilterByDateRange(startDate2, endDate2)
@@ -267,7 +268,7 @@ static class Menu
         }
     }
 
-        static private void DisplayFlightDetails(FlightModel flight)
+    static private void DisplayFlightDetails(FlightModel flight)
     {
         DateTime departureDateTime = DateTime.Parse(flight.DepartureTime);
         DateTime arrivalDateTime = DateTime.Parse(flight.ArrivalTime);
