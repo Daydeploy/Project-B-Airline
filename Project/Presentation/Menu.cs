@@ -15,7 +15,7 @@ static class Menu
             "Login",
             "Create Account",
             "Show available Flights",
-            "Show Seat Upgrade Options",
+            // "Show Seat Upgrade Options",
             "Exit"
         };
 
