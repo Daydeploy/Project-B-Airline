@@ -20,9 +20,6 @@ static class UserLogin
         Console.Write("Enter your password: ");
         password = ReadPassword(ref showPassword);
 
-        Console.Write("Confirm your password: ");
-
-        Console.WriteLine("\nPasswords match!");
         acc = _userAccountService.Login(email, password);
 
         if (acc != null)
@@ -193,24 +190,109 @@ static class UserLogin
     }
 
     private static void ViewBookedFlights(int userId)
-    {
-        var bookedFlights = _userAccountService.GetBookedFlights(userId);
-        if (bookedFlights.Count == 0)
+    {   
+        while (true)
         {
-            Console.WriteLine("You have no booked flights.");
-        }
-        else
-        {
-            Console.WriteLine("Your booked flights:");
-            foreach (var flight in bookedFlights)
+            Console.Clear();
+            var bookings = BookingAccess.LoadAll().Where(b => b.UserId == userId).ToList();
+            
+            if (bookings.Count == 0)
             {
-                Console.WriteLine(
-                    $"Flight ID: {flight.FlightId}, Number: {flight.FlightNumber}, Departure: {flight.DepartureTime}, Arrival: {flight.ArrivalTime}");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\nYou have no booked flights.");
+                Console.ResetColor();
+                Console.WriteLine("\nPress any key to return to the menu...");
+                Console.ReadKey();
+                return;
+            }
+
+            Console.WriteLine($"\nYou have {bookings.Count} booked flight(s):\n");
+            
+            DrawBookingsTableHeader();
+            
+            foreach (var booking in bookings)
+            {
+                var flightsLogic = new FlightsLogic();
+                var flight = flightsLogic.GetFlightsById(booking.FlightId);
+                if (flight == null) continue;
+
+                DisplayBookingDetails(booking, flight);
+                DisplayPassengerDetails(booking.Passengers);
+                Console.WriteLine(new string('─', Console.WindowWidth - 1));
+            }
+
+            BookingModifications.DisplayBookingLegend();
+            
+            Console.Write("\nEnter command: ");
+            string command = Console.ReadLine()?.ToLower() ?? "";
+
+            switch (command)
+            {
+                case "m":
+                    BookingModifications.ModifyBookingInteractive(userId);
+                    break;
+                case "b":
+                    return;
+                default:
+                    Console.WriteLine("Invalid command. Press any key to continue...");
+                    Console.ReadKey();
+                    break;
             }
         }
+    }
 
-        Console.WriteLine("\nPress any key to return to the menu...");
-        Console.ReadKey();
+    private static void DrawBookingsTableHeader()
+    {
+        Console.WriteLine(new string('─', Console.WindowWidth - 1)); 
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.WriteLine("BOOKED FLIGHTS DETAILS");
+        Console.ResetColor();
+        Console.WriteLine(new string('─', Console.WindowWidth - 1));
+    }
+
+    private static void DisplayBookingDetails(BookingModel booking, FlightModel flight)
+    {
+        DateTime departureDateTime = DateTime.Parse(flight.DepartureTime);
+        DateTime arrivalDateTime = DateTime.Parse(flight.ArrivalTime);
+        TimeSpan duration = arrivalDateTime - departureDateTime;
+
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine($"Booking ID: {booking.BookingId} | Flight ID: {flight.FlightId}");
+        Console.ResetColor();
+
+        Console.Write($"Route: {flight.Origin} ");
+        Console.ForegroundColor = ConsoleColor.DarkCyan;
+        Console.Write("→");
+        Console.ResetColor();
+        Console.WriteLine($" {flight.Destination}");
+
+        Console.Write($"Departure: {departureDateTime:HH:mm dd MMM} ");
+        Console.ForegroundColor = ConsoleColor.DarkCyan;
+        Console.Write("→");
+        Console.ResetColor();
+        Console.WriteLine($" Arrival: {arrivalDateTime:HH:mm dd MMM}");
+
+        Console.WriteLine($"Duration: {duration.Hours}h {duration.Minutes}m");
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine($"Total Price: {booking.TotalPrice} EUR");
+        Console.ResetColor();
+    }
+
+    private static void DisplayPassengerDetails(List<PassengerModel> passengers)
+    {
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.WriteLine("\nPassengers:");
+        Console.ResetColor();
+
+        foreach (var passenger in passengers)
+        {
+            Console.Write($"• {passenger.Name}");
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.Write($" | Seat: {passenger.SeatNumber}");
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine($" | Checked Baggage: {(passenger.HasCheckedBaggage ? "Yes" : "No")}");
+            Console.ResetColor();
+        }
     }
 
     private static void CheckInForFlight()
@@ -566,17 +648,38 @@ static class UserLogin
                             passengerCount <= 8)
                         {
                             var passengerDetails = new List<PassengerModel>();
+                            var seatSelector = new SeatSelectionUI();
+
+                            // Load existing booked seats for this flight
+                            var existingBookings = BookingLogic.GetBookingsForFlight(flightId);
+                            foreach (var booking in existingBookings)
+                            {
+                                foreach (var passenger in booking.Passengers)
+                                {
+                                    seatSelector.SetSeatOccupied(passenger.SeatNumber);
+                                }
+                            }
 
                             for (int i = 0; i < passengerCount; i++)
                             {
+                                Console.Clear();
                                 Console.WriteLine($"\nPassenger {i + 1} Details:");
 
                                 Console.WriteLine("Enter passenger name:");
                                 string name = Console.ReadLine() ?? string.Empty;
 
-                                Console.WriteLine("Enter desired seat number:");
-                                string seatNumber = Console.ReadLine() ?? string.Empty;
+                                Console.WriteLine("\nSelect a seat for the passenger:");
+                                string seatNumber = seatSelector.SelectSeat();
+                                if (seatNumber == null)
+                                {
+                                    Console.WriteLine("Seat selection cancelled.");
+                                    return;
+                                }
+                                // Mark the seat as occupied for subsequent passengers
+                                seatSelector.SetSeatOccupied(seatNumber);
 
+                                Console.WriteLine($"\nSelected seat: {seatNumber} ({seatSelector.GetSeatClass(seatNumber)} Class)");
+                                
                                 Console.WriteLine("Does this passenger have checked baggage? (y/n):");
                                 bool hasCheckedBaggage = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
 
@@ -592,7 +695,7 @@ static class UserLogin
                             {
                                 BookingModel booking = BookingLogic.CreateBooking(
                                     _userAccountService.CurrentUserId,
-                                    selectedFlight.Destination,
+                                    flightId,
                                     passengerDetails
                                 );
 
@@ -605,9 +708,8 @@ static class UserLogin
                                 foreach (var passenger in booking.Passengers)
                                 {
                                     Console.WriteLine($"\nName: {passenger.Name}");
-                                    Console.WriteLine($"Seat Number: {passenger.SeatNumber}");
-                                    Console.WriteLine(
-                                        $"Checked Baggage: {(passenger.HasCheckedBaggage ? "Yes" : "No")}");
+                                    Console.WriteLine($"Seat: {passenger.SeatNumber} ({seatSelector.GetSeatClass(passenger.SeatNumber)} Class)");
+                                    Console.WriteLine($"Checked Baggage: {(passenger.HasCheckedBaggage ? "Yes" : "No")}");
                                 }
 
                                 Console.WriteLine($"\nTotal Price: {booking.TotalPrice} EUR");

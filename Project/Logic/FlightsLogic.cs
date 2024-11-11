@@ -22,6 +22,11 @@ public class FlightsLogic
         return FlightsAccess.LoadAll();
     }
 
+    public FlightModel GetFlightsById(int flightId)
+    {
+        return GetAllFlights().FirstOrDefault(f => f.FlightId == flightId);
+    }
+
     public List<FlightModel> FilterFlightsByPriceUp(string seatClass)
     {
         return AvailableFlights
@@ -83,7 +88,7 @@ public class FlightsLogic
                                         flight.Origin.Equals(startPoint, StringComparison.OrdinalIgnoreCase) &&
                                         flight.Destination.Equals(endPoint, StringComparison.OrdinalIgnoreCase)).ToList();
     }
-    
+
     // public List<FlightModel> GetConnectingFlights()
     // {
     //     // For this example, we'll simulate connecting flights by combining two direct flights
