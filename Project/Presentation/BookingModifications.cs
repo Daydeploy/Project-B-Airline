@@ -100,6 +100,22 @@ public static class BookingModifications
             }
         }
     }
+    private static void ModifyBooking()
+    {
+        var bookings = BookingAccess.LoadAll();
+        if (!DisplayBookings(bookings)) return;
+
+        int bookingNumber = GetBookingSelection(bookings.Count);
+        if (bookingNumber == -1) return;
+
+        var booking = bookings[bookingNumber - 1];
+        if (!DisplayPassengers(booking)) return;
+
+        int passengerNumber = GetPassengerSelection(booking.Passengers.Count);
+        if (passengerNumber == -1) return;
+
+        ModifyPassengerDetails(booking.FlightId, passengerNumber - 1);
+    }
 
     private static void ModifySeatAssignment(BookingModel booking)
     {
