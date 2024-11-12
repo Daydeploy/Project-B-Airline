@@ -7,8 +7,8 @@
     "passengers": [
       {
         "Name": "Aaron",
-        "SeatNumber": "1B",
-        "HasCheckedBaggage": true
+        "SeatNumber": "",
+        "HasCheckedBaggage": false
       }
     ]
   },

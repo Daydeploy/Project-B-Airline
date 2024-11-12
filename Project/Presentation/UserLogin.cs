@@ -86,7 +86,7 @@ static class UserLogin
 
         while (_isLoggedIn)
         {
-            int selectedIndex = Menu.NavigateMenu(menuItems, "Logged In Menu");
+            int selectedIndex = MenuNavigationService.NavigateMenu(menuItems, "Logged In Menu");
 
             switch (selectedIndex)
             {
@@ -141,7 +141,7 @@ static class UserLogin
 
         while (true)
         {
-            int selectedIndex = Menu.NavigateMenu(upgradeOptions, "Seat Upgrade Options");
+            int selectedIndex = MenuNavigationService.NavigateMenu(upgradeOptions, "Seat Upgrade Options");
             if (selectedIndex == 5) break;
 
             switch (selectedIndex)
@@ -182,7 +182,7 @@ static class UserLogin
 
         while (true)
         {
-            int selectedIndex = Menu.NavigateMenu(options, "Manage Account");
+            int selectedIndex = MenuNavigationService.NavigateMenu(options, "Manage Account");
 
             if (selectedIndex == 10) return;
             if (selectedIndex == 9) DisplayAccountDetails(account);
@@ -616,7 +616,7 @@ static class UserLogin
         Console.ReadKey();
     }
 
-    static public void ShowAvailableFlights()
+    public static void ShowAvailableFlights()
     {
         FlightsLogic flights = new FlightsLogic();
         var flightsList = flights.GetAllFlights().ToList();
@@ -624,21 +624,25 @@ static class UserLogin
         // Display flights in a formatted table
         DisplayFlights(flightsList);
 
-        Console.WriteLine("\nDo you want to filter the flights (y/n)");
-        string input = Console.ReadLine()?.ToLower() ?? "";
-        if (input == "y" || input == "yes")
+        Console.WriteLine("\nPress Enter to filter the flights or Backspace to go back.");
+        var key = Console.ReadKey(intercept: true);
+        if (key.Key == ConsoleKey.Enter)
         {
             Menu.FilterFlightsByPriceUI();
         }
-
-        if (_userAccountService.IsLoggedIn == true)
+        else if (key.Key == ConsoleKey.Backspace)
         {
-            Console.Clear();
-            Console.WriteLine("Do you want to book a flight (y/n)");
-            string input2 = Console.ReadLine()?.ToLower() ?? "";
+            return;
+        }
 
-            if (input2 == "y" || input2 == "yes")
+        if (_userAccountService.IsLoggedIn)
+        {
+            Console.WriteLine("Press Enter to proceed with booking or Backspace to go back.");
+            key = Console.ReadKey(intercept: true);
+
+            if (key.Key == ConsoleKey.Enter)
             {
+                Console.Clear();
                 Console.WriteLine("Enter the Flight ID to book:");
                 if (int.TryParse(Console.ReadLine(), out int flightId))
                 {
@@ -677,10 +681,12 @@ static class UserLogin
                                     Console.WriteLine("Seat selection cancelled.");
                                     return;
                                 }
+
                                 // Mark the seat as occupied for subsequent passengers
                                 seatSelector.SetSeatOccupied(seatNumber);
 
-                                Console.WriteLine($"\nSelected seat: {seatNumber} ({seatSelector.GetSeatClass(seatNumber)} Class)");
+                                Console.WriteLine(
+                                    $"\nSelected seat: {seatNumber} ({seatSelector.GetSeatClass(seatNumber)} Class)");
 
                                 Console.WriteLine("Does this passenger have checked baggage? (y/n):");
                                 bool hasCheckedBaggage = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
@@ -710,8 +716,10 @@ static class UserLogin
                                 foreach (var passenger in booking.Passengers)
                                 {
                                     Console.WriteLine($"\nName: {passenger.Name}");
-                                    Console.WriteLine($"Seat: {passenger.SeatNumber} ({seatSelector.GetSeatClass(passenger.SeatNumber)} Class)");
-                                    Console.WriteLine($"Checked Baggage: {(passenger.HasCheckedBaggage ? "Yes" : "No")}");
+                                    Console.WriteLine(
+                                        $"Seat: {passenger.SeatNumber} ({seatSelector.GetSeatClass(passenger.SeatNumber)} Class)");
+                                    Console.WriteLine(
+                                        $"Checked Baggage: {(passenger.HasCheckedBaggage ? "Yes" : "No")}");
                                 }
 
                                 Console.WriteLine($"\nTotal Price: {booking.TotalPrice} EUR");
@@ -739,8 +747,14 @@ static class UserLogin
                 Console.WriteLine("\nPress any key to return to the menu...");
                 Console.ReadKey();
             }
+            else if (key.Key == ConsoleKey.Backspace)
+            {
+                Console.WriteLine("Returning to the main menu...");
+                return;
+            }
         }
     }
+
 
     static public void DisplayFlights(List<FlightModel> flights)
     {
@@ -773,7 +787,8 @@ static class UserLogin
 
         // Header
         Console.ForegroundColor = ConsoleColor.Cyan;
-        Console.WriteLine($"{"Flight ID",-10} {"Route",-30} {"Departure",-18} {"Arrival",-18} {"Duration",-12} {"Prices (EUR)"}");
+        Console.WriteLine(
+            $"{"Flight ID",-10} {"Route",-30} {"Departure",-18} {"Arrival",-18} {"Duration",-12} {"Prices (EUR)"}");
         Console.ResetColor();
 
         // Header-content separator
@@ -816,6 +831,7 @@ static class UserLogin
             Console.Write($"{seatOption.Class}: {seatOption.Price,4} ");
             Console.ResetColor();
         }
+
         Console.WriteLine();
     }
 

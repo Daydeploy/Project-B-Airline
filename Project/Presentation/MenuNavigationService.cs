@@ -1,37 +1,61 @@
-using System;
-using System.Collections.Generic;
-
-public class MenuNavigationService
+﻿public static class MenuNavigationService
 {
-    public void DisplayMenu(List<string> menuOptions)
+    static public int NavigateMenu(string[] options, string title = "")
+    {
+        int selectedIndex = 0;
+
+        while (true)
+        {
+            DisplayMenu(options, title, selectedIndex);
+
+            ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+            switch (keyInfo.Key)
+            {
+                case ConsoleKey.UpArrow:
+                    selectedIndex = (selectedIndex > 0) ? selectedIndex - 1 : options.Length - 1;
+                    break;
+                case ConsoleKey.DownArrow:
+                    selectedIndex = (selectedIndex < options.Length - 1) ? selectedIndex + 1 : 0;
+                    break;
+                case ConsoleKey.Enter:
+                    return selectedIndex;
+                case ConsoleKey.Backspace:
+                    return -1;
+            }
+        }
+    }
+
+    private static void DisplayMenu(string[] options, string title, int selectedIndex)
     {
         Console.Clear();
-        Console.WriteLine("Please select an option:");
-        for (int i = 0; i < menuOptions.Count; i++)
+        if (!string.IsNullOrEmpty(title))
         {
-            Console.WriteLine($"{i + 1}. {menuOptions[i]}");
+            if (title.Contains("d8888b.  .d88b.  d888888b"))
+            {
+                Console.WriteLine(title);
+                string menuTitle = "Main Menu";
+                Console.WriteLine(menuTitle);
+                Console.WriteLine(new string('-', menuTitle.Length));
+            }
+            else
+            {
+                Console.WriteLine(title);
+                Console.WriteLine(new string('-', title.Length));
+            }
         }
-        Console.WriteLine("0. Go Back");
-    }
 
-    public int HandleMenuSelection(int userInput, List<string> menuOptions)
-    {
-        if (userInput < 0 || userInput > menuOptions.Count)
+        for (int i = 0; i < options.Length; i++)
         {
-            Console.WriteLine("Invalid selection. Please try again.");
-            return -1;
+            if (i == selectedIndex)
+            {
+                Console.ForegroundColor = ConsoleColor.Cyan; // Highlight color
+                Console.WriteLine($"{options[i]}");
+                Console.ResetColor();
+            }
+            else
+            {
+                Console.WriteLine($"{options[i]}");
+            }
         }
-        return userInput;
     }
-
-    public void NavigateBack()
-    {
-        Console.WriteLine("Going back to the previous menu...");
-        Console.ReadKey();
-    }
-
-    public void ClearScreen()
-    {
-        Console.Clear();
-    }
-} 
+}
