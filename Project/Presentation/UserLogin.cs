@@ -621,26 +621,30 @@ static class UserLogin
         FlightsLogic flights = new FlightsLogic();
         var flightsList = flights.GetAllFlights().ToList();
 
-        // Display flights in a formatted table
+        // Display flight table
         DisplayFlights(flightsList);
 
-        Console.WriteLine("\nPress Enter to filter the flights or Backspace to go back."); // change to filter and booking weghalen
-        var key = Console.ReadKey(intercept: true);
-        if (key.Key == ConsoleKey.Enter)
-        {
-            Menu.FilterFlightsByPriceUI();
-        }
-        else if (key.Key == ConsoleKey.Backspace)
-        {
-            return;
-        }
+        Console.WriteLine("\nCommands:");
+        Console.WriteLine("F - Filter flights");
+        Console.WriteLine("B - Book a flight");
+        Console.WriteLine("ESC - Go back");
 
-        if (_userAccountService.IsLoggedIn)
+        while (true)
         {
-            Console.WriteLine("Press Enter to proceed with booking or Backspace to go back.");
-            key = Console.ReadKey(intercept: true);
-
-            if (key.Key == ConsoleKey.Enter)
+            var key = Console.ReadKey(intercept: true);
+            
+            if (key.Key == ConsoleKey.Escape)
+            {
+                return;
+            }
+            
+            if (key.Key == ConsoleKey.F)
+            {
+                Menu.FilterFlightsByPriceUI();
+                return;
+            }
+            
+            if (key.Key == ConsoleKey.B && _userAccountService.IsLoggedIn)
             {
                 Console.Clear();
                 Console.WriteLine("Enter the Flight ID to book:");
@@ -682,7 +686,7 @@ static class UserLogin
                                     return;
                                 }
 
-                                // Mark the seat as occupied for subsequent passengers
+                                // Mark the seat as occupied for preventing double booking
                                 seatSelector.SetSeatOccupied(seatNumber);
 
                                 Console.WriteLine(
