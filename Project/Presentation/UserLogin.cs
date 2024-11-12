@@ -624,7 +624,7 @@ static class UserLogin
         // Display flights in a formatted table
         DisplayFlights(flightsList);
 
-        Console.WriteLine("\nPress Enter to filter the flights or Backspace to go back.");
+        Console.WriteLine("\nPress Enter to filter the flights or Backspace to go back."); // change to filter and booking weghalen
         var key = Console.ReadKey(intercept: true);
         if (key.Key == ConsoleKey.Enter)
         {
@@ -675,18 +675,14 @@ static class UserLogin
                                 string name = Console.ReadLine() ?? string.Empty;
 
                                 Console.WriteLine("\nSelect a seat for the passenger:");
-
-                                string[] aircraftTypes = { "Boeing 737", "Boeing 787", "Airbus 330" };
-                                Random random = new Random();
-                                string randomAircraftType = aircraftTypes[random.Next(aircraftTypes.Length)];
-
-                                string seatNumber = seatSelector.SelectSeat(randomAircraftType);
+                                string seatNumber = seatSelector.SelectSeat(selectedFlight.PlaneType);
                                 if (seatNumber == null)
                                 {
                                     Console.WriteLine("Seat selection cancelled.");
                                     return;
                                 }
 
+                                // Mark the seat as occupied for subsequent passengers
                                 seatSelector.SetSeatOccupied(seatNumber);
 
                                 Console.WriteLine(

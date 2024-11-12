@@ -81,5 +81,36 @@
         "HasCheckedBaggage": true
       }
     ]
+  },
+  {
+    "bookingId": 5671,
+    "userId": 1,
+    "flightId": 1100,
+    "totalPrice": 614,
+    "passengers": [
+      {
+        "Name": "Gabriel",
+        "SeatNumber": "3A",
+        "HasCheckedBaggage": true
+      },
+      {
+        "Name": "hofman",
+        "SeatNumber": "5A",
+        "HasCheckedBaggage": false
+      }
+    ]
+  },
+  {
+    "bookingId": 3818,
+    "userId": 1,
+    "flightId": 1004,
+    "totalPrice": 669,
+    "passengers": [
+      {
+        "Name": "Jamal",
+        "SeatNumber": "2A",
+        "HasCheckedBaggage": false
+      }
+    ]
   }
 ]

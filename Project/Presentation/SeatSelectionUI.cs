@@ -41,6 +41,9 @@ public class SeatSelectionUI
                 case ConsoleKey.RightArrow:
                     if (currentSeat < SEATS_PER_ROW - 1) currentSeat++;
                     break;
+                case ConsoleKey.Escape:
+                    Console.WriteLine("\nSeat selection cancelled.");
+                    return null;
                 case ConsoleKey.Enter:
                     string seatNumber = $"{currentRow}{(char)('A' + currentSeat)}";
                     if (!occupiedSeats.ContainsKey(seatNumber))
@@ -57,7 +60,7 @@ public class SeatSelectionUI
     private void DisplayLegend()
     {
         Console.WriteLine("\n === Seat Selection === ");
-        Console.WriteLine("Use arrow keys to navigate, Enter to select\n");
+        Console.WriteLine("Use arrow keys to navigate, Enter to select, ESC to cancel\n");
         
         Console.ForegroundColor = ConsoleColor.Magenta;
         Console.Write("■ First Class ");
@@ -74,6 +77,8 @@ public class SeatSelectionUI
         for (char c = 'A'; c < 'A' + SEATS_PER_ROW; c++)
         {
             Console.Write($" {c} ");
+            if (c == 'C')
+                Console.Write(" ");
         }
         Console.WriteLine("\n");
     }
@@ -88,7 +93,7 @@ public class SeatSelectionUI
             case "Boeing 787":
                 Display787(selectedRow, selectedSeat);
                 break;
-            case "Airbus 330":
+            case "Airbus A330":
                 DisplayA330(selectedRow, selectedSeat);
                 break;
         }

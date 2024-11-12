@@ -106,11 +106,13 @@ public static class BookingModifications
         Console.Clear();
         Console.WriteLine("=== Change Seat Assignment ===\n");
         
+        // Display passengers
         for (int i = 0; i < booking.Passengers.Count; i++)
         {
             Console.WriteLine($"{i + 1}. {booking.Passengers[i].Name} - Current Seat: {booking.Passengers[i].SeatNumber}");
         }
 
+        // Get passenger selection
         Console.Write("\nSelect passenger number (or 0 to cancel): ");
         if (!int.TryParse(Console.ReadLine(), out int passengerChoice) || 
             passengerChoice < 0 || 
@@ -124,9 +126,10 @@ public static class BookingModifications
         if (passengerChoice == 0) return;
 
         var seatSelector = new SeatSelectionUI();
+        // Load existing booked seats
         var existingBookings = BookingLogic.GetBookingsForFlight(booking.FlightId);
-        
-        //aircraft types and select random one | needs to be adjusted in the future ~ added to json
+
+        // Select random aircraft type
         string[] aircraftTypes = { "Boeing 737", "Boeing 787", "Airbus 330" };
         Random random = new Random();
         string randomAircraftType = aircraftTypes[random.Next(aircraftTypes.Length)];
@@ -172,7 +175,7 @@ public static class BookingModifications
         Console.WriteLine("\nPress any key to continue...");
         Console.ReadKey();
     }
-    
+
     private static void ModifyBaggageOptions(BookingModel booking)
     {
         Console.Clear();
@@ -199,27 +202,11 @@ public static class BookingModifications
         Console.Write($"\nToggle checked baggage for {passenger.Name}? (Y/N): ");
         if (Console.ReadLine()?.ToUpper() == "Y")
         {
-            var newDetails = new BookingDetails
-            {
-                SeatNumber = passenger.SeatNumber,
-                HasCheckedBaggage = !passenger.HasCheckedBaggage
-            };
-
-            var userAccountService = new UserAccountService();
-            bool success = userAccountService.ModifyBooking(booking.FlightId, passengerChoice - 1, newDetails);
-
-            if (success)
-            {
-                passenger.HasCheckedBaggage = !passenger.HasCheckedBaggage;
-                BookingAccess.WriteAll(BookingAccess.LoadAll());
-                Console.WriteLine($"\nBaggage option updated. Checked baggage is now: {(passenger.HasCheckedBaggage ? "Yes" : "No")}");
-            }
-            else
-            {
-                Console.WriteLine("\nFailed to update baggage option. Please try again or contact support.");
-            }
+            passenger.HasCheckedBaggage = !passenger.HasCheckedBaggage;
+            BookingAccess.WriteAll(BookingAccess.LoadAll());
+            Console.WriteLine($"\nBaggage option updated. Checked baggage is now: {(passenger.HasCheckedBaggage ? "Yes" : "No")}");
         }
-    
+        
         Console.WriteLine("\nPress any key to continue...");
         Console.ReadKey();
     }
@@ -253,28 +240,9 @@ public static class BookingModifications
         
         if (!string.IsNullOrWhiteSpace(newName))
         {
-            var newDetails = new BookingDetails
-            {
-                SeatNumber = passenger.SeatNumber,
-                HasCheckedBaggage = passenger.HasCheckedBaggage
-            };
-
-            var userAccountService = new UserAccountService();
-            bool success = userAccountService.ModifyBooking(booking.FlightId, passengerChoice - 1, newDetails);
-
-            if (success)
-            {
-                passenger.Name = newName;
-                var allBookings = BookingAccess.LoadAll();
-                var bookingToUpdate = allBookings.First(b => b.BookingId == booking.BookingId);
-                bookingToUpdate.Passengers[passengerChoice - 1].Name = newName;
-                BookingAccess.WriteAll(allBookings);
-                Console.WriteLine("\nPassenger name updated successfully");
-            }
-            else
-            {
-                Console.WriteLine("\nFailed to update passenger name. Please try again or contact support.");
-            }
+            passenger.Name = newName;
+            BookingAccess.WriteAll(BookingAccess.LoadAll());
+            Console.WriteLine("\nPassenger name updated successfully");
         }
         
         Console.WriteLine("\nPress any key to continue...");
