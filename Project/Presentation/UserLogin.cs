@@ -26,6 +26,7 @@ static class UserLogin
         {
             Console.WriteLine($"Welcome back {acc.FirstName} {acc.LastName}");
             Console.WriteLine($"Your email is {acc.EmailAddress}");
+            _isLoggedIn = true;
             ShowLoggedInMenu(acc);
         }
         else
@@ -116,9 +117,9 @@ static class UserLogin
                 case 8: /* ViewDirectVsConnectingFlights(); */ break;
                 case 9:
                     Console.WriteLine("Logging out...");
-                    _isLoggedIn = false;
                     Menu.Start();
-                    break;
+                    _isLoggedIn = false;
+                    return;
                 case 10:
                     ShowSeatUpgradeOptions();
                     break;
@@ -190,12 +191,12 @@ static class UserLogin
     }
 
     private static void ViewBookedFlights(int userId)
-    {   
+    {
         while (true)
         {
             Console.Clear();
             var bookings = BookingAccess.LoadAll().Where(b => b.UserId == userId).ToList();
-            
+
             if (bookings.Count == 0)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
@@ -207,9 +208,9 @@ static class UserLogin
             }
 
             Console.WriteLine($"\nYou have {bookings.Count} booked flight(s):\n");
-            
+
             DrawBookingsTableHeader();
-            
+
             foreach (var booking in bookings)
             {
                 var flightsLogic = new FlightsLogic();
@@ -222,7 +223,7 @@ static class UserLogin
             }
 
             BookingModifications.DisplayBookingLegend();
-            
+
             Console.Write("\nEnter command: ");
             string command = Console.ReadLine()?.ToLower() ?? "";
 
@@ -243,7 +244,7 @@ static class UserLogin
 
     private static void DrawBookingsTableHeader()
     {
-        Console.WriteLine(new string('─', Console.WindowWidth - 1)); 
+        Console.WriteLine(new string('─', Console.WindowWidth - 1));
         Console.ForegroundColor = ConsoleColor.Cyan;
         Console.WriteLine("BOOKED FLIGHTS DETAILS");
         Console.ResetColor();
@@ -619,7 +620,7 @@ static class UserLogin
     {
         FlightsLogic flights = new FlightsLogic();
         var flightsList = flights.GetAllFlights().ToList();
-        
+
         // Display flights in a formatted table
         DisplayFlights(flightsList);
 
@@ -680,7 +681,7 @@ static class UserLogin
                                 seatSelector.SetSeatOccupied(seatNumber);
 
                                 Console.WriteLine($"\nSelected seat: {seatNumber} ({seatSelector.GetSeatClass(seatNumber)} Class)");
-                                
+
                                 Console.WriteLine("Does this passenger have checked baggage? (y/n):");
                                 bool hasCheckedBaggage = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
 
