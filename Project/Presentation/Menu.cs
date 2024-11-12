@@ -24,62 +24,11 @@ static class Menu
         while (!exit)
         {
             System.Console.WriteLine();
-            int selectedIndex = NavigateMenu(menuItems, AirlineLogo());
+            int selectedIndex = MenuNavigationService.NavigateMenu(menuItems, AirlineLogo());
             HandleSelection(menuItems[selectedIndex], ref exit);
         }
     }
 
-    static public int NavigateMenu(string[] options, string title = "")
-    {
-        int selectedIndex = 0;
-
-        while (true)
-        {
-            Console.Clear();
-            if (!string.IsNullOrEmpty(title))
-            {
-                if (title.Contains("d8888b.  .d88b.  d888888b"))
-                {
-                    Console.WriteLine(title);
-                    string menuTitle = "Main Menu";
-                    Console.WriteLine(menuTitle);
-                    Console.WriteLine(new string('-', menuTitle.Length));
-                }
-                else
-                {
-                    Console.WriteLine(title);
-                    Console.WriteLine(new string('-', title.Length));
-                }
-            }
-
-            for (int i = 0; i < options.Length; i++)
-            {
-                if (i == selectedIndex)
-                {
-                    Console.ForegroundColor = ConsoleColor.Cyan; // Highlight color
-                    Console.WriteLine($"{options[i]}");
-                    Console.ResetColor();
-                }
-                else
-                {
-                    Console.WriteLine($"{options[i]}");
-                }
-            }
-
-            ConsoleKeyInfo keyInfo = Console.ReadKey(true);
-            switch (keyInfo.Key)
-            {
-                case ConsoleKey.UpArrow:
-                    selectedIndex = (selectedIndex > 0) ? selectedIndex - 1 : options.Length - 1;
-                    break;
-                case ConsoleKey.DownArrow:
-                    selectedIndex = (selectedIndex < options.Length - 1) ? selectedIndex + 1 : 0;
-                    break;
-                case ConsoleKey.Enter:
-                    return selectedIndex;
-            }
-        }
-    }
 
     static private void HandleSelection(string selectedOption, ref bool exit)
     {
@@ -154,76 +103,40 @@ static class Menu
             : "Failed to create account. Email may already be in use.");
     }
 
-    static public void ShowDestinations()
-    {
-        var airportLogic = new AirportLogic();
-        var airports = airportLogic.GetAllAirports()
-            .Where(a => a.Type == "Public" && a.City != "Rotterdam")
-            .ToList();
-
-        var validAirports = new List<AirportModel>();
-        var flightDictionary = new Dictionary<int, FlightModel>();
-
-        var availableFlights = FlightsLogic.AvailableFlights;
-
-        foreach (var airport in airports)
-        {
-            var flightAvailable = availableFlights.FirstOrDefault(f => f.Destination == airport.City);
-            if (flightAvailable != null)
-            {
-                validAirports.Add(airport);
-                flightDictionary[airport.AirportID] = flightAvailable;
-            }
-        }
-
-        int selectedIndex = NavigateMenu(
-            validAirports.Select(a => $"{a.AirportID}. {a.City}, {a.Country} - {a.Name}").ToArray(),
-            "Available Destinations with Flights");
-
-        var selectedAirport = validAirports[selectedIndex];
-        Console.Clear();
-        Console.WriteLine($"\nYou selected: {selectedAirport.City}, {selectedAirport.Country}");
-
-        if (flightDictionary.TryGetValue(selectedAirport.AirportID, out var flight))
-        {
-            DisplayFlightDetails(flight);
-        }
-    }
-
     static public void FilterFlightsByPriceUI()
     {
         FlightsLogic flights = new FlightsLogic();
         string[] filterOptions = new[]
         {
-            "Price from low-high",
-            "Price from high-low",
-            "Price between input range",
-            "Filter by destination",
-            "Filter by date range",
-            "Filter by destination and date range",
+            "Price: Low to High",
+            "Price: High to Low",
+            "Price: Custom Range",
+            "Filter by Destination",
+            "Filter by Date Range",
+            "Filter by Destination & Date",
             "Back to Main Menu"
         };
 
-        int selectedIndex = NavigateMenu(filterOptions, "Filter Flights:");
+        int selectedIndex = MenuNavigationService.NavigateMenu(filterOptions, "Filter Flights:");
 
         string[] seatClassOptions = { "Economy", "Business", "First" };
 
         switch (selectedIndex)
         {
             case 0:
-                int seatClassAscIndex = NavigateMenu(seatClassOptions, "Seat Class");
+                int seatClassAscIndex = MenuNavigationService.NavigateMenu(seatClassOptions, "Seat Class");
                 string seatClassAsc = seatClassOptions[seatClassAscIndex];
                 UserLogin.DisplayFlights(flights.FilterFlightsByPriceUp(seatClassAsc));
                 break;
 
             case 1:
-                int seatClassDescIndex = NavigateMenu(seatClassOptions, "Seat Class");
+                int seatClassDescIndex = MenuNavigationService.NavigateMenu(seatClassOptions, "Seat Class");
                 string seatClassDesc = seatClassOptions[seatClassDescIndex];
                 UserLogin.DisplayFlights(flights.FilterFlightsByPriceDown(seatClassDesc));
                 break;
 
             case 2:
-                int seatClassRangeIndex = NavigateMenu(seatClassOptions, "Seat Class");
+                int seatClassRangeIndex = MenuNavigationService.NavigateMenu(seatClassOptions, "Seat Class");
                 string seatClassRange = seatClassOptions[seatClassRangeIndex];
                 Console.WriteLine("Enter minimum price: ");
                 if (int.TryParse(Console.ReadLine(), out int min))
@@ -239,7 +152,7 @@ static class Menu
 
             case 3:
                 var destinations = flights.GetAllDestinations().ToArray();
-                int destinationIndex = NavigateMenu(destinations, "Select Destination");
+                int destinationIndex = MenuNavigationService.NavigateMenu(destinations, "Select Destination");
                 string selectedDestination = destinations[destinationIndex];
                 UserLogin.DisplayFlights(flights.FilterFlightsByDestination(selectedDestination));
                 break;
@@ -253,7 +166,7 @@ static class Menu
 
             case 5:
                 var destinations2 = flights.GetAllDestinations().ToArray();
-                int destinationIndex2 = NavigateMenu(destinations2, "Select Destination");
+                int destinationIndex2 = MenuNavigationService.NavigateMenu(destinations2, "Select Destination");
                 string selectedDestination2 = destinations2[destinationIndex2];
 
                 var calendarUI2 = new CalendarUI();
@@ -266,27 +179,6 @@ static class Menu
             case 6:
                 return;
         }
-    }
-
-    static private void DisplayFlightDetails(FlightModel flight)
-    {
-        DateTime departureDateTime = DateTime.Parse(flight.DepartureTime);
-        DateTime arrivalDateTime = DateTime.Parse(flight.ArrivalTime);
-
-        Console.WriteLine($"Flight ID : {flight.FlightId}");
-        Console.WriteLine($"Route     : {flight.Origin} ➔ {flight.Destination}");
-        Console.WriteLine($"Departure : {departureDateTime:yyyy-MM-dd HH:mm}");
-        Console.WriteLine($"Arrival   : {arrivalDateTime:yyyy-MM-dd HH:mm}");
-        Console.WriteLine("\nPrices:");
-
-        for (int i = 0; i < flight.SeatClassOptions.Count; i++)
-        {
-            var seatOption = flight.SeatClassOptions[i];
-            string prefix = (i == flight.SeatClassOptions.Count - 1) ? "└─" : "├─";
-            Console.WriteLine($"  {prefix} Class: {seatOption.Class,-9} | Price: {seatOption.Price} EUR");
-        }
-
-        Console.WriteLine(new string('-', 40));
     }
 
     static private string AirlineLogo()
