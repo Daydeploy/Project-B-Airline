@@ -675,14 +675,18 @@ static class UserLogin
                                 string name = Console.ReadLine() ?? string.Empty;
 
                                 Console.WriteLine("\nSelect a seat for the passenger:");
-                                string seatNumber = seatSelector.SelectSeat();
+
+                                string[] aircraftTypes = { "Boeing 737", "Boeing 787", "Airbus 330" };
+                                Random random = new Random();
+                                string randomAircraftType = aircraftTypes[random.Next(aircraftTypes.Length)];
+
+                                string seatNumber = seatSelector.SelectSeat(randomAircraftType);
                                 if (seatNumber == null)
                                 {
                                     Console.WriteLine("Seat selection cancelled.");
                                     return;
                                 }
 
-                                // Mark the seat as occupied for subsequent passengers
                                 seatSelector.SetSeatOccupied(seatNumber);
 
                                 Console.WriteLine(

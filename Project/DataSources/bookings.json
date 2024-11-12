@@ -6,9 +6,9 @@
     "totalPrice": 124,
     "passengers": [
       {
-        "Name": "Aaron",
-        "SeatNumber": "",
-        "HasCheckedBaggage": false
+        "Name": "Aaron Hofman",
+        "SeatNumber": "1A",
+        "HasCheckedBaggage": true
       }
     ]
   },
