@@ -53,11 +53,11 @@ public class SeatSelectionUI
 
     public string SelectSeat(string planeType)
     {
-        Console.WriteLine($"DEBUG: Received plane type: '{planeType}'");
-        Console.WriteLine($"DEBUG: Exact string comparison with 'Airbus A330': {planeType == "Airbus A330"}");
-        Console.WriteLine($"DEBUG: String length: {planeType.Length}");
-        Console.WriteLine($"DEBUG: Character codes: {string.Join(",", planeType.Select(c => ((int)c)))}");
-        Console.WriteLine($"DEBUG: Available configurations: {string.Join(", ", planeConfigs.Keys)}");
+        // Console.WriteLine($"DEBUG: Received plane type: '{planeType}'");
+        // Console.WriteLine($"DEBUG: Exact string comparison with 'Airbus A330': {planeType == "Airbus A330"}");
+        // Console.WriteLine($"DEBUG: String length: {planeType.Length}");
+        // Console.WriteLine($"DEBUG: Character codes: {string.Join(",", planeType.Select(c => ((int)c)))}");
+        // Console.WriteLine($"DEBUG: Available configurations: {string.Join(", ", planeConfigs.Keys)}");
 
         // Normalize plane type
         if (planeTypeAliases.TryGetValue(planeType, out string normalizedType))
