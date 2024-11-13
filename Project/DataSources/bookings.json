@@ -7,7 +7,7 @@
     "passengers": [
       {
         "Name": "Aaron Hofman",
-        "SeatNumber": "1A",
+        "SeatNumber": "1B",
         "HasCheckedBaggage": true
       }
     ]
@@ -38,7 +38,7 @@
     "passengers": [
       {
         "Name": "Kirito",
-        "SeatNumber": "3A",
+        "SeatNumber": "3C",
         "HasCheckedBaggage": false
       }
     ]
@@ -65,6 +65,19 @@
       {
         "Name": "Hetwerkt",
         "SeatNumber": "1B",
+        "HasCheckedBaggage": false
+      }
+    ]
+  },
+  {
+    "bookingId": 9592,
+    "userId": 3,
+    "flightId": 1000,
+    "totalPrice": 616,
+    "passengers": [
+      {
+        "Name": "aaron",
+        "SeatNumber": "1H",
         "HasCheckedBaggage": false
       }
     ]

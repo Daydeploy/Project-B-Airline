@@ -5,7 +5,7 @@
       {
         "SeatClass": "First",
         "SeatNumber": "1A",
-        "IsAvailable": true,
+        "IsAvailable": false,
         "PassengerInfo": null
       },
       {

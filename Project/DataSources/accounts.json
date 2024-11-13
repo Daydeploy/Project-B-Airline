@@ -29,5 +29,18 @@
     "password": "aaron",
     "passportDetails": null,
     "miles": 0
+  },
+  {
+    "id": 3,
+    "firstName": "pop",
+    "lastName": "opo",
+    "dateOfBirth": "2004-02-20T00:00:00",
+    "gender": null,
+    "nationality": null,
+    "phoneNumber": null,
+    "email": "pop",
+    "password": "pop",
+    "passportDetails": null,
+    "miles": 0
   }
 ]

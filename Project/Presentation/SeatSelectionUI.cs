@@ -1,5 +1,6 @@
 public class SeatSelectionUI
 {
+    private PlaneConfig currentConfig;
     private Dictionary<string, bool> occupiedSeats = new Dictionary<string, bool>();
     
     // Add dictionary of plane type variations to handle different formats
@@ -49,7 +50,6 @@ public class SeatSelectionUI
         }
     };
 
-    private PlaneConfig currentConfig;
 
     public string SelectSeat(string planeType)
     {
@@ -79,7 +79,6 @@ public class SeatSelectionUI
         {
             Console.Clear();
             DisplayLegend();
-            Console.WriteLine($"\nAircraft: {planeType}\n");
             DisplayPlane(currentRow, currentSeat);
             
             ConsoleKeyInfo key = Console.ReadKey(true);
@@ -108,11 +107,12 @@ public class SeatSelectionUI
                     }
                     break;
             }
+            Console.WriteLine($"\nAircraft: {planeType}\n");
         }
 
         return null;
     }
-
+    
     private void DisplayLegend()
     {
         Console.WriteLine("\n === Seat Selection === ");
@@ -129,10 +129,20 @@ public class SeatSelectionUI
         Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine("□ Available\n");
         
-        Console.Write("     ");
+        Console.Write("    ");
         for (char c = 'A'; c < 'A' + currentConfig.SeatsPerRow; c++)
         {
-            Console.Write($" {c} ");
+            Console.Write($"{c}");
+            
+            // Add extra space after every third seat (aisle)
+            if ((c - 'A' + 1) % 3 == 0 && (c - 'A' + 1) < currentConfig.SeatsPerRow)
+            {
+                Console.Write("   ");
+            }
+            else
+            {
+                Console.Write("   ");
+            }
         }
         Console.WriteLine("\n");
     }
@@ -174,7 +184,7 @@ public class SeatSelectionUI
                 // Add aisle space based on plane type
                 if (AddAisleSpace(seat))
                 {
-                    Console.Write(" ");
+                    Console.Write("  ");
                 }
             }
             
