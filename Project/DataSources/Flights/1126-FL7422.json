@@ -1,0 +1,1087 @@
+[
+  {
+    "FlightId": 1126,
+    "SeatModels": [
+      {
+        "SeatClass": "First",
+        "SeatNumber": "1A",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "First",
+        "SeatNumber": "1B",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "First",
+        "SeatNumber": "1C",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "First",
+        "SeatNumber": "1D",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "First",
+        "SeatNumber": "1E",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "First",
+        "SeatNumber": "1F",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "First",
+        "SeatNumber": "2A",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "First",
+        "SeatNumber": "2B",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "First",
+        "SeatNumber": "2C",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "First",
+        "SeatNumber": "2D",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "First",
+        "SeatNumber": "2E",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "First",
+        "SeatNumber": "2F",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "First",
+        "SeatNumber": "3A",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "First",
+        "SeatNumber": "3B",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "First",
+        "SeatNumber": "3C",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "First",
+        "SeatNumber": "3D",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "First",
+        "SeatNumber": "3E",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "First",
+        "SeatNumber": "3F",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Business",
+        "SeatNumber": "4A",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Business",
+        "SeatNumber": "4B",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Business",
+        "SeatNumber": "4C",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Business",
+        "SeatNumber": "4D",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Business",
+        "SeatNumber": "4E",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Business",
+        "SeatNumber": "4F",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Business",
+        "SeatNumber": "5A",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Business",
+        "SeatNumber": "5B",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Business",
+        "SeatNumber": "5C",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Business",
+        "SeatNumber": "5D",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Business",
+        "SeatNumber": "5E",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Business",
+        "SeatNumber": "5F",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Business",
+        "SeatNumber": "6A",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Business",
+        "SeatNumber": "6B",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Business",
+        "SeatNumber": "6C",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Business",
+        "SeatNumber": "6D",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Business",
+        "SeatNumber": "6E",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Business",
+        "SeatNumber": "6F",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Business",
+        "SeatNumber": "7A",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Business",
+        "SeatNumber": "7B",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Business",
+        "SeatNumber": "7C",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Business",
+        "SeatNumber": "7D",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Business",
+        "SeatNumber": "7E",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Business",
+        "SeatNumber": "7F",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Business",
+        "SeatNumber": "8A",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Business",
+        "SeatNumber": "8B",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Business",
+        "SeatNumber": "8C",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Business",
+        "SeatNumber": "8D",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Business",
+        "SeatNumber": "8E",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Business",
+        "SeatNumber": "8F",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "9A",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "9B",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "9C",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "9D",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "9E",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "9F",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "10A",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "10B",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "10C",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "10D",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "10E",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "10F",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "11A",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "11B",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "11C",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "11D",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "11E",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "11F",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "12A",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "12B",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "12C",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "12D",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "12E",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "12F",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "13A",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "13B",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "13C",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "13D",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "13E",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "13F",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "14A",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "14B",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "14C",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "14D",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "14E",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "14F",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "15A",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "15B",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "15C",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "15D",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "15E",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "15F",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "16A",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "16B",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "16C",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "16D",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "16E",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "16F",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "17A",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "17B",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "17C",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "17D",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "17E",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "17F",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "18A",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "18B",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "18C",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "18D",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "18E",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "18F",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "19A",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "19B",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "19C",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "19D",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "19E",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "19F",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "20A",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "20B",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "20C",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "20D",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "20E",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "20F",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "21A",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "21B",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "21C",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "21D",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "21E",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "21F",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "22A",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "22B",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "22C",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "22D",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "22E",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "22F",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "23A",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "23B",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "23C",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "23D",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "23E",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "23F",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "24A",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "24B",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "24C",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "24D",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "24E",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "24F",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "25A",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "25B",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "25C",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "25D",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "25E",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "25F",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "26A",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "26B",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "26C",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "26D",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "26E",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "26F",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "27A",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "27B",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "27C",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "27D",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "27E",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "27F",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "28A",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "28B",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "28C",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "28D",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "28E",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "28F",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "29A",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "29B",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "29C",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "29D",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "29E",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "29F",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "30A",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "30B",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "30C",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "30D",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "30E",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      },
+      {
+        "SeatClass": "Economy",
+        "SeatNumber": "30F",
+        "IsAvailable": true,
+        "PassengerInfo": null
+      }
+    ]
+  }
+]

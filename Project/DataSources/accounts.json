@@ -1,26 +1,46 @@
 [
   {
     "id": 1,
-    "emailAddress": "n@b.c",
-    "password": "xyz",
-    "fullName": "Nikola Tesla"
+    "firstName": "Test",
+    "lastName": "Testing",
+    "dateOfBirth": "1985-05-15T00:00:00",
+    "gender": "Male",
+    "nationality": "Dutch",
+    "phoneNumber": "\u002B31201234567",
+    "email": "test",
+    "password": "test",
+    "passportDetails": {
+      "passportNumber": "NL123456789",
+      "issueDate": "2000-01-01T00:00:00",
+      "expirationDate": "2030-01-01T00:00:00",
+      "countryOfIssue": "Netherlands"
+    },
+    "miles": 0
   },
   {
     "id": 2,
-    "emailAddress": "t@b.c",
-    "password": "xyz",
-    "fullName": "Thomas Edison"
+    "firstName": "aaron",
+    "lastName": "A",
+    "dateOfBirth": "2004-02-02T00:00:00",
+    "gender": null,
+    "nationality": null,
+    "phoneNumber": null,
+    "email": "aaron",
+    "password": "aaron",
+    "passportDetails": null,
+    "miles": 0
   },
   {
     "id": 3,
-    "emailAddress": "test05@gmail.com",
-    "password": "test05!",
-    "fullName": "test testing"
-  },
-  {
-    "id": 4,
-    "emailAddress": "test",
+    "firstName": "Demo",
+    "lastName": "Project",
+    "dateOfBirth": "2000-11-13T00:00:00",
+    "gender": null,
+    "nationality": null,
+    "phoneNumber": null,
+    "email": "demo1311@gmail.com",
     "password": "test",
-    "fullName": "test testing"
+    "passportDetails": null,
+    "miles": 0
   }
 ]

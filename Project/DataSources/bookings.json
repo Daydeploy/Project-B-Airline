@@ -1,37 +1,94 @@
 [
   {
-    "bookingId": 9844,
-    "userId": 4,
-    "flightId": 8076,
-    "totalPrice": 692,
+    "bookingId": 784,
+    "userId": 1,
+    "flightId": 1000,
+    "totalPrice": 124,
     "passengers": [
       {
-        "Name": "Test_Name_3",
-        "SeatNumber": "24A",
-        "HasCheckedBaggage": true
-      },
-      {
-        "Name": "Test_Name_4",
-        "SeatNumber": "24B",
+        "Name": "Aaron Hofman",
+        "SeatNumber": "1A",
         "HasCheckedBaggage": true
       }
     ]
   },
   {
-    "bookingId": 1399,
-    "userId": 4,
-    "flightId": 8076,
-    "totalPrice": 692,
+    "bookingId": 5458,
+    "userId": 1,
+    "flightId": 1153,
+    "totalPrice": 806,
     "passengers": [
       {
-        "Name": "Test_Name_1",
-        "SeatNumber": "12A",
+        "Name": "Junpei",
+        "SeatNumber": "1A",
+        "HasCheckedBaggage": true
+      },
+      {
+        "Name": "THE ONE PIECE IS REAL",
+        "SeatNumber": "1B",
+        "HasCheckedBaggage": true
+      }
+    ]
+  },
+  {
+    "bookingId": 6503,
+    "userId": 1,
+    "flightId": 1152,
+    "totalPrice": 669,
+    "passengers": [
+      {
+        "Name": "Kirito",
+        "SeatNumber": "2A",
+        "HasCheckedBaggage": false
+      }
+    ]
+  },
+  {
+    "bookingId": 8817,
+    "userId": 1,
+    "flightId": 1152,
+    "totalPrice": 496,
+    "passengers": [
+      {
+        "Name": "Aaron",
+        "SeatNumber": "7A",
+        "HasCheckedBaggage": true
+      }
+    ]
+  },
+  {
+    "bookingId": 2175,
+    "userId": 1,
+    "flightId": 1152,
+    "totalPrice": 669,
+    "passengers": [
+      {
+        "Name": "Hetwerkt",
+        "SeatNumber": "1B",
+        "HasCheckedBaggage": false
+      }
+    ]
+  },
+  {
+    "bookingId": 4428,
+    "userId": 1,
+    "flightId": 1028,
+    "totalPrice": 870,
+    "passengers": [
+      {
+        "Name": "test1",
+        "SeatNumber": "2A",
+        "HasCheckedBaggage": true
+      },
+      {
+        "Name": "test2",
+        "SeatNumber": "3A",
         "HasCheckedBaggage": false
       },
       {
-        "Name": "Test_Name_2",
-        "SeatNumber": "12B",
-        "HasCheckedBaggage": true
+        "Name": "test3",
+        "SeatNumber": "45A",
+        "HasCheckedBaggage": false
       }
     ]
   }

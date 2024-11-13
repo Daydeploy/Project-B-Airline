@@ -16,28 +16,35 @@ public class UserAccountService
         _bookings = BookingAccess.LoadAll();
     }
 
-    public bool CreateAccount(string email, string password, string fullName)
+    public bool CreateAccount(string email, string password, string firstName, string lastName, DateTime dateOfBirth)
     {
         if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password) ||
-            string.IsNullOrWhiteSpace(fullName))
+            string.IsNullOrWhiteSpace(firstName) || string.IsNullOrWhiteSpace(lastName))
         {
             return false;
         }
 
-        var existingAccount =
-            _accountsLogic._accounts.FirstOrDefault(a =>
-                a.EmailAddress.Equals(email, StringComparison.OrdinalIgnoreCase));
+        // Check if an account with this email already exists
+        var existingAccount = _accountsLogic._accounts
+            .FirstOrDefault(a => a.EmailAddress.Equals(email, StringComparison.OrdinalIgnoreCase));
         if (existingAccount != null)
         {
             return false; // Account with this email already exists
         }
 
+        // Create a new unique ID for the account
         int newId = _accountsLogic._accounts.Max(a => a.Id) + 1;
         CurrentUserId = newId;
-        var newAccount = new AccountModel(newId, email, password, fullName);
+
+        // Create the new account with required properties
+        var newAccount = new AccountModel(newId, firstName, lastName, dateOfBirth, email, password);
+
+        // Update the list with the new account
         _accountsLogic.UpdateList(newAccount);
+
         return true;
     }
+
 
     public AccountModel Login(string email, string password)
     {
@@ -57,32 +64,101 @@ public class UserAccountService
         return account;
     }
 
-    public bool ManageAccount(int userId, string newEmail = null, string newPassword = null, string newFullName = null)
+    public bool ManageAccount(int userId, string newEmail = null, string newPassword = null, string newFirstName = null,
+        string newLastName = null, string newGender = null, string newNationality = null,
+        string newPhoneNumber = null, PassportDetailsModel newPassportDetails = null,
+        DateTime? newDateOfBirth = null)
     {
+        // Retrieve the account by user ID
         var account = _accountsLogic.GetById(userId);
         if (account == null)
         {
-            return false;
+            return false; // Account not found
         }
 
+        // Update email if provided
         if (!string.IsNullOrWhiteSpace(newEmail))
         {
             account.EmailAddress = newEmail;
         }
 
+        // Update password if provided
         if (!string.IsNullOrWhiteSpace(newPassword))
         {
             account.Password = newPassword;
         }
 
-        if (!string.IsNullOrWhiteSpace(newFullName))
+        // Update first name if provided
+        if (!string.IsNullOrWhiteSpace(newFirstName))
         {
-            account.FullName = newFullName;
+            account.FirstName = newFirstName;
         }
 
+        // Update last name if provided
+        if (!string.IsNullOrWhiteSpace(newLastName))
+        {
+            account.LastName = newLastName;
+        }
+
+        // Update gender if provided
+        if (!string.IsNullOrWhiteSpace(newGender))
+        {
+            account.Gender = newGender;
+        }
+
+        // Update nationality if provided
+        if (!string.IsNullOrWhiteSpace(newNationality))
+        {
+            account.Nationality = newNationality;
+        }
+
+        // Update phone number if provided
+        if (!string.IsNullOrWhiteSpace(newPhoneNumber))
+        {
+            account.PhoneNumber = newPhoneNumber;
+        }
+
+        // Update date of birth if provided
+        if (newDateOfBirth.HasValue)
+        {
+            account.DateOfBirth = newDateOfBirth.Value;
+        }
+
+        // Update passport details if provided (replace or set specific fields)
+        if (newPassportDetails != null)
+        {
+            if (account.PassportDetails == null)
+            {
+                account.PassportDetails = new PassportDetailsModel();
+            }
+
+            // Update individual passport details only if provided
+            if (!string.IsNullOrWhiteSpace(newPassportDetails.PassportNumber))
+            {
+                account.PassportDetails.PassportNumber = newPassportDetails.PassportNumber;
+            }
+
+            if (newPassportDetails.IssueDate.HasValue)
+            {
+                account.PassportDetails.IssueDate = newPassportDetails.IssueDate;
+            }
+
+            if (newPassportDetails.ExpirationDate.HasValue)
+            {
+                account.PassportDetails.ExpirationDate = newPassportDetails.ExpirationDate;
+            }
+
+            if (!string.IsNullOrWhiteSpace(newPassportDetails.CountryOfIssue))
+            {
+                account.PassportDetails.CountryOfIssue = newPassportDetails.CountryOfIssue;
+            }
+        }
+
+        // Save changes to the account list
         _accountsLogic.UpdateList(account);
         return true;
     }
+
 
     public List<FlightBooking> GetBookedFlights(int userId)
     {
@@ -133,6 +209,16 @@ public class UserAccountService
         BookingAccess.WriteAll(_bookings);
 
         return true;
+    }
+
+    public int GetCurrentMiles(int userId)
+    {
+        var account = AccountsLogic.CurrentAccount; // Assuming you have a way to get the current account
+        if (account != null)
+        {
+            return account.Miles; // Ensure that the AccountModel has a 'Miles' property
+        }
+        return 0; // Return 0 if no account is found
     }
 }
 
