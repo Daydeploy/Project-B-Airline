@@ -178,7 +178,6 @@ static class Menu
                 string seatClassAsc = seatClassOptions[seatClassAscIndex];
                 UserLogin.DisplayFlights(flights.FilterFlightsByPriceUp(seatClassAsc));
                 break;
-
             case 1:
                 int seatClassDescIndex = NavigateMenu(seatClassOptions, "Seat Class");
                 string seatClassDesc = seatClassOptions[seatClassDescIndex];
@@ -197,9 +196,7 @@ static class Menu
                         UserLogin.DisplayFlights(flights.FilterFlightsByPriceRange(seatClassRange, min, max));
                     }
                 }
-
                 break;
-
             case 3:
                 var destinations = flights.GetAllDestinations().ToArray();
                 int destinationIndex = NavigateMenu(destinations, "Select Destination");
@@ -228,6 +225,21 @@ static class Menu
                 break;
             case 6:
                 return;
+        }
+        Console.WriteLine("\nCommands:");
+        Console.WriteLine("BACKSPACE - Back to all flights");
+        Console.WriteLine("ESC - Back to main menu");
+
+        while (true)
+        {
+            var key = Console.ReadKey(intercept: true);
+            if (key.Key == ConsoleKey.Escape)
+                return;
+            if (key.Key == ConsoleKey.Backspace)
+            {
+                UserLogin.ShowAvailableFlights();
+                return;
+            }
         }
     }
 

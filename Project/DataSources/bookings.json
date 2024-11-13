@@ -2,7 +2,7 @@
   {
     "bookingId": 784,
     "userId": 1,
-    "flightId": 1153,
+    "flightId": 1000,
     "totalPrice": 124,
     "passengers": [
       {
@@ -13,102 +13,58 @@
     ]
   },
   {
-    "bookingId": 6533,
+    "bookingId": 5458,
     "userId": 1,
     "flightId": 1153,
-    "totalPrice": 373,
+    "totalPrice": 806,
     "passengers": [
       {
-        "Name": "Sil Paul",
-        "SeatNumber": "3A",
-        "HasCheckedBaggage": false
-      }
-    ]
-  },
-  {
-    "bookingId": 6044,
-    "userId": 1,
-    "flightId": 1153,
-    "totalPrice": 386,
-    "passengers": [
-      {
-        "Name": "Dion",
-        "SeatNumber": "4A",
-        "HasCheckedBaggage": false
+        "Name": "Junpei",
+        "SeatNumber": "1A",
+        "HasCheckedBaggage": true
       },
       {
-        "Name": "Darrin",
-        "SeatNumber": "9A",
-        "HasCheckedBaggage": false
-      }
-    ]
-  },
-  {
-    "bookingId": 147,
-    "userId": 1,
-    "flightId": 1153,
-    "totalPrice": 94,
-    "passengers": [
-      {
-        "Name": "Aaron",
-        "SeatNumber": "12A",
-        "HasCheckedBaggage": false
-      }
-    ]
-  },
-  {
-    "bookingId": 3014,
-    "userId": 1,
-    "flightId": 1153,
-    "totalPrice": 292,
-    "passengers": [
-      {
-        "Name": "rwer",
-        "SeatNumber": "7A",
-        "HasCheckedBaggage": false
-      }
-    ]
-  },
-  {
-    "bookingId": 5994,
-    "userId": 2,
-    "flightId": 1153,
-    "totalPrice": 403,
-    "passengers": [
-      {
-        "Name": "Silvester",
-        "SeatNumber": "3C",
+        "Name": "THE ONE PIECE IS REAL",
+        "SeatNumber": "1B",
         "HasCheckedBaggage": true
       }
     ]
   },
   {
-    "bookingId": 5671,
+    "bookingId": 6503,
     "userId": 1,
-    "flightId": 1100,
-    "totalPrice": 614,
-    "passengers": [
-      {
-        "Name": "Gabriel",
-        "SeatNumber": "3A",
-        "HasCheckedBaggage": true
-      },
-      {
-        "Name": "hofman",
-        "SeatNumber": "5A",
-        "HasCheckedBaggage": false
-      }
-    ]
-  },
-  {
-    "bookingId": 3818,
-    "userId": 1,
-    "flightId": 1004,
+    "flightId": 1152,
     "totalPrice": 669,
     "passengers": [
       {
-        "Name": "Jamal",
-        "SeatNumber": "2A",
+        "Name": "Kirito",
+        "SeatNumber": "3A",
+        "HasCheckedBaggage": false
+      }
+    ]
+  },
+  {
+    "bookingId": 8817,
+    "userId": 1,
+    "flightId": 1152,
+    "totalPrice": 496,
+    "passengers": [
+      {
+        "Name": "Aaron",
+        "SeatNumber": "7A",
+        "HasCheckedBaggage": true
+      }
+    ]
+  },
+  {
+    "bookingId": 2175,
+    "userId": 1,
+    "flightId": 1152,
+    "totalPrice": 669,
+    "passengers": [
+      {
+        "Name": "Hetwerkt",
+        "SeatNumber": "1B",
         "HasCheckedBaggage": false
       }
     ]

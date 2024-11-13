@@ -43,6 +43,7 @@ public static class BookingModifications
             if (flight == null) continue;
 
             Console.WriteLine($"\n{i + 1}. Booking ID: {booking.BookingId}");
+            Console.WriteLine($"   Aircraft type: {flight.PlaneType}");
             Console.WriteLine($"   Flight: {flight.Origin} → {flight.Destination}");
             Console.WriteLine($"   Date: {DateTime.Parse(flight.DepartureTime):dd MMM yyyy}");
         }
@@ -125,14 +126,19 @@ public static class BookingModifications
 
         if (passengerChoice == 0) return;
 
+        // Get flight details to determine aircraft type
+        var flightsLogic = new FlightsLogic();
+        var flight = flightsLogic.GetFlightsById(booking.FlightId);
+        if (flight == null)
+        {
+            Console.WriteLine("Error: Flight not found. Press any key to continue...");
+            Console.ReadKey();
+            return;
+        }
+
         var seatSelector = new SeatSelectionUI();
         // Load existing booked seats
         var existingBookings = BookingLogic.GetBookingsForFlight(booking.FlightId);
-
-        // Select random aircraft type
-        string[] aircraftTypes = { "Boeing 737", "Boeing 787", "Airbus 330" };
-        Random random = new Random();
-        string randomAircraftType = aircraftTypes[random.Next(aircraftTypes.Length)];
 
         foreach (var existingBooking in existingBookings)
         {
@@ -146,7 +152,7 @@ public static class BookingModifications
         }
 
         Console.WriteLine("\nSelect new seat:");
-        string newSeat = seatSelector.SelectSeat(randomAircraftType);
+        string newSeat = seatSelector.SelectSeat(flight.PlaneType);
         
         if (newSeat != null)
         {

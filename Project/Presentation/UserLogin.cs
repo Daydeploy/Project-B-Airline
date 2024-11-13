@@ -73,15 +73,12 @@ static class UserLogin
         {
             "View Booked Flights",
             "Check-in for a Flight",
-            "Modify Booking",
             "Manage Account",
             "Show Available Flights",
             "View Airport Information",
             "Browse Destinations",
-            "Search Flights by Destination",
-            "View Direct vs. Connecting Flights",
-            "Logout",
-            "Show Seat Upgrade Options"
+            "Show Seat Upgrade Options",
+            "Logout"
         };
 
         while (_isLoggedIn)
@@ -97,32 +94,26 @@ static class UserLogin
                     CheckInForFlight();
                     break;
                 case 2:
-                    ModifyBooking();
-                    break;
-                case 3:
                     ManageAccount(account);
                     break;
-                case 4:
+                case 3:
                     ShowAvailableFlights();
                     break;
-                case 5:
+                case 4:
                     ViewAirportInformation();
                     break;
-                case 6:
+                case 5:
                     BrowseDestinations();
                     break;
-                case 7:
-                    SearchFlightsByDestination();
+                case 6:
+                    ShowSeatUpgradeOptions();
                     break;
-                case 8: /* ViewDirectVsConnectingFlights(); */ break;
-                case 9:
+                case 7:
                     Console.WriteLine("Logging out...");
                     Menu.Start();
                     _isLoggedIn = false;
                     return;
-                case 10:
-                    ShowSeatUpgradeOptions();
-                    break;
+                
             }
         }
     }
@@ -258,7 +249,7 @@ static class UserLogin
         TimeSpan duration = arrivalDateTime - departureDateTime;
 
         Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine($"Booking ID: {booking.BookingId} | Flight ID: {flight.FlightId}");
+        Console.WriteLine($"Booking ID: {booking.BookingId} | Flight ID: {flight.FlightId} | Aircraft type: {flight.PlaneType}");
         Console.ResetColor();
 
         Console.Write($"Route: {flight.Origin} ");
@@ -309,24 +300,6 @@ static class UserLogin
         {
             Console.WriteLine("Invalid Flight ID.");
         }
-    }
-
-    //weghalen
-    private static void ModifyBooking()
-    {
-        var bookings = BookingAccess.LoadAll();
-        if (!DisplayBookings(bookings)) return;
-
-        int bookingNumber = GetBookingSelection(bookings.Count);
-        if (bookingNumber == -1) return;
-
-        var booking = bookings[bookingNumber - 1];
-        if (!DisplayPassengers(booking)) return;
-
-        int passengerNumber = GetPassengerSelection(booking.Passengers.Count);
-        if (passengerNumber == -1) return;
-
-        ModifyPassengerDetails(booking.FlightId, passengerNumber - 1);
     }
 
     private static void ViewAvailableUpgrades()
@@ -591,29 +564,53 @@ static class UserLogin
 
     private static void ViewAirportInformation()
     {
-        var airportLogic = new AirportLogic();
-        var airports = airportLogic.GetAllAirports();
-
-        Console.WriteLine("\nAirport Information:");
-        foreach (var airport in airports)
+        while (true)
         {
-            Console.WriteLine($"Name: {airport.Name}");
-            Console.WriteLine($"Address: {airport.Address}");
-            Console.WriteLine($"Phone Number: {airport.PhoneNumber}");
-            Console.WriteLine($"Country: {airport.Country}");
-            Console.WriteLine($"City: {airport.City}");
-            Console.WriteLine();
+            Console.Clear();
+            var airportLogic = new AirportLogic();
+            var airports = airportLogic.GetAllAirports();
 
-            var airportService = new AirportService(new List<AirportModel> { airport });
-            Console.WriteLine("Transportation Options: " + airportService.GetAirportTransportationOptions(airport));
-            Console.WriteLine("Nearby Hotels: " + airportService.GetNearbyHotels(airport));
-            Console.WriteLine("Additional Services: " + airportService.GetAdditionalServices(airport));
-            Console.WriteLine($"Description: {airportService.GetAirportDescription(airport)}");
-            Console.WriteLine(new string('-', 50));
+            int currentIndex = 0;
+            DisplayCurrentAirport();
+
+            while (true)
+            {
+                var key = Console.ReadKey(true);
+                switch (key.Key)
+                {
+                    case ConsoleKey.RightArrow:
+                        if (currentIndex < airports.Count - 1)
+                        {
+                            currentIndex++;
+                            DisplayCurrentAirport();
+                        }
+                        break;
+
+                    case ConsoleKey.LeftArrow:
+                        if (currentIndex > 0)
+                        {
+                            currentIndex--;
+                            DisplayCurrentAirport();
+                        }
+                        break;
+
+                    case ConsoleKey.Escape:
+                        return;
+                }
+            }
+
+            void DisplayCurrentAirport()
+            {
+                Console.Clear();
+                Console.WriteLine("Navigate through airports using the following commands:");
+                Console.WriteLine("ESC - Return to main menu");
+                Console.WriteLine("← → Arrow keys - Navigate between airports");
+                Console.WriteLine(new string('─', Console.WindowWidth - 1));
+
+                Console.WriteLine($"\nAirport {currentIndex + 1} of {airports.Count}");
+                AirportUI.DisplayAirportDetails(airports[currentIndex]);
+            }
         }
-
-        Console.WriteLine("\nPress any key to return to the menu...");
-        Console.ReadKey();
     }
 
     public static void ShowAvailableFlights()
@@ -673,7 +670,7 @@ static class UserLogin
                             for (int i = 0; i < passengerCount; i++)
                             {
                                 Console.Clear();
-                                Console.WriteLine($"\nPassenger {i + 1} Details:");
+                                Console.WriteLine($"Passenger {i + 1} Details:");
 
                                 Console.WriteLine("Enter passenger name:");
                                 string name = Console.ReadLine() ?? string.Empty;
@@ -727,6 +724,7 @@ static class UserLogin
                                 }
 
                                 Console.WriteLine($"\nTotal Price: {booking.TotalPrice} EUR");
+    
                             }
                             catch (Exception ex)
                             {
@@ -746,10 +744,12 @@ static class UserLogin
                 else
                 {
                     Console.WriteLine("Invalid Flight ID format.");
+                    Console.WriteLine("Press BACKSPACE to return to the menu...");
                 }
 
                 Console.WriteLine("\nPress any key to return to the menu...");
                 Console.ReadKey();
+                return;
             }
             else if (key.Key == ConsoleKey.Backspace)
             {
