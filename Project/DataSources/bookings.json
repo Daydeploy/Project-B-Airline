@@ -38,7 +38,7 @@
     "passengers": [
       {
         "Name": "Kirito",
-        "SeatNumber": "3A",
+        "SeatNumber": "2A",
         "HasCheckedBaggage": false
       }
     ]
@@ -65,6 +65,29 @@
       {
         "Name": "Hetwerkt",
         "SeatNumber": "1B",
+        "HasCheckedBaggage": false
+      }
+    ]
+  },
+  {
+    "bookingId": 4428,
+    "userId": 1,
+    "flightId": 1028,
+    "totalPrice": 870,
+    "passengers": [
+      {
+        "Name": "test1",
+        "SeatNumber": "2A",
+        "HasCheckedBaggage": true
+      },
+      {
+        "Name": "test2",
+        "SeatNumber": "3A",
+        "HasCheckedBaggage": false
+      },
+      {
+        "Name": "test3",
+        "SeatNumber": "45A",
         "HasCheckedBaggage": false
       }
     ]

@@ -29,5 +29,18 @@
     "password": "aaron",
     "passportDetails": null,
     "miles": 0
+  },
+  {
+    "id": 3,
+    "firstName": "Demo",
+    "lastName": "Project",
+    "dateOfBirth": "2000-11-13T00:00:00",
+    "gender": null,
+    "nationality": null,
+    "phoneNumber": null,
+    "email": "demo1311@gmail.com",
+    "password": "test",
+    "passportDetails": null,
+    "miles": 0
   }
 ]
