@@ -26,7 +26,8 @@ public static class SeatAccess
 
     public static string GetFilePathForFlight(int flightId)
     {
-        return System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, $@"DataSources/Flights/seats-{flightId}.json"));
+        string flightNumber = _flights.FirstOrDefault(f => f.FlightId == flightId).FlightNumber ?? "unknown";
+        return System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, $@"DataSources/Flights/{flightId}-{flightNumber}.json"));
     }
 
     public static SeatModel LoadForFlight(int flightId)

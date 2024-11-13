@@ -4,10 +4,10 @@ public class SeatLogic
     {
         var seats = new List<SeatInfo>();
 
-        // First Class (Rows 1-5)
-        for (int row = 1; row <= 5; row++)
+        // First Class (Rows 1-3)
+        for (int row = 1; row <= 3; row++)
         {
-            foreach (var letter in new[] { "A", "B" })
+            foreach (var letter in new[] { "A", "B", "C", "D", "E", "F" })
             {
                 seats.Add(new SeatInfo(
                     seatClass: "First",
@@ -18,10 +18,10 @@ public class SeatLogic
             }
         }
 
-        // Business Class (Rows 6-12)
-        for (int row = 6; row <= 12; row++)
+        // Business Class (Rows 4-8)
+        for (int row = 4; row <= 8; row++)
         {
-            foreach (var letter in new[] { "A", "B", "C", "D" })
+            foreach (var letter in new[] { "A", "B", "C", "D", "E", "F" })
             {
                 seats.Add(new SeatInfo(
                     seatClass: "Business",
@@ -32,10 +32,10 @@ public class SeatLogic
             }
         }
 
-        // Economy Class (Rows 13-25)
-        for (int row = 13; row <= 25; row++)
+        // Economy Class (Rows 9-30)
+        for (int row = 9; row <= 30; row++)
         {
-            foreach (var letter in new[] { "A", "B", "C", "D" })
+            foreach (var letter in new[] { "A", "B", "C", "D", "E", "F" })
             {
                 seats.Add(new SeatInfo(
                     seatClass: "Economy",
