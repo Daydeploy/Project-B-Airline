@@ -23,6 +23,7 @@ static class AirportInformation
                         currentIndex++;
                         DisplayCurrentAirport();
                     }
+
                     break;
                 case ConsoleKey.LeftArrow:
                     if (currentIndex > 0)
@@ -30,6 +31,7 @@ static class AirportInformation
                         currentIndex--;
                         DisplayCurrentAirport();
                     }
+
                     break;
                 case ConsoleKey.Escape:
                     return;
@@ -86,7 +88,8 @@ static class AirportInformation
                 Console.WriteLine($"\nFlights to {destination}:");
                 foreach (var flight in flights)
                 {
-                    Console.WriteLine($"Flight ID: {flight.FlightId}, From: {flight.Origin}, Departure: {flight.DepartureTime}");
+                    Console.WriteLine(
+                        $"Flight ID: {flight.FlightId}, From: {flight.Origin}, Departure: {flight.DepartureTime}");
                     Console.WriteLine("Prices:");
                     foreach (var seatOption in flight.SeatClassOptions)
                     {

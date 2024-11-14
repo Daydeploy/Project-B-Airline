@@ -2,7 +2,7 @@ using System;
 
 static class UserLogin
 {
-    static private UserAccountService _userAccountService = new UserAccountService();
+    static public UserAccountService _userAccountService = new UserAccountService();
     private static bool _isLoggedIn = true;
 
     // Entry point for user login

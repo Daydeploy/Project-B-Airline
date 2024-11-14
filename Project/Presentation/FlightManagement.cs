@@ -9,7 +9,7 @@ static class FlightManagement
     {
         FlightsLogic flights = new FlightsLogic();
         var flightsList = flights.GetAllFlights().ToList();
-        
+
         FlightDisplay.DisplayFlights(flightsList);
 
         Console.WriteLine("\nCommands:");
@@ -26,7 +26,7 @@ static class FlightManagement
 
             if (key.Key == ConsoleKey.F)
             {
-                Menu.FilterFlightsByPriceUI();
+                FilterFlightsByPriceUI();
                 return;
             }
 
@@ -36,12 +36,31 @@ static class FlightManagement
                 Console.WriteLine("Enter the Flight ID to book:");
                 if (int.TryParse(Console.ReadLine(), out int flightId))
                 {
-                    BookFlight(flightId, flightsList);
+                    var selectedFlight = flightsList.FirstOrDefault(f => f.FlightId == flightId);
+                    if (selectedFlight != null)
+                    {
+                        Console.WriteLine("How many passengers? (1-8):");
+                        if (int.TryParse(Console.ReadLine(), out int passengerCount) && passengerCount > 0 &&
+                            passengerCount <= 8)
+                        {
+                            var seatSelector = new SeatSelectionUI(); // Ensure seatSelector is included
+                            var passengerDetails =
+                                CollectPassengerDetails(selectedFlight, passengerCount, seatSelector);
+                            CompleteBooking(flightId, passengerDetails, selectedFlight, seatSelector);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid number of passengers.");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Flight not found with the specified ID.");
+                    }
                 }
                 else
                 {
                     Console.WriteLine("Invalid Flight ID format.");
-                    Console.WriteLine("Press BACKSPACE to return to the menu...");
                 }
 
                 Console.WriteLine("\nPress any key to return to the menu...");
@@ -51,34 +70,59 @@ static class FlightManagement
         }
     }
 
-    // Displays the booked flights for the user
+    // Displays booked flights for the logged-in user
     public static void ViewBookedFlights(int userId)
     {
-        var bookings = BookingAccess.LoadAll().Where(b => b.UserId == userId).ToList();
-
-        if (bookings.Count == 0)
+        while (true)
         {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("\nYou have no booked flights.");
-            Console.ResetColor();
-            Console.WriteLine("\nPress any key to return to the menu...");
-            Console.ReadKey();
-            return;
-        }
+            Console.Clear();
+            var bookings = BookingAccess.LoadAll().Where(b => b.UserId == userId).ToList();
 
-        Console.WriteLine($"\nYou have {bookings.Count} booked flight(s):\n");
-        FlightDisplay.DrawBookingsTableHeader();
+            if (bookings.Count == 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\nYou have no booked flights.");
+                Console.ResetColor();
+                Console.WriteLine("\nPress any key to return to the menu...");
+                Console.ReadKey();
+                return;
+            }
 
-        foreach (var booking in bookings)
-        {
-            var flight = new FlightsLogic().GetFlightsById(booking.FlightId);
-            if (flight == null) continue;
+            Console.WriteLine($"\nYou have {bookings.Count} booked flight(s):\n");
 
-            FlightDisplay.DisplayBookingDetails(booking, flight);
-            FlightDisplay.DisplayPassengerDetails(booking.Passengers);
-            Console.WriteLine(new string('─', Console.WindowWidth - 1));
+            FlightDisplay.DrawBookingsTableHeader();
+
+            foreach (var booking in bookings)
+            {
+                var flightsLogic = new FlightsLogic();
+                var flight = flightsLogic.GetFlightsById(booking.FlightId);
+                if (flight == null) continue;
+
+                FlightDisplay.DisplayBookingDetails(booking, flight);
+                FlightDisplay.DisplayPassengerDetails(booking.Passengers);
+                Console.WriteLine(new string('─', Console.WindowWidth - 1));
+            }
+
+            BookingModifications.DisplayBookingLegend();
+
+            Console.Write("\nEnter command: ");
+            string command = Console.ReadLine()?.ToLower() ?? "";
+
+            switch (command)
+            {
+                case "m":
+                    BookingModifications.ModifyBookingInteractive(userId);
+                    break;
+                case "b":
+                    return;
+                default:
+                    Console.WriteLine("Invalid command. Press any key to continue...");
+                    Console.ReadKey();
+                    break;
+            }
         }
     }
+
 
     // Allows the user to check in for a specific flight
     public static void CheckInForFlight()
@@ -86,8 +130,9 @@ static class FlightManagement
         Console.WriteLine("Enter the Flight ID to check in:");
         if (int.TryParse(Console.ReadLine(), out int flightId))
         {
-            bool success = _userAccountService.CheckIn(flightId);
-            Console.WriteLine(success ? "Check-in successful." : "Check-in failed. Please try again or contact support.");
+            bool success = UserLogin._userAccountService.CheckIn(flightId);
+            Console.WriteLine(
+                success ? "Check-in successful." : "Check-in failed. Please try again or contact support.");
         }
         else
         {
@@ -95,34 +140,84 @@ static class FlightManagement
         }
     }
 
-    // Handles the booking process for a specific flight
-    private static void BookFlight(int flightId, List<FlightModel> flightsList)
+    // UI to filter flights by price or other options
+    public static void FilterFlightsByPriceUI()
     {
-        var selectedFlight = flightsList.FirstOrDefault(f => f.FlightId == flightId);
-        if (selectedFlight != null)
+        FlightsLogic flights = new FlightsLogic();
+        string[] filterOptions = new[]
         {
-            Console.WriteLine("How many passengers? (1-8):");
-            if (int.TryParse(Console.ReadLine(), out int passengerCount) && passengerCount > 0 && passengerCount <= 8)
-            {
-                var passengerDetails = CollectPassengerDetails(selectedFlight, passengerCount);
-                CompleteBooking(flightId, passengerDetails, selectedFlight);
-            }
-            else
-            {
-                Console.WriteLine("Invalid number of passengers.");
-            }
-        }
-        else
+            "Price from low-high",
+            "Price from high-low",
+            "Price between input range",
+            "Filter by destination",
+            "Filter by date range",
+            "Filter by destination and date range",
+            "Back to Main Menu"
+        };
+
+        int selectedIndex = MenuNavigationService.NavigateMenu(filterOptions, "Filter Flights:");
+
+        string[] seatClassOptions = { "Economy", "Business", "First" };
+
+        switch (selectedIndex)
         {
-            Console.WriteLine("Flight not found with the specified ID.");
+            case 0:
+                int seatClassAscIndex = MenuNavigationService.NavigateMenu(seatClassOptions, "Seat Class");
+                string seatClassAsc = seatClassOptions[seatClassAscIndex];
+                FlightDisplay.DisplayFlights(flights.FilterFlightsByPriceUp(seatClassAsc));
+                break;
+            case 1:
+                int seatClassDescIndex = MenuNavigationService.NavigateMenu(seatClassOptions, "Seat Class");
+                string seatClassDesc = seatClassOptions[seatClassDescIndex];
+                FlightDisplay.DisplayFlights(flights.FilterFlightsByPriceDown(seatClassDesc));
+                break;
+            case 2:
+                int seatClassRangeIndex = MenuNavigationService.NavigateMenu(seatClassOptions, "Seat Class");
+                string seatClassRange = seatClassOptions[seatClassRangeIndex];
+                Console.WriteLine("Enter minimum price: ");
+                if (int.TryParse(Console.ReadLine(), out int min))
+                {
+                    Console.WriteLine("Enter maximum price: ");
+                    if (int.TryParse(Console.ReadLine(), out int max))
+                    {
+                        FlightDisplay.DisplayFlights(flights.FilterFlightsByPriceRange(seatClassRange, min, max));
+                    }
+                }
+
+                break;
+            case 3:
+                var destinations = flights.GetAllDestinations().ToArray();
+                int destinationIndex = MenuNavigationService.NavigateMenu(destinations, "Select Destination");
+                string selectedDestination = destinations[destinationIndex];
+                FlightDisplay.DisplayFlights(flights.FilterFlightsByDestination(selectedDestination));
+                break;
+            case 4:
+                var calendarUI = new CalendarUI();
+                var (startDate, endDate) = calendarUI.SelectDateRange();
+                FlightDisplay.DisplayFlights(flights.FilterByDateRange(startDate, endDate));
+                break;
+            case 5:
+                var destinations2 = flights.GetAllDestinations().ToArray();
+                int destinationIndex2 = MenuNavigationService.NavigateMenu(destinations2, "Select Destination");
+                string selectedDestination2 = destinations2[destinationIndex2];
+
+                var calendarUI2 = new CalendarUI();
+                var (startDate2, endDate2) = calendarUI2.SelectDateRange();
+                var filteredFlights = flights.FilterByDateRange(startDate2, endDate2)
+                    .Where(f => f.Destination == selectedDestination2)
+                    .ToList();
+                FlightDisplay.DisplayFlights(filteredFlights);
+                break;
+            case 6:
+                return;
         }
     }
 
     // Collects passenger details for the booking process
-    private static List<PassengerModel> CollectPassengerDetails(FlightModel selectedFlight, int passengerCount)
+    private static List<PassengerModel> CollectPassengerDetails(FlightModel selectedFlight, int passengerCount,
+        SeatSelectionUI seatSelector)
     {
         var passengerDetails = new List<PassengerModel>();
-        var seatSelector = new SeatSelectionUI();
 
         // Load existing booked seats for this flight
         var existingBookings = BookingLogic.GetBookingsForFlight(selectedFlight.FlightId);
@@ -156,11 +251,13 @@ static class FlightManagement
     }
 
     // Completes the booking by saving the details
-    private static void CompleteBooking(int flightId, List<PassengerModel> passengerDetails, FlightModel selectedFlight)
+    private static void CompleteBooking(int flightId, List<PassengerModel> passengerDetails, FlightModel selectedFlight,
+        SeatSelectionUI seatSelector)
     {
         try
         {
-            BookingModel booking = BookingLogic.CreateBooking(_userAccountService.CurrentUserId, flightId, passengerDetails);
+            BookingModel booking = BookingLogic.CreateBooking(UserLogin._userAccountService.CurrentUserId, flightId,
+                passengerDetails);
 
             Console.WriteLine("\nFlight booked successfully!\n");
             Console.WriteLine($"Booking ID: {booking.BookingId}");
@@ -171,7 +268,8 @@ static class FlightManagement
             foreach (var passenger in booking.Passengers)
             {
                 Console.WriteLine($"\nName: {passenger.Name}");
-                Console.WriteLine($"Seat: {passenger.SeatNumber} ({seatSelector.GetSeatClass(passenger.SeatNumber)} Class)");
+                Console.WriteLine(
+                    $"Seat: {passenger.SeatNumber} ({seatSelector.GetSeatClass(passenger.SeatNumber)} Class)");
                 Console.WriteLine($"Checked Baggage: {(passenger.HasCheckedBaggage ? "Yes" : "No")}");
             }
 
