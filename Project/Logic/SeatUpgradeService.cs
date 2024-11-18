@@ -2,27 +2,20 @@ using System.Collections.Generic;
 
 public class SeatUpgradeService
 {
-    // Method to view available upgrades for a specific flight
     public List<string> ViewAvailableUpgrades(int flightId)
     {
-        // Logic to fetch available higher-class seats based on the user's current seat
-        // This is a placeholder implementation
         return new List<string> { "Business Class", "First Class" };
     }
 
-    // Method to request an upgrade
     public bool RequestUpgrade(int userId, string newSeatClass)
     {
         UserAccountService userAccountService = new UserAccountService();   
-        // Check if the user has enough miles or if they want to pay
         int requiredMiles = CalculateMilesForUpgrade(newSeatClass);
         if (userAccountService.GetCurrentMiles(userId) >= requiredMiles)
         {
             UseMilesForUpgrade(userId, requiredMiles);
-            // Proceed with the upgrade
         }
-        // Additional logic for payment or upgrade confirmation
-        return false; // Upgrade request failed
+        return false;
     }
 
     // Method to use miles for an upgrade
