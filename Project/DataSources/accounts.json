@@ -42,5 +42,18 @@
     "password": "test",
     "passportDetails": null,
     "miles": 0
+  },
+  {
+    "id": 4,
+    "firstName": "senne",
+    "lastName": "staes",
+    "dateOfBirth": "2004-08-25T00:00:00",
+    "gender": null,
+    "nationality": null,
+    "phoneNumber": null,
+    "email": "tsenne@gmail.com",
+    "password": "2907", 
+    "passportDetails": null,
+    "miles": 0
   }
 ]

@@ -144,7 +144,7 @@ public static class BookingModifications
         {
             foreach (var passenger in existingBooking.Passengers)
             {
-                if (passenger != booking.Passengers[passengerChoice - 1])
+                if (passenger != booking.Passengers[passengerChoice - 1]) // dit doe je om huidige passenger te skippen
                 {
                     seatSelector.SetSeatOccupied(passenger.SeatNumber);
                 }

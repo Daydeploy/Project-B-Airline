@@ -7,7 +7,7 @@
     "passengers": [
       {
         "Name": "Aaron Hofman",
-        "SeatNumber": "1A",
+        "SeatNumber": "7A",
         "HasCheckedBaggage": true
       }
     ]
@@ -20,7 +20,7 @@
     "passengers": [
       {
         "Name": "Junpei",
-        "SeatNumber": "1A",
+        "SeatNumber": "3A",
         "HasCheckedBaggage": true
       },
       {
@@ -89,6 +89,47 @@
         "Name": "test3",
         "SeatNumber": "45A",
         "HasCheckedBaggage": false
+      }
+    ]
+  },
+  {
+    "bookingId": 6903,
+    "userId": 3,
+    "flightId": 1153,
+    "totalPrice": 634,
+    "passengers": [
+      {
+        "Name": "number1",
+        "SeatNumber": "16A",
+        "HasCheckedBaggage": true
+      },
+      {
+        "Name": "Sil",
+        "SeatNumber": "14A",
+        "HasCheckedBaggage": true
+      },
+      {
+        "Name": "Dion",
+        "SeatNumber": "8D",
+        "HasCheckedBaggage": false
+      },
+      {
+        "Name": "Aaron",
+        "SeatNumber": "12C",
+        "HasCheckedBaggage": false
+      }
+    ]
+  },
+  {
+    "bookingId": 4329,
+    "userId": 3,
+    "flightId": 1153,
+    "totalPrice": 124,
+    "passengers": [
+      {
+        "Name": "Darrin",
+        "SeatNumber": "14B",
+        "HasCheckedBaggage": true
       }
     ]
   }

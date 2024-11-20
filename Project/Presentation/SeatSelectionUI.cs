@@ -3,7 +3,7 @@ public class SeatSelectionUI
     private PlaneConfig currentConfig;
     private Dictionary<string, bool> occupiedSeats = new Dictionary<string, bool>();
     
-    // Add dictionary of plane type variations to handle different formats
+    // Add dictionary of plane type variations to handle different Aircrafts
     private readonly Dictionary<string, string> planeTypeAliases = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
     {
         ["Airbus 330"] = "Airbus A330",
@@ -62,7 +62,7 @@ public class SeatSelectionUI
         // Normalize plane type
         if (planeTypeAliases.TryGetValue(planeType, out string normalizedType))
         {
-            planeType = normalizedType;
+            planeType = normalizedType; // zodat airbus werkt dus zet je de plane naar de normalizedType
         }
 
         if (!planeConfigs.ContainsKey(planeType))
