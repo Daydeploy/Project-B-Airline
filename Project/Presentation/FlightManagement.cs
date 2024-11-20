@@ -8,8 +8,38 @@ static class FlightManagement
     public static void ShowAvailableFlights()
     {
         FlightsLogic flights = new FlightsLogic();
-        var flightsList = flights.GetAllFlights().ToList();
+        Console.Clear();
 
+        // Fetch all origins
+        var origins = flights.GetAllOrigins().ToArray();
+        if (!origins.Any())
+        {
+            Console.WriteLine("No available origins found.");
+            return;
+        }
+
+        Console.WriteLine("Select your starting location:");
+
+        // Use the navigation service to select an origin
+        int originIndex = MenuNavigationService.NavigateMenu(origins, "Available Origins");
+        if (originIndex == -1) // Backspace pressed
+        {
+            Console.WriteLine("Returning to the menu.");
+            return;
+        }
+
+        string selectedOrigin = origins[originIndex];
+        Console.Clear();
+
+        // Get flights from the selected origin
+        var flightsList = flights.GetFlightsByOrigin(selectedOrigin).ToList();
+        if (!flightsList.Any())
+        {
+            Console.WriteLine($"No flights available from {selectedOrigin}.");
+            return;
+        }
+
+        Console.WriteLine($"Available flights from {selectedOrigin}:\n");
         FlightDisplay.DisplayFlights(flightsList);
 
         Console.WriteLine("\nCommands:");
@@ -26,7 +56,7 @@ static class FlightManagement
 
             if (key.Key == ConsoleKey.F)
             {
-                FilterFlightsByPriceUI();
+                FilterFlightsByPriceUI(selectedOrigin);
                 return;
             }
 
@@ -69,6 +99,7 @@ static class FlightManagement
             }
         }
     }
+
 
     // Displays booked flights for the logged-in user
     public static void ViewBookedFlights(int userId)
@@ -141,7 +172,7 @@ static class FlightManagement
     }
 
     // UI to filter flights by price or other options
-    public static void FilterFlightsByPriceUI()
+    public static void FilterFlightsByPriceUI(string selectedOrigin)
     {
         FlightsLogic flights = new FlightsLogic();
         string[] filterOptions = new[]
@@ -164,12 +195,12 @@ static class FlightManagement
             case 0:
                 int seatClassAscIndex = MenuNavigationService.NavigateMenu(seatClassOptions, "Seat Class");
                 string seatClassAsc = seatClassOptions[seatClassAscIndex];
-                FlightDisplay.DisplayFlights(flights.FilterFlightsByPriceUp(seatClassAsc));
+                FlightDisplay.DisplayFlights(flights.FilterFlightsByPriceUp(selectedOrigin, seatClassAsc));
                 break;
             case 1:
                 int seatClassDescIndex = MenuNavigationService.NavigateMenu(seatClassOptions, "Seat Class");
                 string seatClassDesc = seatClassOptions[seatClassDescIndex];
-                FlightDisplay.DisplayFlights(flights.FilterFlightsByPriceDown(seatClassDesc));
+                FlightDisplay.DisplayFlights(flights.FilterFlightsByPriceDown(selectedOrigin, seatClassDesc));
                 break;
             case 2:
                 int seatClassRangeIndex = MenuNavigationService.NavigateMenu(seatClassOptions, "Seat Class");
@@ -180,30 +211,54 @@ static class FlightManagement
                     Console.WriteLine("Enter maximum price: ");
                     if (int.TryParse(Console.ReadLine(), out int max))
                     {
-                        FlightDisplay.DisplayFlights(flights.FilterFlightsByPriceRange(seatClassRange, min, max));
+                        FlightDisplay.DisplayFlights(
+                            flights.FilterFlightsByPriceRange(selectedOrigin, seatClassRange, min, max));
                     }
                 }
 
                 break;
             case 3:
-                var destinations = flights.GetAllDestinations().ToArray();
-                int destinationIndex = MenuNavigationService.NavigateMenu(destinations, "Select Destination");
-                string selectedDestination = destinations[destinationIndex];
-                FlightDisplay.DisplayFlights(flights.FilterFlightsByDestination(selectedDestination));
+                // Fetch destinations filtered by the selected origin
+                var possibleDestinations = flights.GetDestinationsByOrigin(selectedOrigin).ToArray();
+                if (!possibleDestinations.Any())
+                {
+                    Console.WriteLine($"No destinations available from {selectedOrigin}.");
+                    Console.WriteLine("\nPress any key to return...");
+                    Console.ReadKey();
+                    return;
+                }
+
+                int destinationIndex = MenuNavigationService.NavigateMenu(possibleDestinations, "Select Destination");
+                if (destinationIndex == -1) return; // Handle back navigation
+
+                string selectedDestination = possibleDestinations[destinationIndex];
+                FlightDisplay.DisplayFlights(flights.FilterFlightsByDestination(selectedOrigin, selectedDestination));
                 break;
             case 4:
                 var calendarUI = new CalendarUI();
                 var (startDate, endDate) = calendarUI.SelectDateRange();
-                FlightDisplay.DisplayFlights(flights.FilterByDateRange(startDate, endDate));
+                FlightDisplay.DisplayFlights(flights.FilterByDateRange(selectedOrigin, startDate, endDate));
                 break;
             case 5:
-                var destinations2 = flights.GetAllDestinations().ToArray();
-                int destinationIndex2 = MenuNavigationService.NavigateMenu(destinations2, "Select Destination");
-                string selectedDestination2 = destinations2[destinationIndex2];
+                // Fetch destinations filtered by the selected origin
+                var destinationsWithDateRange = flights.GetDestinationsByOrigin(selectedOrigin).ToArray();
+                if (!destinationsWithDateRange.Any())
+                {
+                    Console.WriteLine($"No destinations available from {selectedOrigin}.");
+                    Console.WriteLine("\nPress any key to return...");
+                    Console.ReadKey();
+                    return;
+                }
+
+                int destinationIndex2 =
+                    MenuNavigationService.NavigateMenu(destinationsWithDateRange, "Select Destination");
+                if (destinationIndex2 == -1) return; // Handle back navigation
+
+                string selectedDestination2 = destinationsWithDateRange[destinationIndex2];
 
                 var calendarUI2 = new CalendarUI();
                 var (startDate2, endDate2) = calendarUI2.SelectDateRange();
-                var filteredFlights = flights.FilterByDateRange(startDate2, endDate2)
+                var filteredFlights = flights.FilterByDateRange(selectedOrigin, startDate2, endDate2)
                     .Where(f => f.Destination == selectedDestination2)
                     .ToList();
                 FlightDisplay.DisplayFlights(filteredFlights);

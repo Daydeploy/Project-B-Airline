@@ -1,118 +1,119 @@
 public class FlightsLogic
 {
     public static readonly Random random = new Random();
-    //public static readonly List<AirportModel> airports = AirportAccess.LoadAllAirports();
-
     public static List<FlightModel> AvailableFlights = new List<FlightModel>();
-    public const int FlightsCount = 5;
 
-
+    // Append flights from the data source
     public static void AppendFlights()
     {
-        // Load all flights from the JSON file into the AvailableFlights list
+        // Load all flights from the data source
         AvailableFlights = FlightsAccess.LoadAll();
 
-        // Optionally save the updated list to the file if needed
+        // Optionally save the loaded flights back to the file if needed
         FlightsAccess.WriteAll(AvailableFlights);
     }
 
-
+    // Retrieve all flights from the data source
     public List<FlightModel> GetAllFlights()
     {
         return FlightsAccess.LoadAll();
     }
 
+    // Retrieve a specific flight by its ID
     public FlightModel GetFlightsById(int flightId)
     {
-        return GetAllFlights().FirstOrDefault(f => f.FlightId == flightId);
+        return AvailableFlights.FirstOrDefault(f => f.FlightId == flightId);
     }
 
-    public List<FlightModel> FilterFlightsByPriceUp(string seatClass)
+    // Filter flights by price (low to high) and origin
+    public List<FlightModel> FilterFlightsByPriceUp(string origin, string seatClass)
     {
         return AvailableFlights
+            .Where(f => f.Origin.Equals(origin, StringComparison.OrdinalIgnoreCase))
             .OrderBy(f => f.SeatClassOptions.FirstOrDefault(option => option.Class == seatClass)?.Price ?? int.MaxValue)
             .ToList();
     }
 
-    public List<FlightModel> FilterFlightsByPriceDown(string seatClass)
+    // Filter flights by price (high to low) and origin
+    public List<FlightModel> FilterFlightsByPriceDown(string origin, string seatClass)
     {
         return AvailableFlights
-            .OrderByDescending(f =>
-                f.SeatClassOptions.FirstOrDefault(option => option.Class == seatClass)?.Price ?? int.MinValue)
+            .Where(f => f.Origin.Equals(origin, StringComparison.OrdinalIgnoreCase))
+            .OrderByDescending(f => f.SeatClassOptions.FirstOrDefault(option => option.Class == seatClass)?.Price ?? int.MinValue)
             .ToList();
     }
 
-    public List<FlightModel> FilterFlightsByPriceRange(string seatClass, int minPrice, int maxPrice)
+    // Filter flights within a specific price range and origin
+    public List<FlightModel> FilterFlightsByPriceRange(string origin, string seatClass, int minPrice, int maxPrice)
     {
         return AvailableFlights
             .Where(f =>
+                f.Origin.Equals(origin, StringComparison.OrdinalIgnoreCase) &&
                 f.SeatClassOptions.Any(option =>
                     option.Class == seatClass && option.Price >= minPrice && option.Price <= maxPrice))
             .ToList();
     }
 
-
-    public List<FlightModel> FilterFlightsByDestination(string destination)
+    // Filter flights by destination and origin
+    public List<FlightModel> FilterFlightsByDestination(string origin, string destination)
     {
-        return AvailableFlights.Where(f => f.Destination == destination).ToList();
-    }
-
-    public List<string> GetAllDestinations()
-    {
-        return GetAllFlights().Select(f => f.Destination).Distinct().ToList();
-    }
-
-    public List<FlightModel> SearchFlightsByDestination(string destination)
-    {
-        return GetAllFlights().Where(f => f.Destination.Equals(destination, StringComparison.OrdinalIgnoreCase))
+        return AvailableFlights
+            .Where(f => 
+                f.Origin.Equals(origin, StringComparison.OrdinalIgnoreCase) && 
+                f.Destination.Equals(destination, StringComparison.OrdinalIgnoreCase))
             .ToList();
     }
 
-    public List<FlightModel> GetDirectFlights()
+    // Get a list of unique destinations from available flights, optionally filtered by origin
+    public List<string> GetDestinationsByOrigin(string origin)
     {
-        // Assuming all flights in AvailableFlights are direct flights
-        return AvailableFlights;
+        return AvailableFlights
+            .Where(f => f.Origin.Equals(origin, StringComparison.OrdinalIgnoreCase))
+            .Select(f => f.Destination)
+            .Distinct()
+            .ToList();
     }
 
-    public List<FlightModel> FilterByDateRange(DateTime startDate, DateTime endDate)
+    // Get a list of unique destinations from all flights
+    public List<string> GetAllDestinations()
     {
-        return AvailableFlights.Where(flight => DateTime.Parse(flight.DepartureTime) >= startDate &&
-                                        DateTime.Parse(flight.DepartureTime) <= endDate).ToList();
+        return AvailableFlights.Select(f => f.Destination).Distinct().ToList();
     }
 
-    public List<FlightModel> FilterFlights(string destination, DateTime startDate, DateTime endDate, string startPoint, string endPoint)
+    // Get a list of unique origins from available flights
+    public List<string> GetAllOrigins()
     {
-        return AvailableFlights.Where(flight => flight.Destination.Equals(destination, StringComparison.OrdinalIgnoreCase) &&
-                                        DateTime.Parse(flight.DepartureTime) >= startDate &&
-                                        DateTime.Parse(flight.DepartureTime) <= endDate &&
-                                        flight.Origin.Equals(startPoint, StringComparison.OrdinalIgnoreCase) &&
-                                        flight.Destination.Equals(endPoint, StringComparison.OrdinalIgnoreCase)).ToList();
+        return AvailableFlights.Select(f => f.Origin).Distinct().ToList();
     }
 
-    // public List<FlightModel> GetConnectingFlights()
-    // {
-    //     // For this example, we'll simulate connecting flights by combining two direct flights
-    //     var connectingFlights = new List<FlightModel>();
-    //     var allFlights = GetAllFlights();
-    //
-    //     foreach (var flight1 in allFlights)
-    //     {
-    //         foreach (var flight2 in allFlights.Where(f => f.Origin == flight1.Destination))
-    //         {
-    //             var connectingFlight = new FlightModel(
-    //                 flightId: random.Next(10000, 99999),
-    //                 origin: flight1.Origin,
-    //                 destination: flight2.Destination,
-    //                 departureTime: flight1.DepartureTime,
-    //                 arrivalTime: flight2.ArrivalTime,
-    //                 price: flight1.Price + flight2.Price,
-    //                 availableSeats: Math.Min(flight1.AvailableSeats, flight2.AvailableSeats),
-    //                 flightNumber: $"{flight1.FlightNumber}-{flight2.FlightNumber}"
-    //             );
-    //             connectingFlights.Add(connectingFlight);
-    //         }
-    //     }
-    //
-    //     return connectingFlights;
-    // }
+    // Filter flights by a specific date range and origin
+    public List<FlightModel> FilterByDateRange(string origin, DateTime startDate, DateTime endDate)
+    {
+        return AvailableFlights
+            .Where(flight =>
+                flight.Origin.Equals(origin, StringComparison.OrdinalIgnoreCase) &&
+                DateTime.Parse(flight.DepartureTime) >= startDate &&
+                DateTime.Parse(flight.DepartureTime) <= endDate)
+            .ToList();
+    }
+
+    // Retrieve flights based on origin
+    public List<FlightModel> GetFlightsByOrigin(string origin)
+    {
+        return AvailableFlights
+            .Where(f => f.Origin.Equals(origin, StringComparison.OrdinalIgnoreCase))
+            .ToList();
+    }
+
+    // Advanced filtering for flights based on multiple criteria
+    public List<FlightModel> FilterFlights(string destination, DateTime startDate, DateTime endDate, string origin)
+    {
+        return AvailableFlights
+            .Where(flight =>
+                flight.Origin.Equals(origin, StringComparison.OrdinalIgnoreCase) &&
+                flight.Destination.Equals(destination, StringComparison.OrdinalIgnoreCase) &&
+                DateTime.Parse(flight.DepartureTime) >= startDate &&
+                DateTime.Parse(flight.DepartureTime) <= endDate)
+            .ToList();
+    }
 }

@@ -69,41 +69,41 @@ static class AirportInformation
     }
 
     // Searches for flights by a specified destination
-    public static void SearchFlightsByDestination()
-    {
-        Console.WriteLine("\nEnter the destination you want to search for:");
-        string? destination = Console.ReadLine() ?? string.Empty;
-
-        if (!string.IsNullOrWhiteSpace(destination))
-        {
-            FlightsLogic flightsLogic = new FlightsLogic();
-            var flights = flightsLogic.SearchFlightsByDestination(destination);
-
-            if (flights.Count == 0)
-            {
-                Console.WriteLine($"No flights found for destination: {destination}");
-            }
-            else
-            {
-                Console.WriteLine($"\nFlights to {destination}:");
-                foreach (var flight in flights)
-                {
-                    Console.WriteLine(
-                        $"Flight ID: {flight.FlightId}, From: {flight.Origin}, Departure: {flight.DepartureTime}");
-                    Console.WriteLine("Prices:");
-                    foreach (var seatOption in flight.SeatClassOptions)
-                    {
-                        Console.WriteLine($"Class: {seatOption.Class}, Price: {seatOption.Price} EUR");
-                    }
-                }
-            }
-        }
-        else
-        {
-            Console.WriteLine("Invalid destination.");
-        }
-
-        Console.WriteLine("\nPress any key to return to the menu...");
-        Console.ReadKey();
-    }
+    // public static void SearchFlightsByDestination()
+    // {
+    //     Console.WriteLine("\nEnter the destination you want to search for:");
+    //     string? destination = Console.ReadLine() ?? string.Empty;
+    //
+    //     if (!string.IsNullOrWhiteSpace(destination))
+    //     {
+    //         FlightsLogic flightsLogic = new FlightsLogic();
+    //         var flights = flightsLogic.SearchFlightsByDestination(destination);
+    //
+    //         if (flights.Count == 0)
+    //         {
+    //             Console.WriteLine($"No flights found for destination: {destination}");
+    //         }
+    //         else
+    //         {
+    //             Console.WriteLine($"\nFlights to {destination}:");
+    //             foreach (var flight in flights)
+    //             {
+    //                 Console.WriteLine(
+    //                     $"Flight ID: {flight.FlightId}, From: {flight.Origin}, Departure: {flight.DepartureTime}");
+    //                 Console.WriteLine("Prices:");
+    //                 foreach (var seatOption in flight.SeatClassOptions)
+    //                 {
+    //                     Console.WriteLine($"Class: {seatOption.Class}, Price: {seatOption.Price} EUR");
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     else
+    //     {
+    //         Console.WriteLine("Invalid destination.");
+    //     }
+    //
+    //     Console.WriteLine("\nPress any key to return to the menu...");
+    //     Console.ReadKey();
+    // }
 }

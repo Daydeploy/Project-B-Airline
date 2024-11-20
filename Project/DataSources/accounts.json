@@ -42,5 +42,23 @@
     "password": "test",
     "passportDetails": null,
     "miles": 0
+  },
+  {
+    "id": 4,
+    "firstName": "Test",
+    "lastName": "Testing",
+    "dateOfBirth": "1985-05-15T00:00:00",
+    "gender": "Male",
+    "nationality": "Dutch",
+    "phoneNumber": "\u002B31201234567",
+    "email": "dion",
+    "password": "dion",
+    "passportDetails": {
+      "passportNumber": "NL123456789",
+      "issueDate": "2000-01-01T00:00:00",
+      "expirationDate": "2030-01-01T00:00:00",
+      "countryOfIssue": "Netherlands"
+    },
+    "miles": 0
   }
 ]

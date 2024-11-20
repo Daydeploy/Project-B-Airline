@@ -3,11 +3,11 @@
         "AirportID": 1,
         "Country": "Netherlands",
         "City": "Rotterdam",
-        "Name": "Rotterdam The Hague Airport",
-        "Code": "RTM",
+        "Name": "Rotterdam South Airport",
+        "Code": "RSZ",
         "Type": "Public",
-        "PhoneNumber": "+31 10 446 3444",
-        "Address": "Rotterdam Airportplein 60, 3045 AP Rotterdam, Netherlands"
+        "PhoneNumber": "+31 10 123 4567",
+        "Address": "Driemanssteeweg 107, 3011 WN Rotterdam, Netherlands"
     },
     {
         "AirportID": 2,
@@ -30,7 +30,7 @@
         "Address": "Hartmann Rd, Royal Docks, London E16 2PX, United Kingdom"
     },
     {
-        "AirportID": 6,
+        "AirportID": 4,
         "Country": "France",
         "City": "Nice",
         "Name": "Nice Côte d'Azur Airport",
@@ -40,7 +40,7 @@
         "Address": "Rue Costes et Bellonte, 06206 Nice, France"
     },
     {
-        "AirportID": 7,
+        "AirportID": 5,
         "Country": "Spain",
         "City": "Málaga",
         "Name": "Málaga–Costa del Sol Airport",
@@ -50,7 +50,7 @@
         "Address": "Av. del Comandante García Morato, s/n, 29004 Málaga, Spain"
     },
     {
-        "AirportID": 8,
+        "AirportID": 6,
         "Country": "Greece",
         "City": "Mykonos",
         "Name": "Mykonos International Airport",
@@ -60,7 +60,7 @@
         "Address": "Mykonos Airport, 846 00 Mykonos, Greece"
     },
     {
-        "AirportID": 9,
+        "AirportID": 7,
         "Country": "Italy",
         "City": "Milan",
         "Name": "Milan Malpensa Airport",
