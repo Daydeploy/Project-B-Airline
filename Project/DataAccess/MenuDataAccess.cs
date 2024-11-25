@@ -1,38 +1,22 @@
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
-
 public class MenuDataAccess
 {
-    private const string MenuFilePath = "menuOptions.json";
+    private static string _filePath = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/menuOptions.json"));
+    private static GenericJsonAccess<MenuOptionModel> _menuAccess = new GenericJsonAccess<MenuOptionModel>(_filePath);
 
-    public List<MenuOption> LoadMenuOptions()
+
+    public static List<MenuOptionModel> LoadAll()
     {
-        if (!File.Exists(MenuFilePath))
-        {
-            return new List<MenuOption>();
-        }
-
-        string json = File.ReadAllText(MenuFilePath);
-        return JsonSerializer.Deserialize<List<MenuOption>>(json);
+        return _menuAccess.LoadAll();
     }
 
-    public MenuOption GetMenuItemById(int id)
+    public static void WriteAll(List<MenuOptionModel> menuOptions)
     {
-        var options = LoadMenuOptions();
+        _menuAccess.WriteAll(menuOptions);
+    }
+
+    public static MenuOptionModel GetById(int id)
+    {
+        var options = LoadAll();
         return options.Find(option => option.MenuItemID == id);
     }
-
-    public void SaveMenuOptions(List<MenuOption> options)
-    {
-        string json = JsonSerializer.Serialize(options);
-        File.WriteAllText(MenuFilePath, json);
-    }
-}
-
-public class MenuOption
-{
-    public int MenuItemID { get; set; }
-    public string MenuOptionDescription { get; set; }
-    public string Action { get; set; }
 }

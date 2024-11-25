@@ -6,11 +6,21 @@
     "totalPrice": 124,
     "passengers": [
       {
-        "Name": "Aaron Hofman",
-        "SeatNumber": "7A",
-        "HasCheckedBaggage": true
+        "name": null,
+        "seatNumber": null,
+        "hasCheckedBaggage": false,
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
       }
-    ]
+    ],
+    "pets": []
   },
   {
     "bookingId": 5458,
@@ -19,16 +29,35 @@
     "totalPrice": 806,
     "passengers": [
       {
-        "Name": "Junpei",
-        "SeatNumber": "3A",
-        "HasCheckedBaggage": true
+        "name": null,
+        "seatNumber": null,
+        "hasCheckedBaggage": false,
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
       },
       {
-        "Name": "THE ONE PIECE IS REAL",
-        "SeatNumber": "1B",
-        "HasCheckedBaggage": true
+        "name": null,
+        "seatNumber": null,
+        "hasCheckedBaggage": false,
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
       }
-    ]
+    ],
+    "pets": null
   },
   {
     "bookingId": 6503,
@@ -37,11 +66,21 @@
     "totalPrice": 669,
     "passengers": [
       {
-        "Name": "Kirito",
-        "SeatNumber": "2A",
-        "HasCheckedBaggage": false
+        "name": null,
+        "seatNumber": null,
+        "hasCheckedBaggage": false,
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
       }
-    ]
+    ],
+    "pets": null
   },
   {
     "bookingId": 8817,
@@ -50,11 +89,21 @@
     "totalPrice": 496,
     "passengers": [
       {
-        "Name": "Aaron",
-        "SeatNumber": "7A",
-        "HasCheckedBaggage": true
+        "name": null,
+        "seatNumber": null,
+        "hasCheckedBaggage": false,
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
       }
-    ]
+    ],
+    "pets": null
   },
   {
     "bookingId": 2175,
@@ -63,11 +112,21 @@
     "totalPrice": 669,
     "passengers": [
       {
-        "Name": "Hetwerkt",
-        "SeatNumber": "1B",
-        "HasCheckedBaggage": false
+        "name": null,
+        "seatNumber": null,
+        "hasCheckedBaggage": false,
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
       }
-    ]
+    ],
+    "pets": null
   },
   {
     "bookingId": 4428,
@@ -76,21 +135,49 @@
     "totalPrice": 870,
     "passengers": [
       {
-        "Name": "test1",
-        "SeatNumber": "2A",
-        "HasCheckedBaggage": true
+        "name": null,
+        "seatNumber": null,
+        "hasCheckedBaggage": false,
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
       },
       {
-        "Name": "test2",
-        "SeatNumber": "3A",
-        "HasCheckedBaggage": false
+        "name": null,
+        "seatNumber": null,
+        "hasCheckedBaggage": false,
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
       },
       {
-        "Name": "test3",
-        "SeatNumber": "45A",
-        "HasCheckedBaggage": false
+        "name": null,
+        "seatNumber": null,
+        "hasCheckedBaggage": false,
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
       }
-    ]
+    ],
+    "pets": null
   },
   {
     "bookingId": 6903,
@@ -99,26 +186,63 @@
     "totalPrice": 634,
     "passengers": [
       {
-        "Name": "number1",
-        "SeatNumber": "16A",
-        "HasCheckedBaggage": true
+        "name": null,
+        "seatNumber": null,
+        "hasCheckedBaggage": false,
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
       },
       {
-        "Name": "Sil",
-        "SeatNumber": "14A",
-        "HasCheckedBaggage": true
+        "name": null,
+        "seatNumber": null,
+        "hasCheckedBaggage": false,
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
       },
       {
-        "Name": "Dion",
-        "SeatNumber": "8D",
-        "HasCheckedBaggage": false
+        "name": null,
+        "seatNumber": null,
+        "hasCheckedBaggage": false,
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
       },
       {
-        "Name": "Aaron",
-        "SeatNumber": "12C",
-        "HasCheckedBaggage": false
+        "name": null,
+        "seatNumber": null,
+        "hasCheckedBaggage": false,
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
       }
-    ]
+    ],
+    "pets": null
   },
   {
     "bookingId": 4329,
@@ -127,10 +251,43 @@
     "totalPrice": 124,
     "passengers": [
       {
-        "Name": "Darrin",
-        "SeatNumber": "14B",
-        "HasCheckedBaggage": true
+        "name": null,
+        "seatNumber": null,
+        "hasCheckedBaggage": false,
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
       }
-    ]
+    ],
+    "pets": null
+  },
+  {
+    "bookingId": 9714,
+    "userId": 1,
+    "flightId": 3873,
+    "totalPrice": 823,
+    "passengers": [
+      {
+        "name": "evvn",
+        "seatNumber": "1B",
+        "hasCheckedBaggage": true,
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      }
+    ],
+    "pets": []
   }
 ]

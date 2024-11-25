@@ -241,6 +241,43 @@ public class SeatSelectionUI
             return "Business";
         return "Economy";
     }
+
+    public void SelectPetsForBooking(int bookingId)
+    {
+        var petService = new PetService();
+        List<PetModel> petsToBook = new List<PetModel>();
+
+        while (true)
+        {
+            Console.WriteLine("Enter pet type (Dog, Cat, Other) or 'done' to finish:");
+            string petType = Console.ReadLine();
+            if (petType.Equals("done", StringComparison.OrdinalIgnoreCase)) break;
+
+            string seatingLocation;
+            if (petType.Equals("Dog", StringComparison.OrdinalIgnoreCase) || 
+                petType.Equals("Cat", StringComparison.OrdinalIgnoreCase))
+            {
+                Console.WriteLine("Would you like to place the pet in the seat next to you? (yes/no)");
+                string response = Console.ReadLine();
+                seatingLocation = response.Equals("yes", StringComparison.OrdinalIgnoreCase) ? "Seat" : "Luggage Room";
+            }
+            else
+            {
+                seatingLocation = "Luggage Room";
+            }
+
+            var pet = new PetModel
+            {
+                Type = petType,
+                Size = "Medium",
+                SeatingLocation = seatingLocation,
+                Color = petType == "Dog" ? "Brown" : "Gray"
+            };
+
+            petsToBook.Add(pet);
+            petService.AddPetToBooking(bookingId, pet);
+        }
+    }
 }
 
 public class PlaneConfig
