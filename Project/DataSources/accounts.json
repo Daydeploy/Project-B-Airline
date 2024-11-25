@@ -52,7 +52,20 @@
     "nationality": null,
     "phoneNumber": null,
     "email": "tsenne@gmail.com",
-    "password": "2907", 
+    "password": "2907",
+    "passportDetails": null,
+    "miles": 0
+  },
+  {
+    "id": 5,
+    "firstName": "tets",
+    "lastName": "test",
+    "dateOfBirth": "2000-10-10T00:00:00",
+    "gender": null,
+    "nationality": null,
+    "phoneNumber": null,
+    "email": "te",
+    "password": "te",
     "passportDetails": null,
     "miles": 0
   }
