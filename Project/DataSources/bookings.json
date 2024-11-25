@@ -289,5 +289,28 @@
       }
     ],
     "pets": []
+  },
+  {
+    "bookingId": 4059,
+    "userId": 1,
+    "flightId": 3870,
+    "totalPrice": 587,
+    "passengers": [
+      {
+        "name": "Klastest",
+        "seatNumber": "1C",
+        "hasCheckedBaggage": true,
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      }
+    ],
+    "pets": []
   }
 ]
