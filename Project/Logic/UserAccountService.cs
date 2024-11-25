@@ -16,11 +16,31 @@ public class UserAccountService
         _bookings = BookingAccess.LoadAll();
     }
 
-    public bool CreateAccount(string email, string password, string firstName, string lastName, DateTime dateOfBirth)
+    public bool CreateAccount(string firstName, string lastName, string email, string password, DateTime dateOfBirth)
     {
-        if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password) ||
-            string.IsNullOrWhiteSpace(firstName) || string.IsNullOrWhiteSpace(lastName))
+        if (string.IsNullOrWhiteSpace(firstName) || string.IsNullOrWhiteSpace(lastName))
         {
+            Console.WriteLine("Error: First name and last name must be filled.");
+            return false;
+        }
+
+        while (true)
+        {
+            if (string.IsNullOrWhiteSpace(email) || !email.Contains("@") || !email.Contains("."))
+            {
+                Console.WriteLine("Error: Email must contain '@' and a domain (For instance: '.com').");
+                Console.Write("Please enter your email address again: ");
+                email = Console.ReadLine();
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        if (string.IsNullOrWhiteSpace(password))
+        {
+            Console.WriteLine("Error: Password must be filled.");
             return false;
         }
 
@@ -29,7 +49,8 @@ public class UserAccountService
             .FirstOrDefault(a => a.EmailAddress.Equals(email, StringComparison.OrdinalIgnoreCase));
         if (existingAccount != null)
         {
-            return false; // Account with this email already exists
+            Console.WriteLine("Error: An account with this email already exists.");
+            return false; // Return false if the account already exists
         }
 
         // Create a new unique ID for the account
