@@ -1,0 +1,29 @@
+[
+    {
+        "type": "Dog",
+        "size": "Medium",
+        "seatingLocation": "Seat",
+        "fee": {
+            "Seat": 50,
+            "Luggage Room": 20
+        }
+    },
+    {
+        "type": "Cat",
+        "size": "Small",
+        "seatingLocation": "Seat",
+        "fee": {
+            "Seat": 40,
+            "Luggage Room": 15
+        }
+    },
+    {
+        "type": "Other",
+        "size": "Varies",
+        "seatingLocation": "Luggage Room",
+        "fee": {
+            "Seat": 10,
+            "Luggage Room": 10
+        }
+    }
+] 

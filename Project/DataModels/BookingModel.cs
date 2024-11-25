@@ -17,12 +17,16 @@ public class BookingModel
     [JsonPropertyName("passengers")]
     public List<PassengerModel> Passengers { get; set; }
 
-    public BookingModel(int bookingId, int userId, int flightId, int totalPrice, List<PassengerModel> passengers)
+    [JsonPropertyName("pets")]
+    public List<PetModel> Pets { get; set; }
+
+    public BookingModel(int bookingId, int userId, int flightId, int totalPrice, List<PassengerModel> passengers, List<PetModel> pets)
     {
         BookingId = bookingId;
         UserId = userId;
         FlightId = flightId;
         TotalPrice = totalPrice;
         Passengers = passengers;
+        Pets = pets;
     }
 }
