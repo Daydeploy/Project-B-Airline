@@ -285,4 +285,5 @@ public class PlaneConfig
     public int Rows { get; set; }
     public int SeatsPerRow { get; set; }
     public (int StartRow, int EndRow)[] SeatClasses { get; set; }
+
 }
