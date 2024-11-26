@@ -4,104 +4,148 @@ using System.Linq;
 
 static class FlightManagement
 {
-    // Displays all available flights and provides options to filter or book
-    public static void ShowAvailableFlights()
+   public static void ShowAvailableFlights()
+{
+    FlightsLogic flights = new FlightsLogic();
+    Console.Clear();
+
+    // Fetch all origins
+    var origins = flights.GetAllOrigins().ToArray();
+    if (!origins.Any())
     {
-        FlightsLogic flights = new FlightsLogic();
-        Console.Clear();
+        Console.WriteLine("No available origins found.");
+        return;
+    }
 
-        // Fetch all origins
-        var origins = flights.GetAllOrigins().ToArray();
-        if (!origins.Any())
-        {
-            Console.WriteLine("No available origins found.");
-            return;
-        }
+    Console.WriteLine("Select your starting location:");
 
-        Console.WriteLine("Select your starting location:");
+    // Use the navigation service to select an origin
+    int originIndex = MenuNavigationService.NavigateMenu(origins, "Available Origins");
+    if (originIndex == -1) // Backspace pressed
+    {
+        Console.WriteLine("Returning to the menu.");
+        return;
+    }
 
-        // Use the navigation service to select an origin
-        int originIndex = MenuNavigationService.NavigateMenu(origins, "Available Origins");
-        if (originIndex == -1) // Backspace pressed
-        {
-            Console.WriteLine("Returning to the menu.");
-            return;
-        }
+    string selectedOrigin = origins[originIndex];
+    Console.Clear();
 
-        string selectedOrigin = origins[originIndex];
-        Console.Clear();
+    // Fetch destinations based on the selected origin
+    var destinations = flights.GetDestinationsByOrigin(selectedOrigin).ToArray();
+    if (!destinations.Any())
+    {
+        Console.WriteLine($"No destinations available from {selectedOrigin}.");
+        return;
+    }
 
-        // Get flights from the selected origin
-        var flightsList = flights.GetFlightsByOrigin(selectedOrigin).ToList();
-        if (!flightsList.Any())
-        {
-            Console.WriteLine($"No flights available from {selectedOrigin}.");
-            return;
-        }
+    Console.WriteLine($"Available destinations from {selectedOrigin}:");
 
-        Console.WriteLine($"Available flights from {selectedOrigin}:\n");
-        FlightDisplay.DisplayFlights(flightsList);
+    // Use the navigation service to select a destination
+    int destinationIndex = MenuNavigationService.NavigateMenu(destinations, "Available Destinations");
+    if (destinationIndex == -1) // Backspace pressed
+    {
+        Console.WriteLine("Returning to the menu.");
+        return;
+    }
 
-        Console.WriteLine("\nCommands:");
-        Console.WriteLine("F - Filter flights");
+    string selectedDestination = destinations[destinationIndex];
+    Console.Clear();
+
+    // Get flights from the selected origin to the selected destination
+    var flightsList = flights.GetFlightsByOriginAndDestination(selectedOrigin, selectedDestination).ToList();
+    if (!flightsList.Any())
+    {
+        Console.WriteLine($"No flights available from {selectedOrigin} to {selectedDestination}.");
+        return;
+    }
+
+    Console.WriteLine($"Available flights from {selectedOrigin} to {selectedDestination}:\n");
+    FlightDisplay.DisplayFlights(flightsList);
+
+    Console.WriteLine("\nCommands:");
+    Console.WriteLine("F - Filter flights");
+
+    // Only show the "Book a flight" option if the user is logged in
+    if (UserLogin._userAccountService.IsUserLoggedIn())
+    {
         Console.WriteLine("B - Book a flight");
-        Console.WriteLine("ESC - Go back");
+    }
+    else
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine("B - Book a flight (Login required)");
+        Console.ResetColor();
+    }
 
-        while (true)
+    Console.WriteLine("ESC - Go back");
+
+    while (true)
+    {
+        var key = Console.ReadKey(intercept: true);
+
+        if (key.Key == ConsoleKey.Escape)
+            return;
+
+        if (key.Key == ConsoleKey.F)
         {
-            var key = Console.ReadKey(intercept: true);
+            FilterFlightsByPriceUI(selectedOrigin, selectedDestination);
+            return;
+        }
 
-            if (key.Key == ConsoleKey.Escape)
-                return;
-
-            if (key.Key == ConsoleKey.F)
-            {
-                FilterFlightsByPriceUI(selectedOrigin);
-                return;
-            }
-
-            if (key.Key == ConsoleKey.B)
+        if (key.Key == ConsoleKey.B)
+        {
+            if (UserLogin._userAccountService.IsUserLoggedIn())
             {
                 Console.Clear();
-                Console.WriteLine("Enter the Flight ID to book:");
-                if (int.TryParse(Console.ReadLine(), out int flightId))
+                BookFlight(flightsList);
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\nYou must be logged in to book a flight.");
+                Console.ResetColor();
+            }
+            return;
+        }
+    }
+}
+
+
+    private static void BookFlight(List<FlightModel> flightsList)
+    {
+        Console.WriteLine("Enter the Flight ID to book:");
+        if (int.TryParse(Console.ReadLine(), out int flightId))
+        {
+            var selectedFlight = flightsList.FirstOrDefault(f => f.FlightId == flightId);
+            if (selectedFlight != null)
+            {
+                Console.WriteLine("How many passengers? (1-8):");
+                if (int.TryParse(Console.ReadLine(), out int passengerCount) && passengerCount > 0 &&
+                    passengerCount <= 8)
                 {
-                    var selectedFlight = flightsList.FirstOrDefault(f => f.FlightId == flightId);
-                    if (selectedFlight != null)
-                    {
-                        Console.WriteLine("How many passengers? (1-8):");
-                        if (int.TryParse(Console.ReadLine(), out int passengerCount) && passengerCount > 0 &&
-                            passengerCount <= 8)
-                        {
-                            var seatSelector = new SeatSelectionUI(); // Ensure seatSelector is included
-                            var passengerDetails =
-                                CollectPassengerDetails(selectedFlight, passengerCount, seatSelector);
-                            CompleteBooking(flightId, passengerDetails, selectedFlight, seatSelector);
-                        }
-                        else
-                        {
-                            Console.WriteLine("Invalid number of passengers.");
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("Flight not found with the specified ID.");
-                    }
+                    var seatSelector = new SeatSelectionUI();
+                    var passengerDetails = CollectPassengerDetails(selectedFlight, passengerCount, seatSelector);
+                    CompleteBooking(flightId, passengerDetails, selectedFlight, seatSelector);
                 }
                 else
                 {
-                    Console.WriteLine("Invalid Flight ID format.");
+                    Console.WriteLine("Invalid number of passengers.");
                 }
-
-                Console.WriteLine("\nPress any key to return to the menu...");
-                Console.ReadKey();
-                return;
+            }
+            else
+            {
+                Console.WriteLine("Flight not found with the specified ID.");
             }
         }
+        else
+        {
+            Console.WriteLine("Invalid Flight ID format.");
+        }
+
+        Console.WriteLine("\nPress any key to return to the menu...");
+        Console.ReadKey();
     }
 
-
-    // Displays booked flights for the logged-in user
     public static void ViewBookedFlights(int userId)
     {
         while (true)
@@ -172,109 +216,63 @@ static class FlightManagement
     }
 
     // UI to filter flights by price or other options
-    public static void FilterFlightsByPriceUI(string selectedOrigin)
+   public static void FilterFlightsByPriceUI(string selectedOrigin, string selectedDestination)
+{
+    FlightsLogic flights = new FlightsLogic();
+    string[] filterOptions = new[]
     {
-        FlightsLogic flights = new FlightsLogic();
-        string[] filterOptions = new[]
-        {
-            "Price from low-high",
-            "Price from high-low",
-            "Price between input range",
-            "Filter by destination",
-            "Filter by date range",
-            "Filter by destination and date range",
-            "Back to Main Menu"
-        };
+        "Price from low-high",
+        "Price from high-low",
+        "Price between input range",
+        "Filter by date range",
+        "Back to Main Menu"
+    };
 
-        int selectedIndex = MenuNavigationService.NavigateMenu(filterOptions, "Filter Flights:");
+    int selectedIndex = MenuNavigationService.NavigateMenu(filterOptions, "Filter Flights:");
 
-        string[] seatClassOptions = { "Economy", "Business", "First" };
+    string[] seatClassOptions = { "Economy", "Business", "First" };
 
-        switch (selectedIndex)
-        {
-            case 0:
-                int seatClassAscIndex = MenuNavigationService.NavigateMenu(seatClassOptions, "Seat Class");
-                string seatClassAsc = seatClassOptions[seatClassAscIndex];
-                FlightDisplay.DisplayFlights(flights.FilterFlightsByPriceUp(selectedOrigin, seatClassAsc));
-                break;
-            case 1:
-                int seatClassDescIndex = MenuNavigationService.NavigateMenu(seatClassOptions, "Seat Class");
-                string seatClassDesc = seatClassOptions[seatClassDescIndex];
-                FlightDisplay.DisplayFlights(flights.FilterFlightsByPriceDown(selectedOrigin, seatClassDesc));
-                break;
-            case 2:
-                int seatClassRangeIndex = MenuNavigationService.NavigateMenu(seatClassOptions, "Seat Class");
-                string seatClassRange = seatClassOptions[seatClassRangeIndex];
-                Console.WriteLine("Enter minimum price: ");
-                if (int.TryParse(Console.ReadLine(), out int min))
+    switch (selectedIndex)
+    {
+        case 0:
+            int seatClassAscIndex = MenuNavigationService.NavigateMenu(seatClassOptions, "Seat Class");
+            string seatClassAsc = seatClassOptions[seatClassAscIndex];
+            FlightDisplay.DisplayFlights(flights.FilterFlightsByPriceUp(selectedOrigin, selectedDestination, seatClassAsc));
+            break;
+        case 1:
+            int seatClassDescIndex = MenuNavigationService.NavigateMenu(seatClassOptions, "Seat Class");
+            string seatClassDesc = seatClassOptions[seatClassDescIndex];
+            FlightDisplay.DisplayFlights(flights.FilterFlightsByPriceDown(selectedOrigin, selectedDestination, seatClassDesc));
+            break;
+        case 2:
+            int seatClassRangeIndex = MenuNavigationService.NavigateMenu(seatClassOptions, "Seat Class");
+            string seatClassRange = seatClassOptions[seatClassRangeIndex];
+            Console.WriteLine("Enter minimum price: ");
+            if (int.TryParse(Console.ReadLine(), out int min))
+            {
+                Console.WriteLine("Enter maximum price: ");
+                if (int.TryParse(Console.ReadLine(), out int max))
                 {
-                    Console.WriteLine("Enter maximum price: ");
-                    if (int.TryParse(Console.ReadLine(), out int max))
-                    {
-                        FlightDisplay.DisplayFlights(
-                            flights.FilterFlightsByPriceRange(selectedOrigin, seatClassRange, min, max));
-                    }
+                    FlightDisplay.DisplayFlights(
+                        flights.FilterFlightsByPriceRange(selectedOrigin, selectedDestination, seatClassRange, min, max));
                 }
-
-                break;
-            case 3:
-                // Fetch destinations filtered by the selected origin
-                var possibleDestinations = flights.GetDestinationsByOrigin(selectedOrigin).ToArray();
-                if (!possibleDestinations.Any())
-                {
-                    Console.WriteLine($"No destinations available from {selectedOrigin}.");
-                    Console.WriteLine("\nPress any key to return...");
-                    Console.ReadKey();
-                    return;
-                }
-
-                int destinationIndex = MenuNavigationService.NavigateMenu(possibleDestinations, "Select Destination");
-                if (destinationIndex == -1) return; // Handle back navigation
-
-                string selectedDestination = possibleDestinations[destinationIndex];
-                FlightDisplay.DisplayFlights(flights.FilterFlightsByDestination(selectedOrigin, selectedDestination));
-                break;
-            case 4:
-                var calendarUI = new CalendarUI();
-                var (startDate, endDate) = calendarUI.SelectDateRange();
-                FlightDisplay.DisplayFlights(flights.FilterByDateRange(selectedOrigin, startDate, endDate));
-                break;
-            case 5:
-                // Fetch destinations filtered by the selected origin
-                var destinationsWithDateRange = flights.GetDestinationsByOrigin(selectedOrigin).ToArray();
-                if (!destinationsWithDateRange.Any())
-                {
-                    Console.WriteLine($"No destinations available from {selectedOrigin}.");
-                    Console.WriteLine("\nPress any key to return...");
-                    Console.ReadKey();
-                    return;
-                }
-
-                int destinationIndex2 =
-                    MenuNavigationService.NavigateMenu(destinationsWithDateRange, "Select Destination");
-                if (destinationIndex2 == -1) return; // Handle back navigation
-
-                string selectedDestination2 = destinationsWithDateRange[destinationIndex2];
-
-                var calendarUI2 = new CalendarUI();
-                var (startDate2, endDate2) = calendarUI2.SelectDateRange();
-                var filteredFlights = flights.FilterByDateRange(selectedOrigin, startDate2, endDate2)
-                    .Where(f => f.Destination == selectedDestination2)
-                    .ToList();
-                FlightDisplay.DisplayFlights(filteredFlights);
-                break;
-            case 6:
-                return;
-        }
+            }
+            break;
+        case 3:
+            var calendarUI = new CalendarUI();
+            var (startDate, endDate) = calendarUI.SelectDateRange();
+            FlightDisplay.DisplayFlights(flights.FilterByDateRange(selectedOrigin, selectedDestination, startDate, endDate));
+            break;
+        case 4:
+            return;
     }
+}
 
-    // Collects passenger details for the booking process
     private static List<PassengerModel> CollectPassengerDetails(FlightModel selectedFlight, int passengerCount,
         SeatSelectionUI seatSelector)
     {
         var passengerDetails = new List<PassengerModel>();
 
-        // Load existing booked seats for this flight
         var existingBookings = BookingLogic.GetBookingsForFlight(selectedFlight.FlightId);
         foreach (var booking in existingBookings)
         {
@@ -305,15 +303,13 @@ static class FlightManagement
         return passengerDetails;
     }
 
-    // Completes the booking by saving the details
     private static void CompleteBooking(int flightId, List<PassengerModel> passengerDetails, FlightModel selectedFlight,
         SeatSelectionUI seatSelector)
     {
         try
         {
-
             BookingModel booking = BookingLogic.CreateBooking(UserLogin._userAccountService.CurrentUserId, flightId,
-                passengerDetails, new List<PetModel>()); // moet gecheckt worden of correct werkt
+                passengerDetails, new List<PetModel>()); // Modify as needed
 
             Console.WriteLine("\nFlight booked successfully!\n");
             Console.WriteLine($"Booking ID: {booking.BookingId}");

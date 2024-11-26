@@ -111,9 +111,11 @@ static class UserLogin
                     SeatUpgradeOptions.ShowSeatUpgradeOptions();
                     break;
                 case 7:
-                    Console.WriteLine("Logging out...");
+                    Console.Clear();
+                    _userAccountService.Logout();
+                    Console.WriteLine("You have successfully logged out.");
+                    Console.WriteLine("Returning to the main menu...");
                     MenuNavigation.Start();
-                    _isLoggedIn = false;
                     return;
             }
         }

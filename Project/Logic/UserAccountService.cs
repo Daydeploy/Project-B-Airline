@@ -14,6 +14,8 @@ public class UserAccountService
     {
         _accountsLogic = new AccountsLogic();
         _bookings = BookingAccess.LoadAll();
+        IsLoggedIn = false; 
+        CurrentUserId = -1; 
     }
 
     public bool CreateAccount(string firstName, string lastName, string email, string password, DateTime dateOfBirth)
@@ -69,20 +71,32 @@ public class UserAccountService
 
     public AccountModel Login(string email, string password)
     {
-        // Set current user id
-        CurrentUserId =
-            _accountsLogic._accounts.FirstOrDefault(a => a.EmailAddress == email)?.Id ?? -1; // Set to -1 if not found
+        // Attempt to find the account
         var account = _accountsLogic.CheckLogin(email, password);
+
         if (account != null)
         {
             IsLoggedIn = true;
+            CurrentUserId = account.Id;
+            return account;
         }
         else
         {
             IsLoggedIn = false;
+            CurrentUserId = -1;
+            return null;
         }
+    }
 
-        return account;
+    public void Logout()
+    {
+        IsLoggedIn = false;
+        CurrentUserId = -1;
+    }
+
+    public bool IsUserLoggedIn()
+    {
+        return IsLoggedIn;
     }
 
     public bool ManageAccount(int userId, string newEmail = null, string newPassword = null, string newFirstName = null,
@@ -97,82 +111,31 @@ public class UserAccountService
             return false; // Account not found
         }
 
-        // Update email if provided
-        if (!string.IsNullOrWhiteSpace(newEmail))
-        {
-            account.EmailAddress = newEmail;
-        }
+        // Update fields if new values are provided
+        if (!string.IsNullOrWhiteSpace(newEmail)) account.EmailAddress = newEmail;
+        if (!string.IsNullOrWhiteSpace(newPassword)) account.Password = newPassword;
+        if (!string.IsNullOrWhiteSpace(newFirstName)) account.FirstName = newFirstName;
+        if (!string.IsNullOrWhiteSpace(newLastName)) account.LastName = newLastName;
+        if (!string.IsNullOrWhiteSpace(newGender)) account.Gender = newGender;
+        if (!string.IsNullOrWhiteSpace(newNationality)) account.Nationality = newNationality;
+        if (!string.IsNullOrWhiteSpace(newPhoneNumber)) account.PhoneNumber = newPhoneNumber;
+        if (newDateOfBirth.HasValue) account.DateOfBirth = newDateOfBirth.Value;
 
-        // Update password if provided
-        if (!string.IsNullOrWhiteSpace(newPassword))
-        {
-            account.Password = newPassword;
-        }
-
-        // Update first name if provided
-        if (!string.IsNullOrWhiteSpace(newFirstName))
-        {
-            account.FirstName = newFirstName;
-        }
-
-        // Update last name if provided
-        if (!string.IsNullOrWhiteSpace(newLastName))
-        {
-            account.LastName = newLastName;
-        }
-
-        // Update gender if provided
-        if (!string.IsNullOrWhiteSpace(newGender))
-        {
-            account.Gender = newGender;
-        }
-
-        // Update nationality if provided
-        if (!string.IsNullOrWhiteSpace(newNationality))
-        {
-            account.Nationality = newNationality;
-        }
-
-        // Update phone number if provided
-        if (!string.IsNullOrWhiteSpace(newPhoneNumber))
-        {
-            account.PhoneNumber = newPhoneNumber;
-        }
-
-        // Update date of birth if provided
-        if (newDateOfBirth.HasValue)
-        {
-            account.DateOfBirth = newDateOfBirth.Value;
-        }
-
-        // Update passport details if provided (replace or set specific fields)
         if (newPassportDetails != null)
         {
-            if (account.PassportDetails == null)
-            {
-                account.PassportDetails = new PassportDetailsModel();
-            }
+            account.PassportDetails ??= new PassportDetailsModel();
 
-            // Update individual passport details only if provided
             if (!string.IsNullOrWhiteSpace(newPassportDetails.PassportNumber))
-            {
                 account.PassportDetails.PassportNumber = newPassportDetails.PassportNumber;
-            }
 
             if (newPassportDetails.IssueDate.HasValue)
-            {
                 account.PassportDetails.IssueDate = newPassportDetails.IssueDate;
-            }
 
             if (newPassportDetails.ExpirationDate.HasValue)
-            {
                 account.PassportDetails.ExpirationDate = newPassportDetails.ExpirationDate;
-            }
 
             if (!string.IsNullOrWhiteSpace(newPassportDetails.CountryOfIssue))
-            {
                 account.PassportDetails.CountryOfIssue = newPassportDetails.CountryOfIssue;
-            }
         }
 
         // Save changes to the account list
@@ -239,6 +202,7 @@ public class UserAccountService
         {
             return account.Miles; // Ensure that the AccountModel has a 'Miles' property
         }
+
         return 0; // Return 0 if no account is found
     }
 }
