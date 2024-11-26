@@ -43,7 +43,21 @@ static class AccountManagement
         string lastName = Console.ReadLine();
 
         Console.WriteLine("Enter your email address:");
-        string email = Console.ReadLine();
+        string email = Console.ReadLine().Trim();
+
+        while (true)
+        {
+            if (string.IsNullOrWhiteSpace(email) || !IsValidEmail(email))
+            {
+                Console.WriteLine("Error: Email must contain '@' and a domain (For instance: '.com').");
+                Console.Write("Please enter your email address again: ");
+                email = Console.ReadLine().Trim();
+            }
+            else
+            {
+                break;
+            }
+        }
 
         string password = "";
         string confirmPassword = "";
@@ -61,7 +75,7 @@ static class AccountManagement
             return;
         }
 
-        Console.WriteLine("Enter your date of birth (yyyy-mm-dd):");
+        Console.WriteLine("Enter your date of birth (dd-MM-yyyy):");
         if (!DateTime.TryParse(Console.ReadLine(), out DateTime dateOfBirth))
         {
             Console.WriteLine("Invalid date format. Please try again.");
@@ -82,7 +96,7 @@ static class AccountManagement
         Console.WriteLine($"Email: {account.EmailAddress}");
         Console.WriteLine($"First Name: {account.FirstName}");
         Console.WriteLine($"Last Name: {account.LastName}");
-        Console.WriteLine($"Date of Birth: {account.DateOfBirth:yyyy-MM-dd}");
+        Console.WriteLine($"Date of Birth: {account.DateOfBirth:dd-MM-yyyy}");
         Console.WriteLine($"Gender: {account.Gender ?? "Not provided"}");
         Console.WriteLine($"Nationality: {account.Nationality ?? "Not provided"}");
         Console.WriteLine($"Phone Number: {account.PhoneNumber ?? "Not provided"}");
@@ -91,8 +105,8 @@ static class AccountManagement
         {
             Console.WriteLine("Passport Details:");
             Console.WriteLine($"  Passport Number: {account.PassportDetails.PassportNumber ?? "Not provided"}");
-            Console.WriteLine($"  Issue Date: {account.PassportDetails.IssueDate?.ToString("yyyy-MM-dd") ?? "Not provided"}");
-            Console.WriteLine($"  Expiration Date: {account.PassportDetails.ExpirationDate?.ToString("yyyy-MM-dd") ?? "Not provided"}");
+            Console.WriteLine($"  Issue Date: {account.PassportDetails.IssueDate?.ToString("dd-MM-yyyy") ?? "Not provided"}");
+            Console.WriteLine($"  Expiration Date: {account.PassportDetails.ExpirationDate?.ToString("dd-MM-yyyy") ?? "Not provided"}");
             Console.WriteLine($"  Country of Issue: {account.PassportDetails.CountryOfIssue ?? "Not provided"}");
         }
         else
@@ -125,7 +139,14 @@ static class AccountManagement
             case 2:
                 Console.WriteLine($"Current First Name: {account.FirstName}");
                 Console.WriteLine("Enter new first name:");
-                updateSuccessful = UserLogin._userAccountService.ManageAccount(account.Id, newFirstName: Console.ReadLine());
+                string newFirstName = Console.ReadLine();
+                while (string.IsNullOrWhiteSpace(newFirstName))
+                {
+                    Console.WriteLine("Invalid input. Please enter a valid first name.");
+                    Console.Write("Enter new first name: ");
+                    newFirstName = Console.ReadLine();
+                }
+                updateSuccessful = UserLogin._userAccountService.ManageAccount(account.Id, newFirstName: newFirstName);
                 Console.WriteLine(
                     updateSuccessful ? "First name updated successfully." : "Failed to update first name.");
                 break;
@@ -136,8 +157,8 @@ static class AccountManagement
                 Console.WriteLine(updateSuccessful ? "Last name updated successfully." : "Failed to update last name.");
                 break;
             case 4:
-                Console.WriteLine($"Current Date of Birth: {account.DateOfBirth:yyyy-MM-dd}");
-                Console.WriteLine("Enter new date of birth (yyyy-mm-dd):");
+                Console.WriteLine($"Current Date of Birth: {account.DateOfBirth:dd-MM-yyyy}");
+                Console.WriteLine("Enter new date of birth (dd-MM-yyyy):");
                 if (DateTime.TryParse(Console.ReadLine(), out DateTime newDateOfBirth))
                 {
                     updateSuccessful = UserLogin._userAccountService.ManageAccount(account.Id, newDateOfBirth: newDateOfBirth);
@@ -177,12 +198,12 @@ static class AccountManagement
                 Console.WriteLine("Enter new passport number:");
                 string passportNumber = Console.ReadLine() ?? string.Empty;
 
-                Console.WriteLine($"Current Issue Date: {account.PassportDetails?.IssueDate?.ToString("yyyy-MM-dd") ?? "Not provided"}");
-                Console.WriteLine("Enter new passport issue date (yyyy-mm-dd):");
+                Console.WriteLine($"Current Issue Date: {account.PassportDetails?.IssueDate?.ToString("dd-MM-yyyy") ?? "Not provided"}");
+                Console.WriteLine("Enter new passport issue date (dd-MM-yyyy):");
                 DateTime.TryParse(Console.ReadLine(), out DateTime issueDate);
 
-                Console.WriteLine($"Current Expiration Date: {account.PassportDetails?.ExpirationDate?.ToString("yyyy-MM-dd") ?? "Not provided"}");
-                Console.WriteLine("Enter new passport expiration date (yyyy-mm-dd):");
+                Console.WriteLine($"Current Expiration Date: {account.PassportDetails?.ExpirationDate?.ToString("dd-MM-yyyy") ?? "Not provided"}");
+                Console.WriteLine("Enter new passport expiration date (dd-MM-yyyy):");
                 DateTime.TryParse(Console.ReadLine(), out DateTime expirationDate);
 
                 Console.WriteLine($"Current Country of Issue: {account.PassportDetails?.CountryOfIssue ?? "Not provided"}");
@@ -202,5 +223,13 @@ static class AccountManagement
 
         Console.WriteLine("\nPress any key to continue...");
         Console.ReadKey();
+    }
+
+    private static bool IsValidEmail(string email)
+    {
+        return !string.IsNullOrWhiteSpace(email) && 
+               email.Contains("@") && 
+               email.IndexOf("@") < email.LastIndexOf(".") && 
+               email.IndexOf(".") > email.IndexOf("@") + 1;
     }
 }
