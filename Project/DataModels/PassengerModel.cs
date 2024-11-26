@@ -5,8 +5,11 @@ public class PassengerModel : PersonModel
     [JsonPropertyName("name")]
     public string Name { get; set; }
 
-    [JsonPropertyName("pet")]
-    public PetModel? Pet { get; set; }
+    [JsonPropertyName("hasPet")]
+    public bool HasPet { get; set; }
+
+    [JsonPropertyName("petDetails")]
+    public PetModel PetDetails { get; set; }
 
     [JsonPropertyName("seatNumber")]
     public string? SeatNumber { get; set; }
@@ -14,10 +17,12 @@ public class PassengerModel : PersonModel
     [JsonPropertyName("hasCheckedBaggage")]
     public bool HasCheckedBaggage { get; set; }
 
-    public PassengerModel(string name, string? seatNumber, bool hasCheckedBaggage)
+    public PassengerModel(string name, string? seatNumber, bool hasCheckedBaggage, bool hasPet = false, PetModel petDetails = null)
     {
         Name = name;
         SeatNumber = seatNumber;
         HasCheckedBaggage = hasCheckedBaggage;
+        HasPet = hasPet;
+        PetDetails = petDetails;
     }
 }

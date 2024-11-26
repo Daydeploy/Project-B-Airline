@@ -213,16 +213,13 @@ static class FlightManagement
         {
             var selectedFlight = flightsList.FirstOrDefault(f => f.FlightId == flightId);
             if (selectedFlight != null)
-            {
+            {   
                 Console.WriteLine("How many passengers? (1-8):");
                 if (int.TryParse(Console.ReadLine(), out int passengerCount) && passengerCount > 0 &&
                     passengerCount <= 8)
                 {
-                    // Collect passenger details only once
                     var seatSelector = new SeatSelectionUI();
                     var passengerDetails = CollectPassengerDetails(selectedFlight, passengerCount, seatSelector);
-
-                    // Book the outbound flight
                     CompleteBooking(flightId, passengerDetails, selectedFlight, seatSelector);
 
                     if (isRoundTrip)
@@ -292,36 +289,107 @@ static class FlightManagement
     }
 
 
-    private static List<PassengerModel> CollectPassengerDetails(FlightModel selectedFlight, int passengerCount,
+        private static List<PassengerModel> CollectPassengerDetails(FlightModel selectedFlight, int passengerCount, 
         SeatSelectionUI seatSelector)
     {
         var passengerDetails = new List<PassengerModel>();
-
-        var existingBookings = BookingLogic.GetBookingsForFlight(selectedFlight.FlightId);
-        foreach (var booking in existingBookings)
+        string[] petTypes = new[] { "Dog", "Cat", "Bird", "Rabbit", "Hamster" };
+        Dictionary<string, double> maxWeights = new()
         {
-            foreach (var passenger in booking.Passengers)
-            {
-                seatSelector.SetSeatOccupied(passenger.SeatNumber);
-            }
-        }
-
+            { "Dog", 32.0 },
+            { "Cat", 15.0 },
+            { "Bird", 2.0 },
+            { "Rabbit", 8.0 },
+            { "Hamster", 1.0 }
+        };
+    
         for (int i = 0; i < passengerCount; i++)
         {
             Console.Clear();
             Console.WriteLine($"Passenger {i + 1} Details:");
             Console.WriteLine("Enter passenger name:");
             string name = Console.ReadLine() ?? string.Empty;
+    
             Console.WriteLine("\nSelect a seat for the passenger:");
             string seatNumber = seatSelector.SelectSeat(selectedFlight.PlaneType);
             seatSelector.SetSeatOccupied(seatNumber);
+    
             Console.WriteLine("Does this passenger have checked baggage? (y/n):");
             bool hasCheckedBaggage = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
+    
+            Console.WriteLine("Does this passenger have a pet? (y/n):");
+            bool hasPet = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
+    
+            PetModel petDetails = null;
+            if (hasPet)
+            {
+                petDetails = SelectPetDetails(petTypes, maxWeights);
+                seatSelector.SetPetSeat(seatNumber);
+            }
+    
+            var passenger = new PassengerModel(name, seatNumber, hasCheckedBaggage, hasPet, petDetails);
+            passengerDetails.Add(passenger);
+        }
+    
+        return passengerDetails;
+    }
+    private static PetModel SelectPetDetails(string[] petTypes, Dictionary<string, double> maxWeights)
+    {
+        int selectedIndex = 0;
+        ConsoleKey key;
 
-            passengerDetails.Add(new PassengerModel(name, seatNumber, hasCheckedBaggage));
+        do
+        {
+            Console.Clear();
+            Console.WriteLine("Select pet type:");
+            for (int i = 0; i < petTypes.Length; i++)
+            {
+                if (i == selectedIndex)
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.Write("> ");
+                }
+                else
+                {
+                    Console.Write("  ");
+                }
+                Console.WriteLine(petTypes[i]);
+                Console.ResetColor();
+            }
+
+            key = Console.ReadKey(true).Key;
+            if (key == ConsoleKey.UpArrow && selectedIndex > 0) selectedIndex--;
+            if (key == ConsoleKey.DownArrow && selectedIndex < petTypes.Length - 1) selectedIndex++;
+        } while (key != ConsoleKey.Enter);
+
+        string selectedPetType = petTypes[selectedIndex];
+        double maxWeight = maxWeights[selectedPetType];
+
+        Console.WriteLine($"\nEnter {selectedPetType}'s weight in kg (max {maxWeight}kg):");
+        double weight;
+        while (!double.TryParse(Console.ReadLine(), out weight) || weight <= 0 || weight > 100)
+        {
+            Console.WriteLine("Please enter a valid weight (0-100kg):");
         }
 
-        return passengerDetails;
+        string storageLocation = weight > maxWeight / 2 ? "Cargo" : "Storage";
+        if (weight > maxWeight)
+        {
+            Console.WriteLine($"\nWarning: Pet exceeds maximum weight for {selectedPetType}.");
+            Console.WriteLine("Pet must be transported in cargo area.");
+            storageLocation = "Cargo";
+        }
+        else
+        {
+            Console.WriteLine($"\nPet will be transported in {storageLocation}.");
+        }
+
+        return new PetModel
+        {
+            Type = selectedPetType,
+            Weight = weight,
+            StorageLocation = storageLocation
+        };
     }
 
     private static void CompleteBooking(int flightId, List<PassengerModel> passengerDetails, FlightModel selectedFlight,

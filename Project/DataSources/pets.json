@@ -2,28 +2,28 @@
     {
         "type": "Dog",
         "size": "Medium",
-        "seatingLocation": "Seat",
+        "maxWeight": 32.0,
+        "storageLocation": "Storage",
         "fee": {
-            "Seat": 50,
-            "Luggage Room": 20
+            "Storage": 20
         }
     },
     {
         "type": "Cat",
         "size": "Small",
-        "seatingLocation": "Seat",
+        "maxWeight": 15.0,
+        "storageLocation": "Storage",
         "fee": {
-            "Seat": 40,
-            "Luggage Room": 15
+            "Storage": 15
         }
     },
     {
         "type": "Other",
         "size": "Varies",
-        "seatingLocation": "Luggage Room",
+        "maxWeight": 20.0,
+        "storageLocation": "Cargo",
         "fee": {
-            "Seat": 10,
-            "Luggage Room": 10
+            "Cargo": 10
         }
     }
-] 
+]

@@ -2,7 +2,9 @@ public class SeatSelectionUI
 {
     private PlaneConfig currentConfig;
     private Dictionary<string, bool> occupiedSeats = new Dictionary<string, bool>();
-    
+    // Add dictionary to track seats with pets
+    private Dictionary<string, bool> petSeats = new Dictionary<string, bool>();
+
     // Add dictionary of plane type variations to handle different Aircrafts
     private readonly Dictionary<string, string> planeTypeAliases = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
     {
@@ -119,29 +121,25 @@ public class SeatSelectionUI
         Console.WriteLine("Use arrow keys to navigate, ENTER to select and ESCAPE to cancel\n");
         
         Console.ForegroundColor = ConsoleColor.Magenta;
-        Console.Write("■ First Class ");
+        Console.Write("■ First Class  ");
         Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.Write("■ Business Class ");
+        Console.Write("■ Business Class  ");
         Console.ForegroundColor = ConsoleColor.Cyan;
-        Console.Write("■ Economy Class ");
+        Console.Write("■ Economy Class  ");
         Console.ForegroundColor = ConsoleColor.Red;
-        Console.Write("■ Occupied ");
+        Console.Write("■ Occupied  ");
+        Console.ForegroundColor = ConsoleColor.DarkGray;
+        Console.Write("▲ With Pet  ");
         Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine("□ Available\n");
         
         Console.Write("    ");
         for (char c = 'A'; c < 'A' + currentConfig.SeatsPerRow; c++)
         {
-            Console.Write($"{c}");
-            
-            // Add extra space after every third seat (aisle)
-            if ((c - 'A' + 1) % 3 == 0 && (c - 'A' + 1) < currentConfig.SeatsPerRow)
+            Console.Write($" {c} ");
+            if (AddAisleSpace(c - 'A'))
             {
-                Console.Write("   ");
-            }
-            else
-            {
-                Console.Write("   ");
+                Console.Write("  ");
             }
         }
         Console.WriteLine("\n");
@@ -158,6 +156,7 @@ public class SeatSelectionUI
                 string seatNumber = $"{row}{(char)('A' + seat)}";
                 bool isSelected = row == selectedRow && seat == selectedSeat;
                 bool isOccupied = occupiedSeats.ContainsKey(seatNumber);
+                bool hasPet = petSeats.ContainsKey(seatNumber);
 
                 // Set color based on seat class
                 if (row <= currentConfig.SeatClasses[0].EndRow)
@@ -168,7 +167,9 @@ public class SeatSelectionUI
                     Console.ForegroundColor = ConsoleColor.Cyan;     // Economy Class
 
                 if (isOccupied)
-                    Console.ForegroundColor = ConsoleColor.Red;
+                {
+                    Console.ForegroundColor = hasPet ? ConsoleColor.DarkGray : ConsoleColor.Red;
+                }
 
                 if (isSelected)
                 {
@@ -178,7 +179,8 @@ public class SeatSelectionUI
                 }
                 else
                 {
-                    Console.Write(isOccupied ? " ■ " : " □ ");
+                    // Use different symbol for pet seats
+                    Console.Write(isOccupied ? (hasPet ? " ▲ " : " ■ ") : " □ ");
                 }
 
                 // Add aisle space based on plane type
@@ -228,6 +230,15 @@ public class SeatSelectionUI
             occupiedSeats.Remove(seatNumber);
     }
 
+    // Add method to set pet seat
+    public void SetPetSeat(string seatNumber, bool hasPet = true)
+    {
+        if (hasPet)
+            petSeats[seatNumber] = true;
+        else
+            petSeats.Remove(seatNumber);
+    }
+
     public string GetSeatClass(string seatNumber)
     {
         if (currentConfig == null)
@@ -242,42 +253,47 @@ public class SeatSelectionUI
         return "Economy";
     }
 
-    public void SelectPetsForBooking(int bookingId)
-    {
-        var petService = new PetService();
-        List<PetModel> petsToBook = new List<PetModel>();
+    
+    // //moet aangepast worden dit werkt niet
+    // public List<PetModel> SelectPetsForBooking(int bookingId)
+    // {
+    //     var petService = new PetService();
+    //     List<PetModel> petsToBook = new List<PetModel>();
 
-        while (true)
-        {
-            Console.WriteLine("Enter pet type (Dog, Cat, Other) or 'done' to finish:");
-            string petType = Console.ReadLine();
-            if (petType.Equals("done", StringComparison.OrdinalIgnoreCase)) break;
+    //     while (true)
+    //     {
+    //         Console.WriteLine("\nEnter pet type (Dog, Cat, Other) or 'done' to finish:");
+    //         string petType = Console.ReadLine();
+    //         if (petType.Equals("done", StringComparison.OrdinalIgnoreCase)) break;
 
-            string seatingLocation;
-            if (petType.Equals("Dog", StringComparison.OrdinalIgnoreCase) || 
-                petType.Equals("Cat", StringComparison.OrdinalIgnoreCase))
-            {
-                Console.WriteLine("Would you like to place the pet in the seat next to you? (yes/no)");
-                string response = Console.ReadLine();
-                seatingLocation = response.Equals("yes", StringComparison.OrdinalIgnoreCase) ? "Seat" : "Luggage Room";
-            }
-            else
-            {
-                seatingLocation = "Luggage Room";
-            }
+    //         Console.WriteLine("Enter pet weight in kg:");
+    //         if (!double.TryParse(Console.ReadLine(), out double weight))
+    //         {
+    //             Console.WriteLine("Invalid weight entered. Please try again.");
+    //             continue;
+    //         }
 
-            var pet = new PetModel
-            {
-                Type = petType,
-                Size = "Medium",
-                SeatingLocation = seatingLocation,
-                // Color = petType == "Dog" ? "Brown" : "Gray"
-            };
+    //         var pet = new PetModel
+    //         {
+    //             Type = petType,
+    //             Weight = weight,
+    //             BookingId = bookingId
+    //         };
 
-            petsToBook.Add(pet);
-            petService.AddPetToBooking(bookingId, pet);
-        }
-    }
+    //         try
+    //         {
+    //             petService.ValidatePetBooking(pet);
+    //             petsToBook.Add(pet);
+    //             Console.WriteLine($"Pet added successfully. Location: {pet.SeatingLocation}");
+    //         }
+    //         catch (InvalidOperationException ex)
+    //         {
+    //             Console.WriteLine($"Error: {ex.Message}");
+    //         }
+    //     }
+
+    //     return petsToBook;
+    // }
 }
 
 public class PlaneConfig

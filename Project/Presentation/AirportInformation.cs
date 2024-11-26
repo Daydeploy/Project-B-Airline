@@ -69,3 +69,4 @@ static class AirportInformation
         Console.WriteLine("\nPress any key to return to the menu...");
         Console.ReadKey();
     }
+}

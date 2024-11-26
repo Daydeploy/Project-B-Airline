@@ -53,7 +53,12 @@ public class BookingLogic
         }
 
         List<PassengerModel> passengers = passengerDetails
-            .Select(p => new PassengerModel(p.Name, p.SeatNumber, p.HasCheckedBaggage))
+            .Select(p => new PassengerModel(
+                p.Name, 
+                p.SeatNumber, 
+                p.HasCheckedBaggage,
+                p.HasPet,
+                p.PetDetails))
             .ToList();
 
         BookingModel newBooking = new BookingModel(bookingId, userId, flightId, totalPrice, passengers, petDetails);

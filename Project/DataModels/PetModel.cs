@@ -14,9 +14,18 @@ public class PetModel
     [JsonPropertyName("size")]
     public string Size { get; set; }
 
+    [JsonPropertyName("weight")]
+    public double Weight { get; set; }
+
+    [JsonPropertyName("storageLocation")]
+    public string StorageLocation { get; set; }  // "Cargo" or "Storage"
+
+    [JsonPropertyName("maxWeight")]
+    public double MaxWeight { get; set; }
+
     [JsonPropertyName("seatingLocation")]
     public string SeatingLocation { get; set; }
 
     [JsonPropertyName("fee")]
     public Dictionary<string, decimal> Fee { get; set; }
-} 
+}

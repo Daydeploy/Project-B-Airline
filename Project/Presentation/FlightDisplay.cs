@@ -123,7 +123,15 @@ static class FlightDisplay
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.Write($" | Seat: {passenger.SeatNumber}");
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine($" | Checked Baggage: {(passenger.HasCheckedBaggage ? "Yes" : "No")}");
+            Console.Write($" | Checked Baggage: {(passenger.HasCheckedBaggage ? "Yes" : "No")}");
+            
+            if (passenger.HasPet)
+            {
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.Write($" | Pet: {passenger.PetDetails.Type} ({passenger.PetDetails.Weight}kg, {passenger.PetDetails.StorageLocation})");
+            }
+            
+            Console.WriteLine();
             Console.ResetColor();
         }
     }

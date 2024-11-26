@@ -1,5 +1,17 @@
 public class PetService
 {
+    private readonly Dictionary<string, (double MaxCabinWeight, double MaxWeight)> _petWeightLimits;
+
+    public PetService()
+    {
+        _petWeightLimits = new Dictionary<string, (double, double)>
+        {
+            { "Dog", (8.0, 32.0) },
+            { "Cat", (6.0, 15.0) },
+            { "Other", (4.0, 20.0) }
+        };
+    }
+
     public void AddPetToBooking(int bookingId, PetModel petDetails)
     {
         ValidatePetBooking(petDetails);
@@ -18,19 +30,31 @@ public class PetService
 
     public void ValidatePetBooking(PetModel petDetails)
     {
-        if (petDetails.Type == "Dog" || petDetails.Type == "Cat")
+        if (!_petWeightLimits.ContainsKey(petDetails.Type))
         {
-            if (petDetails.SeatingLocation != "Seat")
-            {
-                throw new InvalidOperationException("Dogs and cats must sit in the cabin.");
-            }
+            throw new InvalidOperationException("Invalid pet type.");
+        }
+
+        var (maxCabinWeight, maxWeight) = _petWeightLimits[petDetails.Type];
+
+        if (petDetails.Weight > maxWeight)
+        {
+            throw new InvalidOperationException($"Pet is too heavy. Maximum allowed weight is {maxWeight}kg.");
+        }
+
+        if (petDetails.Weight > maxCabinWeight)
+        {
+            petDetails.SeatingLocation = "Luggage Room";
+            Console.WriteLine($"Due to weight ({petDetails.Weight}kg), pet will be transported in luggage compartment.");
+        }
+        else if (petDetails.Type == "Dog" || petDetails.Type == "Cat")
+        {
+            Console.WriteLine("Would you like the pet to travel in cabin? (y/n):");
+            petDetails.SeatingLocation = Console.ReadLine()?.ToLower().StartsWith("y") ?? false ? "Seat" : "Luggage Room";
         }
         else
         {
-            if (petDetails.SeatingLocation != "Luggage Room")
-            {
-                throw new InvalidOperationException("Other animals must go in the luggage room.");
-            }
+            petDetails.SeatingLocation = "Luggage Room";
         }
     }
-} 
+}
