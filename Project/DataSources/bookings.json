@@ -7,6 +7,7 @@
     "passengers": [
       {
         "name": null,
+        "pet": null,
         "seatNumber": null,
         "hasCheckedBaggage": false,
         "firstName": null,
@@ -30,6 +31,7 @@
     "passengers": [
       {
         "name": null,
+        "pet": null,
         "seatNumber": null,
         "hasCheckedBaggage": false,
         "firstName": null,
@@ -44,6 +46,7 @@
       },
       {
         "name": null,
+        "pet": null,
         "seatNumber": null,
         "hasCheckedBaggage": false,
         "firstName": null,
@@ -67,6 +70,7 @@
     "passengers": [
       {
         "name": null,
+        "pet": null,
         "seatNumber": null,
         "hasCheckedBaggage": false,
         "firstName": null,
@@ -90,6 +94,7 @@
     "passengers": [
       {
         "name": null,
+        "pet": null,
         "seatNumber": null,
         "hasCheckedBaggage": false,
         "firstName": null,
@@ -113,6 +118,7 @@
     "passengers": [
       {
         "name": null,
+        "pet": null,
         "seatNumber": null,
         "hasCheckedBaggage": false,
         "firstName": null,
@@ -136,6 +142,7 @@
     "passengers": [
       {
         "name": null,
+        "pet": null,
         "seatNumber": null,
         "hasCheckedBaggage": false,
         "firstName": null,
@@ -150,6 +157,7 @@
       },
       {
         "name": null,
+        "pet": null,
         "seatNumber": null,
         "hasCheckedBaggage": false,
         "firstName": null,
@@ -164,6 +172,7 @@
       },
       {
         "name": null,
+        "pet": null,
         "seatNumber": null,
         "hasCheckedBaggage": false,
         "firstName": null,
@@ -187,6 +196,7 @@
     "passengers": [
       {
         "name": null,
+        "pet": null,
         "seatNumber": null,
         "hasCheckedBaggage": false,
         "firstName": null,
@@ -201,6 +211,7 @@
       },
       {
         "name": null,
+        "pet": null,
         "seatNumber": null,
         "hasCheckedBaggage": false,
         "firstName": null,
@@ -215,6 +226,7 @@
       },
       {
         "name": null,
+        "pet": null,
         "seatNumber": null,
         "hasCheckedBaggage": false,
         "firstName": null,
@@ -229,6 +241,7 @@
       },
       {
         "name": null,
+        "pet": null,
         "seatNumber": null,
         "hasCheckedBaggage": false,
         "firstName": null,
@@ -252,6 +265,7 @@
     "passengers": [
       {
         "name": null,
+        "pet": null,
         "seatNumber": null,
         "hasCheckedBaggage": false,
         "firstName": null,
@@ -275,6 +289,7 @@
     "passengers": [
       {
         "name": "evvn",
+        "pet": null,
         "seatNumber": "1B",
         "hasCheckedBaggage": true,
         "firstName": null,
@@ -298,7 +313,47 @@
     "passengers": [
       {
         "name": "Klastest",
+        "pet": null,
         "seatNumber": "1C",
+        "hasCheckedBaggage": true,
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      }
+    ],
+    "pets": []
+  },
+  {
+    "bookingId": 8062,
+    "userId": 1,
+    "flightId": 3863,
+    "totalPrice": 520,
+    "passengers": [
+      {
+        "name": "Aaron",
+        "pet": null,
+        "seatNumber": "6A",
+        "hasCheckedBaggage": true,
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      },
+      {
+        "name": "Gabriel",
+        "pet": null,
+        "seatNumber": "6B",
         "hasCheckedBaggage": true,
         "firstName": null,
         "lastName": null,

@@ -271,7 +271,7 @@ public class SeatSelectionUI
                 Type = petType,
                 Size = "Medium",
                 SeatingLocation = seatingLocation,
-                Color = petType == "Dog" ? "Brown" : "Gray"
+                // Color = petType == "Dog" ? "Brown" : "Gray"
             };
 
             petsToBook.Add(pet);
