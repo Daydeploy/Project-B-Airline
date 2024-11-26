@@ -1,0 +1,28 @@
+[
+  {
+    "id": 1,
+    "firstName": "Test",
+    "lastName": "Account",
+    "dateOfBirth": "1990-01-01T00:00:00",
+    "gender": null,
+    "nationality": null,
+    "phoneNumber": null,
+    "email": "test.account@gmail.com",
+    "password": "test",
+    "passportDetails": null,
+    "miles": 0
+  },
+  {
+    "id": 2,
+    "firstName": "test2account@gmail.com",
+    "lastName": "test2",
+    "dateOfBirth": "1999-11-11T00:00:00",
+    "gender": null,
+    "nationality": null,
+    "phoneNumber": null,
+    "email": "test2account@gmail.com",
+    "password": "Account2",
+    "passportDetails": null,
+    "miles": 0
+  }
+]
