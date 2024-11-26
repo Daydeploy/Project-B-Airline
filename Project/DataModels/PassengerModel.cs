@@ -5,6 +5,9 @@ public class PassengerModel : PersonModel
     [JsonPropertyName("name")]
     public string Name { get; set; }
 
+    [JsonPropertyName("pet")]
+    public PetModel? Pet { get; set; }
+
     [JsonPropertyName("seatNumber")]
     public string? SeatNumber { get; set; }
 

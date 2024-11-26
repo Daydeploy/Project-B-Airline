@@ -17,9 +17,6 @@ public class PetModel
     [JsonPropertyName("seatingLocation")]
     public string SeatingLocation { get; set; }
 
-    [JsonPropertyName("color")]
-    public string Color { get; set; }
-
     [JsonPropertyName("fee")]
     public Dictionary<string, decimal> Fee { get; set; }
 } 

@@ -82,6 +82,19 @@ static class FlightManagement
                         {
                             Console.WriteLine("Invalid number of passengers.");
                         }
+                        Console.WriteLine("Do you want to bring your pet? (y/n):");
+                        if (Console.ReadLine()?.ToLower().StartsWith("y") ?? false)
+                        {
+                            Console.WriteLine("Enter the type of pet (Dog, Cat, Other):");
+                            string petType = Console.ReadLine();
+                            Console.WriteLine("Enter the size of the pet (Small, Medium, Large):");
+                            string petSize = Console.ReadLine();
+                            Console.WriteLine("Enter the seating location for the pet (Seat, Luggage Room):");
+                            string petSeatingLocation = Console.ReadLine();
+                            var pet = new PetModel(petType, petSize, petSeatingLocation);
+                            var petService = new PetService();
+                            petService.AddPetToBooking(flightId, pet);
+                        }
                     }
                     else
                     {
@@ -319,6 +332,7 @@ static class FlightManagement
             Console.WriteLine($"Booking ID: {booking.BookingId}");
             Console.WriteLine($"Flight: {selectedFlight.Origin} to {selectedFlight.Destination}");
             Console.WriteLine($"Departure: {selectedFlight.DepartureTime}");
+            Console.WriteLine($"Arrival: {selectedFlight.ArrivalTime}");
             Console.WriteLine("\nPassengers:");
 
             foreach (var passenger in booking.Passengers)

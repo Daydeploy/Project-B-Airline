@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 public class PetService
 {
     public void AddPetToBooking(int bookingId, PetModel petDetails)
