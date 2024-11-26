@@ -125,7 +125,14 @@ static class AccountManagement
             case 2:
                 Console.WriteLine($"Current First Name: {account.FirstName}");
                 Console.WriteLine("Enter new first name:");
-                updateSuccessful = UserLogin._userAccountService.ManageAccount(account.Id, newFirstName: Console.ReadLine());
+                string newFirstName = Console.ReadLine();
+                while (string.IsNullOrWhiteSpace(newFirstName))
+                {
+                    Console.WriteLine("Invalid input. Please enter a valid first name.");
+                    Console.Write("Enter new first name: ");
+                    newFirstName = Console.ReadLine();
+                }
+                updateSuccessful = UserLogin._userAccountService.ManageAccount(account.Id, newFirstName: newFirstName);
                 Console.WriteLine(
                     updateSuccessful ? "First name updated successfully." : "Failed to update first name.");
                 break;

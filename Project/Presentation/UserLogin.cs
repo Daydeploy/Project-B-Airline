@@ -12,7 +12,13 @@ static class UserLogin
         Console.WriteLine("Welcome to the login page");
         Console.WriteLine("Note: You can press F2 to toggle password visibility while typing.");
         Console.Write("Please enter your login details:\nEmail: ");
-        string email = Console.ReadLine() ?? string.Empty;
+        string email = Console.ReadLine();
+        while (!IsValidEmail(email))
+        {
+            Console.WriteLine("Invalid input. Please enter a valid email address.");
+            Console.Write("Email: ");
+            email = Console.ReadLine();
+        }
 
         string password = "";
         bool showPassword = false;
@@ -117,5 +123,10 @@ static class UserLogin
                     return;
             }
         }
+    }
+
+    private static bool IsValidEmail(string email)
+    {
+        return email.Contains("@") && email.Contains(".");
     }
 }
