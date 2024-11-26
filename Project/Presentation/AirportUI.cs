@@ -1,6 +1,6 @@
 public class AirportUI
 {
-    private static void DisplayAirportHeader()
+    public static void DisplayAirportHeader()
     {
         Console.WriteLine("\n" + new string('-', 100));
         Console.WriteLine("|{0,-20}|{1,-15}|{2,-20}|{3,-20}|{4,-18}|", 
