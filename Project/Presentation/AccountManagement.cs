@@ -43,7 +43,21 @@ static class AccountManagement
         string lastName = Console.ReadLine();
 
         Console.WriteLine("Enter your email address:");
-        string email = Console.ReadLine();
+        string email = Console.ReadLine().Trim();
+
+        while (true)
+        {
+            if (string.IsNullOrWhiteSpace(email) || !IsValidEmail(email))
+            {
+                Console.WriteLine("Error: Email must contain '@' and a domain (For instance: '.com').");
+                Console.Write("Please enter your email address again: ");
+                email = Console.ReadLine().Trim();
+            }
+            else
+            {
+                break;
+            }
+        }
 
         string password = "";
         string confirmPassword = "";
@@ -125,7 +139,14 @@ static class AccountManagement
             case 2:
                 Console.WriteLine($"Current First Name: {account.FirstName}");
                 Console.WriteLine("Enter new first name:");
-                updateSuccessful = UserLogin._userAccountService.ManageAccount(account.Id, newFirstName: Console.ReadLine());
+                string newFirstName = Console.ReadLine();
+                while (string.IsNullOrWhiteSpace(newFirstName))
+                {
+                    Console.WriteLine("Invalid input. Please enter a valid first name.");
+                    Console.Write("Enter new first name: ");
+                    newFirstName = Console.ReadLine();
+                }
+                updateSuccessful = UserLogin._userAccountService.ManageAccount(account.Id, newFirstName: newFirstName);
                 Console.WriteLine(
                     updateSuccessful ? "First name updated successfully." : "Failed to update first name.");
                 break;
@@ -202,5 +223,13 @@ static class AccountManagement
 
         Console.WriteLine("\nPress any key to continue...");
         Console.ReadKey();
+    }
+
+    private static bool IsValidEmail(string email)
+    {
+        return !string.IsNullOrWhiteSpace(email) && 
+               email.Contains("@") && 
+               email.IndexOf("@") < email.LastIndexOf(".") && 
+               email.IndexOf(".") > email.IndexOf("@") + 1;
     }
 }
