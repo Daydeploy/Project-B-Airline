@@ -13,21 +13,21 @@ public class TestFlightLogic
         _testFlights = new List<FlightModel>
         {
             new FlightModel(
-                1, "Rotterdam", "Paris", "2024-11-15 10:00", "2024-11-15 12:00", null, 0, 0, null, null, null, null, null, 
+                1, "Rotterdam", "Paris", "2024-11-15 10:00", "2024-11-15 12:00", null, 0, "", null, null, null, null,
                 new List<SeatClassOption>
                 {
                     new SeatClassOption("Economy", 150),
                     new SeatClassOption("Business", 300)
                 }, null, null),
             new FlightModel(
-                2, "Rotterdam", "London", "2024-11-16 14:00", "2024-11-16 15:30", null, 0, 0, null, null, null, null, null, 
+                2, "Rotterdam", "London", "2024-11-16 14:00", "2024-11-16 15:30", null, 0, "", null, null, null, null, 
                 new List<SeatClassOption>
                 {
                     new SeatClassOption("Economy", 200),
                     new SeatClassOption("Business", 400)
                 }, null, null),
             new FlightModel(
-                3, "Rotterdam", "London", "2024-11-17 09:00", "2024-11-17 10:30", null, 0, 0, null, null, null, null, null, 
+                3, "Rotterdam", "London", "2024-11-17 09:00", "2024-11-17 10:30", null, 0, "", null, null, null, null, 
                 new List<SeatClassOption>
                 {
                     new SeatClassOption("Economy", 175),

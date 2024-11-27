@@ -25,7 +25,7 @@ public class TestSeatUpgrade
             dateOfBirth: DateTime.Now.AddYears(-25),
             emailAddress: "test@example.com",
             password: "password123",
-            miles: 50000
+            miles: null
         );
 
         _testFlights = new List<FlightModel>
@@ -38,7 +38,6 @@ public class TestSeatUpgrade
                 departureTime: DateTime.Now.AddDays(7).ToString(),
                 arrivalTime: DateTime.Now.AddDays(7).AddHours(2).ToString(),
                 distance: 500,
-                availableSeats: 150,
                 planeType: "Boeing 737",
                 departureTerminal: "T1",
                 arrivalTerminal: "T2",
