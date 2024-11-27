@@ -420,5 +420,40 @@
       }
     ],
     "pets": []
+  },
+  {
+    "bookingId": 7797,
+    "userId": 1,
+    "flightId": 3866,
+    "totalPrice": 587,
+    "passengers": [
+      {
+        "name": "Aaron met dier",
+        "hasPet": true,
+        "petDetails": {
+          "petId": 0,
+          "bookingId": 0,
+          "type": "Dog",
+          "size": null,
+          "weight": 12,
+          "storageLocation": "Storage",
+          "maxWeight": 0,
+          "seatingLocation": null,
+          "fee": null
+        },
+        "seatNumber": "1A",
+        "hasCheckedBaggage": true,
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      }
+    ],
+    "pets": []
   }
 ]

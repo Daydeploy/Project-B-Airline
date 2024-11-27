@@ -310,23 +310,27 @@ static class FlightManagement
             Console.WriteLine("Enter passenger name:");
             string name = Console.ReadLine() ?? string.Empty;
     
-            Console.WriteLine("\nSelect a seat for the passenger:");
-            string seatNumber = seatSelector.SelectSeat(selectedFlight.PlaneType);
-            seatSelector.SetSeatOccupied(seatNumber);
-    
             Console.WriteLine("Does this passenger have checked baggage? (y/n):");
             bool hasCheckedBaggage = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
     
             Console.WriteLine("Does this passenger have a pet? (y/n):");
             bool hasPet = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
-    
+
             PetModel petDetails = null;
             if (hasPet)
             {
                 petDetails = SelectPetDetails(petTypes, maxWeights);
+            }
+
+            Console.WriteLine("\nSelect a seat for the passenger:");
+            string seatNumber = seatSelector.SelectSeat(selectedFlight.PlaneType);
+            seatSelector.SetSeatOccupied(seatNumber);
+
+            if (hasPet)
+            {
                 seatSelector.SetPetSeat(seatNumber);
             }
-    
+            
             var passenger = new PassengerModel(name, seatNumber, hasCheckedBaggage, hasPet, petDetails);
             passengerDetails.Add(passenger);
         }

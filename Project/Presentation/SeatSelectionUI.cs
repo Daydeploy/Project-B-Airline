@@ -180,7 +180,14 @@ public class SeatSelectionUI
                 else
                 {
                     // Use different symbol for pet seats
-                    Console.Write(isOccupied ? (hasPet ? " ▲ " : " ■ ") : " □ ");
+                    if (isOccupied)
+                    {
+                        Console.Write(hasPet ? " ▲ " : " ■ ");
+                    }
+                    else
+                    {
+                        Console.Write(" □ ");
+                    }
                 }
 
                 // Add aisle space based on plane type
@@ -253,47 +260,6 @@ public class SeatSelectionUI
         return "Economy";
     }
 
-    
-    // //moet aangepast worden dit werkt niet
-    // public List<PetModel> SelectPetsForBooking(int bookingId)
-    // {
-    //     var petService = new PetService();
-    //     List<PetModel> petsToBook = new List<PetModel>();
-
-    //     while (true)
-    //     {
-    //         Console.WriteLine("\nEnter pet type (Dog, Cat, Other) or 'done' to finish:");
-    //         string petType = Console.ReadLine();
-    //         if (petType.Equals("done", StringComparison.OrdinalIgnoreCase)) break;
-
-    //         Console.WriteLine("Enter pet weight in kg:");
-    //         if (!double.TryParse(Console.ReadLine(), out double weight))
-    //         {
-    //             Console.WriteLine("Invalid weight entered. Please try again.");
-    //             continue;
-    //         }
-
-    //         var pet = new PetModel
-    //         {
-    //             Type = petType,
-    //             Weight = weight,
-    //             BookingId = bookingId
-    //         };
-
-    //         try
-    //         {
-    //             petService.ValidatePetBooking(pet);
-    //             petsToBook.Add(pet);
-    //             Console.WriteLine($"Pet added successfully. Location: {pet.SeatingLocation}");
-    //         }
-    //         catch (InvalidOperationException ex)
-    //         {
-    //             Console.WriteLine($"Error: {ex.Message}");
-    //         }
-    //     }
-
-    //     return petsToBook;
-    // }
 }
 
 public class PlaneConfig
