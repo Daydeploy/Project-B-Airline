@@ -213,7 +213,7 @@ static class FlightManagement
         {
             var selectedFlight = flightsList.FirstOrDefault(f => f.FlightId == flightId);
             if (selectedFlight != null)
-            {   
+            {
                 Console.WriteLine("How many passengers? (1-8):");
                 if (int.TryParse(Console.ReadLine(), out int passengerCount) && passengerCount > 0 &&
                     passengerCount <= 8)
@@ -235,7 +235,6 @@ static class FlightManagement
                                         DateTime.Parse(selectedFlight.ArrivalTime)) // Convert to DateTime
                             .ToList();
 
-
                         if (returnFlights.Any())
                         {
                             Console.WriteLine("\nSelect a return flight:");
@@ -247,9 +246,28 @@ static class FlightManagement
                                 var returnFlight = returnFlights.FirstOrDefault(f => f.FlightId == returnFlightId);
                                 if (returnFlight != null)
                                 {
-                                    // Use the same passenger details for the return flight
-                                    CompleteBooking(returnFlightId, passengerDetails, returnFlight, seatSelector);
+                                    Console.WriteLine("\nSelecting seats for the return flight:");
 
+                                    foreach (var passenger in passengerDetails)
+                                    {
+                                        Console.WriteLine(
+                                            $"\nSelect a seat for {passenger.Name} on the return flight:");
+                                        string seatNumber =
+                                            seatSelector.SelectSeat(returnFlight
+                                                .PlaneType); // Reusing the existing instance
+                                        seatSelector.SetSeatOccupied(seatNumber);
+
+                                        if (passenger.HasPet)
+                                        {
+                                            seatSelector.SetPetSeat(seatNumber);
+                                        }
+
+                                        // Update the passenger's seat number for the return flight
+                                        passenger.SeatNumber = seatNumber;
+                                    }
+
+                                    // Complete the booking for the return flight
+                                    CompleteBooking(returnFlightId, passengerDetails, returnFlight, seatSelector);
                                     Console.WriteLine("\nRound-trip booking completed successfully!");
                                 }
                                 else
@@ -289,7 +307,7 @@ static class FlightManagement
     }
 
 
-        private static List<PassengerModel> CollectPassengerDetails(FlightModel selectedFlight, int passengerCount, 
+    private static List<PassengerModel> CollectPassengerDetails(FlightModel selectedFlight, int passengerCount,
         SeatSelectionUI seatSelector)
     {
         var passengerDetails = new List<PassengerModel>();
@@ -302,17 +320,17 @@ static class FlightManagement
             { "Rabbit", 8.0 },
             { "Hamster", 1.0 }
         };
-    
+
         for (int i = 0; i < passengerCount; i++)
         {
             Console.Clear();
             Console.WriteLine($"Passenger {i + 1} Details:");
             Console.WriteLine("Enter passenger name:");
             string name = Console.ReadLine() ?? string.Empty;
-    
+
             Console.WriteLine("Does this passenger have checked baggage? (y/n):");
             bool hasCheckedBaggage = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
-    
+
             Console.WriteLine("Does this passenger have a pet? (y/n):");
             bool hasPet = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
 
@@ -330,13 +348,14 @@ static class FlightManagement
             {
                 seatSelector.SetPetSeat(seatNumber);
             }
-            
+
             var passenger = new PassengerModel(name, seatNumber, hasCheckedBaggage, hasPet, petDetails);
             passengerDetails.Add(passenger);
         }
-    
+
         return passengerDetails;
     }
+
     private static PetModel SelectPetDetails(string[] petTypes, Dictionary<string, double> maxWeights)
     {
         int selectedIndex = 0;
@@ -357,6 +376,7 @@ static class FlightManagement
                 {
                     Console.Write("  ");
                 }
+
                 Console.WriteLine(petTypes[i]);
                 Console.ResetColor();
             }
