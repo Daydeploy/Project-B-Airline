@@ -181,7 +181,7 @@ public class MilesLogic
         AccountsAccess.WriteAll(accounts);
     }
 
-    public static void CalculateMilesFromBooking(int accountId)
+    public static int CalculateMilesFromBooking(int accountId)
     {
         var accounts = AccountsAccess.LoadAll();
         var bookings = BookingAccess.LoadAll();
@@ -197,7 +197,7 @@ public class MilesLogic
 
         if (!milesRecord.Enrolled)
         {
-            return;
+            return 0;
         }
 
         var currentLevel = milesRecord.Level;
@@ -226,6 +226,7 @@ public class MilesLogic
         }
         milesRecord.Points += totalMilesEarned;
         AccountsAccess.WriteAll(accounts);
+        return totalMilesEarned;
     }
 
     public static int BasicPointsRedemption(int accountId, int price, int bookingId)

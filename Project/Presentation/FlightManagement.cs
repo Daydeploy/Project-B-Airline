@@ -445,7 +445,9 @@ static class FlightManagement
             Console.WriteLine($"\nTotal Price: {booking.TotalPrice} EUR");
 
             // Calculate miles and apply points redemption
-            MilesLogic.CalculateMilesFromBooking(UserLogin._userAccountService.CurrentUserId);
+            int milesEarned = MilesLogic.CalculateMilesFromBooking(UserLogin._userAccountService.CurrentUserId);
+            Console.WriteLine($"Miles Earned: {milesEarned}");
+
             booking.TotalPrice = MilesLogic.BasicPointsRedemption(UserLogin._userAccountService.CurrentUserId, booking.TotalPrice, booking.BookingId);
 
             // Display the updated price

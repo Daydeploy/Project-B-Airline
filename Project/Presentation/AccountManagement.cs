@@ -219,6 +219,10 @@ static class AccountManagement
                 break;
 
             case 9: // Frequent Flyer Program enrollment/unenrollment
+                var accounts = AccountsAccess.LoadAll();
+                account = accounts.FirstOrDefault(a => a.Id == account.Id);
+
+
                 if (account.Miles != null && account.Miles.Count > 0)
                 {
                     var milesRecord = account.Miles[0];
