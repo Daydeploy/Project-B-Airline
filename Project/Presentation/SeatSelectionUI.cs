@@ -1,8 +1,11 @@
 public class SeatSelectionUI
 {
+    private PlaneConfig currentConfig;
     private Dictionary<string, bool> occupiedSeats = new Dictionary<string, bool>();
-    
-    // Add dictionary of plane type variations to handle different formats
+    // Add dictionary to track seats with pets
+    private Dictionary<string, bool> petSeats = new Dictionary<string, bool>();
+
+    // Add dictionary of plane type variations to handle different Aircrafts
     private readonly Dictionary<string, string> planeTypeAliases = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
     {
         ["Airbus 330"] = "Airbus A330",
@@ -49,7 +52,6 @@ public class SeatSelectionUI
         }
     };
 
-    private PlaneConfig currentConfig;
 
     public string SelectSeat(string planeType)
     {
@@ -62,7 +64,7 @@ public class SeatSelectionUI
         // Normalize plane type
         if (planeTypeAliases.TryGetValue(planeType, out string normalizedType))
         {
-            planeType = normalizedType;
+            planeType = normalizedType; // zodat airbus werkt dus zet je de plane naar de normalizedType
         }
 
         if (!planeConfigs.ContainsKey(planeType))
@@ -79,8 +81,7 @@ public class SeatSelectionUI
         {
             Console.Clear();
             DisplayLegend();
-            Console.WriteLine($"\nAircraft: {planeType}\n");
-            DisplayPlane(currentRow, currentSeat);
+            DisplayPlane(currentRow, currentSeat, planeType);
             
             ConsoleKeyInfo key = Console.ReadKey(true);
             switch (key.Key)
@@ -112,32 +113,38 @@ public class SeatSelectionUI
 
         return null;
     }
-
+    
     private void DisplayLegend()
     {
         Console.WriteLine("\n === Seat Selection === ");
         Console.WriteLine("Use arrow keys to navigate, ENTER to select and ESCAPE to cancel\n");
         
         Console.ForegroundColor = ConsoleColor.Magenta;
-        Console.Write("■ First Class ");
+        Console.Write("■ First Class  ");
         Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.Write("■ Business Class ");
+        Console.Write("■ Business Class  ");
         Console.ForegroundColor = ConsoleColor.Cyan;
-        Console.Write("■ Economy Class ");
+        Console.Write("■ Economy Class  ");
         Console.ForegroundColor = ConsoleColor.Red;
-        Console.Write("■ Occupied ");
+        Console.Write("■ Occupied  ");
+        Console.ForegroundColor = ConsoleColor.DarkGray;
+        Console.Write("▲ With Pet  ");
         Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine("□ Available\n");
         
-        Console.Write("     ");
+        Console.Write("    ");
         for (char c = 'A'; c < 'A' + currentConfig.SeatsPerRow; c++)
         {
             Console.Write($" {c} ");
+            if (AddAisleSpace(c - 'A'))
+            {
+                Console.Write("  ");
+            }
         }
         Console.WriteLine("\n");
     }
 
-    private void DisplayPlane(int selectedRow, int selectedSeat)
+    private void DisplayPlane(int selectedRow, int selectedSeat, string planeType)
     {
         for (int row = 1; row <= currentConfig.Rows; row++)
         {
@@ -148,6 +155,7 @@ public class SeatSelectionUI
                 string seatNumber = $"{row}{(char)('A' + seat)}";
                 bool isSelected = row == selectedRow && seat == selectedSeat;
                 bool isOccupied = occupiedSeats.ContainsKey(seatNumber);
+                bool hasPet = petSeats.ContainsKey(seatNumber);
 
                 // Set color based on seat class
                 if (row <= currentConfig.SeatClasses[0].EndRow)
@@ -158,23 +166,25 @@ public class SeatSelectionUI
                     Console.ForegroundColor = ConsoleColor.Cyan;     // Economy Class
 
                 if (isOccupied)
-                    Console.ForegroundColor = ConsoleColor.Red;
+                {
+                    Console.ForegroundColor = hasPet ? ConsoleColor.DarkGray : ConsoleColor.Red;
+                }
 
                 if (isSelected)
                 {
                     Console.BackgroundColor = ConsoleColor.DarkGray;
-                    Console.Write("[■]");
+                    Console.Write(hasPet ? "[▲]" : "[■]");
                     Console.BackgroundColor = ConsoleColor.Black;
                 }
                 else
                 {
-                    Console.Write(isOccupied ? " ■ " : " □ ");
+                    Console.Write(isOccupied ? (hasPet ? " ▲ " : " ■ ") : " □ ");
                 }
 
                 // Add aisle space based on plane type
                 if (AddAisleSpace(seat))
                 {
-                    Console.Write(" ");
+                    Console.Write("  ");
                 }
             }
             
@@ -185,6 +195,8 @@ public class SeatSelectionUI
             if (row == currentConfig.SeatClasses[0].EndRow || row == currentConfig.SeatClasses[1].EndRow)
                 Console.WriteLine("     +" + new string('-', currentConfig.SeatsPerRow * 3 + GetTotalAisleSpaces()) + "+");
         }
+        Console.WriteLine($"\nAircraft: {planeType}\n");
+
     }
 
     private bool AddAisleSpace(int seatIndex)
@@ -218,6 +230,15 @@ public class SeatSelectionUI
             occupiedSeats.Remove(seatNumber);
     }
 
+    // Add method to set pet seat
+    public void SetPetSeat(string seatNumber, bool hasPet = true)
+    {
+        if (hasPet)
+            petSeats[seatNumber] = true;
+        else
+            petSeats.Remove(seatNumber);
+    }
+
     public string GetSeatClass(string seatNumber)
     {
         if (currentConfig == null)
@@ -231,6 +252,7 @@ public class SeatSelectionUI
             return "Business";
         return "Economy";
     }
+
 }
 
 public class PlaneConfig
@@ -238,4 +260,5 @@ public class PlaneConfig
     public int Rows { get; set; }
     public int SeatsPerRow { get; set; }
     public (int StartRow, int EndRow)[] SeatClasses { get; set; }
+
 }

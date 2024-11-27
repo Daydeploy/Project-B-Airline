@@ -1,0 +1,29 @@
+[
+    {
+        "type": "Dog",
+        "size": "Medium",
+        "maxWeight": 32.0,
+        "storageLocation": "Storage",
+        "fee": {
+            "Storage": 20
+        }
+    },
+    {
+        "type": "Cat",
+        "size": "Small",
+        "maxWeight": 15.0,
+        "storageLocation": "Storage",
+        "fee": {
+            "Storage": 15
+        }
+    },
+    {
+        "type": "Other",
+        "size": "Varies",
+        "maxWeight": 20.0,
+        "storageLocation": "Cargo",
+        "fee": {
+            "Cargo": 10
+        }
+    }
+]

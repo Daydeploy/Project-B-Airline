@@ -2,45 +2,85 @@
   {
     "id": 1,
     "firstName": "Test",
-    "lastName": "Testing",
-    "dateOfBirth": "1985-05-15T00:00:00",
-    "gender": "Male",
-    "nationality": "Dutch",
-    "phoneNumber": "\u002B31201234567",
-    "email": "test",
+    "lastName": "Account",
+    "dateOfBirth": "1990-01-01T00:00:00",
+    "gender": null,
+    "nationality": null,
+    "phoneNumber": null,
+    "email": "test.account@gmail.com",
     "password": "test",
-    "passportDetails": {
-      "passportNumber": "NL123456789",
-      "issueDate": "2000-01-01T00:00:00",
-      "expirationDate": "2030-01-01T00:00:00",
-      "countryOfIssue": "Netherlands"
-    },
-    "miles": 0
+    "passportDetails": null,
+    "milesDetails": [
+      {
+        "Enrolled": false,
+        "Level": "",
+        "Experience": 0,
+        "Points": 0,
+        "History": ""
+      }
+    ]
   },
   {
     "id": 2,
-    "firstName": "aaron",
-    "lastName": "A",
-    "dateOfBirth": "2004-02-02T00:00:00",
+    "firstName": "test2account@gmail.com",
+    "lastName": "test2",
+    "dateOfBirth": "1999-11-11T00:00:00",
     "gender": null,
     "nationality": null,
     "phoneNumber": null,
-    "email": "aaron",
-    "password": "aaron",
+    "email": "test2account@gmail.com",
+    "password": "Account2",
     "passportDetails": null,
-    "miles": 0
+    "milesDetails": [
+      {
+        "Enrolled": false,
+        "Level": "",
+        "Experience": 0,
+        "Points": 0,
+        "History": ""
+      }
+    ]
   },
   {
-    "id": 3,
-    "firstName": "Demo",
-    "lastName": "Project",
-    "dateOfBirth": "2000-11-13T00:00:00",
+    "id": 82,
+    "firstName": "test2account@gmail.com",
+    "lastName": "test2",
+    "dateOfBirth": "1999-11-11T00:00:00",
     "gender": null,
     "nationality": null,
     "phoneNumber": null,
-    "email": "demo1311@gmail.com",
+    "email": "test@test.nl",
     "password": "test",
     "passportDetails": null,
-    "miles": 0
+    "milesDetails": [
+      {
+        "Enrolled": false,
+        "Level": "",
+        "Experience": 0,
+        "Points": 0,
+        "History": ""
+      }
+    ]
+  },
+  {
+    "id": 83,
+    "firstName": "Darrin",
+    "lastName": "Wever",
+    "dateOfBirth": "1998-09-08T00:00:00",
+    "gender": null,
+    "nationality": null,
+    "phoneNumber": null,
+    "email": "darrinwever@gmail.com",
+    "password": "test",
+    "passportDetails": null,
+    "milesDetails": [
+      {
+        "Enrolled": true,
+        "Level": "Bronze",
+        "Experience": 0,
+        "Points": 0,
+        "History": "\nLevel updated to Bronze at 2024-11-27 07:48:49\nEarned 1784 Miles from booking 9084 - 446 euros at 2024-11-27 07:49:03"
+      }
+    ]
   }
 ]

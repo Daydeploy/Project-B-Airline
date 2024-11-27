@@ -36,7 +36,7 @@ public class BookingLogic
         }
     }
 
-    public static BookingModel CreateBooking(int userId, int flightId, List<PassengerModel> passengerDetails)
+    public static BookingModel CreateBooking(int userId, int flightId, List<PassengerModel> passengerDetails, List<PetModel> petDetails)
     {
         // Generate a new booking ID
         int bookingId = GenerateBookingId();
@@ -45,14 +45,23 @@ public class BookingLogic
         var flight = _flights.FirstOrDefault(f => f.FlightId == flightId) 
             ?? throw new Exception("Flight not found");
         
-        // Calculate total price based on flight price, passengers, and their selections
+        // Calculate total price including pets
         int totalPrice = CalculateTotalPrice(flight.Destination, passengerDetails);
+        foreach (var pet in petDetails)
+        {
+            totalPrice += (int)PetDataAccess.GetPetFees(pet.Type, pet.SeatingLocation); // ik weet niet of locatie correct is
+        }
 
         List<PassengerModel> passengers = passengerDetails
-            .Select(p => new PassengerModel(p.Name, p.SeatNumber, p.HasCheckedBaggage))
+            .Select(p => new PassengerModel(
+                p.Name, 
+                p.SeatNumber, 
+                p.HasCheckedBaggage,
+                p.HasPet,
+                p.PetDetails))
             .ToList();
 
-        BookingModel newBooking = new BookingModel(bookingId, userId, flightId, totalPrice, passengers);
+        BookingModel newBooking = new BookingModel(bookingId, userId, flightId, totalPrice, passengers, petDetails);
         _bookings.Add(newBooking);
         BookingAccess.WriteAll(_bookings);
         return newBooking;
