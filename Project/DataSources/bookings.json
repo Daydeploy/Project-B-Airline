@@ -387,20 +387,20 @@
     "pets": []
   },
   {
-    "bookingId": 640,
+    "bookingId": 1149,
     "userId": 1,
-    "flightId": 3863,
+    "flightId": 3710,
     "totalPrice": 446,
     "passengers": [
       {
-        "name": "HasApet",
+        "name": "Evenkijken of het werkt",
         "hasPet": true,
         "petDetails": {
           "petId": 0,
           "bookingId": 0,
-          "type": "Dog",
+          "type": "Bird",
           "size": null,
-          "weight": 12,
+          "weight": 1,
           "storageLocation": "Storage",
           "maxWeight": 0,
           "seatingLocation": null,
@@ -422,26 +422,26 @@
     "pets": []
   },
   {
-    "bookingId": 7797,
+    "bookingId": 8354,
     "userId": 1,
-    "flightId": 3866,
-    "totalPrice": 587,
+    "flightId": 3710,
+    "totalPrice": 118,
     "passengers": [
       {
-        "name": "Aaron met dier",
+        "name": "sdf",
         "hasPet": true,
         "petDetails": {
           "petId": 0,
           "bookingId": 0,
           "type": "Dog",
           "size": null,
-          "weight": 12,
+          "weight": 11,
           "storageLocation": "Storage",
           "maxWeight": 0,
           "seatingLocation": null,
           "fee": null
         },
-        "seatNumber": "1A",
+        "seatNumber": "10A",
         "hasCheckedBaggage": true,
         "firstName": null,
         "lastName": null,

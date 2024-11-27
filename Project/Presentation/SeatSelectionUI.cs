@@ -81,7 +81,7 @@ public class SeatSelectionUI
         {
             Console.Clear();
             DisplayLegend();
-            DisplayPlane(currentRow, currentSeat);
+            DisplayPlane(currentRow, currentSeat, planeType);
             
             ConsoleKeyInfo key = Console.ReadKey(true);
             switch (key.Key)
@@ -109,7 +109,6 @@ public class SeatSelectionUI
                     }
                     break;
             }
-            Console.WriteLine($"\nAircraft: {planeType}\n");
         }
 
         return null;
@@ -145,7 +144,7 @@ public class SeatSelectionUI
         Console.WriteLine("\n");
     }
 
-    private void DisplayPlane(int selectedRow, int selectedSeat)
+    private void DisplayPlane(int selectedRow, int selectedSeat, string planeType)
     {
         for (int row = 1; row <= currentConfig.Rows; row++)
         {
@@ -174,20 +173,12 @@ public class SeatSelectionUI
                 if (isSelected)
                 {
                     Console.BackgroundColor = ConsoleColor.DarkGray;
-                    Console.Write("[■]");
+                    Console.Write(hasPet ? "[▲]" : "[■]");
                     Console.BackgroundColor = ConsoleColor.Black;
                 }
                 else
                 {
-                    // Use different symbol for pet seats
-                    if (isOccupied)
-                    {
-                        Console.Write(hasPet ? " ▲ " : " ■ ");
-                    }
-                    else
-                    {
-                        Console.Write(" □ ");
-                    }
+                    Console.Write(isOccupied ? (hasPet ? " ▲ " : " ■ ") : " □ ");
                 }
 
                 // Add aisle space based on plane type
@@ -204,6 +195,8 @@ public class SeatSelectionUI
             if (row == currentConfig.SeatClasses[0].EndRow || row == currentConfig.SeatClasses[1].EndRow)
                 Console.WriteLine("     +" + new string('-', currentConfig.SeatsPerRow * 3 + GetTotalAisleSpaces()) + "+");
         }
+        Console.WriteLine($"\nAircraft: {planeType}\n");
+
     }
 
     private bool AddAisleSpace(int seatIndex)
