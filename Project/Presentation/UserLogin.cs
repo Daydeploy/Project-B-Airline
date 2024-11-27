@@ -33,6 +33,7 @@ static class UserLogin
             Console.WriteLine($"Welcome back {acc.FirstName} {acc.LastName}");
             Console.WriteLine($"Your email is {acc.EmailAddress}");
             _isLoggedIn = true;
+            MilesLogic.UpdateAllAccountLevels();
             ShowLoggedInMenu(acc);
         }
         else

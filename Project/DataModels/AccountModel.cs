@@ -33,11 +33,11 @@ public class AccountModel
     [JsonPropertyName("passportDetails")]
     public PassportDetailsModel? PassportDetails { get; set; }  // Nullable
 
-    [JsonPropertyName("miles")]
-    public int Miles { get; set; }
+    [JsonPropertyName("milesDetails")]
+    public List<MilesModel> Miles { get; set; }
 
     public AccountModel(int id, string firstName, string lastName, DateTime dateOfBirth,
-                        string emailAddress, string password, int miles = 0)
+                        string emailAddress, string password, List<MilesModel> miles)
     {
         Id = id;
         FirstName = firstName;

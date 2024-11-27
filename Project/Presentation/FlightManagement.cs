@@ -213,65 +213,85 @@ static class FlightManagement
         {
             var selectedFlight = flightsList.FirstOrDefault(f => f.FlightId == flightId);
             if (selectedFlight != null)
-            {   
-                Console.WriteLine("How many passengers? (1-8):");
-                if (int.TryParse(Console.ReadLine(), out int passengerCount) && passengerCount > 0 &&
-                    passengerCount <= 8)
+            {
                 {
-                    var seatSelector = new SeatSelectionUI();
-                    var passengerDetails = CollectPassengerDetails(selectedFlight, passengerCount, seatSelector);
-                    CompleteBooking(flightId, passengerDetails, selectedFlight, seatSelector);
-
-                    if (isRoundTrip)
+                    Console.WriteLine("How many passengers? (1-8):");
+                    if (int.TryParse(Console.ReadLine(), out int passengerCount) && passengerCount > 0 &&
+                        passengerCount <= 8)
                     {
-                        Console.Clear();
-                        Console.WriteLine(
-                            $"Finding return flights from {selectedFlight.Destination} to {selectedFlight.Origin}...");
+                        var seatSelector = new SeatSelectionUI();
+                        var passengerDetails = CollectPassengerDetails(selectedFlight, passengerCount, seatSelector);
+                        CompleteBooking(flightId, passengerDetails, selectedFlight, seatSelector);
 
-                        var flightsLogic = new FlightsLogic();
-                        var returnFlights = flightsLogic
-                            .GetFlightsByOriginAndDestination(selectedFlight.Destination, selectedFlight.Origin)
-                            .Where(f => DateTime.Parse(f.DepartureTime) >
-                                        DateTime.Parse(selectedFlight.ArrivalTime)) // Convert to DateTime
-                            .ToList();
-
-
-                        if (returnFlights.Any())
+                        if (isRoundTrip)
                         {
-                            Console.WriteLine("\nSelect a return flight:");
-                            FlightDisplay.DisplayFlights(returnFlights);
+                            Console.Clear();
+                            Console.WriteLine(
+                                $"Finding return flights from {selectedFlight.Destination} to {selectedFlight.Origin}...");
 
-                            Console.WriteLine("\nEnter the Flight ID for the return flight:");
-                            if (int.TryParse(Console.ReadLine(), out int returnFlightId))
+                            var flightsLogic = new FlightsLogic();
+                            var returnFlights = flightsLogic
+                                .GetFlightsByOriginAndDestination(selectedFlight.Destination, selectedFlight.Origin)
+                                .Where(f => DateTime.Parse(f.DepartureTime) >
+                                            DateTime.Parse(selectedFlight.ArrivalTime)) // Convert to DateTime
+                                .ToList();
+
+                            if (returnFlights.Any())
                             {
-                                var returnFlight = returnFlights.FirstOrDefault(f => f.FlightId == returnFlightId);
-                                if (returnFlight != null)
-                                {
-                                    // Use the same passenger details for the return flight
-                                    CompleteBooking(returnFlightId, passengerDetails, returnFlight, seatSelector);
+                                Console.WriteLine("\nSelect a return flight:");
+                                FlightDisplay.DisplayFlights(returnFlights);
 
-                                    Console.WriteLine("\nRound-trip booking completed successfully!");
+                                Console.WriteLine("\nEnter the Flight ID for the return flight:");
+                                if (int.TryParse(Console.ReadLine(), out int returnFlightId))
+                                {
+                                    var returnFlight = returnFlights.FirstOrDefault(f => f.FlightId == returnFlightId);
+                                    if (returnFlight != null)
+                                    {
+                                        Console.WriteLine("\nSelecting seats for the return flight:");
+
+                                        foreach (var passenger in passengerDetails)
+                                        {
+                                            Console.WriteLine(
+                                                $"\nSelect a seat for {passenger.Name} on the return flight:");
+                                            string seatNumber =
+                                                seatSelector.SelectSeat(returnFlight
+                                                    .PlaneType); // Reusing the existing instance
+                                            seatSelector.SetSeatOccupied(seatNumber);
+
+                                            if (passenger.HasPet)
+                                            {
+                                                seatSelector.SetPetSeat(seatNumber);
+                                            }
+
+                                            // Update the passenger's seat number for the return flight
+                                            passenger.SeatNumber = seatNumber;
+                                        }
+
+                                        // Complete the booking for the return flight
+                                        CompleteBooking(returnFlightId, passengerDetails, returnFlight, seatSelector);
+                                        Console.WriteLine("\nRound-trip booking completed successfully!");
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Return flight not found with the specified ID.");
+                                    }
                                 }
                                 else
                                 {
-                                    Console.WriteLine("Return flight not found with the specified ID.");
+                                    Console.WriteLine("Invalid Flight ID format for the return flight.");
                                 }
                             }
                             else
                             {
-                                Console.WriteLine("Invalid Flight ID format for the return flight.");
+                                Console.WriteLine(
+                                    $"No return flights available from {selectedFlight.Destination} to {selectedFlight.Origin} after the arrival time of the first flight.");
                             }
                         }
-                        else
-                        {
-                            Console.WriteLine(
-                                $"No return flights available from {selectedFlight.Destination} to {selectedFlight.Origin} after the arrival time of the first flight.");
-                        }
                     }
-                }
-                else
-                {
-                    Console.WriteLine("Invalid number of passengers.");
+                    else
+                    {
+                        Console.WriteLine("Invalid number of passengers.");
+                    }
                 }
             }
             else
@@ -289,8 +309,8 @@ static class FlightManagement
     }
 
 
-        private static List<PassengerModel> CollectPassengerDetails(FlightModel selectedFlight, int passengerCount, 
-        SeatSelectionUI seatSelector)
+    private static List<PassengerModel> CollectPassengerDetails(FlightModel selectedFlight, int passengerCount,
+    SeatSelectionUI seatSelector)
     {
         var passengerDetails = new List<PassengerModel>();
         string[] petTypes = new[] { "Dog", "Cat", "Bird", "Rabbit", "Hamster" };
@@ -302,17 +322,19 @@ static class FlightManagement
             { "Rabbit", 8.0 },
             { "Hamster", 1.0 }
         };
-    
+
         for (int i = 0; i < passengerCount; i++)
         {
             Console.Clear();
             Console.WriteLine($"Passenger {i + 1} Details:");
             Console.WriteLine("Enter passenger name:");
             string name = Console.ReadLine() ?? string.Empty;
-    
+
+
             Console.WriteLine("Does this passenger have checked baggage? (y/n):");
             bool hasCheckedBaggage = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
-    
+
+
             Console.WriteLine("Does this passenger have a pet? (y/n):");
             bool hasPet = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
 
@@ -330,13 +352,16 @@ static class FlightManagement
             {
                 seatSelector.SetPetSeat(seatNumber);
             }
-            
+
+
             var passenger = new PassengerModel(name, seatNumber, hasCheckedBaggage, hasPet, petDetails);
             passengerDetails.Add(passenger);
         }
-    
+
+
         return passengerDetails;
     }
+
     private static PetModel SelectPetDetails(string[] petTypes, Dictionary<string, double> maxWeights)
     {
         int selectedIndex = 0;
@@ -357,6 +382,7 @@ static class FlightManagement
                 {
                     Console.Write("  ");
                 }
+
                 Console.WriteLine(petTypes[i]);
                 Console.ResetColor();
             }
@@ -417,12 +443,20 @@ static class FlightManagement
             }
 
             Console.WriteLine($"\nTotal Price: {booking.TotalPrice} EUR");
+
+            // Calculate miles and apply points redemption
+            MilesLogic.CalculateMilesFromBooking(UserLogin._userAccountService.CurrentUserId);
+            booking.TotalPrice = MilesLogic.BasicPointsRedemption(UserLogin._userAccountService.CurrentUserId, booking.TotalPrice, booking.BookingId);
+
+            // Display the updated price
+            Console.WriteLine($"\nDiscounted Total Price: {booking.TotalPrice} EUR");
         }
         catch (Exception ex)
         {
             Console.WriteLine($"Error creating booking: {ex.Message}");
         }
     }
+
 
     public static void ViewBookedFlights(int userId)
     {

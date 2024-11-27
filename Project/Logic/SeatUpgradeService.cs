@@ -13,7 +13,7 @@ public class SeatUpgradeService
     // Method to request an upgrade
     public bool RequestUpgrade(int userId, string newSeatClass)
     {
-        UserAccountService userAccountService = new UserAccountService();   
+        UserAccountService userAccountService = new UserAccountService();
         // Check if the user has enough miles or if they want to pay
         int requiredMiles = CalculateMilesForUpgrade(newSeatClass);
         if (userAccountService.GetCurrentMiles(userId) >= requiredMiles)
@@ -30,11 +30,16 @@ public class SeatUpgradeService
     {
         var accountsLogic = new AccountsLogic(); // Create an instance
         var account = accountsLogic.GetById(userId); // Get the account by userId
-        if (account != null && account.Miles >= milesAmount)
+        if (account != null && account.Miles.Any(m => m.Points >= milesAmount))
         {
-            account.Miles -= milesAmount; // Deduct miles
-            AccountsAccess.WriteAll(accountsLogic._accounts); // Save updated accounts
-            return true; // Assume miles were successfully deducted
+            var milesEntry = account.Miles.FirstOrDefault(m => m.Points >= milesAmount);
+
+            if (milesEntry != null)
+            {
+                milesEntry.Points -= milesAmount;
+                AccountsAccess.WriteAll(accountsLogic._accounts); // Save updated accounts
+                return true;
+            }
         }
         return false; // Not enough miles
     }
@@ -66,4 +71,4 @@ public class SeatUpgradeService
                 return 0; // No miles required for other classes
         }
     }
-} 
+}

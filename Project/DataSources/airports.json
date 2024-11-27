@@ -1,72 +1,72 @@
 [
-    {
-        "AirportID": 1,
-        "Country": "Netherlands",
-        "City": "Rotterdam",
-        "Name": "Rotterdam South Airport",
-        "Code": "RSZ",
-        "Type": "Public",
-        "PhoneNumber": "+31 10 123 4567",
-        "Address": "Driemanssteeweg 107, 3011 WN Rotterdam, Netherlands"
-    },
-    {
-        "AirportID": 2,
-        "Country": "Ireland",
-        "City": "Dublin",
-        "Name": "Dublin Airport",
-        "Code": "DUB",
-        "Type": "Public",
-        "PhoneNumber": "+353 1 814 1111",
-        "Address": "Dublin Airport, Co. Dublin, Ireland"
-    },
-    {
-        "AirportID": 3,
-        "Country": "United Kingdom",
-        "City": "London",
-        "Name": "London City Airport",
-        "Code": "LCY",
-        "Type": "Public",
-        "PhoneNumber": "+44 20 7646 0088",
-        "Address": "Hartmann Rd, Royal Docks, London E16 2PX, United Kingdom"
-    },
-    {
-        "AirportID": 4,
-        "Country": "France",
-        "City": "Nice",
-        "Name": "Nice Côte d'Azur Airport",
-        "Code": "NCE",
-        "Type": "Public",
-        "PhoneNumber": "+33 820 423 333",
-        "Address": "Rue Costes et Bellonte, 06206 Nice, France"
-    },
-    {
-        "AirportID": 5,
-        "Country": "Spain",
-        "City": "Málaga",
-        "Name": "Málaga–Costa del Sol Airport",
-        "Code": "AGP",
-        "Type": "Public",
-        "PhoneNumber": "+34 913 211 000",
-        "Address": "Av. del Comandante García Morato, s/n, 29004 Málaga, Spain"
-    },
-    {
-        "AirportID": 6,
-        "Country": "Greece",
-        "City": "Mykonos",
-        "Name": "Mykonos International Airport",
-        "Code": "JMK",
-        "Type": "Public",
-        "PhoneNumber": "+30 2289 079100",
-        "Address": "Mykonos Airport, 846 00 Mykonos, Greece"
-    },
-    {
-        "AirportID": 7,
-        "Country": "Italy",
-        "City": "Milan",
-        "Name": "Milan Malpensa Airport",
-        "Code": "MXP",
-        "Type": "Public",
-        "PhoneNumber": "+39 02 232323",
-        "Address": "21010 Ferno Varese, Italy"
-    }
+  {
+    "airportId": 1,
+    "country": "Netherlands",
+    "city": "Rotterdam",
+    "name": "Rotterdam South Airport",
+    "code": "RSZ",
+    "type": "Public",
+    "phoneNumber": "+31 10 123 4567",
+    "address": "Driemanssteeweg 107, 3011 WN Rotterdam, Netherlands"
+  },
+  {
+    "airportId": 2,
+    "country": "Ireland",
+    "city": "Dublin",
+    "name": "Dublin Airport",
+    "code": "DUB",
+    "type": "Public",
+    "phoneNumber": "+353 1 814 1111",
+    "address": "Dublin Airport, Co. Dublin, Ireland"
+  },
+  {
+    "airportId": 3,
+    "country": "United Kingdom",
+    "city": "London",
+    "name": "London City Airport",
+    "code": "LCY",
+    "type": "Public",
+    "phoneNumber": "+44 20 7646 0088",
+    "address": "Hartmann Rd, Royal Docks, London E16 2PX, United Kingdom"
+  },
+  {
+    "airportId": 4,
+    "country": "France",
+    "city": "Nice",
+    "name": "Nice Côte d'Azur Airport",
+    "code": "NCE",
+    "type": "Public",
+    "phoneNumber": "+33 820 423 333",
+    "address": "Rue Costes et Bellonte, 06206 Nice, France"
+  },
+  {
+    "airportId": 5,
+    "country": "Spain",
+    "city": "Málaga",
+    "name": "Málaga–Costa del Sol Airport",
+    "code": "AGP",
+    "type": "Public",
+    "phoneNumber": "+34 913 211 000",
+    "address": "Av. del Comandante García Morato, s/n, 29004 Málaga, Spain"
+  },
+  {
+    "airportId": 6,
+    "country": "Greece",
+    "city": "Mykonos",
+    "name": "Mykonos International Airport",
+    "code": "JMK",
+    "type": "Public",
+    "phoneNumber": "+30 2289 079100",
+    "address": "Mykonos Airport, 846 00 Mykonos, Greece"
+  },
+  {
+    "airportId": 7,
+    "country": "Italy",
+    "city": "Milan",
+    "name": "Milan Malpensa Airport",
+    "code": "MXP",
+    "type": "Public",
+    "phoneNumber": "+39 02 232323",
+    "address": "21010 Ferno Varese, Italy"
+  }
 ]
