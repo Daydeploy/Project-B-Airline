@@ -62,11 +62,14 @@ public class MilesLogic
 
         foreach (var miles in account.Miles)
         {
-            String newLevel = CalculateLevel(miles.Experience);
-            if (miles.Level != newLevel)
+            if (miles.Enrolled)
             {
-                miles.Level = newLevel;
-                miles.History += $"\nLevel updated to {newLevel} at {DateTime.Now:yyyy-MM-dd HH:mm:ss}";
+                string newLevel = CalculateLevel(miles.Experience);
+                if (miles.Level != newLevel)
+                {
+                    miles.Level = newLevel;
+                    miles.History += $"\nLevel updated to {newLevel} at {DateTime.Now:yyyy-MM-dd HH:mm:ss}";
+                }
             }
         }
 
@@ -82,11 +85,14 @@ public class MilesLogic
         {
             foreach (var miles in account.Miles)
             {
-                string newLevel = CalculateLevel(miles.Experience);
-                if (miles.Level != newLevel)
+                if (miles.Enrolled)
                 {
-                    miles.Level = newLevel;
-                    miles.History += $"\nLevel updated to {newLevel} at {DateTime.Now:yyyy-MM-dd HH:mm:ss}";
+                    string newLevel = CalculateLevel(miles.Experience);
+                    if (miles.Level != newLevel)
+                    {
+                        miles.Level = newLevel;
+                        miles.History += $"\nLevel updated to {newLevel} at {DateTime.Now:yyyy-MM-dd HH:mm:ss}";
+                    }
                 }
             }
         }
@@ -138,6 +144,11 @@ public class MilesLogic
 
         var milesRecord = account.Miles[0];
 
+        if (!milesRecord.Enrolled)
+        {
+            return;
+        }
+
         // Get bookings for this user
         var userBookings = bookings.Where(b => b.UserId == accountId).ToList();
 
@@ -183,6 +194,12 @@ public class MilesLogic
         }
 
         var milesRecord = account.Miles[0];
+
+        if (!milesRecord.Enrolled)
+        {
+            return;
+        }
+
         var currentLevel = milesRecord.Level;
 
         // Get bookings for this user
@@ -209,6 +226,63 @@ public class MilesLogic
         }
         milesRecord.Points += totalMilesEarned;
         AccountsAccess.WriteAll(accounts);
+    }
+
+    public static int BasicPointsRedemption(int accountId, int price, int bookingId)
+    {
+        var accounts = AccountsAccess.LoadAll();
+        var bookings = BookingAccess.LoadAll();
+
+        var account = accounts.FirstOrDefault(a => a.Id == accountId);
+
+        if (account == null || account.Miles == null || account.Miles.Count == 0)
+        {
+            throw new ArgumentException($"Account {accountId} not found or has no miles record");
+        }
+
+        var milesRecord = account.Miles[0];
+
+        // Check if the account has enough points for redemption
+        if (milesRecord.Points >= 50000)
+        {
+            // Determine discount percentage based on user's level
+            double discountPercentage = milesRecord.Level switch
+            {
+                "Bronze" => 0.05, // 5%
+                "Silver" => 0.10, // 10%
+                "Gold" => 0.15, // 15%
+                "Platinum" => 0.20, // 20%
+                _ => 0.05 // Default to 5% if level is unexpected
+            };
+
+            // Calculate discount amount
+            int discountAmount = (int)(price * discountPercentage);
+
+            // Deduct points
+            milesRecord.Points -= 50000;
+
+            // Add history entry for points redemption
+            milesRecord.History += $"\nRedeemed 50000 points for {discountAmount} euro discount at {DateTime.Now:yyyy-MM-dd HH:mm:ss}";
+
+            // Locate the booking and update the total price
+            var booking = bookings.FirstOrDefault(b => b.BookingId == bookingId);
+            if (booking == null)
+            {
+                throw new ArgumentException($"Booking with ID {bookingId} not found.");
+            }
+
+            booking.TotalPrice -= discountAmount;
+
+            // Save updates to the accounts and bookings
+            AccountsAccess.WriteAll(accounts);
+            BookingAccess.WriteAll(bookings);
+
+            // Return the discounted price
+            return price - discountAmount;
+        }
+
+        // If not enough points, return the original price
+        return price;
     }
 
 }

@@ -455,5 +455,30 @@
       }
     ],
     "pets": []
+  },
+  {
+    "bookingId": 9084,
+    "userId": 83,
+    "flightId": 1064,
+    "totalPrice": 446,
+    "passengers": [
+      {
+        "name": "Darrin Wever",
+        "hasPet": false,
+        "petDetails": null,
+        "seatNumber": "1A",
+        "hasCheckedBaggage": true,
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      }
+    ],
+    "pets": []
   }
 ]

@@ -17,6 +17,7 @@ static class AccountManagement
             "Change Nationality",
             "Change Phone Number",
             "Change Passport Details",
+            "Frequent Flyer Program",
             "View Account Details",
             "Back to Main Menu"
         };
@@ -25,8 +26,8 @@ static class AccountManagement
         {
             int selectedIndex = MenuNavigationService.NavigateMenu(options, "Manage Account");
 
-            if (selectedIndex == 10) return;
-            if (selectedIndex == 9) DisplayAccountDetails(account);
+            if (selectedIndex == 11) return;
+            if (selectedIndex == 19) DisplayAccountDetails(account);
             else HandleManageAccountOption(selectedIndex, account);
         }
     }
@@ -82,7 +83,7 @@ static class AccountManagement
             return;
         }
 
-        bool accountCreated = UserLogin._userAccountService.CreateAccount(email, password, firstName, lastName, dateOfBirth);
+        bool accountCreated = UserLogin._userAccountService.CreateAccount(firstName, lastName, email, password, dateOfBirth);
 
         Console.WriteLine(accountCreated
             ? "Account created successfully. Please login."
@@ -216,6 +217,54 @@ static class AccountManagement
                     ? "Passport details updated successfully."
                     : "Failed to update passport details.");
                 break;
+
+            case 9: // Frequent Flyer Program enrollment/unenrollment
+                if (account.Miles != null && account.Miles.Count > 0)
+                {
+                    var milesRecord = account.Miles[0];
+
+                    if (milesRecord.Enrolled)
+                    {
+                        Console.WriteLine("\n--- Frequent Flyer Program Details ---");
+                        Console.WriteLine($"Current Level: {milesRecord.Level}");
+                        Console.WriteLine($"Current XP: {milesRecord.Experience}");
+                        Console.WriteLine($"Total Points: {milesRecord.Points}\n");
+                    }
+
+                    // Prompt for enrollment or unenrollment
+                    Console.WriteLine(milesRecord.Enrolled
+                        ? "You are currently enrolled in the Frequent Flyer Program."
+                        : "You are not currently enrolled in the Frequent Flyer Program.");
+
+                    Console.WriteLine(milesRecord.Enrolled
+                        ? "Would you like to unenroll? (Y/N)"
+                        : "Would you like to enroll? (Y/N)");
+
+                    string response = Console.ReadLine()?.Trim().ToUpper();
+
+                    if (response == "Y")
+                    {
+                        // Toggle enrollment status
+                        milesRecord.Enrolled = !milesRecord.Enrolled;
+
+                        updateSuccessful = UserLogin._userAccountService.ManageAccount(
+                            account.Id,
+                            newMiles: account.Miles
+                        );
+
+                        Console.WriteLine(updateSuccessful
+                            ? (milesRecord.Enrolled
+                                ? "Successfully enrolled in the Frequent Flyer Program!"
+                                : "Successfully unenrolled from the Frequent Flyer Program.")
+                            : "Failed to update Frequent Flyer Program status.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Error: Miles information is not available.");
+                }
+                break;
+
             default:
                 Console.WriteLine("Invalid option selected.");
                 break;
@@ -227,9 +276,9 @@ static class AccountManagement
 
     private static bool IsValidEmail(string email)
     {
-        return !string.IsNullOrWhiteSpace(email) && 
-               email.Contains("@") && 
-               email.IndexOf("@") < email.LastIndexOf(".") && 
+        return !string.IsNullOrWhiteSpace(email) &&
+               email.Contains("@") &&
+               email.IndexOf("@") < email.LastIndexOf(".") &&
                email.IndexOf(".") > email.IndexOf("@") + 1;
     }
 }
