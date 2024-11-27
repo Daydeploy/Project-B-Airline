@@ -14,8 +14,8 @@ public class UserAccountService
     {
         _accountsLogic = new AccountsLogic();
         _bookings = BookingAccess.LoadAll();
-        IsLoggedIn = false; 
-        CurrentUserId = -1; 
+        IsLoggedIn = false;
+        CurrentUserId = -1;
     }
 
     public bool CreateAccount(string firstName, string lastName, string email, string password, DateTime dateOfBirth)
@@ -59,8 +59,11 @@ public class UserAccountService
         int newId = _accountsLogic._accounts.Max(a => a.Id) + 1;
         CurrentUserId = newId;
 
-        // Create the new account with required properties
-        var newAccount = new AccountModel(newId, firstName, lastName, dateOfBirth, email, password);
+        // Create miles list with default "Not Enrolled" status if no miles exist
+        var initialMiles = new List<MilesModel> { new MilesModel(string.Empty, 0, 0, string.Empty) };
+
+        // Create the new account with required properties and default miles status
+        var newAccount = new AccountModel(newId, firstName, lastName, dateOfBirth, email, password, initialMiles);
 
         // Update the list with the new account
         _accountsLogic.UpdateList(newAccount);
@@ -102,7 +105,7 @@ public class UserAccountService
     public bool ManageAccount(int userId, string newEmail = null, string newPassword = null, string newFirstName = null,
         string newLastName = null, string newGender = null, string newNationality = null,
         string newPhoneNumber = null, PassportDetailsModel newPassportDetails = null,
-        DateTime? newDateOfBirth = null)
+        DateTime? newDateOfBirth = null, List<MilesModel> newMiles = null)
     {
         // Retrieve the account by user ID
         var account = _accountsLogic.GetById(userId);
@@ -167,6 +170,8 @@ public class UserAccountService
     {
         // For now, we'll just return true to simulate a successful check-in
         // In a real application, you'd want to update the booking status
+
+        MilesLogic.UpdateFlightExperience(CurrentUserId);
         return true;
     }
 
@@ -200,7 +205,7 @@ public class UserAccountService
         var account = AccountsLogic.CurrentAccount; // Assuming you have a way to get the current account
         if (account != null)
         {
-            return account.Miles; // Ensure that the AccountModel has a 'Miles' property
+            return account.Miles.Sum(m => m.Points); // Ensure that the AccountModel has a 'Miles' property
         }
 
         return 0; // Return 0 if no account is found

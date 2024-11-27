@@ -10,7 +10,14 @@
     "email": "test.account@gmail.com",
     "password": "test",
     "passportDetails": null,
-    "miles": 0
+    "milesDetails": [
+      {
+        "Level": "Bronze",
+        "Experience": 0,
+        "Points": 0,
+        "History": "\nLevel updated to Bronze at 2024-11-27 04:43:31"
+      }
+    ]
   },
   {
     "id": 2,
@@ -23,7 +30,14 @@
     "email": "test2account@gmail.com",
     "password": "Account2",
     "passportDetails": null,
-    "miles": 0
+    "milesDetails": [
+      {
+        "Level": "Bronze",
+        "Experience": 0,
+        "Points": 0,
+        "History": "\nLevel updated to Bronze at 2024-11-27 04:43:31"
+      }
+    ]
   },
   {
     "id": 82,
@@ -36,6 +50,33 @@
     "email": "test@test.nl",
     "password": "test",
     "passportDetails": null,
-    "miles": 0
+    "milesDetails": [
+      {
+        "Level": "Bronze",
+        "Experience": 0,
+        "Points": 0,
+        "History": "\nLevel updated to Bronze at 2024-11-27 04:43:31"
+      }
+    ]
+  },
+  {
+    "id": 83,
+    "firstName": "Darrin",
+    "lastName": "Wever",
+    "dateOfBirth": "1998-09-08T00:00:00",
+    "gender": null,
+    "nationality": null,
+    "phoneNumber": null,
+    "email": "darrinwever@gmail.com",
+    "password": "test",
+    "passportDetails": null,
+    "milesDetails": [
+      {
+        "Level": "Bronze",
+        "Experience": 0,
+        "Points": 1784,
+        "History": "New account created\nEarned 1784 Miles from booking 3441 - 446 euros at 2024-11-27 02:54:33"
+      }
+    ]
   }
 ]
