@@ -22,6 +22,7 @@
                 case ConsoleKey.Backspace:
                     return -1;
             }
+            
         }
     }
 
