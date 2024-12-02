@@ -34,6 +34,40 @@
     ]
   },
   {
+    "id": 4000,
+    "flightNumber": "RA8452",
+    "origin": "Rotterdam South Airport",
+    "originCode": "RSZ",
+    "destination": "Dublin Airport",
+    "destinationCode": "DUB",
+    "departureTime": "2024-11-20T15:00:00",
+    "arrivalTime": "2024-11-20T16:30:00",
+    "distance": 742,
+    "planeType": "Boeing 737",
+    "departureTerminal": "C4",
+    "arrivalTerminal": "A10",
+    "departureGate": "B5",
+    "arrivalGate": "A8",
+    "seatClassOptions": [
+      {
+        "class": "Economy",
+        "price": 88
+      },
+      {
+        "class": "Business",
+        "price": 230
+      },
+      {
+        "class": "First",
+        "price": 416
+      }
+    ],
+    "status": "On Time",
+    "mealService": [
+      "Lunch"
+    ]
+  },
+  {
     "id": 1001,
     "flightNumber": "RA1268",
     "origin": "Rotterdam South Airport",

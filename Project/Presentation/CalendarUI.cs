@@ -1,107 +1,73 @@
 public class CalendarUI
 {
     private DateTime currentDate;
-    private DateTime? selectedStartDate;
-    private DateTime? selectedEndDate;
-    private bool isSelectingEndDate;
-    private bool isSelectingYear;
-    private bool isSelectingMonth;
     private const ConsoleColor SelectedColor = ConsoleColor.Cyan;
     private const ConsoleColor HighlightColor = ConsoleColor.DarkCyan;
-    private const ConsoleColor RangeColor = ConsoleColor.DarkGray;
 
     public CalendarUI()
     {
         currentDate = DateTime.Now;
-        selectedStartDate = null;
-        selectedEndDate = null;
-        isSelectingEndDate = false;
-        isSelectingYear = false;
-        isSelectingMonth = false;
     }
 
-    public (DateTime startDate, DateTime endDate) SelectDateRange()
+    public DateTime SelectDate()
     {
         Console.CursorVisible = false;
+        DateTime selectedDate = DateTime.Now.Date;
         bool done = false;
 
         while (!done)
         {
             Console.Clear();
-            if (isSelectingYear)
-            {
-                DrawYearSelector();
-            }
-            else if (isSelectingMonth)
-            {
-                DrawMonthSelector();
-            }
-            else
-            {
-                DrawCalendar();
-                DrawInstructions();
-                DrawDateRangeInfo();
-            }
+            DrawCalendar(selectedDate);
+            DrawInstructions();
 
             var key = Console.ReadKey(true);
-            if (isSelectingYear)
+            switch (key.Key)
             {
-                HandleYearSelection(key);
-            }
-            else if (isSelectingMonth)
-            {
-                HandleMonthSelection(key);
-            }
-            else
-            {
-                HandleKeyInput(key);
-                switch (key.Key)
-                {
-                    case ConsoleKey.T:
-                        currentDate = DateTime.Now;
-                        break;
-                    case ConsoleKey.Y:
-                        isSelectingYear = true;
-                        break;
-                    case ConsoleKey.M:
-                        isSelectingMonth = true;
-                        break;
-                    case ConsoleKey.Enter:
-                        if (!selectedStartDate.HasValue)
-                        {
-                            selectedStartDate = currentDate.Date;
-                            isSelectingEndDate = true;
-                        }
-                        else if (!selectedEndDate.HasValue)
-                        {
-                            if (currentDate.Date >= selectedStartDate.Value)
-                            {
-                                selectedEndDate = currentDate.Date;
-                                done = true;
-                            }
-                        }
-                        break;
-                    case ConsoleKey.Escape:
-                        if (selectedStartDate.HasValue && !selectedEndDate.HasValue)
-                        {
-                            selectedStartDate = null;
-                            isSelectingEndDate = false;
-                        }
-                        break;
-                }
+                case ConsoleKey.LeftArrow:
+                case ConsoleKey.A:
+                    selectedDate = selectedDate.AddDays(-1);
+                    break;
+                case ConsoleKey.RightArrow:
+                case ConsoleKey.D:
+                    selectedDate = selectedDate.AddDays(1);
+                    break;
+                case ConsoleKey.UpArrow:
+                case ConsoleKey.W:
+                    selectedDate = selectedDate.AddDays(-7);
+                    break;
+                case ConsoleKey.DownArrow:
+                case ConsoleKey.S:
+                    selectedDate = selectedDate.AddDays(7);
+                    break;
+                case ConsoleKey.T:
+                    selectedDate = DateTime.Now.Date;
+                    break;
+                case ConsoleKey.Y:
+                    SelectYear(ref selectedDate);
+                    break;
+                case ConsoleKey.M:
+                    SelectMonth(ref selectedDate);
+                    break;
+                case ConsoleKey.Enter:
+                    done = true;
+                    break;
+                case ConsoleKey.Escape:
+                    Console.CursorVisible = true;
+                    return DateTime.MinValue;
             }
         }
 
         Console.CursorVisible = true;
-        return (selectedStartDate.Value, selectedEndDate.Value);
+        return selectedDate;
     }
 
-    private void DrawCalendar()
+    private void DrawCalendar(DateTime selectedDate)
     {
-        var firstDayOfMonth = new DateTime(currentDate.Year, currentDate.Month, 1);
+        var firstDayOfMonth = new DateTime(selectedDate.Year, selectedDate.Month, 1);
         var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
 
-        Console.WriteLine($"\n   {currentDate:MMMM yyyy}\n");
+        Console.WriteLine($"\n   {selectedDate:MMMM yyyy}\n");
         Console.WriteLine(" Su Mo Tu We Th Fr Sa");
 
         int dayOfWeek = (int)firstDayOfMonth.DayOfWeek;
@@ -117,188 +83,90 @@ public class CalendarUI
                     continue;
                 }
 
-                var currentDate = new DateTime(this.currentDate.Year, this.currentDate.Month, currentDay);
-                bool isSelected = IsDateSelected(currentDate);
-                bool isHighlighted = this.currentDate.Date == currentDate;
-                bool isInRange = IsDateInRange(currentDate);
+                var currentDate = new DateTime(selectedDate.Year, selectedDate.Month, currentDay);
+                bool isSelected = selectedDate.Date == currentDate.Date;
                 bool isToday = currentDate.Date == DateTime.Now.Date;
 
                 if (isSelected)
                 {
                     Console.ForegroundColor = SelectedColor;
                 }
-                else if (isHighlighted)
+                else if (isToday)
                 {
                     Console.ForegroundColor = HighlightColor;
                 }
-                else if (isInRange)
-                {
-                    Console.ForegroundColor = RangeColor;
-                }
 
-                if (isToday)
-                {
-                    Console.Write("[");
-                    Console.Write($"{currentDay,2}");
-                    Console.Write("]");
-                }
-                else
-                {
-                    Console.Write($"{currentDay,2} ");
-                }
-                
+                Console.Write($"{currentDay,2} ");
                 Console.ResetColor();
 
                 currentDay++;
             }
+
             Console.WriteLine();
             if (currentDay > lastDayOfMonth.Day) break;
         }
     }
 
-    private void DrawYearSelector()
+    private void SelectYear(ref DateTime selectedDate)
     {
-        Console.WriteLine("\n Select Year:");
-        Console.WriteLine($"\n<< {currentDate.Year} >>");
-        Console.WriteLine("\nUse ← → to change year");
-        Console.WriteLine("Enter to select, Esc to cancel");
-    }
-
-    private void DrawMonthSelector()
-    {
-        Console.WriteLine("\n Select Month:");
-        string[] months = System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.MonthNames[..^1];
-        for (int i = 0; i < months.Length; i++)
+        bool done = false;
+        while (!done)
         {
-            if (i == currentDate.Month - 1)
+            Console.Clear();
+            Console.WriteLine($"\n Select Year: {selectedDate.Year}\n");
+            Console.WriteLine("Use ← → to change year, Enter to confirm, Esc to cancel");
+
+            var key = Console.ReadKey(true);
+            switch (key.Key)
             {
-                Console.ForegroundColor = HighlightColor;
-                Console.WriteLine($">> {months[i]}");
-                Console.ResetColor();
+                case ConsoleKey.LeftArrow:
+                    selectedDate = selectedDate.AddYears(-1);
+                    break;
+                case ConsoleKey.RightArrow:
+                    selectedDate = selectedDate.AddYears(1);
+                    break;
+                case ConsoleKey.Enter:
+                    done = true;
+                    break;
+                case ConsoleKey.Escape:
+                    return;
             }
-            else
+        }
+    }
+
+    private void SelectMonth(ref DateTime selectedDate)
+    {
+        bool done = false;
+        while (!done)
+        {
+            Console.Clear();
+            Console.WriteLine($"\n Select Month: {selectedDate:MMMM}\n");
+            Console.WriteLine("Use ↑ ↓ to change month, Enter to confirm, Esc to cancel");
+
+            var key = Console.ReadKey(true);
+            switch (key.Key)
             {
-                Console.WriteLine($"   {months[i]}");
+                case ConsoleKey.UpArrow:
+                    selectedDate = selectedDate.AddMonths(-1);
+                    break;
+                case ConsoleKey.DownArrow:
+                    selectedDate = selectedDate.AddMonths(1);
+                    break;
+                case ConsoleKey.Enter:
+                    done = true;
+                    break;
+                case ConsoleKey.Escape:
+                    return;
             }
         }
-        Console.WriteLine("\nUse ↑ ↓ to select month");
-        Console.WriteLine("Enter to confirm, Esc to cancel");
-    }
-
-    private void HandleYearSelection(ConsoleKeyInfo key)
-    {
-        switch (key.Key)
-        {
-            case ConsoleKey.LeftArrow:
-                currentDate = currentDate.AddYears(-1);
-                break;
-            case ConsoleKey.RightArrow:
-                currentDate = currentDate.AddYears(1);
-                break;
-            case ConsoleKey.Enter:
-                isSelectingYear = false;
-                break;
-            case ConsoleKey.Escape:
-                isSelectingYear = false;
-                break;
-        }
-    }
-
-    private void HandleMonthSelection(ConsoleKeyInfo key)
-    {
-        switch (key.Key)
-        {
-            case ConsoleKey.UpArrow:
-                currentDate = currentDate.AddMonths(-1);
-                break;
-            case ConsoleKey.DownArrow:
-                currentDate = currentDate.AddMonths(1);
-                break;
-            case ConsoleKey.Enter:
-                isSelectingMonth = false;
-                break;
-            case ConsoleKey.Escape:
-                isSelectingMonth = false;
-                break;
-        }
-    }
-
-    private void HandleKeyInput(ConsoleKeyInfo keyInfo)
-    {
-        switch (keyInfo.Key)
-        {
-            case ConsoleKey.RightArrow:
-            case ConsoleKey.D:
-                currentDate = currentDate.AddDays(1);
-                break;
-            case ConsoleKey.LeftArrow:
-            case ConsoleKey.A:
-                currentDate = currentDate.AddDays(-1);
-                break;
-            case ConsoleKey.UpArrow:
-            case ConsoleKey.W:
-                currentDate = currentDate.AddDays(-7);
-                break;
-            case ConsoleKey.DownArrow:
-            case ConsoleKey.S:
-                currentDate = currentDate.AddDays(7);
-                break;
-        }
-    }
-
-    private bool IsDateSelected(DateTime date)
-    {
-        return (selectedStartDate.HasValue && date.Date == selectedStartDate.Value.Date) ||
-               (selectedEndDate.HasValue && date.Date == selectedEndDate.Value.Date);
-    }
-
-    private bool IsDateInRange(DateTime date)
-    {
-        if (!selectedStartDate.HasValue || !selectedEndDate.HasValue)
-        {
-            return selectedStartDate.HasValue && date.Date > selectedStartDate.Value.Date && date.Date <= currentDate.Date;
-        }
-        return date.Date > selectedStartDate.Value.Date && date.Date < selectedEndDate.Value.Date;
     }
 
     private void DrawInstructions()
     {
         Console.WriteLine("\nControls:");
-        Console.WriteLine("← → or A/D : Change days    T: Today");
-        Console.WriteLine("↑ ↓ or W/S : Navigate weeks Y: Year selector");
-        Console.WriteLine("Enter      : Select date    M: Month selector");
-        Console.WriteLine("Esc        : Clear selection");
-        Console.WriteLine();
-
-        if (!selectedStartDate.HasValue)
-        {
-            Console.WriteLine("Select start date");
-        }
-        else if (!selectedEndDate.HasValue)
-        {
-            Console.WriteLine($"Start date: {selectedStartDate.Value:d}");
-            Console.WriteLine("Select end date");
-        }
-    }
-
-    private void DrawDateRangeInfo()
-    {
-        if (selectedStartDate.HasValue)
-        {
-            int daysSelected = 0;
-            if (selectedEndDate.HasValue)
-            {
-                daysSelected = (int)(selectedEndDate.Value - selectedStartDate.Value).TotalDays + 1;
-            }
-            else if (currentDate.Date > selectedStartDate.Value)
-            {
-                daysSelected = (int)(currentDate.Date - selectedStartDate.Value).TotalDays + 1;
-            }
-
-            if (daysSelected > 0)
-            {
-                Console.WriteLine($"\nSelected range: {daysSelected} day{(daysSelected != 1 ? "s" : "")}");
-            }
-        }
+        Console.WriteLine("← → or A/D : Move by day    ↑ ↓ or W/S : Move by week");
+        Console.WriteLine("T          : Today          Y          : Year selector");
+        Console.WriteLine("M          : Month selector Enter      : Select date");
+        Console.WriteLine("Esc        : Cancel");
     }
 }

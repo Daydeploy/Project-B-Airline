@@ -142,7 +142,7 @@ static class FlightManagement
                     filteredFlights = FilterByPriceRange(flights, origin, destination, seatClassOptions);
                     break;
                 case 3:
-                    filteredFlights = FilterByDateRange(flights, origin, destination);
+                    //filteredFlights = FilterByDateRange(flights, origin, destination);
                     break;
             }
 
@@ -196,19 +196,18 @@ static class FlightManagement
         return new List<FlightModel>();
     }
 
-    private static List<FlightModel> FilterByDateRange(FlightsLogic flights, string origin, string destination)
-    {
-        var calendarUI = new CalendarUI();
-        var (startDate, endDate) = calendarUI.SelectDateRange();
-        return flights.FilterByDateRange(origin, destination, startDate, endDate).ToList();
-    }
+    // private static List<FlightModel> FilterByDateRange(FlightsLogic flights, string origin, string destination)
+    // {
+    //     var calendarUI = new CalendarUI();
+    //     var (startDate, endDate) = calendarUI.SelectDateRange();
+    //     return flights.FilterByDateRange(origin, destination, startDate, endDate).ToList();
+    // }
 
     public static void BookAFlight(AccountModel account)
     {
         Console.Clear();
         FlightsLogic flightsLogic = new FlightsLogic();
 
-        // Step 1: Select Origin
         var origins = flightsLogic.GetAllOrigins();
         if (!origins.Any())
         {
@@ -221,7 +220,6 @@ static class FlightManagement
         if (originIndex == -1) return;
         string origin = origins[originIndex];
 
-        // Step 2: Select Destination
         var destinations = flightsLogic.GetDestinationsByOrigin(origin);
         if (!destinations.Any())
         {
@@ -234,85 +232,85 @@ static class FlightManagement
         if (destinationIndex == -1) return;
         string destination = destinations[destinationIndex];
 
-        // Step 3: Ask if it's a return trip
         Console.Clear();
         string[] tripOptions = { "Yes, it's a round-trip booking", "No, one-way trip only" };
         int tripChoice = MenuNavigationService.NavigateMenu(tripOptions, "Is this a round-trip booking?");
         bool isRoundTrip = tripChoice == 0;
 
-        // Step 4: Select Date Range for One-Way Trip
         Console.Clear();
-        Console.WriteLine("Please select a date range for your flight:");
+        Console.WriteLine("Please select a departure date:");
         CalendarUI calendar = new CalendarUI();
-        (DateTime startDate, DateTime endDate) = calendar.SelectDateRange();
+        DateTime departureDate = calendar.SelectDate();
+        if (departureDate == DateTime.MinValue)
+        {
+            Console.WriteLine("Date selection cancelled.");
+            return;
+        }
 
-        // Step 5: If it's a return trip, select return date range
-        DateTime? returnStartDate = null;
-        DateTime? returnEndDate = null;
+        DateTime? returnDate = null;
         if (isRoundTrip)
         {
             Console.Clear();
-            Console.WriteLine("Please select a date range for your return flight:");
-            (returnStartDate, returnEndDate) = calendar.SelectDateRange();
-
-            // Ensure return dates are valid
-            if (returnStartDate < endDate)
+            Console.WriteLine("Please select a return date:");
+            returnDate = calendar.SelectDate();
+            if (returnDate == DateTime.MinValue)
             {
-                Console.WriteLine("Return flight dates must be after the departure dates. Please start again.");
+                Console.WriteLine("Return date selection cancelled.");
+                return;
+            }
+
+            if (returnDate <= departureDate)
+            {
+                Console.WriteLine("Return date must be after the departure date. Please start again.");
                 return;
             }
         }
 
-        // Step 6: Filter Flights for the One-Way Trip
-        var availableFlights = flightsLogic.FilterByDateRange(origin, destination, startDate, endDate);
+        var availableFlights = flightsLogic.FilterFlightsByDate(origin, destination, departureDate);
         if (!availableFlights.Any())
         {
-            Console.WriteLine(
-                $"No flights found from {origin} to {destination} between {startDate:d} and {endDate:d}.");
+            Console.WriteLine($"No flights found from {origin} to {destination} on {departureDate:dd MMM yyyy}.");
             Console.WriteLine("\nPress any key to return to the menu...");
             Console.ReadKey();
             return;
         }
 
-        // Step 7: Display Available Flights for One-Way Trip
         Console.WriteLine("\nAvailable flights:");
-        FlightDisplay.DisplayFlights(availableFlights);
+        string[] flightOptions = availableFlights
+            .Select((f, index) =>
+                $"{f.Origin} → {f.Destination}\n" +
+                $"Departure: {DateTime.Parse(f.DepartureTime):HH:mm dd MMM yyyy}  |  Arrival: {DateTime.Parse(f.ArrivalTime):HH:mm dd MMM yyyy}\n" +
+                $"Economy: {f.SeatClassOptions[0].Price} EUR  |  Business: {f.SeatClassOptions[1].Price} EUR  |  First: {f.SeatClassOptions[2].Price} EUR\n" +
+                $"{new string('─', 80)}")
+            .ToArray();
 
-        // Step 8: Book One-Way Trip
-        Console.WriteLine("Enter the Flight ID to book:");
-        if (int.TryParse(Console.ReadLine(), out int flightId))
+
+        int selectedIndex = MenuNavigationService.NavigateMenu(flightOptions, "Select a flight:");
+
+        if (selectedIndex == -1)
         {
-            var selectedFlight = availableFlights.FirstOrDefault(f => f.FlightId == flightId);
-            if (selectedFlight != null)
-            {
-                Console.WriteLine("How many passengers? (1-8):");
-                if (int.TryParse(Console.ReadLine(), out int passengerCount) && passengerCount > 0 &&
-                    passengerCount <= 8)
-                {
-                    var seatSelector = new SeatSelectionUI();
-                    var passengerDetails = CollectPassengerDetails(selectedFlight, passengerCount, seatSelector);
-                    CompleteBooking(flightId, passengerDetails, selectedFlight, seatSelector);
-
-                    // Step 9: Handle Round Trip
-                    if (isRoundTrip)
-                    {
-                        HandleReturnFlightBooking(destination, origin, returnStartDate.Value, returnEndDate.Value,
-                            passengerDetails, seatSelector);
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Invalid number of passengers.");
-                }
-            }
-            else
-            {
-                Console.WriteLine("Flight not found with the specified ID.");
-            }
+            Console.WriteLine("Flight selection cancelled.");
+            return;
         }
-        else
+
+        var selectedFlight = availableFlights[selectedIndex];
+
+        Console.WriteLine("How many passengers? (1-8):");
+        if (!int.TryParse(Console.ReadLine(), out int passengerCount) || passengerCount <= 0 || passengerCount > 8)
         {
-            Console.WriteLine("Invalid Flight ID format.");
+            Console.WriteLine("Invalid number of passengers.");
+            return;
+        }
+
+        var seatSelector = new SeatSelectionUI();
+        var passengerDetails = CollectPassengerDetails(selectedFlight, passengerCount, seatSelector);
+
+        CompleteBooking(selectedFlight.FlightId, passengerDetails, selectedFlight, seatSelector);
+
+        if (isRoundTrip)
+        {
+            HandleReturnFlightBooking(destination, origin, departureDate, returnDate.Value, passengerDetails,
+                seatSelector);
         }
 
         Console.WriteLine("\nPress any key to return to the menu...");
@@ -320,57 +318,63 @@ static class FlightManagement
     }
 
 
-    private static void HandleReturnFlightBooking(string destination, string origin, DateTime returnStartDate,
-        DateTime returnEndDate, List<PassengerModel> passengerDetails, SeatSelectionUI seatSelector)
+    private static void HandleReturnFlightBooking(
+        string destination,
+        string origin,
+        DateTime departureDate,
+        DateTime returnDate,
+        List<PassengerModel> passengerDetails,
+        SeatSelectionUI seatSelector
+    )
     {
         Console.Clear();
         Console.WriteLine($"Finding return flights from {destination} to {origin}...");
 
         FlightsLogic flightsLogic = new FlightsLogic();
-        var returnFlights = flightsLogic.FilterByDateRange(destination, origin, returnStartDate, returnEndDate);
+        var returnFlights = flightsLogic.FilterFlightsByDate(destination, origin, returnDate);
 
         if (!returnFlights.Any())
         {
             Console.WriteLine(
-                $"No return flights available from {destination} to {origin} between {returnStartDate:d} and {returnEndDate:d}.");
+                $"No return flights available from {destination} to {origin} on {returnDate:dd MMM yyyy}.");
             return;
         }
 
         Console.WriteLine("\nAvailable return flights:");
-        FlightDisplay.DisplayFlights(returnFlights);
+        string[] flightOptions = returnFlights
+            .Select((f, index) =>
+                $"{f.Origin} → {f.Destination}\n" +
+                $"Departure: {DateTime.Parse(f.DepartureTime):HH:mm dd MMM yyyy}  |  Arrival: {DateTime.Parse(f.ArrivalTime):HH:mm dd MMM yyyy}\n" +
+                $"Economy: {f.SeatClassOptions[0].Price} EUR  |  Business: {f.SeatClassOptions[1].Price} EUR  |  First: {f.SeatClassOptions[2].Price} EUR\n" +
+                $"{new string('─', 80)}")
+            .ToArray();
 
-        Console.WriteLine("\nEnter the Flight ID for the return flight:");
-        if (int.TryParse(Console.ReadLine(), out int returnFlightId))
+        int selectedIndex = MenuNavigationService.NavigateMenu(flightOptions, "Select a return flight:");
+
+        if (selectedIndex == -1)
         {
-            var selectedReturnFlight = returnFlights.FirstOrDefault(f => f.FlightId == returnFlightId);
-            if (selectedReturnFlight != null)
-            {
-                foreach (var passenger in passengerDetails)
-                {
-                    Console.WriteLine($"\nSelect a seat for {passenger.Name} on the return flight:");
-                    string seatNumber = seatSelector.SelectSeat(selectedReturnFlight.PlaneType);
-                    seatSelector.SetSeatOccupied(seatNumber);
-
-                    if (passenger.HasPet)
-                    {
-                        seatSelector.SetPetSeat(seatNumber);
-                    }
-
-                    passenger.SeatNumber = seatNumber;
-                }
-
-                CompleteBooking(returnFlightId, passengerDetails, selectedReturnFlight, seatSelector);
-                Console.WriteLine("\nRound-trip booking completed successfully!");
-            }
-            else
-            {
-                Console.WriteLine("Return flight not found with the specified ID.");
-            }
+            Console.WriteLine("Return flight selection cancelled.");
+            return;
         }
-        else
+
+        var selectedReturnFlight = returnFlights[selectedIndex];
+
+        foreach (var passenger in passengerDetails)
         {
-            Console.WriteLine("Invalid Flight ID format for the return flight.");
+            Console.WriteLine($"\nSelect a seat for {passenger.Name} on the return flight:");
+            string seatNumber = seatSelector.SelectSeat(selectedReturnFlight.PlaneType);
+            seatSelector.SetSeatOccupied(seatNumber);
+
+            if (passenger.HasPet)
+            {
+                seatSelector.SetPetSeat(seatNumber);
+            }
+
+            passenger.SeatNumber = seatNumber;
         }
+
+        CompleteBooking(selectedReturnFlight.FlightId, passengerDetails, selectedReturnFlight, seatSelector);
+        Console.WriteLine("\nRound-trip booking completed successfully!");
     }
 
 

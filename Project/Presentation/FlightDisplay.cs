@@ -30,7 +30,8 @@ static class FlightDisplay
     {
         Console.WriteLine(new string('─', Console.WindowWidth - 1));
         Console.ForegroundColor = ConsoleColor.Cyan;
-        Console.WriteLine($"{"Flight ID",-10} {"Route",-30} {"Departure",-18} {"Arrival",-18} {"Duration",-12} {"Prices (EUR)"}");
+        Console.WriteLine(
+            $"{"Flight ID",-10} {"Route",-30} {"Departure",-18} {"Arrival",-18} {"Duration",-12} {"Prices (EUR)"}");
         Console.ResetColor();
         Console.WriteLine(new string('─', Console.WindowWidth - 1));
     }
@@ -89,7 +90,8 @@ static class FlightDisplay
         TimeSpan duration = arrivalDateTime - departureDateTime;
 
         Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine($"Booking ID: {booking.BookingId} | Flight ID: {flight.FlightId} | Aircraft type: {flight.PlaneType}");
+        Console.WriteLine(
+            $"Booking ID: {booking.BookingId} | Flight ID: {flight.FlightId} | Aircraft type: {flight.PlaneType}");
         Console.ResetColor();
 
         Console.Write($"Route: {flight.Origin} ");
@@ -124,13 +126,14 @@ static class FlightDisplay
             Console.Write($" | Seat: {passenger.SeatNumber}");
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.Write($" | Checked Baggage: {(passenger.HasCheckedBaggage ? "Yes" : "No")}");
-            
+
             if (passenger.HasPet)
             {
                 Console.ForegroundColor = ConsoleColor.Magenta;
-                Console.Write($" | Pet: {passenger.PetDetails.Type} ({passenger.PetDetails.Weight}kg, {passenger.PetDetails.StorageLocation})");
+                Console.Write(
+                    $" | Pet: {passenger.PetDetails.Type} ({passenger.PetDetails.Weight}kg, {passenger.PetDetails.StorageLocation})");
             }
-            
+
             Console.WriteLine();
             Console.ResetColor();
         }

@@ -121,4 +121,13 @@ public class FlightsLogic
                              DateTime.Parse(flight.DepartureTime) >= DateTime.Now)
             .ToList();
     }
+
+    public List<FlightModel> FilterFlightsByDate(string origin, string destination, DateTime date)
+    {
+        return AvailableFlights
+            .Where(f => f.Origin.Equals(origin) &&
+                        f.Destination.Equals(destination) &&
+                        DateTime.Parse(f.DepartureTime).Date == date.Date)
+            .ToList();
+    }
 }
