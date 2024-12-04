@@ -2,7 +2,6 @@ public class SeatSelectionUI
 {
     private PlaneConfig currentConfig;
     private Dictionary<string, bool> occupiedSeats = new Dictionary<string, bool>();
-    // Add dictionary to track seats with pets
     private Dictionary<string, bool> petSeats = new Dictionary<string, bool>();
 
     // Add dictionary of plane type variations to handle different Aircrafts
@@ -48,7 +47,7 @@ public class SeatSelectionUI
                 (1, 4),     // First Class
                 (5, 14),    // Business Class
                 (15, 50)    // Economy Class
-            }
+            } // tuple met start en eind rij 
         }
     };
 
@@ -67,10 +66,12 @@ public class SeatSelectionUI
             planeType = normalizedType; // zodat airbus werkt dus zet je de plane naar de normalizedType
         }
 
-        if (!planeConfigs.ContainsKey(planeType))
-        {
-            throw new ArgumentException($"Unsupported plane type: {planeType}. Available types: {string.Join(", ", planeConfigs.Keys)}");
-        }
+
+        // Debugging
+        // if (!planeConfigs.ContainsKey(planeType))
+        // {
+        //     throw new ArgumentException($"Unsupported plane type: {planeType}. Available types: {string.Join(", ", planeConfigs.Keys)}");
+        // }
 
         currentConfig = planeConfigs[planeType];
         int currentRow = 1;
