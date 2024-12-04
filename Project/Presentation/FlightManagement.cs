@@ -146,7 +146,7 @@ static class FlightManagement
                     break;
             }
 
-            if (filteredFlights.Any())
+            if (filteredFlights.Count != 0)
             {
                 DisplayFlightsWithActions(filteredFlights, UserLogin._userAccountService.IsUserLoggedIn());
                 HandleFlightCommands(filteredFlights, origin, destination);
@@ -209,7 +209,7 @@ static class FlightManagement
         FlightsLogic flightsLogic = new FlightsLogic();
 
         var origins = flightsLogic.GetAllOrigins();
-        if (!origins.Any())
+        if (origins.Count == 0)
         {
             Console.WriteLine("No available origins found.");
             return;
@@ -221,7 +221,7 @@ static class FlightManagement
         string origin = origins[originIndex];
 
         var destinations = flightsLogic.GetDestinationsByOrigin(origin);
-        if (!destinations.Any())
+        if (destinations.Count == 0)
         {
             Console.WriteLine($"No destinations available from {origin}.");
             return;
@@ -267,7 +267,7 @@ static class FlightManagement
         }
 
         var availableFlights = flightsLogic.FilterFlightsByDate(origin, destination, departureDate);
-        if (!availableFlights.Any())
+        if (availableFlights.Count == 0)
         {
             Console.WriteLine($"No flights found from {origin} to {destination} on {departureDate:dd MMM yyyy}.");
             Console.WriteLine("\nPress any key to return to the menu...");
@@ -318,13 +318,8 @@ static class FlightManagement
     }
 
 
-    private static void HandleReturnFlightBooking(
-        string destination,
-        string origin,
-        DateTime departureDate,
-        DateTime returnDate,
-        List<PassengerModel> passengerDetails,
-        SeatSelectionUI seatSelector
+    private static void HandleReturnFlightBooking(string destination, string origin, DateTime departureDate,
+        DateTime returnDate, List<PassengerModel> passengerDetails, SeatSelectionUI seatSelector
     )
     {
         Console.Clear();
@@ -333,7 +328,7 @@ static class FlightManagement
         FlightsLogic flightsLogic = new FlightsLogic();
         var returnFlights = flightsLogic.FilterFlightsByDate(destination, origin, returnDate);
 
-        if (!returnFlights.Any())
+        if (returnFlights.Count == 0)
         {
             Console.WriteLine(
                 $"No return flights available from {destination} to {origin} on {returnDate:dd MMM yyyy}.");
