@@ -2,12 +2,11 @@ using System;
 
 static class MenuNavigation
 {
-    // Main entry point for displaying the main menu
     public static void Start()
     {
         Console.OutputEncoding = System.Text.Encoding.UTF8;
         Console.CursorVisible = false;
-        string[] menuItems = { "Login", "Create Account", "Show available Flights", "Exit" };
+        string[] menuItems = { "Login", "Create Account", "Show available Flights", "Packages", "Exit" };
 
         bool exit = false;
 
@@ -19,7 +18,6 @@ static class MenuNavigation
         }
     }
 
-    // Handles selection of menu options
     static private void HandleSelection(string selectedOption, ref bool exit)
     {
         Console.Clear();
@@ -33,6 +31,10 @@ static class MenuNavigation
                 break;
             case "Show available Flights":
                 FlightManagement.ShowAvailableFlights();
+                break;
+            case "Packages":
+                PackagesUI packagesUI = new PackagesUI();
+                packagesUI.ShowPackages();
                 break;
             case "Exit":
                 exit = true;
