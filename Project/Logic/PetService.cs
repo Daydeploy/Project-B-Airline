@@ -51,7 +51,7 @@ public class PetService
         {
             Console.WriteLine("Would you like the pet to travel in cabin? (y/n):");
             petDetails.SeatingLocation = Console.ReadLine()?.ToLower().StartsWith("y") ?? false ? "Seat" : "Luggage Room";
-            // null-coalescing, provides default value when dealing with nullable types
+            // null-coalescing, provides default value when dealing with nullable types or reference types that might/could be null
         }
         else
         {
