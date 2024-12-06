@@ -30,32 +30,48 @@ public class PetService
 
     public void ValidatePetBooking(PetModel petDetails)
     {
-        if (!_petWeightLimits.ContainsKey(petDetails.Type))
+        while (true)
         {
-            throw new InvalidOperationException("Invalid pet type.");
-        }
+            if (!_petWeightLimits.ContainsKey(petDetails.Type))
+            {
+                Console.WriteLine("Invalid pet type. Please enter a valid pet type (Dog, Cat, Other):");
+                petDetails.Type = Console.ReadLine();
+                continue;
+            }
 
-        var (maxCabinWeight, maxWeight) = _petWeightLimits[petDetails.Type];
+            var (maxCabinWeight, maxWeight) = _petWeightLimits[petDetails.Type];
 
-        if (petDetails.Weight > maxWeight)
-        {
-            throw new InvalidOperationException($"Pet is too heavy. Maximum allowed weight is {maxWeight}kg.");
-        }
+            if (petDetails.Weight > maxWeight)
+            {
+                Console.WriteLine($"Pet is too heavy. Maximum allowed weight is {maxWeight}kg. Please enter a valid weight:");
+                if (double.TryParse(Console.ReadLine(), out var newWeight))
+                {
+                    petDetails.Weight = newWeight;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input. Please enter a numerical value.");
+                }
+                continue;
+            }
 
-        if (petDetails.Weight > maxCabinWeight)
-        {
-            petDetails.SeatingLocation = "Luggage Room";
-            Console.WriteLine($"Due to weight ({petDetails.Weight}kg), pet will be transported in luggage compartment.");
-        }
-        else if (petDetails.Type == "Dog" || petDetails.Type == "Cat")
-        {
-            Console.WriteLine("Would you like the pet to travel in cabin? (y/n):");
-            petDetails.SeatingLocation = Console.ReadLine()?.ToLower().StartsWith("y") ?? false ? "Seat" : "Luggage Room";
-            // null-coalescing, provides default value when dealing with nullable types or reference types that might/could be null
-        }
-        else
-        {
-            petDetails.SeatingLocation = "Luggage Room";
+            if (petDetails.Weight > maxCabinWeight)
+            {
+                petDetails.SeatingLocation = "Luggage Room";
+                Console.WriteLine($"Due to weight ({petDetails.Weight}kg), the pet will be transported in the luggage compartment.");
+            }
+            else if (petDetails.Type == "Dog" || petDetails.Type == "Cat")
+            {
+                Console.WriteLine("Would you like the pet to travel in the cabin? (y/n):");
+                string? response = Console.ReadLine()?.ToLower();
+                petDetails.SeatingLocation = response == "y" ? "Seat" : "Luggage Room";
+            }
+            else
+            {
+                petDetails.SeatingLocation = "Luggage Room";
+            }
+
+            break;
         }
     }
 }

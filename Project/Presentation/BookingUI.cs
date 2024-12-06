@@ -38,4 +38,4 @@ public class BookingUI
         BookingSummaryUI bookingSummaryUI = new BookingSummaryUI();
         bookingSummaryUI.RenderUpdatedSummary(bookingId);
     }
-} 
+}
