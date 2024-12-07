@@ -1,3 +1,5 @@
+using System;
+
 static class UserLogin
 {
     static public UserAccountService _userAccountService = new UserAccountService();
@@ -86,7 +88,8 @@ static class UserLogin
                 case 7: // Show Seat Upgrade Options
                     SeatUpgradeOptions.ShowSeatUpgradeOptions();
                     break;
-                case 8: // dit is de (comfort) package optie
+                case 8: // Packages
+                    Console.WriteLine("Navigating to Packages...");
                     PackagesUI packagesUI = new PackagesUI();
                     packagesUI.ShowPackages();
                     break;

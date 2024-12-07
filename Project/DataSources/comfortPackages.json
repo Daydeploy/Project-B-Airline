@@ -1,0 +1,16 @@
+[
+    {
+        "id": 1,
+        "name": "Comfort Package",
+        "contents": [
+        "Slippers",
+        "Face Mask",
+        "Ear Plugs"
+        ],
+        "cost": 15.99,
+        "availableIn": [
+        "Economy",
+        "Business"  
+        ]
+    }
+    ] 
