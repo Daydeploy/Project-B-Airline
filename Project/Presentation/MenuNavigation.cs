@@ -6,7 +6,7 @@ static class MenuNavigation
     {
         Console.OutputEncoding = System.Text.Encoding.UTF8;
         Console.CursorVisible = false;
-        string[] menuItems = { "Login", "Create Account", "Show available Flights", "Packages", "Exit" };
+        string[] menuItems = { "Login", "Create Account", "Show available Flights", "Exit" };
 
         bool exit = false;
 
@@ -31,10 +31,6 @@ static class MenuNavigation
                 break;
             case "Show available Flights":
                 FlightManagement.ShowAvailableFlights();
-                break;
-            case "Packages":
-                PackagesUI packagesUI = new PackagesUI();
-                packagesUI.ShowPackages();
                 break;
             case "Exit":
                 exit = true;

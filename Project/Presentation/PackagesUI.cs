@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class PackagesUI
 {
     private ComfortPackageService _comfortPackageService = new ComfortPackageService();
+    private SmallItemsUI _smallItemsUI = new SmallItemsUI();
 
     public void ShowPackages()
     {
@@ -39,6 +40,16 @@ public class PackagesUI
         else
         {
             comfortPackageUI.ShowValidationErrors("The comfort package is not available for your selected flight class.");
+        }
+
+        Console.WriteLine("Would you like to view small items? (yes/no)");
+        string response = Console.ReadLine()?.ToLower();
+        if (response == "yes")
+        {
+            _smallItemsUI.RenderItemCatalog();
+            Console.WriteLine("Enter the item ID to add it to your booking:");
+            int itemId = int.Parse(Console.ReadLine() ?? "0");
+            _smallItemsUI.AddItemToBooking(itemId, bookingId);
         }
     }
 } 
