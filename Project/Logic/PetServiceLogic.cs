@@ -1,8 +1,8 @@
-public class PetService
+public class PetServiceLogic
 {
     private readonly Dictionary<string, (double MaxCabinWeight, double MaxWeight)> _petWeightLimits;
 
-    public PetService()
+    public PetServiceLogic()
     {
         _petWeightLimits = new Dictionary<string, (double, double)>
         {

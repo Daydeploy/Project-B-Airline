@@ -5,11 +5,11 @@ using System.Collections.Generic;
 
 public class SmallItemsUI
 {
-    private SmallItemsService _smallItemsService = new SmallItemsService();
+    private SmallItemsServiceLogic _smallItemsServiceLogic = new SmallItemsServiceLogic();
 
     public void RenderItemCatalog()
     {
-        List<SmallItem> items = _smallItemsService.FetchItemDetails();
+        List<SmallItem> items = _smallItemsServiceLogic.FetchItemDetails();
         Console.WriteLine("Available Small Items:");
         foreach (var item in items)
         {
@@ -19,7 +19,7 @@ public class SmallItemsUI
 
     public void AddItemToBooking(int itemId, int bookingId)
     {
-        _smallItemsService.AddToPurchase(itemId, bookingId);
+        _smallItemsServiceLogic.AddToPurchase(itemId, bookingId);
         Console.WriteLine("Item added to your booking.");
     }
 } 

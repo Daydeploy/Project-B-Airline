@@ -22,7 +22,7 @@ static class FlightManagement
             return;
         }
 
-        DisplayFlightsWithActions(flightsList, UserLogin._userAccountService.IsUserLoggedIn());
+        DisplayFlightsWithActions(flightsList, UserLogin.UserAccountServiceLogic.IsUserLoggedIn());
         HandleFlightCommands(flightsList, origin, destination);
     }
 
@@ -91,7 +91,7 @@ static class FlightManagement
 
             if (key.Key == ConsoleKey.B)
             {
-                if (UserLogin._userAccountService.IsUserLoggedIn())
+                if (UserLogin.UserAccountServiceLogic.IsUserLoggedIn())
                 {
                     Console.Clear();
                     //  BookFlight(flightsList);
@@ -148,7 +148,7 @@ static class FlightManagement
 
             if (filteredFlights.Count != 0)
             {
-                DisplayFlightsWithActions(filteredFlights, UserLogin._userAccountService.IsUserLoggedIn());
+                DisplayFlightsWithActions(filteredFlights, UserLogin.UserAccountServiceLogic.IsUserLoggedIn());
                 HandleFlightCommands(filteredFlights, origin, destination);
             }
             else
@@ -491,7 +491,7 @@ static class FlightManagement
     {
         try
         {
-            BookingModel booking = BookingLogic.CreateBooking(UserLogin._userAccountService.CurrentUserId, flightId,
+            BookingModel booking = BookingLogic.CreateBooking(UserLogin.UserAccountServiceLogic.CurrentUserId, flightId,
                 passengerDetails, new List<PetModel>());
             Console.WriteLine("\nFlight booked successfully!\n");
             Console.WriteLine($"Booking ID: {booking.BookingId}");
@@ -509,10 +509,10 @@ static class FlightManagement
             Console.WriteLine($"\nTotal Price: {booking.TotalPrice} EUR");
 
             // Calculate miles and apply points redemption
-            int milesEarned = MilesLogic.CalculateMilesFromBooking(UserLogin._userAccountService.CurrentUserId);
+            int milesEarned = MilesLogic.CalculateMilesFromBooking(UserLogin.UserAccountServiceLogic.CurrentUserId);
             Console.WriteLine($"Miles Earned: {milesEarned}");
 
-            booking.TotalPrice = MilesLogic.BasicPointsRedemption(UserLogin._userAccountService.CurrentUserId,
+            booking.TotalPrice = MilesLogic.BasicPointsRedemption(UserLogin.UserAccountServiceLogic.CurrentUserId,
                 booking.TotalPrice, booking.BookingId);
 
             // Display the updated price
@@ -582,7 +582,7 @@ static class FlightManagement
         Console.WriteLine("Enter the Flight ID to check in:");
         if (int.TryParse(Console.ReadLine(), out int flightId))
         {
-            bool success = UserLogin._userAccountService.CheckIn(flightId);
+            bool success = UserLogin.UserAccountServiceLogic.CheckIn(flightId);
             Console.WriteLine(
                 success ? "Check-in successful." : "Check-in failed. Please try again or contact support.");
         }

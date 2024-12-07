@@ -6,39 +6,22 @@ using System.Text.Json;
 public class ComfortPackageDataAccess
 {
     private static string _filePath = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/comfortPackages.json"));
-    private static List<ComfortPackage> _comfortPackages;
+    private static GenericJsonAccess<ComfortPackageModel> _comfortPackages  = new GenericJsonAccess<ComfortPackageModel>(_filePath);
+    //  private static string _filePath = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/flights.json"));
+    // private static GenericJsonAccess<FlightModel> _flightAccess = new GenericJsonAccess<FlightModel>(_filePath);
 
-    static ComfortPackageDataAccess()
+    public static ComfortPackageModel? GetComfortPackage(int packageId)
     {
-        _comfortPackages = LoadComfortPackageDetails();
+        var comfortPackageOptions = LoadAll();
+        return comfortPackageOptions.Find(option => option.Id == packageId);
     }
-
-    private static List<ComfortPackage> LoadComfortPackageDetails()
+    public static List<ComfortPackageModel> LoadAll()
     {
-        string json = File.ReadAllText(_filePath);
-        return JsonSerializer.Deserialize<List<ComfortPackage>>(json);
+        return _comfortPackages.LoadAll();
     }
-
-    public static ComfortPackage GetComfortPackage(int packageId)
-    {
-        return _comfortPackages.FirstOrDefault(p => p.Id == packageId);
-    }
-
-    public static void AddComfortPackageToBooking(int bookingId, int packageId)
-    {
-    }
-
-    public static ComfortPackage GetBookingComfortDetails(int bookingId)
-    {
-        return null;
-    }
+    // public static ComfortPackage GetBookingComfortDetails(int bookingId)
+    // {
+    //     return null;
+    // }
 }
 
-public class ComfortPackage
-{
-    public int Id { get; set; }
-    public string Name { get; set; }
-    public List<string> Contents { get; set; }
-    public decimal Cost { get; set; }
-    public List<string> AvailableIn { get; set; }
-} 

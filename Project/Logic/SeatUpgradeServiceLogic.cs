@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-public class SeatUpgradeService
+public class SeatUpgradeServiceLogic
 {
     public List<string> ViewAvailableUpgrades(int flightId)
     {
@@ -9,9 +9,9 @@ public class SeatUpgradeService
 
     public bool RequestUpgrade(int userId, string newSeatClass)
     {
-        UserAccountService userAccountService = new UserAccountService();
+        UserAccountServiceLogic userAccountServiceLogic = new UserAccountServiceLogic();
         int requiredMiles = CalculateMilesForUpgrade(newSeatClass);
-        if (userAccountService.GetCurrentMiles(userId) >= requiredMiles)
+        if (userAccountServiceLogic.GetCurrentMiles(userId) >= requiredMiles)
         {
             UseMilesForUpgrade(userId, requiredMiles);
         }

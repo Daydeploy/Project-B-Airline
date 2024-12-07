@@ -83,7 +83,7 @@ static class AccountManagement
             return;
         }
 
-        bool accountCreated = UserLogin._userAccountService.CreateAccount(firstName, lastName, email, password, dateOfBirth);
+        bool accountCreated = UserLogin.UserAccountServiceLogic.CreateAccount(firstName, lastName, email, password, dateOfBirth);
 
         Console.WriteLine(accountCreated
             ? "Account created successfully. Please login."
@@ -129,12 +129,12 @@ static class AccountManagement
             case 0:
                 Console.WriteLine($"Current Email: {account.EmailAddress}");
                 Console.WriteLine("Enter new email:");
-                updateSuccessful = UserLogin._userAccountService.ManageAccount(account.Id, newEmail: Console.ReadLine());
+                updateSuccessful = UserLogin.UserAccountServiceLogic.ManageAccount(account.Id, newEmail: Console.ReadLine());
                 Console.WriteLine(updateSuccessful ? "Email updated successfully." : "Failed to update email.");
                 break;
             case 1:
                 Console.WriteLine("Enter new password:");
-                updateSuccessful = UserLogin._userAccountService.ManageAccount(account.Id, newPassword: Console.ReadLine());
+                updateSuccessful = UserLogin.UserAccountServiceLogic.ManageAccount(account.Id, newPassword: Console.ReadLine());
                 Console.WriteLine(updateSuccessful ? "Password updated successfully." : "Failed to update password.");
                 break;
             case 2:
@@ -147,14 +147,14 @@ static class AccountManagement
                     Console.Write("Enter new first name: ");
                     newFirstName = Console.ReadLine();
                 }
-                updateSuccessful = UserLogin._userAccountService.ManageAccount(account.Id, newFirstName: newFirstName);
+                updateSuccessful = UserLogin.UserAccountServiceLogic.ManageAccount(account.Id, newFirstName: newFirstName);
                 Console.WriteLine(
                     updateSuccessful ? "First name updated successfully." : "Failed to update first name.");
                 break;
             case 3:
                 Console.WriteLine($"Current Last Name: {account.LastName}");
                 Console.WriteLine("Enter new last name:");
-                updateSuccessful = UserLogin._userAccountService.ManageAccount(account.Id, newLastName: Console.ReadLine());
+                updateSuccessful = UserLogin.UserAccountServiceLogic.ManageAccount(account.Id, newLastName: Console.ReadLine());
                 Console.WriteLine(updateSuccessful ? "Last name updated successfully." : "Failed to update last name.");
                 break;
             case 4:
@@ -162,7 +162,7 @@ static class AccountManagement
                 Console.WriteLine("Enter new date of birth (dd-MM-yyyy):");
                 if (DateTime.TryParse(Console.ReadLine(), out DateTime newDateOfBirth))
                 {
-                    updateSuccessful = UserLogin._userAccountService.ManageAccount(account.Id, newDateOfBirth: newDateOfBirth);
+                    updateSuccessful = UserLogin.UserAccountServiceLogic.ManageAccount(account.Id, newDateOfBirth: newDateOfBirth);
                     Console.WriteLine(updateSuccessful
                         ? "Date of birth updated successfully."
                         : "Failed to update date of birth.");
@@ -175,13 +175,13 @@ static class AccountManagement
             case 5:
                 Console.WriteLine($"Current Gender: {account.Gender ?? "Not provided"}");
                 Console.WriteLine("Enter new gender:");
-                updateSuccessful = UserLogin._userAccountService.ManageAccount(account.Id, newGender: Console.ReadLine());
+                updateSuccessful = UserLogin.UserAccountServiceLogic.ManageAccount(account.Id, newGender: Console.ReadLine());
                 Console.WriteLine(updateSuccessful ? "Gender updated successfully." : "Failed to update gender.");
                 break;
             case 6:
                 Console.WriteLine($"Current Nationality: {account.Nationality ?? "Not provided"}");
                 Console.WriteLine("Enter new nationality:");
-                updateSuccessful = UserLogin._userAccountService.ManageAccount(account.Id, newNationality: Console.ReadLine());
+                updateSuccessful = UserLogin.UserAccountServiceLogic.ManageAccount(account.Id, newNationality: Console.ReadLine());
                 Console.WriteLine(updateSuccessful
                     ? "Nationality updated successfully."
                     : "Failed to update nationality.");
@@ -189,7 +189,7 @@ static class AccountManagement
             case 7:
                 Console.WriteLine($"Current Phone Number: {account.PhoneNumber ?? "Not provided"}");
                 Console.WriteLine("Enter new phone number:");
-                updateSuccessful = UserLogin._userAccountService.ManageAccount(account.Id, newPhoneNumber: Console.ReadLine());
+                updateSuccessful = UserLogin.UserAccountServiceLogic.ManageAccount(account.Id, newPhoneNumber: Console.ReadLine());
                 Console.WriteLine(updateSuccessful
                     ? "Phone number updated successfully."
                     : "Failed to update phone number.");
@@ -212,7 +212,7 @@ static class AccountManagement
                 string countryOfIssue = Console.ReadLine() ?? string.Empty;
 
                 var newPassportDetails = new PassportDetailsModel(passportNumber, issueDate, expirationDate, countryOfIssue);
-                updateSuccessful = UserLogin._userAccountService.ManageAccount(account.Id, newPassportDetails: newPassportDetails);
+                updateSuccessful = UserLogin.UserAccountServiceLogic.ManageAccount(account.Id, newPassportDetails: newPassportDetails);
                 Console.WriteLine(updateSuccessful
                     ? "Passport details updated successfully."
                     : "Failed to update passport details.");
@@ -251,7 +251,7 @@ static class AccountManagement
                         // Toggle enrollment status
                         milesRecord.Enrolled = !milesRecord.Enrolled;
 
-                        updateSuccessful = UserLogin._userAccountService.ManageAccount(
+                        updateSuccessful = UserLogin.UserAccountServiceLogic.ManageAccount(
                             account.Id,
                             newMiles: account.Miles
                         );

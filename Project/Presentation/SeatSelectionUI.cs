@@ -253,6 +253,23 @@ public class SeatSelectionUI
             return "Business";
         return "Economy";
     }
+        
+    public string GetSeatClass(string seatNumber, string planeType) // coor comfortpackeges gebeuren
+    {
+        int row = int.Parse(new string(seatNumber.Where(char.IsDigit).ToArray()));
+        var planeConfig = planeConfigs[planeType];
+
+        // Check which class range the row falls into
+        var (firstStart, firstEnd) = planeConfig.SeatClasses[0];
+        var (businessStart, businessEnd) = planeConfig.SeatClasses[1];
+        
+        if (row >= firstStart && row <= firstEnd)
+            return "First";
+        if (row >= businessStart && row <= businessEnd)
+            return "Business";
+
+        return "Economy"; //default
+    }
 
 }
 

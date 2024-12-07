@@ -47,7 +47,7 @@ static class SeatUpgradeOptions
         Console.WriteLine("Enter your flight ID to view available upgrades:");
         if (int.TryParse(Console.ReadLine(), out int flightId))
         {
-            var seatUpgradeService = new SeatUpgradeService();
+            var seatUpgradeService = new SeatUpgradeServiceLogic();
             var availableUpgrades = seatUpgradeService.ViewAvailableUpgrades(flightId);
 
             if (availableUpgrades.Count > 0)
@@ -75,8 +75,8 @@ static class SeatUpgradeOptions
         Console.WriteLine("Enter the number of miles you want to use for the upgrade:");
         if (int.TryParse(Console.ReadLine(), out int miles) && miles > 0)
         {
-            var seatUpgradeService = new SeatUpgradeService();
-            bool upgradeSuccess = seatUpgradeService.UseMilesForUpgrade(UserLogin._userAccountService.CurrentUserId, miles);
+            var seatUpgradeService = new SeatUpgradeServiceLogic();
+            bool upgradeSuccess = seatUpgradeService.UseMilesForUpgrade(UserLogin.UserAccountServiceLogic.CurrentUserId, miles);
 
             Console.WriteLine(upgradeSuccess
                 ? "Upgrade using miles successful!"
@@ -101,7 +101,7 @@ static class SeatUpgradeOptions
         Console.WriteLine("Enter the class you want to view benefits for:");
         string seatClass = Console.ReadLine() ?? string.Empty;
 
-        var seatUpgradeService = new SeatUpgradeService();
+        var seatUpgradeService = new SeatUpgradeServiceLogic();
         string benefits = seatUpgradeService.ViewUpgradeBenefits(seatClass);
         Console.WriteLine(benefits);
     }

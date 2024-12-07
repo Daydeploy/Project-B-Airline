@@ -163,7 +163,7 @@ public static class BookingModifications
                 HasCheckedBaggage = passenger.HasCheckedBaggage
             };
 
-            var userAccountService = new UserAccountService();
+            var userAccountService = new UserAccountServiceLogic();
             bool success = userAccountService.ModifyBooking(booking.FlightId, passengerChoice - 1, newDetails);
 
             if (success)

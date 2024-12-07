@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public class UserAccountService
+public class UserAccountServiceLogic
 {
     public AccountsLogic _accountsLogic;
     private List<BookingModel> _bookings;
@@ -10,7 +10,7 @@ public class UserAccountService
     public bool IsLoggedIn { get; set; }
     public int CurrentUserId { get; set; }
 
-    public UserAccountService()
+    public UserAccountServiceLogic()
     {
         _accountsLogic = new AccountsLogic();
         _bookings = BookingAccess.LoadAll();

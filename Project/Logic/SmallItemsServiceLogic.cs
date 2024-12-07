@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 
 
-public class SmallItemsService
+public class SmallItemsServiceLogic
 {
     public List<SmallItem> FetchItemDetails()
     {

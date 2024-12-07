@@ -2,7 +2,7 @@ using System;
 
 static class UserLogin
 {
-    static public UserAccountService _userAccountService = new UserAccountService();
+    static public UserAccountServiceLogic UserAccountServiceLogic = new UserAccountServiceLogic();
     private static bool _isLoggedIn = true;
 
     public static void Start()
@@ -25,7 +25,7 @@ static class UserLogin
         Console.Write("Enter your password: ");
         password = ReadPassword(ref showPassword);
 
-        acc = _userAccountService.Login(email, password);
+        acc = UserAccountServiceLogic.Login(email, password);
 
         if (acc != null)
         {
@@ -89,13 +89,11 @@ static class UserLogin
                     SeatUpgradeOptions.ShowSeatUpgradeOptions();
                     break;
                 case 8: // Packages
-                    Console.WriteLine("Navigating to Packages...");
-                    PackagesUI packagesUI = new PackagesUI();
-                    packagesUI.ShowPackages();
+                    PackagesUI.ShowPackages();
                     break;
                 case 9: // Logout
                     Console.Clear();
-                    _userAccountService.Logout();
+                    UserAccountServiceLogic.Logout();
                     Console.WriteLine("You have successfully logged out.");
                     Console.WriteLine("Returning to the main menu...");
                     MenuNavigation.Start();
