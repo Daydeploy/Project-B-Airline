@@ -52,6 +52,7 @@ static class UserLogin
             "View Airport Information",
             "Browse Destinations",
             "Show Seat Upgrade Options",
+            "Packages",
             "Logout"
         };
 
@@ -85,7 +86,11 @@ static class UserLogin
                 case 7: // Show Seat Upgrade Options
                     SeatUpgradeOptions.ShowSeatUpgradeOptions();
                     break;
-                case 8: // Logout
+                case 8: // dit is de (comfort) package optie
+                    PackagesUI packagesUI = new PackagesUI();
+                    packagesUI.ShowPackages();
+                    break;
+                case 9: // Logout
                     Console.Clear();
                     _userAccountService.Logout();
                     Console.WriteLine("You have successfully logged out.");
