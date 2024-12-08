@@ -38,39 +38,48 @@ static class FlightDisplay
 
     // Displays details of a single flight in a formatted manner
     public static void DisplayFlightDetails(FlightModel flight)
+{
+    DateTime departureDateTime = DateTime.Parse(flight.DepartureTime);
+    DateTime arrivalDateTime = DateTime.Parse(flight.ArrivalTime);
+    TimeSpan duration = arrivalDateTime - departureDateTime;
+
+    Console.ForegroundColor = ConsoleColor.Yellow;
+    Console.Write($"{flight.FlightId,-10} ");
+    Console.ResetColor();
+
+    Console.Write($"{flight.Origin} ");
+    Console.ForegroundColor = ConsoleColor.DarkCyan;
+    Console.Write("→");
+    Console.ResetColor();
+    Console.Write($" {flight.Destination,-22} ");
+
+    Console.Write($"{departureDateTime:HH:mm dd MMM} ");
+    Console.ForegroundColor = ConsoleColor.DarkCyan;
+    Console.Write("→");
+    Console.ResetColor();
+    Console.Write($" {arrivalDateTime:HH:mm dd MMM} ");
+
+    string durationStr = $"{duration.Hours}h {duration.Minutes}m";
+    Console.Write($"{durationStr,-12} ");
+
+    string currentSeason = GetCurrentSeason();
+
+    foreach (var seatOption in flight.SeatClassOptions)
     {
-        DateTime departureDateTime = DateTime.Parse(flight.DepartureTime);
-        DateTime arrivalDateTime = DateTime.Parse(flight.ArrivalTime);
-        TimeSpan duration = arrivalDateTime - departureDateTime;
+        double seasonalPrice = seatOption.Price * 
+            (currentSeason == "summer" ? seatOption.SeasonalMultiplier.Summer : seatOption.SeasonalMultiplier.Winter);
+        double totalPrice = seasonalPrice * (1 + flight.Taxes.Country) +
+            flight.Taxes.Airport[flight.OriginCode] +
+            flight.Taxes.Airport[flight.DestinationCode];
 
-        Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.Write($"{flight.FlightId,-10} ");
+        Console.ForegroundColor = GetPriceColor(seatOption.SeatClass);
+        Console.Write($"{seatOption.SeatClass}: {totalPrice:F2} ");
         Console.ResetColor();
-
-        Console.Write($"{flight.Origin} ");
-        Console.ForegroundColor = ConsoleColor.DarkCyan;
-        Console.Write("→");
-        Console.ResetColor();
-        Console.Write($" {flight.Destination,-22} ");
-
-        Console.Write($"{departureDateTime:HH:mm dd MMM} ");
-        Console.ForegroundColor = ConsoleColor.DarkCyan;
-        Console.Write("→");
-        Console.ResetColor();
-        Console.Write($" {arrivalDateTime:HH:mm dd MMM} ");
-
-        string durationStr = $"{duration.Hours}h {duration.Minutes}m";
-        Console.Write($"{durationStr,-12} ");
-
-        foreach (var seatOption in flight.SeatClassOptions)
-        {
-            Console.ForegroundColor = GetPriceColor(seatOption.Class);
-            Console.Write($"{seatOption.Class}: {seatOption.Price,4} ");
-            Console.ResetColor();
-        }
-
-        Console.WriteLine();
     }
+
+    Console.WriteLine();
+}
+
 
     // Draws the header for the bookings table
     public static void DrawBookingsTableHeader()
@@ -150,4 +159,10 @@ static class FlightDisplay
             _ => ConsoleColor.Gray
         };
     }
+    private static string GetCurrentSeason()
+    {
+        var currentMonth = DateTime.Now.Month;
+        return (currentMonth >= 6 && currentMonth <= 8) ? "summer" : "winter";
+    }
+
 }

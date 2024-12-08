@@ -98,10 +98,10 @@ public class BookingLogic
         {
             var seatClass = GetSeatClass(p.SeatNumber);
             
-            var basePrice = flight.SeatClassOptions
-                .FirstOrDefault(so => so.Class.Equals(seatClass, StringComparison.OrdinalIgnoreCase))
-                ?.Price ?? 0;
-
+            var basePrice = (int)(flight.SeatClassOptions
+                .FirstOrDefault(so => so.SeatClass.Equals(seatClass, StringComparison.OrdinalIgnoreCase))
+                ?.Price ?? 0);
+    
             return basePrice + (p.HasCheckedBaggage ? baggagePrice : 0);
         });
     }

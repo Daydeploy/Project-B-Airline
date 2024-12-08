@@ -109,7 +109,7 @@ public class MilesLogic
     // TODO implement conditional statements for every flight type
     public static string DetermineSeatClass(FlightModel flight, PassengerModel passenger)
     {
-        return flight.SeatClassOptions.FirstOrDefault()?.Class ?? "Economy";
+        return flight.SeatClassOptions.FirstOrDefault()?.SeatClass ?? "Economy";
     }
 
     public static int CalculateExperiencePoints(FlightModel flight, string seatClass)

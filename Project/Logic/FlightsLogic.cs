@@ -27,7 +27,7 @@ public class FlightsLogic
         return AvailableFlights
             .Where(f => f.Origin.Equals(origin) && f.Destination.Equals(destination) &&
                         DateTime.Parse(f.DepartureTime) >= DateTime.Now)
-            .OrderBy(f => f.SeatClassOptions.FirstOrDefault(option => option.Class == seatClass)?.Price ?? int.MaxValue)
+            .OrderBy(f => f.SeatClassOptions.FirstOrDefault(option => option.SeatClass == seatClass)?.Price ?? int.MaxValue)
             .ToList();
     }
 
@@ -37,7 +37,7 @@ public class FlightsLogic
             .Where(f => f.Origin.Equals(origin) && f.Destination.Equals(destination) &&
                         DateTime.Parse(f.DepartureTime) >= DateTime.Now)
             .OrderByDescending(f =>
-                f.SeatClassOptions.FirstOrDefault(option => option.Class == seatClass)?.Price ?? int.MinValue)
+                f.SeatClassOptions.FirstOrDefault(option => option.SeatClass == seatClass)?.Price ?? int.MinValue)
             .ToList();
     }
 
@@ -47,7 +47,7 @@ public class FlightsLogic
         return AvailableFlights
             .Where(f => f.Origin.Equals(origin) && f.Destination.Equals(destination) &&
                         f.SeatClassOptions.Any(option =>
-                            option.Class == seatClass && option.Price >= minPrice && option.Price <= maxPrice) &&
+                            option.SeatClass == seatClass && option.Price >= minPrice && option.Price <= maxPrice) &&
                         DateTime.Parse(f.DepartureTime) >= DateTime.Now)
             .ToList();
     }

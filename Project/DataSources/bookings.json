@@ -623,5 +623,103 @@
     ],
     "pets": [],
     "comfortPackages": null
+  },
+  {
+    "bookingId": 3995,
+    "userId": 1,
+    "flightId": 1271,
+    "totalPrice": 3636,
+    "passengers": [
+      {
+        "name": "hoi",
+        "hasPet": true,
+        "petDetails": {
+          "petId": 0,
+          "bookingId": 0,
+          "type": "Bird",
+          "size": null,
+          "weight": 1,
+          "storageLocation": "Storage",
+          "maxWeight": 0,
+          "seatingLocation": null,
+          "fee": null
+        },
+        "seatNumber": "1C",
+        "hasCheckedBaggage": true,
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      },
+      {
+        "name": "werk aub",
+        "hasPet": true,
+        "petDetails": {
+          "petId": 0,
+          "bookingId": 0,
+          "type": "Dog",
+          "size": null,
+          "weight": 1,
+          "storageLocation": "Storage",
+          "maxWeight": 0,
+          "seatingLocation": null,
+          "fee": null
+        },
+        "seatNumber": "1B",
+        "hasCheckedBaggage": true,
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      }
+    ],
+    "pets": [],
+    "comfortPackages": null
+  },
+  {
+    "bookingId": 7173,
+    "userId": 1,
+    "flightId": 1271,
+    "totalPrice": 1818,
+    "passengers": [
+      {
+        "name": "werk aub",
+        "hasPet": true,
+        "petDetails": {
+          "petId": 0,
+          "bookingId": 0,
+          "type": "Bird",
+          "size": null,
+          "weight": 1,
+          "storageLocation": "Storage",
+          "maxWeight": 0,
+          "seatingLocation": null,
+          "fee": null
+        },
+        "seatNumber": "1E",
+        "hasCheckedBaggage": true,
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      }
+    ],
+    "pets": [],
+    "comfortPackages": null
   }
 ]
