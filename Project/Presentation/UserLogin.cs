@@ -50,11 +50,10 @@ static class UserLogin
             "View Booked Flights",
             "Check-in for a Flight",
             "Manage Account",
-            "Show Available Flights",
             "View Airport Information",
             "Browse Destinations",
-            "Show Seat Upgrade Options",
             "Packages",
+            "Show Available Flights and advanced flight booking",
             "Logout"
         };
 
@@ -76,22 +75,19 @@ static class UserLogin
                 case 3: // Manage Account
                     AccountManagement.ManageAccount(account);
                     break;
-                case 4: // Show Available Flights
-                    FlightManagement.ShowAvailableFlights();
-                    break;
-                case 5: // View Airport Information
+                case 4: // View Airport Information
                     AirportInformation.ViewAirportInformation();
                     break;
-                case 6: // Browse Destinations
+                case 5: // Browse Destinations
                     AirportInformation.BrowseDestinations();
                     break;
-                case 7: // Show Seat Upgrade Options
-                    SeatUpgradeOptions.ShowSeatUpgradeOptions();
-                    break;
-                case 8: // Packages
+                case 6: // Packages
                     PackagesUI.ShowPackages();
                     break;
-                case 9: // Logout
+                case 7: // Show Available Flights and advanced flight booking
+                    FlightManagement.ShowAvailableFlights();
+                    break;
+                case 8: // Logout
                     Console.Clear();
                     UserAccountServiceLogic.Logout();
                     Console.WriteLine("You have successfully logged out.");
