@@ -721,5 +721,187 @@
     ],
     "pets": [],
     "comfortPackages": null
+  },
+  {
+    "bookingId": 7004,
+    "userId": 1,
+    "flightId": 1271,
+    "totalPrice": 1788,
+    "passengers": [
+      {
+        "name": "werk aub",
+        "hasPet": false,
+        "petDetails": null,
+        "seatNumber": "1A",
+        "hasCheckedBaggage": false,
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      }
+    ],
+    "pets": [],
+    "comfortPackages": null
+  },
+  {
+    "bookingId": 5915,
+    "userId": 1,
+    "flightId": 1271,
+    "totalPrice": 2898,
+    "passengers": [
+      {
+        "name": "Sil",
+        "hasPet": true,
+        "petDetails": {
+          "petId": 0,
+          "bookingId": 0,
+          "type": "Dog",
+          "size": null,
+          "weight": 20,
+          "storageLocation": "Cargo",
+          "maxWeight": 0,
+          "seatingLocation": null,
+          "fee": null
+        },
+        "seatNumber": "5A",
+        "hasCheckedBaggage": true,
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      },
+      {
+        "name": "Paul",
+        "hasPet": false,
+        "petDetails": null,
+        "seatNumber": "1A",
+        "hasCheckedBaggage": false,
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      }
+    ],
+    "pets": [],
+    "comfortPackages": null
+  },
+  {
+    "bookingId": 6713,
+    "userId": 1,
+    "flightId": 1271,
+    "totalPrice": 1788,
+    "passengers": [
+      {
+        "name": "paulus",
+        "hasPet": false,
+        "petDetails": null,
+        "seatNumber": "1F",
+        "hasCheckedBaggage": false,
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      }
+    ],
+    "pets": [],
+    "comfortPackages": null
+  },
+  {
+    "bookingId": 7656,
+    "userId": 1,
+    "flightId": 1271,
+    "totalPrice": 715,
+    "passengers": [
+      {
+        "name": "Werk aub",
+        "hasPet": false,
+        "petDetails": null,
+        "seatNumber": "22A",
+        "hasCheckedBaggage": false,
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      }
+    ],
+    "pets": [],
+    "comfortPackages": null
+  },
+  {
+    "bookingId": 2335,
+    "userId": 1,
+    "flightId": 1271,
+    "totalPrice": 715,
+    "passengers": [
+      {
+        "name": "NU GAAT HET WERKEN",
+        "hasPet": false,
+        "petDetails": null,
+        "seatNumber": "27A",
+        "hasCheckedBaggage": false,
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      }
+    ],
+    "pets": [],
+    "comfortPackages": null
+  },
+  {
+    "bookingId": 5318,
+    "userId": 1,
+    "flightId": 1271,
+    "totalPrice": 715,
+    "passengers": [
+      {
+        "name": "aub werk nu",
+        "hasPet": false,
+        "petDetails": null,
+        "seatNumber": "27A",
+        "hasCheckedBaggage": false,
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      }
+    ],
+    "pets": [],
+    "comfortPackages": null
   }
 ]

@@ -117,7 +117,24 @@ static class FlightDisplay
 
         Console.WriteLine($"Duration: {duration.Hours}h {duration.Minutes}m");
         Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine($"Total Price: {booking.TotalPrice} EUR");
+        // prijs zonder tax voor elke passenger
+        if (booking.Passengers?.Any() == true)
+        {
+            foreach (var passenger in booking.Passengers)
+            {
+                if (!string.IsNullOrEmpty(passenger.SeatNumber))
+                {
+                    var seatClass = new SeatSelectionUI().GetSeatClass(passenger.SeatNumber, flight.PlaneType);
+                    var basePrice = flight.SeatClassOptions
+                        .FirstOrDefault(so => so.SeatClass.Equals(seatClass, StringComparison.OrdinalIgnoreCase))
+                        ?.Price ?? 0;
+                    
+                    Console.WriteLine($"Base Price for {passenger.Name} ({seatClass}): {basePrice:F2} EUR");
+                }
+            }
+        }
+
+        Console.WriteLine($"Total Price including taxes: {booking.TotalPrice} EUR");
         Console.ResetColor();
     }
 

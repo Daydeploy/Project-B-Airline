@@ -496,7 +496,7 @@ static class FlightManagement
             Console.WriteLine("\nFlight booked successfully!\n");
             Console.WriteLine($"Booking ID: {booking.BookingId}");
             Console.WriteLine($"Flight: {selectedFlight.Origin} to {selectedFlight.Destination}");
-            Console.WriteLine($"Departure: {selectedFlight.DepartureTime}");
+            Console.WriteLine($"Departure: {DateTime.Parse(selectedFlight.DepartureTime):HH:mm dd MMM yyyy}");
             Console.WriteLine("\nPassengers:");
             foreach (var passenger in booking.Passengers)
             {
@@ -506,7 +506,22 @@ static class FlightManagement
                 Console.WriteLine($"Checked Baggage: {(passenger.HasCheckedBaggage ? "Yes" : "No")}");
             }
 
-            Console.WriteLine($"\nTotal Price: {booking.TotalPrice} EUR");
+            if (booking.Passengers?.Any() == true)
+            {
+                foreach (var passenger in booking.Passengers)
+                {
+                    if (!string.IsNullOrEmpty(passenger.SeatNumber))
+                    {
+                        var seatClass = new SeatSelectionUI().GetSeatClass(passenger.SeatNumber, selectedFlight.PlaneType);
+                        var basePrice = selectedFlight.SeatClassOptions
+                            .FirstOrDefault(so => so.SeatClass.Equals(seatClass, StringComparison.OrdinalIgnoreCase))
+                            ?.Price ?? 0;
+                        
+                        Console.WriteLine($"\nBase Price: ({seatClass}): {basePrice:F2} EUR");
+                    }
+                }
+            }
+            Console.WriteLine($"Total Price: {booking.TotalPrice} EUR");
 
             // Calculate miles and apply points redemption
             int milesEarned = MilesLogic.CalculateMilesFromBooking(UserLogin.UserAccountServiceLogic.CurrentUserId);
@@ -552,7 +567,7 @@ static class FlightManagement
                 var flight = flightsLogic.GetFlightsById(booking.FlightId);
                 if (flight == null) continue;
 
-                FlightDisplay.DisplayBookingDetails(booking, flight);
+                FlightDisplay.DisplayBookingDetails(booking, flight); 
                 FlightDisplay.DisplayPassengerDetails(booking.Passengers);
                 Console.WriteLine(new string('─', Console.WindowWidth - 1));
             }
