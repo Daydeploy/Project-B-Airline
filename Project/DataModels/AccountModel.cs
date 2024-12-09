@@ -36,8 +36,11 @@ public class AccountModel
     [JsonPropertyName("milesDetails")]
     public List<MilesModel> Miles { get; set; }
 
+    [JsonPropertyName("paymentInformation")]
+    public List<PaymentInformationModel> PaymentInformation { get; set; }
+
     public AccountModel(int id, string firstName, string lastName, DateTime dateOfBirth,
-                        string emailAddress, string password, List<MilesModel> miles)
+                        string emailAddress, string password, List<MilesModel> miles, List<PaymentInformationModel>? paymentInformation = null)
     {
         Id = id;
         FirstName = firstName;
@@ -46,5 +49,6 @@ public class AccountModel
         EmailAddress = emailAddress;
         Password = password;
         Miles = miles;
+        PaymentInformation = paymentInformation;
     }
 }

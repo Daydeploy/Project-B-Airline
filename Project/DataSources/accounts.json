@@ -18,7 +18,8 @@
         "Points": 0,
         "History": ""
       }
-    ]
+    ],
+    "paymentInformation": null
   },
   {
     "id": 2,
@@ -39,7 +40,8 @@
         "Points": 0,
         "History": ""
       }
-    ]
+    ],
+    "paymentInformation": null
   },
   {
     "id": 82,
@@ -60,7 +62,8 @@
         "Points": 0,
         "History": ""
       }
-    ]
+    ],
+    "paymentInformation": null
   },
   {
     "id": 83,
@@ -78,8 +81,16 @@
         "Enrolled": true,
         "Level": "Bronze",
         "Experience": 0,
-        "Points": 0,
-        "History": "\nLevel updated to Bronze at 2024-11-27 07:48:49\nEarned 1784 Miles from booking 9084 - 446 euros at 2024-11-27 07:49:03"
+        "Points": 24288,
+        "History": "\nLevel updated to Bronze at 2024-11-27 07:48:49\nEarned 1784 Miles from booking 9084 - 446 euros at 2024-11-27 07:49:03\nEarned 1856 Miles from booking 1942 - 464 euros at 2024-12-09 08:08:35\nEarned 22432 Miles from booking 213 - 5608 euros at 2024-12-09 08:08:35"
+      }
+    ],
+    "paymentInformation": [
+      {
+        "cardHolder": "Darrin Wever",
+        "cardNumber": "012345678909",
+        "cVV": "1111",
+        "expirationDate": "12/30"
       }
     ]
   }
