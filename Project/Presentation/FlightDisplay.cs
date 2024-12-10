@@ -92,63 +92,99 @@ static class FlightDisplay
     }
 
     // Displays details for a specific booking
-    public static void DisplayBookingDetails(BookingModel booking, FlightModel flight)
+        public static void DisplayBookingDetails(BookingModel booking, FlightModel flight)
     {
-        DateTime departureDateTime = DateTime.Parse(flight.DepartureTime);
-        DateTime arrivalDateTime = DateTime.Parse(flight.ArrivalTime);
-        TimeSpan duration = arrivalDateTime - departureDateTime;
-
-        Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine(
-            $"Booking ID: {booking.BookingId} | Flight ID: {flight.FlightId} | Aircraft type: {flight.PlaneType}");
-        Console.ResetColor();
-
-        Console.Write($"Route: {flight.Origin} ");
-        Console.ForegroundColor = ConsoleColor.DarkCyan;
-        Console.Write("→");
-        Console.ResetColor();
-        Console.WriteLine($" {flight.Destination}");
-
-        Console.Write($"Departure: {departureDateTime:HH:mm dd MMM} ");
-        Console.ForegroundColor = ConsoleColor.DarkCyan;
-        Console.Write("→");
-        Console.ResetColor();
-        Console.WriteLine($" Arrival: {arrivalDateTime:HH:mm dd MMM}");
-
-        Console.WriteLine($"Duration: {duration.Hours}h {duration.Minutes}m");
-        // prijs zonder tax voor elke passenger
-        if (booking.Passengers?.Any() == true)
-        {   
-            Console.WriteLine("Purchased items:\n");
-            foreach (var passenger in booking.Passengers)
-            {   Console.ForegroundColor = ConsoleColor.DarkGray;
-                foreach (var item in passenger.ShopItems)
+        if (booking == null) // anders krijg je een NullReferenceException 
+        {
+            Console.WriteLine("Error: Invalid booking");
+            return;
+        }
+    
+        if (booking.FlightId == 0)
+        {
+            DisplayPrivateJetBookingDetails(booking);
+            return;
+        }
+    
+        if (flight == null)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"Booking ID: {booking.BookingId} | ERROR: Flight details not found");
+            Console.ResetColor();
+            return;
+        }
+    
+        try
+        {
+            DateTime departureDateTime = DateTime.Parse(flight.DepartureTime);
+            DateTime arrivalDateTime = DateTime.Parse(flight.ArrivalTime);
+            TimeSpan duration = arrivalDateTime - departureDateTime;
+    
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine(
+                $"Booking ID: {booking.BookingId} | Flight ID: {flight.FlightId} | Aircraft type: {flight.PlaneType}");
+            Console.ResetColor();
+    
+            Console.Write($"Route: {flight.Origin} ");
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.Write("→");
+            Console.ResetColor();
+            Console.WriteLine($" {flight.Destination}");
+    
+            Console.Write($"Departure: {departureDateTime:HH:mm dd MMM} ");
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.Write("→");
+            Console.ResetColor();
+            Console.WriteLine($" Arrival: {arrivalDateTime:HH:mm dd MMM}");
+    
+            Console.WriteLine($"Duration: {duration.Hours}h {duration.Minutes}m");
+            
+            if (booking.Passengers?.Any() == true)
+            {   
+                Console.WriteLine("Purchased items:\n");
+                foreach (var passenger in booking.Passengers)
                 {   
-                    if(item != null)
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                    if (passenger.ShopItems?.Any() == true)
                     {
-                        Console.WriteLine($" - {item.Name} | Price: {item.Price} EUR");
-                    } else {
+                        foreach (var item in passenger.ShopItems)
+                        {   
+                            if(item != null)
+                            {
+                                Console.WriteLine($" - {item.Name} | Price: {item.Price} EUR");
+                            }
+                        }
+                    }
+                    else
+                    {
                         Console.WriteLine("No items purchased");
                     }
+                    Console.ResetColor();
+    
+                    if (!string.IsNullOrEmpty(passenger.SeatNumber))
+                    {
+                        var seatClass = new SeatSelectionUI().GetSeatClass(passenger.SeatNumber, flight.PlaneType);
+                        var basePrice = flight.SeatClassOptions?
+                            .FirstOrDefault(so => so.SeatClass.Equals(seatClass, StringComparison.OrdinalIgnoreCase))
+                            ?.Price ?? 0;
+                        
+                        Console.WriteLine($"\nBase ticket price for {passenger.Name} ({seatClass}): {basePrice:F2} EUR");
+                    }
                 }
-                Console.ResetColor();
-                if (!string.IsNullOrEmpty(passenger.SeatNumber))
-                {
-                    var seatClass = new SeatSelectionUI().GetSeatClass(passenger.SeatNumber, flight.PlaneType);
-                    var basePrice = flight.SeatClassOptions
-                        .FirstOrDefault(so => so.SeatClass.Equals(seatClass, StringComparison.OrdinalIgnoreCase))
-                        ?.Price ?? 0;
-                    
-                    Console.WriteLine($"\nBase ticket price for {passenger.Name} ({seatClass}): {basePrice:F2} EUR");
-                }
-
             }
+    
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"Total Price including purchased items and taxes: {booking.TotalPrice} EUR");
+            Console.ResetColor();
         }
-        Console.ForegroundColor = ConsoleColor.Green;
-
-        Console.WriteLine($"Total Price including purchased items and taxes: {booking.TotalPrice} EUR");
-        Console.ResetColor();
+        catch (Exception ex)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"Error displaying booking {booking.BookingId}: {ex.Message}");
+            Console.ResetColor();
+        }
     }
+    
 
     // Displays details of each passenger in a booking
     public static void DisplayPassengerDetails(List<PassengerModel> passengers)
@@ -175,6 +211,50 @@ static class FlightDisplay
             Console.WriteLine();
             Console.ResetColor();
         }
+    }
+    private static void DisplayPrivateJetBookingDetails(BookingModel booking)
+    {
+        Console.WriteLine(new string('═', Console.WindowWidth - 1)); // Different border for private jets
+        Console.ForegroundColor = ConsoleColor.Magenta;
+        Console.WriteLine("╔═ PRIVATE JET BOOKING ═╗");
+        Console.ResetColor();
+
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine($"Booking ID: {booking.BookingId}");
+        Console.ResetColor();
+
+        Console.ForegroundColor = ConsoleColor.DarkYellow;
+        Console.WriteLine($"Aircraft: {booking.PlaneType}");
+        Console.ResetColor();
+
+        // Display passenger list with luxury styling
+        Console.WriteLine("\nPassenger Manifest:");
+        foreach (var passenger in booking.Passengers)
+        {
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write($"♦ {passenger.Name}");
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine($" | Suite: {passenger.SeatNumber}");
+            Console.ResetColor();
+
+            // Display any purchased items
+            if (passenger.ShopItems.Any())
+            {
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                foreach (var item in passenger.ShopItems.Where(i => i != null))
+                {
+                    Console.WriteLine($"  ◈ {item.Name} ({item.Price:F2} EUR)");
+                }
+                Console.ResetColor();
+            }
+        }
+
+        // Display total price with luxury styling
+        Console.WriteLine(new string('─', Console.WindowWidth - 1));
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine($"Charter Price: {booking.TotalPrice:N2} EUR");
+        Console.ResetColor();
+        Console.WriteLine(new string('═', Console.WindowWidth - 1));
     }
 
     // Determines the color to display based on seat class

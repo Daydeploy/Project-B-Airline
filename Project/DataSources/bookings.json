@@ -24,7 +24,8 @@
       }
     ],
     "pets": [],
-    "comfortPackages": null
+    "comfortPackages": null,
+    "planeType": null
   },
   {
     "bookingId": 5458,
@@ -68,7 +69,8 @@
       }
     ],
     "pets": null,
-    "comfortPackages": null
+    "comfortPackages": null,
+    "planeType": null
   },
   {
     "bookingId": 6503,
@@ -95,7 +97,8 @@
       }
     ],
     "pets": null,
-    "comfortPackages": null
+    "comfortPackages": null,
+    "planeType": null
   },
   {
     "bookingId": 8817,
@@ -122,7 +125,8 @@
       }
     ],
     "pets": null,
-    "comfortPackages": null
+    "comfortPackages": null,
+    "planeType": null
   },
   {
     "bookingId": 2175,
@@ -149,7 +153,8 @@
       }
     ],
     "pets": null,
-    "comfortPackages": null
+    "comfortPackages": null,
+    "planeType": null
   },
   {
     "bookingId": 4428,
@@ -210,7 +215,8 @@
       }
     ],
     "pets": null,
-    "comfortPackages": null
+    "comfortPackages": null,
+    "planeType": null
   },
   {
     "bookingId": 6903,
@@ -288,7 +294,8 @@
       }
     ],
     "pets": null,
-    "comfortPackages": null
+    "comfortPackages": null,
+    "planeType": null
   },
   {
     "bookingId": 4329,
@@ -315,7 +322,8 @@
       }
     ],
     "pets": null,
-    "comfortPackages": null
+    "comfortPackages": null,
+    "planeType": null
   },
   {
     "bookingId": 9714,
@@ -342,7 +350,8 @@
       }
     ],
     "pets": [],
-    "comfortPackages": null
+    "comfortPackages": null,
+    "planeType": null
   },
   {
     "bookingId": 4059,
@@ -369,7 +378,8 @@
       }
     ],
     "pets": [],
-    "comfortPackages": null
+    "comfortPackages": null,
+    "planeType": null
   },
   {
     "bookingId": 8062,
@@ -413,7 +423,8 @@
       }
     ],
     "pets": [],
-    "comfortPackages": null
+    "comfortPackages": null,
+    "planeType": null
   },
   {
     "bookingId": 1149,
@@ -450,7 +461,8 @@
       }
     ],
     "pets": [],
-    "comfortPackages": null
+    "comfortPackages": null,
+    "planeType": null
   },
   {
     "bookingId": 8354,
@@ -487,7 +499,8 @@
       }
     ],
     "pets": [],
-    "comfortPackages": null
+    "comfortPackages": null,
+    "planeType": null
   },
   {
     "bookingId": 1942,
@@ -514,7 +527,8 @@
       }
     ],
     "pets": [],
-    "comfortPackages": null
+    "comfortPackages": null,
+    "planeType": null
   },
   {
     "bookingId": 5077,
@@ -541,7 +555,8 @@
       }
     ],
     "pets": [],
-    "comfortPackages": null
+    "comfortPackages": null,
+    "planeType": null
   },
   {
     "bookingId": 2856,
@@ -610,7 +625,8 @@
           "First"
         ]
       }
-    ]
+    ],
+    "planeType": null
   },
   {
     "bookingId": 285,
@@ -647,7 +663,8 @@
       }
     ],
     "pets": [],
-    "comfortPackages": null
+    "comfortPackages": null,
+    "planeType": null
   },
   {
     "bookingId": 3995,
@@ -711,7 +728,8 @@
       }
     ],
     "pets": [],
-    "comfortPackages": null
+    "comfortPackages": null,
+    "planeType": null
   },
   {
     "bookingId": 7173,
@@ -748,7 +766,8 @@
       }
     ],
     "pets": [],
-    "comfortPackages": null
+    "comfortPackages": null,
+    "planeType": null
   },
   {
     "bookingId": 7004,
@@ -775,7 +794,8 @@
       }
     ],
     "pets": [],
-    "comfortPackages": null
+    "comfortPackages": null,
+    "planeType": null
   },
   {
     "bookingId": 5915,
@@ -829,7 +849,8 @@
       }
     ],
     "pets": [],
-    "comfortPackages": null
+    "comfortPackages": null,
+    "planeType": null
   },
   {
     "bookingId": 6713,
@@ -856,7 +877,8 @@
       }
     ],
     "pets": [],
-    "comfortPackages": null
+    "comfortPackages": null,
+    "planeType": null
   },
   {
     "bookingId": 7656,
@@ -883,7 +905,8 @@
       }
     ],
     "pets": [],
-    "comfortPackages": null
+    "comfortPackages": null,
+    "planeType": null
   },
   {
     "bookingId": 2335,
@@ -910,7 +933,8 @@
       }
     ],
     "pets": [],
-    "comfortPackages": null
+    "comfortPackages": null,
+    "planeType": null
   },
   {
     "bookingId": 5318,
@@ -937,7 +961,8 @@
       }
     ],
     "pets": [],
-    "comfortPackages": null
+    "comfortPackages": null,
+    "planeType": null
   },
   {
     "bookingId": 9257,
@@ -964,7 +989,8 @@
       }
     ],
     "pets": [],
-    "comfortPackages": null
+    "comfortPackages": null,
+    "planeType": null
   },
   {
     "bookingId": 503,
@@ -1008,6 +1034,35 @@
       }
     ],
     "pets": [],
-    "comfortPackages": null
+    "comfortPackages": null,
+    "planeType": null
+  },
+  {
+    "bookingId": 9811,
+    "userId": 1,
+    "flightId": 0,
+    "totalPrice": 15000,
+    "passengers": [
+      {
+        "name": "q",
+        "hasPet": false,
+        "petDetails": null,
+        "seatNumber": "PJ1",
+        "hasCheckedBaggage": false,
+        "shopItems": [],
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      }
+    ],
+    "pets": [],
+    "comfortPackages": null,
+    "planeType": "Bombardier Learjet 75"
   }
 ]

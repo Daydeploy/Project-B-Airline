@@ -19,7 +19,8 @@
         "History": ""
       }
     ],
-    "paymentInformation": null
+    "paymentInformation": null,
+    "privateJet": null
   },
   {
     "id": 2,
@@ -41,7 +42,8 @@
         "History": ""
       }
     ],
-    "paymentInformation": null
+    "paymentInformation": null,
+    "privateJet": null
   },
   {
     "id": 82,
@@ -63,7 +65,8 @@
         "History": ""
       }
     ],
-    "paymentInformation": null
+    "paymentInformation": null,
+    "privateJet": null
   },
   {
     "id": 83,
@@ -92,6 +95,7 @@
         "cVV": "1111",
         "expirationDate": "12/30"
       }
-    ]
+    ],
+    "privateJet": null
   }
 ]
