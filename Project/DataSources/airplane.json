@@ -1,0 +1,64 @@
+{
+  "model_airplanes": [
+    {
+      "id": "A330-001",
+      "type": "Airbus A330",
+      "available": true
+    },
+    {
+      "id": "A330-002",
+      "type": "Airbus A330",
+      "available": false
+    },
+    {
+      "id": "A330-003",
+      "type": "Airbus A330",
+      "available": true
+    },
+    {
+      "id": "A330-004",
+      "type": "Airbus A330",
+      "available": true
+    },
+    {
+      "id": "B787-001",
+      "type": "Boeing 787",
+      "available": true
+    },
+    {
+      "id": "B787-002",
+      "type": "Boeing 787",
+      "available": false
+    },
+    {
+      "id": "B787-003",
+      "type": "Boeing 787",
+      "available": true
+    },
+    {
+      "id": "B787-004",
+      "type": "Boeing 787",
+      "available": true
+    },
+    {
+      "id": "B737-001",
+      "type": "Boeing 737",
+      "available": true
+    },
+    {
+      "id": "B737-002",
+      "type": "Boeing 737",
+      "available": false
+    },
+    {
+      "id": "B737-003",
+      "type": "Boeing 737",
+      "available": true
+    },
+    {
+      "id": "B737-004",
+      "type": "Boeing 737",
+      "available": true
+    }
+  ]
+}
