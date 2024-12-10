@@ -116,12 +116,22 @@ static class FlightDisplay
         Console.WriteLine($" Arrival: {arrivalDateTime:HH:mm dd MMM}");
 
         Console.WriteLine($"Duration: {duration.Hours}h {duration.Minutes}m");
-        Console.ForegroundColor = ConsoleColor.Green;
         // prijs zonder tax voor elke passenger
         if (booking.Passengers?.Any() == true)
-        {
+        {   
+            Console.WriteLine("Purchased items:\n");
             foreach (var passenger in booking.Passengers)
-            {
+            {   Console.ForegroundColor = ConsoleColor.DarkGray;
+                foreach (var item in passenger.ShopItems)
+                {   
+                    if(item != null)
+                    {
+                        Console.WriteLine($" - {item.Name} | Price: {item.Price} EUR");
+                    } else {
+                        Console.WriteLine("No items purchased");
+                    }
+                }
+                Console.ResetColor();
                 if (!string.IsNullOrEmpty(passenger.SeatNumber))
                 {
                     var seatClass = new SeatSelectionUI().GetSeatClass(passenger.SeatNumber, flight.PlaneType);
@@ -129,12 +139,14 @@ static class FlightDisplay
                         .FirstOrDefault(so => so.SeatClass.Equals(seatClass, StringComparison.OrdinalIgnoreCase))
                         ?.Price ?? 0;
                     
-                    Console.WriteLine($"Base Price for {passenger.Name} ({seatClass}): {basePrice:F2} EUR");
+                    Console.WriteLine($"\nBase ticket price for {passenger.Name} ({seatClass}): {basePrice:F2} EUR");
                 }
+
             }
         }
+        Console.ForegroundColor = ConsoleColor.Green;
 
-        Console.WriteLine($"Total Price including taxes: {booking.TotalPrice} EUR");
+        Console.WriteLine($"Total Price including purchased items and taxes: {booking.TotalPrice} EUR");
         Console.ResetColor();
     }
 

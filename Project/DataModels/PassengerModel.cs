@@ -17,6 +17,9 @@ public class PassengerModel : PersonModel
     [JsonPropertyName("hasCheckedBaggage")]
     public bool HasCheckedBaggage { get; set; }
 
+    [JsonPropertyName("shopItems")]
+    public List<ShopItemModel> ShopItems { get; set; } = new List<ShopItemModel>();
+
     public PassengerModel(string name, string? seatNumber, bool hasCheckedBaggage, bool hasPet = false, PetModel petDetails = null)
     {
         Name = name;
@@ -24,5 +27,6 @@ public class PassengerModel : PersonModel
         HasCheckedBaggage = hasCheckedBaggage;
         HasPet = hasPet;
         PetDetails = petDetails;
+        ShopItems = new List<ShopItemModel>();
     }
 }
