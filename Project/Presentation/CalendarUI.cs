@@ -3,16 +3,20 @@ public class CalendarUI
     private DateTime currentDate;
     private const ConsoleColor SelectedColor = ConsoleColor.Cyan;
     private const ConsoleColor HighlightColor = ConsoleColor.DarkCyan;
+    private const ConsoleColor RedHighlightColor = ConsoleColor.Red; // Highlight selected date in red
 
-    public CalendarUI()
+    private DateTime? highlightDate; // Date to highlight in red
+
+    public CalendarUI(DateTime? startingDate = null, DateTime? highlightDate = null)
     {
-        currentDate = DateTime.Now;
+        this.currentDate = startingDate ?? DateTime.Now;
+        this.highlightDate = highlightDate;
     }
 
     public DateTime SelectDate()
     {
         Console.CursorVisible = false;
-        DateTime selectedDate = DateTime.Now.Date;
+        DateTime selectedDate = currentDate.Date;
         bool done = false;
 
         while (!done)
@@ -86,10 +90,15 @@ public class CalendarUI
                 var currentDate = new DateTime(selectedDate.Year, selectedDate.Month, currentDay);
                 bool isSelected = selectedDate.Date == currentDate.Date;
                 bool isToday = currentDate.Date == DateTime.Now.Date;
+                bool isHighlighted = highlightDate.HasValue && currentDate.Date == highlightDate.Value.Date;
 
                 if (isSelected)
                 {
                     Console.ForegroundColor = SelectedColor;
+                }
+                else if (isHighlighted)
+                {
+                    Console.ForegroundColor = RedHighlightColor;
                 }
                 else if (isToday)
                 {

@@ -252,7 +252,8 @@ static class FlightManagement
         {
             Console.Clear();
             Console.WriteLine("Please select a return date:");
-            returnDate = calendar.SelectDate();
+            CalendarUI returnCalendar = new CalendarUI(startingDate: departureDate, highlightDate: departureDate);
+            returnDate = returnCalendar.SelectDate();
             if (returnDate == DateTime.MinValue)
             {
                 Console.WriteLine("Return date selection cancelled.");
@@ -512,15 +513,17 @@ static class FlightManagement
                 {
                     if (!string.IsNullOrEmpty(passenger.SeatNumber))
                     {
-                        var seatClass = new SeatSelectionUI().GetSeatClass(passenger.SeatNumber, selectedFlight.PlaneType);
+                        var seatClass =
+                            new SeatSelectionUI().GetSeatClass(passenger.SeatNumber, selectedFlight.PlaneType);
                         var basePrice = selectedFlight.SeatClassOptions
                             .FirstOrDefault(so => so.SeatClass.Equals(seatClass, StringComparison.OrdinalIgnoreCase))
                             ?.Price ?? 0;
-                        
+
                         Console.WriteLine($"\nBase Price: ({seatClass}): {basePrice:F2} EUR");
                     }
                 }
             }
+
             Console.WriteLine($"Total Price: {booking.TotalPrice} EUR");
 
             // Calculate miles and apply points redemption
@@ -567,7 +570,7 @@ static class FlightManagement
                 var flight = flightsLogic.GetFlightsById(booking.FlightId);
                 if (flight == null) continue;
 
-                FlightDisplay.DisplayBookingDetails(booking, flight); 
+                FlightDisplay.DisplayBookingDetails(booking, flight);
                 FlightDisplay.DisplayPassengerDetails(booking.Passengers);
                 Console.WriteLine(new string('─', Console.WindowWidth - 1));
             }
