@@ -16,7 +16,7 @@ static class FlightManagement
         if (string.IsNullOrEmpty(destination)) return;
 
         List<FlightModel> flightsList = flights.GetFlightsByOriginAndDestination(origin, destination).ToList();
-        if (!flightsList.Any())
+        if (flightsList.Count == 0)
         {
             Console.WriteLine($"No flights available from {origin} to {destination}.");
             return;
@@ -64,6 +64,7 @@ static class FlightManagement
         Console.WriteLine("F - Filter flights");
         if (allowBooking)
             Console.WriteLine("B - Book a flight");
+        //todo: zet booking terug
         else
         {
             Console.ForegroundColor = ConsoleColor.Red;
@@ -396,7 +397,7 @@ static class FlightManagement
         else
         {
             CompleteBooking(departureFlight.FlightId, passengerDetails, departureFlight, seatSelector,
-                        includeInsuranceForDeparture);
+                includeInsuranceForDeparture);
         }
 
         if (returnFlight != null)
@@ -446,9 +447,8 @@ static class FlightManagement
             else
             {
                 CompleteBooking(returnFlight.FlightId, passengerDetails, returnFlight, seatSelector,
-                                includeInsuranceForReturn);
+                    includeInsuranceForReturn);
             }
-
         }
     }
 
@@ -468,7 +468,7 @@ static class FlightManagement
     }
 
     private static List<PassengerModel> CollectPassengerDetails(FlightModel selectedFlight, int passengerCount,
-    SeatSelectionUI seatSelector)
+        SeatSelectionUI seatSelector)
     {
         List<PassengerModel> passengerDetails = new List<PassengerModel>();
         string[] petTypes = { "Dog", "Cat", "Bird", "Rabbit", "Hamster" };
@@ -497,7 +497,7 @@ static class FlightManagement
             {
                 Console.WriteLine("Do you have special luggage? (y/n):");
                 bool hasSpecialLuggage = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
-                
+
                 if (hasSpecialLuggage)
                 {
                     Console.WriteLine("What special luggage do you have? (e.g. Ski equipment, Musical instrument):");
@@ -538,6 +538,7 @@ static class FlightManagement
 
         return passengerDetails;
     }
+
     private static PetModel SelectPetDetails(string[] petTypes, Dictionary<string, double> maxWeights)
     {
         int selectedIndex = 0;
@@ -612,16 +613,17 @@ static class FlightManagement
             double totalBaggageCost = 0;
             double totalBasePrice = 0;
 
-            BookingModel booking = BookingLogic.CreateBooking(UserLogin.UserAccountServiceLogic.CurrentUserId, departureFlightId,
+            BookingModel booking = BookingLogic.CreateBooking(UserLogin.UserAccountServiceLogic.CurrentUserId,
+                departureFlightId,
                 passengerDetails, new List<PetModel>());
 
             totalBasePrice = booking.TotalPrice;
-                
+
             Console.WriteLine("\nFlight booked successfully!\n");
             Console.WriteLine($"Booking ID: {booking.BookingId}");
             Console.WriteLine($"Flight: {departureFlight.Origin} to {departureFlight.Destination}");
             Console.WriteLine($"Departure: {DateTime.Parse(departureFlight.DepartureTime):HH:mm dd MMM yyyy}");
-            
+
             // Shop items selection
             for (int i = 0; i < booking.Passengers.Count; i++)
             {
@@ -629,16 +631,16 @@ static class FlightManagement
                 Console.WriteLine($"\nPassenger: {passenger.Name}");
                 Console.WriteLine("Would you like to purchase items from our shop? (y/n):");
                 bool wantsItem = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
-    
+
                 if (wantsItem)
                 {
                     var shopUI = new ShopUI();
                     var purchasedItems = shopUI.DisplaySmallItemsShop(booking.BookingId, i);
-                    foreach(var item in purchasedItems)
+                    foreach (var item in purchasedItems)
                     {
                         passenger.ShopItems.Add(item);
                     }
-                
+
                     booking.TotalPrice += (int)purchasedItems.Sum(item => item.Price);
                 }
 
@@ -647,7 +649,7 @@ static class FlightManagement
                     totalBaggageCost += 30; // Standard baggage fee
                 }
             }
-    
+
             // Update booking with new total price
             var bookings = BookingAccess.LoadAll();
             var bookingToUpdate = bookings.FirstOrDefault(b => b.BookingId == booking.BookingId);
@@ -656,19 +658,21 @@ static class FlightManagement
                 bookingToUpdate.TotalPrice = booking.TotalPrice;
                 BookingAccess.WriteAll(bookings);
             }
-    
+
             // Display final details
             Console.WriteLine("\nPassengers:");
             foreach (var passenger in booking.Passengers)
             {
                 Console.WriteLine($"\nName: {passenger.Name}");
-                Console.WriteLine($"Seat: {passenger.SeatNumber} ({seatSelector.GetSeatClass(passenger.SeatNumber)} Class)");
+                Console.WriteLine(
+                    $"Seat: {passenger.SeatNumber} ({seatSelector.GetSeatClass(passenger.SeatNumber)} Class)");
                 Console.WriteLine($"Checked Baggage: {(passenger.HasCheckedBaggage ? "Yes" : "No")}");
                 Console.WriteLine($"Pet: {(passenger.HasPet ? "Yes" : "No")}");
                 if (passenger.HasPet && passenger.PetDetails != null)
                 {
                     Console.WriteLine($"Pet Details: {passenger.PetDetails.Type} ({passenger.PetDetails.Weight}kg)");
                 }
+
                 if (passenger.ShopItems.Any())
                 {
                     Console.WriteLine("Shop Items:");
@@ -678,7 +682,7 @@ static class FlightManagement
                     }
                 }
             }
-    
+
             // Calculate and display final price
             int earnedMiles = MilesLogic.CalculateMilesFromBooking(UserLogin.UserAccountServiceLogic.CurrentUserId);
             Console.WriteLine($"\nMiles Earned: {earnedMiles}");
@@ -696,35 +700,35 @@ static class FlightManagement
                 Console.WriteLine($"  Cancellation Insurance: {insuranceCost:F2} EUR");
             }
 
-        double finalTotalPrice = totalBasePrice + totalBaggageCost;
-        Console.WriteLine($"  Final Total Price: {finalTotalPrice:F2} EUR\n");
+            double finalTotalPrice = totalBasePrice + totalBaggageCost;
+            Console.WriteLine($"  Final Total Price: {finalTotalPrice:F2} EUR\n");
 
-        int roundedTotalPrice = (int)Math.Round(finalTotalPrice);
+            int roundedTotalPrice = (int)Math.Round(finalTotalPrice);
 
-        Console.WriteLine("------------------------------------------------------------");
-        Console.WriteLine("Rewards Summary:");
-        Console.WriteLine("------------------------------------------------------------");
+            Console.WriteLine("------------------------------------------------------------");
+            Console.WriteLine("Rewards Summary:");
+            Console.WriteLine("------------------------------------------------------------");
 
-        int milesEarned = MilesLogic.CalculateMilesFromBooking(UserLogin.UserAccountServiceLogic.CurrentUserId);
-        Console.WriteLine($"  Miles Earned: {milesEarned}");
+            int milesEarned = MilesLogic.CalculateMilesFromBooking(UserLogin.UserAccountServiceLogic.CurrentUserId);
+            Console.WriteLine($"  Miles Earned: {milesEarned}");
 
-        double discountedPrice = MilesLogic.BasicPointsRedemption(
-            UserLogin.UserAccountServiceLogic.CurrentUserId,
-            roundedTotalPrice,
-            booking.BookingId
-        );
+            double discountedPrice = MilesLogic.BasicPointsRedemption(
+                UserLogin.UserAccountServiceLogic.CurrentUserId,
+                roundedTotalPrice,
+                booking.BookingId
+            );
 
-        Console.WriteLine($"  Discounted Total Price: {discountedPrice:F2} EUR\n");
+            Console.WriteLine($"  Discounted Total Price: {discountedPrice:F2} EUR\n");
 
-        Console.WriteLine("------------------------------------------------------------");
-        Console.WriteLine("Thank you for booking with us!");
-        Console.WriteLine("------------------------------------------------------------");
+            Console.WriteLine("------------------------------------------------------------");
+            Console.WriteLine("Thank you for booking with us!");
+            Console.WriteLine("------------------------------------------------------------");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error creating booking: {ex.Message}");
+        }
     }
-    catch (Exception ex)
-    {
-        Console.WriteLine($"Error creating booking: {ex.Message}");
-    }
-}
 
     public static void ViewBookedFlights(int userId)
     {
@@ -806,7 +810,8 @@ static class FlightManagement
         string jetType = "";
         int maxPassengers = 0;
 
-        Console.WriteLine("We have two private jets. A Bombardier Learjet 75 with \x1B[4m6 seats\x1B[0m and a Bombardier Global 8280 with \x1B[4m8 seats\x1B[0m.");
+        Console.WriteLine(
+            "We have two private jets. A Bombardier Learjet 75 with \x1B[4m6 seats\x1B[0m and a Bombardier Global 8280 with \x1B[4m8 seats\x1B[0m.");
         Console.WriteLine("Which jet would you like to book? (1/2)");
         if (int.TryParse(Console.ReadLine(), out int choice))
         {
@@ -817,7 +822,7 @@ static class FlightManagement
             }
             else if (choice == 2)
             {
-                jetType = "Bombardier Global 8280"; 
+                jetType = "Bombardier Global 8280";
                 maxPassengers = 8;
             }
             else
@@ -828,9 +833,9 @@ static class FlightManagement
 
             Console.WriteLine($"\nYou have selected the {jetType}.");
             Console.WriteLine($"How many passengers? (1-{maxPassengers}):");
-            
-            if (!int.TryParse(Console.ReadLine(), out int passengerCount) || 
-                passengerCount <= 0 || 
+
+            if (!int.TryParse(Console.ReadLine(), out int passengerCount) ||
+                passengerCount <= 0 ||
                 passengerCount > maxPassengers)
             {
                 Console.WriteLine("Invalid number of passengers.");
@@ -851,7 +856,7 @@ static class FlightManagement
 
             try
             {
-                    BookingModel booking = BookingLogic.CreateBooking( // kan nog geen special items kopen of entertainment
+                BookingModel booking = BookingLogic.CreateBooking( // kan nog geen special items kopen of entertainment
                     user,
                     0, // Special ID for private jets
                     passengers,
