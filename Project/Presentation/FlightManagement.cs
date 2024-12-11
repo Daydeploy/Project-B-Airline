@@ -208,9 +208,8 @@ static class FlightManagement
         Console.Clear();
         FlightsLogic flightsLogic = new FlightsLogic();
 
-        // Step 1: Select Origin
         var origins = flightsLogic.GetAllOrigins();
-        if (!origins.Any())
+        if (origins.Count == 0)
         {
             Console.WriteLine("No available origins found.");
             return;
@@ -221,9 +220,8 @@ static class FlightManagement
         if (originIndex == -1) return;
         string origin = origins[originIndex];
 
-        // Step 2: Select Destination
         var destinations = flightsLogic.GetDestinationsByOrigin(origin);
-        if (!destinations.Any())
+        if (destinations.Count == 0)
         {
             Console.WriteLine($"No destinations available from {origin}.");
             return;
@@ -234,21 +232,20 @@ static class FlightManagement
         if (destinationIndex == -1) return;
         string destination = destinations[destinationIndex];
 
-        // Step 3: Select Trip Type (One-way or Round-trip)
         Console.Clear();
         string[] tripOptions = { "Yes, it's a round-trip booking", "No, one-way trip only" };
         int tripChoice = MenuNavigationService.NavigateMenu(tripOptions, "Is this a round-trip booking?");
         bool isRoundTrip = tripChoice == 0;
 
-        // Step 4: Select Departure Date
-        Console.Clear();
-        DateTime departureDate;
+
+        DateTime departureDate = DateTime.Now;
         List<FlightModel> availableFlights;
 
         while (true)
         {
+            Console.Clear();
             Console.WriteLine("Please select a departure date:");
-            CalendarUI calendar = new CalendarUI();
+            CalendarUI calendar = new CalendarUI(startingDate: departureDate);
             departureDate = calendar.SelectDate();
             if (departureDate == DateTime.MinValue)
             {
@@ -256,20 +253,21 @@ static class FlightManagement
                 return;
             }
 
-            // Step 5: Fetch Available Flights for Departure
             availableFlights = flightsLogic.FilterFlightsByDate(origin, destination, departureDate);
             if (availableFlights.Any())
             {
-                break; // Exit the loop if flights are found
+                break;
             }
 
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($"No flights found from {origin} to {destination} on {departureDate:dd MMM yyyy}.");
+            Console.WriteLine($"\nNo flights found from {origin} to {destination} on {departureDate:dd MMM yyyy}.");
             Console.ResetColor();
-            Console.WriteLine("Please select another date.");
+            Console.WriteLine("Press any key to select another date...");
+            Console.ReadKey();
         }
 
-        // Step 6: Select a Departure Flight
+
+        Console.Clear();
         Console.WriteLine("\nAvailable flights:");
         string[] flightOptions = availableFlights
             .Select((f, index) =>
@@ -286,7 +284,6 @@ static class FlightManagement
 
         var selectedFlight = availableFlights[selectedFlightIndex];
 
-        // Step 7: Handle Round-trip Logic
         DateTime? returnDate = null;
         if (isRoundTrip)
         {
@@ -295,7 +292,8 @@ static class FlightManagement
             {
                 Console.Clear();
                 Console.WriteLine("Please select a return date:");
-                CalendarUI returnCalendar = new CalendarUI(startingDate: departureDate, highlightDate: departureDate);
+                CalendarUI returnCalendar = new CalendarUI(startingDate: returnDate ?? departureDate,
+                    highlightDate: departureDate);
                 returnDate = returnCalendar.SelectDate();
                 if (returnDate == DateTime.MinValue)
                 {
@@ -305,7 +303,11 @@ static class FlightManagement
 
                 if (returnDate <= departureDate)
                 {
-                    Console.WriteLine("Return date must be after the departure date. Please select a valid date.");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"\nReturn date must be after the departure date ({departureDate:dd MMM yyyy}).");
+                    Console.ResetColor();
+                    Console.WriteLine("Press any key to select another return date...");
+                    Console.ReadKey();
                     continue;
                 }
 
@@ -314,13 +316,14 @@ static class FlightManagement
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine(
-                        $"No return flights available from {destination} to {origin} on {returnDate:dd MMM yyyy}.");
+                        $"\nNo return flights available from {destination} to {origin} on {returnDate:dd MMM yyyy}.");
                     Console.ResetColor();
-                    Console.WriteLine("Please select another return date.");
+                    Console.WriteLine("Press any key to select another return date...");
+                    Console.ReadKey();
                     continue;
                 }
 
-                // If valid return flights are found, proceed
+                Console.Clear();
                 Console.WriteLine("\nAvailable return flights:");
                 string[] returnFlightOptions = returnFlights
                     .Select((f, index) =>
@@ -338,20 +341,19 @@ static class FlightManagement
 
                 var selectedReturnFlight = returnFlights[selectedReturnFlightIndex];
 
-                // Continue with return flight details
                 HandlePassengerDetailsAndBooking(account, selectedFlight, selectedReturnFlight);
                 validReturnDate = true;
             }
         }
         else
         {
-            // Handle one-way trip booking
             HandlePassengerDetailsAndBooking(account, selectedFlight, null);
         }
 
         Console.WriteLine("\nPress any key to return to the menu...");
         Console.ReadKey();
     }
+
 
     private static void HandlePassengerDetailsAndBooking(AccountModel account, FlightModel departureFlight,
         FlightModel? returnFlight)
@@ -366,11 +368,11 @@ static class FlightManagement
         var seatSelector = new SeatSelectionUI();
         var passengerDetails = CollectPassengerDetails(departureFlight, passengerCount, seatSelector);
 
-        // Create booking for departure flight
+
         BookingLogic.CreateBooking(account.Id, departureFlight.FlightId, passengerDetails, new List<PetModel>());
         Console.WriteLine("\nDeparture flight booking completed successfully!");
 
-        // Create booking for return flight if applicable
+
         if (returnFlight != null)
         {
             foreach (var passenger in passengerDetails)
