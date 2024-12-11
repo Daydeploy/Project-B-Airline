@@ -23,7 +23,9 @@ public class BookingModel
     [JsonPropertyName("comfortPackages")]
     public List<ComfortPackageModel> ComfortPackages { get; set; } = new List<ComfortPackageModel>();
 
-    public BookingModel(int bookingId, int userId, int flightId, int totalPrice, List<PassengerModel> passengers, List<PetModel> pets, List<ComfortPackageModel> comfortPackages = null)
+     public string PlaneType { get; }
+
+    public BookingModel(int bookingId, int userId, int flightId, int totalPrice, List<PassengerModel> passengers, List<PetModel> pets, List<ComfortPackageModel> comfortPackages = null, string planeType = null)
     {
         BookingId = bookingId;
         UserId = userId;
@@ -32,6 +34,7 @@ public class BookingModel
         Passengers = passengers;
         Pets = pets;
         ComfortPackages = comfortPackages;
+        PlaneType = planeType;
     }
     
 }

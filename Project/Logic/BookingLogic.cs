@@ -64,6 +64,38 @@ public class BookingLogic
         return newBooking;
     }
 
+    public static BookingModel CreatePrivateJetBooking(int userId, List<PassengerModel> passengerDetails, string jetType)
+    {
+    int bookingId = GenerateBookingId();
+    int totalPrice = 2500 * passengerDetails.Count; // prijs voor nu op 2500 gezet x aantal passengerss
+
+    var passengers = passengerDetails
+        .Select(p => new PassengerModel(
+            p.Name, 
+            p.SeatNumber, 
+            p.HasCheckedBaggage,
+            p.HasPet,
+            p.PetDetails))
+        .ToList();
+
+    BookingModel newBooking = new BookingModel(
+        bookingId,
+        userId, 
+        0, // Flight ID staat gewoon op 0 nu
+        totalPrice, 
+        passengers, 
+        new List<PetModel>(), // geen pets
+        null, // er zijn voor nu geen comfort packages op private jets, want die zijn standaard al luxer
+        jetType
+    );
+
+    _bookings.Add(newBooking);
+    BookingAccess.WriteAll(_bookings);
+
+    return newBooking;
+    }
+
+
     private static int GenerateBookingId()
     {
         int bookingId;

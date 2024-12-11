@@ -66,28 +66,34 @@ static class UserLogin
                 case 0: // Book a Flight
                     FlightManagement.BookAFlight(account);
                     break;
-                case 1: // View Booked Flights
+                case 1: // Book Private Jet
+                    FlightManagement.BookPrivateJet(account.Id);
+                    break;
+                case 2: // View Booked Flights
                     FlightManagement.ViewBookedFlights(account.Id);
                     break;
-                case 2: // Check-in for a Flight
+                case 3: // Check-in for a Flight
                     FlightManagement.CheckInForFlight();
                     break;
-                case 3: // Manage Account
+                case 4: // Manage Account
                     AccountManagement.ManageAccount(account);
                     break;
-                case 4: // View Airport Information
-                    AirportInformation.ViewAirportInformation();
-                    break;
-                case 5: // Browse Destinations
-                    AirportInformation.BrowseDestinations();
-                    break;
-                case 6: // Packages
-                    PackagesUI.ShowPackages();
-                    break;
-                case 7: // Show Available Flights and advanced flight booking
+                case 5: // Show Available Flights
                     FlightManagement.ShowAvailableFlights();
                     break;
-                case 8: // Logout
+                case 6: // View Airport Information
+                    AirportInformation.ViewAirportInformation();
+                    break;
+                case 7: // Browse Destinations
+                    AirportInformation.BrowseDestinations();
+                    break;
+                case 8: // Show Seat Upgrade Options
+                    SeatUpgradeOptions.ShowSeatUpgradeOptions();
+                    break;
+                case 9: // Packages
+                    PackagesUI.ShowPackages();
+                    break;
+                case 10: // Logout
                     Console.Clear();
                     UserAccountServiceLogic.Logout();
                     Console.WriteLine("You have successfully logged out.");

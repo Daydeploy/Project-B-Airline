@@ -20,7 +20,8 @@
         "History": ""
       }
     ],
-    "paymentInformation": null
+    "paymentInformation": null,
+    "privateJet": null
   },
   {
     "id": 2,
@@ -43,7 +44,8 @@
         "History": ""
       }
     ],
-    "paymentInformation": null
+    "paymentInformation": null,
+    "privateJet": null
   },
   {
     "id": 82,
@@ -66,7 +68,8 @@
         "History": ""
       }
     ],
-    "paymentInformation": null
+    "paymentInformation": null,
+    "privateJet": null
   },
   {
     "id": 83,
@@ -97,6 +100,7 @@
         "expirationDate": "12/2222",
         "billingAddress": "Test Address 1"
       }
-    ]
+    ],
+    "privateJet": null
   }
 ]

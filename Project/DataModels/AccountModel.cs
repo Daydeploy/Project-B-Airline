@@ -42,6 +42,9 @@ public class AccountModel
     [JsonPropertyName("paymentInformation")]
     public List<PaymentInformationModel> PaymentInformation { get; set; }
 
+    [JsonPropertyName("privateJet")]
+    public string PrivateJet { get; set; }
+
     public AccountModel(int id, string firstName, string lastName, DateTime dateOfBirth,
                         string emailAddress, string password, List<MilesModel> miles, List<PaymentInformationModel>? paymentInformation = null)
     {

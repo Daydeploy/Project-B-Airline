@@ -383,7 +383,7 @@ static class FlightManagement
 
                 if (account.PaymentInformation == null)
                 {
-                    Console.WriteLine("No paymenr information added, Booking cannot proceed.");
+                    Console.WriteLine("No payment information added, Booking cannot proceed.");
                     return;
                 }
             }
@@ -779,4 +779,87 @@ static class FlightManagement
             Console.WriteLine("Invalid Flight ID.");
         }
     }
+
+    public static void BookPrivateJet(int userId)
+    {
+        var user = userId;
+        string jetType = "";
+        int maxPassengers = 0;
+
+        Console.WriteLine("We have two private jets. A Bombardier Learjet 75 with \x1B[4m6 seats\x1B[0m and a Bombardier Global 8280 with \x1B[4m8 seats\x1B[0m.");
+        Console.WriteLine("Which jet would you like to book? (1/2)");
+        if (int.TryParse(Console.ReadLine(), out int choice))
+        {
+            if (choice == 1)
+            {
+                jetType = "Bombardier Learjet 75";
+                maxPassengers = 6;
+            }
+            else if (choice == 2)
+            {
+                jetType = "Bombardier Global 8280"; 
+                maxPassengers = 8;
+            }
+            else
+            {
+                Console.WriteLine("Invalid choice.");
+                return;
+            }
+
+            Console.WriteLine($"\nYou have selected the {jetType}.");
+            Console.WriteLine($"How many passengers? (1-{maxPassengers}):");
+            
+            if (!int.TryParse(Console.ReadLine(), out int passengerCount) || 
+                passengerCount <= 0 || 
+                passengerCount > maxPassengers)
+            {
+                Console.WriteLine("Invalid number of passengers.");
+                return;
+            }
+
+            List<PassengerModel> passengers = new List<PassengerModel>();
+            for (int i = 0; i < passengerCount; i++)
+            {
+                Console.Clear();
+                Console.WriteLine($"Passenger {i + 1} Details:");
+                Console.WriteLine("Enter passenger name:");
+                string name = Console.ReadLine() ?? string.Empty;
+
+                var passenger = new PassengerModel(name, $"PJ{i + 1}", false);
+                passengers.Add(passenger);
+            }
+
+            try
+            {
+                    BookingModel booking = BookingLogic.CreatePrivateJetBooking(
+                    user, 
+                    passengers, 
+                    jetType
+                );
+
+                Console.WriteLine("\nPrivate jet booking completed successfully!");
+                Console.WriteLine($"Booking ID: {booking.BookingId}");
+                Console.WriteLine($"Aircraft: {booking.PlaneType}");
+                Console.WriteLine($"Total Price: {booking.TotalPrice:C}");
+                Console.WriteLine("\nPassenger Details:");
+                foreach (var passenger in passengers)
+                {
+                    Console.WriteLine($"- {passenger.Name} (Seat: {passenger.SeatNumber})");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error creating booking: {ex.Message}");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Invalid choice.");
+        }
+
+        Console.WriteLine("\nPress any key to continue...");
+        Console.ReadKey();
+    }
+
+
 }
