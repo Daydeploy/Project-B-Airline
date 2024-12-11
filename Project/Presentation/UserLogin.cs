@@ -47,6 +47,7 @@ static class UserLogin
         string[] menuItems = new[]
         {
             "Book a Flight",
+            "Book Private Jet",
             "View Booked Flights",
             "Check-in for a Flight",
             "Manage Account",
@@ -78,22 +79,19 @@ static class UserLogin
                 case 4: // Manage Account
                     AccountManagement.ManageAccount(account);
                     break;
-                case 5: // Show Available Flights
-                    FlightManagement.ShowAvailableFlights();
-                    break;
-                case 6: // View Airport Information
+                case 5: // View Airport Information
                     AirportInformation.ViewAirportInformation();
                     break;
-                case 7: // Browse Destinations
+                case 6: // Browse Destinations
                     AirportInformation.BrowseDestinations();
                     break;
-                case 8: // Show Seat Upgrade Options
-                    SeatUpgradeOptions.ShowSeatUpgradeOptions();
-                    break;
-                case 9: // Packages
+                case 7: // Packages
                     PackagesUI.ShowPackages();
                     break;
-                case 10: // Logout
+                case 8: // Show Available Flights and advanced flight booking
+                    FlightManagement.ShowAvailableFlights();
+                    break;
+                case 9: // Logout
                     Console.Clear();
                     UserAccountServiceLogic.Logout();
                     Console.WriteLine("You have successfully logged out.");

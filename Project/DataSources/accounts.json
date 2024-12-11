@@ -10,7 +10,12 @@
     "address": null,
     "email": "test.account@gmail.com",
     "password": "test",
-    "passportDetails": null,
+    "passportDetails": {
+      "passportNumber": null,
+      "issueDate": "0001-01-01T00:00:00",
+      "expirationDate": "0001-01-01T00:00:00",
+      "countryOfIssue": "1"
+    },
     "milesDetails": [
       {
         "Enrolled": false,
@@ -20,7 +25,15 @@
         "History": ""
       }
     ],
-    "paymentInformation": null,
+    "paymentInformation": [
+      {
+        "cardHolder": "Sil",
+        "cardNumber": "1234567890123456",
+        "cVV": "222",
+        "expirationDate": "11/26",
+        "billingAddress": "Wijnhaven 106"
+      }
+    ],
     "privateJet": null
   },
   {
