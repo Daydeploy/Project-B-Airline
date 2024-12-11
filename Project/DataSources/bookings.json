@@ -104,5 +104,133 @@
         ]
       }
     ]
+  },
+  {
+    "bookingId": 4856,
+    "userId": 1,
+    "flightId": 1223,
+    "totalPrice": 3412,
+    "passengers": [
+      {
+        "name": "Sil",
+        "hasPet": true,
+        "petDetails": {
+          "petId": 0,
+          "bookingId": 0,
+          "type": "Cat",
+          "size": null,
+          "weight": 12,
+          "storageLocation": "Cargo",
+          "maxWeight": 0,
+          "seatingLocation": null,
+          "fee": null
+        },
+        "seatNumber": "2A",
+        "hasCheckedBaggage": true,
+        "shopItems": [
+          {
+            "name": "Cabernet Sauvignon (187 ml bottle)",
+            "price": 10,
+            "category": "Snacks \u0026 Drinks",
+            "description": "Red wine, premium brand"
+          },
+          {
+            "name": "Creed Aventus (100 ml)",
+            "price": 450,
+            "category": "Fragrances",
+            "description": "High-end niche fragrance with fruity and smoky notes"
+          },
+          {
+            "name": "Lindt Master Chocolatier Collection (500g)",
+            "price": 30,
+            "category": "Luxury Chocolates \u0026 Gourmet Treats",
+            "description": "Fine Swiss chocolates"
+          },
+          {
+            "name": "Tissot PRX Automatic Watch",
+            "price": 650,
+            "category": "Watches",
+            "description": "Classic design, Swiss-made"
+          },
+          {
+            "name": "Swarovski Crystal Necklace",
+            "price": 85,
+            "category": "Jewelry",
+            "description": "Elegant, gift-ready design"
+          },
+          {
+            "name": "Collector\u0027s Edition Airline Poster (Framed)",
+            "price": 150,
+            "category": "Exclusive Souvenirs",
+            "description": "Retro or modern artwork"
+          },
+          {
+            "name": "Collector\u0027s Edition Airline Poster (Framed)",
+            "price": 150,
+            "category": "Exclusive Souvenirs",
+            "description": "Retro or modern artwork"
+          }
+        ],
+        "specialLuggage": "Musical instrument",
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      }
+    ],
+    "pets": [],
+    "comfortPackages": [
+      {
+        "id": 1,
+        "name": "Basic Package",
+        "contents": [
+          "Blanket",
+          "Pillow"
+        ],
+        "cost": 15.00,
+        "availableIn": [
+          "Economy",
+          "Business",
+          "First"
+        ]
+      }
+    ],
+    "planeType": null,
+    "entertainment": [
+      {
+        "id": 5,
+        "name": "Gaming Package",
+        "contents": [
+          "Handheld Gaming Console",
+          "Pre-installed Games"
+        ],
+        "cost": 75.00,
+        "availableIn": [
+          "Economy",
+          "Business",
+          "First"
+        ]
+      },
+      {
+        "id": 1,
+        "name": "Basic Entertainment",
+        "contents": [
+          "Movies",
+          "Music",
+          "Flight Map"
+        ],
+        "cost": 30.00,
+        "availableIn": [
+          "Economy",
+          "Business",
+          "First"
+        ]
+      }
+    ]
   }
 ]
