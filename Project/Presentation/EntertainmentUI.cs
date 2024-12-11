@@ -7,13 +7,19 @@ static class EntertainmentUI
         var entertainmentOptions = EntertainmentDataAccess.LoadAll();
         
         Console.WriteLine("\nAvailable Comfort Packages:");
-        Console.WriteLine(new string('-', 50));
+
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine(new string('-', 80));
+        Console.ResetColor();
         
         foreach (var option in entertainmentOptions)
         {
             Console.WriteLine($"{option.Id}. {option.Name} - {string.Join(", ", option.Contents)} (€{option.Cost:F2})");
             Console.WriteLine($"   Available in: {string.Join(", ", option.AvailableIn)}");
-            Console.WriteLine(new string('-', 50));
+            
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(new string('-', 80));
+            Console.ResetColor();
         }
     }
 
@@ -35,9 +41,16 @@ static class EntertainmentUI
             }
     
             Console.Clear();
+
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("=== Entertainment Options ===\n");
+            Console.ResetColor();
+
             Console.WriteLine("Your Booked Flights:");
-            Console.WriteLine(new string('-', 50));
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(new string('-', 80));
+            Console.ResetColor();
     
             foreach (var booking in bookedFlights)
             {
@@ -45,9 +58,14 @@ static class EntertainmentUI
                 if (flight != null)
                 {
                     Console.WriteLine($"Booking ID: {booking.BookingId}");
+                    System.Console.WriteLine($"Aircraft type: {flight.PlaneType}");
+                    System.Console.WriteLine($"Seat Class: {flight.SeatClassOptions.FirstOrDefault()?.SeatClass}");
                     Console.WriteLine($"Flight: {flight.Origin} to {flight.Destination}");
                     Console.WriteLine($"Date: {flight.DepartureTime}");
-                    Console.WriteLine(new string('-', 50));
+
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(new string('-', 80));
+                    Console.ResetColor();
                 }
             }
     

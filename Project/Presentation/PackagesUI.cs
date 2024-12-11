@@ -59,6 +59,7 @@ static class PackagesUI
                     System.Console.WriteLine($"Seat Class: {flight.SeatClassOptions.FirstOrDefault()?.SeatClass}");
                     Console.WriteLine($"Flight: {flight.Origin} to {flight.Destination}");
                     Console.WriteLine($"Date: {flight.DepartureTime}");
+                    
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine(new string('-', 80));
                     Console.ResetColor();

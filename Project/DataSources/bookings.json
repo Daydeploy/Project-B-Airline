@@ -33,7 +33,7 @@
     "bookingId": 7909,
     "userId": 1,
     "flightId": 1271,
-    "totalPrice": 1110,
+    "totalPrice": 1235,
     "passengers": [
       {
         "name": "God Please",
@@ -55,8 +55,54 @@
       }
     ],
     "pets": [],
-    "comfortPackages": null,
+    "comfortPackages": [
+      {
+        "id": 1,
+        "name": "Basic Package",
+        "contents": [
+          "Blanket",
+          "Pillow"
+        ],
+        "cost": 15.00,
+        "availableIn": [
+          "Economy",
+          "Business",
+          "First"
+        ]
+      }
+    ],
     "planeType": null,
-    "entertainment": null
+    "entertainment": [
+      {
+        "id": 2,
+        "name": "Social Package",
+        "contents": [
+          "Multiplayer Gaming",
+          "Group Movie Streaming",
+          "Digital Trivia Games"
+        ],
+        "cost": 80.00,
+        "availableIn": [
+          "Economy",
+          "Business",
+          "First"
+        ]
+      },
+      {
+        "id": 1,
+        "name": "Basic Entertainment",
+        "contents": [
+          "Movies",
+          "Music",
+          "Flight Map"
+        ],
+        "cost": 30.00,
+        "availableIn": [
+          "Economy",
+          "Business",
+          "First"
+        ]
+      }
+    ]
   }
 ]

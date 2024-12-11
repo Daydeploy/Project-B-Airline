@@ -54,6 +54,7 @@ static class UserLogin
             "View Airport Information",
             "Browse Destinations",
             "Show Seat Upgrade Options",
+            "Advanced flight booking",
             "Add Comfort Packages",
             "Add Entertainment",
             "Logout"
@@ -80,19 +81,19 @@ static class UserLogin
                 case 4: // Manage Account
                     AccountManagement.ManageAccount(account);
                     break;
-                case 5: // Show Available Flights
-                    FlightManagement.ShowAvailableFlights();
-                    break;
-                case 6: // View Airport Information
+                case 5: // View Airport Information
                     AirportInformation.ViewAirportInformation();
                     break;
-                case 7: // Browse Destinations
+                case 6: // Browse Destinations
                     AirportInformation.BrowseDestinations();
                     break;
-                case 8: // Show Seat Upgrade Options
+                case 7: // Show Seat Upgrade Options
                     SeatUpgradeOptions.ShowSeatUpgradeOptions();
                     break;
-                case 9: // Packages
+                case 8: // Advanced flight booking
+                    FlightManagement.ShowAvailableFlights();
+                    break;
+                case 9: // Add Comfort Packages
                     PackagesUI.ShowPackages();
                     break;
                 case 10: // Add Entertainment
@@ -106,6 +107,7 @@ static class UserLogin
                     MenuNavigation.Start();
                     _isLoggedIn = false;
                     return;
+
             }
         }
     }
