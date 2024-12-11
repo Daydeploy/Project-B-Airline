@@ -17,12 +17,20 @@ public class PassengerModel : PersonModel
     [JsonPropertyName("hasCheckedBaggage")]
     public bool HasCheckedBaggage { get; set; }
 
-    public PassengerModel(string name, string? seatNumber, bool hasCheckedBaggage, bool hasPet = false, PetModel petDetails = null)
+    [JsonPropertyName("shopItems")]
+    public List<ShopItemModel> ShopItems { get; set; } = new List<ShopItemModel>();
+
+    [JsonPropertyName("specialLuggage")]
+    public string SpecialLuggage { get; set; }
+
+    public PassengerModel(string name, string? seatNumber, bool hasCheckedBaggage, bool hasPet = false, PetModel petDetails = null, string specialLuggage = "")
     {
         Name = name;
         SeatNumber = seatNumber;
         HasCheckedBaggage = hasCheckedBaggage;
         HasPet = hasPet;
         PetDetails = petDetails;
+        ShopItems = new List<ShopItemModel>();
+        SpecialLuggage = specialLuggage;
     }
 }

@@ -467,13 +467,12 @@ static class FlightManagement
         return response == "y";
     }
 
-
     private static List<PassengerModel> CollectPassengerDetails(FlightModel selectedFlight, int passengerCount,
-        SeatSelectionUI seatSelector)
+    SeatSelectionUI seatSelector)
     {
-        var passengerDetails = new List<PassengerModel>();
-        string[] petTypes = new[] { "Dog", "Cat", "Bird", "Rabbit", "Hamster" };
-        Dictionary<string, double> maxWeights = new()
+        List<PassengerModel> passengerDetails = new List<PassengerModel>();
+        string[] petTypes = { "Dog", "Cat", "Bird", "Rabbit", "Hamster" };
+        var maxWeights = new Dictionary<string, double>
         {
             { "Dog", 32.0 },
             { "Cat", 15.0 },
@@ -489,10 +488,27 @@ static class FlightManagement
             Console.WriteLine("Enter passenger name:");
             string name = Console.ReadLine() ?? string.Empty;
 
-
             Console.WriteLine("Does this passenger have checked baggage? (y/n):");
             bool hasCheckedBaggage = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
 
+            string specialLuggage = "";
+
+            if (hasCheckedBaggage)
+            {
+                Console.WriteLine("Do you have special luggage? (y/n):");
+                bool hasSpecialLuggage = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
+                
+                if (hasSpecialLuggage)
+                {
+                    Console.WriteLine("What special luggage do you have? (e.g. Ski equipment, Musical instrument):");
+                    specialLuggage = Console.ReadLine() ?? string.Empty;
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine($"\nYour {specialLuggage} will be stored securely in the luggage compartment.");
+                    Console.ResetColor();
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey();
+                }
+            }
 
             Console.WriteLine("Does this passenger have a pet? (y/n):");
             bool hasPet = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
@@ -503,6 +519,10 @@ static class FlightManagement
                 petDetails = SelectPetDetails(petTypes, maxWeights);
             }
 
+            // In FlightManagement.cs, add some debug logging after passenger creation:
+            var passenger = new PassengerModel(name, null, hasCheckedBaggage, hasPet, petDetails, specialLuggage);
+            Console.WriteLine($"DEBUG: Special luggage set to: {passenger.SpecialLuggage}"); // Verify value is set\
+
             Console.WriteLine("\nSelect a seat for the passenger:");
             string seatNumber = seatSelector.SelectSeat(selectedFlight.PlaneType);
             seatSelector.SetSeatOccupied(seatNumber);
@@ -512,15 +532,12 @@ static class FlightManagement
                 seatSelector.SetPetSeat(seatNumber);
             }
 
-
-            var passenger = new PassengerModel(name, seatNumber, hasCheckedBaggage, hasPet, petDetails);
+            passenger.SeatNumber = seatNumber;
             passengerDetails.Add(passenger);
         }
 
-
         return passengerDetails;
     }
-
     private static PetModel SelectPetDetails(string[] petTypes, Dictionary<string, double> maxWeights)
     {
         int selectedIndex = 0;
@@ -590,89 +607,74 @@ static class FlightManagement
         FlightModel? returnFlight = null,
         int? returnFlightId = null)
     {
-        double totalBasePrice = 0.0;
-        double totalBaggageCost = 0.0;
-        const double baggageCost = 30.0;
-
-        Console.Clear();
-        Console.WriteLine("------------------------------------------------------------");
-        Console.WriteLine("                    FLIGHT BOOKING SUMMARY                   ");
-        Console.WriteLine("------------------------------------------------------------\n");
-
-        BookingModel departureBooking = BookingLogic.CreateBooking(
-            UserLogin.UserAccountServiceLogic.CurrentUserId,
-            departureFlightId,
-            passengerDetails,
-            new List<PetModel>()
-        );
-
-        Console.WriteLine($"Booking ID: {departureBooking.BookingId}");
-        Console.WriteLine($"Flight: {departureFlight.Origin} → {departureFlight.Destination}");
-        Console.WriteLine($"Departure: {DateTime.Parse(departureFlight.DepartureTime):HH:mm dd MMM yyyy}\n");
-
-        BookingModel? returnBooking = null;
-        if (returnFlight != null && returnFlightId.HasValue)
+        try
         {
-            returnBooking = BookingLogic.CreateBooking(
-                UserLogin.UserAccountServiceLogic.CurrentUserId,
-                returnFlightId.Value,
-                passengerDetails,
-                new List<PetModel>()
-            );
-
-            Console.WriteLine($"Return Booking ID: {returnBooking.BookingId}");
-            Console.WriteLine($"Return Flight: {returnFlight.Origin} → {returnFlight.Destination}");
-            Console.WriteLine($"Return Departure: {DateTime.Parse(returnFlight.DepartureTime):HH:mm dd MMM yyyy}\n");
-        }
-
-        Console.WriteLine("Passengers:");
-        foreach (var passenger in passengerDetails)
-        {
-            var seatClass = seatSelector.GetSeatClass(passenger.SeatNumber);
-            Console.WriteLine($"  - Name: {passenger.Name}");
-            Console.WriteLine($"    Seat: {passenger.SeatNumber} ({seatClass} Class)");
-            Console.WriteLine($"    Checked Baggage: {(passenger.HasCheckedBaggage ? "Yes" : "No")}");
-            Console.WriteLine();
-
-            if (passenger.HasCheckedBaggage)
+            BookingModel booking = BookingLogic.CreateBooking(UserLogin.UserAccountServiceLogic.CurrentUserId, flightId,
+                passengerDetails, new List<PetModel>());
+                
+            Console.WriteLine("\nFlight booked successfully!\n");
+            Console.WriteLine($"Booking ID: {booking.BookingId}");
+            Console.WriteLine($"Flight: {selectedFlight.Origin} to {selectedFlight.Destination}");
+            Console.WriteLine($"Departure: {DateTime.Parse(selectedFlight.DepartureTime):HH:mm dd MMM yyyy}");
+            
+            // Shop items selection
+            for (int i = 0; i < booking.Passengers.Count; i++)
             {
-                totalBaggageCost += baggageCost;
-            }
-        }
-
-        Console.WriteLine("------------------------------------------------------------");
-        Console.WriteLine("Pricing Details:");
-        Console.WriteLine("------------------------------------------------------------");
-
-        foreach (var passenger in passengerDetails)
-        {
-            if (!string.IsNullOrEmpty(passenger.SeatNumber))
-            {
-                var seatClass = seatSelector.GetSeatClass(passenger.SeatNumber, departureFlight.PlaneType);
-                var basePrice = departureFlight.SeatClassOptions
-                    .FirstOrDefault(so => so.SeatClass.Equals(seatClass, StringComparison.OrdinalIgnoreCase))
-                    ?.Price ?? 0.0;
-
-                totalBasePrice += basePrice;
-                Console.WriteLine($"  Base Price (Departure - {seatClass} Class): {basePrice:F2} EUR");
-            }
-        }
-
-        if (returnFlight != null)
-        {
-            foreach (var passenger in passengerDetails)
-            {
-                if (!string.IsNullOrEmpty(passenger.SeatNumber))
+                var passenger = booking.Passengers[i];
+                Console.WriteLine($"\nPassenger: {passenger.Name}");
+                Console.WriteLine("Would you like to purchase items from our shop? (y/n):");
+                bool wantsItem = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
+    
+                if (wantsItem)
                 {
-                    var seatClass = seatSelector.GetSeatClass(passenger.SeatNumber, returnFlight.PlaneType);
-                    var basePrice = returnFlight.SeatClassOptions
-                        .FirstOrDefault(so => so.SeatClass.Equals(seatClass, StringComparison.OrdinalIgnoreCase))
-                        ?.Price ?? 0.0;
-
-                    totalBasePrice += basePrice;
-                    Console.WriteLine($"  Base Price (Return - {seatClass} Class): {basePrice:F2} EUR");
+                    var shopUI = new ShopUI();
+                    var purchasedItems = shopUI.DisplaySmallItemsShop(booking.BookingId, i);
+                    foreach(var item in purchasedItems)
+                    {
+                        passenger.ShopItems.Add(item);
+                    }
+                
+                    booking.TotalPrice += (int)purchasedItems.Sum(item => item.Price);
                 }
             }
+    
+            // Update booking with new total price
+            var bookings = BookingAccess.LoadAll();
+            var bookingToUpdate = bookings.FirstOrDefault(b => b.BookingId == booking.BookingId);
+            if (bookingToUpdate != null)
+            {
+                bookingToUpdate.TotalPrice = booking.TotalPrice;
+                BookingAccess.WriteAll(bookings);
+            }
+    
+            // Display final details
+            Console.WriteLine("\nPassengers:");
+            foreach (var passenger in booking.Passengers)
+            {
+                Console.WriteLine($"\nName: {passenger.Name}");
+                Console.WriteLine($"Seat: {passenger.SeatNumber} ({seatSelector.GetSeatClass(passenger.SeatNumber)} Class)");
+                Console.WriteLine($"Checked Baggage: {(passenger.HasCheckedBaggage ? "Yes" : "No")}");
+                Console.WriteLine($"Pet: {(passenger.HasPet ? "Yes" : "No")}");
+                if (passenger.HasPet && passenger.PetDetails != null)
+                {
+                    Console.WriteLine($"Pet Details: {passenger.PetDetails.Type} ({passenger.PetDetails.Weight}kg)");
+                }
+                if (passenger.ShopItems.Any())
+                {
+                    Console.WriteLine("Shop Items:");
+                    foreach (var item in passenger.ShopItems)
+                    {
+                        Console.WriteLine($"- {item.Name} ({item.Price:F2} EUR)");
+                    }
+                }
+            }
+    
+            // Calculate and display final price
+            int milesEarned = MilesLogic.CalculateMilesFromBooking(UserLogin.UserAccountServiceLogic.CurrentUserId);
+            Console.WriteLine($"\nMiles Earned: {milesEarned}");
+            booking.TotalPrice = MilesLogic.BasicPointsRedemption(UserLogin.UserAccountServiceLogic.CurrentUserId,
+                booking.TotalPrice, booking.BookingId);
+            Console.WriteLine($"Final Total Price: {booking.TotalPrice:F2} EUR");
         }
 
         if (totalBaggageCost > 0)
@@ -737,8 +739,15 @@ static class FlightManagement
             foreach (var booking in bookings)
             {
                 var flightsLogic = new FlightsLogic();
-                var flight = flightsLogic.GetFlightsById(booking.FlightId);
-                if (flight == null) continue;
+                FlightModel flight;
+                if (booking.FlightId == 0)
+                {
+                    flight = null;
+                }
+                else
+                {
+                    flight = flightsLogic.GetFlightsById(booking.FlightId);
+                }
 
                 FlightDisplay.DisplayBookingDetails(booking, flight);
                 FlightDisplay.DisplayPassengerDetails(booking.Passengers);
@@ -831,9 +840,12 @@ static class FlightManagement
 
             try
             {
-                    BookingModel booking = BookingLogic.CreatePrivateJetBooking(
-                    user, 
-                    passengers, 
+                    BookingModel booking = BookingLogic.CreateBooking( // kan nog geen special items kopen of entertainment
+                    user,
+                    0, // Special ID for private jets
+                    passengers,
+                    new List<PetModel>(), // geen pets
+                    true,
                     jetType
                 );
 
@@ -860,6 +872,4 @@ static class FlightManagement
         Console.WriteLine("\nPress any key to continue...");
         Console.ReadKey();
     }
-
-
 }

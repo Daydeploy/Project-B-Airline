@@ -53,8 +53,9 @@ static class UserLogin
             "Manage Account",
             "View Airport Information",
             "Browse Destinations",
-            "Packages",
-            "Show Available Flights and advanced flight booking",
+            "Show Seat Upgrade Options",
+            "Add Comfort Packages",
+            "Add Entertainment",
             "Logout"
         };
 
@@ -79,19 +80,25 @@ static class UserLogin
                 case 4: // Manage Account
                     AccountManagement.ManageAccount(account);
                     break;
-                case 5: // View Airport Information
-                    AirportInformation.ViewAirportInformation();
-                    break;
-                case 6: // Browse Destinations
-                    AirportInformation.BrowseDestinations();
-                    break;
-                case 7: // Packages
-                    PackagesUI.ShowPackages();
-                    break;
-                case 8: // Show Available Flights and advanced flight booking
+                case 5: // Show Available Flights
                     FlightManagement.ShowAvailableFlights();
                     break;
-                case 9: // Logout
+                case 6: // View Airport Information
+                    AirportInformation.ViewAirportInformation();
+                    break;
+                case 7: // Browse Destinations
+                    AirportInformation.BrowseDestinations();
+                    break;
+                case 8: // Show Seat Upgrade Options
+                    SeatUpgradeOptions.ShowSeatUpgradeOptions();
+                    break;
+                case 9: // Packages
+                    PackagesUI.ShowPackages();
+                    break;
+                case 10: // Add Entertainment
+                    EntertainmentUI.ShowEntertainment();
+                    break;
+                case 11: // Logout
                     Console.Clear();
                     UserAccountServiceLogic.Logout();
                     Console.WriteLine("You have successfully logged out.");

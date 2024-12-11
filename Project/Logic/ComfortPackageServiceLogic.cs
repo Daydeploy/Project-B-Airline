@@ -1,11 +1,5 @@
 public class ComfortPackageServiceLogic
-{
-    public bool ValidatePackageAvailability(string flightClass)
-    {
-        var package = ComfortPackageDataAccess.GetComfortPackage(1);
-        return package != null && package.AvailableIn.Contains(flightClass);
-    }
-
+{    
     public void AddPackageToBooking(int bookingId, int packageId)
     {
         try

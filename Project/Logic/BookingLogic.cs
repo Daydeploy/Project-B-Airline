@@ -36,17 +36,34 @@ public class BookingLogic
         }
     }
 
-    public static BookingModel CreateBooking(int userId, int flightId, List<PassengerModel> passengerDetails, List<PetModel> petDetails)
+    public static BookingModel CreateBooking(int userId, int flightId, List<PassengerModel> passengerDetails, 
+        List<PetModel> petDetails, bool isPrivateJet = false, string jetType = null)
     {
         int bookingId = GenerateBookingId();
-        
-        var flight = _flights.FirstOrDefault(f => f.FlightId == flightId) 
-            ?? throw new Exception("Flight not found");
-        
-        int totalPrice = CalculateTotalPrice(flight.Destination, passengerDetails);
-        foreach (var pet in petDetails)
+        int totalPrice;
+
+        if (isPrivateJet && !string.IsNullOrEmpty(jetType))
         {
-            totalPrice += (int)PetDataAccess.GetPetFees(pet.Type, pet.SeatingLocation); // ik weet niet of locatie correct is
+            // Private jet base prices
+            var privateJetPrices = new Dictionary<string, int>
+            {
+                { "Bombardier Learjet 75", 15000 },
+                { "Bombardier Global 8280", 25000 }
+            };
+
+            // Price for private jet
+            totalPrice = privateJetPrices[jetType];
+        }
+        else
+        {
+            var flight = _flights.FirstOrDefault(f => f.FlightId == flightId) 
+                ?? throw new Exception("Flight not found");
+            totalPrice = CalculateTotalPrice(flight.Destination, passengerDetails);
+            
+            foreach (var pet in petDetails)
+            {
+                totalPrice += (int)PetDataAccess.GetPetFees(pet.Type, pet.SeatingLocation);
+            }
         }
 
         List<PassengerModel> passengers = passengerDetails
@@ -55,44 +72,19 @@ public class BookingLogic
                 p.SeatNumber, 
                 p.HasCheckedBaggage,
                 p.HasPet,
-                p.PetDetails))
+                p.PetDetails,
+                p.SpecialLuggage))
             .ToList();
 
         BookingModel newBooking = new BookingModel(bookingId, userId, flightId, totalPrice, passengers, petDetails);
+        if (isPrivateJet)
+        {
+            newBooking.PlaneType = jetType;
+        }
+        
         _bookings.Add(newBooking);
         BookingAccess.WriteAll(_bookings);
         return newBooking;
-    }
-
-    public static BookingModel CreatePrivateJetBooking(int userId, List<PassengerModel> passengerDetails, string jetType)
-    {
-    int bookingId = GenerateBookingId();
-    int totalPrice = 2500 * passengerDetails.Count; // prijs voor nu op 2500 gezet x aantal passengerss
-
-    var passengers = passengerDetails
-        .Select(p => new PassengerModel(
-            p.Name, 
-            p.SeatNumber, 
-            p.HasCheckedBaggage,
-            p.HasPet,
-            p.PetDetails))
-        .ToList();
-
-    BookingModel newBooking = new BookingModel(
-        bookingId,
-        userId, 
-        0, // Flight ID staat gewoon op 0 nu
-        totalPrice, 
-        passengers, 
-        new List<PetModel>(), // geen pets
-        null, // er zijn voor nu geen comfort packages op private jets, want die zijn standaard al luxer
-        jetType
-    );
-
-    _bookings.Add(newBooking);
-    BookingAccess.WriteAll(_bookings);
-
-    return newBooking;
     }
 
 
