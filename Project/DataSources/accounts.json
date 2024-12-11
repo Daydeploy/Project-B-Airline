@@ -7,9 +7,15 @@
     "gender": null,
     "nationality": null,
     "phoneNumber": null,
+    "address": null,
     "email": "test.account@gmail.com",
     "password": "test",
-    "passportDetails": null,
+    "passportDetails": {
+      "passportNumber": null,
+      "issueDate": "0001-01-01T00:00:00",
+      "expirationDate": "0001-01-01T00:00:00",
+      "countryOfIssue": "1"
+    },
     "milesDetails": [
       {
         "Enrolled": false,
@@ -18,7 +24,17 @@
         "Points": 0,
         "History": ""
       }
-    ]
+    ],
+    "paymentInformation": [
+      {
+        "cardHolder": "Sil",
+        "cardNumber": "1234567890123456",
+        "cVV": "222",
+        "expirationDate": "11/26",
+        "billingAddress": "Wijnhaven 106"
+      }
+    ],
+    "privateJet": null
   },
   {
     "id": 2,
@@ -28,6 +44,7 @@
     "gender": null,
     "nationality": null,
     "phoneNumber": null,
+    "address": null,
     "email": "test2account@gmail.com",
     "password": "Account2",
     "passportDetails": null,
@@ -39,7 +56,9 @@
         "Points": 0,
         "History": ""
       }
-    ]
+    ],
+    "paymentInformation": null,
+    "privateJet": null
   },
   {
     "id": 82,
@@ -49,6 +68,7 @@
     "gender": null,
     "nationality": null,
     "phoneNumber": null,
+    "address": null,
     "email": "test@test.nl",
     "password": "test",
     "passportDetails": null,
@@ -60,7 +80,9 @@
         "Points": 0,
         "History": ""
       }
-    ]
+    ],
+    "paymentInformation": null,
+    "privateJet": null
   },
   {
     "id": 83,
@@ -70,6 +92,7 @@
     "gender": null,
     "nationality": null,
     "phoneNumber": null,
+    "address": null,
     "email": "darrinwever@gmail.com",
     "password": "test",
     "passportDetails": null,
@@ -78,9 +101,19 @@
         "Enrolled": true,
         "Level": "Bronze",
         "Experience": 0,
-        "Points": 0,
-        "History": "\nLevel updated to Bronze at 2024-11-27 07:48:49\nEarned 1784 Miles from booking 9084 - 446 euros at 2024-11-27 07:49:03"
+        "Points": 24288,
+        "History": "\nLevel updated to Bronze at 2024-11-27 07:48:49\nEarned 1784 Miles from booking 9084 - 446 euros at 2024-11-27 07:49:03\nEarned 1856 Miles from booking 1942 - 464 euros at 2024-12-09 08:08:35\nEarned 22432 Miles from booking 213 - 5608 euros at 2024-12-09 08:08:35"
       }
-    ]
+    ],
+    "paymentInformation": [
+      {
+        "cardHolder": "Darrin Wever",
+        "cardNumber": "1234567890123456",
+        "cVV": "1234",
+        "expirationDate": "12/2222",
+        "billingAddress": "Test Address 1"
+      }
+    ],
+    "privateJet": null
   }
 ]

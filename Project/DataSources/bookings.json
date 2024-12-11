@@ -1,312 +1,18 @@
 [
   {
-    "bookingId": 784,
+    "bookingId": 3689,
     "userId": 1,
-    "flightId": 1000,
-    "totalPrice": 124,
+    "flightId": 1271,
+    "totalPrice": 1110,
     "passengers": [
       {
-        "name": null,
+        "name": "nu echtttt",
         "hasPet": false,
         "petDetails": null,
-        "seatNumber": null,
-        "hasCheckedBaggage": false,
-        "firstName": null,
-        "lastName": null,
-        "dateOfBirth": "0001-01-01T00:00:00",
-        "gender": null,
-        "nationality": null,
-        "fullName": " ",
-        "phoneNumber": null,
-        "address": null,
-        "id": 0
-      }
-    ],
-    "pets": []
-  },
-  {
-    "bookingId": 5458,
-    "userId": 1,
-    "flightId": 1153,
-    "totalPrice": 806,
-    "passengers": [
-      {
-        "name": null,
-        "hasPet": false,
-        "petDetails": null,
-        "seatNumber": null,
-        "hasCheckedBaggage": false,
-        "firstName": null,
-        "lastName": null,
-        "dateOfBirth": "0001-01-01T00:00:00",
-        "gender": null,
-        "nationality": null,
-        "fullName": " ",
-        "phoneNumber": null,
-        "address": null,
-        "id": 0
-      },
-      {
-        "name": null,
-        "hasPet": false,
-        "petDetails": null,
-        "seatNumber": null,
-        "hasCheckedBaggage": false,
-        "firstName": null,
-        "lastName": null,
-        "dateOfBirth": "0001-01-01T00:00:00",
-        "gender": null,
-        "nationality": null,
-        "fullName": " ",
-        "phoneNumber": null,
-        "address": null,
-        "id": 0
-      }
-    ],
-    "pets": null
-  },
-  {
-    "bookingId": 6503,
-    "userId": 1,
-    "flightId": 1152,
-    "totalPrice": 669,
-    "passengers": [
-      {
-        "name": null,
-        "hasPet": false,
-        "petDetails": null,
-        "seatNumber": null,
-        "hasCheckedBaggage": false,
-        "firstName": null,
-        "lastName": null,
-        "dateOfBirth": "0001-01-01T00:00:00",
-        "gender": null,
-        "nationality": null,
-        "fullName": " ",
-        "phoneNumber": null,
-        "address": null,
-        "id": 0
-      }
-    ],
-    "pets": null
-  },
-  {
-    "bookingId": 8817,
-    "userId": 1,
-    "flightId": 1152,
-    "totalPrice": 496,
-    "passengers": [
-      {
-        "name": null,
-        "hasPet": false,
-        "petDetails": null,
-        "seatNumber": null,
-        "hasCheckedBaggage": false,
-        "firstName": null,
-        "lastName": null,
-        "dateOfBirth": "0001-01-01T00:00:00",
-        "gender": null,
-        "nationality": null,
-        "fullName": " ",
-        "phoneNumber": null,
-        "address": null,
-        "id": 0
-      }
-    ],
-    "pets": null
-  },
-  {
-    "bookingId": 2175,
-    "userId": 1,
-    "flightId": 1152,
-    "totalPrice": 669,
-    "passengers": [
-      {
-        "name": null,
-        "hasPet": false,
-        "petDetails": null,
-        "seatNumber": null,
-        "hasCheckedBaggage": false,
-        "firstName": null,
-        "lastName": null,
-        "dateOfBirth": "0001-01-01T00:00:00",
-        "gender": null,
-        "nationality": null,
-        "fullName": " ",
-        "phoneNumber": null,
-        "address": null,
-        "id": 0
-      }
-    ],
-    "pets": null
-  },
-  {
-    "bookingId": 4428,
-    "userId": 1,
-    "flightId": 1028,
-    "totalPrice": 870,
-    "passengers": [
-      {
-        "name": null,
-        "hasPet": false,
-        "petDetails": null,
-        "seatNumber": null,
-        "hasCheckedBaggage": false,
-        "firstName": null,
-        "lastName": null,
-        "dateOfBirth": "0001-01-01T00:00:00",
-        "gender": null,
-        "nationality": null,
-        "fullName": " ",
-        "phoneNumber": null,
-        "address": null,
-        "id": 0
-      },
-      {
-        "name": null,
-        "hasPet": false,
-        "petDetails": null,
-        "seatNumber": null,
-        "hasCheckedBaggage": false,
-        "firstName": null,
-        "lastName": null,
-        "dateOfBirth": "0001-01-01T00:00:00",
-        "gender": null,
-        "nationality": null,
-        "fullName": " ",
-        "phoneNumber": null,
-        "address": null,
-        "id": 0
-      },
-      {
-        "name": null,
-        "hasPet": false,
-        "petDetails": null,
-        "seatNumber": null,
-        "hasCheckedBaggage": false,
-        "firstName": null,
-        "lastName": null,
-        "dateOfBirth": "0001-01-01T00:00:00",
-        "gender": null,
-        "nationality": null,
-        "fullName": " ",
-        "phoneNumber": null,
-        "address": null,
-        "id": 0
-      }
-    ],
-    "pets": null
-  },
-  {
-    "bookingId": 6903,
-    "userId": 3,
-    "flightId": 1153,
-    "totalPrice": 634,
-    "passengers": [
-      {
-        "name": null,
-        "hasPet": false,
-        "petDetails": null,
-        "seatNumber": null,
-        "hasCheckedBaggage": false,
-        "firstName": null,
-        "lastName": null,
-        "dateOfBirth": "0001-01-01T00:00:00",
-        "gender": null,
-        "nationality": null,
-        "fullName": " ",
-        "phoneNumber": null,
-        "address": null,
-        "id": 0
-      },
-      {
-        "name": null,
-        "hasPet": false,
-        "petDetails": null,
-        "seatNumber": null,
-        "hasCheckedBaggage": false,
-        "firstName": null,
-        "lastName": null,
-        "dateOfBirth": "0001-01-01T00:00:00",
-        "gender": null,
-        "nationality": null,
-        "fullName": " ",
-        "phoneNumber": null,
-        "address": null,
-        "id": 0
-      },
-      {
-        "name": null,
-        "hasPet": false,
-        "petDetails": null,
-        "seatNumber": null,
-        "hasCheckedBaggage": false,
-        "firstName": null,
-        "lastName": null,
-        "dateOfBirth": "0001-01-01T00:00:00",
-        "gender": null,
-        "nationality": null,
-        "fullName": " ",
-        "phoneNumber": null,
-        "address": null,
-        "id": 0
-      },
-      {
-        "name": null,
-        "hasPet": false,
-        "petDetails": null,
-        "seatNumber": null,
-        "hasCheckedBaggage": false,
-        "firstName": null,
-        "lastName": null,
-        "dateOfBirth": "0001-01-01T00:00:00",
-        "gender": null,
-        "nationality": null,
-        "fullName": " ",
-        "phoneNumber": null,
-        "address": null,
-        "id": 0
-      }
-    ],
-    "pets": null
-  },
-  {
-    "bookingId": 4329,
-    "userId": 3,
-    "flightId": 1153,
-    "totalPrice": 124,
-    "passengers": [
-      {
-        "name": null,
-        "hasPet": false,
-        "petDetails": null,
-        "seatNumber": null,
-        "hasCheckedBaggage": false,
-        "firstName": null,
-        "lastName": null,
-        "dateOfBirth": "0001-01-01T00:00:00",
-        "gender": null,
-        "nationality": null,
-        "fullName": " ",
-        "phoneNumber": null,
-        "address": null,
-        "id": 0
-      }
-    ],
-    "pets": null
-  },
-  {
-    "bookingId": 9714,
-    "userId": 1,
-    "flightId": 3873,
-    "totalPrice": 823,
-    "passengers": [
-      {
-        "name": "evvn",
-        "hasPet": false,
-        "petDetails": null,
-        "seatNumber": "1B",
+        "seatNumber": "5A",
         "hasCheckedBaggage": true,
+        "shopItems": [],
+        "specialLuggage": "",
         "firstName": null,
         "lastName": null,
         "dateOfBirth": "0001-01-01T00:00:00",
@@ -318,45 +24,229 @@
         "id": 0
       }
     ],
-    "pets": []
+    "pets": [],
+    "comfortPackages": null,
+    "planeType": null,
+    "entertainment": null
   },
   {
-    "bookingId": 4059,
+    "bookingId": 7909,
     "userId": 1,
-    "flightId": 3870,
-    "totalPrice": 587,
+    "flightId": 1271,
+    "totalPrice": 1235,
     "passengers": [
       {
-        "name": "Klastest",
-        "hasPet": false,
-        "petDetails": null,
-        "seatNumber": "1C",
-        "hasCheckedBaggage": true,
-        "firstName": null,
-        "lastName": null,
-        "dateOfBirth": "0001-01-01T00:00:00",
-        "gender": null,
-        "nationality": null,
-        "fullName": " ",
-        "phoneNumber": null,
-        "address": null,
-        "id": 0
-      }
-    ],
-    "pets": []
-  },
-  {
-    "bookingId": 8062,
-    "userId": 1,
-    "flightId": 3863,
-    "totalPrice": 520,
-    "passengers": [
-      {
-        "name": "Aaron",
+        "name": "God Please",
         "hasPet": false,
         "petDetails": null,
         "seatNumber": "6A",
         "hasCheckedBaggage": true,
+        "shopItems": [],
+        "specialLuggage": "",
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      }
+    ],
+    "pets": [],
+    "comfortPackages": [
+      {
+        "id": 1,
+        "name": "Basic Package",
+        "contents": [
+          "Blanket",
+          "Pillow"
+        ],
+        "cost": 15.00,
+        "availableIn": [
+          "Economy",
+          "Business",
+          "First"
+        ]
+      }
+    ],
+    "planeType": null,
+    "entertainment": [
+      {
+        "id": 2,
+        "name": "Social Package",
+        "contents": [
+          "Multiplayer Gaming",
+          "Group Movie Streaming",
+          "Digital Trivia Games"
+        ],
+        "cost": 80.00,
+        "availableIn": [
+          "Economy",
+          "Business",
+          "First"
+        ]
+      },
+      {
+        "id": 1,
+        "name": "Basic Entertainment",
+        "contents": [
+          "Movies",
+          "Music",
+          "Flight Map"
+        ],
+        "cost": 30.00,
+        "availableIn": [
+          "Economy",
+          "Business",
+          "First"
+        ]
+      }
+    ]
+  },
+  {
+    "bookingId": 4856,
+    "userId": 1,
+    "flightId": 1223,
+    "totalPrice": 3412,
+    "passengers": [
+      {
+        "name": "Sil",
+        "hasPet": true,
+        "petDetails": {
+          "petId": 0,
+          "bookingId": 0,
+          "type": "Cat",
+          "size": null,
+          "weight": 12,
+          "storageLocation": "Cargo",
+          "maxWeight": 0,
+          "seatingLocation": null,
+          "fee": null
+        },
+        "seatNumber": "2A",
+        "hasCheckedBaggage": true,
+        "shopItems": [
+          {
+            "name": "Cabernet Sauvignon (187 ml bottle)",
+            "price": 10,
+            "category": "Snacks \u0026 Drinks",
+            "description": "Red wine, premium brand"
+          },
+          {
+            "name": "Creed Aventus (100 ml)",
+            "price": 450,
+            "category": "Fragrances",
+            "description": "High-end niche fragrance with fruity and smoky notes"
+          },
+          {
+            "name": "Lindt Master Chocolatier Collection (500g)",
+            "price": 30,
+            "category": "Luxury Chocolates \u0026 Gourmet Treats",
+            "description": "Fine Swiss chocolates"
+          },
+          {
+            "name": "Tissot PRX Automatic Watch",
+            "price": 650,
+            "category": "Watches",
+            "description": "Classic design, Swiss-made"
+          },
+          {
+            "name": "Swarovski Crystal Necklace",
+            "price": 85,
+            "category": "Jewelry",
+            "description": "Elegant, gift-ready design"
+          },
+          {
+            "name": "Collector\u0027s Edition Airline Poster (Framed)",
+            "price": 150,
+            "category": "Exclusive Souvenirs",
+            "description": "Retro or modern artwork"
+          },
+          {
+            "name": "Collector\u0027s Edition Airline Poster (Framed)",
+            "price": 150,
+            "category": "Exclusive Souvenirs",
+            "description": "Retro or modern artwork"
+          }
+        ],
+        "specialLuggage": "Musical instrument",
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      }
+    ],
+    "pets": [],
+    "comfortPackages": [
+      {
+        "id": 1,
+        "name": "Basic Package",
+        "contents": [
+          "Blanket",
+          "Pillow"
+        ],
+        "cost": 15.00,
+        "availableIn": [
+          "Economy",
+          "Business",
+          "First"
+        ]
+      }
+    ],
+    "planeType": null,
+    "entertainment": [
+      {
+        "id": 5,
+        "name": "Gaming Package",
+        "contents": [
+          "Handheld Gaming Console",
+          "Pre-installed Games"
+        ],
+        "cost": 75.00,
+        "availableIn": [
+          "Economy",
+          "Business",
+          "First"
+        ]
+      },
+      {
+        "id": 1,
+        "name": "Basic Entertainment",
+        "contents": [
+          "Movies",
+          "Music",
+          "Flight Map"
+        ],
+        "cost": 30.00,
+        "availableIn": [
+          "Economy",
+          "Business",
+          "First"
+        ]
+      }
+    ]
+  },
+  {
+    "bookingId": 3680,
+    "userId": 1,
+    "flightId": 0,
+    "totalPrice": 15000,
+    "passengers": [
+      {
+        "name": "Sil",
+        "hasPet": false,
+        "petDetails": null,
+        "seatNumber": "PJ1",
+        "hasCheckedBaggage": false,
+        "shopItems": [],
+        "specialLuggage": "",
         "firstName": null,
         "lastName": null,
         "dateOfBirth": "0001-01-01T00:00:00",
@@ -368,11 +258,13 @@
         "id": 0
       },
       {
-        "name": "Gabriel",
+        "name": "Paul",
         "hasPet": false,
         "petDetails": null,
-        "seatNumber": "6B",
-        "hasCheckedBaggage": true,
+        "seatNumber": "PJ2",
+        "hasCheckedBaggage": false,
+        "shopItems": [],
+        "specialLuggage": "",
         "firstName": null,
         "lastName": null,
         "dateOfBirth": "0001-01-01T00:00:00",
@@ -384,90 +276,25 @@
         "id": 0
       }
     ],
-    "pets": []
+    "pets": [],
+    "comfortPackages": null,
+    "planeType": "Bombardier Learjet 75",
+    "entertainment": null
   },
   {
-    "bookingId": 1149,
+    "bookingId": 4411,
     "userId": 1,
-    "flightId": 3710,
-    "totalPrice": 446,
+    "flightId": 0,
+    "totalPrice": 15000,
     "passengers": [
       {
-        "name": "Evenkijken of het werkt",
-        "hasPet": true,
-        "petDetails": {
-          "petId": 0,
-          "bookingId": 0,
-          "type": "Bird",
-          "size": null,
-          "weight": 1,
-          "storageLocation": "Storage",
-          "maxWeight": 0,
-          "seatingLocation": null,
-          "fee": null
-        },
-        "seatNumber": "1A",
-        "hasCheckedBaggage": true,
-        "firstName": null,
-        "lastName": null,
-        "dateOfBirth": "0001-01-01T00:00:00",
-        "gender": null,
-        "nationality": null,
-        "fullName": " ",
-        "phoneNumber": null,
-        "address": null,
-        "id": 0
-      }
-    ],
-    "pets": []
-  },
-  {
-    "bookingId": 8354,
-    "userId": 1,
-    "flightId": 3710,
-    "totalPrice": 118,
-    "passengers": [
-      {
-        "name": "sdf",
-        "hasPet": true,
-        "petDetails": {
-          "petId": 0,
-          "bookingId": 0,
-          "type": "Dog",
-          "size": null,
-          "weight": 11,
-          "storageLocation": "Storage",
-          "maxWeight": 0,
-          "seatingLocation": null,
-          "fee": null
-        },
-        "seatNumber": "10A",
-        "hasCheckedBaggage": true,
-        "firstName": null,
-        "lastName": null,
-        "dateOfBirth": "0001-01-01T00:00:00",
-        "gender": null,
-        "nationality": null,
-        "fullName": " ",
-        "phoneNumber": null,
-        "address": null,
-        "id": 0
-      }
-    ],
-    "pets": []
-  },
-  {
-    "bookingId": 1942,
-    "userId": 83,
-    "flightId": 1066,
-    "totalPrice": 464,
-    "passengers": [
-      {
-        "name": "Darrin Wever",
+        "name": "haks",
         "hasPet": false,
         "petDetails": null,
-        "seatNumber": "1A",
-        "hasCheckedBaggage": true,
+        "seatNumber": "PJ1",
+        "hasCheckedBaggage": false,
+        "shopItems": [],
+        "specialLuggage": "",
         "firstName": null,
         "lastName": null,
         "dateOfBirth": "0001-01-01T00:00:00",
@@ -479,6 +306,112 @@
         "id": 0
       }
     ],
-    "pets": []
+    "pets": [],
+    "comfortPackages": null,
+    "planeType": "Bombardier Learjet 75",
+    "entertainment": null
+  },
+  {
+    "bookingId": 5275,
+    "userId": 1,
+    "flightId": 0,
+    "totalPrice": 15000,
+    "passengers": [
+      {
+        "name": "Pail",
+        "hasPet": false,
+        "petDetails": null,
+        "seatNumber": "PJ1",
+        "hasCheckedBaggage": false,
+        "shopItems": [],
+        "specialLuggage": "",
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      }
+    ],
+    "pets": [],
+    "comfortPackages": null,
+    "planeType": "Bombardier Learjet 75",
+    "entertainment": null
+  },
+  {
+    "bookingId": 9428,
+    "userId": 1,
+    "flightId": 1234,
+    "totalPrice": 26039,
+    "passengers": [
+      {
+        "name": "Dion",
+        "hasPet": false,
+        "petDetails": null,
+        "seatNumber": "6H",
+        "hasCheckedBaggage": true,
+        "shopItems": [
+          {
+            "name": "Van Cleef \u0026 Arpels Alhambra Necklace (18K Yellow Gold)",
+            "price": 12500,
+            "category": "Jewelry",
+            "description": "Classic clover design"
+          },
+          {
+            "name": "Van Cleef \u0026 Arpels Alhambra Necklace (18K Yellow Gold)",
+            "price": 12500,
+            "category": "Jewelry",
+            "description": "Classic clover design"
+          }
+        ],
+        "specialLuggage": "Drumstel",
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      }
+    ],
+    "pets": [],
+    "comfortPackages": null,
+    "planeType": null,
+    "entertainment": null
+  },
+  {
+    "bookingId": 6846,
+    "userId": 1,
+    "flightId": 1302,
+    "totalPrice": 1608,
+    "passengers": [
+      {
+        "name": "Dion",
+        "hasPet": false,
+        "petDetails": null,
+        "seatNumber": "2B",
+        "hasCheckedBaggage": true,
+        "shopItems": [],
+        "specialLuggage": "Drumstel",
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      }
+    ],
+    "pets": [],
+    "comfortPackages": null,
+    "planeType": null,
+    "entertainment": null
   }
 ]

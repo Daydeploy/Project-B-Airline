@@ -1,0 +1,217 @@
+[
+  {
+    "category": "Snacks & Drinks",
+    "items": [
+      {
+        "name": "Lays Potato Chips",
+        "price": 3.50,
+        "description": "Small bag, Classic or Sour Cream & Onion flavors"
+      },
+      {
+        "name": "Snickers Bar",
+        "price": 2.50,
+        "description": "Standard size, caramel, nougat, and peanuts"
+      },
+      {
+        "name": "Haribo Gummy Bears",
+        "price": 2.75,
+        "description": "3.5 oz bag, assorted fruit flavors"
+      },
+      {
+        "name": "Coca-Cola (12 oz can)",
+        "price": 3.00,
+        "description": "Classic or Diet Coke options"
+      },
+      {
+        "name": "Heineken Beer",
+        "price": 7.50,
+        "description": "330 ml bottle"
+      },
+      {
+        "name": "Cabernet Sauvignon (187 ml bottle)",
+        "price": 10.00,
+        "description": "Red wine, premium brand"
+      },
+      {
+        "name": "Starbucks Pike Place Coffee",
+        "price": 4.50,
+        "description": "Hot, freshly brewed"
+      }
+    ]
+  },
+  {
+    "category": "Fragrances",
+    "items": [
+      {
+        "name": "Chanel No. 5 Eau de Parfum (50 ml)",
+        "price": 120.00,
+        "description": "Iconic floral scent"
+      },
+      {
+        "name": "Dior Sauvage Eau de Toilette (60 ml)",
+        "price": 105.00,
+        "description": "Fresh and woody notes"
+      },
+      {
+        "name": "Jo Malone Peony & Blush Suede (50 ml)",
+        "price": 110.00,
+        "description": "Light floral and fruity scent"
+      },
+      {
+        "name": "Tom Ford Oud Wood (50 ml)",
+        "price": 200.00,
+        "description": "Exotic oud and sandalwood blend"
+      },
+      {
+        "name": "Creed Aventus (100 ml)",
+        "price": 450.00,
+        "description": "High-end niche fragrance with fruity and smoky notes"
+      },
+      {
+        "name": "Le Labo Santal 33 (50 ml)",
+        "price": 280.00,
+        "description": "Cult-favorite unisex fragrance with sandalwood base"
+      }
+    ]
+  },
+  {
+    "category": "Luxury Chocolates & Gourmet Treats",
+    "items": [
+      {
+        "name": "Godiva Gold Collection (24-piece box)",
+        "price": 65.00,
+        "description": "Premium Belgian chocolate selection"
+      },
+      {
+        "name": "Lindt Master Chocolatier Collection (500g)",
+        "price": 30.00,
+        "description": "Fine Swiss chocolates"
+      },
+      {
+        "name": "Teuscher Champagne Truffles (12-piece box)",
+        "price": 65.00,
+        "description": "Handmade Swiss truffles"
+      },
+      {
+        "name": "La Maison du Chocolat Assorted Box (500g)",
+        "price": 120.00,
+        "description": "Artisanal French chocolates"
+      },
+      {
+        "name": "Pierre Hermé Macarons (12-piece box)",
+        "price": 60.00,
+        "description": "Luxury French macarons in assorted flavors"
+      },
+      {
+        "name": "Beluga Caviar (50g tin)",
+        "price": 200.00,
+        "description": "Premium sturgeon caviar, comes with a mother-of-pearl spoon"
+      }
+    ]
+  },
+  {
+    "category": "Watches",
+    "items": [
+      {
+        "name": "Fossil Men's Watch (Model: FS5305)",
+        "price": 140.00,
+        "description": "Casual, stainless steel and leather"
+      },
+      {
+        "name": "Tissot PRX Automatic Watch",
+        "price": 650.00,
+        "description": "Classic design, Swiss-made"
+      },
+      {
+        "name": "TAG Heuer Carrera Chronograph",
+        "price": 3500.00,
+        "description": "Luxury sports watch"
+      },
+      {
+        "name": "Rolex Submariner (Model: 126610LN)",
+        "price": 12500.00,
+        "description": "Stainless steel, iconic design"
+      },
+      {
+        "name": "Omega Seamaster Aqua Terra (Model: 220.10.41.21.03.001)",
+        "price": 6000.00,
+        "description": "Classic luxury diver’s watch"
+      },
+      {
+        "name": "Patek Philippe Nautilus (Model: 5711/1A)",
+        "price": 70000.00,
+        "description": "Highly coveted luxury sports watch"
+      }
+    ]
+  },
+  {
+    "category": "Jewelry",
+    "items": [
+      {
+        "name": "Swarovski Crystal Necklace",
+        "price": 85.00,
+        "description": "Elegant, gift-ready design"
+      },
+      {
+        "name": "Pandora Charm Bracelet with 3 Charms",
+        "price": 195.00,
+        "description": "Customizable, sterling silver"
+      },
+      {
+        "name": "Cartier Love Bracelet (18K Yellow Gold)",
+        "price": 6500.00,
+        "description": "Timeless luxury design"
+      },
+      {
+        "name": "Bvlgari Serpenti Ring (18K Rose Gold)",
+        "price": 9800.00,
+        "description": "Iconic snake motif"
+      },
+      {
+        "name": "Van Cleef & Arpels Alhambra Necklace (18K Yellow Gold)",
+        "price": 12500.00,
+        "description": "Classic clover design"
+      },
+      {
+        "name": "Tiffany & Co. Diamond Stud Earrings (1 carat)",
+        "price": 10000.00,
+        "description": "Brilliant-cut diamonds in platinum"
+      }
+    ]
+  },
+  {
+    "category": "Exclusive Souvenirs",
+    "items": [
+      {
+        "name": "Airplane Model Balloon",
+        "price": 8.00,
+        "description": "Inflatable, airline-branded"
+      },
+      {
+        "name": "Miniature Airplane Replica (Diecast Metal)",
+        "price": 35.00,
+        "description": "Detailed, airline-branded"
+      },
+      {
+        "name": "Leather Travel Wallet with Airline Logo",
+        "price": 85.00,
+        "description": "Full-grain leather, embossed logo"
+      },
+      {
+        "name": "Customized Airport Snow Globe",
+        "price": 50.00,
+        "description": "City landmarks and airport theme"
+      },
+      {
+        "name": "Airline-Branded Fine Porcelain Mug Set",
+        "price": 60.00,
+        "description": "Set of 2, elegant design"
+      },
+      {
+        "name": "Collector's Edition Airline Poster (Framed)",
+        "price": 150.00,
+        "description": "Retro or modern artwork"
+      }
+    ]
+  }
+]

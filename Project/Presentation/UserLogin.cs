@@ -2,10 +2,9 @@ using System;
 
 static class UserLogin
 {
-    static public UserAccountService _userAccountService = new UserAccountService();
+    static public UserAccountServiceLogic UserAccountServiceLogic = new UserAccountServiceLogic();
     private static bool _isLoggedIn = true;
 
-    // Entry point for user login
     public static void Start()
     {
         AccountModel? acc = null;
@@ -26,7 +25,7 @@ static class UserLogin
         Console.Write("Enter your password: ");
         password = ReadPassword(ref showPassword);
 
-        acc = _userAccountService.Login(email, password);
+        acc = UserAccountServiceLogic.Login(email, password);
 
         if (acc != null)
         {
@@ -43,7 +42,81 @@ static class UserLogin
         }
     }
 
-    // Method to read password input with optional visibility toggle
+    private static void ShowLoggedInMenu(AccountModel account)
+    {
+        string[] menuItems = new[]
+        {
+            "Book a Flight",
+            "Book Private Jet",
+            "View Booked Flights",
+            "Check-in for a Flight",
+            "Manage Account",
+            "View Airport Information",
+            "Browse Destinations",
+            "Show Seat Upgrade Options",
+            "Advanced flight booking",
+            "Add Comfort Packages",
+            "Add Entertainment",
+            "Logout"
+        };
+
+        while (_isLoggedIn)
+        {
+            int selectedIndex = MenuNavigationService.NavigateMenu(menuItems, "Logged In Menu");
+
+            switch (selectedIndex)
+            {
+                case 0: // Book a Flight
+                    FlightManagement.BookAFlight(account);
+                    break;
+                case 1: // Book Private Jet
+                    FlightManagement.BookPrivateJet(account.Id);
+                    break;
+                case 2: // View Booked Flights
+                    FlightManagement.ViewBookedFlights(account.Id);
+                    break;
+                case 3: // Check-in for a Flight
+                    FlightManagement.CheckInForFlight();
+                    break;
+                case 4: // Manage Account
+                    AccountManagement.ManageAccount(account);
+                    break;
+                case 5: // View Airport Information
+                    AirportInformation.ViewAirportInformation();
+                    break;
+                case 6: // Browse Destinations
+                    AirportInformation.BrowseDestinations();
+                    break;
+                case 7: // Show Seat Upgrade Options
+                    SeatUpgradeOptions.ShowSeatUpgradeOptions();
+                    break;
+                case 8: // Advanced flight booking
+                    FlightManagement.ShowAvailableFlights();
+                    break;
+                case 9: // Add Comfort Packages
+                    PackagesUI.ShowPackages();
+                    break;
+                case 10: // Add Entertainment
+                    EntertainmentUI.ShowEntertainment();
+                    break;
+                case 11: // Logout
+                    Console.Clear();
+                    UserAccountServiceLogic.Logout();
+                    Console.WriteLine("You have successfully logged out.");
+                    Console.WriteLine("Returning to the main menu...");
+                    MenuNavigation.Start();
+                    _isLoggedIn = false;
+                    return;
+
+            }
+        }
+    }
+
+    private static bool IsValidEmail(string email)
+    {
+        return email.Contains("@") && email.Contains(".");
+    }
+
     public static string ReadPassword(ref bool showPassword)
     {
         string pass = "";
@@ -73,64 +146,5 @@ static class UserLogin
 
         Console.WriteLine();
         return pass;
-    }
-
-    // Displays the menu options available to a logged-in user
-    private static void ShowLoggedInMenu(AccountModel account)
-    {
-        string[] menuItems = new[]
-        {
-            "View Booked Flights",
-            "Check-in for a Flight",
-            "Manage Account",
-            "Show Available Flights",
-            "View Airport Information",
-            "Browse Destinations",
-            "Show Seat Upgrade Options",
-            "Logout"
-        };
-
-        while (_isLoggedIn)
-        {
-            int selectedIndex = MenuNavigationService.NavigateMenu(menuItems, "Logged In Menu");
-
-            switch (selectedIndex)
-            {
-                case 0:
-                    FlightManagement.ViewBookedFlights(account.Id);
-                    break;
-                case 1:
-                    FlightManagement.CheckInForFlight();
-                    break;
-                case 2:
-                    AccountManagement.ManageAccount(account);
-                    break;
-                case 3:
-                    FlightManagement.ShowAvailableFlights();
-                    break;
-                case 4:
-                    AirportInformation.ViewAirportInformation();
-                    break;
-                case 5:
-                    AirportInformation.BrowseDestinations();
-                    break;
-                case 6:
-                    SeatUpgradeOptions.ShowSeatUpgradeOptions();
-                    break;
-                case 7:
-                    Console.Clear();
-                    _userAccountService.Logout();
-                    Console.WriteLine("You have successfully logged out.");
-                    Console.WriteLine("Returning to the main menu...");
-                    MenuNavigation.Start();
-                    _isLoggedIn = false;
-                    return;
-            }
-        }
-    }
-
-    private static bool IsValidEmail(string email)
-    {
-        return email.Contains("@") && email.Contains(".");
     }
 }

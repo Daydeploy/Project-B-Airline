@@ -3,8 +3,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 [TestClass]
 public class TestSeatUpgrade
 {
-    private SeatUpgradeService _seatUpgradeService;
-    private UserAccountService _userAccountService;
+    private SeatUpgradeServiceLogic _seatUpgradeServiceLogic;
+    private UserAccountServiceLogic _userAccountServiceLogic;
     private BookingLogic _bookingLogic;
     private FlightsLogic _flightsLogic;
     private List<FlightModel> _testFlights;
@@ -13,8 +13,8 @@ public class TestSeatUpgrade
     [TestInitialize]
     public void Setup()
     {
-        _seatUpgradeService = new SeatUpgradeService();
-        _userAccountService = new UserAccountService();
+        _seatUpgradeServiceLogic = new SeatUpgradeServiceLogic();
+        _userAccountServiceLogic = new UserAccountServiceLogic();
         _bookingLogic = new BookingLogic();
         _flightsLogic = new FlightsLogic();
 
@@ -60,7 +60,7 @@ public class TestSeatUpgrade
     {
         var booking = CreateTestBooking("15A");
 
-        var upgrades = _seatUpgradeService.ViewAvailableUpgrades(booking.FlightId);
+        var upgrades = _seatUpgradeServiceLogic.ViewAvailableUpgrades(booking.FlightId);
 
         Assert.IsNotNull(upgrades);
         Assert.AreEqual(2, upgrades.Count);
@@ -74,7 +74,7 @@ public class TestSeatUpgrade
         var booking = CreateTestBooking("15A");
         int initialMiles = _testUser.Miles;
 
-        bool upgradeResult = _seatUpgradeService.UpgradeSeat(
+        bool upgradeResult = _seatUpgradeServiceLogic.UpgradeSeat(
             booking.FlightId,
             booking.Passengers[0].Name,
             "5A",
@@ -90,7 +90,7 @@ public class TestSeatUpgrade
     {
         var booking = CreateTestBooking("15A");
 
-        bool upgradeResult = _seatUpgradeService.UpgradeSeat(
+        bool upgradeResult = _seatUpgradeServiceLogic.UpgradeSeat(
             booking.FlightId,
             booking.Passengers[0].Name,
             "5A",
@@ -105,7 +105,7 @@ public class TestSeatUpgrade
     {
         var booking = CreateTestBooking("5A");
 
-        bool upgradeResult = _seatUpgradeService.UpgradeSeat(
+        bool upgradeResult = _seatUpgradeServiceLogic.UpgradeSeat(
             booking.FlightId,
             booking.Passengers[0].Name,
             "15A",
@@ -121,7 +121,7 @@ public class TestSeatUpgrade
         var booking = CreateTestBooking("15A");
         _testUser.Miles = 100;
 
-        bool upgradeResult = _seatUpgradeService.UpgradeSeat(
+        bool upgradeResult = _seatUpgradeServiceLogic.UpgradeSeat(
             booking.FlightId,
             booking.Passengers[0].Name,
             "1A",

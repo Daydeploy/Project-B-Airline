@@ -3,12 +3,12 @@
 // [TestClass]
 // public class TestPetService
 // {
-//     private PetService _petService;
+//     private PetServiceLogic _petService;
 //
 //     [TestInitialize]
 //     public void Setup()
 //     {
-//         _petService = new PetService();
+//         _petService = new PetServiceLogic();
 //     }
 //
 //     [TestMethod]

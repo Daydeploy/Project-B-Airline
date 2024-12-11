@@ -2,16 +2,22 @@ using System.Text.Json.Serialization;
 
 public class SeatClassOption
 {
-    [JsonPropertyName("class")]
-    public string Class { get; set; }
+    [JsonPropertyName("class")] 
+    public string SeatClass { get; set; }
 
-    [JsonPropertyName("price")]
-    public int Price { get; set; }
+    [JsonPropertyName("price")] 
+    public double Price { get; set; }
 
-    // Constructor parameters now match the property names exactly
-    public SeatClassOption(string @class, int price)
+    [JsonPropertyName("seasonalMultiplier")] 
+    public SeasonalMultiplier? SeasonalMultiplier { get; set; }
+
+    // Parameterless constructor for JSON deserialization
+    public SeatClassOption() { }
+
+    // Constructor for creating new instances
+    public SeatClassOption(string seatClass, double price)
     {
-        Class = @class;
+        SeatClass = seatClass;
         Price = price;
     }
 }

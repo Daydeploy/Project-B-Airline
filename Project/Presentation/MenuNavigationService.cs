@@ -3,6 +3,7 @@
     static public int NavigateMenu(string[] options, string title = "")
     {
         int selectedIndex = 0;
+        Console.CursorVisible = false;
 
         while (true)
         {

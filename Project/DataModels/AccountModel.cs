@@ -24,6 +24,9 @@ public class AccountModel
     [JsonPropertyName("phoneNumber")]
     public string? PhoneNumber { get; set; }  // Nullable
 
+    [JsonPropertyName("address")]
+    public string? Address { get; set; }  // Nullable
+
     [JsonPropertyName("email")]
     public string EmailAddress { get; set; }
 
@@ -36,8 +39,14 @@ public class AccountModel
     [JsonPropertyName("milesDetails")]
     public List<MilesModel> Miles { get; set; }
 
+    [JsonPropertyName("paymentInformation")]
+    public List<PaymentInformationModel> PaymentInformation { get; set; }
+
+    [JsonPropertyName("privateJet")]
+    public string PrivateJet { get; set; }
+
     public AccountModel(int id, string firstName, string lastName, DateTime dateOfBirth,
-                        string emailAddress, string password, List<MilesModel> miles)
+                        string emailAddress, string password, List<MilesModel> miles, List<PaymentInformationModel>? paymentInformation = null)
     {
         Id = id;
         FirstName = firstName;
@@ -46,5 +55,6 @@ public class AccountModel
         EmailAddress = emailAddress;
         Password = password;
         Miles = miles;
+        PaymentInformation = paymentInformation;
     }
 }

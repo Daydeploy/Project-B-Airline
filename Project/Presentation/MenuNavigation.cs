@@ -2,7 +2,6 @@ using System;
 
 static class MenuNavigation
 {
-    // Main entry point for displaying the main menu
     public static void Start()
     {
         Console.OutputEncoding = System.Text.Encoding.UTF8;
@@ -19,7 +18,6 @@ static class MenuNavigation
         }
     }
 
-    // Handles selection of menu options
     static private void HandleSelection(string selectedOption, ref bool exit)
     {
         Console.Clear();

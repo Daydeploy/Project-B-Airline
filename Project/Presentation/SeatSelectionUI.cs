@@ -2,7 +2,6 @@ public class SeatSelectionUI
 {
     private PlaneConfig currentConfig;
     private Dictionary<string, bool> occupiedSeats = new Dictionary<string, bool>();
-    // Add dictionary to track seats with pets
     private Dictionary<string, bool> petSeats = new Dictionary<string, bool>();
 
     // Add dictionary of plane type variations to handle different Aircrafts
@@ -48,7 +47,7 @@ public class SeatSelectionUI
                 (1, 4),     // First Class
                 (5, 14),    // Business Class
                 (15, 50)    // Economy Class
-            }
+            } // tuple met start en eind rij 
         }
     };
 
@@ -67,10 +66,12 @@ public class SeatSelectionUI
             planeType = normalizedType; // zodat airbus werkt dus zet je de plane naar de normalizedType
         }
 
-        if (!planeConfigs.ContainsKey(planeType))
-        {
-            throw new ArgumentException($"Unsupported plane type: {planeType}. Available types: {string.Join(", ", planeConfigs.Keys)}");
-        }
+
+        // Debugging
+        // if (!planeConfigs.ContainsKey(planeType))
+        // {
+        //     throw new ArgumentException($"Unsupported plane type: {planeType}. Available types: {string.Join(", ", planeConfigs.Keys)}");
+        // }
 
         currentConfig = planeConfigs[planeType];
         int currentRow = 1;
@@ -251,6 +252,23 @@ public class SeatSelectionUI
         if (row <= currentConfig.SeatClasses[1].EndRow)
             return "Business";
         return "Economy";
+    }
+        
+    public string GetSeatClass(string seatNumber, string planeType) // coor comfortpackeges gebeuren
+    {
+        int row = int.Parse(new string(seatNumber.Where(char.IsDigit).ToArray()));
+        var planeConfig = planeConfigs[planeType];
+
+        // Check which class range the row falls into
+        var (firstStart, firstEnd) = planeConfig.SeatClasses[0];
+        var (businessStart, businessEnd) = planeConfig.SeatClasses[1];
+        
+        if (row >= firstStart && row <= firstEnd)
+            return "First";
+        if (row >= businessStart && row <= businessEnd)
+            return "Business";
+
+        return "Economy"; //default
     }
 
 }

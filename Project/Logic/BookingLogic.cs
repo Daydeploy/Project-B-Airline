@@ -36,20 +36,31 @@ public class BookingLogic
         }
     }
 
-    public static BookingModel CreateBooking(int userId, int flightId, List<PassengerModel> passengerDetails, List<PetModel> petDetails)
+    public static BookingModel CreateBooking(int userId, int flightId, List<PassengerModel> passengerDetails, 
+        List<PetModel> petDetails, bool isPrivateJet = false, string jetType = null)
     {
-        // Generate a new booking ID
         int bookingId = GenerateBookingId();
-        
-        // Get the flight to calculate price
-        var flight = _flights.FirstOrDefault(f => f.FlightId == flightId) 
-            ?? throw new Exception("Flight not found");
-        
-        // Calculate total price including pets
-        int totalPrice = CalculateTotalPrice(flight.Destination, passengerDetails);
-        foreach (var pet in petDetails)
+        int totalPrice;
+
+        if (isPrivateJet)
         {
-            totalPrice += (int)PetDataAccess.GetPetFees(pet.Type, pet.SeatingLocation); // ik weet niet of locatie correct is
+            var privateJetPrices = new Dictionary<string, int>
+            {
+                { "Bombardier Learjet 75", 15000 },
+                { "Bombardier Global 8280", 25000 }
+            };
+
+            totalPrice = privateJetPrices[jetType];
+        }
+        else
+        {
+            var flight = _flights.FirstOrDefault(f => f.FlightId == flightId);
+            totalPrice = CalculateTotalPrice(flight.Destination, passengerDetails);
+            
+            foreach (var pet in petDetails)
+            {
+                totalPrice += (int)PetDataAccess.GetPetFees(pet.Type, pet.SeatingLocation);
+            }
         }
 
         List<PassengerModel> passengers = passengerDetails
@@ -58,14 +69,21 @@ public class BookingLogic
                 p.SeatNumber, 
                 p.HasCheckedBaggage,
                 p.HasPet,
-                p.PetDetails))
+                p.PetDetails,
+                p.SpecialLuggage))
             .ToList();
 
         BookingModel newBooking = new BookingModel(bookingId, userId, flightId, totalPrice, passengers, petDetails);
+        if (isPrivateJet)
+        {
+            newBooking.PlaneType = jetType;
+        }
+        
         _bookings.Add(newBooking);
         BookingAccess.WriteAll(_bookings);
         return newBooking;
     }
+
 
     private static int GenerateBookingId()
     {
@@ -95,28 +113,24 @@ public class BookingLogic
         var flight = _flights.FirstOrDefault(f => f.Destination.Equals(destination, StringComparison.OrdinalIgnoreCase));
         if (flight == null || flight.SeatClassOptions == null) return 0;
     
-        int baggagePrice = 30; // Additional price for checked baggage
+        int baggagePrice = 30;
     
         return passengers.Sum(p =>
         {
-            // Get seat class based on row number
             var seatClass = GetSeatClass(p.SeatNumber);
             
-            // Find matching price from flight's SeatClassOptions
-            var basePrice = flight.SeatClassOptions
-                .FirstOrDefault(so => so.Class.Equals(seatClass, StringComparison.OrdinalIgnoreCase))
-                ?.Price ?? 0;
-
+            var basePrice = (int)(flight.SeatClassOptions
+                .FirstOrDefault(so => so.SeatClass.Equals(seatClass, StringComparison.OrdinalIgnoreCase))
+                ?.Price ?? 0);
+    
             return basePrice + (p.HasCheckedBaggage ? baggagePrice : 0);
         });
     }
     
     private static string GetSeatClass(string seatNumber)
     {
-        // Extract row number from seat number (voorbeeld "15A" -> 15)
         int row = int.Parse(new string(seatNumber.Where(char.IsDigit).ToArray()));
         
-        // Class based on row number
         if (row <= 3) return "First";
         if (row <= 8) return "Business";
         return "Economy";
@@ -134,7 +148,6 @@ public class BookingLogic
         passenger.SeatNumber = newDetails.SeatNumber;
         passenger.HasCheckedBaggage = newDetails.HasCheckedBaggage;
 
-        // Recalculate total price after modification
         booking.TotalPrice = CalculateTotalPrice(
             _flights.First(f => f.FlightId == flightId).Destination, 
             booking.Passengers
