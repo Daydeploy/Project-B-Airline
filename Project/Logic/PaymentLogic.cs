@@ -2,6 +2,14 @@ public class PaymentLogic
 {
     private static readonly List<AccountModel> _accounts = AccountsAccess.LoadAll();
 
+    public static bool ValidateName(string name)
+    {
+        if (!string.IsNullOrEmpty(name))
+        {
+            return true;
+        }
+        return false;
+    }
 
     public static bool ValidateCardNumber(string cardNumber)
     {
@@ -69,6 +77,15 @@ public class PaymentLogic
         }
 
         return true;
+    }
+
+    public static bool ValidateAddress(string address)
+    {
+        if (!string.IsNullOrEmpty(address))
+        {
+            return true;
+        }
+        return false;
     }
 
 }

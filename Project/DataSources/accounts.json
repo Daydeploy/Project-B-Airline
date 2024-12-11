@@ -7,6 +7,7 @@
     "gender": null,
     "nationality": null,
     "phoneNumber": null,
+    "address": null,
     "email": "test.account@gmail.com",
     "password": "test",
     "passportDetails": null,
@@ -29,6 +30,7 @@
     "gender": null,
     "nationality": null,
     "phoneNumber": null,
+    "address": null,
     "email": "test2account@gmail.com",
     "password": "Account2",
     "passportDetails": null,
@@ -51,6 +53,7 @@
     "gender": null,
     "nationality": null,
     "phoneNumber": null,
+    "address": null,
     "email": "test@test.nl",
     "password": "test",
     "passportDetails": null,
@@ -73,6 +76,7 @@
     "gender": null,
     "nationality": null,
     "phoneNumber": null,
+    "address": null,
     "email": "darrinwever@gmail.com",
     "password": "test",
     "passportDetails": null,
@@ -88,9 +92,10 @@
     "paymentInformation": [
       {
         "cardHolder": "Darrin Wever",
-        "cardNumber": "0123456789012345",
-        "cVV": "123",
-        "expirationDate": "12/28"
+        "cardNumber": "1234567890123456",
+        "cVV": "1234",
+        "expirationDate": "12/2222",
+        "billingAddress": "Test Address 1"
       }
     ]
   }

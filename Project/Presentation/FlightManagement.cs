@@ -364,11 +364,41 @@ static class FlightManagement
 
         var seatSelector = new SeatSelectionUI();
         var passengerDetails = CollectPassengerDetails(departureFlight, passengerCount, seatSelector);
-        
+
         bool includeInsuranceForDeparture = PromptForInsurance(passengerCount, "departure");
-        CompleteBooking(departureFlight.FlightId, passengerDetails, departureFlight, seatSelector,
-            includeInsuranceForDeparture);
-        
+
+        if (account.PaymentInformation == null)
+        {
+            Console.WriteLine("\nPayment information is required to complete a booking.");
+            Console.WriteLine("\nWould you like to add payment information now? (Y/N)");
+
+            string response = Console.ReadLine().ToUpper();
+
+            if (response == "Y")
+            {
+                AccountManagement.HandleManageAccountOption(1, account);
+
+                var accounts = AccountsAccess.LoadAll();
+                account = accounts.FirstOrDefault(x => x.Id == account.Id);
+
+                if (account.PaymentInformation == null)
+                {
+                    Console.WriteLine("No paymenr information added, Booking cannot proceed.");
+                    return;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Booking cancelled due to missing payment information.");
+                return;
+            }
+        }
+        else
+        {
+            CompleteBooking(departureFlight.FlightId, passengerDetails, departureFlight, seatSelector,
+                        includeInsuranceForDeparture);
+        }
+
         if (returnFlight != null)
         {
             foreach (var passenger in passengerDetails)
@@ -386,8 +416,39 @@ static class FlightManagement
             }
 
             bool includeInsuranceForReturn = PromptForInsurance(passengerCount, "return");
-            CompleteBooking(returnFlight.FlightId, passengerDetails, returnFlight, seatSelector,
-                includeInsuranceForReturn);
+
+            if (account.PaymentInformation == null)
+            {
+                Console.WriteLine("\nPayment information is required to complete a booking.");
+                Console.WriteLine("\nWould you like to add payment information now? (Y/N)");
+
+                string response = Console.ReadLine().ToUpper();
+
+                if (response == "Y")
+                {
+                    AccountManagement.HandleManageAccountOption(1, account);
+
+                    var accounts = AccountsAccess.LoadAll();
+                    account = accounts.FirstOrDefault(x => x.Id == account.Id);
+
+                    if (account.PaymentInformation == null)
+                    {
+                        Console.WriteLine("No paymenr information added, Booking cannot proceed.");
+                        return;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Booking cancelled due to missing payment information.");
+                    return;
+                }
+            }
+            else
+            {
+                CompleteBooking(returnFlight.FlightId, passengerDetails, returnFlight, seatSelector,
+                                includeInsuranceForReturn);
+            }
+
         }
     }
 
@@ -537,7 +598,7 @@ static class FlightManagement
         Console.WriteLine("------------------------------------------------------------");
         Console.WriteLine("                    FLIGHT BOOKING SUMMARY                   ");
         Console.WriteLine("------------------------------------------------------------\n");
-        
+
         BookingModel departureBooking = BookingLogic.CreateBooking(
             UserLogin.UserAccountServiceLogic.CurrentUserId,
             departureFlightId,
@@ -548,7 +609,7 @@ static class FlightManagement
         Console.WriteLine($"Booking ID: {departureBooking.BookingId}");
         Console.WriteLine($"Flight: {departureFlight.Origin} → {departureFlight.Destination}");
         Console.WriteLine($"Departure: {DateTime.Parse(departureFlight.DepartureTime):HH:mm dd MMM yyyy}\n");
-        
+
         BookingModel? returnBooking = null;
         if (returnFlight != null && returnFlightId.HasValue)
         {
