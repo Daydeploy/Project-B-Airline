@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 public class AccountsLogic
 {
@@ -54,6 +55,35 @@ public class AccountsLogic
         {
             return false;
         }
+        return true;
+    }
+
+    public static bool IsValidPassword(string password)
+    {
+        if (string.IsNullOrEmpty(password))
+        {
+            return false;
+        }
+
+        bool hasUpperCase = Regex.IsMatch(password, @"[A-Z]");
+        bool hasNumber = Regex.IsMatch(password, @"[0-9]");
+        bool hasSpecialChar = Regex.IsMatch(password, @"[!@#$%^&*(),.?""':;{}|<>]");
+
+        return hasUpperCase && hasNumber && hasSpecialChar;
+    }
+
+    public static bool CreateAccount(string firstName, string lastName, string email, string password, string confirmPassword, DateTime dateOfBirth, bool enrollFrequentFlyer)
+    {
+        if (password != confirmPassword)
+        {
+            throw new Exception("Passwords do not match.");
+        }
+
+        if (!IsValidPassword(password))
+        {
+            throw new Exception("Invalid password. Password must contain at least one uppercase letter, one number, and one special character.");
+        }
+
         return true;
     }
 }

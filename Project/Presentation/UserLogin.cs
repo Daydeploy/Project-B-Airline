@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 static class UserLogin
 {
@@ -145,6 +146,20 @@ static class UserLogin
         } while (key.Key != ConsoleKey.Enter);
 
         Console.WriteLine();
+
+        if (!IsValidPassword(pass))
+        {
+            Console.WriteLine("Invalid password. Password must contain at least one uppercase letter, one number, and one special character.");
+            return ReadPassword(ref showPassword);
+        }
+
         return pass;
+    }
+
+    private static bool IsValidPassword(string password)
+    {
+        return password.Any(char.IsUpper) &&
+               password.Any(char.IsDigit) &&
+               password.Any(ch => !char.IsLetterOrDigit(ch));
     }
 }
