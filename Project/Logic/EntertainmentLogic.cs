@@ -25,7 +25,6 @@ public class EntertainmentLogic
             // Initialize entertainmentOption if null
             booking.Entertainment ??= new List<EntertainmentModel>();
             
-            // Add entertainment and update price
             booking.Entertainment.Add(entertainmentOption);
             booking.TotalPrice += (int)entertainmentOption.Cost;
 

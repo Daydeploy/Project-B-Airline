@@ -25,7 +25,6 @@ public class ComfortPackageServiceLogic
             // Initialize ComfortPackages if null
             booking.ComfortPackages ??= new List<ComfortPackageModel>();
             
-            // Add package and update price
             booking.ComfortPackages.Add(package);
             booking.TotalPrice += (int)package.Cost;
 
