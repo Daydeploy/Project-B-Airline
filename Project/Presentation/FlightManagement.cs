@@ -364,13 +364,11 @@ static class FlightManagement
 
         var seatSelector = new SeatSelectionUI();
         var passengerDetails = CollectPassengerDetails(departureFlight, passengerCount, seatSelector);
-
-        // Departure flight handling
+        
         bool includeInsuranceForDeparture = PromptForInsurance(passengerCount, "departure");
         CompleteBooking(departureFlight.FlightId, passengerDetails, departureFlight, seatSelector,
             includeInsuranceForDeparture);
-
-        // Return flight handling (if applicable)
+        
         if (returnFlight != null)
         {
             foreach (var passenger in passengerDetails)
@@ -539,8 +537,7 @@ static class FlightManagement
         Console.WriteLine("------------------------------------------------------------");
         Console.WriteLine("                    FLIGHT BOOKING SUMMARY                   ");
         Console.WriteLine("------------------------------------------------------------\n");
-
-        // Departure Flight Details
+        
         BookingModel departureBooking = BookingLogic.CreateBooking(
             UserLogin.UserAccountServiceLogic.CurrentUserId,
             departureFlightId,
@@ -551,8 +548,7 @@ static class FlightManagement
         Console.WriteLine($"Booking ID: {departureBooking.BookingId}");
         Console.WriteLine($"Flight: {departureFlight.Origin} → {departureFlight.Destination}");
         Console.WriteLine($"Departure: {DateTime.Parse(departureFlight.DepartureTime):HH:mm dd MMM yyyy}\n");
-
-        // Return Flight Details (if applicable)
+        
         BookingModel? returnBooking = null;
         if (returnFlight != null && returnFlightId.HasValue)
         {
