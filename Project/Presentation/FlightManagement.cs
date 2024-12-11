@@ -809,7 +809,7 @@ static class FlightManagement
         var user = userId;
         string jetType = "";
         int maxPassengers = 0;
-
+        Console.Clear();
         Console.WriteLine(
             "We have two private jets. A Bombardier Learjet 75 with \x1B[4m6 seats\x1B[0m and a Bombardier Global 8280 with \x1B[4m8 seats\x1B[0m.");
         Console.WriteLine("Which jet would you like to book? (1/2)");
@@ -848,7 +848,11 @@ static class FlightManagement
                 Console.Clear();
                 Console.WriteLine($"Passenger {i + 1} Details:");
                 Console.WriteLine("Enter passenger name:");
-                string name = Console.ReadLine() ?? string.Empty;
+                string name = Console.ReadLine();
+                if (name == null)
+                {
+                    name = string.Empty;
+                }
 
                 var passenger = new PassengerModel(name, $"PJ{i + 1}", false);
                 passengers.Add(passenger);
@@ -858,7 +862,7 @@ static class FlightManagement
             {
                 BookingModel booking = BookingLogic.CreateBooking( // kan nog geen special items kopen of entertainment
                     user,
-                    0, // Special ID for private jets
+                    0, // speciale flightID for private jets
                     passengers,
                     new List<PetModel>(), // geen pets
                     true,

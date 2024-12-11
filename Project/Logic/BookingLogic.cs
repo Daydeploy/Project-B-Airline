@@ -42,22 +42,19 @@ public class BookingLogic
         int bookingId = GenerateBookingId();
         int totalPrice;
 
-        if (isPrivateJet && !string.IsNullOrEmpty(jetType))
+        if (isPrivateJet)
         {
-            // Private jet base prices
             var privateJetPrices = new Dictionary<string, int>
             {
                 { "Bombardier Learjet 75", 15000 },
                 { "Bombardier Global 8280", 25000 }
             };
 
-            // Price for private jet
             totalPrice = privateJetPrices[jetType];
         }
         else
         {
-            var flight = _flights.FirstOrDefault(f => f.FlightId == flightId) 
-                ?? throw new Exception("Flight not found");
+            var flight = _flights.FirstOrDefault(f => f.FlightId == flightId);
             totalPrice = CalculateTotalPrice(flight.Destination, passengerDetails);
             
             foreach (var pet in petDetails)

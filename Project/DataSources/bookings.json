@@ -232,5 +232,113 @@
         ]
       }
     ]
+  },
+  {
+    "bookingId": 3680,
+    "userId": 1,
+    "flightId": 0,
+    "totalPrice": 15000,
+    "passengers": [
+      {
+        "name": "Sil",
+        "hasPet": false,
+        "petDetails": null,
+        "seatNumber": "PJ1",
+        "hasCheckedBaggage": false,
+        "shopItems": [],
+        "specialLuggage": "",
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      },
+      {
+        "name": "Paul",
+        "hasPet": false,
+        "petDetails": null,
+        "seatNumber": "PJ2",
+        "hasCheckedBaggage": false,
+        "shopItems": [],
+        "specialLuggage": "",
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      }
+    ],
+    "pets": [],
+    "comfortPackages": null,
+    "planeType": "Bombardier Learjet 75",
+    "entertainment": null
+  },
+  {
+    "bookingId": 4411,
+    "userId": 1,
+    "flightId": 0,
+    "totalPrice": 15000,
+    "passengers": [
+      {
+        "name": "haks",
+        "hasPet": false,
+        "petDetails": null,
+        "seatNumber": "PJ1",
+        "hasCheckedBaggage": false,
+        "shopItems": [],
+        "specialLuggage": "",
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      }
+    ],
+    "pets": [],
+    "comfortPackages": null,
+    "planeType": "Bombardier Learjet 75",
+    "entertainment": null
+  },
+  {
+    "bookingId": 5275,
+    "userId": 1,
+    "flightId": 0,
+    "totalPrice": 15000,
+    "passengers": [
+      {
+        "name": "Pail",
+        "hasPet": false,
+        "petDetails": null,
+        "seatNumber": "PJ1",
+        "hasCheckedBaggage": false,
+        "shopItems": [],
+        "specialLuggage": "",
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      }
+    ],
+    "pets": [],
+    "comfortPackages": null,
+    "planeType": "Bombardier Learjet 75",
+    "entertainment": null
   }
 ]
