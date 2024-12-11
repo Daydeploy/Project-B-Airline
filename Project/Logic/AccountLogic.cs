@@ -47,4 +47,13 @@ public class AccountsLogic
             i.EmailAddress.Equals(email, StringComparison.OrdinalIgnoreCase) && i.Password == password);
         return CurrentAccount;
     }
+
+    public static bool HasCompleteContactInformation(string FirstName, string LastName, string Email, string PhoneNumber, string Address)
+    {
+        if (FirstName == null || LastName == null || Email == null || PhoneNumber == null || Address == null)
+        {
+            return false;
+        }
+        return true;
+    }
 }

@@ -237,64 +237,124 @@ static class FlightManagement
         int tripChoice = MenuNavigationService.NavigateMenu(tripOptions, "Is this a round-trip booking?");
         bool isRoundTrip = tripChoice == 0;
 
-        Console.Clear();
-        Console.WriteLine("Please select a departure date:");
-        CalendarUI calendar = new CalendarUI();
-        DateTime departureDate = calendar.SelectDate();
-        if (departureDate == DateTime.MinValue)
-        {
-            Console.WriteLine("Date selection cancelled.");
-            return;
-        }
 
-        DateTime? returnDate = null;
-        if (isRoundTrip)
+        DateTime departureDate = DateTime.Now;
+        List<FlightModel> availableFlights;
+
+        while (true)
         {
             Console.Clear();
-            Console.WriteLine("Please select a return date:");
-            returnDate = calendar.SelectDate();
-            if (returnDate == DateTime.MinValue)
+            Console.WriteLine("Please select a departure date:");
+            CalendarUI calendar = new CalendarUI(startingDate: departureDate);
+            departureDate = calendar.SelectDate();
+            if (departureDate == DateTime.MinValue)
             {
-                Console.WriteLine("Return date selection cancelled.");
+                Console.WriteLine("Date selection cancelled.");
                 return;
             }
 
-            if (returnDate <= departureDate)
+            availableFlights = flightsLogic.FilterFlightsByDate(origin, destination, departureDate);
+            if (availableFlights.Count != 0)
             {
-                Console.WriteLine("Return date must be after the departure date. Please start again.");
-                return;
+                break;
             }
-        }
 
-        var availableFlights = flightsLogic.FilterFlightsByDate(origin, destination, departureDate);
-        if (availableFlights.Count == 0)
-        {
-            Console.WriteLine($"No flights found from {origin} to {destination} on {departureDate:dd MMM yyyy}.");
-            Console.WriteLine("\nPress any key to return to the menu...");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"\nNo flights found from {origin} to {destination} on {departureDate:dd MMM yyyy}.");
+            Console.ResetColor();
             Console.ReadKey();
-            return;
         }
 
+
+        Console.Clear();
         Console.WriteLine("\nAvailable flights:");
         string[] flightOptions = availableFlights
             .Select((f, index) =>
                 $"{f.Origin} → {f.Destination}\n" +
                 $"Departure: {DateTime.Parse(f.DepartureTime):HH:mm dd MMM yyyy}  |  Arrival: {DateTime.Parse(f.ArrivalTime):HH:mm dd MMM yyyy}\n" +
-                $"Economy: {f.SeatClassOptions[0].Price} EUR  |  Business: {f.SeatClassOptions[1].Price} EUR  |  First: {f.SeatClassOptions[2].Price} EUR\n" +
-                $"{new string('─', 80)}")
+                $"Economy: {f.SeatClassOptions[0].Price} EUR  |  Business: {f.SeatClassOptions[1].Price} EUR  |  First: {f.SeatClassOptions[2].Price} EUR\n")
             .ToArray();
-
-
-        int selectedIndex = MenuNavigationService.NavigateMenu(flightOptions, "Select a flight:");
-
-        if (selectedIndex == -1)
+        int selectedFlightIndex = MenuNavigationService.NavigateMenu(flightOptions, "Select a departure flight:");
+        if (selectedFlightIndex == -1)
         {
             Console.WriteLine("Flight selection cancelled.");
             return;
         }
 
-        var selectedFlight = availableFlights[selectedIndex];
+        var selectedFlight = availableFlights[selectedFlightIndex];
 
+        DateTime? returnDate = null;
+        if (isRoundTrip)
+        {
+            bool validReturnDate = false;
+            while (!validReturnDate)
+            {
+                Console.Clear();
+                Console.WriteLine("Please select a return date:");
+                CalendarUI returnCalendar = new CalendarUI(startingDate: returnDate ?? departureDate,
+                    highlightDate: departureDate);
+                returnDate = returnCalendar.SelectDate();
+                if (returnDate == DateTime.MinValue)
+                {
+                    Console.WriteLine("Return date selection cancelled.");
+                    return;
+                }
+
+                if (returnDate <= departureDate)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"\nReturn date must be after the departure date ({departureDate:dd MMM yyyy}).");
+                    Console.ResetColor();
+                    Console.ReadKey();
+                    continue;
+                }
+
+                var returnFlights = flightsLogic.FilterFlightsByDate(destination, origin, returnDate.Value);
+                if (returnFlights.Count == 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(
+                        $"\nNo return flights available from {destination} to {origin} on {returnDate:dd MMM yyyy}.");
+                    Console.ResetColor();
+                    Console.ReadKey();
+                    continue;
+                }
+
+                Console.Clear();
+                Console.WriteLine("\nAvailable return flights:");
+                string[] returnFlightOptions = returnFlights
+                    .Select((f, index) =>
+                        $"{f.Origin} → {f.Destination}\n" +
+                        $"Departure: {DateTime.Parse(f.DepartureTime):HH:mm dd MMM yyyy}  |  Arrival: {DateTime.Parse(f.ArrivalTime):HH:mm dd MMM yyyy}\n" +
+                        $"Economy: {f.SeatClassOptions[0].Price} EUR  |  Business: {f.SeatClassOptions[1].Price} EUR  |  First: {f.SeatClassOptions[2].Price} EUR\n")
+                    .ToArray();
+                int selectedReturnFlightIndex =
+                    MenuNavigationService.NavigateMenu(returnFlightOptions, "Select a return flight:");
+                if (selectedReturnFlightIndex == -1)
+                {
+                    Console.WriteLine("Return flight selection cancelled.");
+                    return;
+                }
+
+                var selectedReturnFlight = returnFlights[selectedReturnFlightIndex];
+
+                HandlePassengerDetailsAndBooking(account, selectedFlight, selectedReturnFlight);
+                validReturnDate = true;
+            }
+        }
+        else
+        {
+            HandlePassengerDetailsAndBooking(account, selectedFlight, null);
+        }
+
+        Console.WriteLine("\nPress any key to return to the menu...");
+        Console.ReadKey();
+    }
+
+
+    private static void HandlePassengerDetailsAndBooking(AccountModel account, FlightModel departureFlight,
+        FlightModel? returnFlight)
+    {
         Console.WriteLine("How many passengers? (1-8):");
         if (!int.TryParse(Console.ReadLine(), out int passengerCount) || passengerCount <= 0 || passengerCount > 8)
         {
@@ -303,73 +363,108 @@ static class FlightManagement
         }
 
         var seatSelector = new SeatSelectionUI();
-        var passengerDetails = CollectPassengerDetails(selectedFlight, passengerCount, seatSelector);
+        var passengerDetails = CollectPassengerDetails(departureFlight, passengerCount, seatSelector);
 
-        CompleteBooking(selectedFlight.FlightId, passengerDetails, selectedFlight, seatSelector);
+        bool includeInsuranceForDeparture = PromptForInsurance(passengerCount, "departure");
 
-        if (isRoundTrip)
+        if (account.PaymentInformation == null)
         {
-            HandleReturnFlightBooking(destination, origin, departureDate, returnDate.Value, passengerDetails,
-                seatSelector);
+            Console.WriteLine("\nPayment information is required to complete a booking.");
+            Console.WriteLine("\nWould you like to add payment information now? (Y/N)");
+
+            string response = Console.ReadLine().ToUpper();
+
+            if (response == "Y")
+            {
+                AccountManagement.HandleManageAccountOption(1, account);
+
+                var accounts = AccountsAccess.LoadAll();
+                account = accounts.FirstOrDefault(x => x.Id == account.Id);
+
+                if (account.PaymentInformation == null)
+                {
+                    Console.WriteLine("No payment information added, Booking cannot proceed.");
+                    return;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Booking cancelled due to missing payment information.");
+                return;
+            }
+        }
+        else
+        {
+            CompleteBooking(departureFlight.FlightId, passengerDetails, departureFlight, seatSelector,
+                        includeInsuranceForDeparture);
         }
 
-        Console.WriteLine("\nPress any key to return to the menu...");
-        Console.ReadKey();
+        if (returnFlight != null)
+        {
+            foreach (var passenger in passengerDetails)
+            {
+                Console.WriteLine($"\nSelect a seat for {passenger.Name} on the return flight:");
+                string seatNumber = seatSelector.SelectSeat(returnFlight.PlaneType);
+                seatSelector.SetSeatOccupied(seatNumber);
+
+                if (passenger.HasPet)
+                {
+                    seatSelector.SetPetSeat(seatNumber);
+                }
+
+                passenger.SeatNumber = seatNumber;
+            }
+
+            bool includeInsuranceForReturn = PromptForInsurance(passengerCount, "return");
+
+            if (account.PaymentInformation == null)
+            {
+                Console.WriteLine("\nPayment information is required to complete a booking.");
+                Console.WriteLine("\nWould you like to add payment information now? (Y/N)");
+
+                string response = Console.ReadLine().ToUpper();
+
+                if (response == "Y")
+                {
+                    AccountManagement.HandleManageAccountOption(1, account);
+
+                    var accounts = AccountsAccess.LoadAll();
+                    account = accounts.FirstOrDefault(x => x.Id == account.Id);
+
+                    if (account.PaymentInformation == null)
+                    {
+                        Console.WriteLine("No paymenr information added, Booking cannot proceed.");
+                        return;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Booking cancelled due to missing payment information.");
+                    return;
+                }
+            }
+            else
+            {
+                CompleteBooking(returnFlight.FlightId, passengerDetails, returnFlight, seatSelector,
+                                includeInsuranceForReturn);
+            }
+
+        }
     }
 
 
-    private static void HandleReturnFlightBooking(string destination, string origin, DateTime departureDate,
-        DateTime returnDate, List<PassengerModel> passengerDetails, SeatSelectionUI seatSelector
-    )
+    private static bool PromptForInsurance(int passengerCount, string flightType)
     {
-        Console.Clear();
-        Console.WriteLine($"Finding return flights from {destination} to {origin}...");
+        double insuranceCostPerPassenger = 10.0;
+        double totalInsuranceCost = insuranceCostPerPassenger * passengerCount;
 
-        FlightsLogic flightsLogic = new FlightsLogic();
-        var returnFlights = flightsLogic.FilterFlightsByDate(destination, origin, returnDate);
+        Console.WriteLine($"\nWould you like to add cancellation insurance for your {flightType} flight?");
+        Console.WriteLine(
+            $"Cost: {insuranceCostPerPassenger:F2} EUR per passenger, Total: {totalInsuranceCost:F2} EUR");
+        Console.WriteLine("Enter Y to add insurance, or N to skip:");
 
-        if (returnFlights.Count == 0)
-        {
-            Console.WriteLine(
-                $"No return flights available from {destination} to {origin} on {returnDate:dd MMM yyyy}.");
-            return;
-        }
-
-        Console.WriteLine("\nAvailable return flights:");
-        string[] flightOptions = returnFlights
-            .Select((f, index) =>
-                $"{f.Origin} → {f.Destination}\n" +
-                $"Departure: {DateTime.Parse(f.DepartureTime):HH:mm dd MMM yyyy}  |  Arrival: {DateTime.Parse(f.ArrivalTime):HH:mm dd MMM yyyy}\n" +
-                $"Economy: {f.SeatClassOptions[0].Price} EUR  |  Business: {f.SeatClassOptions[1].Price} EUR  |  First: {f.SeatClassOptions[2].Price} EUR\n" +
-                $"{new string('─', 80)}")
-            .ToArray();
-
-        int selectedIndex = MenuNavigationService.NavigateMenu(flightOptions, "Select a return flight:");
-
-        if (selectedIndex == -1)
-        {
-            Console.WriteLine("Return flight selection cancelled.");
-            return;
-        }
-
-        var selectedReturnFlight = returnFlights[selectedIndex];
-
-        foreach (var passenger in passengerDetails)
-        {
-            Console.WriteLine($"\nSelect a seat for {passenger.Name} on the return flight:");
-            string seatNumber = seatSelector.SelectSeat(selectedReturnFlight.PlaneType);
-            seatSelector.SetSeatOccupied(seatNumber);
-
-            if (passenger.HasPet)
-            {
-                seatSelector.SetPetSeat(seatNumber);
-            }
-
-            passenger.SeatNumber = seatNumber;
-        }
-
-        CompleteBooking(selectedReturnFlight.FlightId, passengerDetails, selectedReturnFlight, seatSelector);
-        Console.WriteLine("\nRound-trip booking completed successfully!");
+        string response = Console.ReadLine()?.Trim().ToLower();
+        return response == "y";
     }
 
     private static List<PassengerModel> CollectPassengerDetails(FlightModel selectedFlight, int passengerCount,
@@ -503,8 +598,14 @@ static class FlightManagement
         };
     }
 
-    private static void CompleteBooking(int flightId, List<PassengerModel> passengerDetails, FlightModel selectedFlight,
-        SeatSelectionUI seatSelector)
+    private static void CompleteBooking(
+        int departureFlightId,
+        List<PassengerModel> passengerDetails,
+        FlightModel departureFlight,
+        SeatSelectionUI seatSelector,
+        bool includeInsurance,
+        FlightModel? returnFlight = null,
+        int? returnFlightId = null)
     {
         try
         {
@@ -575,10 +676,42 @@ static class FlightManagement
                 booking.TotalPrice, booking.BookingId);
             Console.WriteLine($"Final Total Price: {booking.TotalPrice:F2} EUR");
         }
-        catch (Exception ex)
+
+        if (totalBaggageCost > 0)
         {
-            Console.WriteLine($"Error creating booking: {ex.Message}");
+            Console.WriteLine($"  Baggage Cost: {totalBaggageCost:F2} EUR");
         }
+
+        if (includeInsurance)
+        {
+            double insuranceCost = passengerDetails.Count * 10.0;
+            totalBasePrice += insuranceCost;
+            Console.WriteLine($"  Cancellation Insurance: {insuranceCost:F2} EUR");
+        }
+
+        double finalTotalPrice = totalBasePrice + totalBaggageCost;
+        Console.WriteLine($"  Final Total Price: {finalTotalPrice:F2} EUR\n");
+
+        int roundedTotalPrice = (int)Math.Round(finalTotalPrice);
+
+        Console.WriteLine("------------------------------------------------------------");
+        Console.WriteLine("Rewards Summary:");
+        Console.WriteLine("------------------------------------------------------------");
+
+        int milesEarned = MilesLogic.CalculateMilesFromBooking(UserLogin.UserAccountServiceLogic.CurrentUserId);
+        Console.WriteLine($"  Miles Earned: {milesEarned}");
+
+        double discountedPrice = MilesLogic.BasicPointsRedemption(
+            UserLogin.UserAccountServiceLogic.CurrentUserId,
+            roundedTotalPrice,
+            departureBooking.BookingId
+        );
+
+        Console.WriteLine($"  Discounted Total Price: {discountedPrice:F2} EUR\n");
+
+        Console.WriteLine("------------------------------------------------------------");
+        Console.WriteLine("Thank you for booking with us!");
+        Console.WriteLine("------------------------------------------------------------");
     }
 
 
@@ -616,7 +749,7 @@ static class FlightManagement
                     flight = flightsLogic.GetFlightsById(booking.FlightId);
                 }
 
-                FlightDisplay.DisplayBookingDetails(booking, flight); 
+                FlightDisplay.DisplayBookingDetails(booking, flight);
                 FlightDisplay.DisplayPassengerDetails(booking.Passengers);
                 Console.WriteLine(new string('─', Console.WindowWidth - 1));
             }
@@ -707,11 +840,11 @@ static class FlightManagement
 
             try
             {
-                    BookingModel booking = BookingLogic.CreateBooking(
+                    BookingModel booking = BookingLogic.CreateBooking( // kan nog geen special items kopen of entertainment
                     user,
                     0, // Special ID for private jets
                     passengers,
-                    new List<PetModel>(),
+                    new List<PetModel>(), // geen pets
                     true,
                     jetType
                 );

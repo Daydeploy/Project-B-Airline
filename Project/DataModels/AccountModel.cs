@@ -24,6 +24,9 @@ public class AccountModel
     [JsonPropertyName("phoneNumber")]
     public string? PhoneNumber { get; set; }  // Nullable
 
+    [JsonPropertyName("address")]
+    public string? Address { get; set; }  // Nullable
+
     [JsonPropertyName("email")]
     public string EmailAddress { get; set; }
 

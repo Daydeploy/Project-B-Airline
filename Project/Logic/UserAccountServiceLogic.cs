@@ -117,7 +117,7 @@ public class UserAccountServiceLogic
 
     public bool ManageAccount(int userId, string newEmail = null, string newPassword = null, string newFirstName = null,
         string newLastName = null, string newGender = null, string newNationality = null,
-        string newPhoneNumber = null, PassportDetailsModel newPassportDetails = null,
+        string newPhoneNumber = null, string newAddress = null, PassportDetailsModel newPassportDetails = null,
         DateTime? newDateOfBirth = null, List<MilesModel> newMiles = null)
     {
         var account = _accountsLogic.GetById(userId);
@@ -133,6 +133,7 @@ public class UserAccountServiceLogic
         if (!string.IsNullOrWhiteSpace(newGender)) account.Gender = newGender;
         if (!string.IsNullOrWhiteSpace(newNationality)) account.Nationality = newNationality;
         if (!string.IsNullOrWhiteSpace(newPhoneNumber)) account.PhoneNumber = newPhoneNumber;
+        if (!string.IsNullOrWhiteSpace(newAddress)) account.Address = newAddress;
         if (newDateOfBirth.HasValue) account.DateOfBirth = newDateOfBirth.Value;
 
         if (newPassportDetails != null)

@@ -51,7 +51,6 @@ static class UserLogin
             "View Booked Flights",
             "Check-in for a Flight",
             "Manage Account",
-            "Show Available Flights",
             "View Airport Information",
             "Browse Destinations",
             "Show Seat Upgrade Options",

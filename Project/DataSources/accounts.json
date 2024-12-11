@@ -7,9 +7,15 @@
     "gender": null,
     "nationality": null,
     "phoneNumber": null,
+    "address": null,
     "email": "test.account@gmail.com",
     "password": "test",
-    "passportDetails": null,
+    "passportDetails": {
+      "passportNumber": null,
+      "issueDate": "0001-01-01T00:00:00",
+      "expirationDate": "0001-01-01T00:00:00",
+      "countryOfIssue": "1"
+    },
     "milesDetails": [
       {
         "Enrolled": false,
@@ -19,7 +25,15 @@
         "History": ""
       }
     ],
-    "paymentInformation": null,
+    "paymentInformation": [
+      {
+        "cardHolder": "Sil",
+        "cardNumber": "1234567890123456",
+        "cVV": "222",
+        "expirationDate": "11/26",
+        "billingAddress": "Wijnhaven 106"
+      }
+    ],
     "privateJet": null
   },
   {
@@ -30,6 +44,7 @@
     "gender": null,
     "nationality": null,
     "phoneNumber": null,
+    "address": null,
     "email": "test2account@gmail.com",
     "password": "Account2",
     "passportDetails": null,
@@ -53,6 +68,7 @@
     "gender": null,
     "nationality": null,
     "phoneNumber": null,
+    "address": null,
     "email": "test@test.nl",
     "password": "test",
     "passportDetails": null,
@@ -76,6 +92,7 @@
     "gender": null,
     "nationality": null,
     "phoneNumber": null,
+    "address": null,
     "email": "darrinwever@gmail.com",
     "password": "test",
     "passportDetails": null,
@@ -91,9 +108,10 @@
     "paymentInformation": [
       {
         "cardHolder": "Darrin Wever",
-        "cardNumber": "012345678909",
-        "cVV": "1111",
-        "expirationDate": "12/30"
+        "cardNumber": "1234567890123456",
+        "cVV": "1234",
+        "expirationDate": "12/2222",
+        "billingAddress": "Test Address 1"
       }
     ],
     "privateJet": null

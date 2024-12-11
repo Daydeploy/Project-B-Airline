@@ -14,11 +14,15 @@ public class PaymentInformationModel
     [JsonPropertyName("expirationDate")]
     public string ExpirationDate { get; set; }
 
-    public PaymentInformationModel(string cardHolder, string cardNumber, string cVV, string expirationDate)
+    [JsonPropertyName("billingAddress")]
+    public string BillingAddress { get; set; }
+
+    public PaymentInformationModel(string cardHolder, string cardNumber, string cVV, string expirationDate, string billingAddress)
     {
         CardHolder = cardHolder;
         CardNumber = cardNumber;
         CVV = cVV;
         ExpirationDate = expirationDate;
+        BillingAddress = billingAddress;
     }
 }

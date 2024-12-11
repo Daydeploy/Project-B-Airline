@@ -38,9 +38,16 @@ static class PackagesUI
             }
 
             Console.Clear();
+            
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("=== Comfort Packages ===\n");
+            Console.ResetColor();
+
             Console.WriteLine("Your Booked Flights:");
-            Console.WriteLine(new string('-', 50));
+            
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(new string('-', 80));
+            Console.ResetColor();
 
             foreach (var booking in bookedFlights)
             {
@@ -48,9 +55,12 @@ static class PackagesUI
                 if (flight != null)
                 {
                     Console.WriteLine($"Booking ID: {booking.BookingId}");
+                    System.Console.WriteLine($"Aircraft type: {flight.PlaneType}");
                     Console.WriteLine($"Flight: {flight.Origin} to {flight.Destination}");
                     Console.WriteLine($"Date: {flight.DepartureTime}");
-                    Console.WriteLine(new string('-', 50));
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(new string('-', 80));
+                    Console.ResetColor();
                 }
             }
 
