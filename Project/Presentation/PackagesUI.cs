@@ -56,6 +56,7 @@ static class PackagesUI
                 {
                     Console.WriteLine($"Booking ID: {booking.BookingId}");
                     System.Console.WriteLine($"Aircraft type: {flight.PlaneType}");
+                    System.Console.WriteLine($"Seat Class: {flight.SeatClassOptions.FirstOrDefault()?.SeatClass}");
                     Console.WriteLine($"Flight: {flight.Origin} to {flight.Destination}");
                     Console.WriteLine($"Date: {flight.DepartureTime}");
                     Console.ForegroundColor = ConsoleColor.Red;
