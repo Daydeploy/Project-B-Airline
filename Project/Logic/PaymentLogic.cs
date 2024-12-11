@@ -5,7 +5,7 @@ public class PaymentLogic
 
     public static bool ValidateCardNumber(string cardNumber)
     {
-        if (string.IsNullOrEmpty(cardNumber))
+        if (!string.IsNullOrEmpty(cardNumber))
         {
             if (cardNumber.Length == 16)
             {
@@ -20,7 +20,7 @@ public class PaymentLogic
 
     public static bool ValidateCVV(string cvv)
     {
-        if (string.IsNullOrEmpty(cvv))
+        if (!string.IsNullOrEmpty(cvv))
         {
             if (cvv.Length == 3 || cvv.Length == 4)
             {
@@ -50,7 +50,7 @@ public class PaymentLogic
         bool isValidMonth = int.TryParse(parts[0], out int month);
         bool isValidYear = int.TryParse(parts[1], out int year);
 
-        if (!isValidMonth && !isValidYear)
+        if (!isValidMonth || !isValidYear)
         {
             return false;
         }
@@ -60,7 +60,7 @@ public class PaymentLogic
             return false;
         }
 
-        year += 20 + year;
+        year = 2000 + year;
 
         var expirationDateTime = new DateTime(year, month, DateTime.DaysInMonth(year, month));
         if (expirationDateTime < DateTime.Now)

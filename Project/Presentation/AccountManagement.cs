@@ -278,19 +278,6 @@ static class AccountManagement
 
                 if (accountToUpdate.PaymentInformation == null) accountToUpdate.PaymentInformation = new List<PaymentInformationModel>();
 
-                if (accountToUpdate.PaymentInformation.Count > 0)
-                {
-                    var currentPayment = accountToUpdate.PaymentInformation[0];
-                    Console.WriteLine("Current Payment Methods:");
-                    Console.WriteLine($"Card Holder: {currentPayment.CardHolder}");
-                    Console.WriteLine($"Card Number: {currentPayment.CardNumber}");
-                    Console.WriteLine($"Expiration Date: {currentPayment.ExpirationDate}");
-                }
-                else
-                {
-                    Console.WriteLine("No Payment methods currently saved.");
-                }
-
                 string[] paymentOptions = {
                     "Update Payment Method",
                     "Remove Payment Method",
@@ -306,16 +293,16 @@ static class AccountManagement
 
                     while (!isValidPaymentInformation)
                     {
-                        Console.WriteLine("Enter Card Holder Name:");
+                        Console.WriteLine("\nEnter Card Holder Name:");
                         string _cardHolder = Console.ReadLine();
 
-                        Console.WriteLine("Enter Card Number:");
+                        Console.WriteLine("\nEnter Card Number:");
                         string _cardNumber = Console.ReadLine();
 
-                        Console.WriteLine("Enter CVV");
+                        Console.WriteLine("\nEnter CVV");
                         string _cVV = Console.ReadLine();
 
-                        Console.WriteLine("Enter Expiration Date");
+                        Console.WriteLine("\nEnter Expiration Date");
                         string _expirationDate = Console.ReadLine();
 
                         if (!PaymentLogic.ValidateCardNumber(_cardNumber))
@@ -336,16 +323,33 @@ static class AccountManagement
                             continue;
                         }
 
+                        Console.WriteLine("\nConfirm Payment Method Update:");
+                        Console.WriteLine($"Card Holder: {_cardHolder}");
+                        Console.WriteLine($"Card Number: {_cardNumber}");
+                        Console.WriteLine($"Expiration Date: {_expirationDate}");
+
+                        Console.WriteLine("\nPress any key to confirm this payment method, or 'N' to cancel.");
+                        var confirmKey = Console.ReadKey(true);
+
+                        if (confirmKey.Key == ConsoleKey.N)
+                        {
+                            Console.WriteLine("Payment method update cancelled.");
+                            break;
+                        }
+
                         paymentInfo = new PaymentInformationModel(_cardHolder, _cardNumber, _cVV, _expirationDate);
                         isValidPaymentInformation = true;
                     }
 
-                    accountToUpdate.PaymentInformation.Clear();
-                    accountToUpdate.PaymentInformation.Add(paymentInfo);
+                    if (paymentInfo != null)
+                    {
+                        accountToUpdate.PaymentInformation.Clear();
+                        accountToUpdate.PaymentInformation.Add(paymentInfo);
 
-                    AccountsAccess.WriteAll(accounts);
+                        AccountsAccess.WriteAll(accounts);
 
-                    Console.WriteLine("Payment method updated successfully.");
+                        Console.WriteLine("Payment method updated successfully.");
+                    }
                 }
 
                 if (paymentOptionIndex == 1)
@@ -363,6 +367,7 @@ static class AccountManagement
 
                 Console.WriteLine("\nPress any key to continue...");
                 Console.ReadKey();
+                Console.Clear();
                 break;
 
             default:

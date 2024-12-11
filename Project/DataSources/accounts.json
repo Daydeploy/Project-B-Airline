@@ -88,9 +88,9 @@
     "paymentInformation": [
       {
         "cardHolder": "Darrin Wever",
-        "cardNumber": "012345678909",
-        "cVV": "1111",
-        "expirationDate": "12/30"
+        "cardNumber": "0123456789012345",
+        "cVV": "123",
+        "expirationDate": "12/28"
       }
     ]
   }
