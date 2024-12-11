@@ -1,1 +1,116 @@
- 
+[
+    {
+        "id": 1,
+        "name": "Basic Entertainment",
+        "contents": [
+            "Movies",
+            "Music",
+            "Flight Map"
+        ],
+        "cost": 30.00,
+        "availableIn": [
+            "Economy",
+            "Business",
+            "First"
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Social Package",
+        "contents": [
+            "Multiplayer Gaming",
+            "Group Movie Streaming",
+            "Digital Trivia Games"
+        ],
+        "cost": 80.00,
+        "availableIn": [
+            "Economy",
+            "Business",
+            "First"
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Sports Enthusiast Package",
+        "contents": [
+            "Live Sports Streaming",
+            "Sports Magazines",
+            "Score Updates"
+        ],
+        "cost": 100.00,
+        "availableIn": [
+            "Business",
+            "First"
+        ]
+    },
+    {
+        "id": 4,
+        "name": "Streaming Package",
+        "contents": [
+            "Unlimited Netflix",
+            "Disney+",
+            "Amazon Prime Access"
+        ],
+        "cost": 25.00,
+        "availableIn": [
+            "Business",
+            "First"
+        ]
+    },
+    {
+        "id": 5,
+        "name": "Gaming Package",
+        "contents": [
+            "Handheld Gaming Console",
+            "Pre-installed Games"
+        ],
+        "cost": 75.00,
+        "availableIn": [
+            "Economy",
+            "Business",
+            "First"
+        ]
+    },
+    {
+        "id": 6,
+        "name": "Relaxation Package",
+        "contents": [
+            "Meditation Apps",
+            "Calming Music",
+            "Aromatherapy Kits"
+        ],
+        "cost": 20.00,
+        "availableIn": [
+            "Business",
+            "First"
+        ]
+    },
+    {
+        "id": 7,
+        "name": "Deluxe Media Package",
+        "contents": [
+            "Premium Movies",
+            "Podcasts",
+            "eBooks"
+        ],
+        "cost": 35.00,
+        "availableIn": [
+            "Business",
+            "First"
+        ]
+    },
+    {
+        "id": 8,
+        "name": "Ultimate VIP Package",
+        "contents": [
+            "All Other Packages",
+            "Personal Concierge",
+            "Exclusive Content",
+            "Escort Services"
+        ],
+        "cost": 350.00,
+        "availableIn": [
+            "First"
+        ]
+    }
+]

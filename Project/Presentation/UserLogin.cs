@@ -55,7 +55,8 @@ static class UserLogin
             "View Airport Information",
             "Browse Destinations",
             "Show Seat Upgrade Options",
-            "Packages",
+            "Add Comfort Packages",
+            "Add Entertainment",
             "Logout"
         };
 
@@ -95,7 +96,10 @@ static class UserLogin
                 case 9: // Packages
                     PackagesUI.ShowPackages();
                     break;
-                case 10: // Logout
+                case 10: // Add Entertainment
+                    EntertainmentUI.ShowEntertainment();
+                    break;
+                case 11: // Logout
                     Console.Clear();
                     UserAccountServiceLogic.Logout();
                     Console.WriteLine("You have successfully logged out.");

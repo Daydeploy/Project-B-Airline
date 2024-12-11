@@ -396,6 +396,25 @@ static class FlightManagement
             Console.WriteLine("Does this passenger have checked baggage? (y/n):");
             bool hasCheckedBaggage = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
 
+            string specialLuggage = "";
+
+            if (hasCheckedBaggage)
+            {
+                Console.WriteLine("Do you have special luggage? (y/n):");
+                bool hasSpecialLuggage = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
+                
+                if (hasSpecialLuggage)
+                {
+                    Console.WriteLine("What special luggage do you have? (e.g. Ski equipment, Musical instrument):");
+                    specialLuggage = Console.ReadLine() ?? string.Empty;
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine($"\nYour {specialLuggage} will be stored securely in the luggage compartment.");
+                    Console.ResetColor();
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey();
+                }
+            }
+
             Console.WriteLine("Does this passenger have a pet? (y/n):");
             bool hasPet = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
 
@@ -405,7 +424,9 @@ static class FlightManagement
                 petDetails = SelectPetDetails(petTypes, maxWeights);
             }
 
-            var passenger = new PassengerModel(name, null, hasCheckedBaggage, hasPet, petDetails);
+            // In FlightManagement.cs, add some debug logging after passenger creation:
+            var passenger = new PassengerModel(name, null, hasCheckedBaggage, hasPet, petDetails, specialLuggage);
+            Console.WriteLine($"DEBUG: Special luggage set to: {passenger.SpecialLuggage}"); // Verify value is set\
 
             Console.WriteLine("\nSelect a seat for the passenger:");
             string seatNumber = seatSelector.SelectSeat(selectedFlight.PlaneType);

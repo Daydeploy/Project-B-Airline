@@ -72,7 +72,8 @@ public class BookingLogic
                 p.SeatNumber, 
                 p.HasCheckedBaggage,
                 p.HasPet,
-                p.PetDetails))
+                p.PetDetails,
+                p.SpecialLuggage))
             .ToList();
 
         BookingModel newBooking = new BookingModel(bookingId, userId, flightId, totalPrice, passengers, petDetails);

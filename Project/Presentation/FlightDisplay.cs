@@ -38,47 +38,47 @@ static class FlightDisplay
 
     // Displays details of a single flight in a formatted manner
     public static void DisplayFlightDetails(FlightModel flight)
-{
-    DateTime departureDateTime = DateTime.Parse(flight.DepartureTime);
-    DateTime arrivalDateTime = DateTime.Parse(flight.ArrivalTime);
-    TimeSpan duration = arrivalDateTime - departureDateTime;
-
-    Console.ForegroundColor = ConsoleColor.Yellow;
-    Console.Write($"{flight.FlightId,-10} ");
-    Console.ResetColor();
-
-    Console.Write($"{flight.Origin} ");
-    Console.ForegroundColor = ConsoleColor.DarkCyan;
-    Console.Write("→");
-    Console.ResetColor();
-    Console.Write($" {flight.Destination,-22} ");
-
-    Console.Write($"{departureDateTime:HH:mm dd MMM} ");
-    Console.ForegroundColor = ConsoleColor.DarkCyan;
-    Console.Write("→");
-    Console.ResetColor();
-    Console.Write($" {arrivalDateTime:HH:mm dd MMM} ");
-
-    string durationStr = $"{duration.Hours}h {duration.Minutes}m";
-    Console.Write($"{durationStr,-12} ");
-
-    string currentSeason = GetCurrentSeason();
-
-    foreach (var seatOption in flight.SeatClassOptions)
     {
-        double seasonalPrice = seatOption.Price * 
-            (currentSeason == "summer" ? seatOption.SeasonalMultiplier.Summer : seatOption.SeasonalMultiplier.Winter);
-        double totalPrice = seasonalPrice * (1 + flight.Taxes.Country) +
-            flight.Taxes.Airport[flight.OriginCode] +
-            flight.Taxes.Airport[flight.DestinationCode];
+        DateTime departureDateTime = DateTime.Parse(flight.DepartureTime);
+        DateTime arrivalDateTime = DateTime.Parse(flight.ArrivalTime);
+        TimeSpan duration = arrivalDateTime - departureDateTime;
 
-        Console.ForegroundColor = GetPriceColor(seatOption.SeatClass);
-        Console.Write($"{seatOption.SeatClass}: {totalPrice:F2} ");
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.Write($"{flight.FlightId,-10} ");
         Console.ResetColor();
-    }
 
-    Console.WriteLine();
-}
+        Console.Write($"{flight.Origin} ");
+        Console.ForegroundColor = ConsoleColor.DarkCyan;
+        Console.Write("→");
+        Console.ResetColor();
+        Console.Write($" {flight.Destination,-22} ");
+
+        Console.Write($"{departureDateTime:HH:mm dd MMM} ");
+        Console.ForegroundColor = ConsoleColor.DarkCyan;
+        Console.Write("→");
+        Console.ResetColor();
+        Console.Write($" {arrivalDateTime:HH:mm dd MMM} ");
+
+        string durationStr = $"{duration.Hours}h {duration.Minutes}m";
+        Console.Write($"{durationStr,-12} ");
+
+        string currentSeason = GetCurrentSeason();
+
+        foreach (var seatOption in flight.SeatClassOptions)
+        {
+            double seasonalPrice = seatOption.Price * 
+                (currentSeason == "summer" ? seatOption.SeasonalMultiplier.Summer : seatOption.SeasonalMultiplier.Winter);
+            double totalPrice = seasonalPrice * (1 + flight.Taxes.Country) +
+                flight.Taxes.Airport[flight.OriginCode] +
+                flight.Taxes.Airport[flight.DestinationCode];
+
+            Console.ForegroundColor = GetPriceColor(seatOption.SeatClass);
+            Console.Write($"{seatOption.SeatClass}: {totalPrice:F2} ");
+            Console.ResetColor();
+        }
+
+        Console.WriteLine();
+    }
 
 
     // Draws the header for the bookings table
@@ -138,10 +138,26 @@ static class FlightDisplay
             Console.WriteLine($" Arrival: {arrivalDateTime:HH:mm dd MMM}");
     
             Console.WriteLine($"Duration: {duration.Hours}h {duration.Minutes}m");
+
+            Console.WriteLine(new string('-', 30));
+
+            Console.WriteLine("Purchased Entertainment:" );
+            if (booking.Entertainment?.Any() == true)
+            {
+                foreach (var entertainment in booking.Entertainment)
+                {
+                    Console.WriteLine($" - {entertainment.Name} | Price: {entertainment.Cost} EUR");
+                }
+            }
+            else
+            {
+                Console.WriteLine("No entertainment purchased");
+            }
             
+            Console.WriteLine(new string('-', 30));
             if (booking.Passengers?.Any() == true)
             {   
-                Console.WriteLine("Purchased items:\n");
+                Console.WriteLine("\nPurchased items:\n");
                 foreach (var passenger in booking.Passengers)
                 {   
                     Console.ForegroundColor = ConsoleColor.DarkGray;
@@ -201,6 +217,12 @@ static class FlightDisplay
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.Write($" | Checked Baggage: {(passenger.HasCheckedBaggage ? "Yes" : "No")}");
 
+            if (!string.IsNullOrEmpty(passenger.SpecialLuggage))
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write($" | Special Luggage: {passenger.SpecialLuggage}");
+            }
+
             if (passenger.HasPet)
             {
                 Console.ForegroundColor = ConsoleColor.Magenta;
@@ -214,7 +236,6 @@ static class FlightDisplay
     }
     private static void DisplayPrivateJetBookingDetails(BookingModel booking)
     {
-        Console.WriteLine(new string('═', Console.WindowWidth - 1)); // Different border for private jets
         Console.ForegroundColor = ConsoleColor.Magenta;
         Console.WriteLine("╔═ PRIVATE JET BOOKING ═╗");
         Console.ResetColor();
@@ -249,12 +270,12 @@ static class FlightDisplay
             }
         }
 
-        // Display total price with luxury styling
-        Console.WriteLine(new string('─', Console.WindowWidth - 1));
+        
+        Console.WriteLine(new string('═', 30));
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine($"Charter Price: {booking.TotalPrice:N2} EUR");
         Console.ResetColor();
-        Console.WriteLine(new string('═', Console.WindowWidth - 1));
+        Console.WriteLine(new string('═', 30));
     }
 
     // Determines the color to display based on seat class
