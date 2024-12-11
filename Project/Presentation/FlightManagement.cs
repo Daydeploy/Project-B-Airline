@@ -609,13 +609,18 @@ static class FlightManagement
     {
         try
         {
-            BookingModel booking = BookingLogic.CreateBooking(UserLogin.UserAccountServiceLogic.CurrentUserId, flightId,
+            double totalBaggageCost = 0;
+            double totalBasePrice = 0;
+
+            BookingModel booking = BookingLogic.CreateBooking(UserLogin.UserAccountServiceLogic.CurrentUserId, departureFlightId,
                 passengerDetails, new List<PetModel>());
+
+            totalBasePrice = booking.TotalPrice;
                 
             Console.WriteLine("\nFlight booked successfully!\n");
             Console.WriteLine($"Booking ID: {booking.BookingId}");
-            Console.WriteLine($"Flight: {selectedFlight.Origin} to {selectedFlight.Destination}");
-            Console.WriteLine($"Departure: {DateTime.Parse(selectedFlight.DepartureTime):HH:mm dd MMM yyyy}");
+            Console.WriteLine($"Flight: {departureFlight.Origin} to {departureFlight.Destination}");
+            Console.WriteLine($"Departure: {DateTime.Parse(departureFlight.DepartureTime):HH:mm dd MMM yyyy}");
             
             // Shop items selection
             for (int i = 0; i < booking.Passengers.Count; i++)
@@ -635,6 +640,11 @@ static class FlightManagement
                     }
                 
                     booking.TotalPrice += (int)purchasedItems.Sum(item => item.Price);
+                }
+
+                if (passenger.HasCheckedBaggage)
+                {
+                    totalBaggageCost += 30; // Standard baggage fee
                 }
             }
     
@@ -670,24 +680,21 @@ static class FlightManagement
             }
     
             // Calculate and display final price
-            int milesEarned = MilesLogic.CalculateMilesFromBooking(UserLogin.UserAccountServiceLogic.CurrentUserId);
-            Console.WriteLine($"\nMiles Earned: {milesEarned}");
+            int earnedMiles = MilesLogic.CalculateMilesFromBooking(UserLogin.UserAccountServiceLogic.CurrentUserId);
+            Console.WriteLine($"\nMiles Earned: {earnedMiles}");
             booking.TotalPrice = MilesLogic.BasicPointsRedemption(UserLogin.UserAccountServiceLogic.CurrentUserId,
                 booking.TotalPrice, booking.BookingId);
-            Console.WriteLine($"Final Total Price: {booking.TotalPrice:F2} EUR");
-        }
+            if (totalBaggageCost > 0)
+            {
+                Console.WriteLine($"  Baggage Cost: {totalBaggageCost:F2} EUR");
+            }
 
-        if (totalBaggageCost > 0)
-        {
-            Console.WriteLine($"  Baggage Cost: {totalBaggageCost:F2} EUR");
-        }
-
-        if (includeInsurance)
-        {
-            double insuranceCost = passengerDetails.Count * 10.0;
-            totalBasePrice += insuranceCost;
-            Console.WriteLine($"  Cancellation Insurance: {insuranceCost:F2} EUR");
-        }
+            if (includeInsurance)
+            {
+                double insuranceCost = passengerDetails.Count * 10.0;
+                totalBasePrice += insuranceCost;
+                Console.WriteLine($"  Cancellation Insurance: {insuranceCost:F2} EUR");
+            }
 
         double finalTotalPrice = totalBasePrice + totalBaggageCost;
         Console.WriteLine($"  Final Total Price: {finalTotalPrice:F2} EUR\n");
@@ -704,7 +711,7 @@ static class FlightManagement
         double discountedPrice = MilesLogic.BasicPointsRedemption(
             UserLogin.UserAccountServiceLogic.CurrentUserId,
             roundedTotalPrice,
-            departureBooking.BookingId
+            booking.BookingId
         );
 
         Console.WriteLine($"  Discounted Total Price: {discountedPrice:F2} EUR\n");
@@ -713,7 +720,11 @@ static class FlightManagement
         Console.WriteLine("Thank you for booking with us!");
         Console.WriteLine("------------------------------------------------------------");
     }
-
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Error creating booking: {ex.Message}");
+    }
+}
 
     public static void ViewBookedFlights(int userId)
     {
