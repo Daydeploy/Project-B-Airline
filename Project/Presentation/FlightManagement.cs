@@ -254,7 +254,7 @@ static class FlightManagement
             }
 
             availableFlights = flightsLogic.FilterFlightsByDate(origin, destination, departureDate);
-            if (availableFlights.Any())
+            if (availableFlights.Count != 0)
             {
                 break;
             }
@@ -310,7 +310,7 @@ static class FlightManagement
                 }
 
                 var returnFlights = flightsLogic.FilterFlightsByDate(destination, origin, returnDate.Value);
-                if (!returnFlights.Any())
+                if (returnFlights.Count == 0)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine(
@@ -365,11 +365,12 @@ static class FlightManagement
         var seatSelector = new SeatSelectionUI();
         var passengerDetails = CollectPassengerDetails(departureFlight, passengerCount, seatSelector);
 
+        // Departure flight handling
+        bool includeInsuranceForDeparture = PromptForInsurance(passengerCount, "departure");
+        CompleteBooking(departureFlight.FlightId, passengerDetails, departureFlight, seatSelector,
+            includeInsuranceForDeparture);
 
-        BookingLogic.CreateBooking(account.Id, departureFlight.FlightId, passengerDetails, new List<PetModel>());
-        Console.WriteLine("\nDeparture flight booking completed successfully!");
-
-
+        // Return flight handling (if applicable)
         if (returnFlight != null)
         {
             foreach (var passenger in passengerDetails)
@@ -386,10 +387,27 @@ static class FlightManagement
                 passenger.SeatNumber = seatNumber;
             }
 
-            BookingLogic.CreateBooking(account.Id, returnFlight.FlightId, passengerDetails, new List<PetModel>());
-            Console.WriteLine("\nRound-trip booking completed successfully!");
+            bool includeInsuranceForReturn = PromptForInsurance(passengerCount, "return");
+            CompleteBooking(returnFlight.FlightId, passengerDetails, returnFlight, seatSelector,
+                includeInsuranceForReturn);
         }
     }
+
+
+    private static bool PromptForInsurance(int passengerCount, string flightType)
+    {
+        double insuranceCostPerPassenger = 10.0;
+        double totalInsuranceCost = insuranceCostPerPassenger * passengerCount;
+
+        Console.WriteLine($"\nWould you like to add cancellation insurance for your {flightType} flight?");
+        Console.WriteLine(
+            $"Cost: {insuranceCostPerPassenger:F2} EUR per passenger, Total: {totalInsuranceCost:F2} EUR");
+        Console.WriteLine("Enter Y to add insurance, or N to skip:");
+
+        string response = Console.ReadLine()?.Trim().ToLower();
+        return response == "y";
+    }
+
 
     private static List<PassengerModel> CollectPassengerDetails(FlightModel selectedFlight, int passengerCount,
         SeatSelectionUI seatSelector)
@@ -504,59 +522,137 @@ static class FlightManagement
         };
     }
 
-    private static void CompleteBooking(int flightId, List<PassengerModel> passengerDetails, FlightModel selectedFlight,
-        SeatSelectionUI seatSelector)
+    private static void CompleteBooking(
+        int departureFlightId,
+        List<PassengerModel> passengerDetails,
+        FlightModel departureFlight,
+        SeatSelectionUI seatSelector,
+        bool includeInsurance,
+        FlightModel? returnFlight = null,
+        int? returnFlightId = null)
     {
-        try
+        double totalBasePrice = 0.0;
+        double totalBaggageCost = 0.0;
+        const double baggageCost = 30.0;
+
+        Console.Clear();
+        Console.WriteLine("------------------------------------------------------------");
+        Console.WriteLine("                    FLIGHT BOOKING SUMMARY                   ");
+        Console.WriteLine("------------------------------------------------------------\n");
+
+        // Departure Flight Details
+        BookingModel departureBooking = BookingLogic.CreateBooking(
+            UserLogin.UserAccountServiceLogic.CurrentUserId,
+            departureFlightId,
+            passengerDetails,
+            new List<PetModel>()
+        );
+
+        Console.WriteLine($"Booking ID: {departureBooking.BookingId}");
+        Console.WriteLine($"Flight: {departureFlight.Origin} → {departureFlight.Destination}");
+        Console.WriteLine($"Departure: {DateTime.Parse(departureFlight.DepartureTime):HH:mm dd MMM yyyy}\n");
+
+        // Return Flight Details (if applicable)
+        BookingModel? returnBooking = null;
+        if (returnFlight != null && returnFlightId.HasValue)
         {
-            BookingModel booking = BookingLogic.CreateBooking(UserLogin.UserAccountServiceLogic.CurrentUserId, flightId,
-                passengerDetails, new List<PetModel>());
-            Console.WriteLine("\nFlight booked successfully!\n");
-            Console.WriteLine($"Booking ID: {booking.BookingId}");
-            Console.WriteLine($"Flight: {selectedFlight.Origin} to {selectedFlight.Destination}");
-            Console.WriteLine($"Departure: {DateTime.Parse(selectedFlight.DepartureTime):HH:mm dd MMM yyyy}");
-            Console.WriteLine("\nPassengers:");
-            foreach (var passenger in booking.Passengers)
+            returnBooking = BookingLogic.CreateBooking(
+                UserLogin.UserAccountServiceLogic.CurrentUserId,
+                returnFlightId.Value,
+                passengerDetails,
+                new List<PetModel>()
+            );
+
+            Console.WriteLine($"Return Booking ID: {returnBooking.BookingId}");
+            Console.WriteLine($"Return Flight: {returnFlight.Origin} → {returnFlight.Destination}");
+            Console.WriteLine($"Return Departure: {DateTime.Parse(returnFlight.DepartureTime):HH:mm dd MMM yyyy}\n");
+        }
+
+        Console.WriteLine("Passengers:");
+        foreach (var passenger in passengerDetails)
+        {
+            var seatClass = seatSelector.GetSeatClass(passenger.SeatNumber);
+            Console.WriteLine($"  - Name: {passenger.Name}");
+            Console.WriteLine($"    Seat: {passenger.SeatNumber} ({seatClass} Class)");
+            Console.WriteLine($"    Checked Baggage: {(passenger.HasCheckedBaggage ? "Yes" : "No")}");
+            Console.WriteLine();
+
+            if (passenger.HasCheckedBaggage)
             {
-                Console.WriteLine($"\nName: {passenger.Name}");
-                Console.WriteLine(
-                    $"Seat: {passenger.SeatNumber} ({seatSelector.GetSeatClass(passenger.SeatNumber)} Class)");
-                Console.WriteLine($"Checked Baggage: {(passenger.HasCheckedBaggage ? "Yes" : "No")}");
+                totalBaggageCost += baggageCost;
             }
+        }
 
-            if (booking.Passengers?.Any() == true)
+        Console.WriteLine("------------------------------------------------------------");
+        Console.WriteLine("Pricing Details:");
+        Console.WriteLine("------------------------------------------------------------");
+
+        foreach (var passenger in passengerDetails)
+        {
+            if (!string.IsNullOrEmpty(passenger.SeatNumber))
             {
-                foreach (var passenger in booking.Passengers)
-                {
-                    if (!string.IsNullOrEmpty(passenger.SeatNumber))
-                    {
-                        var seatClass =
-                            new SeatSelectionUI().GetSeatClass(passenger.SeatNumber, selectedFlight.PlaneType);
-                        var basePrice = selectedFlight.SeatClassOptions
-                            .FirstOrDefault(so => so.SeatClass.Equals(seatClass, StringComparison.OrdinalIgnoreCase))
-                            ?.Price ?? 0;
+                var seatClass = seatSelector.GetSeatClass(passenger.SeatNumber, departureFlight.PlaneType);
+                var basePrice = departureFlight.SeatClassOptions
+                    .FirstOrDefault(so => so.SeatClass.Equals(seatClass, StringComparison.OrdinalIgnoreCase))
+                    ?.Price ?? 0.0;
 
-                        Console.WriteLine($"\nBase Price: ({seatClass}): {basePrice:F2} EUR");
-                    }
+                totalBasePrice += basePrice;
+                Console.WriteLine($"  Base Price (Departure - {seatClass} Class): {basePrice:F2} EUR");
+            }
+        }
+
+        if (returnFlight != null)
+        {
+            foreach (var passenger in passengerDetails)
+            {
+                if (!string.IsNullOrEmpty(passenger.SeatNumber))
+                {
+                    var seatClass = seatSelector.GetSeatClass(passenger.SeatNumber, returnFlight.PlaneType);
+                    var basePrice = returnFlight.SeatClassOptions
+                        .FirstOrDefault(so => so.SeatClass.Equals(seatClass, StringComparison.OrdinalIgnoreCase))
+                        ?.Price ?? 0.0;
+
+                    totalBasePrice += basePrice;
+                    Console.WriteLine($"  Base Price (Return - {seatClass} Class): {basePrice:F2} EUR");
                 }
             }
-
-            Console.WriteLine($"Total Price: {booking.TotalPrice} EUR");
-
-            // Calculate miles and apply points redemption
-            int milesEarned = MilesLogic.CalculateMilesFromBooking(UserLogin.UserAccountServiceLogic.CurrentUserId);
-            Console.WriteLine($"Miles Earned: {milesEarned}");
-
-            booking.TotalPrice = MilesLogic.BasicPointsRedemption(UserLogin.UserAccountServiceLogic.CurrentUserId,
-                booking.TotalPrice, booking.BookingId);
-
-            // Display the updated price
-            Console.WriteLine($"\nDiscounted Total Price: {booking.TotalPrice} EUR");
         }
-        catch (Exception ex)
+
+        if (totalBaggageCost > 0)
         {
-            Console.WriteLine($"Error creating booking: {ex.Message}");
+            Console.WriteLine($"  Baggage Cost: {totalBaggageCost:F2} EUR");
         }
+
+        if (includeInsurance)
+        {
+            double insuranceCost = passengerDetails.Count * 10.0;
+            totalBasePrice += insuranceCost;
+            Console.WriteLine($"  Cancellation Insurance: {insuranceCost:F2} EUR");
+        }
+
+        double finalTotalPrice = totalBasePrice + totalBaggageCost;
+        Console.WriteLine($"  Final Total Price: {finalTotalPrice:F2} EUR\n");
+
+        int roundedTotalPrice = (int)Math.Round(finalTotalPrice);
+
+        Console.WriteLine("------------------------------------------------------------");
+        Console.WriteLine("Rewards Summary:");
+        Console.WriteLine("------------------------------------------------------------");
+
+        int milesEarned = MilesLogic.CalculateMilesFromBooking(UserLogin.UserAccountServiceLogic.CurrentUserId);
+        Console.WriteLine($"  Miles Earned: {milesEarned}");
+
+        double discountedPrice = MilesLogic.BasicPointsRedemption(
+            UserLogin.UserAccountServiceLogic.CurrentUserId,
+            roundedTotalPrice,
+            departureBooking.BookingId
+        );
+
+        Console.WriteLine($"  Discounted Total Price: {discountedPrice:F2} EUR\n");
+
+        Console.WriteLine("------------------------------------------------------------");
+        Console.WriteLine("Thank you for booking with us!");
+        Console.WriteLine("------------------------------------------------------------");
     }
 
 

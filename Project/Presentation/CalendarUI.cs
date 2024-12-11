@@ -3,9 +3,9 @@ public class CalendarUI
     private DateTime currentDate;
     private const ConsoleColor SelectedColor = ConsoleColor.Cyan;
     private const ConsoleColor HighlightColor = ConsoleColor.DarkCyan;
-    private const ConsoleColor RedHighlightColor = ConsoleColor.Red; // Highlight selected date in red
+    private const ConsoleColor RedHighlightColor = ConsoleColor.Red;
 
-    private DateTime? highlightDate; // Date to highlight in red
+    private DateTime? highlightDate;
 
     public CalendarUI(DateTime? startingDate = null, DateTime? highlightDate = null)
     {
