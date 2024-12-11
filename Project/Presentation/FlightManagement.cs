@@ -262,7 +262,6 @@ static class FlightManagement
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine($"\nNo flights found from {origin} to {destination} on {departureDate:dd MMM yyyy}.");
             Console.ResetColor();
-            Console.WriteLine("Press any key to select another date...");
             Console.ReadKey();
         }
 
@@ -306,7 +305,6 @@ static class FlightManagement
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine($"\nReturn date must be after the departure date ({departureDate:dd MMM yyyy}).");
                     Console.ResetColor();
-                    Console.WriteLine("Press any key to select another return date...");
                     Console.ReadKey();
                     continue;
                 }
@@ -318,7 +316,6 @@ static class FlightManagement
                     Console.WriteLine(
                         $"\nNo return flights available from {destination} to {origin} on {returnDate:dd MMM yyyy}.");
                     Console.ResetColor();
-                    Console.WriteLine("Press any key to select another return date...");
                     Console.ReadKey();
                     continue;
                 }
