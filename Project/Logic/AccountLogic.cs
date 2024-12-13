@@ -86,4 +86,29 @@ public class AccountsLogic
 
         return true;
     }
+
+    public static bool IsValidFirstName(string firstName)
+    {
+        if (string.IsNullOrWhiteSpace(firstName))
+        {
+            return false;
+        }
+
+        firstName = firstName.Trim();
+
+        if (firstName.Length < 2 || firstName.Length > 20)
+        {
+            return false;
+        }
+
+        if (firstName.Any(char.IsDigit))
+        {
+            return false;
+        }
+
+        firstName = char.ToUpper(firstName[0]) + firstName.Substring(1).ToLower();
+
+
+        return true;
+    }
 }
