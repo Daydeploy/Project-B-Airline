@@ -31,10 +31,37 @@ static class AccountManagement
         Console.WriteLine("Note: You can press F2 to toggle password visibility while typing.\n");
         Console.WriteLine("Create a new account");
 
-        Console.WriteLine("Enter your first name:");
-        string firstName = Console.ReadLine();
-        Console.WriteLine("Enter your last name:");
-        string lastName = Console.ReadLine();
+        string firstName;
+        string lastName;
+        
+        do
+        {
+            Console.WriteLine("Enter your first name:");
+            firstName = Console.ReadLine();
+            if (!AccountsLogic.IsValidFirstName(firstName))
+            {
+                Console.WriteLine("First name must be between 2 and 20 characters long, start with a capital letter, and cannot contain numbers.");
+            }
+            else
+            {
+                break;
+            }
+        } while (true);
+        
+        do
+        {
+            Console.WriteLine("Enter your last name:");
+            lastName = Console.ReadLine();
+            if (!AccountsLogic.IsValidLastName(lastName))
+            {
+                Console.WriteLine("Last name must be between 2 and 20 characters long, start with a capital letter, and cannot contain numbers.");
+            }
+            else
+            {
+                break;
+            }
+        } while (true);
+
 
         Console.WriteLine("Enter your email address:");
         string email = Console.ReadLine().Trim();
