@@ -111,4 +111,29 @@ public class AccountsLogic
 
         return true;
     }
+
+    public static bool IsValidLastName(string lastName)
+    {
+        if (string.IsNullOrWhiteSpace(lastName))
+        {
+            return false;
+        }
+
+        lastName = lastName.Trim();
+
+        if (lastName.Length < 2 || lastName.Length > 20)
+        {
+            return false;
+        }
+
+        if (lastName.Any(char.IsDigit))
+        {
+            return false;
+        }
+
+        lastName = char.ToUpper(lastName[0]) + lastName.Substring(1).ToLower();
+
+
+        return true;
+    }
 }
