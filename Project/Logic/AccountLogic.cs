@@ -91,6 +91,11 @@ public class AccountsLogic
             return false;
         }
 
+        if (firstName.Any(char.IsPunctuation))
+        {
+            return false;
+        }
+
         firstName = char.ToUpper(firstName[0]) + firstName.Substring(1).ToLower();
 
 
@@ -112,6 +117,11 @@ public class AccountsLogic
         }
 
         if (lastName.Any(char.IsDigit))
+        {
+            return false;
+        }
+
+        if (lastName.Any(char.IsPunctuation))
         {
             return false;
         }
