@@ -72,21 +72,6 @@ public class AccountsLogic
         return hasUpperCase && hasNumber && hasSpecialChar;
     }
 
-    public static bool CreateAccount(string firstName, string lastName, string email, string password, string confirmPassword, DateTime dateOfBirth, bool enrollFrequentFlyer)
-    {
-        if (password != confirmPassword)
-        {
-            throw new Exception("Passwords do not match.");
-        }
-
-        if (!IsValidPassword(password))
-        {
-            throw new Exception("Invalid password. Password must contain at least one uppercase letter, one number, and one special character.");
-        }
-
-        return true;
-    }
-
     public static bool IsValidFirstName(string firstName)
     {
         if (string.IsNullOrWhiteSpace(firstName))

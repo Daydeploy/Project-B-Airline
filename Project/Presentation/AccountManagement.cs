@@ -84,17 +84,20 @@ static class AccountManagement
         string confirmPassword = "";
         bool showPassword = false;
 
-        Console.Write("Enter your password: ");
-        password = UserLogin.ReadPassword(ref showPassword);
-
-        Console.Write("Confirm your password: ");
-        confirmPassword = UserLogin.ReadPassword(ref showPassword);
-
-        if (password != confirmPassword)
+        do
         {
-            Console.WriteLine("\nPasswords do not match. Please try again.");
-            return;
-        }
+            Console.Write("Enter your password: ");
+            password = UserLogin.ReadPassword(ref showPassword);
+
+            Console.Write("Confirm your password: ");
+            confirmPassword = UserLogin.ReadPassword(ref showPassword);
+
+            if (password != confirmPassword)
+            {
+                Console.WriteLine("\nPasswords do not match. Please try again.");
+                return;
+            }
+        } while (!AccountsLogic.IsValidPassword(password));
 
         Console.WriteLine("Enter your date of birth (dd-MM-yyyy):");
         if (!DateTime.TryParse(Console.ReadLine(), out DateTime dateOfBirth))
