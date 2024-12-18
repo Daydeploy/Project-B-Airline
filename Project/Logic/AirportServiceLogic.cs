@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 
-// Interface definition
 public interface IAirportService
 {
     List<AirportModel> GetAvailableAirports();
@@ -9,7 +8,6 @@ public interface IAirportService
     string GetAirportDescription(AirportModel airport);
 }
 
-// Implementation
 public class AirportServiceLogic : IAirportService
 {
     private List<AirportModel> _airports;
