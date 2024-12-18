@@ -1,7 +1,16 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public class AirportServiceLogic
+// Interface definition
+public interface IAirportService
+{
+    List<AirportModel> GetAvailableAirports();
+    string GetAvailableServices(AirportModel airport);
+    string GetAirportDescription(AirportModel airport);
+}
+
+// Implementation
+public class AirportServiceLogic : IAirportService
 {
     private List<AirportModel> _airports;
 
@@ -10,33 +19,12 @@ public class AirportServiceLogic
         _airports = airports;
     }
 
-    public List<AirportModel> GetLuxuriousAirports()
+    public List<AirportModel> GetAvailableAirports()
     {
-        return _airports.Where(a => a.Type == "Public" && IsAirportLuxurious(a)).ToList();
+        return _airports.Where(a => a.Country == "NL").ToList();
     }
 
-    public List<AirportModel> GetLuxuriousPrivateAirstrips()
-    {
-        return _airports.Where(a => a.Type == "Private" && IsAirportLuxurious(a)).ToList();
-    }
-
-    public bool IsAirportLuxurious(AirportModel airport)
-    {
-
-        return airport.Name.Contains("Luxury") || airport.Name.Contains("VIP") || airport.Name.Contains("Executive");
-    }
-
-    public string GetAirportTransportationOptions(AirportModel airport)
-    {
-        return "Taxi, Shuttle, Limousine Service";
-    }
-
-    public string GetNearbyHotels(AirportModel airport)
-    {
-        return "Luxury Hotel A, Executive Suite B, VIP Resort C";
-    }
-
-    public string GetAdditionalServices(AirportModel airport)
+    public string GetAvailableServices(AirportModel airport)
     {
         return "Helicopter Transfer, VIP Lounge, Concierge Service";
     }
@@ -47,4 +35,4 @@ public class AirportServiceLogic
                $"Our world-class facilities and exclusive services ensure an unforgettable journey. " +
                $"From VIP lounges to personalized concierge, we redefine air travel.";
     }
-}     
+}
