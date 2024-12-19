@@ -30,48 +30,29 @@ public class PetServiceLogic
 
     public void ValidatePetBooking(PetModel petDetails)
     {
-        while (true)
+        if (!_petWeightLimits.ContainsKey(petDetails.Type))
         {
-            if (!_petWeightLimits.ContainsKey(petDetails.Type))
-            {
-                Console.WriteLine("Invalid pet type. Please enter a valid pet type (Dog, Cat, Other):");
-                petDetails.Type = Console.ReadLine();
-                continue;
-            }
+            throw new ArgumentException($"Invalid pet type. Valid types are: {string.Join(", ", _petWeightLimits.Keys)}");
+        }
 
-            var (maxCabinWeight, maxWeight) = _petWeightLimits[petDetails.Type];
+        var (maxCabinWeight, maxWeight) = _petWeightLimits[petDetails.Type];
 
-            if (petDetails.Weight > maxWeight)
-            {
-                Console.WriteLine($"Pet is too heavy. Maximum allowed weight is {maxWeight}kg. Please enter a valid weight:");
-                if (double.TryParse(Console.ReadLine(), out var newWeight))
-                {
-                    petDetails.Weight = newWeight;
-                }
-                else
-                {
-                    Console.WriteLine("Invalid input. Please enter a numerical value.");
-                }
-                continue;
-            }
+        if (petDetails.Weight > maxWeight)
+        {
+            throw new ArgumentException($"Pet is too heavy. Maximum allowed weight is {maxWeight}kg.");
+        }
 
-            if (petDetails.Weight > maxCabinWeight)
-            {
-                petDetails.SeatingLocation = "Luggage Room";
-                Console.WriteLine($"Due to weight ({petDetails.Weight}kg), the pet will be transported in the luggage compartment.");
-            }
-            else if (petDetails.Type == "Dog" || petDetails.Type == "Cat")
-            {
-                Console.WriteLine("Would you like the pet to travel in the cabin? (y/n):");
-                string? response = Console.ReadLine()?.ToLower();
-                petDetails.SeatingLocation = response == "y" ? "Seat" : "Luggage Room";
-            }
-            else
-            {
-                petDetails.SeatingLocation = "Luggage Room";
-            }
-
-            break;
+        if (petDetails.Weight > maxCabinWeight)
+        {
+            petDetails.SeatingLocation = "Luggage Room";
+        }
+        else if ((petDetails.Type == "Dog" || petDetails.Type == "Cat") && string.IsNullOrEmpty(petDetails.SeatingLocation))
+        {
+            throw new ArgumentException("Seating location must be specified for cats and dogs under cabin weight limit.");
+        }
+        else if (petDetails.Type == "Other")
+        {
+            petDetails.SeatingLocation = "Luggage Room";
         }
     }
 }
