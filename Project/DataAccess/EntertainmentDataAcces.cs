@@ -10,7 +10,14 @@ public class EntertainmentDataAccess
 
     public static void WriteAll(List<EntertainmentModel> entertainments)
     {
-        _entertainmentAccess.WriteAll(entertainments);
+        try
+        {
+            _entertainmentAccess.WriteAll(entertainments);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception($"Failed to write entertainment data: {ex.Message}");
+        }
     }
 
     public static EntertainmentModel? GetEntertainment(int entertainmentId)

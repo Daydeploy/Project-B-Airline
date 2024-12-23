@@ -11,6 +11,11 @@ public class PaymentLogic
         return false;
     }
 
+    public static bool ValidateName(string firstName, string lastName)
+    {
+        return ValidateName(firstName) && ValidateName(lastName);
+    }
+
     public static bool ValidateCardNumber(string cardNumber)
     {
         if (!string.IsNullOrEmpty(cardNumber))
