@@ -45,7 +45,7 @@ static class UserLogin
 
     private static void ShowLoggedInMenu(AccountModel account)
     {   
-        if (account.EmailAddress.ToLower() == "admin@admin.com")
+        if (account.EmailAddress.ToLower() == "admin")
         {
             AdminAccountUI.ShowAdminMenu();
             return;
@@ -124,19 +124,57 @@ static class UserLogin
         return email.Contains("@") && email.Contains(".");
     }
 
-    public static string ReadPassword(ref bool showPassword)
+    // public static string ReadPassword(ref bool showPassword)
+    // {
+    //     string pass = "";
+    //     ConsoleKeyInfo key;
+
+    //     do
+    //     {
+    //         key = Console.ReadKey(true);
+
+    //         if (key.Key == ConsoleKey.F2)
+    //         {
+    //             showPassword = !showPassword;
+    //             Console.Write("\r" + new string(' ', Console.WindowWidth) + "\r");
+    //             Console.Write("Enter your password: " + (showPassword ? pass : new string('*', pass.Length)));
+    //         }
+    //         else if (key.Key == ConsoleKey.Backspace && pass.Length > 0)
+    //         {
+    //             pass = pass.Substring(0, pass.Length - 1);
+    //             Console.Write("\b \b");
+    //         }
+    //         else if (key.Key != ConsoleKey.Enter)
+    //         {
+    //             pass += key.KeyChar;
+    //             Console.Write(showPassword ? key.KeyChar : '*');
+    //         }
+    //     } while (key.Key != ConsoleKey.Enter);
+
+    //     Console.WriteLine();
+
+    //     if (!IsValidPassword(pass))
+    //     {
+    //         Console.WriteLine("Invalid password. Password must contain at least one uppercase letter, one number, and one special character.");
+    //         Console.Write("Enter your password: ");
+    //         return ReadPassword(ref showPassword);
+    //     }
+
+
+    //     return pass;
+    // }
+    private static string ReadPassword(ref bool showPassword)
     {
         string pass = "";
         ConsoleKeyInfo key;
-
+    
         do
         {
             key = Console.ReadKey(true);
-
             if (key.Key == ConsoleKey.F2)
             {
                 showPassword = !showPassword;
-                Console.Write("\r" + new string(' ', Console.WindowWidth) + "\r");
+                Console.Write("\r" + new string(' ', Console.WindowWidth - 1) + "\r");
                 Console.Write("Enter your password: " + (showPassword ? pass : new string('*', pass.Length)));
             }
             else if (key.Key == ConsoleKey.Backspace && pass.Length > 0)
@@ -150,16 +188,8 @@ static class UserLogin
                 Console.Write(showPassword ? key.KeyChar : '*');
             }
         } while (key.Key != ConsoleKey.Enter);
-
+    
         Console.WriteLine();
-
-        if (!IsValidPassword(pass))
-        {
-            Console.WriteLine("Invalid password. Password must contain at least one uppercase letter, one number, and one special character.");
-            Console.Write("Enter your password: ");
-            return ReadPassword(ref showPassword);
-        }
-
         return pass;
     }
 
