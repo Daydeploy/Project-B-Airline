@@ -28,79 +28,60 @@ static class AccountManagement
     // Prompts the user to create a new account and handles validation
     public static void CreateAccount()
     {
-        Console.WriteLine("Note: You can press F2 to toggle password visibility while typing.\n");
-        Console.WriteLine("Create a new account");
+        Console.WriteLine("Note: You can press F2 to toggle password visibility while typing.");
+        Console.WriteLine("Press ESC at any time to return to menu\n");
+        Console.WriteLine("Create a new account\n");
 
-        string firstName;
-        string lastName;
-        
-        do
+        bool showPassword = false;  // Moved to top level
+
+        // First Name
+        string firstName = GetUserInput("Enter your first name: ", isPassword: false, ref showPassword);
+        if (firstName == null) return;
+        while (!AccountsLogic.IsValidFirstName(firstName))
         {
-            Console.WriteLine("Enter your first name:");
-            firstName = Console.ReadLine();
-            if (!AccountsLogic.IsValidFirstName(firstName))
-            {
-                Console.WriteLine("First name must be between 2 and 20 characters long, start with a capital letter, and cannot contain numbers.");
-            }
-            else
-            {
-                break;
-            }
-        } while (true);
-        
-        do
-        {
-            Console.WriteLine("Enter your last name:");
-            lastName = Console.ReadLine();
-            if (!AccountsLogic.IsValidLastName(lastName))
-            {
-                Console.WriteLine("Last name must be between 2 and 20 characters long, start with a capital letter, and cannot contain numbers.");
-            }
-            else
-            {
-                break;
-            }
-        } while (true);
-
-
-        Console.WriteLine("Enter your email address:");
-        string email = Console.ReadLine().Trim();
-
-        while (true)
-        {
-            if (string.IsNullOrWhiteSpace(email) || !IsValidEmail(email))
-            {
-                Console.WriteLine("Error: Email must contain '@' and a domain (For instance: '.com').");
-                Console.Write("Please enter your email address again: ");
-                email = Console.ReadLine().Trim();
-            }
-            else
-            {
-                break;
-            }
+            Console.WriteLine("First name must be between 2 and 20 characters long, start with a capital letter, and cannot contain numbers.");
+            firstName = GetUserInput("Enter your first name: ", isPassword: false, ref showPassword);
+            if (firstName == null) return;
         }
 
-        string password = "";
-        string confirmPassword = "";
-        bool showPassword = false;
-
-        do
+        // Last Name
+        string lastName = GetUserInput("Enter your last name: ", isPassword: false, ref showPassword);
+        if (lastName == null) return;
+        while (!AccountsLogic.IsValidLastName(lastName))
         {
-            Console.Write("Enter your password: ");
-            password = UserLogin.ReadPassword(ref showPassword);
+            Console.WriteLine("Last name must be between 2 and 20 characters long, start with a capital letter, and cannot contain numbers.");
+            lastName = GetUserInput("Enter your last name: ", isPassword: false, ref showPassword);
+            if (lastName == null) return;
+        }
 
-            Console.Write("Confirm your password: ");
-            confirmPassword = UserLogin.ReadPassword(ref showPassword);
+        // Email
+        string email = GetUserInput("Enter your email address: ", isPassword: false, ref showPassword);
+        if (email == null) return;
+        while (string.IsNullOrWhiteSpace(email) || !IsValidEmail(email))
+        {
+            Console.WriteLine("Error: Email must contain '@' and a domain (For instance: '.com').");
+            email = GetUserInput("Please enter your email address again: ", isPassword: false, ref showPassword);
+            if (email == null) return;
+        }
 
-            if (password != confirmPassword)
-            {
-                Console.WriteLine("\nPasswords do not match. Please try again.");
-                return;
-            }
-        } while (!AccountsLogic.IsValidPassword(password));
+        // Password
+        string password = GetUserInput("Enter your password: ", isPassword: true, ref showPassword);
+        if (password == null) return;
 
-        Console.WriteLine("Enter your date of birth (dd-MM-yyyy):");
-        if (!DateTime.TryParse(Console.ReadLine(), out DateTime dateOfBirth))
+        string confirmPassword = GetUserInput("Confirm your password: ", isPassword: true, ref showPassword);
+        if (confirmPassword == null) return;
+
+        if (password != confirmPassword)
+        {
+            Console.WriteLine("\nPasswords do not match. Please try again.");
+            return;
+        }
+
+        // Date of Birth
+        string dobInput = GetUserInput("Enter your date of birth (dd-MM-yyyy): ", isPassword: false, ref showPassword);
+        if (dobInput == null) return;
+
+        if (!DateTime.TryParse(dobInput, out DateTime dateOfBirth))
         {
             Console.WriteLine("Invalid date format. Please try again.");
             return;
@@ -109,8 +90,65 @@ static class AccountManagement
         bool accountCreated = UserLogin.UserAccountServiceLogic.CreateAccount(firstName, lastName, email, password, dateOfBirth);
 
         Console.WriteLine(accountCreated
-            ? "Account created successfully. Please login."
-            : "Failed to create account. Email may already be in use.");
+            ? "\nAccount created successfully. Please login."
+            : "\nFailed to create account. Email may already be in use.");
+    }
+
+    private static string GetUserInput(string prompt, bool isPassword)
+    {
+        bool showPassword = false;
+        return GetUserInput(prompt, isPassword, ref showPassword);
+    }
+
+    private static string GetUserInput(string prompt, bool isPassword, ref bool showPassword)
+    {
+        Console.Write(prompt);
+        string input = "";
+        ConsoleKeyInfo key;
+
+        while (true)
+        {
+            key = Console.ReadKey(true);
+
+            if (key.Key == ConsoleKey.Escape)
+            {
+                Console.WriteLine("\nReturning to menu...");
+                return null;
+            }
+
+            if (key.Key == ConsoleKey.Enter && input.Length > 0)
+            {
+                Console.WriteLine();
+                return input;
+            }
+
+            if (isPassword && key.Key == ConsoleKey.F2)
+            {
+                showPassword = !showPassword;
+                Console.Write("\r" + new string(' ', Console.WindowWidth - 1) + "\r");
+                Console.Write(prompt + (showPassword ? input : new string('*', input.Length)));
+                continue;
+            }
+
+            if (key.Key == ConsoleKey.Backspace && input.Length > 0)
+            {
+                input = input.Substring(0, input.Length - 1);
+                Console.Write("\r" + new string(' ', Console.WindowWidth - 1) + "\r");
+                Console.Write(prompt);
+                if (isPassword)
+                    Console.Write(showPassword ? input : new string('*', input.Length));
+                else
+                    Console.Write(input);
+            }
+            else if (!char.IsControl(key.KeyChar))
+            {
+                input += key.KeyChar;
+                if (isPassword)
+                    Console.Write(showPassword ? key.KeyChar : '*');
+                else
+                    Console.Write(key.KeyChar);
+            }
+        }
     }
 
     // Displays the account details for the user

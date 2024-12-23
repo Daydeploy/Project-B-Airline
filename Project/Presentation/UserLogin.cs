@@ -13,12 +13,12 @@ static class UserLogin
         Console.WriteLine("Note: You can press F2 to toggle password visibility while typing.");
         Console.Write("Please enter your login details:\nEmail: ");
         string email = Console.ReadLine();
-        while (!IsValidEmail(email))
-        {
-            Console.WriteLine("Invalid input. Please enter a valid email address.");
-            Console.Write("Email: ");
-            email = Console.ReadLine();
-        }
+        // while (!IsValidEmail(email))
+        // {
+        //     Console.WriteLine("Invalid input. Please enter a valid email address.");
+        //     Console.Write("Email: ");
+        //     email = Console.ReadLine();
+        // }
 
         string password = "";
         bool showPassword = false;
@@ -44,7 +44,13 @@ static class UserLogin
     }
 
     private static void ShowLoggedInMenu(AccountModel account)
-    {
+    {   
+        if (account.EmailAddress.ToLower() == "admin@admin.com")
+        {
+            AdminAccountUI.ShowAdminMenu();
+            return;
+        }
+        
         string[] menuItems = new[]
         {
             "Book a Flight",
@@ -150,6 +156,7 @@ static class UserLogin
         if (!IsValidPassword(pass))
         {
             Console.WriteLine("Invalid password. Password must contain at least one uppercase letter, one number, and one special character.");
+            Console.Write("Enter your password: ");
             return ReadPassword(ref showPassword);
         }
 

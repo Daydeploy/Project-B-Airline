@@ -121,4 +121,9 @@ public class AccountsLogic
 
         return true;
     }
+    
+    public List<AccountModel> GetAllAccounts()
+    {
+        return _accounts;
+    }
 }

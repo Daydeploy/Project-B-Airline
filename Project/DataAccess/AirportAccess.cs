@@ -12,4 +12,18 @@ public static class AirportAccess
     {
         _airportAccess.WriteAll(airports);
     }
+
+    public static void AddAirport(AirportModel newAirport)
+    {
+        var airports = LoadAllAirports();
+        if (!airports.Any(a => a.AirportID == newAirport.AirportID))
+        {
+            airports.Add(newAirport);
+            _airportAccess.WriteAll(airports);
+        }
+        else
+        {
+            throw new Exception($"Airport with ID {newAirport.AirportID} already exists");
+        }
+    }
 }

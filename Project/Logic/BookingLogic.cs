@@ -16,7 +16,6 @@ public class BookingLogic
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error loading bookings for flight {flightId}: {ex.Message}");
             return new List<BookingModel>();
         }
     }
@@ -31,7 +30,6 @@ public class BookingLogic
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error loading bookings for user {userId}: {ex.Message}");
             return new List<BookingModel>();
         }
     }

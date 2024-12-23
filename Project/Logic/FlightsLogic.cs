@@ -18,7 +18,7 @@ public class FlightsLogic
 
     public FlightModel GetFlightsById(int flightId)
     {
-        return AvailableFlights
+       return AvailableFlights
             .FirstOrDefault(f => f.FlightId == flightId && DateTime.Parse(f.DepartureTime) >= DateTime.Now);
     }
 
@@ -129,5 +129,71 @@ public class FlightsLogic
                         f.Destination.Equals(destination) &&
                         DateTime.Parse(f.DepartureTime).Date == date.Date)
             .ToList();
+    }
+
+     public void AddFlight(FlightModel newFlight)
+    {
+        // Validate flight
+        ValidateFlight(newFlight);
+        
+        // Generate new ID
+        int newId = AvailableFlights.Count > 0 ? 
+            AvailableFlights.Max(f => f.FlightId) + 1 : 1;
+        newFlight.FlightId = newId;
+
+        // Add to list and save
+        AvailableFlights.Add(newFlight);
+        FlightsAccess.WriteAll(AvailableFlights);
+    }
+
+    public void UpdateFlight(FlightModel updatedFlight)
+    {
+        // Validate flight
+        ValidateFlight(updatedFlight);
+
+        // Find and update flight
+        var existingFlight = AvailableFlights.FirstOrDefault(f => f.FlightId == updatedFlight.FlightId);
+        if (existingFlight == null)
+            throw new KeyNotFoundException($"Flight with ID {updatedFlight.FlightId} not found");
+
+        int index = AvailableFlights.IndexOf(existingFlight);
+        AvailableFlights[index] = updatedFlight;
+
+        // Save changes
+        FlightsAccess.WriteAll(AvailableFlights);
+    }
+
+    public void DeleteFlight(int flightId)
+    {
+        var flight = AvailableFlights.FirstOrDefault(f => f.FlightId == flightId);
+        if (flight == null)
+            throw new KeyNotFoundException($"Flight with ID {flightId} not found");
+
+        AvailableFlights.Remove(flight);
+        FlightsAccess.WriteAll(AvailableFlights);
+    }
+
+    private void ValidateFlight(FlightModel flight)
+    {
+        if (string.IsNullOrWhiteSpace(flight.Origin))
+            throw new ArgumentException("Origin is required");
+        
+        if (string.IsNullOrWhiteSpace(flight.Destination))
+            throw new ArgumentException("Destination is required");
+        
+        if (string.IsNullOrWhiteSpace(flight.FlightNumber))
+            throw new ArgumentException("Flight number is required");
+
+        if (string.IsNullOrWhiteSpace(flight.DepartureTime))
+            throw new ArgumentException("Departure time is required");
+
+        if (string.IsNullOrWhiteSpace(flight.ArrivalTime))
+            throw new ArgumentException("Arrival time is required");
+
+        if (DateTime.Parse(flight.DepartureTime) >= DateTime.Parse(flight.ArrivalTime))
+            throw new ArgumentException("Departure time must be before arrival time");
+
+        if (flight.SeatClassOptions == null || !flight.SeatClassOptions.Any())
+            throw new ArgumentException("At least one seat class option is required");
     }
 }
