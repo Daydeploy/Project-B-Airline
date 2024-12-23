@@ -413,5 +413,35 @@
     "comfortPackages": null,
     "planeType": null,
     "entertainment": null
+  },
+  {
+    "bookingId": 1938,
+    "userId": 1,
+    "flightId": 1303,
+    "totalPrice": 1150,
+    "passengers": [
+      {
+        "name": "test",
+        "hasPet": false,
+        "petDetails": null,
+        "seatNumber": "4A",
+        "hasCheckedBaggage": false,
+        "shopItems": [],
+        "specialLuggage": "",
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      }
+    ],
+    "pets": [],
+    "comfortPackages": null,
+    "planeType": null,
+    "entertainment": null
   }
 ]

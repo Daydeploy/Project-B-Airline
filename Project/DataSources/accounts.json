@@ -6,12 +6,12 @@
     "dateOfBirth": "1990-01-01T00:00:00",
     "gender": null,
     "nationality": null,
-    "phoneNumber": null,
-    "address": null,
-    "email": "test.account@gmail.com",
-    "password": "Test1!",
+    "phoneNumber": "0686388692",
+    "address": "test adress",
+    "email": "test",
+    "password": "test",
     "passportDetails": {
-      "passportNumber": null,
+      "passportNumber": "121212",
       "issueDate": "0001-01-01T00:00:00",
       "expirationDate": "0001-01-01T00:00:00",
       "countryOfIssue": "1"
@@ -43,11 +43,16 @@
     "dateOfBirth": "1999-11-11T00:00:00",
     "gender": null,
     "nationality": null,
-    "phoneNumber": null,
-    "address": null,
+    "phoneNumber": "0686388692",
+    "address": "test adress",
     "email": "test2account@gmail.com",
     "password": "Account2",
-    "passportDetails": null,
+    "passportDetails": {
+      "passportNumber": "121212",
+      "issueDate": "0001-01-01T00:00:00",
+      "expirationDate": "0001-01-01T00:00:00",
+      "countryOfIssue": "1"
+    },
     "milesDetails": [
       {
         "Enrolled": false,
