@@ -218,7 +218,15 @@ static class FlightInformation
             }
         }
     }
-
+    private static string[] GetAvailablePlaneTypes()
+    {
+        return new[] 
+        {
+            "Boeing 737",
+            "Boeing 787", 
+            "Airbus A330"
+        };
+    }
    private static FlightModel CollectFlightDetails()
     {
         Console.Clear();
@@ -293,8 +301,19 @@ static class FlightInformation
             return null;
         }
 
-        Console.Write("Enter plane type: ");
-        string planeType = Console.ReadLine();
+        Console.WriteLine("\nSelect plane type:");
+        string[] planeTypes = GetAvailablePlaneTypes();
+        int selectedIndex = MenuNavigationService.NavigateMenu(planeTypes, "Available Aircraft");
+        
+        if (selectedIndex == -1)
+        {
+            Console.WriteLine("\nPlane type selection cancelled.");
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+            return null;
+        }
+
+        string planeType = planeTypes[selectedIndex];
 
         Console.Write("Enter departure terminal: ");
         string departureTerminal = Console.ReadLine();
