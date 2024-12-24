@@ -1,7 +1,7 @@
 public class SeatSelectionUI
 {
     private PlaneConfig currentConfig;
-    private Dictionary<string, bool> occupiedSeats = new Dictionary<string, bool>();
+    private Dictionary<string, string> occupiedSeats = new Dictionary<string, string>(); // Seat -> Passenger Initials
     private Dictionary<string, bool> petSeats = new Dictionary<string, bool>();
 
     // Add dictionary of plane type variations to handle different Aircrafts
@@ -51,8 +51,36 @@ public class SeatSelectionUI
         }
     };
 
+    public void LoadExistingBookings(int flightId)
+    {
+        occupiedSeats.Clear();
+        petSeats.Clear();
+        
+        var bookings = BookingAccess.LoadAll()
+            .Where(b => b.FlightId == flightId)
+            .ToList();
 
-    public string SelectSeat(string planeType)
+        foreach (var booking in bookings)
+        {
+            foreach (var passenger in booking.Passengers)
+            {
+                if (!string.IsNullOrEmpty(passenger.SeatNumber))
+                {
+                    string initials = new string(passenger.Name.Split(' ')
+                        .Select(s => s[0])
+                        .Take(2)
+                        .ToArray());
+                    occupiedSeats[passenger.SeatNumber] = initials;
+
+                    if (passenger.HasPet)
+                    {
+                        petSeats[passenger.SeatNumber] = true;
+                    }
+                }
+            }
+        }
+    }
+    public string SelectSeat(string planeType, int flightId)
     {
         // Console.WriteLine($"DEBUG: Received plane type: '{planeType}'");
         // Console.WriteLine($"DEBUG: Exact string comparison with 'Airbus A330': {planeType == "Airbus A330"}");
@@ -70,10 +98,12 @@ public class SeatSelectionUI
         // Debugging
         // if (!planeConfigs.ContainsKey(planeType))
         // {
-        //     throw new ArgumentException($"Unsupported plane type: {planeType}. Available types: {string.Join(", ", planeConfigs.Keys)}");
+        //     throw new ArgumentException($"Unsupported plane type: {planeType}. Available types: {string.join(", ", planeConfigs.Keys)}");
         // }
 
         currentConfig = planeConfigs[planeType];
+        LoadExistingBookings(flightId);
+        
         int currentRow = 1;
         int currentSeat = 0;
         bool seatSelected = false;
@@ -174,12 +204,12 @@ public class SeatSelectionUI
                 if (isSelected)
                 {
                     Console.BackgroundColor = ConsoleColor.DarkGray;
-                    Console.Write(hasPet ? "[▲]" : "[■]");
+                    Console.Write($"[{(isOccupied ? occupiedSeats[seatNumber] : "□")}]");
                     Console.BackgroundColor = ConsoleColor.Black;
                 }
                 else
                 {
-                    Console.Write(isOccupied ? (hasPet ? " ▲ " : " ■ ") : " □ ");
+                    Console.Write(isOccupied ? $" {occupiedSeats[seatNumber]} " : " □ ");
                 }
 
                 // Add aisle space based on plane type
@@ -223,12 +253,19 @@ public class SeatSelectionUI
         }
     }
 
-    public void SetSeatOccupied(string seatNumber, bool occupied = true)
+    public void SetSeatOccupied(string seatNumber, string passengerName = "", bool occupied = true)
     {
         if (occupied)
-            occupiedSeats[seatNumber] = true;
+        {
+            string initials = !string.IsNullOrEmpty(passengerName) 
+                ? new string(passengerName.Split(' ').Select(s => s[0]).Take(2).ToArray()) 
+                : "■";
+            occupiedSeats[seatNumber] = initials;
+        }
         else
+        {
             occupiedSeats.Remove(seatNumber);
+        }
     }
 
     // Add method to set pet seat

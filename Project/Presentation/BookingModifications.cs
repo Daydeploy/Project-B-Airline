@@ -33,23 +33,56 @@ public static class BookingModifications
         Console.Clear();
         var bookings = BookingAccess.LoadAll().Where(b => b.UserId == userId).ToList();
         
+        if (bookings.Count == 0)
+        {
+            Console.WriteLine("You have no bookings to modify.");
+            Console.WriteLine("\nPress any key to continue...");
+            Console.ReadKey();
+            return;
+        }
+
         Console.WriteLine("=== Modify Booking ===\n");
         Console.WriteLine("Available bookings:");
         
         for (int i = 0; i < bookings.Count; i++)
         {
             var booking = bookings[i];
-            var flight = new FlightsLogic().GetFlightsById(booking.FlightId);
-            if (flight == null) continue;
-
             Console.WriteLine($"\n{i + 1}. Booking ID: {booking.BookingId}");
-            Console.WriteLine($"   Aircraft type: {flight.PlaneType}");
-            Console.WriteLine($"   Flight: {flight.Origin} → {flight.Destination}");
-            Console.WriteLine($"   Date: {DateTime.Parse(flight.DepartureTime):dd MMM yyyy}");
+
+            if (booking.FlightId == 0 && !string.IsNullOrEmpty(booking.PlaneType)) // Private Jet booking
+            {
+                Console.WriteLine($"   Private Jet: {booking.PlaneType}");
+                Console.WriteLine($"   Passengers: {booking.Passengers.Count}");
+                Console.WriteLine($"   Total Price: {booking.TotalPrice:C}");
+            }
+            else // Regular flight booking
+            {
+                var flight = new FlightsLogic().GetFlightsById(booking.FlightId);
+                if (flight != null)
+                {
+                    Console.WriteLine($"   Aircraft type: {flight.PlaneType}");
+                    Console.WriteLine($"   Flight: {flight.Origin} → {flight.Destination}");
+                    Console.WriteLine($"   Date: {DateTime.Parse(flight.DepartureTime):dd MMM yyyy}");
+                }
+                else
+                {
+                    Console.WriteLine($"   Flight details not available");
+                }
+            }
+
+            // Display passengers
+            Console.WriteLine("\n   Passengers:");
+            foreach (var passenger in booking.Passengers)
+            {
+                Console.WriteLine($"   - {passenger.Name} (Seat: {passenger.SeatNumber})");
+            }
+            Console.WriteLine(new string('-', 50));
         }
 
-        Console.Write("\nEnter booking number to modify (or 0 to cancel): ");
-        if (!int.TryParse(Console.ReadLine(), out int bookingChoice) || bookingChoice < 0 || bookingChoice > bookings.Count)
+        Console.Write("\nEnter number to modify (or 0 to cancel): ");
+        if (!int.TryParse(Console.ReadLine(), out int bookingChoice) || 
+            bookingChoice < 0 || 
+            bookingChoice > bookings.Count)
         {
             Console.WriteLine("Invalid selection. Press any key to continue...");
             Console.ReadKey();
@@ -61,7 +94,6 @@ public static class BookingModifications
         var selectedBooking = bookings[bookingChoice - 1];
         ModifySelectedBooking(selectedBooking);
     }
-
     private static void ModifySelectedBooking(BookingModel booking)
     {
         while (true)
@@ -152,7 +184,7 @@ public static class BookingModifications
         }
 
         Console.WriteLine("\nSelect new seat:");
-        string newSeat = seatSelector.SelectSeat(flight.PlaneType);
+        string newSeat = seatSelector.SelectSeat(flight.PlaneType, booking.FlightId);
         
         if (newSeat != null)
         {

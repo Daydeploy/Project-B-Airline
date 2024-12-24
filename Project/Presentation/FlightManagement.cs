@@ -458,7 +458,7 @@ static class FlightManagement
             foreach (var passenger in passengerDetails)
             {
                 Console.WriteLine($"\nSelect a seat for {passenger.Name} on the return flight:");
-                string seatNumber = seatSelector.SelectSeat(returnFlight.PlaneType);
+                string seatNumber = seatSelector.SelectSeat(returnFlight.PlaneType, returnFlight.FlightId);
                 seatSelector.SetSeatOccupied(seatNumber);
 
                 if (passenger.HasPet)
@@ -627,11 +627,11 @@ static class FlightManagement
 
             // In FlightManagement.cs, add some debug logging after passenger creation:
             var passenger = new PassengerModel(name, null, hasCheckedBaggage, hasPet, petDetails, specialLuggage);
-            Console.WriteLine($"DEBUG: Special luggage set to: {passenger.SpecialLuggage}"); // Verify value is set\
+            // Console.WriteLine($"DEBUG: Special luggage set to: {passenger.SpecialLuggage}"); // Verify value is set\
 
             Console.WriteLine("\nSelect a seat for the passenger:");
-            string seatNumber = seatSelector.SelectSeat(selectedFlight.PlaneType);
-            seatSelector.SetSeatOccupied(seatNumber);
+            string seatNumber = seatSelector.SelectSeat(selectedFlight.PlaneType, selectedFlight.FlightId);
+            seatSelector.SetSeatOccupied(seatNumber, name);
 
             if (hasPet)
             {
