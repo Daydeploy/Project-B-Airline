@@ -83,30 +83,29 @@ static class FlightManagement
         {
             var key = Console.ReadKey(intercept: true);
 
-            if (key.Key == ConsoleKey.Escape)
-                return;
-
-            if (key.Key == ConsoleKey.F)
+            switch (key.Key)
             {
-                FilterFlightsByPriceUI(origin, destination, account);
-                return;
-            }
-
-            if (key.Key == ConsoleKey.B)
-            {
-                if (UserLogin.UserAccountServiceLogic.IsUserLoggedIn())
+                case ConsoleKey.Escape:
+                    return;
+                case ConsoleKey.F:
+                    FilterFlightsByPriceUI(origin, destination, account);
+                    return;
+                case ConsoleKey.B:
                 {
-                    Console.Clear();
-                    AdvancedBooking(flightsList, account);
-                }
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("\nYou must be logged in to book a flight.");
-                    Console.ResetColor();
-                }
+                    if (UserLogin.UserAccountServiceLogic.IsUserLoggedIn())
+                    {
+                        Console.Clear();
+                        AdvancedBooking(flightsList, account);
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("\nYou must be logged in to book a flight.");
+                        Console.ResetColor();
+                    }
 
-                return;
+                    return;
+                }
             }
         }
     }
@@ -380,21 +379,15 @@ static class FlightManagement
         if (isRoundTrip)
         {
             Console.Clear();
-            Console.WriteLine(
-                $"Finding return flights from {selectedFlight.Destination} to {selectedFlight.Origin}...");
 
-            var returnFlights = flightsLogic
-                .GetFlightsByOriginAndDestination(selectedFlight.Destination, selectedFlight.Origin)
-                .Where(f => DateTime.Parse(f.DepartureTime) > DateTime.Parse(selectedFlight.ArrivalTime))
-                .ToList();
+            var returnFlights = flightsLogic.GetReturnFlights(selectedFlight);
 
-            if (!returnFlights.Any())
+            if (returnFlights.Count == 0)
             {
                 Console.WriteLine("No return flights available. Round-trip booking cannot proceed.");
                 return;
             }
 
-            // Use DisplayFlightsWithActions to show return flights
             Console.WriteLine("Available Return Flights:");
             DisplayFlightsWithActions(returnFlights, allowBooking: true);
 
@@ -413,7 +406,6 @@ static class FlightManagement
             }
         }
 
-        // Proceed with handling passenger details and booking
         HandlePassengerDetailsAndBooking(account, selectedFlight, returnFlight);
 
         Console.WriteLine("\nBooking completed. Press any key to return to the menu...");
