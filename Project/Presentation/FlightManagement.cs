@@ -91,21 +91,21 @@ static class FlightManagement
                     FilterFlightsByPriceUI(origin, destination, account);
                     return;
                 case ConsoleKey.B:
-                {
-                    if (UserLogin.UserAccountServiceLogic.IsUserLoggedIn())
                     {
-                        Console.Clear();
-                        AdvancedBooking(flightsList, account);
-                    }
-                    else
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("\nYou must be logged in to book a flight.");
-                        Console.ResetColor();
-                    }
+                        if (UserLogin.UserAccountServiceLogic.IsUserLoggedIn())
+                        {
+                            Console.Clear();
+                            AdvancedBooking(flightsList, account);
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("\nYou must be logged in to book a flight.");
+                            Console.ResetColor();
+                        }
 
-                    return;
-                }
+                        return;
+                    }
             }
         }
     }
@@ -416,6 +416,8 @@ static class FlightManagement
     private static void HandlePassengerDetailsAndBooking(AccountModel account, FlightModel departureFlight,
         FlightModel? returnFlight)
     {
+
+        AccountsAccess.LoadAll();
         Console.WriteLine("How many passengers? (1-8):");
         if (!int.TryParse(Console.ReadLine(), out int passengerCount) || passengerCount <= 0 || passengerCount > 8)
         {
@@ -692,7 +694,7 @@ static class FlightManagement
                 Console.WriteLine("Press any key to continue...");
                 Console.ReadKey();
             }
-            
+
 
             Console.WriteLine("Does this passenger have a pet? (y/n):");
             bool hasPet = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
@@ -994,6 +996,10 @@ static class FlightManagement
             bool success = UserLogin.UserAccountServiceLogic.CheckIn(flightId);
             Console.WriteLine(
                 success ? "Check-in successful." : "Check-in failed. Please try again or contact support.");
+
+
+            Console.WriteLine("\nPress any key to continue.");
+            Console.ReadKey();
         }
         else
         {
@@ -1029,14 +1035,14 @@ static class FlightManagement
             }
 
             Console.WriteLine($"\nYou have selected the {jetType}.");
-            
+
             int passengerCount = 0;
             bool isValidInput = false;
-            
+
             while (!isValidInput)
             {
                 Console.WriteLine($"How many passengers? (1-{maxPassengers}):");
-                
+
                 if (int.TryParse(Console.ReadLine(), out passengerCount) &&
                     passengerCount > 0 &&
                     passengerCount <= maxPassengers)
@@ -1048,7 +1054,7 @@ static class FlightManagement
                     Console.WriteLine("Invalid number of passengers. Please try again.");
                 }
             }
-            
+
             // Continue with rest of the code using passengerCount
             List<PassengerModel> passengers = new List<PassengerModel>();
             for (int i = 0; i < passengerCount; i++)
