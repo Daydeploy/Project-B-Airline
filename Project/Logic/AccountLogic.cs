@@ -72,65 +72,50 @@ public class AccountsLogic
         return hasUpperCase && hasNumber && hasSpecialChar;
     }
 
-    public static bool IsValidFirstName(string firstName)
+    public static bool IsValidName(string name)
     {
-        if (string.IsNullOrWhiteSpace(firstName))
+        if (string.IsNullOrWhiteSpace(name))
         {
             return false;
         }
 
-        firstName = firstName.Trim();
+        name = name.Trim();
 
-        if (firstName.Length < 2 || firstName.Length > 20)
+        if (name.Length < 2 || name.Length > 20)
         {
             return false;
         }
 
-        if (firstName.Any(char.IsDigit))
+        if (name.Any(char.IsDigit))
         {
             return false;
         }
 
-        if (firstName.Any(char.IsPunctuation))
+        if (name.Any(char.IsPunctuation))
         {
             return false;
         }
 
-        firstName = char.ToUpper(firstName[0]) + firstName.Substring(1).ToLower();
+        name = char.ToUpper(name[0]) + name.Substring(1).ToLower();
 
 
         return true;
     }
 
-    public static bool IsValidLastName(string lastName)
+    public static bool IsValidEmail(string email)
     {
-        if (string.IsNullOrWhiteSpace(lastName))
+        if (string.IsNullOrWhiteSpace(email))
         {
             return false;
         }
 
-        lastName = lastName.Trim();
-
-        if (lastName.Length < 2 || lastName.Length > 20)
+        if (!email.Contains("@") || !email.Contains("."))
         {
             return false;
         }
-
-        if (lastName.Any(char.IsDigit))
-        {
-            return false;
-        }
-
-        if (lastName.Any(char.IsPunctuation))
-        {
-            return false;
-        }
-
-        lastName = char.ToUpper(lastName[0]) + lastName.Substring(1).ToLower();
-
-
         return true;
     }
+
     public bool DeleteAccount(int accountId)
     {
         var accountToDelete = _accounts.FirstOrDefault(a => a.Id == accountId);

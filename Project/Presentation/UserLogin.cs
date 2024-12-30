@@ -38,7 +38,9 @@ static class UserLogin
         }
         else
         {
-            Console.WriteLine("No account found with that email and password");
+            Console.WriteLine("No account found with that email and password combination.");
+            Console.WriteLine("\nPress any key to return to the main menu...");
+            Console.ReadKey();  
             MenuNavigation.Start();
         }
     }

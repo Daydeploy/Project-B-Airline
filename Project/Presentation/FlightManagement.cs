@@ -666,7 +666,13 @@ static class FlightManagement
             Console.Clear();
             Console.WriteLine($"Passenger {i + 1} Details:");
             Console.WriteLine("Enter passenger name:");
-            string name = Console.ReadLine() ?? string.Empty;
+            string name = Console.ReadLine();
+            while (!AccountsLogic.IsValidName(name))
+            {
+                Console.WriteLine("Name must be between 2 and 20 characters long, start with a capital letter, and cannot contain numbers.");
+                Console.WriteLine("Enter passenger name: ");
+                name = Console.ReadLine();
+            }
 
             Console.WriteLine("Does this passenger have checked baggage? (y/n):");
             bool hasCheckedBaggage = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
@@ -752,9 +758,9 @@ static class FlightManagement
 
         Console.WriteLine($"\nEnter {selectedPetType}'s weight in kg (max {maxWeight}kg):");
         double weight;
-        while (!double.TryParse(Console.ReadLine(), out weight) || weight <= 0 || weight > 100)
+        while (!double.TryParse(Console.ReadLine(), out weight) || weight <= 0 || weight > maxWeight)
         {
-            Console.WriteLine("Please enter a valid weight (0-100kg):");
+            Console.WriteLine($"Please enter a valid weight (0-{maxWeight}kg):");
         }
 
         string storageLocation = weight > maxWeight / 2 ? "Cargo" : "Storage";
@@ -1010,16 +1016,27 @@ static class FlightManagement
             }
 
             Console.WriteLine($"\nYou have selected the {jetType}.");
-            Console.WriteLine($"How many passengers? (1-{maxPassengers}):");
-
-            if (!int.TryParse(Console.ReadLine(), out int passengerCount) ||
-                passengerCount <= 0 ||
-                passengerCount > maxPassengers)
+            
+            int passengerCount = 0;
+            bool isValidInput = false;
+            
+            while (!isValidInput)
             {
-                Console.WriteLine("Invalid number of passengers.");
-                return;
+                Console.WriteLine($"How many passengers? (1-{maxPassengers}):");
+                
+                if (int.TryParse(Console.ReadLine(), out passengerCount) &&
+                    passengerCount > 0 &&
+                    passengerCount <= maxPassengers)
+                {
+                    isValidInput = true;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid number of passengers. Please try again.");
+                }
             }
-
+            
+            // Continue with rest of the code using passengerCount
             List<PassengerModel> passengers = new List<PassengerModel>();
             for (int i = 0; i < passengerCount; i++)
             {

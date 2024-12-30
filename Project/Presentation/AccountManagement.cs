@@ -37,7 +37,7 @@ static class AccountManagement
         // First Name
         string firstName = GetUserInput("Enter your first name: ", isPassword: false, ref showPassword);
         if (firstName == null) return;
-        while (!AccountsLogic.IsValidFirstName(firstName))
+        while (!AccountsLogic.IsValidName(firstName))
         {
             Console.WriteLine("First name must be between 2 and 20 characters long, start with a capital letter, and cannot contain numbers.");
             firstName = GetUserInput("Enter your first name: ", isPassword: false, ref showPassword);
@@ -47,7 +47,7 @@ static class AccountManagement
         // Last Name
         string lastName = GetUserInput("Enter your last name: ", isPassword: false, ref showPassword);
         if (lastName == null) return;
-        while (!AccountsLogic.IsValidLastName(lastName))
+        while (!AccountsLogic.IsValidName(lastName))
         {
             Console.WriteLine("Last name must be between 2 and 20 characters long, start with a capital letter, and cannot contain numbers.");
             lastName = GetUserInput("Enter your last name: ", isPassword: false, ref showPassword);
@@ -67,9 +67,21 @@ static class AccountManagement
         // Password
         string password = GetUserInput("Enter your password: ", isPassword: true, ref showPassword);
         if (password == null) return;
+        while(!AccountsLogic.IsValidPassword(password))
+        {
+            Console.WriteLine("Password must contain at least one uppercase letter, one number, and one special character.");
+            password = GetUserInput("Enter your password: ", isPassword: true, ref showPassword);
+            if (password == null) return;
+        }
 
         string confirmPassword = GetUserInput("Confirm your password: ", isPassword: true, ref showPassword);
         if (confirmPassword == null) return;
+        while (!AccountsLogic.IsValidPassword(confirmPassword))
+        {
+            Console.WriteLine("Password must contain at least one uppercase letter, one number, and one special character.");
+            confirmPassword = GetUserInput("Confirm your password: ", isPassword: true, ref showPassword);
+            if (confirmPassword == null) return;
+        }
 
         if (password != confirmPassword)
         {
@@ -212,13 +224,27 @@ static class AccountManagement
                     case 0:
                         Console.WriteLine($"Current Email: {account.EmailAddress}");
                         Console.WriteLine("Enter new email:");
-                        updateSuccessful = UserLogin.UserAccountServiceLogic.ManageAccount(account.Id, newEmail: Console.ReadLine());
+                        string newEmail = Console.ReadLine();
+                        while (!IsValidEmail(newEmail))
+                        {
+                            Console.WriteLine("Invalid email format. Please enter a valid email address.");
+                            Console.Write("Enter new email: ");
+                            newEmail = Console.ReadLine();
+                        }
+                        updateSuccessful = UserLogin.UserAccountServiceLogic.ManageAccount(account.Id, newEmail);
                         Console.WriteLine(updateSuccessful ? "Email updated successfully." : "Failed to update email.");
                         break;
 
                     case 1:
                         Console.WriteLine("Enter new password:");
-                        updateSuccessful = UserLogin.UserAccountServiceLogic.ManageAccount(account.Id, newPassword: Console.ReadLine());
+                        string newPassword = Console.ReadLine();
+                        while (!AccountsLogic.IsValidPassword(newPassword))
+                        {
+                            Console.WriteLine("Password must contain at least one uppercase letter, one number, and one special character.");
+                            Console.Write("Enter new password: ");
+                            newPassword = Console.ReadLine();
+                        }
+                        updateSuccessful = UserLogin.UserAccountServiceLogic.ManageAccount(account.Id, newPassword);
                         Console.WriteLine(updateSuccessful ? "Password updated successfully." : "Failed to update password.");
                         break;
 
