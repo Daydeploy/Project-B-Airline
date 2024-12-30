@@ -131,9 +131,25 @@ public class AccountsLogic
 
         return true;
     }
-    
+    public bool DeleteAccount(int accountId)
+    {
+        var accountToDelete = _accounts.FirstOrDefault(a => a.Id == accountId);
+        if (accountToDelete == null || accountToDelete.EmailAddress.ToLower() == "admin") 
+        {
+            return false;
+        }
+
+        _accounts.Remove(accountToDelete);
+        AccountsAccess.WriteAll(_accounts);
+        // Reload accounts after deletion
+        _accounts = AccountsAccess.LoadAll();
+        return true;
+    }
+
     public List<AccountModel> GetAllAccounts()
     {
-        return _accounts;
+        return _accounts
+            .Where(a => !a.EmailAddress.ToLower().Equals("admin"))
+            .ToList();
     }
 }

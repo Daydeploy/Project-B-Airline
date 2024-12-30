@@ -64,11 +64,12 @@ public static class AccountInformation
     {
         Console.Clear();
         var accountsLogic = new AccountsLogic();
-        var accounts = accountsLogic.GetAllAccounts();
+        var accounts = accountsLogic.GetAllAccounts()
+            .Where(a => !a.EmailAddress.ToLower().Equals("admin"))
+            .ToList();
 
         Console.WriteLine("=== Delete Account Information ===\n");
         
-        // Display accounts
         foreach (var account in accounts)
         {
             Console.WriteLine($"{account.Id}. {account.FirstName} {account.LastName} ({account.EmailAddress})");
@@ -92,9 +93,14 @@ public static class AccountInformation
         Console.Write($"\nAre you sure you want to delete account for {selectedAccount.FirstName} {selectedAccount.LastName}? (Y/N): ");
         if (Console.ReadLine()?.ToUpper() == "Y")
         {
-            accounts.Remove(selectedAccount);
-            AccountsAccess.WriteAll(accounts);
-            Console.WriteLine("Account deleted successfully!");
+            if (accountsLogic.DeleteAccount(accountId))
+            {
+                Console.WriteLine("Account deleted successfully!");
+            }
+            else
+            {
+                Console.WriteLine("Failed to delete account.");
+            }
         }
         else
         {
