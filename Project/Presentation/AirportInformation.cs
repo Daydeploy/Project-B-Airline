@@ -57,17 +57,78 @@ static class AirportInformation
     // Displays a list of all available destinations
     public static void BrowseDestinations()
     {
-        FlightsLogic flightsLogic = new FlightsLogic();
-        var destinations = flightsLogic.GetAllDestinations();
-
-        Console.WriteLine("\nAvailable Destinations:");
-        foreach (var destination in destinations)
+        while (true)
         {
-            Console.WriteLine(destination);
+            Console.Clear();
+            FlightsLogic flightsLogic = new FlightsLogic();
+            var destinations = flightsLogic.GetAllDestinations().Distinct().ToList();
+            
+            int currentIndex = 0;
+            DisplayCurrentDestination();
+    
+            while (true)
+            {
+                var key = Console.ReadKey(true);
+                switch (key.Key)
+                {
+                    case ConsoleKey.RightArrow:
+                        if (currentIndex < destinations.Count - 1)
+                        {
+                            currentIndex++;
+                            DisplayCurrentDestination();
+                        }
+                        break;
+    
+                    case ConsoleKey.LeftArrow:
+                        if (currentIndex > 0)
+                        {
+                            currentIndex--;
+                            DisplayCurrentDestination();
+                        }
+                        break;
+    
+                    case ConsoleKey.Escape:
+                        return;
+                }
+            }
+    
+            void DisplayCurrentDestination()
+            {
+                Console.Clear();
+                
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("=== Browse Destinations ===\n");
+                Console.ForegroundColor = ConsoleColor.Gray;
+                Console.WriteLine("Navigation Controls:");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.WriteLine("← → - Navigate between destinations");
+                Console.WriteLine("ESC - Return to main menu\n");
+                
+                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                Console.WriteLine(new string('═', Console.WindowWidth - 1));
+    
+                var currentDestination = destinations[currentIndex];
+                var flightCount = flightsLogic.GetAllFlights()
+                    .Count(f => f.Destination.Equals(currentDestination, StringComparison.OrdinalIgnoreCase));
+    
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine($"\nDestination {currentIndex + 1} of {destinations.Count}");
+                
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine($"\n╔══ {currentDestination} ══╗");
+                
+                Console.ForegroundColor = flightCount > 0 ? ConsoleColor.Green : ConsoleColor.Red;
+                Console.WriteLine($"\nNumber of flights available: {flightCount}");
+                
+                Console.ForegroundColor = ConsoleColor.Gray;
+                Console.WriteLine("\nTo view detailed flight information, please use the Flight Search option.");
+                
+                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                Console.WriteLine(new string('═', Console.WindowWidth - 1));
+                
+                Console.ResetColor();
+            }
         }
-
-        Console.WriteLine("\nPress any key to return to the menu...");
-        Console.ReadKey();
     }
 
     public static void EditAirportInformation()
