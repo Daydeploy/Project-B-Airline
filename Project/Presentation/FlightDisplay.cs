@@ -68,12 +68,12 @@ static class FlightDisplay
         {
             double seasonalPrice = seatOption.Price * 
                 (currentSeason == "summer" ? seatOption.SeasonalMultiplier.Summer : seatOption.SeasonalMultiplier.Winter);
-            double totalPrice = seasonalPrice * (1 + flight.Taxes.Country) +
+            int totalPrice = (int)(seasonalPrice * (1 + flight.Taxes.Country) +
                 flight.Taxes.Airport[flight.OriginCode] +
-                flight.Taxes.Airport[flight.DestinationCode];
+                flight.Taxes.Airport[flight.DestinationCode]);
 
             Console.ForegroundColor = GetPriceColor(seatOption.SeatClass);
-            Console.Write($"{seatOption.SeatClass}: {totalPrice:F2} ");
+            Console.Write($"{seatOption.SeatClass}: {totalPrice} ");
             Console.ResetColor();
         }
 
