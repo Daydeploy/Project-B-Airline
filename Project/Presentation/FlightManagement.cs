@@ -673,22 +673,20 @@ static class FlightManagement
 
             string specialLuggage = "";
 
-            if (hasCheckedBaggage)
-            {
-                Console.WriteLine("Do you have special luggage? (y/n):");
-                bool hasSpecialLuggage = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
+            Console.WriteLine("Do you have special luggage? (y/n):");
+            bool hasSpecialLuggage = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
 
-                if (hasSpecialLuggage)
-                {
-                    Console.WriteLine("What special luggage do you have? (e.g. Ski equipment, Musical instrument):");
-                    specialLuggage = Console.ReadLine() ?? string.Empty;
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine($"\nYour {specialLuggage} will be stored securely in the luggage compartment.");
-                    Console.ResetColor();
-                    Console.WriteLine("Press any key to continue...");
-                    Console.ReadKey();
-                }
+            if (hasSpecialLuggage)
+            {
+                Console.WriteLine("What special luggage do you have? (e.g. Ski equipment, Musical instrument):");
+                specialLuggage = Console.ReadLine() ?? string.Empty;
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"\nYour {specialLuggage} will be stored securely in the luggage compartment.");
+                Console.ResetColor();
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
             }
+            
 
             Console.WriteLine("Does this passenger have a pet? (y/n):");
             bool hasPet = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;

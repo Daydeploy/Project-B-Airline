@@ -82,24 +82,11 @@ public class SeatSelectionUI
     }
     public string SelectSeat(string planeType, int flightId)
     {
-        // Console.WriteLine($"DEBUG: Received plane type: '{planeType}'");
-        // Console.WriteLine($"DEBUG: Exact string comparison with 'Airbus A330': {planeType == "Airbus A330"}");
-        // Console.WriteLine($"DEBUG: String length: {planeType.Length}");
-        // Console.WriteLine($"DEBUG: Character codes: {string.Join(",", planeType.Select(c => ((int)c)))}");
-        // Console.WriteLine($"DEBUG: Available configurations: {string.Join(", ", planeConfigs.Keys)}");
-
         // Normalize plane type
         if (planeTypeAliases.TryGetValue(planeType, out string normalizedType))
         {
             planeType = normalizedType; // zodat airbus werkt dus zet je de plane naar de normalizedType
         }
-
-
-        // Debugging
-        // if (!planeConfigs.ContainsKey(planeType))
-        // {
-        //     throw new ArgumentException($"Unsupported plane type: {planeType}. Available types: {string.join(", ", planeConfigs.Keys)}");
-        // }
 
         currentConfig = planeConfigs[planeType];
         LoadExistingBookings(flightId);
@@ -134,8 +121,17 @@ public class SeatSelectionUI
                     return null;
                 case ConsoleKey.Enter:
                     string seatNumber = $"{currentRow}{(char)('A' + currentSeat)}";
-                    if (!occupiedSeats.ContainsKey(seatNumber))
+                    if (occupiedSeats.ContainsKey(seatNumber))
                     {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("\nThis seat is already occupied! Choose another seat.");
+                        Console.ResetColor();
+                        Console.WriteLine("Press any key to continue...");
+                        Console.ReadKey(true);
+                    }
+                    else
+                    {
+                        seatSelected = true;
                         return seatNumber;
                     }
                     break;
@@ -200,7 +196,7 @@ public class SeatSelectionUI
                 {
                     Console.ForegroundColor = hasPet ? ConsoleColor.DarkGray : ConsoleColor.Red;
                 }
-
+                
                 if (isSelected)
                 {
                     Console.BackgroundColor = ConsoleColor.DarkGray;
@@ -211,7 +207,7 @@ public class SeatSelectionUI
                 {
                     Console.Write(isOccupied ? $" {occupiedSeats[seatNumber]} " : " □ ");
                 }
-
+                
                 // Add aisle space based on plane type
                 if (AddAisleSpace(seat))
                 {
@@ -258,7 +254,7 @@ public class SeatSelectionUI
         if (occupied)
         {
             string initials = !string.IsNullOrEmpty(passengerName) 
-                ? new string(passengerName.Split(' ').Select(s => s[0]).Take(2).ToArray()) 
+                ? new string(passengerName.Split(' ').Select(s => s[0]).Take(2).ToArray()).ToUpper() 
                 : "■";
             occupiedSeats[seatNumber] = initials;
         }
@@ -268,7 +264,6 @@ public class SeatSelectionUI
         }
     }
 
-    // Add method to set pet seat
     public void SetPetSeat(string seatNumber, bool hasPet = true)
     {
         if (hasPet)

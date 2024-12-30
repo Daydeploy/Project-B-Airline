@@ -16,10 +16,11 @@ public class FlightsLogic
             .ToList();
     }
 
-    public FlightModel GetFlightsById(int flightId)
+    public FlightModel? GetFlightsById(int flightId)
     {
         return AvailableFlights
-            .FirstOrDefault(f => f.FlightId == flightId && DateTime.Parse(f.DepartureTime) >= DateTime.Now);
+            .FirstOrDefault(f => f.FlightId == flightId);
+            // .FirstOrDefault(f => f.FlightId == flightId && DateTime.Parse(f.DepartureTime) >= DateTime.Now);
     }
 
     public List<FlightModel> FilterFlightsByPriceUp(string origin, string destination, string seatClass)
