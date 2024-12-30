@@ -34,7 +34,7 @@ static class EntertainmentUI
     
             if (bookedFlights.Count == 0)
             {
-                Console.WriteLine("\nYou have no booked flights.");
+                Console.WriteLine("\nYou have no booked flights, or not available for this type of flight.");
                 Console.WriteLine("Press any key to return to menu...");
                 Console.ReadKey();
                 return;
