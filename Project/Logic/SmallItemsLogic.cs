@@ -9,23 +9,23 @@ public class SmallItemsLogic
         return SmallItemsDataAccess.LoadAll();
     }
 
-    public void AddItemsToPassenger(List<ShopItemModel> items, int bookingId, int passengerIndex)
+    public bool AddItemsToPassenger(List<ShopItemModel> items, int bookingId, int passengerIndex)
     {
         var bookings = BookingAccess.LoadAll();
         var booking = bookings.FirstOrDefault(b => b.BookingId == bookingId);
         
         if (booking == null)
-            throw new Exception("Booking not found");
+            return false;
 
         if (passengerIndex < 0 || passengerIndex >= booking.Passengers.Count)
-            throw new Exception("Invalid passenger index");
+            return false;
 
         var passenger = booking.Passengers[passengerIndex];
         passenger.ShopItems.AddRange(items);
         
-        // Update total price for booking
         booking.TotalPrice += (int)items.Sum(i => i.Price);
         
         BookingAccess.WriteAll(bookings);
+        return true;
     }
 }

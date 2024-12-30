@@ -26,12 +26,12 @@ public class AirportLogic
         _airports = AirportAccess.LoadAllAirports();
     }
 
-    public void UpdateAirport(AirportModel updatedAirport)
+    public bool UpdateAirport(AirportModel updatedAirport)
     {
         var existingAirport = _airports.FirstOrDefault(a => a.AirportID == updatedAirport.AirportID);
         if (existingAirport == null)
         {
-            throw new KeyNotFoundException($"Airport with ID {updatedAirport.AirportID} not found");
+            return false;
         }
 
         int index = _airports.IndexOf(existingAirport);
@@ -39,5 +39,6 @@ public class AirportLogic
 
         AirportAccess.WriteAllAirports(_airports);
         _airports = AirportAccess.LoadAllAirports();
+        return true;
     }
 }

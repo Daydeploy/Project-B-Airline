@@ -786,126 +786,125 @@ static class FlightManagement
         FlightModel? returnFlight = null,
         int? returnFlightId = null)
     {
-        try
+        double totalBaggageCost = 0;
+        double totalBasePrice = 0;
+
+        BookingModel booking = BookingLogic.CreateBooking(UserLogin.UserAccountServiceLogic.CurrentUserId,
+            departureFlightId,
+            passengerDetails, new List<PetModel>());
+
+        if (booking == null)
         {
-            double totalBaggageCost = 0;
-            double totalBasePrice = 0;
-
-            BookingModel booking = BookingLogic.CreateBooking(UserLogin.UserAccountServiceLogic.CurrentUserId,
-                departureFlightId,
-                passengerDetails, new List<PetModel>());
-
-            totalBasePrice = booking.TotalPrice;
-
-            Console.WriteLine("\nFlight booked successfully!\n");
-            Console.WriteLine($"Booking ID: {booking.BookingId}");
-            Console.WriteLine($"Flight: {departureFlight.Origin} to {departureFlight.Destination}");
-            Console.WriteLine($"Departure: {DateTime.Parse(departureFlight.DepartureTime):HH:mm dd MMM yyyy}");
-
-            // Shop items selection
-            for (int i = 0; i < booking.Passengers.Count; i++)
-            {
-                var passenger = booking.Passengers[i];
-                Console.WriteLine($"\nPassenger: {passenger.Name}");
-                Console.WriteLine("Would you like to purchase items from our shop? (y/n):");
-                bool wantsItem = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
-
-                if (wantsItem)
-                {
-                    var shopUI = new ShopUI();
-                    var purchasedItems = shopUI.DisplaySmallItemsShop(booking.BookingId, i);
-                    foreach (var item in purchasedItems)
-                    {
-                        passenger.ShopItems.Add(item);
-                    }
-
-                    booking.TotalPrice += (int)purchasedItems.Sum(item => item.Price);
-                }
-
-                if (passenger.HasCheckedBaggage)
-                {
-                    totalBaggageCost += 30; // Standard baggage fee
-                }
-            }
-
-            // Update booking with new total price
-            var bookings = BookingAccess.LoadAll();
-            var bookingToUpdate = bookings.FirstOrDefault(b => b.BookingId == booking.BookingId);
-            if (bookingToUpdate != null)
-            {
-                bookingToUpdate.TotalPrice = booking.TotalPrice;
-                BookingAccess.WriteAll(bookings);
-            }
-
-            // Display final details
-            Console.WriteLine("\nPassengers:");
-            foreach (var passenger in booking.Passengers)
-            {
-                Console.WriteLine($"\nName: {passenger.Name}");
-                Console.WriteLine(
-                    $"Seat: {passenger.SeatNumber} ({seatSelector.GetSeatClass(passenger.SeatNumber)} Class)");
-                Console.WriteLine($"Checked Baggage: {(passenger.HasCheckedBaggage ? "Yes" : "No")}");
-                Console.WriteLine($"Pet: {(passenger.HasPet ? "Yes" : "No")}");
-                if (passenger.HasPet && passenger.PetDetails != null)
-                {
-                    Console.WriteLine($"Pet Details: {passenger.PetDetails.Type} ({passenger.PetDetails.Weight}kg)");
-                }
-
-                if (passenger.ShopItems.Any())
-                {
-                    Console.WriteLine("Shop Items:");
-                    foreach (var item in passenger.ShopItems)
-                    {
-                        Console.WriteLine($"- {item.Name} ({item.Price:F2} EUR)");
-                    }
-                }
-            }
-
-            // Calculate and display final price
-            int earnedMiles = MilesLogic.CalculateMilesFromBooking(UserLogin.UserAccountServiceLogic.CurrentUserId);
-            Console.WriteLine($"\nMiles Earned: {earnedMiles}");
-            booking.TotalPrice = MilesLogic.BasicPointsRedemption(UserLogin.UserAccountServiceLogic.CurrentUserId,
-                booking.TotalPrice, booking.BookingId);
-            if (totalBaggageCost > 0)
-            {
-                Console.WriteLine($"  Baggage Cost: {totalBaggageCost:F2} EUR");
-            }
-
-            if (includeInsurance)
-            {
-                double insuranceCost = passengerDetails.Count * 10.0;
-                totalBasePrice += insuranceCost;
-                Console.WriteLine($"  Cancellation Insurance: {insuranceCost:F2} EUR");
-            }
-
-            double finalTotalPrice = totalBasePrice + totalBaggageCost;
-            Console.WriteLine($"  Final Total Price: {finalTotalPrice:F2} EUR\n");
-
-            int roundedTotalPrice = (int)Math.Round(finalTotalPrice);
-
-            Console.WriteLine("------------------------------------------------------------");
-            Console.WriteLine("Rewards Summary:");
-            Console.WriteLine("------------------------------------------------------------");
-
-            int milesEarned = MilesLogic.CalculateMilesFromBooking(UserLogin.UserAccountServiceLogic.CurrentUserId);
-            Console.WriteLine($"  Miles Earned: {milesEarned}");
-
-            double discountedPrice = MilesLogic.BasicPointsRedemption(
-                UserLogin.UserAccountServiceLogic.CurrentUserId,
-                roundedTotalPrice,
-                booking.BookingId
-            );
-
-            Console.WriteLine($"  Discounted Total Price: {discountedPrice:F2} EUR\n");
-
-            Console.WriteLine("------------------------------------------------------------");
-            Console.WriteLine("Thank you for booking with us!");
-            Console.WriteLine("------------------------------------------------------------");
+            Console.WriteLine("Error: Unable to create booking. Please try again.");
+            return;
         }
-        catch (Exception ex)
+
+        totalBasePrice = booking.TotalPrice;
+
+        Console.WriteLine("\nFlight booked successfully!\n");
+        Console.WriteLine($"Booking ID: {booking.BookingId}");
+        Console.WriteLine($"Flight: {departureFlight.Origin} to {departureFlight.Destination}");
+        Console.WriteLine($"Departure: {DateTime.Parse(departureFlight.DepartureTime):HH:mm dd MMM yyyy}");
+
+        // Shop items selection
+        for (int i = 0; i < booking.Passengers.Count; i++)
         {
-            Console.WriteLine($"Error creating booking: {ex.Message}");
+            var passenger = booking.Passengers[i];
+            Console.WriteLine($"\nPassenger: {passenger.Name}");
+            Console.WriteLine("Would you like to purchase items from our shop? (y/n):");
+            bool wantsItem = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
+
+            if (wantsItem)
+            {
+                var shopUI = new ShopUI();
+                var purchasedItems = shopUI.DisplaySmallItemsShop(booking.BookingId, i);
+                foreach (var item in purchasedItems)
+                {
+                    passenger.ShopItems.Add(item);
+                }
+
+                booking.TotalPrice += (int)purchasedItems.Sum(item => item.Price);
+            }
+
+            if (passenger.HasCheckedBaggage)
+            {
+                totalBaggageCost += 30; // Standard baggage fee
+            }
         }
+
+        // Update booking with new total price
+        var bookings = BookingAccess.LoadAll();
+        var bookingToUpdate = bookings.FirstOrDefault(b => b.BookingId == booking.BookingId);
+        if (bookingToUpdate != null)
+        {
+            bookingToUpdate.TotalPrice = booking.TotalPrice;
+            BookingAccess.WriteAll(bookings);
+        }
+
+        // Display final details
+        Console.WriteLine("\nPassengers:");
+        foreach (var passenger in booking.Passengers)
+        {
+            Console.WriteLine($"\nName: {passenger.Name}");
+            Console.WriteLine(
+                $"Seat: {passenger.SeatNumber} ({seatSelector.GetSeatClass(passenger.SeatNumber)} Class)");
+            Console.WriteLine($"Checked Baggage: {(passenger.HasCheckedBaggage ? "Yes" : "No")}");
+            Console.WriteLine($"Pet: {(passenger.HasPet ? "Yes" : "No")}");
+            if (passenger.HasPet && passenger.PetDetails != null)
+            {
+                Console.WriteLine($"Pet Details: {passenger.PetDetails.Type} ({passenger.PetDetails.Weight}kg)");
+            }
+
+            if (passenger.ShopItems.Any())
+            {
+                Console.WriteLine("Shop Items:");
+                foreach (var item in passenger.ShopItems)
+                {
+                    Console.WriteLine($"- {item.Name} ({item.Price:F2} EUR)");
+                }
+            }
+        }
+
+        // Calculate and display final price
+        int earnedMiles = MilesLogic.CalculateMilesFromBooking(UserLogin.UserAccountServiceLogic.CurrentUserId);
+        Console.WriteLine($"\nMiles Earned: {earnedMiles}");
+        booking.TotalPrice = MilesLogic.BasicPointsRedemption(UserLogin.UserAccountServiceLogic.CurrentUserId,
+            booking.TotalPrice, booking.BookingId);
+        if (totalBaggageCost > 0)
+        {
+            Console.WriteLine($"  Baggage Cost: {totalBaggageCost:F2} EUR");
+        }
+
+        if (includeInsurance)
+        {
+            double insuranceCost = passengerDetails.Count * 10.0;
+            totalBasePrice += insuranceCost;
+            Console.WriteLine($"  Cancellation Insurance: {insuranceCost:F2} EUR");
+        }
+
+        double finalTotalPrice = totalBasePrice + totalBaggageCost;
+        Console.WriteLine($"  Final Total Price: {finalTotalPrice:F2} EUR\n");
+
+        int roundedTotalPrice = (int)Math.Round(finalTotalPrice);
+
+        Console.WriteLine("------------------------------------------------------------");
+        Console.WriteLine("Rewards Summary:");
+        Console.WriteLine("------------------------------------------------------------");
+
+        int milesEarned = MilesLogic.CalculateMilesFromBooking(UserLogin.UserAccountServiceLogic.CurrentUserId);
+        Console.WriteLine($"  Miles Earned: {milesEarned}");
+
+        double discountedPrice = MilesLogic.BasicPointsRedemption(
+            UserLogin.UserAccountServiceLogic.CurrentUserId,
+            roundedTotalPrice,
+            booking.BookingId
+        );
+
+        Console.WriteLine($"  Discounted Total Price: {discountedPrice:F2} EUR\n");
+
+        Console.WriteLine("------------------------------------------------------------");
+        Console.WriteLine("Thank you for booking with us!");
+        Console.WriteLine("------------------------------------------------------------");
     }
 
     public static void ViewBookedFlights(int userId)
@@ -1036,38 +1035,37 @@ static class FlightManagement
                 passengers.Add(passenger);
             }
 
-            try
-            {
-                BookingModel booking = BookingLogic.CreateBooking( // kan nog geen special items kopen of entertainment
-                    user,
-                    0, // speciale flightID for private jets
-                    passengers,
-                    new List<PetModel>(), // geen pets
-                    true,
-                    jetType
-                );
+            BookingModel booking = BookingLogic.CreateBooking(
+                user,
+                0, // special flightID for private jets
+                passengers,
+                new List<PetModel>(), // no pets
+                true,
+                jetType
+            );
 
-                Console.WriteLine("\nPrivate jet booking completed successfully!");
-                Console.WriteLine($"Booking ID: {booking.BookingId}");
-                Console.WriteLine($"Aircraft: {booking.PlaneType}");
-                Console.WriteLine($"Total Price: {booking.TotalPrice:C}");
-                Console.WriteLine("\nPassenger Details:");
-                foreach (var passenger in passengers)
-                {
-                    Console.WriteLine($"- {passenger.Name} (Seat: {passenger.SeatNumber})");
-                }
-            }
-            catch (Exception ex)
+            if (booking == null)
             {
-                Console.WriteLine($"Error creating booking: {ex.Message}");
+                Console.WriteLine("Error: Unable to create private jet booking. Please try again.");
+                return;
             }
+
+            Console.WriteLine("\nPrivate jet booking completed successfully!");
+            Console.WriteLine($"Booking ID: {booking.BookingId}");
+            Console.WriteLine($"Aircraft: {booking.PlaneType}");
+            Console.WriteLine($"Total Price: {booking.TotalPrice:C}");
+            Console.WriteLine("\nPassenger Details:");
+            foreach (var passenger in passengers)
+            {
+                Console.WriteLine($"- {passenger.Name} (Seat: {passenger.SeatNumber})");
+            }
+
+            Console.WriteLine("\nPress any key to continue...");
+            Console.ReadKey();
         }
         else
         {
             Console.WriteLine("Invalid choice.");
         }
-
-        Console.WriteLine("\nPress any key to continue...");
-        Console.ReadKey();
     }
 }
