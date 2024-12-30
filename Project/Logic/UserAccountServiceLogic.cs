@@ -18,6 +18,11 @@ public class UserAccountServiceLogic
         CurrentUserId = -1;
     }
 
+    public AccountModel CurrentAccount
+    {
+        get { return IsLoggedIn ? _accountsLogic.GetById(CurrentUserId) : null; }
+    }
+
     public bool CreateAccount(string firstName, string lastName, string email, string password, DateTime dateOfBirth)
     {
         if (string.IsNullOrWhiteSpace(firstName) || string.IsNullOrWhiteSpace(lastName))
@@ -63,14 +68,12 @@ public class UserAccountServiceLogic
         int newId = _accountsLogic._accounts.Max(a => a.Id) + 1;
         CurrentUserId = newId;
 
-        var initialMiles = new List<MilesModel> { new MilesModel(string.Empty, 0, 0, string.Empty) {
-            Enrolled = isEnrolled
-        } };
+        var initialMiles = new List<MilesModel>
+            { new MilesModel(string.Empty, 0, 0, string.Empty) { Enrolled = isEnrolled } };
 
         var newAccount = new AccountModel(newId, firstName, lastName, dateOfBirth, email, password, initialMiles);
 
         _accountsLogic.UpdateList(newAccount);
-
 
         if (isEnrolled)
         {
@@ -83,7 +86,6 @@ public class UserAccountServiceLogic
 
         return true;
     }
-
 
     public AccountModel Login(string email, string password)
     {
@@ -157,7 +159,6 @@ public class UserAccountServiceLogic
         return true;
     }
 
-
     public List<FlightBooking> GetBookedFlights(int userId)
     {
         var userBookings = _bookings.Where(b => b.UserId == userId).ToList();
@@ -179,7 +180,6 @@ public class UserAccountServiceLogic
 
     public bool CheckIn(int flightId)
     {
-
         MilesLogic.UpdateFlightExperience(CurrentUserId);
         return true;
     }
@@ -208,7 +208,7 @@ public class UserAccountServiceLogic
 
     public int GetCurrentMiles(int userId)
     {
-        var account = AccountsLogic.CurrentAccount;
+        var account = CurrentAccount;
         if (account != null)
         {
             return account.Miles.Sum(m => m.Points);

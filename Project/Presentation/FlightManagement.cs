@@ -6,6 +6,8 @@ static class FlightManagement
 {
     public static void ShowAvailableFlights()
     {
+        var account = UserLogin.UserAccountServiceLogic.CurrentAccount;
+
         FlightsLogic flights = new FlightsLogic();
         Console.Clear();
 
@@ -23,13 +25,13 @@ static class FlightManagement
         }
 
         DisplayFlightsWithActions(flightsList, UserLogin.UserAccountServiceLogic.IsUserLoggedIn());
-        HandleFlightCommands(flightsList, origin, destination);
+        HandleFlightCommands(flightsList, origin, destination, account);
     }
 
     private static string SelectOrigin(FlightsLogic flights)
     {
         var origins = flights.GetAllOrigins().ToArray();
-        if (!origins.Any())
+        if (origins.Length == 0)
         {
             Console.WriteLine("No available origins found.");
             return null;
@@ -44,7 +46,7 @@ static class FlightManagement
     private static string SelectDestination(FlightsLogic flights, string origin)
     {
         var destinations = flights.GetDestinationsByOrigin(origin).ToArray();
-        if (!destinations.Any())
+        if (destinations.Length == 0)
         {
             Console.WriteLine($"No destinations available from {origin}.");
             return null;
@@ -64,7 +66,6 @@ static class FlightManagement
         Console.WriteLine("F - Filter flights");
         if (allowBooking)
             Console.WriteLine("B - Book a flight");
-        //todo: zet booking terug
         else
         {
             Console.ForegroundColor = ConsoleColor.Red;
@@ -75,42 +76,42 @@ static class FlightManagement
         Console.WriteLine("ESC - Go back");
     }
 
-    private static void HandleFlightCommands(List<FlightModel> flightsList, string origin, string destination)
+    private static void HandleFlightCommands(List<FlightModel> flightsList, string origin, string destination,
+        AccountModel account)
     {
         while (true)
         {
             var key = Console.ReadKey(intercept: true);
 
-            if (key.Key == ConsoleKey.Escape)
-                return;
-
-            if (key.Key == ConsoleKey.F)
+            switch (key.Key)
             {
-                FilterFlightsByPriceUI(origin, destination);
-                return;
-            }
-
-            if (key.Key == ConsoleKey.B)
-            {
-                if (UserLogin.UserAccountServiceLogic.IsUserLoggedIn())
+                case ConsoleKey.Escape:
+                    return;
+                case ConsoleKey.F:
+                    FilterFlightsByPriceUI(origin, destination, account);
+                    return;
+                case ConsoleKey.B:
                 {
-                    Console.Clear();
-                    //  BookFlight(flightsList);
-                }
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("\nYou must be logged in to book a flight.");
-                    Console.ResetColor();
-                }
+                    if (UserLogin.UserAccountServiceLogic.IsUserLoggedIn())
+                    {
+                        Console.Clear();
+                        AdvancedBooking(flightsList, account);
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("\nYou must be logged in to book a flight.");
+                        Console.ResetColor();
+                    }
 
-                return;
+                    return;
+                }
             }
         }
     }
 
 
-    public static void FilterFlightsByPriceUI(string origin, string destination)
+    public static void FilterFlightsByPriceUI(string origin, string destination, AccountModel account)
     {
         FlightsLogic flights = new FlightsLogic();
         string[] filterOptions =
@@ -150,7 +151,7 @@ static class FlightManagement
             if (filteredFlights.Count != 0)
             {
                 DisplayFlightsWithActions(filteredFlights, UserLogin.UserAccountServiceLogic.IsUserLoggedIn());
-                HandleFlightCommands(filteredFlights, origin, destination);
+                HandleFlightCommands(filteredFlights, origin, destination, account);
             }
             else
             {
@@ -352,6 +353,65 @@ static class FlightManagement
         Console.ReadKey();
     }
 
+    private static void AdvancedBooking(List<FlightModel> flightsList, AccountModel account)
+    {
+        FlightsLogic flightsLogic = new FlightsLogic();
+
+        Console.WriteLine("Is this a round-trip booking? (y/n):");
+        bool isRoundTrip = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
+
+        Console.WriteLine("Enter the Flight ID for your departure flight:");
+        if (!int.TryParse(Console.ReadLine(), out int flightId))
+        {
+            Console.WriteLine("Invalid Flight ID entered.");
+            return;
+        }
+
+        var selectedFlight = flightsLogic.GetFlightsById(flightId);
+        if (selectedFlight == null)
+        {
+            Console.WriteLine("Flight not found. Please check the Flight ID and try again.");
+            return;
+        }
+
+        FlightModel returnFlight = null;
+
+        if (isRoundTrip)
+        {
+            Console.Clear();
+
+            var returnFlights = flightsLogic.GetReturnFlights(selectedFlight);
+
+            if (returnFlights.Count == 0)
+            {
+                Console.WriteLine("No return flights available. Round-trip booking cannot proceed.");
+                return;
+            }
+
+            Console.WriteLine("Available Return Flights:");
+            DisplayFlightsWithActions(returnFlights, allowBooking: true);
+
+            Console.WriteLine("\nEnter the Flight ID for your return flight:");
+            if (!int.TryParse(Console.ReadLine(), out int returnFlightId))
+            {
+                Console.WriteLine("Invalid Flight ID entered for the return flight.");
+                return;
+            }
+
+            returnFlight = flightsLogic.GetFlightsById(returnFlightId);
+            if (returnFlight == null)
+            {
+                Console.WriteLine("Return flight not found. Please check the Flight ID and try again.");
+                return;
+            }
+        }
+
+        HandlePassengerDetailsAndBooking(account, selectedFlight, returnFlight);
+
+        Console.WriteLine("\nBooking completed. Press any key to return to the menu...");
+        Console.ReadKey();
+    }
+
 
     private static void HandlePassengerDetailsAndBooking(AccountModel account, FlightModel departureFlight,
         FlightModel? returnFlight)
@@ -368,7 +428,8 @@ static class FlightManagement
 
         bool includeInsuranceForDeparture = PromptForInsurance(passengerCount, "departure");
 
-        if (account.PaymentInformation == null || !AccountsLogic.HasCompleteContactInformation(account.FirstName, account.LastName, account.EmailAddress, account.PhoneNumber, account.Address))
+        if (account.PaymentInformation == null || !AccountsLogic.HasCompleteContactInformation(account.FirstName,
+                account.LastName, account.EmailAddress, account.PhoneNumber, account.Address))
         {
             if (account.PaymentInformation == null)
             {
@@ -397,7 +458,8 @@ static class FlightManagement
                 }
             }
 
-            if (!AccountsLogic.HasCompleteContactInformation(account.FirstName, account.LastName, account.EmailAddress, account.PhoneNumber, account.Address))
+            if (!AccountsLogic.HasCompleteContactInformation(account.FirstName, account.LastName, account.EmailAddress,
+                    account.PhoneNumber, account.Address))
             {
                 Console.WriteLine("\nComplete contact information is required to complete a booking.");
                 Console.WriteLine("Please update the following missing details:\n");
@@ -406,18 +468,22 @@ static class FlightManagement
                 {
                     Console.WriteLine("- First Name");
                 }
+
                 if (string.IsNullOrEmpty(account.LastName))
                 {
                     Console.WriteLine("- Last Name");
                 }
+
                 if (string.IsNullOrEmpty(account.EmailAddress))
                 {
                     Console.WriteLine("- Email Address");
                 }
+
                 if (string.IsNullOrEmpty(account.PhoneNumber))
                 {
                     Console.WriteLine("- Phone Number");
                 }
+
                 if (string.IsNullOrEmpty(account.Address))
                 {
                     Console.WriteLine("- Address");
@@ -434,7 +500,8 @@ static class FlightManagement
                     var accounts = AccountsAccess.LoadAll();
                     account = accounts.FirstOrDefault(x => x.Id == account.Id);
 
-                    if (!AccountsLogic.HasCompleteContactInformation(account.FirstName, account.LastName, account.EmailAddress, account.PhoneNumber, account.Address))
+                    if (!AccountsLogic.HasCompleteContactInformation(account.FirstName, account.LastName,
+                            account.EmailAddress, account.PhoneNumber, account.Address))
                     {
                         Console.WriteLine("Contact information not updated completely. Booking cannot proceed.");
                         return;
@@ -471,7 +538,8 @@ static class FlightManagement
 
             bool includeInsuranceForReturn = PromptForInsurance(passengerCount, "return");
 
-            if (account.PaymentInformation == null || !AccountsLogic.HasCompleteContactInformation(account.FirstName, account.LastName, account.EmailAddress, account.PhoneNumber, account.Address))
+            if (account.PaymentInformation == null || !AccountsLogic.HasCompleteContactInformation(account.FirstName,
+                    account.LastName, account.EmailAddress, account.PhoneNumber, account.Address))
             {
                 if (account.PaymentInformation == null)
                 {
@@ -500,7 +568,8 @@ static class FlightManagement
                     }
                 }
 
-                if (!AccountsLogic.HasCompleteContactInformation(account.FirstName, account.LastName, account.EmailAddress, account.PhoneNumber, account.Address))
+                if (!AccountsLogic.HasCompleteContactInformation(account.FirstName, account.LastName,
+                        account.EmailAddress, account.PhoneNumber, account.Address))
                 {
                     Console.WriteLine("\nComplete contact information is required to complete a booking.");
                     Console.WriteLine("Please update the following missing details:\n");
@@ -509,18 +578,22 @@ static class FlightManagement
                     {
                         Console.WriteLine("- First Name");
                     }
+
                     if (string.IsNullOrEmpty(account.LastName))
                     {
                         Console.WriteLine("- Last Name");
                     }
+
                     if (string.IsNullOrEmpty(account.EmailAddress))
                     {
                         Console.WriteLine("- Email Address");
                     }
+
                     if (string.IsNullOrEmpty(account.PhoneNumber))
                     {
                         Console.WriteLine("- Phone Number");
                     }
+
                     if (string.IsNullOrEmpty(account.Address))
                     {
                         Console.WriteLine("- Address");
@@ -537,7 +610,8 @@ static class FlightManagement
                         var accounts = AccountsAccess.LoadAll();
                         account = accounts.FirstOrDefault(x => x.Id == account.Id);
 
-                        if (!AccountsLogic.HasCompleteContactInformation(account.FirstName, account.LastName, account.EmailAddress, account.PhoneNumber, account.Address))
+                        if (!AccountsLogic.HasCompleteContactInformation(account.FirstName, account.LastName,
+                                account.EmailAddress, account.PhoneNumber, account.Address))
                         {
                             Console.WriteLine("Contact information not updated completely. Booking cannot proceed.");
                             return;

@@ -18,7 +18,7 @@ public class FlightsLogic
 
     public FlightModel GetFlightsById(int flightId)
     {
-       return AvailableFlights
+        return AvailableFlights
             .FirstOrDefault(f => f.FlightId == flightId && DateTime.Parse(f.DepartureTime) >= DateTime.Now);
     }
 
@@ -27,7 +27,8 @@ public class FlightsLogic
         return AvailableFlights
             .Where(f => f.Origin.Equals(origin) && f.Destination.Equals(destination) &&
                         DateTime.Parse(f.DepartureTime) >= DateTime.Now)
-            .OrderBy(f => f.SeatClassOptions.FirstOrDefault(option => option.SeatClass == seatClass)?.Price ?? int.MaxValue)
+            .OrderBy(f =>
+                f.SeatClassOptions.FirstOrDefault(option => option.SeatClass == seatClass)?.Price ?? int.MaxValue)
             .ToList();
     }
 
@@ -57,6 +58,15 @@ public class FlightsLogic
         return AvailableFlights
             .Where(f => f.Origin.Equals(origin) && f.Destination.Equals(destination) &&
                         DateTime.Parse(f.DepartureTime) >= DateTime.Now)
+            .ToList();
+    }
+
+    public List<FlightModel> GetReturnFlights(FlightModel selectedFlight)
+    {
+        return AvailableFlights
+            .Where(f => f.Origin == selectedFlight.Destination &&
+                        f.Destination == selectedFlight.Origin &&
+                        DateTime.Parse(f.DepartureTime) > DateTime.Parse(selectedFlight.ArrivalTime))
             .ToList();
     }
 
@@ -131,14 +141,13 @@ public class FlightsLogic
             .ToList();
     }
 
-     public void AddFlight(FlightModel newFlight)
+    public void AddFlight(FlightModel newFlight)
     {
         // Validate flight
         ValidateFlight(newFlight);
-        
+
         // Generate new ID
-        int newId = AvailableFlights.Count > 0 ? 
-            AvailableFlights.Max(f => f.FlightId) + 1 : 1;
+        int newId = AvailableFlights.Count > 0 ? AvailableFlights.Max(f => f.FlightId) + 1 : 1;
         newFlight.FlightId = newId;
 
         // Add to list and save
@@ -177,10 +186,10 @@ public class FlightsLogic
     {
         if (string.IsNullOrWhiteSpace(flight.Origin))
             throw new ArgumentException("Origin is required");
-        
+
         if (string.IsNullOrWhiteSpace(flight.Destination))
             throw new ArgumentException("Destination is required");
-        
+
         if (string.IsNullOrWhiteSpace(flight.FlightNumber))
             throw new ArgumentException("Flight number is required");
 
