@@ -111,18 +111,23 @@ public class BookingLogic
         var flight = _flights.FirstOrDefault(f => f.Destination.Equals(destination, StringComparison.OrdinalIgnoreCase));
         if (flight == null || flight.SeatClassOptions == null) return 0;
     
-        int baggagePrice = 30;
+        const int baggagePrice = 30;
     
-        return passengers.Sum(p =>
+        var total = passengers.Sum(p =>
         {
             var seatClass = GetSeatClass(p.SeatNumber);
             
-            var basePrice = (int)(flight.SeatClassOptions
+            var basePrice = flight.SeatClassOptions
                 .FirstOrDefault(so => so.SeatClass.Equals(seatClass, StringComparison.OrdinalIgnoreCase))
-                ?.Price ?? 0);
+                ?.Price ?? 0;
     
-            return basePrice + (p.HasCheckedBaggage ? baggagePrice : 0);
+            var totalPrice = basePrice + (p.HasCheckedBaggage ? baggagePrice : 0);
+            return totalPrice;
         });
+    
+        // Ensure changes are saved to json
+        BookingAccess.WriteAll(_bookings);
+        return total;
     }
     
     private static string GetSeatClass(string seatNumber)

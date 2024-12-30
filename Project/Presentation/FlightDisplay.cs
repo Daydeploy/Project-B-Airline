@@ -92,7 +92,7 @@ static class FlightDisplay
     }
 
     // Displays details for a specific booking
-        public static void DisplayBookingDetails(BookingModel booking, FlightModel flight)
+    public static void DisplayBookingDetails(BookingModel booking, FlightModel flight)
     {
         if (booking == null) // anders krijg je een NullReferenceException 
         {

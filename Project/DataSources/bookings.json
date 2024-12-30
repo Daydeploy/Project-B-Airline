@@ -282,92 +282,19 @@
     "entertainment": null
   },
   {
-    "bookingId": 4411,
+    "bookingId": 7303,
     "userId": 1,
-    "flightId": 0,
-    "totalPrice": 15000,
+    "flightId": 1368,
+    "totalPrice": 1505,
     "passengers": [
       {
-        "name": "haks",
+        "name": "Pratheeban",
         "hasPet": false,
         "petDetails": null,
-        "seatNumber": "PJ1",
+        "seatNumber": "1A",
         "hasCheckedBaggage": false,
         "shopItems": [],
         "specialLuggage": "",
-        "firstName": null,
-        "lastName": null,
-        "dateOfBirth": "0001-01-01T00:00:00",
-        "gender": null,
-        "nationality": null,
-        "fullName": " ",
-        "phoneNumber": null,
-        "address": null,
-        "id": 0
-      }
-    ],
-    "pets": [],
-    "comfortPackages": null,
-    "planeType": "Bombardier Learjet 75",
-    "entertainment": null
-  },
-  {
-    "bookingId": 5275,
-    "userId": 1,
-    "flightId": 0,
-    "totalPrice": 15000,
-    "passengers": [
-      {
-        "name": "Pail",
-        "hasPet": false,
-        "petDetails": null,
-        "seatNumber": "PJ1",
-        "hasCheckedBaggage": false,
-        "shopItems": [],
-        "specialLuggage": "",
-        "firstName": null,
-        "lastName": null,
-        "dateOfBirth": "0001-01-01T00:00:00",
-        "gender": null,
-        "nationality": null,
-        "fullName": " ",
-        "phoneNumber": null,
-        "address": null,
-        "id": 0
-      }
-    ],
-    "pets": [],
-    "comfortPackages": null,
-    "planeType": "Bombardier Learjet 75",
-    "entertainment": null
-  },
-  {
-    "bookingId": 9428,
-    "userId": 1,
-    "flightId": 1234,
-    "totalPrice": 26039,
-    "passengers": [
-      {
-        "name": "Dion",
-        "hasPet": false,
-        "petDetails": null,
-        "seatNumber": "6H",
-        "hasCheckedBaggage": true,
-        "shopItems": [
-          {
-            "name": "Van Cleef \u0026 Arpels Alhambra Necklace (18K Yellow Gold)",
-            "price": 12500,
-            "category": "Jewelry",
-            "description": "Classic clover design"
-          },
-          {
-            "name": "Van Cleef \u0026 Arpels Alhambra Necklace (18K Yellow Gold)",
-            "price": 12500,
-            "category": "Jewelry",
-            "description": "Classic clover design"
-          }
-        ],
-        "specialLuggage": "Drumstel",
         "firstName": null,
         "lastName": null,
         "dateOfBirth": "0001-01-01T00:00:00",
@@ -385,46 +312,16 @@
     "entertainment": null
   },
   {
-    "bookingId": 6846,
+    "bookingId": 2595,
     "userId": 1,
-    "flightId": 1302,
-    "totalPrice": 1608,
+    "flightId": 1368,
+    "totalPrice": 1505,
     "passengers": [
       {
-        "name": "Dion",
+        "name": "Adonai",
         "hasPet": false,
         "petDetails": null,
-        "seatNumber": "2B",
-        "hasCheckedBaggage": true,
-        "shopItems": [],
-        "specialLuggage": "Drumstel",
-        "firstName": null,
-        "lastName": null,
-        "dateOfBirth": "0001-01-01T00:00:00",
-        "gender": null,
-        "nationality": null,
-        "fullName": " ",
-        "phoneNumber": null,
-        "address": null,
-        "id": 0
-      }
-    ],
-    "pets": [],
-    "comfortPackages": null,
-    "planeType": null,
-    "entertainment": null
-  },
-  {
-    "bookingId": 1938,
-    "userId": 1,
-    "flightId": 1303,
-    "totalPrice": 1150,
-    "passengers": [
-      {
-        "name": "test",
-        "hasPet": false,
-        "petDetails": null,
-        "seatNumber": "4A",
+        "seatNumber": "1B",
         "hasCheckedBaggage": false,
         "shopItems": [],
         "specialLuggage": "",

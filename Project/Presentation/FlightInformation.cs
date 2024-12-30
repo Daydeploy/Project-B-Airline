@@ -332,7 +332,7 @@ static class FlightInformation
         foreach (var seatClass in classes)
         {
             Console.Write($"\nEnter price for {seatClass} class (or press Enter to skip): ");
-            if (double.TryParse(Console.ReadLine(), out double price))
+            if (int.TryParse(Console.ReadLine(), out int price))
             {
                 Console.WriteLine($"\nEnter seasonal multipliers for {seatClass} class:");
                 Console.Write("Summer multiplier (e.g. 1.2 for 20% increase): ");
