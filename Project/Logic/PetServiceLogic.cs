@@ -12,10 +12,16 @@ public class PetServiceLogic
         };
     }
 
-    public void AddPetToBooking(int bookingId, PetModel petDetails)
+    public (bool success, string error) AddPetToBooking(int bookingId, PetModel petDetails)
     {
-        ValidatePetBooking(petDetails);
+        var validationResult = ValidatePetBooking(petDetails);
+        if (!validationResult.success)
+        {
+            return validationResult;
+        }
+
         PetDataAccess.SavePetBooking(petDetails, bookingId);
+        return (true, string.Empty);
     }
 
     public decimal CalculatePetFees(PetModel petDetails)
@@ -28,18 +34,18 @@ public class PetServiceLogic
         return new List<string> { "1A", "1B", "2A" };
     }
 
-    public void ValidatePetBooking(PetModel petDetails)
+    public (bool success, string error) ValidatePetBooking(PetModel petDetails)
     {
         if (!_petWeightLimits.ContainsKey(petDetails.Type))
         {
-            throw new ArgumentException($"Invalid pet type. Valid types are: {string.Join(", ", _petWeightLimits.Keys)}");
+            return (false, $"Invalid pet type. Valid types are: {string.Join(", ", _petWeightLimits.Keys)}");
         }
 
         var (maxCabinWeight, maxWeight) = _petWeightLimits[petDetails.Type];
 
         if (petDetails.Weight > maxWeight)
         {
-            throw new ArgumentException($"Pet is too heavy. Maximum allowed weight is {maxWeight}kg.");
+            return (false, $"Pet is too heavy. Maximum allowed weight is {maxWeight}kg.");
         }
 
         if (petDetails.Weight > maxCabinWeight)
@@ -48,11 +54,13 @@ public class PetServiceLogic
         }
         else if ((petDetails.Type == "Dog" || petDetails.Type == "Cat") && string.IsNullOrEmpty(petDetails.SeatingLocation))
         {
-            throw new ArgumentException("Seating location must be specified for cats and dogs under cabin weight limit.");
+            return (false, "Seating location must be specified for cats and dogs under cabin weight limit.");
         }
         else if (petDetails.Type == "Other")
         {
             petDetails.SeatingLocation = "Luggage Room";
         }
+
+        return (true, string.Empty);
     }
 }

@@ -8,39 +8,25 @@ public class BookingLogic
 
     public static List<BookingModel> GetBookingsForFlight(int flightId)
     {
-        try
-        {
-            return _bookings
-                .Where(booking => booking.FlightId == flightId)
-                .ToList();
-        }
-        catch (Exception ex)
-        {
-            return new List<BookingModel>();
-        }
+        return _bookings
+            .Where(booking => booking.FlightId == flightId)
+            .ToList();
     }
 
     public static List<BookingModel> GetBookingsForUser(int userId)
     {
-        try
-        {
-            return _bookings
-                .Where(booking => booking.UserId == userId)
-                .ToList();
-        }
-        catch (Exception ex)
-        {
-            return new List<BookingModel>();
-        }
+        return _bookings
+            .Where(booking => booking.UserId == userId)
+            .ToList();
     }
 
     public static BookingModel CreateBooking(int userId, int flightId, List<PassengerModel> passengerDetails, 
         List<PetModel> petDetails, bool isPrivateJet = false, string jetType = null)
     {
         int bookingId = GenerateBookingId();
-        int totalPrice;
+        int totalPrice = 0;
 
-        if (isPrivateJet)
+        if (isPrivateJet && jetType != null)
         {
             var privateJetPrices = new Dictionary<string, int>
             {
@@ -48,16 +34,29 @@ public class BookingLogic
                 { "Bombardier Global 8280", 25000 }
             };
 
-            totalPrice = privateJetPrices[jetType];
+            if (privateJetPrices.ContainsKey(jetType))
+            {
+                totalPrice = privateJetPrices[jetType];
+            }
+            else
+            {
+                return null;
+            }
         }
         else
         {
             var flight = _flights.FirstOrDefault(f => f.FlightId == flightId);
+            if (flight == null) return null;
+
             totalPrice = CalculateTotalPrice(flight.Destination, passengerDetails);
             
             foreach (var pet in petDetails)
             {
-                totalPrice += (int)PetDataAccess.GetPetFees(pet.Type, pet.SeatingLocation);
+                var petFees = PetDataAccess.GetPetFees(pet.Type, pet.SeatingLocation);
+                if (petFees.HasValue)
+                {
+                    totalPrice += (int)petFees.Value;
+                }
             }
         }
 
@@ -94,16 +93,21 @@ public class BookingLogic
         return bookingId;
     }
 
-    public static int GetUserId(int id)
+    public static (int userId, bool success) GetUserId(int id)
     {
-        return _accounts.FirstOrDefault(x => x.Id.Equals(id))?.Id 
-            ?? throw new Exception("User not found");
+        var account = _accounts.FirstOrDefault(x => x.Id.Equals(id));
+        return account != null 
+            ? (account.Id, true) 
+            : (0, false);
     }
 
-    public static int GetFlightId(string destination)
+    public static (int flightId, bool success) GetFlightId(string destination)
     {
-        return _flights.FirstOrDefault(f => f.Destination.Equals(destination, StringComparison.OrdinalIgnoreCase))?.FlightId 
-            ?? throw new Exception("Flight not found");
+        var flight = _flights.FirstOrDefault(f => 
+            f.Destination.Equals(destination, StringComparison.OrdinalIgnoreCase));
+        return flight != null 
+            ? (flight.FlightId, true) 
+            : (0, false);
     }
 
     private static int CalculateTotalPrice(string destination, List<PassengerModel> passengers)

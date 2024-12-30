@@ -1,6 +1,5 @@
 public class MilesLogic
 {
-    // XP ranges
     private const int _bronzeMin = 0;
     private const int _silverMin = 101;
     private const int _goldMin = 201;
@@ -14,7 +13,6 @@ public class MilesLogic
         Platinum
     }
 
-    // Distance range
     private const int _short_Max = 500;
     private const int _medium_Max = 2500;
 
@@ -33,7 +31,7 @@ public class MilesLogic
         {("Long", "First"), 30},
     };
 
-    public static string CalculateLevel(int experience) // Returns the Level of the user as a string.
+    public static string CalculateLevel(int experience)
     {
         if (experience >= _platinumMin)
         {
@@ -53,12 +51,12 @@ public class MilesLogic
         }
     }
 
-    public static void UpdateAccountLevel(int id)
+    public static bool UpdateAccountLevel(int id)
     {
         List<AccountModel> _accounts = AccountsAccess.LoadAll();
 
         var account = _accounts.FirstOrDefault(x => x.Id == id);
-        if (account == null) throw new Exception($"Account with ID {id}, not found.");
+        if (account == null) return false;
 
         foreach (var miles in account.Miles)
         {
@@ -74,6 +72,7 @@ public class MilesLogic
         }
 
         AccountsAccess.WriteAll(_accounts);
+        return true;
     }
 
     public static void UpdateAllAccountLevels()
@@ -99,14 +98,13 @@ public class MilesLogic
         AccountsAccess.WriteAll(_accounts);
     }
 
-    public static string DetermineFlightType(int distance) // Returns the type of flight for xp calculation. 
+    public static string DetermineFlightType(int distance)
     {
         if (distance <= _short_Max) return "Short";
         if (distance <= _medium_Max) return "Medium";
         return "Long";
     }
 
-    // TODO implement conditional statements for every flight type
     public static string DetermineSeatClass(FlightModel flight, PassengerModel passenger)
     {
         return flight.SeatClassOptions.FirstOrDefault()?.SeatClass ?? "Economy";
@@ -117,7 +115,7 @@ public class MilesLogic
         if (!DateTime.TryParse(flight.DepartureTime, out DateTime departureTime) ||
             departureTime > DateTime.Now)
         {
-            return 0;  // No XP for flights that have not occcured.
+            return 0;
         }
 
         string flightType = DetermineFlightType(flight.Distance);
@@ -127,10 +125,10 @@ public class MilesLogic
             return xp;
         }
 
-        return 0; // Return 0 if seatClass not found.
+        return 0;
     }
 
-    public static void UpdateFlightExperience(int accountId)
+    public static bool UpdateFlightExperience(int accountId)
     {
         var accounts = AccountsAccess.LoadAll();
         var bookings = BookingAccess.LoadAll();
@@ -139,32 +137,27 @@ public class MilesLogic
         var account = accounts.FirstOrDefault(a => a.Id == accountId);
         if (account == null || account.Miles == null || account.Miles.Count == 0)
         {
-            throw new ArgumentException($"Account {accountId} not found or has no miles record");
+            return false;
         }
 
         var milesRecord = account.Miles[0];
 
         if (!milesRecord.Enrolled)
         {
-            return;
+            return true;
         }
 
-        // Get bookings for this user
         var userBookings = bookings.Where(b => b.UserId == accountId).ToList();
 
         foreach (var booking in userBookings)
         {
-            // Find the flight associated with this booking
             var flight = flights.FirstOrDefault(f => f.FlightId == booking.FlightId);
             if (flight == null) continue;
 
-            // Iterate through passengers in the booking
             foreach (var passenger in booking.Passengers)
             {
-                // Determine seat class for the passenger
-                var seatClass = DetermineSeatClass(flight, passenger); // Update as necessary to match data structure
+                var seatClass = DetermineSeatClass(flight, passenger);
 
-                // Calculate experience points
                 int xp = CalculateExperiencePoints(flight, seatClass);
 
                 if (xp > 0)
@@ -175,13 +168,13 @@ public class MilesLogic
             }
         }
 
-        // Update level after accumulating XP
         milesRecord.Level = CalculateLevel(milesRecord.Experience);
 
         AccountsAccess.WriteAll(accounts);
+        return true;
     }
 
-    public static int CalculateMilesFromBooking(int accountId)
+    public static (int earnedMiles, bool success) CalculateMilesFromBooking(int accountId)
     {
         var accounts = AccountsAccess.LoadAll();
         var bookings = BookingAccess.LoadAll();
@@ -190,19 +183,18 @@ public class MilesLogic
 
         if (account == null || account.Miles == null || account.Miles.Count == 0)
         {
-            throw new ArgumentException($"Account {accountId} not found or has no miles record");
+            return (0, false);
         }
 
         var milesRecord = account.Miles[0];
 
         if (!milesRecord.Enrolled)
         {
-            return 0;
+            return (0, true);
         }
 
         var currentLevel = milesRecord.Level;
 
-        // Get bookings for this user
         var userBookings = bookings.Where(b => b.UserId == accountId).ToList();
 
         int totalMilesEarned = 0;
@@ -215,75 +207,62 @@ public class MilesLogic
                 "Silver" => 6,
                 "Gold" => 7,
                 "Platinum" => 8,
-                _ => 4 // Default to Bronze rate if level is unexpected
+                _ => 4
             };
 
             int bookingMiles = (int)(booking.TotalPrice * milesMultiplier);
             totalMilesEarned += bookingMiles;
 
-            // Update miles history
             milesRecord.History += $"\nEarned {bookingMiles} Miles from booking {booking.BookingId} - {booking.TotalPrice} euros at {DateTime.Now:yyyy-MM-dd HH:mm:ss}";
         }
         milesRecord.Points += totalMilesEarned;
         AccountsAccess.WriteAll(accounts);
-        return totalMilesEarned;
+        return (totalMilesEarned, true);
     }
 
-    public static int BasicPointsRedemption(int accountId, int price, int bookingId)
+    public static (int finalPrice, bool success) BasicPointsRedemption(int accountId, int price, int bookingId)
     {
         var accounts = AccountsAccess.LoadAll();
         var bookings = BookingAccess.LoadAll();
 
         var account = accounts.FirstOrDefault(a => a.Id == accountId);
-
         if (account == null || account.Miles == null || account.Miles.Count == 0)
         {
-            throw new ArgumentException($"Account {accountId} not found or has no miles record");
+            return (price, false);
         }
 
         var milesRecord = account.Miles[0];
+        var booking = bookings.FirstOrDefault(b => b.BookingId == bookingId);
+        
+        if (booking == null)
+        {
+            return (price, false);
+        }
 
-        // Check if the account has enough points for redemption
         if (milesRecord.Points >= 50000)
         {
-            // Determine discount percentage based on user's level
             double discountPercentage = milesRecord.Level switch
             {
-                "Bronze" => 0.05, // 5%
-                "Silver" => 0.10, // 10%
-                "Gold" => 0.15, // 15%
-                "Platinum" => 0.20, // 20%
-                _ => 0.05 // Default to 5% if level is unexpected
+                "Bronze" => 0.05,
+                "Silver" => 0.10,
+                "Gold" => 0.15,
+                "Platinum" => 0.20,
+                _ => 0.05
             };
 
-            // Calculate discount amount
             int discountAmount = (int)(price * discountPercentage);
-
-            // Deduct points
             milesRecord.Points -= 50000;
-
-            // Add history entry for points redemption
             milesRecord.History += $"\nRedeemed 50000 points for {discountAmount} euro discount at {DateTime.Now:yyyy-MM-dd HH:mm:ss}";
 
-            // Locate the booking and update the total price
-            var booking = bookings.FirstOrDefault(b => b.BookingId == bookingId);
-            if (booking == null)
-            {
-                throw new ArgumentException($"Booking with ID {bookingId} not found.");
-            }
-
             booking.TotalPrice -= discountAmount;
-
-            // Save updates to the accounts and bookings
+            
             AccountsAccess.WriteAll(accounts);
             BookingAccess.WriteAll(bookings);
 
-            // Return the discounted price
-            return price - discountAmount;
+            return (price - discountAmount, true);
         }
 
-        // If not enough points, return the original price
-        return price;
+        return (price, true);
     }
 
 }

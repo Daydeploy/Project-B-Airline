@@ -5,19 +5,16 @@ public class EntertainmentDataAccess
 
     public static List<EntertainmentModel> LoadAll()
     {
-        return _entertainmentAccess.LoadAll();
+        return _entertainmentAccess.LoadAll() ?? new List<EntertainmentModel>();
     }
 
-    public static void WriteAll(List<EntertainmentModel> entertainments)
+    public static bool WriteAll(List<EntertainmentModel> entertainments)
     {
-        try
-        {
-            _entertainmentAccess.WriteAll(entertainments);
-        }
-        catch (Exception ex)
-        {
-            throw new Exception($"Failed to write entertainment data: {ex.Message}");
-        }
+        if (entertainments == null)
+            return false;
+            
+        _entertainmentAccess.WriteAll(entertainments);
+        return true;
     }
 
     public static EntertainmentModel? GetEntertainment(int entertainmentId)

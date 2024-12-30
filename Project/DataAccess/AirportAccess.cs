@@ -8,22 +8,25 @@ public static class AirportAccess
         return _airportAccess.LoadAll();
     }
 
-    public static void WriteAllAirports(List<AirportModel> airports)
+    public static bool WriteAllAirports(List<AirportModel> airports)
     {
+        if (airports == null)
+            return false;
+            
         _airportAccess.WriteAll(airports);
+        return true;
     }
 
-    public static void AddAirport(AirportModel newAirport)
+    public static bool AddAirport(AirportModel newAirport)
     {
+        if (newAirport == null)
+            return false;
+
         var airports = LoadAllAirports();
-        if (!airports.Any(a => a.AirportID == newAirport.AirportID))
-        {
-            airports.Add(newAirport);
-            _airportAccess.WriteAll(airports);
-        }
-        else
-        {
-            throw new Exception($"Airport with ID {newAirport.AirportID} already exists");
-        }
+        if (airports.Any(a => a.AirportID == newAirport.AirportID))
+            return false;
+        
+        airports.Add(newAirport);
+        return WriteAllAirports(airports);
     }
 }

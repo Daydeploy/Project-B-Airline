@@ -87,14 +87,14 @@ static class FlightInformation
                 Console.Write("\nSave these changes? (Y/N): ");
                 if (Console.ReadLine()?.ToUpper() == "Y")
                 {
-                    try
+                    bool success = flightsLogic.UpdateFlight(selectedFlight);
+                    if (success)
                     {
-                        flightsLogic.UpdateFlight(selectedFlight);
                         Console.WriteLine("Flight information updated successfully!");
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        Console.WriteLine($"Error updating flight: {ex.Message}");
+                        Console.WriteLine("Error: Unable to update flight information.");
                     }
                     Console.WriteLine("\nPress any key to continue...");
                     Console.ReadKey();
@@ -117,14 +117,14 @@ static class FlightInformation
         var newFlight = CollectFlightDetails();
         if (newFlight == null) return;
 
-        try
+        bool success = flightsLogic.AddFlight(newFlight);
+        if (success)
         {
-            flightsLogic.AddFlight(newFlight);
             Console.WriteLine("\nFlight added successfully!");
         }
-        catch (Exception ex)
+        else
         {
-            Console.WriteLine($"\nError adding flight: {ex.Message}");
+            Console.WriteLine("\nError: Unable to add flight.");
         }
 
         Console.WriteLine("\nPress any key to continue...");
@@ -165,14 +165,14 @@ static class FlightInformation
         Console.Write($"\nAre you sure you want to delete flight {selectedFlight.FlightNumber}? (Y/N): ");
         if (Console.ReadLine()?.ToUpper() == "Y")
         {
-            try
+            bool success = flightsLogic.DeleteFlight(selectedFlight.FlightId);
+            if (success)
             {
-                flightsLogic.DeleteFlight(selectedFlight.FlightId);
                 Console.WriteLine("\nFlight deleted successfully!");
             }
-            catch (Exception ex)
+            else
             {
-                Console.WriteLine($"\nError deleting flight: {ex.Message}");
+                Console.WriteLine("\nError: Unable to delete flight.");
             }
         }
         else

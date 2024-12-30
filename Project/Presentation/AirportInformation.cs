@@ -208,14 +208,14 @@ static class AirportInformation
                 Console.Write("\nSave these changes? (Y/N): ");
                 if (Console.ReadLine()?.ToUpper() == "Y")
                 {
-                    try
+                    bool success = airportLogic.UpdateAirport(selectedAirport);
+                    if (success)
                     {
-                        airportLogic.UpdateAirport(selectedAirport);
                         Console.WriteLine("Airport information updated successfully!");
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        Console.WriteLine($"Error updating airport: {ex.Message}");
+                        Console.WriteLine("Error: Failed to update airport information.");
                     }
                     Console.WriteLine("\nPress any key to continue...");
                     Console.ReadKey();
@@ -327,14 +327,14 @@ static class AirportInformation
             address
         );
 
-        try
+        bool success = airportLogic.AddAirport(newAirport);
+        if (success)
         {
-            airportLogic.AddAirport(newAirport);
             Console.WriteLine("\nAirport added successfully!");
         }
-        catch (Exception ex)
+        else
         {
-            Console.WriteLine($"\nError adding airport: {ex.Message}");
+            Console.WriteLine("\nError: Failed to add airport.");
         }
 
         Console.WriteLine("\nPress any key to continue...");
@@ -369,16 +369,14 @@ static class AirportInformation
         
         if (Console.ReadLine()?.ToUpper() == "Y")
         {
-            try
+            bool success = AirportAccess.WriteAllAirports(airports);
+            if (success)
             {
-                // Remove airport and update JSON
-                airports.RemoveAt(selectedIndex);
-                AirportAccess.WriteAllAirports(airports);
                 Console.WriteLine("\nAirport deleted successfully!");
             }
-            catch (Exception ex)
+            else
             {
-                Console.WriteLine($"\nError deleting airport: {ex.Message}");
+                Console.WriteLine("\nError: Failed to delete airport.");
             }
         }
         else

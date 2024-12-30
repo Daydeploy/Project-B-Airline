@@ -275,9 +275,10 @@ public class SeatSelectionUI
     public string GetSeatClass(string seatNumber)
     {
         if (currentConfig == null)
-            throw new InvalidOperationException("Plane configuration not set. Call SelectSeat first.");
-            
-        int row = int.Parse(new string(seatNumber.Where(char.IsDigit).ToArray()));
+            return string.Empty;
+        
+        if (!int.TryParse(new string(seatNumber.Where(char.IsDigit).ToArray()), out int row))
+            return string.Empty;
         
         if (row <= currentConfig.SeatClasses[0].EndRow)
             return "First";
@@ -286,12 +287,17 @@ public class SeatSelectionUI
         return "Economy";
     }
         
-    public string GetSeatClass(string seatNumber, string planeType) // coor comfortpackeges gebeuren
+    public string GetSeatClass(string seatNumber, string planeType)
     {
-        int row = int.Parse(new string(seatNumber.Where(char.IsDigit).ToArray()));
-        var planeConfig = planeConfigs[planeType];
+        if (string.IsNullOrEmpty(seatNumber) || string.IsNullOrEmpty(planeType))
+            return string.Empty;
+        
+        if (!planeConfigs.TryGetValue(planeType, out PlaneConfig planeConfig))
+            return string.Empty;
+        
+        if (!int.TryParse(new string(seatNumber.Where(char.IsDigit).ToArray()), out int row))
+            return string.Empty;
 
-        // Check which class range the row falls into
         var (firstStart, firstEnd) = planeConfig.SeatClasses[0];
         var (businessStart, businessEnd) = planeConfig.SeatClasses[1];
         
@@ -300,7 +306,7 @@ public class SeatSelectionUI
         if (row >= businessStart && row <= businessEnd)
             return "Business";
 
-        return "Economy"; //default
+        return "Economy";
     }
 
 }

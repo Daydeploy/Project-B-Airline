@@ -141,17 +141,17 @@ public class ShopUI
         
         if (Console.ReadLine()?.ToUpper() == "Y")
         {
-            try
+            var result = smallItemsLogic.AddItemsToPassenger(cart, bookingId, passengerIndex);
+            if (result.IsSuccess)
             {
-                smallItemsLogic.AddItemsToPassenger(cart, bookingId, passengerIndex);
                 Console.WriteLine("\nPurchase completed successfully!");
                 Console.WriteLine("Press any key to continue...");
                 Console.ReadKey();
                 return true;
             }
-            catch (Exception ex)
+            else
             {
-                Console.WriteLine($"\nError: {ex.Message}");
+                Console.WriteLine($"\nError: {result.Error}");
                 Console.WriteLine("Press any key to continue...");
                 Console.ReadKey();
                 return false;
@@ -164,7 +164,7 @@ public class ShopUI
         cart.Add(new ShopItemModel 
         { 
             Name = item.Name,
-            Price = (decimal)item.Price, // Convert double to decimal
+            Price = (decimal)item.Price,
             Category = category,
             Description = item.Description
         });
