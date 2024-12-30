@@ -53,9 +53,9 @@ public class BookingLogic
             foreach (var pet in petDetails)
             {
                 var petFees = PetDataAccess.GetPetFees(pet.Type, pet.SeatingLocation);
-                if (petFees.HasValue)
+                if (petFees != 0)
                 {
-                    totalPrice += (int)petFees.Value;
+                    totalPrice += (int)petFees;
                 }
             }
         }

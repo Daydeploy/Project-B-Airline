@@ -141,8 +141,8 @@ public class ShopUI
         
         if (Console.ReadLine()?.ToUpper() == "Y")
         {
-            var result = smallItemsLogic.AddItemsToPassenger(cart, bookingId, passengerIndex);
-            if (result.IsSuccess)
+            var success = smallItemsLogic.AddItemsToPassenger(cart, bookingId, passengerIndex);
+            if (success)
             {
                 Console.WriteLine("\nPurchase completed successfully!");
                 Console.WriteLine("Press any key to continue...");
@@ -151,7 +151,7 @@ public class ShopUI
             }
             else
             {
-                Console.WriteLine($"\nError: {result.Error}");
+                Console.WriteLine("\nError: Failed to add items to passenger.");
                 Console.WriteLine("Press any key to continue...");
                 Console.ReadKey();
                 return false;

@@ -327,8 +327,8 @@ static class AirportInformation
             address
         );
 
-        bool success = airportLogic.AddAirport(newAirport);
-        if (success)
+        airports.Add(newAirport);
+        if (AirportAccess.WriteAllAirports(airports))
         {
             Console.WriteLine("\nAirport added successfully!");
         }

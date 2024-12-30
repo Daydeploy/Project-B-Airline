@@ -144,11 +144,11 @@ static class EntertainmentUI
             bool allSuccessful = true;
             foreach (var selectedOptionId in selectedOptions)
             {
-                bool success = _entertainmentLogic.AddEntertainmentToBooking(bookingId, selectedOptionId);
+                var (success, errorMessage) = _entertainmentLogic.AddEntertainmentToBooking(bookingId, selectedOptionId);
                 if (!success)
                 {
                     allSuccessful = false;
-                    Console.WriteLine($"\nFailed to add entertainment option {selectedOptionId}");
+                    Console.WriteLine($"\nFailed to add entertainment option {selectedOptionId}: {errorMessage}");
                 }
             }
             

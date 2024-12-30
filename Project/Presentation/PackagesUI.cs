@@ -1,6 +1,6 @@
 static class PackagesUI
 {
-    private static readonly ComfortPackageServiceLogic ComfortPackageServiceLogic = new ComfortPackageServiceLogic();
+    private static readonly ComfortPackageServiceLogic _comfortPackageServiceLogic = new ComfortPackageServiceLogic();
 
     private static void DisplayPackageOptions()
     {
@@ -103,7 +103,7 @@ static class PackagesUI
             return;
         }
 
-        bool success = ComfortPackageServiceLogic.AddPackageToBooking(bookingId, packageId);
+        var (success, error) = _comfortPackageServiceLogic.AddPackageToBooking(bookingId, packageId);
         if (success)
         {
             Console.WriteLine("\nComfort package added successfully!");

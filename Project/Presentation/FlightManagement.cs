@@ -872,10 +872,19 @@ static class FlightManagement
         }
 
         // Calculate and display final price
-        int earnedMiles = MilesLogic.CalculateMilesFromBooking(UserLogin.UserAccountServiceLogic.CurrentUserId);
-        Console.WriteLine($"\nMiles Earned: {earnedMiles}");
-        booking.TotalPrice = MilesLogic.BasicPointsRedemption(UserLogin.UserAccountServiceLogic.CurrentUserId,
+        var (earnedMiles, milesSuccess) = MilesLogic.CalculateMilesFromBooking(UserLogin.UserAccountServiceLogic.CurrentUserId);
+        if (milesSuccess)
+        {
+            Console.WriteLine($"\nMiles Earned: {earnedMiles}");
+        }
+
+        var (newTotalPrice, priceSuccess) = MilesLogic.BasicPointsRedemption(UserLogin.UserAccountServiceLogic.CurrentUserId,
             booking.TotalPrice, booking.BookingId);
+        if (priceSuccess)
+        {
+            booking.TotalPrice = newTotalPrice;
+        }
+
         if (totalBaggageCost > 0)
         {
             Console.WriteLine($"  Baggage Cost: {totalBaggageCost:F2} EUR");
@@ -897,16 +906,21 @@ static class FlightManagement
         Console.WriteLine("Rewards Summary:");
         Console.WriteLine("------------------------------------------------------------");
 
-        int milesEarned = MilesLogic.CalculateMilesFromBooking(UserLogin.UserAccountServiceLogic.CurrentUserId);
-        Console.WriteLine($"  Miles Earned: {milesEarned}");
+        var (milesEarned, milesEarnedSuccess) = MilesLogic.CalculateMilesFromBooking(UserLogin.UserAccountServiceLogic.CurrentUserId);
+        if (milesEarnedSuccess)
+        {
+            Console.WriteLine($"  Miles Earned: {milesEarned}");
+        }
 
-        double discountedPrice = MilesLogic.BasicPointsRedemption(
+        var (discountedPrice, discountSuccess) = MilesLogic.BasicPointsRedemption(
             UserLogin.UserAccountServiceLogic.CurrentUserId,
             roundedTotalPrice,
             booking.BookingId
         );
-
-        Console.WriteLine($"  Discounted Total Price: {discountedPrice:F2} EUR\n");
+        if (discountSuccess)
+        {
+            Console.WriteLine($"  Discounted Total Price: {discountedPrice:F2} EUR\n");
+        }
 
         Console.WriteLine("------------------------------------------------------------");
         Console.WriteLine("Thank you for booking with us!");
