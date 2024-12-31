@@ -14,6 +14,9 @@ public class BookingModel
     [JsonPropertyName("totalPrice")]
     public int TotalPrice { get; set; }
 
+    [JsonPropertyName("bookingDate")]
+    public DateTime BookingDate { get; set; }
+
     [JsonPropertyName("passengers")]
     public List<PassengerModel> Passengers { get; set; }
 
@@ -35,10 +38,11 @@ public class BookingModel
         UserId = userId;
         FlightId = flightId;
         TotalPrice = totalPrice;
+        BookingDate = DateTime.Now;
         Passengers = passengers;
         Pets = pets;
         ComfortPackages = comfortPackages;
         PlaneType = planeType;
         Entertainment = entertainment;
-    }   
+    }
 }

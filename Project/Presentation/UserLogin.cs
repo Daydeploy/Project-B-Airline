@@ -40,19 +40,25 @@ static class UserLogin
         {
             Console.WriteLine("No account found with that email and password combination.");
             Console.WriteLine("\nPress any key to return to the main menu...");
-            Console.ReadKey();  
+            Console.ReadKey();
             MenuNavigation.Start();
         }
     }
 
     private static void ShowLoggedInMenu(AccountModel account)
-    {   
+    {
         if (account.EmailAddress.ToLower() == "admin")
         {
             AdminAccountUI.ShowAdminMenu();
             return;
         }
-        
+
+        if (account.Id == 0)
+        {
+            FinancePanelUI.FinanceMainMenu();
+            return;
+        }
+
         string[] menuItems = new[]
         {
             "Book a Flight",
@@ -169,7 +175,7 @@ static class UserLogin
     {
         string pass = "";
         ConsoleKeyInfo key;
-    
+
         do
         {
             key = Console.ReadKey(true);
@@ -190,7 +196,7 @@ static class UserLogin
                 Console.Write(showPassword ? key.KeyChar : '*');
             }
         } while (key.Key != ConsoleKey.Enter);
-    
+
         Console.WriteLine();
         return pass;
     }
