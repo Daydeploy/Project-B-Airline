@@ -4,6 +4,7 @@
     "userId": 1,
     "flightId": 1271,
     "totalPrice": 1110,
+    "bookingDate": "2024-12-02T12:42:19",
     "passengers": [
       {
         "name": "nu echtttt",
@@ -34,6 +35,7 @@
     "userId": 1,
     "flightId": 1271,
     "totalPrice": 1235,
+    "bookingDate": "2024-12-07T11:24:53",
     "passengers": [
       {
         "name": "God Please",
@@ -110,6 +112,7 @@
     "userId": 1,
     "flightId": 1223,
     "totalPrice": 3412,
+    "bookingDate": "2024-12-22T20:31:55",
     "passengers": [
       {
         "name": "Sil",
@@ -238,6 +241,7 @@
     "userId": 1,
     "flightId": 0,
     "totalPrice": 15000,
+    "bookingDate": "2024-11-27T16:40:35",
     "passengers": [
       {
         "name": "Sil",
@@ -286,6 +290,7 @@
     "userId": 1,
     "flightId": 1368,
     "totalPrice": 1505,
+    "bookingDate": "2024-11-29T13:34:13",
     "passengers": [
       {
         "name": "Pratheeban",
@@ -316,11 +321,13 @@
     "userId": 1,
     "flightId": 1368,
     "totalPrice": 1505,
+    "bookingDate": "2024-12-01T14:57:26",
     "passengers": [
       {
         "name": "Adonai",
         "hasPet": false,
         "petDetails": null,
+        "seatNumber": "1B",
         "seatNumber": "1B",
         "hasCheckedBaggage": false,
         "shopItems": [],
@@ -346,6 +353,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-13T09:41:29",
     "passengers": [
       {
         "name": "Elizabeth Gonzalez",
@@ -376,6 +384,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-29T13:26:48",
     "passengers": [
       {
         "name": "Betty Brown",
@@ -406,6 +415,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-30T09:29:24",
     "passengers": [
       {
         "name": "Jessica Brown",
@@ -436,6 +446,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-31T17:19:02",
     "passengers": [
       {
         "name": "Linda Miller",
@@ -466,6 +477,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-30T15:54:49",
     "passengers": [
       {
         "name": "Karen Williams",
@@ -496,6 +508,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-08T21:13:14",
     "passengers": [
       {
         "name": "Nancy Lewis",
@@ -526,6 +539,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-05T16:24:53",
     "passengers": [
       {
         "name": "John Williams",
@@ -556,6 +570,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-28T18:47:34",
     "passengers": [
       {
         "name": "William Lopez",
@@ -586,6 +601,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-27T14:46:25",
     "passengers": [
       {
         "name": "Jessica Lewis",
@@ -616,6 +632,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-09T11:44:10",
     "passengers": [
       {
         "name": "Betty Sanchez",
@@ -646,6 +663,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-28T18:25:43",
     "passengers": [
       {
         "name": "Nancy Williams",
@@ -676,6 +694,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-23T15:24:14",
     "passengers": [
       {
         "name": "Karen Jackson",
@@ -706,6 +725,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-07T17:43:41",
     "passengers": [
       {
         "name": "Joseph Harris",
@@ -736,6 +756,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-31T19:50:29",
     "passengers": [
       {
         "name": "Daniel Martinez",
@@ -766,6 +787,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-09T20:17:09",
     "passengers": [
       {
         "name": "Sandra Anderson",
@@ -796,6 +818,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-05T19:51:41",
     "passengers": [
       {
         "name": "Mark Martinez",
@@ -826,6 +849,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-16T15:44:22",
     "passengers": [
       {
         "name": "Jennifer Anderson",
@@ -856,6 +880,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-11T20:41:28",
     "passengers": [
       {
         "name": "Mary Jones",
@@ -886,6 +911,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-29T16:50:31",
     "passengers": [
       {
         "name": "Betty Clark",
@@ -916,6 +942,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-06T09:20:58",
     "passengers": [
       {
         "name": "Betty Harris",
@@ -946,6 +973,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-10T17:33:37",
     "passengers": [
       {
         "name": "Mary Lewis",
@@ -976,6 +1004,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-14T08:09:27",
     "passengers": [
       {
         "name": "Jennifer Lewis",
@@ -1006,6 +1035,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-02T18:56:11",
     "passengers": [
       {
         "name": "Sarah Harris",
@@ -1036,6 +1066,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-23T09:49:29",
     "passengers": [
       {
         "name": "Thomas Jackson",
@@ -1066,6 +1097,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-22T16:54:49",
     "passengers": [
       {
         "name": "Susan Anderson",
@@ -1096,6 +1128,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-16T13:42:01",
     "passengers": [
       {
         "name": "Robert Brown",
@@ -1126,6 +1159,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-24T15:35:42",
     "passengers": [
       {
         "name": "Lisa Johnson",
@@ -1156,6 +1190,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-04T17:50:10",
     "passengers": [
       {
         "name": "Patricia Sanchez",
@@ -1186,6 +1221,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-22T14:11:51",
     "passengers": [
       {
         "name": "Richard Martin",
@@ -1216,6 +1252,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-10T19:05:35",
     "passengers": [
       {
         "name": "Linda Miller",
@@ -1246,6 +1283,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-21T12:08:06",
     "passengers": [
       {
         "name": "James Garcia",
@@ -1276,6 +1314,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-06T15:24:16",
     "passengers": [
       {
         "name": "Daniel Perez",
@@ -1306,6 +1345,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-06T14:55:56",
     "passengers": [
       {
         "name": "David Gonzalez",
@@ -1336,6 +1376,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-16T09:23:39",
     "passengers": [
       {
         "name": "Daniel Moore",
@@ -1366,6 +1407,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-17T17:36:31",
     "passengers": [
       {
         "name": "Sarah Lewis",
@@ -1396,6 +1438,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-14T19:00:33",
     "passengers": [
       {
         "name": "Linda Thomas",
@@ -1426,6 +1469,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-17T17:19:36",
     "passengers": [
       {
         "name": "Joseph Williams",
@@ -1456,6 +1500,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-26T12:49:24",
     "passengers": [
       {
         "name": "John Jones",
@@ -1486,6 +1531,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-12T16:02:00",
     "passengers": [
       {
         "name": "Elizabeth Taylor",
@@ -1516,6 +1562,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-14T19:45:15",
     "passengers": [
       {
         "name": "Joseph Davis",
@@ -1546,6 +1593,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-19T16:46:25",
     "passengers": [
       {
         "name": "Richard Thompson",
@@ -1576,6 +1624,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-25T16:20:48",
     "passengers": [
       {
         "name": "Mark Martin",
@@ -1606,6 +1655,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-23T20:02:22",
     "passengers": [
       {
         "name": "Barbara Clark",
@@ -1636,6 +1686,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-14T11:59:18",
     "passengers": [
       {
         "name": "Mary Clark",
@@ -1666,6 +1717,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-13T13:30:30",
     "passengers": [
       {
         "name": "Matthew Thompson",
@@ -1696,6 +1748,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-15T21:33:25",
     "passengers": [
       {
         "name": "Robert Johnson",
@@ -1726,6 +1779,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-20T20:09:35",
     "passengers": [
       {
         "name": "Margaret Miller",
@@ -1756,6 +1810,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-13T11:12:48",
     "passengers": [
       {
         "name": "Anthony Lewis",
@@ -1786,6 +1841,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-23T09:20:33",
     "passengers": [
       {
         "name": "James Rodriguez",
@@ -1816,6 +1872,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-21T21:26:04",
     "passengers": [
       {
         "name": "Robert Lopez",
@@ -1846,6 +1903,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-18T10:03:14",
     "passengers": [
       {
         "name": "Susan Williams",
@@ -1876,6 +1934,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-20T15:54:51",
     "passengers": [
       {
         "name": "Barbara Ramirez",
@@ -1906,6 +1965,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-23T13:42:26",
     "passengers": [
       {
         "name": "Elizabeth Johnson",
@@ -1936,6 +1996,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-23T13:22:47",
     "passengers": [
       {
         "name": "Margaret Ramirez",
@@ -1966,6 +2027,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-23T21:25:41",
     "passengers": [
       {
         "name": "Lisa Lopez",
@@ -1996,6 +2058,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-03T10:55:22",
     "passengers": [
       {
         "name": "David Jones",
@@ -2026,6 +2089,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-09T15:50:32",
     "passengers": [
       {
         "name": "Karen Robinson",
@@ -2056,6 +2120,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-11T11:04:11",
     "passengers": [
       {
         "name": "Charles Jackson",
@@ -2086,6 +2151,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-14T08:13:56",
     "passengers": [
       {
         "name": "Betty White",
@@ -2116,6 +2182,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-19T11:33:41",
     "passengers": [
       {
         "name": "Linda Jones",
@@ -2146,6 +2213,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-19T09:14:38",
     "passengers": [
       {
         "name": "Karen Martin",
@@ -2176,6 +2244,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-22T15:18:58",
     "passengers": [
       {
         "name": "Sarah Thompson",
@@ -2206,6 +2275,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-25T15:41:20",
     "passengers": [
       {
         "name": "Sarah Thomas",
@@ -2236,6 +2306,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-23T13:07:47",
     "passengers": [
       {
         "name": "Robert Robinson",
@@ -2266,6 +2337,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-09T12:01:16",
     "passengers": [
       {
         "name": "Patricia Martin",
@@ -2296,6 +2368,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-30T12:30:25",
     "passengers": [
       {
         "name": "Sandra Jackson",
@@ -2326,6 +2399,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-03T19:49:26",
     "passengers": [
       {
         "name": "Jessica Gonzalez",
@@ -2356,6 +2430,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-18T21:14:38",
     "passengers": [
       {
         "name": "Jessica Miller",
@@ -2386,6 +2461,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-21T17:09:03",
     "passengers": [
       {
         "name": "Anthony Moore",
@@ -2416,6 +2492,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-18T08:08:50",
     "passengers": [
       {
         "name": "David Perez",
@@ -2446,6 +2523,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-30T15:00:05",
     "passengers": [
       {
         "name": "Robert Miller",
@@ -2476,6 +2554,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-01T17:50:54",
     "passengers": [
       {
         "name": "Mary White",
@@ -2506,6 +2585,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-05T10:16:48",
     "passengers": [
       {
         "name": "Robert White",
@@ -2536,6 +2616,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-07T12:30:12",
     "passengers": [
       {
         "name": "Betty Rodriguez",
@@ -2566,6 +2647,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-09T13:20:17",
     "passengers": [
       {
         "name": "Elizabeth Davis",
@@ -2596,6 +2678,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-27T13:38:58",
     "passengers": [
       {
         "name": "Jessica Hernandez",
@@ -2626,6 +2709,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-13T12:53:02",
     "passengers": [
       {
         "name": "Susan Williams",
@@ -2656,6 +2740,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-28T18:31:01",
     "passengers": [
       {
         "name": "William Lopez",
@@ -2686,6 +2771,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-11T17:27:47",
     "passengers": [
       {
         "name": "Jennifer Sanchez",
@@ -2716,6 +2802,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-08T15:29:01",
     "passengers": [
       {
         "name": "Thomas Perez",
@@ -2746,6 +2833,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-07T10:07:03",
     "passengers": [
       {
         "name": "David Wilson",
@@ -2776,6 +2864,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-23T16:26:30",
     "passengers": [
       {
         "name": "Robert Williams",
@@ -2806,6 +2895,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-28T14:05:01",
     "passengers": [
       {
         "name": "Daniel Jones",
@@ -2836,6 +2926,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-07T15:14:50",
     "passengers": [
       {
         "name": "William Anderson",
@@ -2866,6 +2957,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-10T15:50:52",
     "passengers": [
       {
         "name": "Lisa Anderson",
@@ -2896,6 +2988,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-02T17:12:04",
     "passengers": [
       {
         "name": "Margaret Robinson",
@@ -2926,6 +3019,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-20T19:12:36",
     "passengers": [
       {
         "name": "Anthony Sanchez",
@@ -2956,6 +3050,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-19T11:41:49",
     "passengers": [
       {
         "name": "Sarah White",
@@ -2986,6 +3081,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-20T08:09:21",
     "passengers": [
       {
         "name": "Lisa Martinez",
@@ -3016,6 +3112,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-24T10:23:15",
     "passengers": [
       {
         "name": "Anthony Garcia",
@@ -3046,6 +3143,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-23T17:25:08",
     "passengers": [
       {
         "name": "Daniel Gonzalez",
@@ -3076,6 +3174,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-15T10:43:12",
     "passengers": [
       {
         "name": "David Martinez",
@@ -3106,6 +3205,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-23T11:59:22",
     "passengers": [
       {
         "name": "Karen White",
@@ -3136,6 +3236,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-05T20:38:51",
     "passengers": [
       {
         "name": "Christopher Brown",
@@ -3166,6 +3267,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-08T10:33:17",
     "passengers": [
       {
         "name": "Jennifer Thomas",
@@ -3196,6 +3298,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-09T15:58:46",
     "passengers": [
       {
         "name": "James Thompson",
@@ -3226,6 +3329,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-09T16:41:09",
     "passengers": [
       {
         "name": "Joseph Smith",
@@ -3256,6 +3360,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-02T15:12:10",
     "passengers": [
       {
         "name": "Nancy Clark",
@@ -3286,6 +3391,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-14T12:27:20",
     "passengers": [
       {
         "name": "Jennifer Brown",
@@ -3316,6 +3422,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-29T20:01:47",
     "passengers": [
       {
         "name": "Nancy Clark",
@@ -3346,6 +3453,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-23T10:09:17",
     "passengers": [
       {
         "name": "Matthew Jackson",
@@ -3376,6 +3484,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-27T13:53:35",
     "passengers": [
       {
         "name": "Margaret Jackson",
@@ -3406,6 +3515,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-13T18:14:53",
     "passengers": [
       {
         "name": "Mark Lewis",
@@ -3436,6 +3546,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-12T11:57:28",
     "passengers": [
       {
         "name": "Daniel Wilson",
@@ -3466,6 +3577,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-02T17:32:07",
     "passengers": [
       {
         "name": "Joseph Thomas",
@@ -3496,6 +3608,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-06T11:06:13",
     "passengers": [
       {
         "name": "Betty Lee",
@@ -3526,6 +3639,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-30T09:43:38",
     "passengers": [
       {
         "name": "Jessica Lewis",
@@ -3556,6 +3670,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-29T17:10:32",
     "passengers": [
       {
         "name": "Nancy Ramirez",
@@ -3586,6 +3701,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-22T09:03:50",
     "passengers": [
       {
         "name": "John Lee",
@@ -3616,6 +3732,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-02T21:54:46",
     "passengers": [
       {
         "name": "Patricia Jones",
@@ -3646,6 +3763,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-21T21:26:00",
     "passengers": [
       {
         "name": "William Garcia",
@@ -3676,6 +3794,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-30T08:56:28",
     "passengers": [
       {
         "name": "Anthony Harris",
@@ -3706,6 +3825,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-01T18:31:48",
     "passengers": [
       {
         "name": "Sarah Hernandez",
@@ -3736,6 +3856,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-11T21:10:59",
     "passengers": [
       {
         "name": "Elizabeth Hernandez",
@@ -3766,6 +3887,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-16T18:07:28",
     "passengers": [
       {
         "name": "Margaret Martin",
@@ -3796,6 +3918,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-02T20:27:03",
     "passengers": [
       {
         "name": "Jennifer Ramirez",
@@ -3826,6 +3949,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-07T15:48:44",
     "passengers": [
       {
         "name": "John Brown",
@@ -3856,6 +3980,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-09T12:39:02",
     "passengers": [
       {
         "name": "Thomas Thompson",
@@ -3886,6 +4011,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-04T19:20:31",
     "passengers": [
       {
         "name": "Charles Garcia",
@@ -3916,6 +4042,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-17T11:29:18",
     "passengers": [
       {
         "name": "William Wilson",
@@ -3946,6 +4073,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-28T18:05:13",
     "passengers": [
       {
         "name": "Sandra Anderson",
@@ -3976,6 +4104,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-14T12:34:17",
     "passengers": [
       {
         "name": "Sandra Sanchez",
@@ -4006,6 +4135,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-15T14:18:06",
     "passengers": [
       {
         "name": "Patricia Thompson",
@@ -4036,6 +4166,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-21T21:24:28",
     "passengers": [
       {
         "name": "James Martinez",
@@ -4066,6 +4197,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-20T21:39:16",
     "passengers": [
       {
         "name": "Robert Lopez",
@@ -4096,6 +4228,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-16T12:56:04",
     "passengers": [
       {
         "name": "Sandra Lopez",
@@ -4126,6 +4259,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-28T11:43:20",
     "passengers": [
       {
         "name": "Anthony Wilson",
@@ -4156,6 +4290,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-02T09:19:39",
     "passengers": [
       {
         "name": "Jennifer Lewis",
@@ -4186,6 +4321,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-06T20:20:05",
     "passengers": [
       {
         "name": "Susan Harris",
@@ -4216,6 +4352,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-20T19:19:20",
     "passengers": [
       {
         "name": "Nancy Lee",
@@ -4246,6 +4383,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-21T14:38:06",
     "passengers": [
       {
         "name": "Jessica Sanchez",
@@ -4276,6 +4414,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-12T13:47:11",
     "passengers": [
       {
         "name": "William Perez",
@@ -4306,6 +4445,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-08T15:14:37",
     "passengers": [
       {
         "name": "John Miller",
@@ -4336,6 +4476,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-13T12:41:01",
     "passengers": [
       {
         "name": "John Smith",
@@ -4366,6 +4507,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-18T18:38:36",
     "passengers": [
       {
         "name": "Jennifer White",
@@ -4396,6 +4538,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-04T08:34:55",
     "passengers": [
       {
         "name": "Barbara Perez",
@@ -4426,6 +4569,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-20T20:03:12",
     "passengers": [
       {
         "name": "Jennifer Rodriguez",
@@ -4456,6 +4600,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-03T20:31:29",
     "passengers": [
       {
         "name": "Linda Harris",
@@ -4486,6 +4631,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-30T16:14:42",
     "passengers": [
       {
         "name": "Richard Brown",
@@ -4516,6 +4662,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-28T17:36:07",
     "passengers": [
       {
         "name": "James Hernandez",
@@ -4546,6 +4693,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-17T15:16:08",
     "passengers": [
       {
         "name": "Susan Moore",
@@ -4576,6 +4724,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-13T18:50:55",
     "passengers": [
       {
         "name": "Elizabeth Lopez",
@@ -4606,6 +4755,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-25T11:32:46",
     "passengers": [
       {
         "name": "Matthew Anderson",
@@ -4636,6 +4786,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-28T08:20:34",
     "passengers": [
       {
         "name": "Linda Thomas",
@@ -4666,6 +4817,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-15T17:17:50",
     "passengers": [
       {
         "name": "Joseph Martinez",
@@ -4696,6 +4848,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-31T15:08:25",
     "passengers": [
       {
         "name": "Sarah Miller",
@@ -4726,6 +4879,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-19T16:27:43",
     "passengers": [
       {
         "name": "Christopher Jones",
@@ -4756,6 +4910,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-03T18:35:34",
     "passengers": [
       {
         "name": "Patricia Wilson",
@@ -4786,6 +4941,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-04T15:38:22",
     "passengers": [
       {
         "name": "Betty Wilson",
@@ -4816,6 +4972,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-12T19:40:07",
     "passengers": [
       {
         "name": "Barbara Jones",
@@ -4846,6 +5003,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-02T11:51:23",
     "passengers": [
       {
         "name": "Michael Anderson",
@@ -4876,6 +5034,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-29T11:01:58",
     "passengers": [
       {
         "name": "Joseph Thompson",
@@ -4906,6 +5065,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-22T17:24:33",
     "passengers": [
       {
         "name": "Michael Jones",
@@ -4936,6 +5096,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-10T13:00:45",
     "passengers": [
       {
         "name": "William Davis",
@@ -4966,6 +5127,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-23T15:44:30",
     "passengers": [
       {
         "name": "Joseph Lee",
@@ -4996,6 +5158,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-29T13:36:50",
     "passengers": [
       {
         "name": "Linda Smith",
@@ -5026,6 +5189,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-11T11:22:50",
     "passengers": [
       {
         "name": "Mark Moore",
@@ -5056,6 +5220,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-04T17:05:42",
     "passengers": [
       {
         "name": "Jennifer Jones",
@@ -5086,6 +5251,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-06T20:41:51",
     "passengers": [
       {
         "name": "Sandra Lewis",
@@ -5116,6 +5282,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-10T18:19:37",
     "passengers": [
       {
         "name": "Margaret Harris",
@@ -5146,6 +5313,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-05T08:05:07",
     "passengers": [
       {
         "name": "Susan Robinson",
@@ -5176,6 +5344,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-09T12:41:41",
     "passengers": [
       {
         "name": "William Sanchez",
@@ -5206,6 +5375,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-15T13:15:46",
     "passengers": [
       {
         "name": "Patricia Sanchez",
@@ -5236,6 +5406,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-02T17:17:06",
     "passengers": [
       {
         "name": "Christopher Sanchez",
@@ -5266,6 +5437,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-28T10:23:33",
     "passengers": [
       {
         "name": "Robert Perez",
@@ -5296,6 +5468,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-25T21:52:23",
     "passengers": [
       {
         "name": "Susan Miller",
@@ -5326,6 +5499,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-03T17:33:38",
     "passengers": [
       {
         "name": "Matthew Johnson",
@@ -5356,6 +5530,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-26T15:07:06",
     "passengers": [
       {
         "name": "Jennifer Lewis",
@@ -5386,6 +5561,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-19T17:54:21",
     "passengers": [
       {
         "name": "Betty Ramirez",
@@ -5416,6 +5592,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-11T14:54:39",
     "passengers": [
       {
         "name": "Christopher Gonzalez",
@@ -5446,6 +5623,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-03T18:06:23",
     "passengers": [
       {
         "name": "James Thomas",
@@ -5476,6 +5654,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-23T16:37:30",
     "passengers": [
       {
         "name": "Richard Lopez",
@@ -5506,6 +5685,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-23T12:53:59",
     "passengers": [
       {
         "name": "Jessica Garcia",
@@ -5536,6 +5716,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-22T11:57:08",
     "passengers": [
       {
         "name": "James Brown",
@@ -5566,6 +5747,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-05T10:29:52",
     "passengers": [
       {
         "name": "Christopher Wilson",
@@ -5596,6 +5778,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-20T21:07:47",
     "passengers": [
       {
         "name": "James Garcia",
@@ -5626,6 +5809,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-10T11:51:27",
     "passengers": [
       {
         "name": "Sarah Martin",
@@ -5656,6 +5840,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-31T13:33:21",
     "passengers": [
       {
         "name": "Michael Hernandez",
@@ -5686,6 +5871,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-21T18:24:23",
     "passengers": [
       {
         "name": "Anthony Hernandez",
@@ -5716,6 +5902,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-13T08:25:19",
     "passengers": [
       {
         "name": "Richard Robinson",
@@ -5746,6 +5933,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-18T14:09:12",
     "passengers": [
       {
         "name": "Christopher Robinson",
@@ -5776,6 +5964,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-12T13:04:23",
     "passengers": [
       {
         "name": "Christopher Wilson",
@@ -5806,6 +5995,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-27T18:17:51",
     "passengers": [
       {
         "name": "Christopher Thompson",
@@ -5836,6 +6026,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-19T14:03:09",
     "passengers": [
       {
         "name": "Christopher Clark",
@@ -5866,6 +6057,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-28T20:26:00",
     "passengers": [
       {
         "name": "Barbara Moore",
@@ -5896,6 +6088,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-02T11:12:07",
     "passengers": [
       {
         "name": "Daniel Lopez",
@@ -5926,6 +6119,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-02T09:25:54",
     "passengers": [
       {
         "name": "Robert Taylor",
@@ -5956,6 +6150,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-13T09:27:43",
     "passengers": [
       {
         "name": "Linda Jackson",
@@ -5986,6 +6181,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-04T21:47:40",
     "passengers": [
       {
         "name": "Joseph Garcia",
@@ -6016,6 +6212,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-26T11:54:16",
     "passengers": [
       {
         "name": "Karen Anderson",
@@ -6046,6 +6243,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-02T17:41:20",
     "passengers": [
       {
         "name": "Mary Garcia",
@@ -6076,6 +6274,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-14T11:09:03",
     "passengers": [
       {
         "name": "Patricia Robinson",
@@ -6106,6 +6305,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-16T11:26:38",
     "passengers": [
       {
         "name": "Mark Williams",
@@ -6136,6 +6336,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-12T17:26:31",
     "passengers": [
       {
         "name": "Elizabeth Davis",
@@ -6166,6 +6367,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-11-06T09:43:09",
     "passengers": [
       {
         "name": "Nancy Clark",
@@ -6196,6 +6398,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-24T11:10:06",
     "passengers": [
       {
         "name": "Michael White",
@@ -6226,6 +6429,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-22T16:19:52",
     "passengers": [
       {
         "name": "William Sanchez",
@@ -6256,6 +6460,7 @@
     "userId": 1,
     "flightId": 1384,
     "totalPrice": 1674,
+    "bookingDate": "2024-12-11T16:12:40",
     "passengers": [
       {
         "name": "Thomas Miller",
@@ -6282,35 +6487,18 @@
     "entertainment": null
   },
   {
-    "bookingId": 6220,
-    "userId": 1,
-    "flightId": 1391,
-    "totalPrice": 3288,
+    "bookingId": 6114,
+    "userId": 4,
+    "flightId": 1406,
+    "totalPrice": 1591,
+    "bookingDate": "2024-12-31T17:14:44.097275+01:00",
     "passengers": [
       {
-        "name": "Sil",
+        "name": "Darrin",
         "hasPet": false,
         "petDetails": null,
         "seatNumber": "1A",
-        "hasCheckedBaggage": false,
-        "shopItems": [],
-        "specialLuggage": "",
-        "firstName": null,
-        "lastName": null,
-        "dateOfBirth": "0001-01-01T00:00:00",
-        "gender": null,
-        "nationality": null,
-        "fullName": " ",
-        "phoneNumber": null,
-        "address": null,
-        "id": 0
-      },
-      {
-        "name": "ret",
-        "hasPet": false,
-        "petDetails": null,
-        "seatNumber": "1A",
-        "hasCheckedBaggage": false,
+        "hasCheckedBaggage": true,
         "shopItems": [],
         "specialLuggage": "",
         "firstName": null,
