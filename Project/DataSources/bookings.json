@@ -321,7 +321,7 @@
         "name": "Adonai",
         "hasPet": false,
         "petDetails": null,
-        "seatNumber": "1B",
+        "seatNumber": "1B",  
         "hasCheckedBaggage": false,
         "shopItems": [],
         "specialLuggage": "",
@@ -340,5 +340,5945 @@
     "comfortPackages": null,
     "planeType": null,
     "entertainment": null
-  }
+  },
+  {
+      "bookingId": 8000,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Elizabeth Gonzalez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "1A",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Elizabeth",
+          "lastName": "Gonzalez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Elizabeth Gonzalez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8001,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Betty Brown",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "1B",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Betty",
+          "lastName": "Brown",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Betty Brown",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8002,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Jessica Brown",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "1C",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Jessica",
+          "lastName": "Brown",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Jessica Brown",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8003,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Linda Miller",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "1D",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Linda",
+          "lastName": "Miller",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Linda Miller",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8004,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Karen Williams",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "1E",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Karen",
+          "lastName": "Williams",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Karen Williams",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8005,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Nancy Lewis",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "1F",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Nancy",
+          "lastName": "Lewis",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Nancy Lewis",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8006,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "John Williams",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "2A",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "John",
+          "lastName": "Williams",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "John Williams",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8007,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "William Lopez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "2B",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "William",
+          "lastName": "Lopez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "William Lopez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8008,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Jessica Lewis",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "2C",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Jessica",
+          "lastName": "Lewis",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Jessica Lewis",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8009,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Betty Sanchez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "2D",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Betty",
+          "lastName": "Sanchez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Betty Sanchez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8010,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Nancy Williams",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "2E",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Nancy",
+          "lastName": "Williams",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Nancy Williams",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8011,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Karen Jackson",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "2F",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Karen",
+          "lastName": "Jackson",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Karen Jackson",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8012,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Joseph Harris",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "3A",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Joseph",
+          "lastName": "Harris",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Joseph Harris",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8013,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Daniel Martinez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "3B",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Daniel",
+          "lastName": "Martinez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Daniel Martinez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8014,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Sandra Anderson",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "3C",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Sandra",
+          "lastName": "Anderson",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Sandra Anderson",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8015,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Mark Martinez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "3D",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Mark",
+          "lastName": "Martinez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Mark Martinez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8016,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Jennifer Anderson",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "3E",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Jennifer",
+          "lastName": "Anderson",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Jennifer Anderson",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8017,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Mary Jones",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "3F",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Mary",
+          "lastName": "Jones",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Mary Jones",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8018,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Betty Clark",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "4A",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Betty",
+          "lastName": "Clark",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Betty Clark",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8019,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Betty Harris",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "4B",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Betty",
+          "lastName": "Harris",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Betty Harris",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8020,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Mary Lewis",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "4C",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Mary",
+          "lastName": "Lewis",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Mary Lewis",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8021,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Jennifer Lewis",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "4D",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Jennifer",
+          "lastName": "Lewis",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Jennifer Lewis",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8022,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Sarah Harris",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "4E",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Sarah",
+          "lastName": "Harris",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Sarah Harris",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8023,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Thomas Jackson",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "4F",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Thomas",
+          "lastName": "Jackson",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Thomas Jackson",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8024,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Susan Anderson",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "5A",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Susan",
+          "lastName": "Anderson",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Susan Anderson",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8025,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Robert Brown",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "5B",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Robert",
+          "lastName": "Brown",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Robert Brown",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8026,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Lisa Johnson",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "5C",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Lisa",
+          "lastName": "Johnson",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Lisa Johnson",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8027,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Patricia Sanchez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "5D",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Patricia",
+          "lastName": "Sanchez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Patricia Sanchez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8028,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Richard Martin",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "5E",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Richard",
+          "lastName": "Martin",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Richard Martin",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8029,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Linda Miller",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "5F",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Linda",
+          "lastName": "Miller",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Linda Miller",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8030,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "James Garcia",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "6A",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "James",
+          "lastName": "Garcia",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "James Garcia",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8031,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Daniel Perez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "6B",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Daniel",
+          "lastName": "Perez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Daniel Perez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8032,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "David Gonzalez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "6C",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "David",
+          "lastName": "Gonzalez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "David Gonzalez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8033,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Daniel Moore",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "6D",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Daniel",
+          "lastName": "Moore",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Daniel Moore",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8034,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Sarah Lewis",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "6E",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Sarah",
+          "lastName": "Lewis",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Sarah Lewis",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8035,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Linda Thomas",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "6F",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Linda",
+          "lastName": "Thomas",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Linda Thomas",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8036,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Joseph Williams",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "7A",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Joseph",
+          "lastName": "Williams",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Joseph Williams",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8037,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "John Jones",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "7B",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "John",
+          "lastName": "Jones",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "John Jones",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8038,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Elizabeth Taylor",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "7C",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Elizabeth",
+          "lastName": "Taylor",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Elizabeth Taylor",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8039,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Joseph Davis",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "7D",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Joseph",
+          "lastName": "Davis",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Joseph Davis",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8040,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Richard Thompson",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "7E",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Richard",
+          "lastName": "Thompson",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Richard Thompson",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8041,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Mark Martin",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "7F",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Mark",
+          "lastName": "Martin",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Mark Martin",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8042,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Barbara Clark",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "8A",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Barbara",
+          "lastName": "Clark",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Barbara Clark",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8043,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Mary Clark",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "8B",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Mary",
+          "lastName": "Clark",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Mary Clark",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8044,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Matthew Thompson",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "8C",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Matthew",
+          "lastName": "Thompson",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Matthew Thompson",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8045,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Robert Johnson",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "8D",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Robert",
+          "lastName": "Johnson",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Robert Johnson",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8046,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Margaret Miller",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "8E",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Margaret",
+          "lastName": "Miller",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Margaret Miller",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8047,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Anthony Lewis",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "8F",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Anthony",
+          "lastName": "Lewis",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Anthony Lewis",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8048,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "James Rodriguez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "9A",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "James",
+          "lastName": "Rodriguez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "James Rodriguez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8049,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Robert Lopez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "9B",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Robert",
+          "lastName": "Lopez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Robert Lopez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8050,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Susan Williams",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "9C",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Susan",
+          "lastName": "Williams",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Susan Williams",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8051,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Barbara Ramirez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "9D",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Barbara",
+          "lastName": "Ramirez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Barbara Ramirez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8052,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Elizabeth Johnson",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "9E",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Elizabeth",
+          "lastName": "Johnson",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Elizabeth Johnson",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8053,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Margaret Ramirez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "9F",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Margaret",
+          "lastName": "Ramirez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Margaret Ramirez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8054,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Lisa Lopez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "10A",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Lisa",
+          "lastName": "Lopez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Lisa Lopez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8055,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "David Jones",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "10B",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "David",
+          "lastName": "Jones",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "David Jones",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8056,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Karen Robinson",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "10C",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Karen",
+          "lastName": "Robinson",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Karen Robinson",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8057,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Charles Jackson",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "10D",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Charles",
+          "lastName": "Jackson",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Charles Jackson",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8058,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Betty White",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "10E",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Betty",
+          "lastName": "White",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Betty White",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8059,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Linda Jones",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "10F",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Linda",
+          "lastName": "Jones",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Linda Jones",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8060,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Karen Martin",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "11A",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Karen",
+          "lastName": "Martin",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Karen Martin",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8061,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Sarah Thompson",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "11B",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Sarah",
+          "lastName": "Thompson",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Sarah Thompson",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8062,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Sarah Thomas",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "11C",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Sarah",
+          "lastName": "Thomas",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Sarah Thomas",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8063,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Robert Robinson",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "11D",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Robert",
+          "lastName": "Robinson",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Robert Robinson",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8064,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Patricia Martin",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "11E",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Patricia",
+          "lastName": "Martin",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Patricia Martin",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8065,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Sandra Jackson",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "11F",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Sandra",
+          "lastName": "Jackson",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Sandra Jackson",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8066,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Jessica Gonzalez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "12A",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Jessica",
+          "lastName": "Gonzalez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Jessica Gonzalez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8067,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Jessica Miller",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "12B",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Jessica",
+          "lastName": "Miller",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Jessica Miller",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8068,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Anthony Moore",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "12C",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Anthony",
+          "lastName": "Moore",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Anthony Moore",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8069,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "David Perez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "12D",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "David",
+          "lastName": "Perez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "David Perez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8070,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Robert Miller",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "12E",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Robert",
+          "lastName": "Miller",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Robert Miller",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8071,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Mary White",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "12F",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Mary",
+          "lastName": "White",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Mary White",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8072,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Robert White",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "13A",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Robert",
+          "lastName": "White",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Robert White",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8073,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Betty Rodriguez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "13B",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Betty",
+          "lastName": "Rodriguez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Betty Rodriguez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8074,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Elizabeth Davis",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "13C",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Elizabeth",
+          "lastName": "Davis",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Elizabeth Davis",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8075,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Jessica Hernandez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "13D",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Jessica",
+          "lastName": "Hernandez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Jessica Hernandez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8076,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Susan Williams",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "13E",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Susan",
+          "lastName": "Williams",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Susan Williams",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8077,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "William Lopez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "13F",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "William",
+          "lastName": "Lopez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "William Lopez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8078,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Jennifer Sanchez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "14A",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Jennifer",
+          "lastName": "Sanchez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Jennifer Sanchez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8079,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Thomas Perez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "14B",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Thomas",
+          "lastName": "Perez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Thomas Perez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8080,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "David Wilson",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "14C",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "David",
+          "lastName": "Wilson",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "David Wilson",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8081,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Robert Williams",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "14D",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Robert",
+          "lastName": "Williams",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Robert Williams",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8082,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Daniel Jones",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "14E",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Daniel",
+          "lastName": "Jones",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Daniel Jones",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8083,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "William Anderson",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "14F",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "William",
+          "lastName": "Anderson",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "William Anderson",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8084,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Lisa Anderson",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "15A",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Lisa",
+          "lastName": "Anderson",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Lisa Anderson",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8085,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Margaret Robinson",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "15B",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Margaret",
+          "lastName": "Robinson",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Margaret Robinson",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8086,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Anthony Sanchez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "15C",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Anthony",
+          "lastName": "Sanchez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Anthony Sanchez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8087,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Sarah White",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "15D",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Sarah",
+          "lastName": "White",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Sarah White",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8088,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Lisa Martinez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "15E",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Lisa",
+          "lastName": "Martinez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Lisa Martinez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8089,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Anthony Garcia",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "15F",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Anthony",
+          "lastName": "Garcia",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Anthony Garcia",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8090,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Daniel Gonzalez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "16A",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Daniel",
+          "lastName": "Gonzalez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Daniel Gonzalez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8091,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "David Martinez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "16B",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "David",
+          "lastName": "Martinez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "David Martinez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8092,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Karen White",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "16C",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Karen",
+          "lastName": "White",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Karen White",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8093,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Christopher Brown",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "16D",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Christopher",
+          "lastName": "Brown",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Christopher Brown",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8094,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Jennifer Thomas",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "16E",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Jennifer",
+          "lastName": "Thomas",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Jennifer Thomas",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8095,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "James Thompson",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "16F",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "James",
+          "lastName": "Thompson",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "James Thompson",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8096,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Joseph Smith",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "17A",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Joseph",
+          "lastName": "Smith",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Joseph Smith",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8097,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Nancy Clark",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "17B",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Nancy",
+          "lastName": "Clark",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Nancy Clark",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8098,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Jennifer Brown",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "17C",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Jennifer",
+          "lastName": "Brown",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Jennifer Brown",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8099,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Nancy Clark",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "17D",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Nancy",
+          "lastName": "Clark",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Nancy Clark",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8100,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Matthew Jackson",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "17E",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Matthew",
+          "lastName": "Jackson",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Matthew Jackson",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8101,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Margaret Jackson",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "17F",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Margaret",
+          "lastName": "Jackson",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Margaret Jackson",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8102,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Mark Lewis",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "18A",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Mark",
+          "lastName": "Lewis",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Mark Lewis",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8103,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Daniel Wilson",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "18B",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Daniel",
+          "lastName": "Wilson",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Daniel Wilson",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8104,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Joseph Thomas",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "18C",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Joseph",
+          "lastName": "Thomas",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Joseph Thomas",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8105,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Betty Lee",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "18D",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Betty",
+          "lastName": "Lee",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Betty Lee",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8106,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Jessica Lewis",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "18E",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Jessica",
+          "lastName": "Lewis",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Jessica Lewis",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8107,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Nancy Ramirez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "18F",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Nancy",
+          "lastName": "Ramirez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Nancy Ramirez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8108,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "John Lee",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "19A",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "John",
+          "lastName": "Lee",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "John Lee",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8109,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Patricia Jones",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "19B",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Patricia",
+          "lastName": "Jones",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Patricia Jones",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8110,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "William Garcia",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "19C",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "William",
+          "lastName": "Garcia",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "William Garcia",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8111,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Anthony Harris",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "19D",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Anthony",
+          "lastName": "Harris",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Anthony Harris",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8112,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Sarah Hernandez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "19E",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Sarah",
+          "lastName": "Hernandez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Sarah Hernandez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8113,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Elizabeth Hernandez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "19F",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Elizabeth",
+          "lastName": "Hernandez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Elizabeth Hernandez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8114,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Margaret Martin",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "20A",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Margaret",
+          "lastName": "Martin",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Margaret Martin",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8115,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Jennifer Ramirez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "20B",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Jennifer",
+          "lastName": "Ramirez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Jennifer Ramirez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8116,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "John Brown",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "20C",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "John",
+          "lastName": "Brown",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "John Brown",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8117,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Thomas Thompson",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "20D",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Thomas",
+          "lastName": "Thompson",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Thomas Thompson",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8118,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Charles Garcia",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "20E",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Charles",
+          "lastName": "Garcia",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Charles Garcia",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8119,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "William Wilson",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "20F",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "William",
+          "lastName": "Wilson",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "William Wilson",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8120,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Sandra Anderson",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "21A",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Sandra",
+          "lastName": "Anderson",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Sandra Anderson",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8121,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Sandra Sanchez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "21B",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Sandra",
+          "lastName": "Sanchez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Sandra Sanchez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8122,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Patricia Thompson",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "21C",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Patricia",
+          "lastName": "Thompson",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Patricia Thompson",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8123,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "James Martinez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "21D",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "James",
+          "lastName": "Martinez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "James Martinez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8124,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Robert Lopez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "21E",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Robert",
+          "lastName": "Lopez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Robert Lopez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8125,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Sandra Lopez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "21F",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Sandra",
+          "lastName": "Lopez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Sandra Lopez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8126,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Anthony Wilson",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "22A",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Anthony",
+          "lastName": "Wilson",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Anthony Wilson",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8127,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Jennifer Lewis",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "22B",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Jennifer",
+          "lastName": "Lewis",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Jennifer Lewis",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8128,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Susan Harris",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "22C",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Susan",
+          "lastName": "Harris",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Susan Harris",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8129,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Nancy Lee",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "22D",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Nancy",
+          "lastName": "Lee",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Nancy Lee",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8130,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Jessica Sanchez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "22E",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Jessica",
+          "lastName": "Sanchez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Jessica Sanchez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8131,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "William Perez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "22F",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "William",
+          "lastName": "Perez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "William Perez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8132,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "John Miller",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "23A",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "John",
+          "lastName": "Miller",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "John Miller",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8133,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "John Smith",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "23B",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "John",
+          "lastName": "Smith",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "John Smith",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8134,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Jennifer White",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "23C",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Jennifer",
+          "lastName": "White",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Jennifer White",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8135,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Barbara Perez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "23D",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Barbara",
+          "lastName": "Perez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Barbara Perez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8136,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Jennifer Rodriguez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "23E",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Jennifer",
+          "lastName": "Rodriguez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Jennifer Rodriguez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8137,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Linda Harris",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "23F",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Linda",
+          "lastName": "Harris",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Linda Harris",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8138,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Richard Brown",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "24A",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Richard",
+          "lastName": "Brown",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Richard Brown",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8139,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "James Hernandez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "24B",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "James",
+          "lastName": "Hernandez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "James Hernandez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8140,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Susan Moore",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "24C",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Susan",
+          "lastName": "Moore",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Susan Moore",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8141,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Elizabeth Lopez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "24D",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Elizabeth",
+          "lastName": "Lopez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Elizabeth Lopez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8142,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Matthew Anderson",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "24E",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Matthew",
+          "lastName": "Anderson",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Matthew Anderson",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8143,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Linda Thomas",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "24F",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Linda",
+          "lastName": "Thomas",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Linda Thomas",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8144,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Joseph Martinez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "25A",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Joseph",
+          "lastName": "Martinez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Joseph Martinez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8145,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Sarah Miller",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "25B",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Sarah",
+          "lastName": "Miller",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Sarah Miller",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8146,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Christopher Jones",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "25C",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Christopher",
+          "lastName": "Jones",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Christopher Jones",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8147,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Patricia Wilson",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "25D",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Patricia",
+          "lastName": "Wilson",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Patricia Wilson",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8148,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Betty Wilson",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "25E",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Betty",
+          "lastName": "Wilson",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Betty Wilson",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8149,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Barbara Jones",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "25F",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Barbara",
+          "lastName": "Jones",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Barbara Jones",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8150,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Michael Anderson",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "26A",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Michael",
+          "lastName": "Anderson",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Michael Anderson",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8151,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Joseph Thompson",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "26B",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Joseph",
+          "lastName": "Thompson",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Joseph Thompson",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8152,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Michael Jones",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "26C",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Michael",
+          "lastName": "Jones",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Michael Jones",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8153,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "William Davis",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "26D",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "William",
+          "lastName": "Davis",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "William Davis",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8154,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Joseph Lee",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "26E",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Joseph",
+          "lastName": "Lee",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Joseph Lee",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8155,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Linda Smith",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "26F",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Linda",
+          "lastName": "Smith",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Linda Smith",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8156,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Mark Moore",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "27A",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Mark",
+          "lastName": "Moore",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Mark Moore",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8157,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Jennifer Jones",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "27B",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Jennifer",
+          "lastName": "Jones",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Jennifer Jones",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8158,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Sandra Lewis",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "27C",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Sandra",
+          "lastName": "Lewis",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Sandra Lewis",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8159,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Margaret Harris",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "27D",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Margaret",
+          "lastName": "Harris",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Margaret Harris",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8160,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Susan Robinson",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "27E",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Susan",
+          "lastName": "Robinson",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Susan Robinson",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8161,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "William Sanchez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "27F",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "William",
+          "lastName": "Sanchez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "William Sanchez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8162,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Patricia Sanchez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "28A",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Patricia",
+          "lastName": "Sanchez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Patricia Sanchez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8163,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Christopher Sanchez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "28B",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Christopher",
+          "lastName": "Sanchez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Christopher Sanchez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8164,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Robert Perez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "28C",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Robert",
+          "lastName": "Perez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Robert Perez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8165,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Susan Miller",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "28D",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Susan",
+          "lastName": "Miller",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Susan Miller",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8166,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Matthew Johnson",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "28E",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Matthew",
+          "lastName": "Johnson",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Matthew Johnson",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8167,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Jennifer Lewis",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "28F",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Jennifer",
+          "lastName": "Lewis",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Jennifer Lewis",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8168,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Betty Ramirez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "29A",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Betty",
+          "lastName": "Ramirez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Betty Ramirez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8169,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Christopher Gonzalez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "29B",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Christopher",
+          "lastName": "Gonzalez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Christopher Gonzalez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8170,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "James Thomas",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "29C",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "James",
+          "lastName": "Thomas",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "James Thomas",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8171,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Richard Lopez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "29D",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Richard",
+          "lastName": "Lopez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Richard Lopez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8172,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Jessica Garcia",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "29E",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Jessica",
+          "lastName": "Garcia",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Jessica Garcia",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8173,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "James Brown",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "29F",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "James",
+          "lastName": "Brown",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "James Brown",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8174,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Christopher Wilson",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "30A",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Christopher",
+          "lastName": "Wilson",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Christopher Wilson",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8175,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "James Garcia",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "30B",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "James",
+          "lastName": "Garcia",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "James Garcia",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8176,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Sarah Martin",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "30C",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Sarah",
+          "lastName": "Martin",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Sarah Martin",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8177,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Michael Hernandez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "30D",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Michael",
+          "lastName": "Hernandez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Michael Hernandez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8178,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Anthony Hernandez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "30E",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Anthony",
+          "lastName": "Hernandez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Anthony Hernandez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8179,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Richard Robinson",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "30F",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Richard",
+          "lastName": "Robinson",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Richard Robinson",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8180,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Christopher Robinson",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "31A",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Christopher",
+          "lastName": "Robinson",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Christopher Robinson",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8181,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Christopher Wilson",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "31B",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Christopher",
+          "lastName": "Wilson",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Christopher Wilson",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8182,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Christopher Thompson",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "31C",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Christopher",
+          "lastName": "Thompson",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Christopher Thompson",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8183,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Christopher Clark",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "31D",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Christopher",
+          "lastName": "Clark",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Christopher Clark",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8184,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Barbara Moore",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "31E",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Barbara",
+          "lastName": "Moore",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Barbara Moore",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8185,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Daniel Lopez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "31F",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Daniel",
+          "lastName": "Lopez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Daniel Lopez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8186,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Robert Taylor",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "32A",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Robert",
+          "lastName": "Taylor",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Robert Taylor",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8187,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Linda Jackson",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "32B",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Linda",
+          "lastName": "Jackson",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Linda Jackson",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8188,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Joseph Garcia",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "32C",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Joseph",
+          "lastName": "Garcia",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Joseph Garcia",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8189,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Karen Anderson",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "32D",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Karen",
+          "lastName": "Anderson",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Karen Anderson",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8190,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Mary Garcia",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "32E",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Mary",
+          "lastName": "Garcia",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Mary Garcia",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8191,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Patricia Robinson",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "32F",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Patricia",
+          "lastName": "Robinson",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Patricia Robinson",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8192,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Mark Williams",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "33A",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Mark",
+          "lastName": "Williams",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Mark Williams",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8193,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Elizabeth Davis",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "33B",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Elizabeth",
+          "lastName": "Davis",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Elizabeth Davis",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8194,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Nancy Clark",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "33C",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Nancy",
+          "lastName": "Clark",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Nancy Clark",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8195,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Michael White",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "33D",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Michael",
+          "lastName": "White",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Michael White",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8196,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "William Sanchez",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "33E",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "William",
+          "lastName": "Sanchez",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "William Sanchez",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    },
+    {
+      "bookingId": 8197,
+      "userId": 1,
+      "flightId": 1384,
+      "totalPrice": 1674,
+      "passengers": [
+        {
+          "name": "Thomas Miller",
+          "hasPet": false,
+          "petDetails": null,
+          "seatNumber": "33F",
+          "hasCheckedBaggage": true,
+          "shopItems": [],
+          "specialLuggage": "",
+          "firstName": "Thomas",
+          "lastName": "Miller",
+          "dateOfBirth": "0001-01-01T00:00:00",
+          "gender": null,
+          "nationality": null,
+          "fullName": "Thomas Miller",
+          "phoneNumber": null,
+          "address": null,
+          "id": 0
+        }
+      ],
+      "pets": [],
+      "comfortPackages": null,
+      "planeType": null,
+      "entertainment": null
+    }
 ]

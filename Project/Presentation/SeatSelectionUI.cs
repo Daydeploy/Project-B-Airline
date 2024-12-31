@@ -308,6 +308,21 @@ public class SeatSelectionUI
 
         return "Economy";
     }
+    
+    public int GetAvailableSeatsCount(string planeType, int flightId)
+    {
+        if (!planeConfigs.ContainsKey(planeType))
+        {
+            if (planeTypeAliases.TryGetValue(planeType, out string resolvedType))
+                planeType = resolvedType;
+        }
+
+        var config = planeConfigs[planeType];
+        var totalSeats = config.Rows * config.SeatsPerRow;
+
+        LoadExistingBookings(flightId);
+        return totalSeats - occupiedSeats.Count;
+    }
 
 }
 

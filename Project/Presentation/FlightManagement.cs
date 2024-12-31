@@ -416,18 +416,41 @@ static class FlightManagement
     private static void HandlePassengerDetailsAndBooking(AccountModel account, FlightModel departureFlight,
         FlightModel? returnFlight)
     {
+        var seatSelector = new SeatSelectionUI();
+        int availableSeats = seatSelector.GetAvailableSeatsCount(departureFlight.PlaneType, departureFlight.FlightId);
 
-        AccountsAccess.LoadAll();
-        Console.WriteLine("How many passengers? (1-8):");
-        if (!int.TryParse(Console.ReadLine(), out int passengerCount) || passengerCount <= 0 || passengerCount > 8)
+        if (availableSeats == 0)
         {
-            Console.WriteLine("Invalid number of passengers.");
+            Console.WriteLine("\nSorry, this flight is fully booked.");
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+            return;
+        }
+        
+        AccountsAccess.LoadAll();
+        Console.WriteLine($"\nAvailable seats: {availableSeats}");
+        Console.WriteLine("How many passengers? (1-8):");
+       
+        if (!int.TryParse(Console.ReadLine(), out int passengerCount) || 
+        passengerCount <= 0 || 
+        passengerCount > 8 ||
+        passengerCount > availableSeats)
+        {
+            if (passengerCount > availableSeats)
+            {
+                Console.WriteLine($"\nSorry, there are only {availableSeats} seats available on this flight.");
+            }
+            else
+            {
+                Console.WriteLine("Invalid number of passengers.");
+            }
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
             return;
         }
 
-        var seatSelector = new SeatSelectionUI();
         var passengerDetails = CollectPassengerDetails(departureFlight, passengerCount, seatSelector);
-
+        
         bool includeInsuranceForDeparture = PromptForInsurance(passengerCount, "departure");
 
         if (account.PaymentInformation == null || !AccountsLogic.HasCompleteContactInformation(account.FirstName,
