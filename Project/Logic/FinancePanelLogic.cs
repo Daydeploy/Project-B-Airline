@@ -31,7 +31,7 @@ public class FinancePanelLogic
     public static FinancialMetrics ShowYearlyData(int year)
     {
         var startDate = new DateTime(year, 1, 1);
-        var endDate = year == DateTime.Now.Year ? DateTime.Now : new DateTime(year, 1, 12, 31, 23, 59, 59);
+        var endDate = year == DateTime.Now.Year ? DateTime.Now : new DateTime(year, 12, 31, 23, 59, 59);
 
         return GetFinancialMetrics(startDate, endDate);
     }
