@@ -8,7 +8,7 @@ static class AdminAccountUI
         bool exit = false;
         while (!exit)
         {
-            string[] menuItems = { "Manage airports", "Manage flights", "Manage accounts", "Logout" };
+            string[] menuItems = { "Manage Airports", "Manage Flights", "Manage Accounts", "Manage Finance", "Logout" };
             int selectedIndex = MenuNavigationService.NavigateMenu(menuItems, "Admin Menu");
             HandleSelection(menuItems[selectedIndex], ref exit);
         }
@@ -19,14 +19,17 @@ static class AdminAccountUI
         Console.Clear();
         switch (selectedOption)
         {
-            case "Manage airports":
+            case "Manage Airports":
                 ShowAirportMenu();
                 break;
-            case "Manage flights":
+            case "Manage Flights":
                 ShowFlightMenu();
                 break;
-            case "Manage accounts":
+            case "Manage Accounts":
                 ShowAccountMenu();
+                break;
+            case "Manage Finance":
+                FinanceUserUI.FinanceMainMenu();
                 break;
             case "Logout":
                 UserLogin.UserAccountServiceLogic.Logout();
