@@ -3,6 +3,32 @@ using System.Collections.Generic;
 
 static class FlightDisplay
 {
+    private static readonly Dictionary<string, int> MaxCargoWeight = new()
+    {
+        { "Boeing 737", 35000 },
+        { "Boeing 787", 50000 },
+        { "Airbus A330", 75000 }
+    };
+
+    // Add this new method
+    private static (int usedWeight, int maxWeight) GetFlightWeightInfo(FlightModel flight)
+    {
+        var bookings = BookingAccess.LoadAll()
+            .Where(b => b.FlightId == flight.FlightId)
+            .ToList();
+
+        int usedWeight = 0;
+        foreach (var booking in bookings)
+        {
+            usedWeight += booking.Passengers.Count(p => p.HasCheckedBaggage) * 23; //23kg per bagage
+            usedWeight += booking.Pets.Sum(p => (int)p.Weight);
+            usedWeight += booking.Passengers.Count(p => !string.IsNullOrEmpty(p.SpecialLuggage)) * 30; //30kg per special luggage voor berekening
+        }
+
+        int maxWeight = MaxCargoWeight.TryGetValue(flight.PlaneType, out int weight) ? weight : 35000;
+        return (usedWeight, maxWeight);
+    }
+
     // Displays a list of flights
     public static void DisplayFlights(List<FlightModel> flights)
     {
@@ -31,7 +57,7 @@ static class FlightDisplay
         Console.WriteLine(new string('─', Console.WindowWidth - 1));
         Console.ForegroundColor = ConsoleColor.Cyan;
         Console.WriteLine(
-            $"{"Flight ID",-10} {"Route",-30} {"Departure",-18} {"Arrival",-18} {"Duration",-12} {"Prices (EUR)"}");
+            $"{"Flight ID",-10} {"Route",-50} {"Departure",-15} {"Arrival",-17} {"Duration",-11} {"Cargo (kg)",-10} {"Prices (EUR)"}");
         Console.ResetColor();
         Console.WriteLine(new string('─', Console.WindowWidth - 1));
     }
@@ -42,6 +68,7 @@ static class FlightDisplay
         DateTime departureDateTime = DateTime.Parse(flight.DepartureTime);
         DateTime arrivalDateTime = DateTime.Parse(flight.ArrivalTime);
         TimeSpan duration = arrivalDateTime - departureDateTime;
+        var (usedWeight, maxWeight) = GetFlightWeightInfo(flight);
 
         Console.ForegroundColor = ConsoleColor.Yellow;
         Console.Write($"{flight.FlightId,-10} ");
@@ -59,8 +86,19 @@ static class FlightDisplay
         Console.ResetColor();
         Console.Write($" {arrivalDateTime:HH:mm dd MMM} ");
 
-        string durationStr = $"{duration.Hours}h {duration.Minutes}m";
+        string durationStr = $"\t{duration.Hours}h {duration.Minutes}m";
         Console.Write($"{durationStr,-12} ");
+
+        // Display cargo weight with color coding
+        double weightPercentage = (double)usedWeight / maxWeight;
+        Console.ForegroundColor = weightPercentage switch
+        {
+            >= 0.9 => ConsoleColor.Red,        // Over 90% capacity
+            >= 0.7 => ConsoleColor.Yellow,     // Over 70% capacity
+            _ => ConsoleColor.DarkGreen            // Under 70% capacity
+        };
+        Console.Write($"{usedWeight}/{maxWeight,-7}  ");
+        Console.ResetColor();
 
         string currentSeason = GetCurrentSeason();
 
