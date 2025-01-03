@@ -72,6 +72,7 @@ static class UserLogin
             "Advanced flight booking",
             "Add Comfort Packages",
             "Add Entertainment",
+            "Finance panel",
             "Logout"
         };
 
@@ -114,7 +115,10 @@ static class UserLogin
                 case 10: // Add Entertainment
                     EntertainmentUI.ShowEntertainment();
                     break;
-                case 11: // Logout
+                case 11: // Finance panel
+                    FinanceUserUI.FinanceMainMenu();
+                    break;
+                case 12: // Logout
                     Console.Clear();
                     UserAccountServiceLogic.Logout();
                     Console.WriteLine("You have successfully logged out.");
