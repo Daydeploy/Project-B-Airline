@@ -672,80 +672,94 @@ static class FlightManagement
         return response == "y";
     }
 
+    private static readonly string[] petTypes = { "Dog", "Cat", "Bird", "Rabbit", "Hamster" };
+    private static readonly Dictionary<string, double> maxWeights = new Dictionary<string, double>
+    {
+        { "Dog", 32.0 },
+        { "Cat", 15.0 },
+        { "Bird", 2.0 },
+        { "Rabbit", 8.0 },
+        { "Hamster", 1.0 }
+    };
+
     private static List<PassengerModel> CollectPassengerDetails(FlightModel selectedFlight, int passengerCount,
         SeatSelectionUI seatSelector)
     {
         List<PassengerModel> passengerDetails = new List<PassengerModel>();
-        string[] petTypes = { "Dog", "Cat", "Bird", "Rabbit", "Hamster" };
-        var maxWeights = new Dictionary<string, double>
+        
+        try 
         {
-            { "Dog", 32.0 },
-            { "Cat", 15.0 },
-            { "Bird", 2.0 },
-            { "Rabbit", 8.0 },
-            { "Hamster", 1.0 }
-        };
+            seatSelector.ClearTemporarySeats();
 
-        for (int i = 0; i < passengerCount; i++)
-        {
-            Console.Clear();
-            Console.WriteLine($"Passenger {i + 1} Details:");
-            Console.WriteLine("Enter passenger name:");
-            string name = Console.ReadLine();
-            while (!AccountsLogic.IsValidName(name))
+            for (int i = 0; i < passengerCount; i++)
             {
-                Console.WriteLine("Name must be between 2 and 20 characters long, start with a capital letter, and cannot contain numbers.");
-                Console.WriteLine("Enter passenger name: ");
-                name = Console.ReadLine();
+                Console.Clear();
+                Console.WriteLine($"Passenger {i + 1} Details:");
+                Console.WriteLine("Enter passenger name:");
+                string name = Console.ReadLine();
+                while (!AccountsLogic.IsValidName(name))
+                {
+                    Console.WriteLine("Name must be between 2 and 20 characters long, start with a capital letter, and cannot contain numbers.");
+                    Console.WriteLine("Enter passenger name: ");
+                    name = Console.ReadLine();
+                }
+
+                Console.WriteLine("Does this passenger have checked baggage? (y/n):");
+                bool hasCheckedBaggage = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
+
+                string specialLuggage = "";
+
+                Console.WriteLine("Do you have special luggage? (y/n):");
+                bool hasSpecialLuggage = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
+
+                if (hasSpecialLuggage)
+                {
+                    Console.WriteLine("What special luggage do you have? (e.g. Ski equipment, Musical instrument):");
+                    specialLuggage = Console.ReadLine() ?? string.Empty;
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine($"\nYour {specialLuggage} will be stored securely in the luggage compartment.");
+                    Console.ResetColor();
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey();
+                }
+
+
+                Console.WriteLine("Does this passenger have a pet? (y/n):");
+                bool hasPet = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
+
+                PetModel petDetails = null;
+                if (hasPet)
+                {
+                    petDetails = SelectPetDetails(petTypes, maxWeights);
+                }
+
+                var passenger = new PassengerModel(name, null, hasCheckedBaggage, hasPet, petDetails, specialLuggage);
+
+                Console.WriteLine("\nSelect a seat for the passenger:");
+                string seatNumber = seatSelector.SelectSeat(selectedFlight.PlaneType, selectedFlight.FlightId);
+                if (seatNumber == null)
+                {       
+                    throw new Exception("Seat selection cancelled");
+                }
+                
+                seatSelector.SetSeatOccupied(seatNumber, name);
+                if (hasPet)
+                {
+                    seatSelector.SetPetSeat(seatNumber);
+                }
+
+                passenger.SeatNumber = seatNumber;
+                passengerDetails.Add(passenger);
             }
 
-            Console.WriteLine("Does this passenger have checked baggage? (y/n):");
-            bool hasCheckedBaggage = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
-
-            string specialLuggage = "";
-
-            Console.WriteLine("Do you have special luggage? (y/n):");
-            bool hasSpecialLuggage = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
-
-            if (hasSpecialLuggage)
-            {
-                Console.WriteLine("What special luggage do you have? (e.g. Ski equipment, Musical instrument):");
-                specialLuggage = Console.ReadLine() ?? string.Empty;
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"\nYour {specialLuggage} will be stored securely in the luggage compartment.");
-                Console.ResetColor();
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey();
-            }
-
-
-            Console.WriteLine("Does this passenger have a pet? (y/n):");
-            bool hasPet = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
-
-            PetModel petDetails = null;
-            if (hasPet)
-            {
-                petDetails = SelectPetDetails(petTypes, maxWeights);
-            }
-
-            // In FlightManagement.cs, add some debug logging after passenger creation:
-            var passenger = new PassengerModel(name, null, hasCheckedBaggage, hasPet, petDetails, specialLuggage);
-            // Console.WriteLine($"DEBUG: Special luggage set to: {passenger.SpecialLuggage}"); // Verify value is set\
-
-            Console.WriteLine("\nSelect a seat for the passenger:");
-            string seatNumber = seatSelector.SelectSeat(selectedFlight.PlaneType, selectedFlight.FlightId);
-            seatSelector.SetSeatOccupied(seatNumber, name);
-
-            if (hasPet)
-            {
-                seatSelector.SetPetSeat(seatNumber);
-            }
-
-            passenger.SeatNumber = seatNumber;
-            passengerDetails.Add(passenger);
+            seatSelector.CommitTemporarySeats();
+            return passengerDetails;
         }
-
-        return passengerDetails;
+        catch (Exception)
+        {
+            seatSelector.ClearTemporarySeats();
+            throw;
+        }
     }
 
     private static PetModel SelectPetDetails(string[] petTypes, Dictionary<string, double> maxWeights)
