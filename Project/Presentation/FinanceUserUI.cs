@@ -1,8 +1,8 @@
 public class FinanceUserUI
 {
-
     private static FinanceUserLogic _financeLogic = new FinanceUserLogic();
     private const int MIN_YEAR = 2024;
+
     public static void FinanceMainMenu()
     {
         if (UserLogin.UserAccountServiceLogic.CurrentAccount?.EmailAddress.ToLower() == "admin")
@@ -11,36 +11,37 @@ public class FinanceUserUI
             return;
         }
 
-    string[] financeMenuOptions = {
-        "View All Purchases",
-        "View Purchases by Period",
-        "View Recent Purchases",
-        "View Spending Analysis",
-        "Back to Main Menu"
-    };
-
-    while (true)
-    {
-        int selectedMenuIndex = MenuNavigationService.NavigateMenu(financeMenuOptions, "Personal Finance Panel");
-
-        switch (selectedMenuIndex)
+        string[] financeMenuOptions =
         {
-            case 0:
-                ShowAllPurchases();
-                break;
-            case 1:
-                ShowPurchasesByPeriod();
-                break;
-            case 2:
-                ShowRecentPurchases();
-                break;
-            case 3:
-                ShowSpendingAnalysis();
-                break;
-            case 4:
-                return;
+            "View All Purchases",
+            "View Purchases by Period",
+            "View Recent Purchases",
+            "View Spending Analysis",
+            "Back to Main Menu"
+        };
+
+        while (true)
+        {
+            int selectedMenuIndex = MenuNavigationService.NavigateMenu(financeMenuOptions, "Personal Finance Panel");
+
+            switch (selectedMenuIndex)
+            {
+                case 0:
+                    ShowAllPurchases();
+                    break;
+                case 1:
+                    ShowPurchasesByPeriod();
+                    break;
+                case 2:
+                    ShowRecentPurchases();
+                    break;
+                case 3:
+                    ShowSpendingAnalysis();
+                    break;
+                case 4:
+                    return;
+            }
         }
-    }
     }
 
     private static void ShowPurchaseDetails(BookingModel booking, bool showVAT = true)
@@ -113,9 +114,10 @@ public class FinanceUserUI
 
     private static void ShowPurchasesByPeriod()
     {
-        string[] periodOptions = {
+        string[] periodOptions =
+        {
             "View by Year",
-            "View by Quarter", 
+            "View by Quarter",
             "View by Month",
             "Back"
         };
@@ -154,7 +156,7 @@ public class FinanceUserUI
             Console.WriteLine("=== Select Year ===\n");
             Console.WriteLine("← → : Change Year    Enter : Confirm    Esc : Cancel\n");
             Console.WriteLine($"Selected Year: {selectedYear}");
-            
+
             if (!string.IsNullOrEmpty(message))
             {
                 Console.WriteLine($"\n{message}");
@@ -184,6 +186,7 @@ public class FinanceUserUI
             }
         }
     }
+
     private static void ShowPurchasesByQuarter()
     {
         int currentYear = DateTime.Now.Year;
@@ -219,6 +222,7 @@ public class FinanceUserUI
                     }
                     else
                         message = $"Cannot view years before {MIN_YEAR}";
+
                     break;
                 case ConsoleKey.RightArrow:
                     if (selectedQuarter < 4)
@@ -228,6 +232,7 @@ public class FinanceUserUI
                         selectedQuarter = 1;
                         selectedYear++;
                     }
+
                     break;
                 case ConsoleKey.UpArrow:
                     selectedYear++;
@@ -286,6 +291,7 @@ public class FinanceUserUI
                     }
                     else
                         message = $"Cannot view years before {MIN_YEAR}";
+
                     break;
                 case ConsoleKey.RightArrow:
                     if (selectedMonth < 12)
@@ -295,6 +301,7 @@ public class FinanceUserUI
                         selectedMonth = 1;
                         selectedYear++;
                     }
+
                     break;
                 case ConsoleKey.UpArrow:
                     selectedYear++;
@@ -308,7 +315,8 @@ public class FinanceUserUI
                 case ConsoleKey.Enter:
                     var userId = UserLogin.UserAccountServiceLogic.CurrentUserId;
                     var bookings = _financeLogic.GetPurchasesByMonth(userId, selectedYear, selectedMonth);
-                    DisplayPurchases(bookings, $"Purchases for {new DateTime(selectedYear, selectedMonth, 1):MMMM yyyy}");
+                    DisplayPurchases(bookings,
+                        $"Purchases for {new DateTime(selectedYear, selectedMonth, 1):MMMM yyyy}");
                     done = true;
                     break;
                 case ConsoleKey.Escape:
@@ -387,7 +395,8 @@ public class FinanceUserUI
 
     private static void ShowAdminFinanceMenu()
     {
-        string[] adminFinanceMenuOptions = {
+        string[] adminFinanceMenuOptions =
+        {
             "View All Purchases",
             "View Purchases by Period",
             "View Recent Purchases",
@@ -417,7 +426,7 @@ public class FinanceUserUI
                 case 4:
                     ShowUserSpendingAnalysis();
                     break;
-                case 6:
+                case 5:
                     return;
             }
         }
@@ -426,7 +435,7 @@ public class FinanceUserUI
     private static void ShowUserSpendingAnalysis()
     {
         var users = _financeLogic.GetAllUsers();
-        
+
         if (!users.Any())
         {
             Console.WriteLine("\nNo users found in the system.");
@@ -451,7 +460,7 @@ public class FinanceUserUI
                     Console.Write("→ ");
                 else
                     Console.Write("  ");
-                
+
                 Console.WriteLine($"{users[i].FirstName} {users[i].LastName} ({users[i].EmailAddress})");
             }
 
@@ -482,7 +491,7 @@ public class FinanceUserUI
     private static void ShowUserAnalysis(AccountModel user)
     {
         var analysis = _financeLogic.GetSpendingAnalysis(user.Id);
-        
+
         Console.Clear();
         Console.WriteLine($"=== Spending Analysis for {user.FirstName} {user.LastName} ===\n");
 

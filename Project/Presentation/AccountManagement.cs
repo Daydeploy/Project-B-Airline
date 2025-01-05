@@ -32,14 +32,15 @@ static class AccountManagement
         Console.WriteLine("Press ESC at any time to return to menu\n");
         Console.WriteLine("Create a new account\n");
 
-        bool showPassword = false;  // Moved to top level
+        bool showPassword = false; // Moved to top level
 
         // First Name
         string firstName = GetUserInput("Enter your first name: ", isPassword: false, ref showPassword);
         if (firstName == null) return;
         while (!AccountsLogic.IsValidName(firstName))
         {
-            Console.WriteLine("First name must be between 2 and 20 characters long, start with a capital letter, and cannot contain numbers.");
+            Console.WriteLine(
+                "First name must be between 2 and 20 characters long, start with a capital letter, and cannot contain numbers.");
             firstName = GetUserInput("Enter your first name: ", isPassword: false, ref showPassword);
             if (firstName == null) return;
         }
@@ -49,7 +50,8 @@ static class AccountManagement
         if (lastName == null) return;
         while (!AccountsLogic.IsValidName(lastName))
         {
-            Console.WriteLine("Last name must be between 2 and 20 characters long, start with a capital letter, and cannot contain numbers.");
+            Console.WriteLine(
+                "Last name must be between 2 and 20 characters long, start with a capital letter, and cannot contain numbers.");
             lastName = GetUserInput("Enter your last name: ", isPassword: false, ref showPassword);
             if (lastName == null) return;
         }
@@ -67,9 +69,10 @@ static class AccountManagement
         // Password
         string password = GetUserInput("Enter your password: ", isPassword: true, ref showPassword);
         if (password == null) return;
-        while(!AccountsLogic.IsValidPassword(password))
+        while (!AccountsLogic.IsValidPassword(password))
         {
-            Console.WriteLine("Password must contain at least one uppercase letter, one number, and one special character.");
+            Console.WriteLine(
+                "Password must contain at least one uppercase letter, one number, and one special character.");
             password = GetUserInput("Enter your password: ", isPassword: true, ref showPassword);
             if (password == null) return;
         }
@@ -78,7 +81,8 @@ static class AccountManagement
         if (confirmPassword == null) return;
         while (!AccountsLogic.IsValidPassword(confirmPassword))
         {
-            Console.WriteLine("Password must contain at least one uppercase letter, one number, and one special character.");
+            Console.WriteLine(
+                "Password must contain at least one uppercase letter, one number, and one special character.");
             confirmPassword = GetUserInput("Confirm your password: ", isPassword: true, ref showPassword);
             if (confirmPassword == null) return;
         }
@@ -99,7 +103,8 @@ static class AccountManagement
             return;
         }
 
-        bool accountCreated = UserLogin.UserAccountServiceLogic.CreateAccount(firstName, lastName, email, password, dateOfBirth);
+        bool accountCreated =
+            UserLogin.UserAccountServiceLogic.CreateAccount(firstName, lastName, email, password, dateOfBirth);
 
         Console.WriteLine(accountCreated
             ? "\nAccount created successfully. Please login."
@@ -179,8 +184,10 @@ static class AccountManagement
         {
             Console.WriteLine("Passport Details:");
             Console.WriteLine($"  Passport Number: {account.PassportDetails.PassportNumber ?? "Not provided"}");
-            Console.WriteLine($"  Issue Date: {account.PassportDetails.IssueDate?.ToString("dd-MM-yyyy") ?? "Not provided"}");
-            Console.WriteLine($"  Expiration Date: {account.PassportDetails.ExpirationDate?.ToString("dd-MM-yyyy") ?? "Not provided"}");
+            Console.WriteLine(
+                $"  Issue Date: {account.PassportDetails.IssueDate?.ToString("dd-MM-yyyy") ?? "Not provided"}");
+            Console.WriteLine(
+                $"  Expiration Date: {account.PassportDetails.ExpirationDate?.ToString("dd-MM-yyyy") ?? "Not provided"}");
             Console.WriteLine($"  Country of Issue: {account.PassportDetails.CountryOfIssue ?? "Not provided"}");
         }
         else
@@ -204,7 +211,8 @@ static class AccountManagement
             case 0: // Personal Information
                 Console.WriteLine("\n--- Personal Information Management ---");
 
-                string[] personalOptions = {
+                string[] personalOptions =
+                {
                     "Update Email",
                     "Update Password",
                     "Update First Name",
@@ -215,6 +223,7 @@ static class AccountManagement
                     "Update Phone Number",
                     "Update Address",
                     "Update Passport Details",
+                    "Return to Account Management"
                 };
 
                 int personalOptionIndex = MenuNavigationService.NavigateMenu(personalOptions, "Personal Details");
@@ -231,6 +240,7 @@ static class AccountManagement
                             Console.Write("Enter new email: ");
                             newEmail = Console.ReadLine();
                         }
+
                         updateSuccessful = UserLogin.UserAccountServiceLogic.ManageAccount(account.Id, newEmail);
                         Console.WriteLine(updateSuccessful ? "Email updated successfully." : "Failed to update email.");
                         break;
@@ -240,12 +250,16 @@ static class AccountManagement
                         string newPassword = Console.ReadLine();
                         while (!AccountsLogic.IsValidPassword(newPassword))
                         {
-                            Console.WriteLine("Password must contain at least one uppercase letter, one number, and one special character.");
+                            Console.WriteLine(
+                                "Password must contain at least one uppercase letter, one number, and one special character.");
                             Console.Write("Enter new password: ");
                             newPassword = Console.ReadLine();
                         }
+
                         updateSuccessful = UserLogin.UserAccountServiceLogic.ManageAccount(account.Id, newPassword);
-                        Console.WriteLine(updateSuccessful ? "Password updated successfully." : "Failed to update password.");
+                        Console.WriteLine(updateSuccessful
+                            ? "Password updated successfully."
+                            : "Failed to update password.");
                         break;
 
                     case 2:
@@ -258,7 +272,9 @@ static class AccountManagement
                             Console.Write("Enter new first name: ");
                             newFirstName = Console.ReadLine();
                         }
-                        updateSuccessful = UserLogin.UserAccountServiceLogic.ManageAccount(account.Id, newFirstName: newFirstName);
+
+                        updateSuccessful =
+                            UserLogin.UserAccountServiceLogic.ManageAccount(account.Id, newFirstName: newFirstName);
                         Console.WriteLine(
                             updateSuccessful ? "First name updated successfully." : "Failed to update first name.");
                         break;
@@ -266,8 +282,12 @@ static class AccountManagement
                     case 3:
                         Console.WriteLine($"Current Last Name: {account.LastName}");
                         Console.WriteLine("Enter new last name:");
-                        updateSuccessful = UserLogin.UserAccountServiceLogic.ManageAccount(account.Id, newLastName: Console.ReadLine());
-                        Console.WriteLine(updateSuccessful ? "Last name updated successfully." : "Failed to update last name.");
+                        updateSuccessful =
+                            UserLogin.UserAccountServiceLogic.ManageAccount(account.Id,
+                                newLastName: Console.ReadLine());
+                        Console.WriteLine(updateSuccessful
+                            ? "Last name updated successfully."
+                            : "Failed to update last name.");
                         break;
 
                     case 4:
@@ -275,7 +295,9 @@ static class AccountManagement
                         Console.WriteLine("Enter new date of birth (dd-MM-yyyy):");
                         if (DateTime.TryParse(Console.ReadLine(), out DateTime newDateOfBirth))
                         {
-                            updateSuccessful = UserLogin.UserAccountServiceLogic.ManageAccount(account.Id, newDateOfBirth: newDateOfBirth);
+                            updateSuccessful =
+                                UserLogin.UserAccountServiceLogic.ManageAccount(account.Id,
+                                    newDateOfBirth: newDateOfBirth);
                             Console.WriteLine(updateSuccessful
                                 ? "Date of birth updated successfully."
                                 : "Failed to update date of birth.");
@@ -284,19 +306,24 @@ static class AccountManagement
                         {
                             Console.WriteLine("Invalid date format. Date of birth not updated.");
                         }
+
                         break;
 
                     case 5:
                         Console.WriteLine($"Current Gender: {account.Gender ?? "Not provided"}");
                         Console.WriteLine("Enter new gender:");
-                        updateSuccessful = UserLogin.UserAccountServiceLogic.ManageAccount(account.Id, newGender: Console.ReadLine());
-                        Console.WriteLine(updateSuccessful ? "Gender updated successfully." : "Failed to update gender.");
+                        updateSuccessful =
+                            UserLogin.UserAccountServiceLogic.ManageAccount(account.Id, newGender: Console.ReadLine());
+                        Console.WriteLine(
+                            updateSuccessful ? "Gender updated successfully." : "Failed to update gender.");
                         break;
 
                     case 6:
                         Console.WriteLine($"Current Nationality: {account.Nationality ?? "Not provided"}");
                         Console.WriteLine("Enter new nationality:");
-                        updateSuccessful = UserLogin.UserAccountServiceLogic.ManageAccount(account.Id, newNationality: Console.ReadLine());
+                        updateSuccessful =
+                            UserLogin.UserAccountServiceLogic.ManageAccount(account.Id,
+                                newNationality: Console.ReadLine());
                         Console.WriteLine(updateSuccessful
                             ? "Nationality updated successfully."
                             : "Failed to update nationality.");
@@ -305,7 +332,9 @@ static class AccountManagement
                     case 7:
                         Console.WriteLine($"Current Phone Number: {account.PhoneNumber ?? "Not provided"}");
                         Console.WriteLine("Enter new phone number:");
-                        updateSuccessful = UserLogin.UserAccountServiceLogic.ManageAccount(account.Id, newPhoneNumber: Console.ReadLine());
+                        updateSuccessful =
+                            UserLogin.UserAccountServiceLogic.ManageAccount(account.Id,
+                                newPhoneNumber: Console.ReadLine());
                         Console.WriteLine(updateSuccessful
                             ? "Phone number updated successfully."
                             : "Failed to update phone number.");
@@ -314,39 +343,52 @@ static class AccountManagement
                     case 8:
                         Console.WriteLine($"Current Address: {account.Address ?? "Not provided"}");
                         Console.WriteLine("Enter new Address:");
-                        updateSuccessful = UserLogin.UserAccountServiceLogic.ManageAccount(account.Id, newAddress: Console.ReadLine());
+                        updateSuccessful =
+                            UserLogin.UserAccountServiceLogic.ManageAccount(account.Id, newAddress: Console.ReadLine());
 
-                        Console.WriteLine(updateSuccessful ? "Address updated successfully." : "Failed to update address.");
+                        Console.WriteLine(updateSuccessful
+                            ? "Address updated successfully."
+                            : "Failed to update address.");
                         break;
 
                     case 9:
-                        Console.WriteLine($"Current Passport Number: {account.PassportDetails?.PassportNumber ?? "Not provided"}");
+                        Console.WriteLine(
+                            $"Current Passport Number: {account.PassportDetails?.PassportNumber ?? "Not provided"}");
                         Console.WriteLine("Enter new passport number:");
                         string passportNumber = Console.ReadLine() ?? string.Empty;
 
-                        Console.WriteLine($"Current Issue Date: {account.PassportDetails?.IssueDate?.ToString("dd-MM-yyyy") ?? "Not provided"}");
+                        Console.WriteLine(
+                            $"Current Issue Date: {account.PassportDetails?.IssueDate?.ToString("dd-MM-yyyy") ?? "Not provided"}");
                         Console.WriteLine("Enter new passport issue date (dd-MM-yyyy):");
                         DateTime.TryParse(Console.ReadLine(), out DateTime issueDate);
 
-                        Console.WriteLine($"Current Expiration Date: {account.PassportDetails?.ExpirationDate?.ToString("dd-MM-yyyy") ?? "Not provided"}");
+                        Console.WriteLine(
+                            $"Current Expiration Date: {account.PassportDetails?.ExpirationDate?.ToString("dd-MM-yyyy") ?? "Not provided"}");
                         Console.WriteLine("Enter new passport expiration date (dd-MM-yyyy):");
                         DateTime.TryParse(Console.ReadLine(), out DateTime expirationDate);
 
-                        Console.WriteLine($"Current Country of Issue: {account.PassportDetails?.CountryOfIssue ?? "Not provided"}");
+                        Console.WriteLine(
+                            $"Current Country of Issue: {account.PassportDetails?.CountryOfIssue ?? "Not provided"}");
                         Console.WriteLine("Enter new country of issue:");
                         string countryOfIssue = Console.ReadLine() ?? string.Empty;
 
-                        var newPassportDetails = new PassportDetailsModel(passportNumber, issueDate, expirationDate, countryOfIssue);
-                        updateSuccessful = UserLogin.UserAccountServiceLogic.ManageAccount(account.Id, newPassportDetails: newPassportDetails);
+                        var newPassportDetails =
+                            new PassportDetailsModel(passportNumber, issueDate, expirationDate, countryOfIssue);
+                        updateSuccessful =
+                            UserLogin.UserAccountServiceLogic.ManageAccount(account.Id,
+                                newPassportDetails: newPassportDetails);
                         Console.WriteLine(updateSuccessful
                             ? "Passport details updated successfully."
                             : "Failed to update passport details.");
+                        break;
+                    case 10:
                         break;
 
                     default:
                         Console.WriteLine("Invalid option selected.");
                         break;
                 }
+
                 break;
 
             case 1: // Payment Information
@@ -354,9 +396,11 @@ static class AccountManagement
 
                 Console.WriteLine("\n--- Payment Information Management ---");
 
-                if (accountToUpdate.PaymentInformation == null) accountToUpdate.PaymentInformation = new List<PaymentInformationModel>();
+                if (accountToUpdate.PaymentInformation == null)
+                    accountToUpdate.PaymentInformation = new List<PaymentInformationModel>();
 
-                string[] paymentOptions = {
+                string[] paymentOptions =
+                {
                     "Update Payment Method",
                     "Remove Payment Method",
                     "Back to Account Management",
@@ -382,6 +426,7 @@ static class AccountManagement
                                 Console.WriteLine("Card Holder Name cannot be empty, Please try again.");
                                 continue;
                             }
+
                             break;
                         }
 
@@ -393,9 +438,11 @@ static class AccountManagement
 
                             if (!PaymentLogic.ValidateCardNumber(_cardNumber))
                             {
-                                Console.WriteLine("Invalid Card number, Must be 16 characters long and only contain digits.");
+                                Console.WriteLine(
+                                    "Invalid Card number, Must be 16 characters long and only contain digits.");
                                 continue;
                             }
+
                             break;
                         }
 
@@ -410,6 +457,7 @@ static class AccountManagement
                                 Console.WriteLine("Invalid CVV, Must be 3 or 4 digits.");
                                 continue;
                             }
+
                             break;
                         }
 
@@ -424,6 +472,7 @@ static class AccountManagement
                                 Console.WriteLine("Invalid expiration date, Must be in MM/YY format and not expired.");
                                 continue;
                             }
+
                             break;
                         }
 
@@ -437,7 +486,9 @@ static class AccountManagement
                             {
                                 Console.WriteLine("Invalid billing address, Cannot be empty.");
                                 continue;
-                            };
+                            }
+
+                            ;
                             break;
                         }
 
@@ -456,7 +507,8 @@ static class AccountManagement
                             break;
                         }
 
-                        paymentInfo = new PaymentInformationModel(_cardHolder, _cardNumber, _cVV, _expirationDate, _billingAddress);
+                        paymentInfo = new PaymentInformationModel(_cardHolder, _cardNumber, _cVV, _expirationDate,
+                            _billingAddress);
                         isValidPaymentInformation = true;
                     }
 
@@ -483,6 +535,7 @@ static class AccountManagement
                 {
                     return;
                 }
+
                 Console.Clear();
                 break;
 
@@ -535,6 +588,7 @@ static class AccountManagement
                 {
                     Console.WriteLine("Error: Miles information is not available.");
                 }
+
                 break;
 
             default:
