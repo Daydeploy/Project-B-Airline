@@ -42,7 +42,7 @@ static class FlightManagement
         Console.WriteLine("Select your starting location:");
         int originIndex = MenuNavigationService.NavigateMenu(origins.ToArray(), "Available Origins");
 
-        if (originIndex == -1 || originIndex == origins.Count - 1) 
+        if (originIndex == -1 || originIndex == origins.Count - 1)
         {
             return null;
         }
@@ -64,7 +64,7 @@ static class FlightManagement
         Console.WriteLine($"Available destinations from {origin}:");
         int destinationIndex = MenuNavigationService.NavigateMenu(destinations.ToArray(), "Available Destinations");
 
-        if (destinationIndex == -1 || destinationIndex == destinations.Count - 1) 
+        if (destinationIndex == -1 || destinationIndex == destinations.Count - 1)
         {
             return null;
         }
@@ -752,17 +752,42 @@ static class FlightManagement
                     Console.ReadKey();
                 }
 
+                List<PetModel> passengerPets = new List<PetModel>();
+                bool hasPet = false;
 
-                Console.WriteLine("Does this passenger have a pet? (y/n):");
-                bool hasPet = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
-
-                PetModel petDetails = null;
-                if (hasPet)
+                Console.WriteLine("Does this passenger have any pets? (y/n):");
+                if (Console.ReadLine()?.ToLower().StartsWith("y") ?? false)
                 {
-                    petDetails = SelectPetDetails(petTypes, maxWeights);
+                    int petCount;
+                    do
+                    {
+                        Console.WriteLine("How many pets? (1-3):");
+                        if (int.TryParse(Console.ReadLine(), out petCount) && petCount > 0 && petCount <= 3)
+                        {
+                            hasPet = true;
+                            break;
+                        }
+
+                        Console.WriteLine("Please enter a number between 1 and 3.");
+                    } while (true);
+
+                    for (int j = 0; j < petCount; j++)
+                    {
+                        Console.WriteLine($"\nPet {j + 1} Details:");
+                        PetModel petDetails = SelectPetDetails(petTypes, maxWeights);
+                        if (petDetails != null)
+                        {
+                            passengerPets.Add(petDetails);
+                        }
+                    }
                 }
 
-                var passenger = new PassengerModel(name, null, hasCheckedBaggage, hasPet, petDetails, specialLuggage);
+                var passenger = new PassengerModel(name, null, hasCheckedBaggage, hasPet, null, specialLuggage);
+                if (hasPet && passengerPets.Any())
+                {
+                    passenger.AllPets = new List<PetModel>(passengerPets); 
+                    passenger.PetDetails = passengerPets[0]; 
+                }
 
                 Console.WriteLine("\nSelect a seat for the passenger:");
                 string seatNumber = seatSelector.SelectSeat(selectedFlight.PlaneType, selectedFlight.FlightId);
