@@ -22,9 +22,7 @@ static class FlightDisplay
         {
             usedWeight += booking.Passengers.Count(p => p.HasCheckedBaggage) * 23; //23kg per bagage
             usedWeight += booking.Pets.Sum(p => (int)p.Weight);
-            usedWeight +=
-                booking.Passengers.Count(p => !string.IsNullOrEmpty(p.SpecialLuggage)) *
-                30; //30kg per special luggage voor berekening
+            usedWeight += booking.Passengers.Count(p => !string.IsNullOrEmpty(p.SpecialLuggage)) * 30; //30kg per special luggage voor berekening
         }
 
         int maxWeight = MaxCargoWeight.TryGetValue(flight.PlaneType, out int weight) ? weight : 35000;
@@ -95,9 +93,9 @@ static class FlightDisplay
         double weightPercentage = (double)usedWeight / maxWeight;
         Console.ForegroundColor = weightPercentage switch
         {
-            >= 0.9 => ConsoleColor.Red, // Over 90% capacity
-            >= 0.7 => ConsoleColor.Yellow, // Over 70% capacity
-            _ => ConsoleColor.DarkGreen // Under 70% capacity
+            >= 0.9 => ConsoleColor.Red,        // Over 90% capacity
+            >= 0.7 => ConsoleColor.Yellow,     // Over 70% capacity
+            _ => ConsoleColor.DarkGreen            // Under 70% capacity
         };
         Console.Write($"{usedWeight}/{maxWeight,-7}  ");
         Console.ResetColor();
@@ -106,13 +104,11 @@ static class FlightDisplay
 
         foreach (var seatOption in flight.SeatClassOptions)
         {
-            double seasonalPrice = seatOption.Price *
-                                   (currentSeason == "summer"
-                                       ? seatOption.SeasonalMultiplier.Summer
-                                       : seatOption.SeasonalMultiplier.Winter);
+            double seasonalPrice = seatOption.Price * 
+                (currentSeason == "summer" ? seatOption.SeasonalMultiplier.Summer : seatOption.SeasonalMultiplier.Winter);
             int totalPrice = (int)(seasonalPrice * (1 + flight.Taxes.Country) +
-                                   flight.Taxes.Airport[flight.OriginCode] +
-                                   flight.Taxes.Airport[flight.DestinationCode]);
+                flight.Taxes.Airport[flight.OriginCode] +
+                flight.Taxes.Airport[flight.DestinationCode]);
 
             Console.ForegroundColor = GetPriceColor(seatOption.SeatClass);
             Console.Write($"{seatOption.SeatClass}: {totalPrice} ");
@@ -157,7 +153,7 @@ static class FlightDisplay
         }
 
         // Validate date strings before parsing
-        if (!DateTime.TryParse(flight.DepartureTime, out DateTime departureDateTime) ||
+        if (!DateTime.TryParse(flight.DepartureTime, out DateTime departureDateTime) || 
             !DateTime.TryParse(flight.ArrivalTime, out DateTime arrivalDateTime))
         {
             Console.ForegroundColor = ConsoleColor.Red;
@@ -240,7 +236,6 @@ static class FlightDisplay
         {
             Console.WriteLine("No items purchased");
         }
-
         Console.ResetColor();
 
         if (!string.IsNullOrEmpty(passenger.SeatNumber))
@@ -249,7 +244,7 @@ static class FlightDisplay
             var seatClass = seatSelectionUI.GetSeatClass(passenger.SeatNumber, flight.PlaneType);
             var seatOption = flight.SeatClassOptions?
                 .FirstOrDefault(so => so.SeatClass.Equals(seatClass, StringComparison.OrdinalIgnoreCase));
-
+            
             if (seatOption != null)
             {
                 Console.WriteLine($"\nBase ticket price for {passenger.Name} ({seatClass}): {seatOption.Price:F2} EUR");
@@ -278,26 +273,17 @@ static class FlightDisplay
                 Console.Write($" | Special Luggage: {passenger.SpecialLuggage}");
             }
 
-            if (passenger.HasPet && passenger.AllPets != null && passenger.AllPets.Any())
+            if (passenger.HasPet)
             {
                 Console.ForegroundColor = ConsoleColor.Magenta;
-                Console.Write(" | Pets: ");
-                for (int i = 0; i < passenger.AllPets.Count; i++)
-                {
-                    var pet = passenger.AllPets[i];
-                    Console.Write($"{pet.Type} ({pet.Weight}kg, {pet.StorageLocation})");
-                    if (i < passenger.AllPets.Count - 1)
-                    {
-                        Console.Write(", ");
-                    }
-                }
+                Console.Write(
+                    $" | Pet: {passenger.PetDetails.Type} ({passenger.PetDetails.Weight}kg, {passenger.PetDetails.StorageLocation})");
             }
 
             Console.WriteLine();
             Console.ResetColor();
         }
     }
-
     private static void DisplayPrivateJetBookingDetails(BookingModel booking)
     {
         Console.ForegroundColor = ConsoleColor.Magenta;
@@ -330,12 +316,11 @@ static class FlightDisplay
                 {
                     Console.WriteLine($"  ◈ {item.Name} ({item.Price:F2} EUR)");
                 }
-
                 Console.ResetColor();
             }
         }
 
-
+        
         Console.WriteLine(new string('═', 30));
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine($"Charter Price: {booking.TotalPrice:N2} EUR");
@@ -354,10 +339,10 @@ static class FlightDisplay
             _ => ConsoleColor.Gray
         };
     }
-
     private static string GetCurrentSeason()
     {
         var currentMonth = DateTime.Now.Month;
         return (currentMonth >= 6 && currentMonth <= 8) ? "summer" : "winter";
     }
+
 }

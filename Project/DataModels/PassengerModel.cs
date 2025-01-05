@@ -9,10 +9,7 @@ public class PassengerModel : PersonModel
     public bool HasPet { get; set; }
 
     [JsonPropertyName("petDetails")]
-    public PetModel PetDetails { get; set; } 
-
-    [JsonPropertyName("allPets")]
-    public List<PetModel> AllPets { get; set; } = new List<PetModel>();
+    public PetModel PetDetails { get; set; }
 
     [JsonPropertyName("seatNumber")]
     public string? SeatNumber { get; set; }
@@ -35,10 +32,5 @@ public class PassengerModel : PersonModel
         PetDetails = petDetails;
         ShopItems = new List<ShopItemModel>();
         SpecialLuggage = specialLuggage;
-        AllPets = new List<PetModel>();
-        if (petDetails != null)
-        {
-            AllPets.Add(petDetails);
-        }
     }
 }
