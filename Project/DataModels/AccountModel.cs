@@ -16,16 +16,16 @@ public class AccountModel
     public DateTime DateOfBirth { get; set; }
 
     [JsonPropertyName("gender")]
-    public string? Gender { get; set; }  // Nullable
+    public string Gender { get; set; }
 
     [JsonPropertyName("nationality")]
-    public string? Nationality { get; set; }  // Nullable
+    public string Nationality { get; set; }
 
     [JsonPropertyName("phoneNumber")]
-    public string? PhoneNumber { get; set; }  // Nullable
+    public string PhoneNumber { get; set; }
 
     [JsonPropertyName("address")]
-    public string? Address { get; set; }  // Nullable
+    public string Address { get; set; }
 
     [JsonPropertyName("email")]
     public string EmailAddress { get; set; }
@@ -34,7 +34,7 @@ public class AccountModel
     public string Password { get; set; }
 
     [JsonPropertyName("passportDetails")]
-    public PassportDetailsModel? PassportDetails { get; set; }  // Nullable
+    public PassportDetailsModel PassportDetails { get; set; }
 
     [JsonPropertyName("milesDetails")]
     public List<MilesModel> Miles { get; set; }
@@ -46,7 +46,9 @@ public class AccountModel
     public string PrivateJet { get; set; }
 
     public AccountModel(int id, string firstName, string lastName, DateTime dateOfBirth,
-                        string emailAddress, string password, List<MilesModel> miles, List<PaymentInformationModel>? paymentInformation = null)
+        string emailAddress, string password, string gender, string nationality,
+        string phoneNumber, string address, PassportDetailsModel passportDetails,
+        List<MilesModel> miles, List<PaymentInformationModel> paymentInformation = null)
     {
         Id = id;
         FirstName = firstName;
@@ -54,7 +56,19 @@ public class AccountModel
         DateOfBirth = dateOfBirth;
         EmailAddress = emailAddress;
         Password = password;
+        Gender = gender;
+        Nationality = nationality;
+        PhoneNumber = phoneNumber;
+        Address = address;
+        PassportDetails = passportDetails;
         Miles = miles;
-        PaymentInformation = paymentInformation;
+        PaymentInformation = paymentInformation ?? new List<PaymentInformationModel>();
+    }
+
+    // Parameterless constructor for JSON deserialization
+    public AccountModel()
+    {
+        Miles = new List<MilesModel>();
+        PaymentInformation = new List<PaymentInformationModel>();
     }
 }
