@@ -1065,99 +1065,98 @@ static class FlightManagement
     public static void BookPrivateJet(int userId)
     {
         var user = userId;
-        string jetType = "";
-        int maxPassengers = 0;
-        Console.Clear();
-        Console.WriteLine(
-            "We have two private jets. A Bombardier Learjet 75 with \x1B[4m6 seats\x1B[0m and a Bombardier Global 8280 with \x1B[4m8 seats\x1B[0m.");
-        Console.WriteLine("Which jet would you like to book? (1/2)");
-        if (int.TryParse(Console.ReadLine(), out int choice))
+        string[] jetOptions =
         {
-            if (choice == 1)
-            {
-                jetType = "Bombardier Learjet 75";
-                maxPassengers = 6;
-            }
-            else if (choice == 2)
-            {
-                jetType = "Bombardier Global 8280";
-                maxPassengers = 8;
-            }
-            else
-            {
-                Console.WriteLine("Invalid choice.");
-                return;
-            }
+            "Bombardier Learjet 75 (6 seats)",
+            "Bombardier Global 8280 (8 seats)",
+            "Back to Main Menu"
+        };
 
-            Console.WriteLine($"\nYou have selected the {jetType}.");
+        Console.Clear();
+        int jetChoice = MenuNavigationService.NavigateMenu(jetOptions, "Select Private Jet");
 
-            int passengerCount = 0;
-            bool isValidInput = false;
+        if (jetChoice == 2 || jetChoice == -1) // Back or Escape pressed
+        {
+            return;
+        }
 
-            while (!isValidInput)
-            {
-                Console.WriteLine($"How many passengers? (1-{maxPassengers}):");
+        string jetType;
+        int maxPassengers;
 
-                if (int.TryParse(Console.ReadLine(), out passengerCount) &&
-                    passengerCount > 0 &&
-                    passengerCount <= maxPassengers)
-                {
-                    isValidInput = true;
-                }
-                else
-                {
-                    Console.WriteLine("Invalid number of passengers. Please try again.");
-                }
-            }
-
-            // Continue with rest of the code using passengerCount
-            List<PassengerModel> passengers = new List<PassengerModel>();
-            for (int i = 0; i < passengerCount; i++)
-            {
-                Console.Clear();
-                Console.WriteLine($"Passenger {i + 1} Details:");
-                Console.WriteLine("Enter passenger name:");
-                string name = Console.ReadLine();
-                if (name == null)
-                {
-                    name = string.Empty;
-                }
-
-                var passenger = new PassengerModel(name, $"PJ{i + 1}", false);
-                passengers.Add(passenger);
-            }
-
-            BookingModel booking = BookingLogic.CreateBooking(
-                user,
-                0, // special flightID for private jets
-                passengers,
-                new List<PetModel>(), // no pets
-                true,
-                jetType
-            );
-
-            if (booking == null)
-            {
-                Console.WriteLine("Error: Unable to create private jet booking. Please try again.");
-                return;
-            }
-
-            Console.WriteLine("\nPrivate jet booking completed successfully!");
-            Console.WriteLine($"Booking ID: {booking.BookingId}");
-            Console.WriteLine($"Aircraft: {booking.PlaneType}");
-            Console.WriteLine($"Total Price: {booking.TotalPrice:C}");
-            Console.WriteLine("\nPassenger Details:");
-            foreach (var passenger in passengers)
-            {
-                Console.WriteLine($"- {passenger.Name} (Seat: {passenger.SeatNumber})");
-            }
-
-            Console.WriteLine("\nPress any key to continue...");
-            Console.ReadKey();
+        if (jetChoice == 0)
+        {
+            jetType = "Bombardier Learjet 75";
+            maxPassengers = 6;
         }
         else
         {
-            Console.WriteLine("Invalid choice.");
+            jetType = "Bombardier Global 8280";
+            maxPassengers = 8;
         }
+
+        Console.Clear();
+        Console.WriteLine($"Selected jet: {jetType}");
+        Console.WriteLine($"\nHow many passengers? (1-{maxPassengers}):");
+
+        int passengerCount;
+        while (!int.TryParse(Console.ReadLine(), out passengerCount) ||
+               passengerCount < 1 ||
+               passengerCount > maxPassengers)
+        {
+            Console.WriteLine($"Please enter a valid number between 1 and {maxPassengers}:");
+        }
+
+        // Collect passenger details
+        List<PassengerModel> passengers = new List<PassengerModel>();
+        for (int i = 0; i < passengerCount; i++)
+        {
+            Console.Clear();
+            Console.WriteLine($"Passenger {i + 1} Details:");
+            Console.WriteLine("Enter passenger name:");
+            string name = Console.ReadLine();
+            while (!AccountsLogic.IsValidName(name))
+            {
+                Console.WriteLine(
+                    "Name must be between 2 and 20 characters long, start with a capital letter, and cannot contain numbers.");
+                Console.WriteLine("Enter passenger name: ");
+                name = Console.ReadLine();
+            }
+
+            var passenger = new PassengerModel(name, $"PJ{i + 1}", false);
+            passengers.Add(passenger);
+        }
+
+        // Create booking
+        BookingModel booking = BookingLogic.CreateBooking(
+            user,
+            0, // special flightID for private jets
+            passengers,
+            new List<PetModel>(), // no pets
+            true,
+            jetType
+        );
+
+        if (booking == null)
+        {
+            Console.WriteLine("\nError: Unable to create private jet booking. Please try again.");
+            Console.WriteLine("\nPress any key to continue...");
+            Console.ReadKey();
+            return;
+        }
+
+        // Display booking confirmation
+        Console.Clear();
+        Console.WriteLine("\nPrivate jet booking completed successfully!");
+        Console.WriteLine($"Booking ID: {booking.BookingId}");
+        Console.WriteLine($"Aircraft: {booking.PlaneType}");
+        Console.WriteLine($"Total Price: {booking.TotalPrice:C}");
+        Console.WriteLine("\nPassenger Details:");
+        foreach (var passenger in passengers)
+        {
+            Console.WriteLine($"- {passenger.Name} (Seat: {passenger.SeatNumber})");
+        }
+
+        Console.WriteLine("\nPress any key to continue...");
+        Console.ReadKey();
     }
 }
