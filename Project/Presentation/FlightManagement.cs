@@ -743,12 +743,10 @@ static class FlightManagement
 
                 int baggageChoice =
                     MenuNavigationService.NavigateMenu(yesNoOptions, "Does this passenger have checked baggage?");
-
                 bool hasCheckedBaggage = baggageChoice == 0;
 
                 int specialLuggageChoice =
                     MenuNavigationService.NavigateMenu(yesNoOptions, "Do you have special luggage?");
-
                 bool hasSpecialLuggage = specialLuggageChoice == 0;
 
                 string specialLuggage = "";
@@ -763,17 +761,28 @@ static class FlightManagement
                     Console.ReadKey();
                 }
 
-                int petChoice = MenuNavigationService.NavigateMenu(yesNoOptions, "Does this passenger have a pet?");
-
+                int petChoice = MenuNavigationService.NavigateMenu(yesNoOptions, "Does this passenger have any pets?");
                 bool hasPet = petChoice == 0;
 
-                PetModel petDetails = null;
+                List<PetModel> petDetails = null;
                 if (hasPet)
                 {
                     petDetails = SelectPetDetails(petTypes, maxWeights);
+                    // Update seat marker for passenger with pet in cabin
+                    if (petDetails.Any(p => p.StorageLocation == "Cabin"))
+                    {
+                        Console.WriteLine("Note: You will be assigned a suitable seat for traveling with a pet.");
+                    }
                 }
 
-                var passenger = new PassengerModel(name, null, hasCheckedBaggage, hasPet, petDetails, specialLuggage);
+                var passenger = new PassengerModel(
+                    name,
+                    null,
+                    hasCheckedBaggage,
+                    hasPet,
+                    petDetails,
+                    specialLuggage
+                );
 
                 Console.WriteLine("\nSelect a seat for the passenger:");
                 string seatNumber = seatSelector.SelectSeat(selectedFlight.PlaneType, selectedFlight.FlightId);
@@ -783,7 +792,7 @@ static class FlightManagement
                 }
 
                 seatSelector.SetSeatOccupied(seatNumber, name);
-                if (hasPet)
+                if (hasPet && petDetails.Any(p => p.StorageLocation == "Cabin"))
                 {
                     seatSelector.SetPetSeat(seatNumber);
                 }
@@ -803,38 +812,75 @@ static class FlightManagement
     }
 
 
-    private static PetModel SelectPetDetails(string[] petTypes, Dictionary<string, double> maxWeights)
+    private static List<PetModel> SelectPetDetails(string[] petTypes, Dictionary<string, double> maxWeights)
     {
-        int selectedIndex = MenuNavigationService.NavigateMenu(petTypes, "Select pet type:");
+        List<PetModel> pets = new List<PetModel>();
+        int maxPets = 3;
+        bool cabinPetSelected = false;
 
-        string selectedPetType = petTypes[selectedIndex];
-        double maxWeight = maxWeights[selectedPetType];
+        Console.WriteLine($"\nYou can bring up to {maxPets} pets (one suitable pet in cabin, others in storage)");
+        Console.WriteLine("How many pets would you like to bring? (1-3):");
 
-        Console.WriteLine($"\nEnter {selectedPetType}'s weight in kg (max {maxWeight}kg):");
-        double weight;
-        while (!double.TryParse(Console.ReadLine(), out weight) || weight <= 0 || weight > maxWeight)
+        int petCount;
+        while (!int.TryParse(Console.ReadLine(), out petCount) || petCount < 1 || petCount > maxPets)
         {
-            Console.WriteLine($"Please enter a valid weight (0-{maxWeight}kg):");
+            Console.WriteLine($"Please enter a number between 1 and {maxPets}:");
         }
 
-        string storageLocation = weight > maxWeight / 2 ? "Cargo" : "Storage";
-        if (weight > maxWeight)
+        for (int i = 0; i < petCount; i++)
         {
-            Console.WriteLine($"\nWarning: Pet exceeds maximum weight for {selectedPetType}.");
-            Console.WriteLine("Pet must be transported in cargo area.");
-            storageLocation = "Cargo";
-        }
-        else
-        {
-            Console.WriteLine($"\nPet will be transported in {storageLocation}.");
+            Console.WriteLine($"\nPet {i + 1} Details:");
+            int selectedIndex = MenuNavigationService.NavigateMenu(petTypes, "Select pet type:");
+            string selectedPetType = petTypes[selectedIndex];
+            double maxWeight = maxWeights[selectedPetType];
+
+            Console.WriteLine($"\nEnter {selectedPetType}'s weight in kg (max {maxWeight}kg):");
+            double weight;
+            while (!double.TryParse(Console.ReadLine(), out weight) || weight <= 0 || weight > maxWeight)
+            {
+                Console.WriteLine($"Please enter a valid weight (0-{maxWeight}kg):");
+            }
+
+            string storageLocation = "Storage";
+
+            // If no pet is in cabin yet and this pet meets weight requirements, offer cabin option
+            if (!cabinPetSelected && weight <= maxWeight / 2)
+            {
+                string[] locationOptions = { "Cabin", "Storage" };
+                int locationChoice = MenuNavigationService.NavigateMenu(locationOptions,
+                    $"This {selectedPetType} is eligible for cabin transport. Select location:");
+
+                if (locationChoice == 0) // Cabin selected
+                {
+                    storageLocation = "Cabin";
+                    cabinPetSelected = true;
+                }
+            }
+            else
+            {
+                if (cabinPetSelected)
+                {
+                    Console.WriteLine(
+                        "Another pet is already assigned to the cabin. This pet will be placed in storage.");
+                }
+                else if (weight > maxWeight / 2)
+                {
+                    Console.WriteLine($"Due to weight restrictions, this {selectedPetType} must be placed in storage.");
+                }
+            }
+
+            var pet = new PetModel
+            {
+                Type = selectedPetType,
+                Weight = weight,
+                StorageLocation = storageLocation
+            };
+
+            pets.Add(pet);
+            Console.WriteLine($"{selectedPetType} will be transported in: {storageLocation}");
         }
 
-        return new PetModel
-        {
-            Type = selectedPetType,
-            Weight = weight,
-            StorageLocation = storageLocation
-        };
+        return pets;
     }
 
     private static void CompleteBooking(
@@ -851,7 +897,8 @@ static class FlightManagement
 
         BookingModel booking = BookingLogic.CreateBooking(UserLogin.UserAccountServiceLogic.CurrentUserId,
             departureFlightId,
-            passengerDetails, new List<PetModel>());
+            passengerDetails,
+            new List<PetModel>()); // Empty pets list since pets are now in passengerDetails
 
         if (booking == null)
         {
@@ -867,9 +914,8 @@ static class FlightManagement
         Console.WriteLine($"Departure: {DateTime.Parse(departureFlight.DepartureTime):HH:mm dd MMM yyyy}");
 
         // Shop items selection
-        for (int i = 0; i < booking.Passengers.Count; i++)
+        foreach (var passenger in booking.Passengers)
         {
-            var passenger = booking.Passengers[i];
             Console.WriteLine($"\nPassenger: {passenger.Name}");
             Console.WriteLine("Would you like to purchase items from our shop? (y/n):");
             bool wantsItem = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
@@ -877,18 +923,26 @@ static class FlightManagement
             if (wantsItem)
             {
                 var shopUI = new ShopUI();
-                var purchasedItems = shopUI.DisplaySmallItemsShop(booking.BookingId, i);
-                foreach (var item in purchasedItems)
-                {
-                    passenger.ShopItems.Add(item);
-                }
-
+                var purchasedItems =
+                    shopUI.DisplaySmallItemsShop(booking.BookingId, booking.Passengers.IndexOf(passenger));
+                passenger.ShopItems.AddRange(purchasedItems);
                 booking.TotalPrice += (int)purchasedItems.Sum(item => item.Price);
             }
 
             if (passenger.HasCheckedBaggage)
             {
                 totalBaggageCost += 30; // Standard baggage fee
+            }
+
+            if (passenger.HasPet && passenger.PetDetails != null)
+            {
+                foreach (var pet in passenger.PetDetails)
+                {
+                    // Add pet fees based on storage location
+                    int petFee = pet.StorageLocation == "Cabin" ? 50 : 30;
+                    booking.TotalPrice += petFee;
+                    totalBaggageCost += petFee;
+                }
             }
         }
 
@@ -909,10 +963,13 @@ static class FlightManagement
             Console.WriteLine(
                 $"Seat: {passenger.SeatNumber} ({seatSelector.GetSeatClass(passenger.SeatNumber)} Class)");
             Console.WriteLine($"Checked Baggage: {(passenger.HasCheckedBaggage ? "Yes" : "No")}");
-            Console.WriteLine($"Pet: {(passenger.HasPet ? "Yes" : "No")}");
+
             if (passenger.HasPet && passenger.PetDetails != null)
             {
-                Console.WriteLine($"Pet Details: {passenger.PetDetails.Type} ({passenger.PetDetails.Weight}kg)");
+                foreach (var pet in passenger.PetDetails)
+                {
+                    Console.WriteLine($"Pet: {pet.Type} ({pet.Weight}kg) - {pet.StorageLocation}");
+                }
             }
 
             if (passenger.ShopItems.Any())

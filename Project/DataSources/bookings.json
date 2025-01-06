@@ -9,7 +9,7 @@
       {
         "name": "nu echtttt",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "5A",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -40,7 +40,7 @@
       {
         "name": "God Please",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "6A",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -65,7 +65,7 @@
           "Blanket",
           "Pillow"
         ],
-        "cost": 15.00,
+        "cost": 15.0,
         "availableIn": [
           "Economy",
           "Business",
@@ -83,7 +83,7 @@
           "Group Movie Streaming",
           "Digital Trivia Games"
         ],
-        "cost": 80.00,
+        "cost": 80.0,
         "availableIn": [
           "Economy",
           "Business",
@@ -98,7 +98,7 @@
           "Music",
           "Flight Map"
         ],
-        "cost": 30.00,
+        "cost": 30.0,
         "availableIn": [
           "Economy",
           "Business",
@@ -117,24 +117,26 @@
       {
         "name": "Sil",
         "hasPet": true,
-        "petDetails": {
-          "petId": 0,
-          "bookingId": 0,
-          "type": "Cat",
-          "size": null,
-          "weight": 12,
-          "storageLocation": "Cargo",
-          "maxWeight": 0,
-          "seatingLocation": null,
-          "fee": null
-        },
+        "petDetails": [
+          {
+            "petId": 0,
+            "bookingId": 0,
+            "type": "Cat",
+            "size": null,
+            "weight": 12,
+            "storageLocation": "Cargo",
+            "maxWeight": 0,
+            "seatingLocation": null,
+            "fee": null
+          }
+        ],
         "seatNumber": "2A",
         "hasCheckedBaggage": true,
         "shopItems": [
           {
             "name": "Cabernet Sauvignon (187 ml bottle)",
             "price": 10,
-            "category": "Snacks \u0026 Drinks",
+            "category": "Snacks & Drinks",
             "description": "Red wine, premium brand"
           },
           {
@@ -146,7 +148,7 @@
           {
             "name": "Lindt Master Chocolatier Collection (500g)",
             "price": 30,
-            "category": "Luxury Chocolates \u0026 Gourmet Treats",
+            "category": "Luxury Chocolates & Gourmet Treats",
             "description": "Fine Swiss chocolates"
           },
           {
@@ -162,13 +164,13 @@
             "description": "Elegant, gift-ready design"
           },
           {
-            "name": "Collector\u0027s Edition Airline Poster (Framed)",
+            "name": "Collector's Edition Airline Poster (Framed)",
             "price": 150,
             "category": "Exclusive Souvenirs",
             "description": "Retro or modern artwork"
           },
           {
-            "name": "Collector\u0027s Edition Airline Poster (Framed)",
+            "name": "Collector's Edition Airline Poster (Framed)",
             "price": 150,
             "category": "Exclusive Souvenirs",
             "description": "Retro or modern artwork"
@@ -195,7 +197,7 @@
           "Blanket",
           "Pillow"
         ],
-        "cost": 15.00,
+        "cost": 15.0,
         "availableIn": [
           "Economy",
           "Business",
@@ -212,7 +214,7 @@
           "Handheld Gaming Console",
           "Pre-installed Games"
         ],
-        "cost": 75.00,
+        "cost": 75.0,
         "availableIn": [
           "Economy",
           "Business",
@@ -227,7 +229,7 @@
           "Music",
           "Flight Map"
         ],
-        "cost": 30.00,
+        "cost": 30.0,
         "availableIn": [
           "Economy",
           "Business",
@@ -246,7 +248,7 @@
       {
         "name": "Sil",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "PJ1",
         "hasCheckedBaggage": false,
         "shopItems": [],
@@ -264,7 +266,7 @@
       {
         "name": "Paul",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "PJ2",
         "hasCheckedBaggage": false,
         "shopItems": [],
@@ -295,7 +297,7 @@
       {
         "name": "Pratheeban",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "1A",
         "hasCheckedBaggage": false,
         "shopItems": [],
@@ -326,7 +328,7 @@
       {
         "name": "Adonai",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "1B",
         "hasCheckedBaggage": false,
         "shopItems": [],
@@ -357,7 +359,7 @@
       {
         "name": "Elizabeth Gonzalez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "1A",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -388,7 +390,7 @@
       {
         "name": "Betty Brown",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "1B",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -419,7 +421,7 @@
       {
         "name": "Jessica Brown",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "1C",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -450,7 +452,7 @@
       {
         "name": "Linda Miller",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "1D",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -481,7 +483,7 @@
       {
         "name": "Karen Williams",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "1E",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -512,7 +514,7 @@
       {
         "name": "Nancy Lewis",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "1F",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -543,7 +545,7 @@
       {
         "name": "John Williams",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "2A",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -574,7 +576,7 @@
       {
         "name": "William Lopez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "2B",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -605,7 +607,7 @@
       {
         "name": "Jessica Lewis",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "2C",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -636,7 +638,7 @@
       {
         "name": "Betty Sanchez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "2D",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -667,7 +669,7 @@
       {
         "name": "Nancy Williams",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "2E",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -698,7 +700,7 @@
       {
         "name": "Karen Jackson",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "2F",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -729,7 +731,7 @@
       {
         "name": "Joseph Harris",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "3A",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -760,7 +762,7 @@
       {
         "name": "Daniel Martinez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "3B",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -791,7 +793,7 @@
       {
         "name": "Sandra Anderson",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "3C",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -822,7 +824,7 @@
       {
         "name": "Mark Martinez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "3D",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -853,7 +855,7 @@
       {
         "name": "Jennifer Anderson",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "3E",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -884,7 +886,7 @@
       {
         "name": "Mary Jones",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "3F",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -915,7 +917,7 @@
       {
         "name": "Betty Clark",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "4A",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -946,7 +948,7 @@
       {
         "name": "Betty Harris",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "4B",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -977,7 +979,7 @@
       {
         "name": "Mary Lewis",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "4C",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -1008,7 +1010,7 @@
       {
         "name": "Jennifer Lewis",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "4D",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -1039,7 +1041,7 @@
       {
         "name": "Sarah Harris",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "4E",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -1070,7 +1072,7 @@
       {
         "name": "Thomas Jackson",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "4F",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -1101,7 +1103,7 @@
       {
         "name": "Susan Anderson",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "5A",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -1132,7 +1134,7 @@
       {
         "name": "Robert Brown",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "5B",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -1163,7 +1165,7 @@
       {
         "name": "Lisa Johnson",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "5C",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -1194,7 +1196,7 @@
       {
         "name": "Patricia Sanchez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "5D",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -1225,7 +1227,7 @@
       {
         "name": "Richard Martin",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "5E",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -1256,7 +1258,7 @@
       {
         "name": "Linda Miller",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "5F",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -1287,7 +1289,7 @@
       {
         "name": "James Garcia",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "6A",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -1318,7 +1320,7 @@
       {
         "name": "Daniel Perez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "6B",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -1349,7 +1351,7 @@
       {
         "name": "David Gonzalez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "6C",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -1380,7 +1382,7 @@
       {
         "name": "Daniel Moore",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "6D",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -1411,7 +1413,7 @@
       {
         "name": "Sarah Lewis",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "6E",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -1442,7 +1444,7 @@
       {
         "name": "Linda Thomas",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "6F",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -1473,7 +1475,7 @@
       {
         "name": "Joseph Williams",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "7A",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -1504,7 +1506,7 @@
       {
         "name": "John Jones",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "7B",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -1535,7 +1537,7 @@
       {
         "name": "Elizabeth Taylor",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "7C",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -1566,7 +1568,7 @@
       {
         "name": "Joseph Davis",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "7D",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -1597,7 +1599,7 @@
       {
         "name": "Richard Thompson",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "7E",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -1628,7 +1630,7 @@
       {
         "name": "Mark Martin",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "7F",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -1659,7 +1661,7 @@
       {
         "name": "Barbara Clark",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "8A",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -1690,7 +1692,7 @@
       {
         "name": "Mary Clark",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "8B",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -1721,7 +1723,7 @@
       {
         "name": "Matthew Thompson",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "8C",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -1752,7 +1754,7 @@
       {
         "name": "Robert Johnson",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "8D",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -1783,7 +1785,7 @@
       {
         "name": "Margaret Miller",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "8E",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -1814,7 +1816,7 @@
       {
         "name": "Anthony Lewis",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "8F",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -1845,7 +1847,7 @@
       {
         "name": "James Rodriguez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "9A",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -1876,7 +1878,7 @@
       {
         "name": "Robert Lopez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "9B",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -1907,7 +1909,7 @@
       {
         "name": "Susan Williams",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "9C",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -1938,7 +1940,7 @@
       {
         "name": "Barbara Ramirez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "9D",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -1969,7 +1971,7 @@
       {
         "name": "Elizabeth Johnson",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "9E",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -2000,7 +2002,7 @@
       {
         "name": "Margaret Ramirez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "9F",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -2031,7 +2033,7 @@
       {
         "name": "Lisa Lopez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "10A",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -2062,7 +2064,7 @@
       {
         "name": "David Jones",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "10B",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -2093,7 +2095,7 @@
       {
         "name": "Karen Robinson",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "10C",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -2124,7 +2126,7 @@
       {
         "name": "Charles Jackson",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "10D",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -2155,7 +2157,7 @@
       {
         "name": "Betty White",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "10E",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -2186,7 +2188,7 @@
       {
         "name": "Linda Jones",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "10F",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -2217,7 +2219,7 @@
       {
         "name": "Karen Martin",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "11A",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -2248,7 +2250,7 @@
       {
         "name": "Sarah Thompson",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "11B",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -2279,7 +2281,7 @@
       {
         "name": "Sarah Thomas",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "11C",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -2310,7 +2312,7 @@
       {
         "name": "Robert Robinson",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "11D",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -2341,7 +2343,7 @@
       {
         "name": "Patricia Martin",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "11E",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -2372,7 +2374,7 @@
       {
         "name": "Sandra Jackson",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "11F",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -2403,7 +2405,7 @@
       {
         "name": "Jessica Gonzalez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "12A",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -2434,7 +2436,7 @@
       {
         "name": "Jessica Miller",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "12B",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -2465,7 +2467,7 @@
       {
         "name": "Anthony Moore",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "12C",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -2496,7 +2498,7 @@
       {
         "name": "David Perez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "12D",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -2527,7 +2529,7 @@
       {
         "name": "Robert Miller",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "12E",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -2558,7 +2560,7 @@
       {
         "name": "Mary White",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "12F",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -2589,7 +2591,7 @@
       {
         "name": "Robert White",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "13A",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -2620,7 +2622,7 @@
       {
         "name": "Betty Rodriguez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "13B",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -2651,7 +2653,7 @@
       {
         "name": "Elizabeth Davis",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "13C",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -2682,7 +2684,7 @@
       {
         "name": "Jessica Hernandez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "13D",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -2713,7 +2715,7 @@
       {
         "name": "Susan Williams",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "13E",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -2744,7 +2746,7 @@
       {
         "name": "William Lopez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "13F",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -2775,7 +2777,7 @@
       {
         "name": "Jennifer Sanchez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "14A",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -2806,7 +2808,7 @@
       {
         "name": "Thomas Perez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "14B",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -2837,7 +2839,7 @@
       {
         "name": "David Wilson",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "14C",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -2868,7 +2870,7 @@
       {
         "name": "Robert Williams",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "14D",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -2899,7 +2901,7 @@
       {
         "name": "Daniel Jones",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "14E",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -2930,7 +2932,7 @@
       {
         "name": "William Anderson",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "14F",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -2961,7 +2963,7 @@
       {
         "name": "Lisa Anderson",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "15A",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -2992,7 +2994,7 @@
       {
         "name": "Margaret Robinson",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "15B",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -3023,7 +3025,7 @@
       {
         "name": "Anthony Sanchez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "15C",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -3054,7 +3056,7 @@
       {
         "name": "Sarah White",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "15D",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -3085,7 +3087,7 @@
       {
         "name": "Lisa Martinez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "15E",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -3116,7 +3118,7 @@
       {
         "name": "Anthony Garcia",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "15F",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -3147,7 +3149,7 @@
       {
         "name": "Daniel Gonzalez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "16A",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -3178,7 +3180,7 @@
       {
         "name": "David Martinez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "16B",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -3209,7 +3211,7 @@
       {
         "name": "Karen White",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "16C",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -3240,7 +3242,7 @@
       {
         "name": "Christopher Brown",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "16D",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -3271,7 +3273,7 @@
       {
         "name": "Jennifer Thomas",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "16E",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -3302,7 +3304,7 @@
       {
         "name": "James Thompson",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "16F",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -3333,7 +3335,7 @@
       {
         "name": "Joseph Smith",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "17A",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -3364,7 +3366,7 @@
       {
         "name": "Nancy Clark",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "17B",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -3395,7 +3397,7 @@
       {
         "name": "Jennifer Brown",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "17C",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -3426,7 +3428,7 @@
       {
         "name": "Nancy Clark",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "17D",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -3457,7 +3459,7 @@
       {
         "name": "Matthew Jackson",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "17E",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -3488,7 +3490,7 @@
       {
         "name": "Margaret Jackson",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "17F",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -3519,7 +3521,7 @@
       {
         "name": "Mark Lewis",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "18A",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -3550,7 +3552,7 @@
       {
         "name": "Daniel Wilson",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "18B",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -3581,7 +3583,7 @@
       {
         "name": "Joseph Thomas",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "18C",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -3612,7 +3614,7 @@
       {
         "name": "Betty Lee",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "18D",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -3643,7 +3645,7 @@
       {
         "name": "Jessica Lewis",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "18E",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -3674,7 +3676,7 @@
       {
         "name": "Nancy Ramirez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "18F",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -3705,7 +3707,7 @@
       {
         "name": "John Lee",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "19A",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -3736,7 +3738,7 @@
       {
         "name": "Patricia Jones",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "19B",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -3767,7 +3769,7 @@
       {
         "name": "William Garcia",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "19C",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -3798,7 +3800,7 @@
       {
         "name": "Anthony Harris",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "19D",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -3829,7 +3831,7 @@
       {
         "name": "Sarah Hernandez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "19E",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -3860,7 +3862,7 @@
       {
         "name": "Elizabeth Hernandez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "19F",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -3891,7 +3893,7 @@
       {
         "name": "Margaret Martin",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "20A",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -3922,7 +3924,7 @@
       {
         "name": "Jennifer Ramirez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "20B",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -3953,7 +3955,7 @@
       {
         "name": "John Brown",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "20C",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -3984,7 +3986,7 @@
       {
         "name": "Thomas Thompson",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "20D",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -4015,7 +4017,7 @@
       {
         "name": "Charles Garcia",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "20E",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -4046,7 +4048,7 @@
       {
         "name": "William Wilson",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "20F",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -4077,7 +4079,7 @@
       {
         "name": "Sandra Anderson",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "21A",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -4108,7 +4110,7 @@
       {
         "name": "Sandra Sanchez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "21B",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -4139,7 +4141,7 @@
       {
         "name": "Patricia Thompson",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "21C",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -4170,7 +4172,7 @@
       {
         "name": "James Martinez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "21D",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -4201,7 +4203,7 @@
       {
         "name": "Robert Lopez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "21E",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -4232,7 +4234,7 @@
       {
         "name": "Sandra Lopez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "21F",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -4263,7 +4265,7 @@
       {
         "name": "Anthony Wilson",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "22A",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -4294,7 +4296,7 @@
       {
         "name": "Jennifer Lewis",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "22B",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -4325,7 +4327,7 @@
       {
         "name": "Susan Harris",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "22C",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -4356,7 +4358,7 @@
       {
         "name": "Nancy Lee",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "22D",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -4387,7 +4389,7 @@
       {
         "name": "Jessica Sanchez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "22E",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -4418,7 +4420,7 @@
       {
         "name": "William Perez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "22F",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -4449,7 +4451,7 @@
       {
         "name": "John Miller",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "23A",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -4480,7 +4482,7 @@
       {
         "name": "John Smith",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "23B",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -4511,7 +4513,7 @@
       {
         "name": "Jennifer White",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "23C",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -4542,7 +4544,7 @@
       {
         "name": "Barbara Perez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "23D",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -4573,7 +4575,7 @@
       {
         "name": "Jennifer Rodriguez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "23E",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -4604,7 +4606,7 @@
       {
         "name": "Linda Harris",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "23F",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -4635,7 +4637,7 @@
       {
         "name": "Richard Brown",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "24A",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -4666,7 +4668,7 @@
       {
         "name": "James Hernandez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "24B",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -4697,7 +4699,7 @@
       {
         "name": "Susan Moore",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "24C",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -4728,7 +4730,7 @@
       {
         "name": "Elizabeth Lopez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "24D",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -4759,7 +4761,7 @@
       {
         "name": "Matthew Anderson",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "24E",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -4790,7 +4792,7 @@
       {
         "name": "Linda Thomas",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "24F",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -4821,7 +4823,7 @@
       {
         "name": "Joseph Martinez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "25A",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -4852,7 +4854,7 @@
       {
         "name": "Sarah Miller",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "25B",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -4883,7 +4885,7 @@
       {
         "name": "Christopher Jones",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "25C",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -4914,7 +4916,7 @@
       {
         "name": "Patricia Wilson",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "25D",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -4945,7 +4947,7 @@
       {
         "name": "Betty Wilson",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "25E",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -4976,7 +4978,7 @@
       {
         "name": "Barbara Jones",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "25F",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -5007,7 +5009,7 @@
       {
         "name": "Michael Anderson",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "26A",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -5038,7 +5040,7 @@
       {
         "name": "Joseph Thompson",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "26B",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -5069,7 +5071,7 @@
       {
         "name": "Michael Jones",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "26C",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -5100,7 +5102,7 @@
       {
         "name": "William Davis",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "26D",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -5131,7 +5133,7 @@
       {
         "name": "Joseph Lee",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "26E",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -5162,7 +5164,7 @@
       {
         "name": "Linda Smith",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "26F",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -5193,7 +5195,7 @@
       {
         "name": "Mark Moore",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "27A",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -5224,7 +5226,7 @@
       {
         "name": "Jennifer Jones",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "27B",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -5255,7 +5257,7 @@
       {
         "name": "Sandra Lewis",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "27C",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -5286,7 +5288,7 @@
       {
         "name": "Margaret Harris",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "27D",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -5317,7 +5319,7 @@
       {
         "name": "Susan Robinson",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "27E",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -5348,7 +5350,7 @@
       {
         "name": "William Sanchez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "27F",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -5379,7 +5381,7 @@
       {
         "name": "Patricia Sanchez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "28A",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -5410,7 +5412,7 @@
       {
         "name": "Christopher Sanchez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "28B",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -5441,7 +5443,7 @@
       {
         "name": "Robert Perez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "28C",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -5472,7 +5474,7 @@
       {
         "name": "Susan Miller",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "28D",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -5503,7 +5505,7 @@
       {
         "name": "Matthew Johnson",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "28E",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -5534,7 +5536,7 @@
       {
         "name": "Jennifer Lewis",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "28F",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -5565,7 +5567,7 @@
       {
         "name": "Betty Ramirez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "29A",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -5596,7 +5598,7 @@
       {
         "name": "Christopher Gonzalez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "29B",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -5627,7 +5629,7 @@
       {
         "name": "James Thomas",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "29C",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -5658,7 +5660,7 @@
       {
         "name": "Richard Lopez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "29D",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -5689,7 +5691,7 @@
       {
         "name": "Jessica Garcia",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "29E",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -5720,7 +5722,7 @@
       {
         "name": "James Brown",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "29F",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -5751,7 +5753,7 @@
       {
         "name": "Christopher Wilson",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "30A",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -5782,7 +5784,7 @@
       {
         "name": "James Garcia",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "30B",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -5813,7 +5815,7 @@
       {
         "name": "Sarah Martin",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "30C",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -5844,7 +5846,7 @@
       {
         "name": "Michael Hernandez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "30D",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -5875,7 +5877,7 @@
       {
         "name": "Anthony Hernandez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "30E",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -5906,7 +5908,7 @@
       {
         "name": "Richard Robinson",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "30F",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -5937,7 +5939,7 @@
       {
         "name": "Christopher Robinson",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "31A",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -5968,7 +5970,7 @@
       {
         "name": "Christopher Wilson",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "31B",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -5999,7 +6001,7 @@
       {
         "name": "Christopher Thompson",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "31C",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -6030,7 +6032,7 @@
       {
         "name": "Christopher Clark",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "31D",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -6061,7 +6063,7 @@
       {
         "name": "Barbara Moore",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "31E",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -6092,7 +6094,7 @@
       {
         "name": "Daniel Lopez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "31F",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -6123,7 +6125,7 @@
       {
         "name": "Robert Taylor",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "32A",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -6154,7 +6156,7 @@
       {
         "name": "Linda Jackson",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "32B",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -6185,7 +6187,7 @@
       {
         "name": "Joseph Garcia",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "32C",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -6216,7 +6218,7 @@
       {
         "name": "Karen Anderson",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "32D",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -6247,7 +6249,7 @@
       {
         "name": "Mary Garcia",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "32E",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -6278,7 +6280,7 @@
       {
         "name": "Patricia Robinson",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "32F",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -6309,7 +6311,7 @@
       {
         "name": "Mark Williams",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "33A",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -6340,7 +6342,7 @@
       {
         "name": "Elizabeth Davis",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "33B",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -6371,7 +6373,7 @@
       {
         "name": "Nancy Clark",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "33C",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -6402,7 +6404,7 @@
       {
         "name": "Michael White",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "33D",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -6433,7 +6435,7 @@
       {
         "name": "William Sanchez",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "33E",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -6464,7 +6466,7 @@
       {
         "name": "Thomas Miller",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "33F",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -6495,7 +6497,7 @@
       {
         "name": "Darrin",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "1A",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -6526,17 +6528,19 @@
       {
         "name": "Jamal",
         "hasPet": true,
-        "petDetails": {
-          "petId": 0,
-          "bookingId": 0,
-          "type": "Cat",
-          "size": null,
-          "weight": 2,
-          "storageLocation": "Storage",
-          "maxWeight": 0,
-          "seatingLocation": null,
-          "fee": null
-        },
+        "petDetails": [
+          {
+            "petId": 0,
+            "bookingId": 0,
+            "type": "Cat",
+            "size": null,
+            "weight": 2,
+            "storageLocation": "Storage",
+            "maxWeight": 0,
+            "seatingLocation": null,
+            "fee": null
+          }
+        ],
         "seatNumber": "1A",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -6554,17 +6558,19 @@
       {
         "name": "Kaylian",
         "hasPet": true,
-        "petDetails": {
-          "petId": 0,
-          "bookingId": 0,
-          "type": "Hamster",
-          "size": null,
-          "weight": 1,
-          "storageLocation": "Cargo",
-          "maxWeight": 0,
-          "seatingLocation": null,
-          "fee": null
-        },
+        "petDetails": [
+          {
+            "petId": 0,
+            "bookingId": 0,
+            "type": "Hamster",
+            "size": null,
+            "weight": 1,
+            "storageLocation": "Cargo",
+            "maxWeight": 0,
+            "seatingLocation": null,
+            "fee": null
+          }
+        ],
         "seatNumber": "1B",
         "hasCheckedBaggage": true,
         "shopItems": [],
@@ -6595,7 +6601,7 @@
       {
         "name": "hallo",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "2A",
         "hasCheckedBaggage": false,
         "shopItems": [],
@@ -6613,7 +6619,7 @@
       {
         "name": "foeid",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "2A",
         "hasCheckedBaggage": false,
         "shopItems": [],
@@ -6644,7 +6650,7 @@
       {
         "name": "WOei",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "2B",
         "hasCheckedBaggage": false,
         "shopItems": [],
@@ -6662,7 +6668,7 @@
       {
         "name": "doei",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "2C",
         "hasCheckedBaggage": false,
         "shopItems": [],
@@ -6693,7 +6699,7 @@
       {
         "name": "Khalil",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "3A",
         "hasCheckedBaggage": false,
         "shopItems": [],
@@ -6711,7 +6717,7 @@
       {
         "name": "Billal",
         "hasPet": false,
-        "petDetails": null,
+        "petDetails": [],
         "seatNumber": "3B",
         "hasCheckedBaggage": false,
         "shopItems": [],

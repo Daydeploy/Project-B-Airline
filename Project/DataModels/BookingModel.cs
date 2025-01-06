@@ -2,37 +2,33 @@ using System.Text.Json.Serialization;
 
 public class BookingModel
 {
-    [JsonPropertyName("bookingId")]
-    public int BookingId { get; set; }
+    [JsonPropertyName("bookingId")] public int BookingId { get; set; }
 
-    [JsonPropertyName("userId")]
-    public int UserId { get; set; }
+    [JsonPropertyName("userId")] public int UserId { get; set; }
 
-    [JsonPropertyName("flightId")]
-    public int FlightId { get; set; }
+    [JsonPropertyName("flightId")] public int FlightId { get; set; }
 
-    [JsonPropertyName("totalPrice")]
-    public int TotalPrice { get; set; }
+    [JsonPropertyName("totalPrice")] public int TotalPrice { get; set; }
 
-    [JsonPropertyName("bookingDate")]
-    public DateTime BookingDate { get; set; }
+    [JsonPropertyName("bookingDate")] public DateTime BookingDate { get; set; }
 
-    [JsonPropertyName("passengers")]
-    public List<PassengerModel> Passengers { get; set; }
+    [JsonPropertyName("passengers")] public List<PassengerModel> Passengers { get; set; } = new List<PassengerModel>();
 
-    [JsonPropertyName("pets")]
-    public List<PetModel> Pets { get; set; }
+    [JsonPropertyName("pets")] public List<PetModel> Pets { get; set; } = new List<PetModel>();
 
-    [JsonPropertyName("comfortPackages")]
-    public List<ComfortPackageModel> ComfortPackages { get; set; } = new List<ComfortPackageModel>();
+    [JsonPropertyName("comfortPackages")] public List<ComfortPackageModel>? ComfortPackages { get; set; }
 
-    [JsonPropertyName("planeType")]
-    public string PlaneType { get; set; }
+    [JsonPropertyName("planeType")] public string? PlaneType { get; set; }
 
-    [JsonPropertyName("entertainment")]
-    public List<EntertainmentModel> Entertainment { get; set; } = new List<EntertainmentModel>();
+    [JsonPropertyName("entertainment")] public List<EntertainmentModel>? Entertainment { get; set; }
 
-    public BookingModel(int bookingId, int userId, int flightId, int totalPrice, List<PassengerModel> passengers, List<PetModel> pets, List<ComfortPackageModel> comfortPackages = null, string planeType = null, List<EntertainmentModel> entertainment = null)
+    public BookingModel()
+    {
+        // Default constructor for deserialization
+    }
+
+    public BookingModel(int bookingId, int userId, int flightId, int totalPrice, List<PassengerModel> passengers,
+        List<PetModel> pets)
     {
         BookingId = bookingId;
         UserId = userId;
@@ -41,8 +37,5 @@ public class BookingModel
         BookingDate = DateTime.Now;
         Passengers = passengers;
         Pets = pets;
-        ComfortPackages = comfortPackages;
-        PlaneType = planeType;
-        Entertainment = entertainment;
     }
 }
