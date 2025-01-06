@@ -75,6 +75,7 @@ static class FlightManagement
 
     private static void DisplayFlightsWithActions(List<FlightModel> flightsList, bool allowBooking)
     {
+        Console.CursorVisible = false;
         FlightDisplay.DisplayFlights(flightsList);
 
         Console.WriteLine("\nCommands:");
@@ -159,7 +160,7 @@ static class FlightManagement
                     filteredFlights = FilterByPriceRange(flights, origin, destination, seatClassOptions);
                     break;
                 case 3:
-                    //filteredFlights = FilterByDateRange(flights, origin, destination);
+                    filteredFlights = FilterByDateRange(flights, origin, destination);
                     break;
             }
 
@@ -213,12 +214,12 @@ static class FlightManagement
         return new List<FlightModel>();
     }
 
-    // private static List<FlightModel> FilterByDateRange(FlightsLogic flights, string origin, string destination)
-    // {
-    //     var calendarUI = new CalendarUI();
-    //     var (startDate, endDate) = calendarUI.SelectDateRange();
-    //     return flights.FilterByDateRange(origin, destination, startDate, endDate).ToList();
-    // }
+    private static List<FlightModel> FilterByDateRange(FlightsLogic flights, string origin, string destination)
+    {
+        var calendarUI = new CalendarUI();
+        var (startDate, endDate) = calendarUI.SelectDateRange();
+        return flights.FilterByDateRange(origin, destination, startDate, endDate).ToList();
+    }
 
     public static void BookAFlight(AccountModel account)
     {
