@@ -9,13 +9,16 @@ public class PassengerModel : PersonModel
     public bool HasPet { get; set; }
 
     [JsonPropertyName("petDetails")]
-    public List<PetModel> PetDetails { get; set; } = new List<PetModel>(); // Changed from single PetModel to List
+    public List<PetModel> PetDetails { get; set; } = new List<PetModel>();
 
     [JsonPropertyName("seatNumber")]
     public string? SeatNumber { get; set; }
 
     [JsonPropertyName("hasCheckedBaggage")]
     public bool HasCheckedBaggage { get; set; }
+
+    [JsonPropertyName("numberOfBaggage")]
+    public int NumberOfBaggage { get; set; }
 
     [JsonPropertyName("shopItems")]
     public List<ShopItemModel> ShopItems { get; set; } = new List<ShopItemModel>();
@@ -32,5 +35,6 @@ public class PassengerModel : PersonModel
         PetDetails = petDetails ?? new List<PetModel>();
         ShopItems = new List<ShopItemModel>();
         SpecialLuggage = specialLuggage;
+        NumberOfBaggage = 0;
     }
 }

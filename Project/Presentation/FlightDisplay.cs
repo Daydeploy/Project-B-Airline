@@ -263,6 +263,8 @@ static class FlightDisplay
         Console.WriteLine("\nPassengers:");
         Console.ResetColor();
 
+        const int BAGGAGE_PRICE = 30;
+
         foreach (var passenger in passengers)
         {
             Console.Write($"• {passenger.Name}");
@@ -280,7 +282,15 @@ static class FlightDisplay
             if (booking.FlightId != 0)
             {
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
-                Console.Write($" | Checked Baggage: {(passenger.HasCheckedBaggage ? "Yes" : "No")}");
+                if (passenger.HasCheckedBaggage)
+                {
+                    double baggageCost = passenger.NumberOfBaggage * BAGGAGE_PRICE;
+                    Console.Write($" | Baggage: {passenger.NumberOfBaggage} piece(s) ({baggageCost:F2} EUR)");
+                }
+                else
+                {
+                    Console.Write(" | No Checked Baggage");
+                }
             }
 
             if (!string.IsNullOrEmpty(passenger.SpecialLuggage))

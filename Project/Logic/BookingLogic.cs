@@ -67,7 +67,10 @@ public class BookingLogic
                 p.HasCheckedBaggage,
                 p.HasPet,
                 p.PetDetails,
-                p.SpecialLuggage))
+                p.SpecialLuggage)
+            {
+                NumberOfBaggage = p.NumberOfBaggage
+            })
             .ToList();
 
         BookingModel newBooking = new BookingModel(bookingId, userId, flightId, totalPrice, passengers, petDetails);
@@ -116,7 +119,7 @@ public class BookingLogic
             _flights.FirstOrDefault(f => f.Destination.Equals(destination, StringComparison.OrdinalIgnoreCase));
         if (flight == null || flight.SeatClassOptions == null) return 0;
 
-        const int baggagePrice = 30;
+        const int BAGGAGE_PRICE = 30;
 
         var total = passengers.Sum(p =>
         {
@@ -126,11 +129,15 @@ public class BookingLogic
                 .FirstOrDefault(so => so.SeatClass.Equals(seatClass, StringComparison.OrdinalIgnoreCase))
                 ?.Price ?? 0;
 
-            var totalPrice = basePrice + (p.HasCheckedBaggage ? baggagePrice : 0);
-            return totalPrice;
+            
+            var baggageCost = p.HasCheckedBaggage ? (BAGGAGE_PRICE * p.NumberOfBaggage) : 0;
+
+            Console.WriteLine(
+                $"Debug - Passenger: {p.Name}, HasBaggage: {p.HasCheckedBaggage}, Number of Baggage: {p.NumberOfBaggage}, Baggage Cost: {baggageCost}"); // Debug line
+
+            return basePrice + baggageCost;
         });
 
-        // Ensure changes are saved to json
         BookingAccess.WriteAll(_bookings);
         return total;
     }

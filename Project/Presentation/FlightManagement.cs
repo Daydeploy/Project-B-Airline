@@ -107,21 +107,21 @@ static class FlightManagement
                     FilterFlightsByPriceUI(origin, destination, account);
                     return;
                 case ConsoleKey.B:
+                {
+                    if (UserLogin.UserAccountServiceLogic.IsUserLoggedIn())
                     {
-                        if (UserLogin.UserAccountServiceLogic.IsUserLoggedIn())
-                        {
-                            Console.Clear();
-                            AdvancedBooking(flightsList, account);
-                        }
-                        else
-                        {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("\nYou must be logged in to book a flight.");
-                            Console.ResetColor();
-                        }
-
-                        return;
+                        Console.Clear();
+                        AdvancedBooking(flightsList, account);
                     }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("\nYou must be logged in to book a flight.");
+                        Console.ResetColor();
+                    }
+
+                    return;
+                }
             }
         }
     }
@@ -488,7 +488,7 @@ static class FlightManagement
         bool includeInsuranceForDeparture = PromptForInsurance(passengerCount, "departure");
 
         CompleteBooking(departureFlight.FlightId, passengerDetails, departureFlight, seatSelector,
-                includeInsuranceForDeparture);
+            includeInsuranceForDeparture);
 
         if (returnFlight != null)
         {
@@ -509,7 +509,7 @@ static class FlightManagement
             bool includeInsuranceForReturn = PromptForInsurance(passengerCount, "return");
 
             CompleteBooking(returnFlight.FlightId, passengerDetails, returnFlight, seatSelector,
-                    includeInsuranceForReturn);
+                includeInsuranceForReturn);
         }
     }
 
@@ -544,6 +544,8 @@ static class FlightManagement
     {
         List<PassengerModel> passengerDetails = new List<PassengerModel>();
         string[] yesNoOptions = { "Yes", "No" };
+        const int MAX_BAGGAGE = 3;
+        const int BAGGAGE_PRICE = 30;
 
         try
         {
@@ -566,6 +568,30 @@ static class FlightManagement
                 int baggageChoice =
                     MenuNavigationService.NavigateMenu(yesNoOptions, "Does this passenger have checked baggage?");
                 bool hasCheckedBaggage = baggageChoice == 0;
+
+                int numberOfBaggage = 0;
+                if (hasCheckedBaggage)
+                {
+                    bool validInput = false;
+                    do
+                    {
+                        Console.WriteLine($"\nHow many pieces of baggage? (1-{MAX_BAGGAGE})");
+                        Console.WriteLine($"Price per baggage: {BAGGAGE_PRICE} EUR");
+                        if (int.TryParse(Console.ReadLine(), out numberOfBaggage) &&
+                            numberOfBaggage > 0 &&
+                            numberOfBaggage <= MAX_BAGGAGE)
+                        {
+                            validInput = true;
+                            Console.WriteLine($"\nTotal baggage cost: {numberOfBaggage * BAGGAGE_PRICE} EUR");
+                            Console.WriteLine("Press any key to continue...");
+                            Console.ReadKey();
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Please enter a number between 1 and {MAX_BAGGAGE}");
+                        }
+                    } while (!validInput);
+                }
 
                 int specialLuggageChoice =
                     MenuNavigationService.NavigateMenu(yesNoOptions, "Do you have special luggage?");
@@ -590,7 +616,6 @@ static class FlightManagement
                 if (hasPet)
                 {
                     petDetails = SelectPetDetails(petTypes, maxWeights);
-                    // Update seat marker for passenger with pet in cabin
                     if (petDetails.Any(p => p.StorageLocation == "Cabin"))
                     {
                         Console.WriteLine("Note: You will be assigned a suitable seat for traveling with a pet.");
@@ -604,7 +629,10 @@ static class FlightManagement
                     hasPet,
                     petDetails,
                     specialLuggage
-                );
+                )
+                {
+                    NumberOfBaggage = numberOfBaggage
+                };
 
                 Console.WriteLine("\nSelect a seat for the passenger:");
                 string seatNumber = seatSelector.SelectSeat(selectedFlight.PlaneType, selectedFlight.FlightId);
@@ -716,11 +744,12 @@ static class FlightManagement
     {
         double totalBaggageCost = 0;
         double totalBasePrice = 0;
+        const int BAGGAGE_PRICE = 30;
 
         BookingModel booking = BookingLogic.CreateBooking(UserLogin.UserAccountServiceLogic.CurrentUserId,
             departureFlightId,
             passengerDetails,
-            new List<PetModel>()); // Empty pets list since pets are now in passengerDetails
+            new List<PetModel>());
 
         if (booking == null)
         {
@@ -739,6 +768,41 @@ static class FlightManagement
         foreach (var passenger in booking.Passengers)
         {
             Console.WriteLine($"\nPassenger: {passenger.Name}");
+            Console.WriteLine(
+                $"Seat: {passenger.SeatNumber} ({seatSelector.GetSeatClass(passenger.SeatNumber)} Class)");
+
+            // Display baggage details
+            if (passenger.HasCheckedBaggage)
+            {
+                double passengerBaggageCost = passenger.NumberOfBaggage * BAGGAGE_PRICE;
+                totalBaggageCost += passengerBaggageCost;
+                Console.WriteLine(
+                    $"Checked Baggage: {passenger.NumberOfBaggage} piece(s) ({passengerBaggageCost:F2} EUR)");
+            }
+            else
+            {
+                Console.WriteLine("No Checked Baggage");
+            }
+
+            // Display special luggage
+            if (!string.IsNullOrEmpty(passenger.SpecialLuggage))
+            {
+                Console.WriteLine($"Special Luggage: {passenger.SpecialLuggage}");
+            }
+
+            // Display pet information
+            if (passenger.HasPet && passenger.PetDetails != null)
+            {
+                foreach (var pet in passenger.PetDetails)
+                {
+                    Console.WriteLine($"Pet: {pet.Type} ({pet.Weight}kg) - {pet.StorageLocation}");
+                    // Add pet fees based on storage location
+                    int petFee = pet.StorageLocation == "Cabin" ? 50 : 30;
+                    booking.TotalPrice += petFee;
+                    totalBaggageCost += petFee;
+                }
+            }
+
             Console.WriteLine("Would you like to purchase items from our shop? (y/n):");
             bool wantsItem = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
 
@@ -749,21 +813,14 @@ static class FlightManagement
                     shopUI.DisplaySmallItemsShop(booking.BookingId, booking.Passengers.IndexOf(passenger));
                 passenger.ShopItems.AddRange(purchasedItems);
                 booking.TotalPrice += (int)purchasedItems.Sum(item => item.Price);
-            }
 
-            if (passenger.HasCheckedBaggage)
-            {
-                totalBaggageCost += 30; // Standard baggage fee
-            }
-
-            if (passenger.HasPet && passenger.PetDetails != null)
-            {
-                foreach (var pet in passenger.PetDetails)
+                if (purchasedItems.Any())
                 {
-                    // Add pet fees based on storage location
-                    int petFee = pet.StorageLocation == "Cabin" ? 50 : 30;
-                    booking.TotalPrice += petFee;
-                    totalBaggageCost += petFee;
+                    Console.WriteLine("\nPurchased Items:");
+                    foreach (var item in purchasedItems)
+                    {
+                        Console.WriteLine($"- {item.Name} ({item.Price:F2} EUR)");
+                    }
                 }
             }
         }
@@ -777,65 +834,27 @@ static class FlightManagement
             BookingAccess.WriteAll(bookings);
         }
 
-        // Display final details
-        Console.WriteLine("\nPassengers:");
-        foreach (var passenger in booking.Passengers)
-        {
-            Console.WriteLine($"\nName: {passenger.Name}");
-            Console.WriteLine(
-                $"Seat: {passenger.SeatNumber} ({seatSelector.GetSeatClass(passenger.SeatNumber)} Class)");
-            Console.WriteLine($"Checked Baggage: {(passenger.HasCheckedBaggage ? "Yes" : "No")}");
-
-            if (passenger.HasPet && passenger.PetDetails != null)
-            {
-                foreach (var pet in passenger.PetDetails)
-                {
-                    Console.WriteLine($"Pet: {pet.Type} ({pet.Weight}kg) - {pet.StorageLocation}");
-                }
-            }
-
-            if (passenger.ShopItems.Any())
-            {
-                Console.WriteLine("Shop Items:");
-                foreach (var item in passenger.ShopItems)
-                {
-                    Console.WriteLine($"- {item.Name} ({item.Price:F2} EUR)");
-                }
-            }
-        }
-
-        // Calculate and display final price
-        var (earnedMiles, milesSuccess) =
-            MilesLogic.CalculateMilesFromBooking(UserLogin.UserAccountServiceLogic.CurrentUserId);
-        if (milesSuccess)
-        {
-            Console.WriteLine($"\nMiles Earned: {earnedMiles}");
-        }
-
-        var (newTotalPrice, priceSuccess) = MilesLogic.BasicPointsRedemption(
-            UserLogin.UserAccountServiceLogic.CurrentUserId,
-            booking.TotalPrice, booking.BookingId);
-        if (priceSuccess)
-        {
-            booking.TotalPrice = newTotalPrice;
-        }
+        // Display Price Summary
+        Console.WriteLine("\nPrice Summary:");
+        Console.WriteLine(new string('-', 40));
 
         if (totalBaggageCost > 0)
         {
-            Console.WriteLine($"  Baggage Cost: {totalBaggageCost:F2} EUR");
+            Console.WriteLine($"Base Price: {totalBasePrice - totalBaggageCost:F2} EUR");
+            Console.WriteLine($"Total Baggage Cost: {totalBaggageCost:F2} EUR");
         }
 
         if (includeInsurance)
         {
             double insuranceCost = passengerDetails.Count * 10.0;
             totalBasePrice += insuranceCost;
-            Console.WriteLine($"  Cancellation Insurance: {insuranceCost:F2} EUR");
+            Console.WriteLine($"Cancellation Insurance: {insuranceCost:F2} EUR");
         }
 
-        double finalTotalPrice = totalBasePrice + totalBaggageCost;
-        Console.WriteLine($"  Final Total Price: {finalTotalPrice:F2} EUR\n");
+        Console.WriteLine(new string('-', 40));
+        Console.WriteLine($"Final Total Price: {totalBasePrice:F2} EUR\n");
 
-        int roundedTotalPrice = (int)Math.Round(finalTotalPrice);
+        int roundedTotalPrice = (int)Math.Round(totalBasePrice);
 
         Console.WriteLine("------------------------------------------------------------");
         Console.WriteLine("Rewards Summary:");
