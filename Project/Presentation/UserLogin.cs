@@ -214,95 +214,92 @@ static class UserLogin
 
     public static void PaymentAndAccountInformationCheck(AccountModel account)
     {
-        if (account.PaymentInformation == null || !AccountsLogic.HasCompleteContactInformation(account.FirstName,
-                account.LastName, account.EmailAddress, account.PhoneNumber, account.Address))
+        var accounts = AccountsAccess.LoadAll();
+        account = accounts.FirstOrDefault(x => x.Id == account.Id);
+
+        if (account.PaymentInformation == null)
         {
-            if (account.PaymentInformation == null)
+            Console.WriteLine("\nPayment information is required to complete a booking.");
+            Console.WriteLine("\nWould you like to add payment information now? (Y/N)");
+
+            string response = Console.ReadLine().ToUpper();
+
+            if (response == "Y")
             {
-                Console.WriteLine("\nPayment information is required to complete a booking.");
-                Console.WriteLine("\nWould you like to add payment information now? (Y/N)");
+                AccountManagement.HandleManageAccountOption(1, account);
 
-                string response = Console.ReadLine().ToUpper();
+                accounts = AccountsAccess.LoadAll();
+                account = accounts.FirstOrDefault(x => x.Id == account.Id);
 
-                if (response == "Y")
+                if (account.PaymentInformation == null)
                 {
-                    AccountManagement.HandleManageAccountOption(1, account);
-
-                    var accounts = AccountsAccess.LoadAll();
-                    account = accounts.FirstOrDefault(x => x.Id == account.Id);
-
-                    if (account.PaymentInformation == null)
-                    {
-                        Console.WriteLine("No payment information added, Booking cannot proceed.");
-                        return;
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Booking process cancelled due to missing payment information.");
+                    Console.WriteLine("No payment information added, Booking cannot proceed.");
                     return;
                 }
             }
-
-            if (!AccountsLogic.HasCompleteContactInformation(account.FirstName, account.LastName, account.EmailAddress,
-                    account.PhoneNumber, account.Address))
+            else
             {
-                Console.WriteLine("\nComplete contact information is required to complete a booking.");
-                Console.WriteLine("Please update the following missing details:\n");
+                Console.WriteLine("Booking process cancelled due to missing payment information.");
+                return;
+            }
+        }
 
-                if (string.IsNullOrEmpty(account.FirstName))
+        if (!AccountsLogic.HasCompleteContactInformation(account.FirstName, account.LastName, account.EmailAddress,
+                account.PhoneNumber, account.Address))
+        {
+            Console.WriteLine("\nComplete contact information is required to complete a booking.");
+            Console.WriteLine("Please update the following missing details:\n");
+
+            if (string.IsNullOrEmpty(account.FirstName))
+            {
+                Console.WriteLine("- First Name");
+            }
+
+            if (string.IsNullOrEmpty(account.LastName))
+            {
+                Console.WriteLine("- Last Name");
+            }
+
+            if (string.IsNullOrEmpty(account.EmailAddress))
+            {
+                Console.WriteLine("- Email Address");
+            }
+
+            if (string.IsNullOrEmpty(account.PhoneNumber))
+            {
+                Console.WriteLine("- Phone Number");
+            }
+
+            if (string.IsNullOrEmpty(account.Address))
+            {
+                Console.WriteLine("- Address");
+            }
+
+            Console.WriteLine("Would you like to complete your contact information? (Y/N)");
+
+            string response = Console.ReadLine().ToUpper();
+
+            if (response == "Y")
+            {
+                AccountManagement.HandleManageAccountOption(0, account);
+
+                accounts = AccountsAccess.LoadAll();
+                account = accounts.FirstOrDefault(x => x.Id == account.Id);
+
+                if (!AccountsLogic.HasCompleteContactInformation(account.FirstName, account.LastName,
+                        account.EmailAddress, account.PhoneNumber, account.Address))
                 {
-                    Console.WriteLine("- First Name");
-                }
-
-                if (string.IsNullOrEmpty(account.LastName))
-                {
-                    Console.WriteLine("- Last Name");
-                }
-
-                if (string.IsNullOrEmpty(account.EmailAddress))
-                {
-                    Console.WriteLine("- Email Address");
-                }
-
-                if (string.IsNullOrEmpty(account.PhoneNumber))
-                {
-                    Console.WriteLine("- Phone Number");
-                }
-
-                if (string.IsNullOrEmpty(account.Address))
-                {
-                    Console.WriteLine("- Address");
-                }
-
-                Console.WriteLine("Would you like to complete your contact information? (Y/N)");
-
-                string response = Console.ReadLine().ToUpper();
-
-                if (response == "Y")
-                {
-                    AccountManagement.HandleManageAccountOption(0, account);
-
-                    var accounts = AccountsAccess.LoadAll();
-                    account = accounts.FirstOrDefault(x => x.Id == account.Id);
-
-                    if (!AccountsLogic.HasCompleteContactInformation(account.FirstName, account.LastName,
-                            account.EmailAddress, account.PhoneNumber, account.Address))
-                    {
-                        Console.WriteLine("Contact information not updated completely. Booking cannot proceed.");
-                        return;
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Booking process cancelled due to incomplete contact information.");
+                    Console.WriteLine("Contact information not updated completely. Booking cannot proceed.");
                     return;
                 }
             }
+            else
+            {
+                Console.WriteLine("Booking process cancelled due to incomplete contact information.");
+                return;
+            }
         }
-        else
-        {
-            FlightManagement.BookAFlight(account);
-        }
+
+        FlightManagement.BookAFlight(account);
     }
 }

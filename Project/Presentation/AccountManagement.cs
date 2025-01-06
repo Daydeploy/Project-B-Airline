@@ -436,7 +436,7 @@ static class AccountManagement
                         string _cardNumber;
                         while (true)
                         {
-                            Console.WriteLine("\nEnter Card Number:");
+                            Console.WriteLine("\nEnter Card Number: (Must be 16 digits.)");
                             _cardNumber = Console.ReadLine();
 
                             if (!PaymentLogic.ValidateCardNumber(_cardNumber))
@@ -452,7 +452,7 @@ static class AccountManagement
                         string _cVV;
                         while (true)
                         {
-                            Console.WriteLine("\nEnter CVV");
+                            Console.WriteLine("\nEnter CVV: (Must be 3 or 4 digits)");
                             _cVV = Console.ReadLine();
 
                             if (!PaymentLogic.ValidateCVV(_cVV))
@@ -467,7 +467,7 @@ static class AccountManagement
                         string _expirationDate;
                         while (true)
                         {
-                            Console.WriteLine("\nEnter Expiration Date");
+                            Console.WriteLine("\nEnter Expiration Date: (MM/YY)");
                             _expirationDate = Console.ReadLine();
 
                             if (!PaymentLogic.ValidateExpirationDate(_expirationDate))
@@ -482,7 +482,7 @@ static class AccountManagement
                         string _billingAddress;
                         while (true)
                         {
-                            Console.WriteLine("\nEnter Billing Address");
+                            Console.WriteLine("\nEnter Billing Address:");
                             _billingAddress = Console.ReadLine();
 
                             if (!PaymentLogic.ValidateAddress(_billingAddress))
