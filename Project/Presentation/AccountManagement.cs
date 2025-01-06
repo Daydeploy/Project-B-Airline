@@ -103,6 +103,8 @@ static class AccountManagement
             return;
         }
 
+        System.Console.WriteLine("Would you like to add more information? (Y/N) \nOtherwise the Manage account menu.");
+
         bool accountCreated =
             UserLogin.UserAccountServiceLogic.CreateAccount(firstName, lastName, email, password, dateOfBirth);
 
