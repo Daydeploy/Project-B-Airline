@@ -42,7 +42,7 @@ static class FlightManagement
         Console.WriteLine("Select your starting location:");
         int originIndex = MenuNavigationService.NavigateMenu(origins.ToArray(), "Available Origins");
 
-        if (originIndex == -1 || originIndex == origins.Count - 1) 
+        if (originIndex == -1 || originIndex == origins.Count - 1)
         {
             return null;
         }
@@ -64,7 +64,7 @@ static class FlightManagement
         Console.WriteLine($"Available destinations from {origin}:");
         int destinationIndex = MenuNavigationService.NavigateMenu(destinations.ToArray(), "Available Destinations");
 
-        if (destinationIndex == -1 || destinationIndex == destinations.Count - 1) 
+        if (destinationIndex == -1 || destinationIndex == destinations.Count - 1)
         {
             return null;
         }
@@ -454,27 +454,33 @@ static class FlightManagement
         }
 
         AccountsAccess.LoadAll();
-        Console.WriteLine($"\nAvailable seats: {availableSeats}");
-        Console.WriteLine("How many passengers? (1-8):");
+        int passengerCount;
+        bool isValidInput = false;
 
-        if (!int.TryParse(Console.ReadLine(), out int passengerCount) ||
-            passengerCount <= 0 ||
-            passengerCount > 8 ||
-            passengerCount > availableSeats)
+        do
         {
-            if (passengerCount > availableSeats)
+            Console.WriteLine($"\nAvailable seats: {availableSeats}");
+            Console.WriteLine("How many passengers? (1-8):");
+
+            if (!int.TryParse(Console.ReadLine(), out passengerCount) ||
+                passengerCount <= 0 ||
+                passengerCount > 8 ||
+                passengerCount > availableSeats)
             {
-                Console.WriteLine($"\nSorry, there are only {availableSeats} seats available on this flight.");
-            }
-            else
-            {
-                Console.WriteLine("Invalid number of passengers.");
+                if (passengerCount > availableSeats)
+                {
+                    Console.WriteLine($"\nSorry, there are only {availableSeats} seats available on this flight.");
+                }
+                else
+                {
+                    Console.WriteLine("Invalid number of passengers. Please enter a number between 1 and 8.");
+                }
+
+                continue;
             }
 
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadKey();
-            return;
-        }
+            isValidInput = true;
+        } while (!isValidInput);
 
         var passengerDetails = CollectPassengerDetails(departureFlight, passengerCount, seatSelector);
 
@@ -609,7 +615,7 @@ static class FlightManagement
 
                         if (account.PaymentInformation == null)
                         {
-                            Console.WriteLine("No paymenr information added, Booking cannot proceed.");
+                            Console.WriteLine("No payment information added, Booking cannot proceed.");
                             return;
                         }
                     }
@@ -714,6 +720,7 @@ static class FlightManagement
         SeatSelectionUI seatSelector)
     {
         List<PassengerModel> passengerDetails = new List<PassengerModel>();
+        string[] yesNoOptions = { "Yes", "No" };
 
         try
         {
@@ -733,14 +740,17 @@ static class FlightManagement
                     name = Console.ReadLine();
                 }
 
-                Console.WriteLine("Does this passenger have checked baggage? (y/n):");
-                bool hasCheckedBaggage = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
+                int baggageChoice =
+                    MenuNavigationService.NavigateMenu(yesNoOptions, "Does this passenger have checked baggage?");
+
+                bool hasCheckedBaggage = baggageChoice == 0;
+
+                int specialLuggageChoice =
+                    MenuNavigationService.NavigateMenu(yesNoOptions, "Do you have special luggage?");
+
+                bool hasSpecialLuggage = specialLuggageChoice == 0;
 
                 string specialLuggage = "";
-
-                Console.WriteLine("Do you have special luggage? (y/n):");
-                bool hasSpecialLuggage = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
-
                 if (hasSpecialLuggage)
                 {
                     Console.WriteLine("What special luggage do you have? (e.g. Ski equipment, Musical instrument):");
@@ -752,9 +762,9 @@ static class FlightManagement
                     Console.ReadKey();
                 }
 
+                int petChoice = MenuNavigationService.NavigateMenu(yesNoOptions, "Does this passenger have a pet?");
 
-                Console.WriteLine("Does this passenger have a pet? (y/n):");
-                bool hasPet = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
+                bool hasPet = petChoice == 0;
 
                 PetModel petDetails = null;
                 if (hasPet)
@@ -791,35 +801,10 @@ static class FlightManagement
         }
     }
 
+
     private static PetModel SelectPetDetails(string[] petTypes, Dictionary<string, double> maxWeights)
     {
-        int selectedIndex = 0;
-        ConsoleKey key;
-
-        do
-        {
-            Console.Clear();
-            Console.WriteLine("Select pet type:");
-            for (int i = 0; i < petTypes.Length; i++)
-            {
-                if (i == selectedIndex)
-                {
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.Write("> ");
-                }
-                else
-                {
-                    Console.Write("  ");
-                }
-
-                Console.WriteLine(petTypes[i]);
-                Console.ResetColor();
-            }
-
-            key = Console.ReadKey(true).Key;
-            if (key == ConsoleKey.UpArrow && selectedIndex > 0) selectedIndex--;
-            if (key == ConsoleKey.DownArrow && selectedIndex < petTypes.Length - 1) selectedIndex++;
-        } while (key != ConsoleKey.Enter);
+        int selectedIndex = MenuNavigationService.NavigateMenu(petTypes, "Select pet type:");
 
         string selectedPetType = petTypes[selectedIndex];
         double maxWeight = maxWeights[selectedPetType];
