@@ -1076,7 +1076,7 @@ static class FlightManagement
                 }
 
                 FlightDisplay.DisplayBookingDetails(booking, flight);
-                FlightDisplay.DisplayPassengerDetails(booking.Passengers);
+                FlightDisplay.DisplayPassengerDetails(booking.Passengers, booking);
                 Console.WriteLine(new string('─', Console.WindowWidth - 1));
             }
 
@@ -1102,20 +1102,89 @@ static class FlightManagement
 
     public static void CheckInForFlight()
     {
-        Console.WriteLine("Enter the Flight ID to check in:");
-        if (int.TryParse(Console.ReadLine(), out int flightId))
+        var account = UserLogin.UserAccountServiceLogic.CurrentAccount;
+        if (account == null)
         {
-            bool success = UserLogin.UserAccountServiceLogic.CheckIn(flightId);
-            Console.WriteLine(
-                success ? "Check-in successful." : "Check-in failed. Please try again or contact support.");
-
-
-            Console.WriteLine("\nPress any key to continue.");
+            Console.WriteLine("You must be logged in to check in for a flight.");
+            Console.WriteLine("\nPress any key to continue...");
             Console.ReadKey();
+            return;
         }
-        else
+
+        var bookings = BookingLogic.GetAvailableCheckInBookings(account.Id);
+
+        if (bookings.Count == 0)
         {
-            Console.WriteLine("Invalid Flight ID.");
+            Console.WriteLine("You have no upcoming flights available for check-in.");
+            Console.WriteLine("\nPress any key to continue...");
+            Console.ReadKey();
+            return;
+        }
+
+        var flightsLogic = new FlightsLogic();
+        var flightOptions = new List<string>();
+
+        foreach (var booking in bookings)
+        {
+            var flight = flightsLogic.GetFlightsById(booking.FlightId);
+            if (flight != null)
+            {
+                string flightInfo = $"Flight {flight.FlightNumber}: {flight.Origin} → {flight.Destination}\n" +
+                                    $"Departure: {DateTime.Parse(flight.DepartureTime):dd MMM yyyy HH:mm}\n" +
+                                    $"Booking ID: {booking.BookingId}\n";
+                flightOptions.Add(flightInfo);
+            }
+        }
+
+        flightOptions.Add("Back to Main Menu");
+
+        while (true)
+        {
+            Console.Clear();
+            int selectedIndex =
+                MenuNavigationService.NavigateMenu(flightOptions.ToArray(), "Select Flight for Check-in");
+
+            if (selectedIndex == flightOptions.Count - 1 || selectedIndex == -1)
+            {
+                return;
+            }
+
+            var selectedBooking = bookings[selectedIndex];
+            var selectedFlight = flightsLogic.GetFlightsById(selectedBooking.FlightId);
+
+            if (selectedFlight != null)
+            {
+                Console.Clear();
+                Console.WriteLine($"Checking in for flight {selectedFlight.FlightNumber}");
+                Console.WriteLine($"From: {selectedFlight.Origin} To: {selectedFlight.Destination}");
+                Console.WriteLine($"Departure: {DateTime.Parse(selectedFlight.DepartureTime):dd MMM yyyy HH:mm}");
+                Console.WriteLine("\nPassengers:");
+
+                foreach (var passenger in selectedBooking.Passengers)
+                {
+                    Console.WriteLine($"- {passenger.Name} (Seat: {passenger.SeatNumber})");
+                }
+
+                Console.WriteLine("\nConfirm check-in? (Y/N):");
+                var key = Console.ReadKey(true);
+                if (key.Key == ConsoleKey.Y)
+                {
+                    if (BookingLogic.CheckInBooking(selectedBooking.BookingId))
+                    {
+                        UserLogin.UserAccountServiceLogic.CheckIn(selectedFlight.FlightId);
+                        Console.WriteLine("\nCheck-in successful!");
+                        Console.WriteLine("Your boarding passes have been generated.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nCheck-in failed. Please try again or contact support.");
+                    }
+
+                    Console.WriteLine("\nPress any key to continue...");
+                    Console.ReadKey();
+                    return;
+                }
+            }
         }
     }
 

@@ -258,7 +258,7 @@ static class FlightDisplay
     }
 
     // Displays details of each passenger in a booking
-    public static void DisplayPassengerDetails(List<PassengerModel> passengers)
+    public static void DisplayPassengerDetails(List<PassengerModel> passengers, BookingModel booking)
     {
         Console.ForegroundColor = ConsoleColor.Cyan;
         Console.WriteLine("\nPassengers:");
@@ -286,6 +286,10 @@ static class FlightDisplay
                     $"{pet.Type} ({pet.Weight}kg, {pet.StorageLocation})");
                 Console.Write(string.Join(", ", petDescriptions));
             }
+
+            // Add check-in status display
+            Console.ForegroundColor = booking.IsCheckedIn ? ConsoleColor.Green : ConsoleColor.Red;
+            Console.Write($" | Check-in: {(booking.IsCheckedIn ? "Completed" : "Pending")}");
 
             Console.WriteLine();
             Console.ResetColor();
