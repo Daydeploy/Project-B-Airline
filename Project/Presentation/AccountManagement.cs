@@ -115,9 +115,9 @@ static class AccountManagement
             {
                 Console.WriteLine("\nEnter gender: (Male/Female)");
                 gender = Console.ReadLine()?.Trim();
-                if (string.IsNullOrWhiteSpace(gender))
+                if (!AccountsLogic.IsValidGender(gender))
                 {
-                    Console.WriteLine("Gender cannot be empty. Please enter a valid gender.");
+                    Console.WriteLine("Invalid gender. Please enter either 'Male' or 'Female'.");
                     continue;
                 }
                 break;
@@ -139,9 +139,9 @@ static class AccountManagement
             {
                 Console.WriteLine("Enter phone number:");
                 phoneNumber = Console.ReadLine()?.Trim();
-                if (string.IsNullOrWhiteSpace(phoneNumber))
+                if (!AccountsLogic.IsValidPhoneNumber(phoneNumber))
                 {
-                    Console.WriteLine("Phone number cannot be empty. Please enter a valid phone number.");
+                    Console.WriteLine("Invalid phone number. Number must be between 10-15 digits.");
                     continue;
                 }
                 break;
@@ -158,7 +158,6 @@ static class AccountManagement
                 }
                 break;
             }
-
             Console.WriteLine("Would you like to add passport details? (Y/N)");
             if (Console.ReadLine()?.Trim().ToUpper() == "Y")
             {

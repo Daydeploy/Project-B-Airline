@@ -137,4 +137,91 @@ public class AccountsLogic
             .Where(a => !a.EmailAddress.ToLower().Equals("admin"))
             .ToList();
     }
+
+
+    public static bool IsValidDateOfBirth(DateTime dateOfBirth)
+    {
+        int minAge = 0;  
+        int maxAge = 150;
+        var now = DateTime.Now;
+        var age = now.Year - dateOfBirth.Year;
+        
+        if (dateOfBirth.Date > now.AddYears(-age))
+            age--;
+
+        return age >= minAge && age <= maxAge;
+    }
+
+   public static bool IsValidGender(string gender)
+    {
+        if (string.IsNullOrWhiteSpace(gender))
+            return false;
+
+        gender = gender.Trim().ToLower();
+        return gender == "male" || gender == "female";
+    }
+
+    public static bool IsValidPhoneNumber(string phoneNumber)
+    {
+        if (string.IsNullOrWhiteSpace(phoneNumber))
+            return false;
+
+        phoneNumber = new string(phoneNumber.Where(char.IsDigit).ToArray());
+        return phoneNumber.Length >= 10 && phoneNumber.Length <= 15;
+    }
+
+    public static bool IsValidPassportDetails(PassportDetailsModel passport)
+    {
+        if (passport == null)
+            return true; 
+
+        if (string.IsNullOrWhiteSpace(passport.PassportNumber) ||
+            string.IsNullOrWhiteSpace(passport.CountryOfIssue))
+            return false;
+
+        if (!passport.IssueDate.HasValue || !passport.ExpirationDate.HasValue)
+            return false;
+
+    
+        var now = DateTime.Now.Date;
+        return passport.ExpirationDate.Value > now && 
+               passport.IssueDate.Value <= now &&
+               passport.ExpirationDate.Value > passport.IssueDate.Value;
+    }
+
+    public bool ValidateAccountCreation(
+        string firstName, string lastName, string email, 
+        string password, DateTime dateOfBirth, string gender = null, 
+        string nationality = null, string phoneNumber = null, 
+        string address = null, PassportDetailsModel passportDetails = null)
+    {
+        if (string.IsNullOrWhiteSpace(firstName) || !IsValidName(firstName))
+            return false;
+
+        if (string.IsNullOrWhiteSpace(lastName) || !IsValidName(lastName))
+            return false;
+
+        if (string.IsNullOrWhiteSpace(email) || !IsValidEmail(email))
+            return false;
+
+        if (string.IsNullOrWhiteSpace(password) || !IsValidPassword(password))
+            return false;
+
+        if (!IsValidDateOfBirth(dateOfBirth))
+            return false;
+
+        if (gender != null && !IsValidGender(gender))
+            return false;
+
+        if (phoneNumber != null && !IsValidPhoneNumber(phoneNumber))
+            return false;
+
+        if (passportDetails != null && !IsValidPassportDetails(passportDetails))
+            return false;
+
+        var existingAccount = _accounts
+            .FirstOrDefault(a => a.EmailAddress.Equals(email, StringComparison.OrdinalIgnoreCase));
+        
+        return existingAccount == null;
+    }
 }
