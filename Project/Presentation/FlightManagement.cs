@@ -107,21 +107,21 @@ static class FlightManagement
                     FilterFlightsByPriceUI(origin, destination, account);
                     return;
                 case ConsoleKey.B:
-                {
-                    if (UserLogin.UserAccountServiceLogic.IsUserLoggedIn())
                     {
-                        Console.Clear();
-                        AdvancedBooking(flightsList, account);
-                    }
-                    else
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("\nYou must be logged in to book a flight.");
-                        Console.ResetColor();
-                    }
+                        if (UserLogin.UserAccountServiceLogic.IsUserLoggedIn())
+                        {
+                            Console.Clear();
+                            AdvancedBooking(flightsList, account);
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("\nYou must be logged in to book a flight.");
+                            Console.ResetColor();
+                        }
 
-                    return;
-                }
+                        return;
+                    }
             }
         }
     }
@@ -487,97 +487,8 @@ static class FlightManagement
 
         bool includeInsuranceForDeparture = PromptForInsurance(passengerCount, "departure");
 
-        if (account.PaymentInformation == null || !AccountsLogic.HasCompleteContactInformation(account.FirstName,
-                account.LastName, account.EmailAddress, account.PhoneNumber, account.Address))
-        {
-            if (account.PaymentInformation == null)
-            {
-                Console.WriteLine("\nPayment information is required to complete a booking.");
-                Console.WriteLine("\nWould you like to add payment information now? (Y/N)");
-
-                string response = Console.ReadLine().ToUpper();
-
-                if (response == "Y")
-                {
-                    AccountManagement.HandleManageAccountOption(1, account);
-
-                    var accounts = AccountsAccess.LoadAll();
-                    account = accounts.FirstOrDefault(x => x.Id == account.Id);
-
-                    if (account.PaymentInformation == null)
-                    {
-                        Console.WriteLine("No payment information added, Booking cannot proceed.");
-                        return;
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Booking cancelled due to missing payment information.");
-                    return;
-                }
-            }
-
-            if (!AccountsLogic.HasCompleteContactInformation(account.FirstName, account.LastName, account.EmailAddress,
-                    account.PhoneNumber, account.Address))
-            {
-                Console.WriteLine("\nComplete contact information is required to complete a booking.");
-                Console.WriteLine("Please update the following missing details:\n");
-
-                if (string.IsNullOrEmpty(account.FirstName))
-                {
-                    Console.WriteLine("- First Name");
-                }
-
-                if (string.IsNullOrEmpty(account.LastName))
-                {
-                    Console.WriteLine("- Last Name");
-                }
-
-                if (string.IsNullOrEmpty(account.EmailAddress))
-                {
-                    Console.WriteLine("- Email Address");
-                }
-
-                if (string.IsNullOrEmpty(account.PhoneNumber))
-                {
-                    Console.WriteLine("- Phone Number");
-                }
-
-                if (string.IsNullOrEmpty(account.Address))
-                {
-                    Console.WriteLine("- Address");
-                }
-
-                Console.WriteLine("Would you like to complete your contact information? (Y/N)");
-
-                string response = Console.ReadLine().ToUpper();
-
-                if (response == "Y")
-                {
-                    AccountManagement.HandleManageAccountOption(0, account);
-
-                    var accounts = AccountsAccess.LoadAll();
-                    account = accounts.FirstOrDefault(x => x.Id == account.Id);
-
-                    if (!AccountsLogic.HasCompleteContactInformation(account.FirstName, account.LastName,
-                            account.EmailAddress, account.PhoneNumber, account.Address))
-                    {
-                        Console.WriteLine("Contact information not updated completely. Booking cannot proceed.");
-                        return;
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Booking cancelled due to incomplete contact information.");
-                    return;
-                }
-            }
-        }
-        else
-        {
-            CompleteBooking(departureFlight.FlightId, passengerDetails, departureFlight, seatSelector,
+        CompleteBooking(departureFlight.FlightId, passengerDetails, departureFlight, seatSelector,
                 includeInsuranceForDeparture);
-        }
 
         if (returnFlight != null)
         {
@@ -597,97 +508,8 @@ static class FlightManagement
 
             bool includeInsuranceForReturn = PromptForInsurance(passengerCount, "return");
 
-            if (account.PaymentInformation == null || !AccountsLogic.HasCompleteContactInformation(account.FirstName,
-                    account.LastName, account.EmailAddress, account.PhoneNumber, account.Address))
-            {
-                if (account.PaymentInformation == null)
-                {
-                    Console.WriteLine("\nPayment information is required to complete a booking.");
-                    Console.WriteLine("\nWould you like to add payment information now? (Y/N)");
-
-                    string response = Console.ReadLine().ToUpper();
-
-                    if (response == "Y")
-                    {
-                        AccountManagement.HandleManageAccountOption(1, account);
-
-                        var accounts = AccountsAccess.LoadAll();
-                        account = accounts.FirstOrDefault(x => x.Id == account.Id);
-
-                        if (account.PaymentInformation == null)
-                        {
-                            Console.WriteLine("No payment information added, Booking cannot proceed.");
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("Booking cancelled due to missing payment information.");
-                        return;
-                    }
-                }
-
-                if (!AccountsLogic.HasCompleteContactInformation(account.FirstName, account.LastName,
-                        account.EmailAddress, account.PhoneNumber, account.Address))
-                {
-                    Console.WriteLine("\nComplete contact information is required to complete a booking.");
-                    Console.WriteLine("Please update the following missing details:\n");
-
-                    if (string.IsNullOrEmpty(account.FirstName))
-                    {
-                        Console.WriteLine("- First Name");
-                    }
-
-                    if (string.IsNullOrEmpty(account.LastName))
-                    {
-                        Console.WriteLine("- Last Name");
-                    }
-
-                    if (string.IsNullOrEmpty(account.EmailAddress))
-                    {
-                        Console.WriteLine("- Email Address");
-                    }
-
-                    if (string.IsNullOrEmpty(account.PhoneNumber))
-                    {
-                        Console.WriteLine("- Phone Number");
-                    }
-
-                    if (string.IsNullOrEmpty(account.Address))
-                    {
-                        Console.WriteLine("- Address");
-                    }
-
-                    Console.WriteLine("Would you like to complete your contact information? (Y/N)");
-
-                    string response = Console.ReadLine().ToUpper();
-
-                    if (response == "Y")
-                    {
-                        AccountManagement.HandleManageAccountOption(0, account);
-
-                        var accounts = AccountsAccess.LoadAll();
-                        account = accounts.FirstOrDefault(x => x.Id == account.Id);
-
-                        if (!AccountsLogic.HasCompleteContactInformation(account.FirstName, account.LastName,
-                                account.EmailAddress, account.PhoneNumber, account.Address))
-                        {
-                            Console.WriteLine("Contact information not updated completely. Booking cannot proceed.");
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("Booking cancelled due to incomplete contact information.");
-                        return;
-                    }
-                }
-            }
-            else
-            {
-                CompleteBooking(returnFlight.FlightId, passengerDetails, returnFlight, seatSelector,
+            CompleteBooking(returnFlight.FlightId, passengerDetails, returnFlight, seatSelector,
                     includeInsuranceForReturn);
-            }
         }
     }
 

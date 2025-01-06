@@ -171,6 +171,8 @@ static class AccountManagement
     // Displays the account details for the user
     private static void DisplayAccountDetails(AccountModel account)
     {
+        AccountsAccess.LoadAll();
+
         Console.WriteLine("\n--- Account Details ---");
         Console.WriteLine($"Email: {account.EmailAddress}");
         Console.WriteLine($"First Name: {account.FirstName}");
@@ -179,6 +181,7 @@ static class AccountManagement
         Console.WriteLine($"Gender: {account.Gender ?? "Not provided"}");
         Console.WriteLine($"Nationality: {account.Nationality ?? "Not provided"}");
         Console.WriteLine($"Phone Number: {account.PhoneNumber ?? "Not provided"}");
+        Console.WriteLine($"Address: {account.Address ?? "Not provided"}");
 
         if (account.PassportDetails != null)
         {
