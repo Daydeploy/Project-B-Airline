@@ -23,32 +23,13 @@ public class UserAccountServiceLogic
         get { return IsLoggedIn ? _accountsLogic.GetById(CurrentUserId) : null; }
     }
 
-    public bool CreateAccount(string firstName, string lastName, string email, string password, DateTime dateOfBirth, string gender, string nationality,
-    string phoneNumber, string address, PassportDetailsModel passportDetails)
+    public bool CreateAccount(string firstName, string lastName, string email, string password, 
+    DateTime dateOfBirth, string gender, string nationality, string phoneNumber, 
+    string address, PassportDetailsModel passportDetails)
     {
         if (string.IsNullOrWhiteSpace(firstName) || string.IsNullOrWhiteSpace(lastName))
         {
             Console.WriteLine("Error: First name and last name must be filled.");
-            return false;
-        }
-
-        while (true)
-        {
-            if (string.IsNullOrWhiteSpace(email) || !email.Contains("@") || !email.Contains("."))
-            {
-                Console.WriteLine("Error: Email must contain '@' and a domain (For instance: '.com').");
-                Console.Write("Please enter your email address again: ");
-                email = Console.ReadLine();
-            }
-            else
-            {
-                break;
-            }
-        }
-
-        if (string.IsNullOrWhiteSpace(password))
-        {
-            Console.WriteLine("Error: Password must be filled.");
             return false;
         }
 
@@ -60,8 +41,6 @@ public class UserAccountServiceLogic
             return false;
         }
 
-        Console.WriteLine("");
-
         Console.WriteLine("\nWould you like to enroll in our Frequent Flyer Program? (Y/N)");
         string enrollResponse = Console.ReadLine()?.Trim().ToUpper();
         bool isEnrolled = enrollResponse == "Y" || enrollResponse == "YES";
@@ -72,7 +51,20 @@ public class UserAccountServiceLogic
         var initialMiles = new List<MilesModel>
             { new MilesModel(string.Empty, 0, 0, string.Empty) { Enrolled = isEnrolled } };
 
-        var newAccount = new AccountModel(newId, firstName, lastName, dateOfBirth, email, password, initialMiles);
+        var newAccount = new AccountModel(
+            id: newId,
+            firstName: firstName,
+            lastName: lastName, 
+            dateOfBirth: dateOfBirth,
+            emailAddress: email,
+            password: password,
+            gender: gender,
+            nationality: nationality,
+            phoneNumber: phoneNumber,
+            address: address,
+            passportDetails: passportDetails,
+            miles: initialMiles
+        );
 
         _accountsLogic.UpdateList(newAccount);
 
