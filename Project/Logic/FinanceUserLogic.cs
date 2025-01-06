@@ -32,6 +32,31 @@ public class FinanceUserLogic
             .ToList();
     }
 
+    public List<BookingModel> GetAllBookingsByYear(int year)
+    {
+        return BookingAccess.LoadAll()
+            .Where(b => b.BookingDate.Year == year)
+            .OrderByDescending(b => b.BookingDate)
+            .ToList();
+    }
+
+    public List<BookingModel> GetAllBookingsByQuarter(int year, int quarter)
+    {
+        var (startDate, endDate) = GetQuarterDates(year, quarter);
+        return BookingAccess.LoadAll()
+            .Where(b => b.BookingDate >= startDate && b.BookingDate <= endDate)
+            .OrderByDescending(b => b.BookingDate)
+            .ToList();
+    }
+
+    public List<BookingModel> GetAllBookingsByMonth(int year, int month)
+    {
+        return BookingAccess.LoadAll()
+            .Where(b => b.BookingDate.Year == year && b.BookingDate.Month == month)
+            .OrderByDescending(b => b.BookingDate)
+            .ToList();
+    }
+
     public List<BookingModel> GetAllPurchases(int userId)
     {
         return BookingAccess.LoadAll()
@@ -44,6 +69,14 @@ public class FinanceUserLogic
     {
         return BookingAccess.LoadAll()
             .Where(b => b.UserId == userId)
+            .OrderByDescending(b => b.BookingDate)
+            .Take(count)
+            .ToList();
+    }
+
+    public List<BookingModel> GetRecentPurchasesAdmin(int count = 5)
+    {
+        return BookingAccess.LoadAll()
             .OrderByDescending(b => b.BookingDate)
             .Take(count)
             .ToList();

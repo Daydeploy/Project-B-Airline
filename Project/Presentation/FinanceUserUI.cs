@@ -2,10 +2,15 @@ public class FinanceUserUI
 {
     private static FinanceUserLogic _financeLogic = new FinanceUserLogic();
     private const int MIN_YEAR = 2024;
+    
+    private static bool IsAdmin()
+    {
+        return UserLogin.UserAccountServiceLogic.CurrentAccount?.EmailAddress.ToLower() == "admin";
+    }
 
     public static void FinanceMainMenu()
     {
-        if (UserLogin.UserAccountServiceLogic.CurrentAccount?.EmailAddress.ToLower() == "admin")
+        if (IsAdmin())
         {
             ShowAdminFinanceMenu();
             return;
@@ -143,17 +148,49 @@ public class FinanceUserUI
         }
     }
 
+    private static void ShowPurchasesByPeriodAdmin()
+    {
+        string[] periodOptions =
+        {
+            "View by Year",
+            "View by Quarter",
+            "View by Month",
+            "Back"
+        };
+
+        while (true)
+        {
+            int selectedIndex = MenuNavigationService.NavigateMenu(periodOptions, "Select Period View");
+
+            switch (selectedIndex)
+            {
+                case 0:
+                    ShowPurchasesByYear();
+                    break;
+                case 1:
+                    ShowPurchasesByQuarter();
+                    break;
+                case 2:
+                    ShowPurchasesByMonth();
+                    break;
+                case 3:
+                    return;
+            }
+        }
+    }
+
     private static void ShowPurchasesByYear()
     {
         int currentYear = DateTime.Now.Year;
         int selectedYear = currentYear;
         bool done = false;
         string message = "";
+        bool isAdmin = IsAdmin();
 
         while (!done)
         {
             Console.Clear();
-            Console.WriteLine("=== Select Year ===\n");
+            Console.WriteLine($"=== Select Year ({(isAdmin ? "Admin View" : "User View")}) ===\n");
             Console.WriteLine("← → : Change Year    Enter : Confirm    Esc : Cancel\n");
             Console.WriteLine($"Selected Year: {selectedYear}");
 
@@ -176,9 +213,18 @@ public class FinanceUserUI
                     selectedYear++;
                     break;
                 case ConsoleKey.Enter:
-                    var userId = UserLogin.UserAccountServiceLogic.CurrentUserId;
-                    var bookings = _financeLogic.GetPurchasesByYear(userId, selectedYear);
-                    DisplayPurchases(bookings, $"Purchases for {selectedYear}");
+                    List<BookingModel> bookings;
+                    if (isAdmin)
+                    {
+                        bookings = _financeLogic.GetAllBookingsByYear(selectedYear);
+                        DisplayPurchases(bookings, $"All Purchases for {selectedYear} (Admin View)");
+                    }
+                    else
+                    {
+                        var userId = UserLogin.UserAccountServiceLogic.CurrentUserId;
+                        bookings = _financeLogic.GetPurchasesByYear(userId, selectedYear);
+                        DisplayPurchases(bookings, $"Purchases for {selectedYear}");
+                    }
                     done = true;
                     break;
                 case ConsoleKey.Escape:
@@ -186,7 +232,6 @@ public class FinanceUserUI
             }
         }
     }
-
     private static void ShowPurchasesByQuarter()
     {
         int currentYear = DateTime.Now.Year;
@@ -194,11 +239,12 @@ public class FinanceUserUI
         int selectedQuarter = (DateTime.Now.Month - 1) / 3 + 1;
         bool done = false;
         string message = "";
+        bool isAdmin = IsAdmin();
 
         while (!done)
         {
             Console.Clear();
-            Console.WriteLine("=== Select Quarter ===\n");
+            Console.WriteLine($"=== Select Quarter ({(isAdmin ? "Admin View" : "User View")}) ===\n");
             Console.WriteLine("← → : Change Quarter    ↑ ↓ : Change Year");
             Console.WriteLine("Enter : Confirm        Esc : Cancel\n");
             Console.WriteLine($"Selected Period: Q{selectedQuarter} {selectedYear}");
@@ -244,9 +290,18 @@ public class FinanceUserUI
                         message = $"Cannot view years before {MIN_YEAR}";
                     break;
                 case ConsoleKey.Enter:
-                    var userId = UserLogin.UserAccountServiceLogic.CurrentUserId;
-                    var bookings = _financeLogic.GetPurchasesByQuarter(userId, selectedYear, selectedQuarter);
-                    DisplayPurchases(bookings, $"Purchases for Q{selectedQuarter} {selectedYear}");
+                    List<BookingModel> bookings;
+                    if (isAdmin)
+                    {
+                        bookings = _financeLogic.GetAllBookingsByQuarter(selectedYear, selectedQuarter);
+                        DisplayPurchases(bookings, $"All Purchases for Q{selectedQuarter} {selectedYear} (Admin View)");
+                    }
+                    else
+                    {
+                        var userId = UserLogin.UserAccountServiceLogic.CurrentUserId;
+                        bookings = _financeLogic.GetPurchasesByQuarter(userId, selectedYear, selectedQuarter);
+                        DisplayPurchases(bookings, $"Purchases for Q{selectedQuarter} {selectedYear}");
+                    }
                     done = true;
                     break;
                 case ConsoleKey.Escape:
@@ -263,11 +318,12 @@ public class FinanceUserUI
         int selectedMonth = currentMonth;
         bool done = false;
         string message = "";
+        bool isAdmin = IsAdmin();
 
         while (!done)
         {
             Console.Clear();
-            Console.WriteLine("=== Select Month ===\n");
+            Console.WriteLine($"=== Select Month ({(isAdmin ? "Admin View" : "User View")}) ===\n");
             Console.WriteLine("← → : Change Month    ↑ ↓ : Change Year");
             Console.WriteLine("Enter : Confirm      Esc : Cancel\n");
             Console.WriteLine($"Selected Date: {new DateTime(selectedYear, selectedMonth, 1):MMMM yyyy}");
@@ -313,11 +369,20 @@ public class FinanceUserUI
                         message = $"Cannot view years before {MIN_YEAR}";
                     break;
                 case ConsoleKey.Enter:
-                    var userId = UserLogin.UserAccountServiceLogic.CurrentUserId;
-                    var bookings = _financeLogic.GetPurchasesByMonth(userId, selectedYear, selectedMonth);
-                    DisplayPurchases(bookings,
-                        $"Purchases for {new DateTime(selectedYear, selectedMonth, 1):MMMM yyyy}");
-                    done = true;
+                    if (isAdmin)
+                    {
+                        var bookings = _financeLogic.GetAllBookingsByMonth(selectedYear, selectedMonth);
+                        DisplayPurchases(bookings,
+                            $"All Purchases for {new DateTime(selectedYear, selectedMonth, 1):MMMM yyyy} (Admin View)");
+                    }
+                    else
+                    {
+                        var userId = UserLogin.UserAccountServiceLogic.CurrentUserId;
+                        var bookings = _financeLogic.GetPurchasesByMonth(userId, selectedYear, selectedMonth);
+                        DisplayPurchases(bookings,
+                            $"Purchases for {new DateTime(selectedYear, selectedMonth, 1):MMMM yyyy}");
+                        done = true;
+                    }
                     break;
                 case ConsoleKey.Escape:
                     return;
@@ -356,6 +421,28 @@ public class FinanceUserUI
             .OrderByDescending(b => b.BookingDate)
             .ToList();
 
+        DisplayPurchases(bookings, "All Purchases");
+    }
+
+
+    private static void ShowRecentPurchasesAdmin(int count = 5)
+    {
+        var userId = UserLogin.UserAccountServiceLogic.CurrentUserId;
+        var bookings = _financeLogic.GetRecentPurchasesAdmin(count);
+        if (!bookings.Any())
+        {
+            Console.WriteLine("\nNo recent purchases found.");
+            Console.WriteLine("\nPress any key to continue...");
+            Console.ReadKey();
+            return;
+        }
+
+        DisplayPurchases(bookings, $"Last {count} Purchases");
+    }
+
+    private static void ShowAllPurchasesAdmin()
+    {
+        var bookings = BookingAccess.LoadAll();
         DisplayPurchases(bookings, "All Purchases");
     }
 
@@ -412,13 +499,13 @@ public class FinanceUserUI
             switch (selectedMenuIndex)
             {
                 case 0:
-                    ShowAllPurchases();
+                    ShowAllPurchasesAdmin();
                     break;
                 case 1:
-                    ShowPurchasesByPeriod();
+                    ShowPurchasesByPeriodAdmin();
                     break;
                 case 2:
-                    ShowRecentPurchases();
+                    ShowRecentPurchasesAdmin();
                     break;
                 case 3:
                     ShowSpendingAnalysis();
