@@ -23,7 +23,8 @@ public class UserAccountServiceLogic
         get { return IsLoggedIn ? _accountsLogic.GetById(CurrentUserId) : null; }
     }
 
-    public bool CreateAccount(string firstName, string lastName, string email, string password, DateTime dateOfBirth)
+    public bool CreateAccount(string firstName, string lastName, string email, string password, DateTime dateOfBirth, string gender, string nationality,
+    string phoneNumber, string address, PassportDetailsModel passportDetails)
     {
         if (string.IsNullOrWhiteSpace(firstName) || string.IsNullOrWhiteSpace(lastName))
         {

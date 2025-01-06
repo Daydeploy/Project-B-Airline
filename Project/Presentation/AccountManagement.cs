@@ -103,15 +103,130 @@ static class AccountManagement
             return;
         }
 
-        System.Console.WriteLine("Would you like to add more information? (Y/N) \nOtherwise the Manage account menu.");
+        System.Console.WriteLine("Would you like to add more information? (Y/N) \nOtherwise you can change your information in the manage account menu.");
+        string response = Console.ReadLine()?.Trim().ToUpper();
 
-        bool accountCreated =
-            UserLogin.UserAccountServiceLogic.CreateAccount(firstName, lastName, email, password, dateOfBirth);
+        string gender = null, nationality = null, phoneNumber = null, address = null;
+        PassportDetailsModel passportDetails = null;
 
-        Console.WriteLine(accountCreated
-            ? "\nAccount created successfully. Please login."
-            : "\nFailed to create account. Email may already be in use.");
-    }
+        if (response == "Y")
+        {
+            while (true)
+            {
+                Console.WriteLine("\nEnter gender: (Male/Female)");
+                gender = Console.ReadLine()?.Trim();
+                if (string.IsNullOrWhiteSpace(gender))
+                {
+                    Console.WriteLine("Gender cannot be empty. Please enter a valid gender.");
+                    continue;
+                }
+                break;
+            }
+
+            while (true)
+            {
+                Console.WriteLine("Enter nationality:");
+                nationality = Console.ReadLine()?.Trim();
+                if (string.IsNullOrWhiteSpace(nationality))
+                {
+                    Console.WriteLine("Nationality cannot be empty. Please enter a valid nationality.");
+                    continue;
+                }
+                break;
+            }
+
+            while (true)
+            {
+                Console.WriteLine("Enter phone number:");
+                phoneNumber = Console.ReadLine()?.Trim();
+                if (string.IsNullOrWhiteSpace(phoneNumber))
+                {
+                    Console.WriteLine("Phone number cannot be empty. Please enter a valid phone number.");
+                    continue;
+                }
+                break;
+            }
+
+            while (true)
+            {
+                Console.WriteLine("Enter address:");
+                address = Console.ReadLine()?.Trim();
+                if (string.IsNullOrWhiteSpace(address))
+                {
+                    Console.WriteLine("Address cannot be empty. Please enter a valid address.");
+                    continue;
+                }
+                break;
+            }
+
+            Console.WriteLine("Would you like to add passport details? (Y/N)");
+            if (Console.ReadLine()?.Trim().ToUpper() == "Y")
+            {
+                string passportNumber, countryOfIssue;
+                DateTime issueDate, expirationDate;
+
+                while (true)
+                {
+                    Console.WriteLine("Enter passport number:");
+                    passportNumber = Console.ReadLine()?.Trim();
+                    if (string.IsNullOrWhiteSpace(passportNumber))
+                    {
+                        Console.WriteLine("Passport number cannot be empty. Please enter a valid passport number.");
+                        continue;
+                    }
+                    break;
+                }
+
+                while (true)
+                {
+                    Console.WriteLine("Enter passport issue date (dd-MM-yyyy):");
+                    if (!DateTime.TryParse(Console.ReadLine(), out issueDate))
+                    {
+                        Console.WriteLine("Invalid date format. Please enter the date in dd-MM-yyyy format.");
+                        continue;
+                    }
+                    break;
+                }
+
+                while (true)
+                {
+                    Console.WriteLine("Enter passport expiration date (dd-MM-yyyy):");
+                    if (!DateTime.TryParse(Console.ReadLine(), out expirationDate))
+                    {
+                        Console.WriteLine("Invalid date format. Please enter the date in dd-MM-yyyy format.");
+                        continue;
+                    }
+                    if (expirationDate <= issueDate)
+                    {
+                        Console.WriteLine("Expiration date must be after the issue date.");
+                        continue;
+                    }
+                    break;
+                }
+
+                while (true)
+                {
+                    Console.WriteLine("Enter country of issue:");
+                    countryOfIssue = Console.ReadLine()?.Trim();
+                    if (string.IsNullOrWhiteSpace(countryOfIssue))
+                    {
+                        Console.WriteLine("Country of issue cannot be empty. Please enter a valid country.");
+                        continue;
+                    }
+                    break;
+                }
+
+                passportDetails = new PassportDetailsModel(passportNumber, issueDate, expirationDate, countryOfIssue);
+            }
+        }
+
+        bool accountCreated = UserLogin.UserAccountServiceLogic.CreateAccount(firstName, lastName, email, password, dateOfBirth, 
+        gender, nationality, phoneNumber, address, passportDetails);
+
+    Console.WriteLine(accountCreated
+        ? "\nAccount created successfully. Please login."
+        : "\nFailed to create account. Email may already be in use.");
+}
 
     private static string GetUserInput(string prompt, bool isPassword)
     {
