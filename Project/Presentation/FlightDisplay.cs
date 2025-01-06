@@ -257,20 +257,31 @@ static class FlightDisplay
         }
     }
 
-    // Displays details of each passenger in a booking
     public static void DisplayPassengerDetails(List<PassengerModel> passengers, BookingModel booking)
     {
-        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.ForegroundColor = booking.FlightId == 0 ? ConsoleColor.Magenta : ConsoleColor.Cyan;
         Console.WriteLine("\nPassengers:");
         Console.ResetColor();
 
         foreach (var passenger in passengers)
         {
             Console.Write($"• {passenger.Name}");
+
             Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.Write($" | Seat: {passenger.SeatNumber}");
-            Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.Write($" | Checked Baggage: {(passenger.HasCheckedBaggage ? "Yes" : "No")}");
+            if (booking.FlightId == 0)
+            {
+                Console.Write($" | Suite: {passenger.SeatNumber}");
+            }
+            else
+            {
+                Console.Write($" | Seat: {passenger.SeatNumber}");
+            }
+
+            if (booking.FlightId != 0)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.Write($" | Checked Baggage: {(passenger.HasCheckedBaggage ? "Yes" : "No")}");
+            }
 
             if (!string.IsNullOrEmpty(passenger.SpecialLuggage))
             {
@@ -287,9 +298,11 @@ static class FlightDisplay
                 Console.Write(string.Join(", ", petDescriptions));
             }
 
-            // Add check-in status display
-            Console.ForegroundColor = booking.IsCheckedIn ? ConsoleColor.Green : ConsoleColor.Red;
-            Console.Write($" | Check-in: {(booking.IsCheckedIn ? "Completed" : "Pending")}");
+            if (booking.FlightId != 0)
+            {
+                Console.ForegroundColor = booking.IsCheckedIn ? ConsoleColor.Green : ConsoleColor.Red;
+                Console.Write($" | Check-in: {(booking.IsCheckedIn ? "Completed" : "Pending")}");
+            }
 
             Console.WriteLine();
             Console.ResetColor();
