@@ -6,25 +6,30 @@ static class UserLogin
     static public UserAccountServiceLogic UserAccountServiceLogic = new UserAccountServiceLogic();
     private static bool _isLoggedIn = true;
 
+
+
     public static void Start()
     {
         AccountModel? acc = null;
         Console.WriteLine("Welcome to the login page");
         Console.WriteLine("Note: You can press F2 to toggle password visibility while typing.");
-        Console.Write("Please enter your login details:\nEmail: ");
-        string email = Console.ReadLine();
-        // while (!IsValidEmail(email))
-        // {
-        //     Console.WriteLine("Invalid input. Please enter a valid email address.");
-        //     Console.Write("Email: ");
-        //     email = Console.ReadLine();
-        // }
+        Console.WriteLine("Press ESC at any time to return to menu\n");
 
-        string password = "";
         bool showPassword = false;
 
-        Console.Write("Enter your password: ");
-        password = ReadPassword(ref showPassword);
+        string email = GetUserInput("Please enter your login details:\nEmail: ", false, ref showPassword);
+        if (email == null)
+        {
+            MenuNavigation.Start();
+            return;
+        }
+
+        string password = GetUserInput("Enter your password: ", true, ref showPassword);
+        if (password == null)
+        {
+            MenuNavigation.Start();
+            return;
+        }
 
         acc = UserAccountServiceLogic.Login(email, password);
 
@@ -301,5 +306,56 @@ static class UserLogin
         }
 
         FlightManagement.BookAFlight(account);
+    }
+
+    private static string GetUserInput(string prompt, bool isPassword, ref bool showPassword)
+    {
+        Console.Write(prompt);
+        string input = "";
+        ConsoleKeyInfo key;
+
+        while (true)
+        {
+            key = Console.ReadKey(true);
+
+            if (key.Key == ConsoleKey.Escape)
+            {
+                Console.WriteLine("\nReturning to menu...");
+                return null;
+            }
+
+            if (key.Key == ConsoleKey.Enter && input.Length > 0)
+            {
+                Console.WriteLine();
+                return input;
+            }
+
+            if (isPassword && key.Key == ConsoleKey.F2)
+            {
+                showPassword = !showPassword;
+                Console.Write("\r" + new string(' ', Console.WindowWidth - 1) + "\r");
+                Console.Write(prompt + (showPassword ? input : new string('*', input.Length)));
+                continue;
+            }
+
+            if (key.Key == ConsoleKey.Backspace && input.Length > 0)
+            {
+                input = input.Substring(0, input.Length - 1);
+                Console.Write("\r" + new string(' ', Console.WindowWidth - 1) + "\r");
+                Console.Write(prompt);
+                if (isPassword)
+                    Console.Write(showPassword ? input : new string('*', input.Length));
+                else
+                    Console.Write(input);
+            }
+            else if (!char.IsControl(key.KeyChar))
+            {
+                input += key.KeyChar;
+                if (isPassword)
+                    Console.Write(showPassword ? key.KeyChar : '*');
+                else
+                    Console.Write(key.KeyChar);
+            }
+        }
     }
 }
