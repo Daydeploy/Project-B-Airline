@@ -219,13 +219,13 @@ static class AccountManagement
             }
         }
 
-        bool accountCreated = UserLogin.UserAccountServiceLogic.CreateAccount(firstName, lastName, email, password, dateOfBirth, 
+        bool accountCreated = UserLogin.UserAccountServiceLogic.CreateAccount(firstName, lastName, email, password, dateOfBirth,
         gender, nationality, phoneNumber, address, passportDetails);
 
-    Console.WriteLine(accountCreated
-        ? "\nAccount created successfully. Please login."
-        : "\nFailed to create account. Email may already be in use.");
-}
+        Console.WriteLine(accountCreated
+            ? "\nAccount created successfully. Please login."
+            : "\nFailed to create account. Email may already be in use.");
+    }
 
     private static string GetUserInput(string prompt, bool isPassword)
     {
@@ -322,7 +322,6 @@ static class AccountManagement
     public static void HandleManageAccountOption(int optionIndex, AccountModel account)
     {
         bool updateSuccessful = false;
-
         var accounts = AccountsAccess.LoadAll();
 
         switch (optionIndex)
@@ -332,182 +331,186 @@ static class AccountManagement
 
                 string[] personalOptions =
                 {
-                    "Update Email",
-                    "Update Password",
-                    "Update First Name",
-                    "Update Last Name",
-                    "Update Date of Birth",
-                    "Update Gender",
-                    "Update Nationality",
-                    "Update Phone Number",
-                    "Update Address",
-                    "Update Passport Details",
-                    "Return to Account Management"
-                };
+                "Update Email",
+                "Update Password",
+                "Update First Name",
+                "Update Last Name",
+                "Update Date of Birth",
+                "Update Gender",
+                "Update Nationality",
+                "Update Phone Number",
+                "Update Address",
+                "Update Passport Details",
+                "Return to Account Management"
+            };
 
                 int personalOptionIndex = MenuNavigationService.NavigateMenu(personalOptions, "Personal Details");
 
                 switch (personalOptionIndex)
                 {
-                    case 0:
+                    case 0: // Email
                         Console.WriteLine($"Current Email: {account.EmailAddress}");
-                        Console.WriteLine("Enter new email:");
-                        string newEmail = Console.ReadLine();
-                        while (!IsValidEmail(newEmail))
+                        Console.Write("Enter new email: ");
+                        string newEmail;
+                        do
                         {
-                            Console.WriteLine("Invalid email format. Please enter a valid email address.");
-                            Console.Write("Enter new email: ");
-                            newEmail = Console.ReadLine();
-                        }
+                            newEmail = GetInputWithEsc();
+                            if (newEmail == null) return;
+                            if (!IsValidEmail(newEmail))
+                            {
+                                Console.WriteLine("Invalid email format. Please enter a valid email address.");
+                                Console.Write("Enter new email: ");
+                            }
+                        } while (newEmail != null && !IsValidEmail(newEmail));
 
-                        updateSuccessful = UserLogin.UserAccountServiceLogic.ManageAccount(account.Id, newEmail);
-                        Console.WriteLine(updateSuccessful ? "Email updated successfully." : "Failed to update email.");
+                        if (newEmail != null)
+                        {
+                            updateSuccessful = UserLogin.UserAccountServiceLogic.ManageAccount(account.Id, newEmail);
+                            Console.WriteLine(updateSuccessful ? "Email updated successfully." : "Failed to update email.");
+                        }
                         break;
 
-                    case 1:
-                        Console.WriteLine("Enter new password:");
-                        string newPassword = Console.ReadLine();
-                        while (!AccountsLogic.IsValidPassword(newPassword))
+                    case 1: // Password
+                        Console.Write("Enter new password: ");
+                        string newPassword;
+                        do
                         {
-                            Console.WriteLine(
-                                "Password must contain at least one uppercase letter, one number, and one special character.");
-                            Console.Write("Enter new password: ");
-                            newPassword = Console.ReadLine();
-                        }
+                            newPassword = GetInputWithEsc();
+                            if (newPassword == null) return;
+                            if (!AccountsLogic.IsValidPassword(newPassword))
+                            {
+                                Console.WriteLine("Password must contain at least one uppercase letter, one number, and one special character.");
+                                Console.Write("Enter new password: ");
+                            }
+                        } while (newPassword != null && !AccountsLogic.IsValidPassword(newPassword));
 
-                        updateSuccessful = UserLogin.UserAccountServiceLogic.ManageAccount(account.Id, newPassword);
-                        Console.WriteLine(updateSuccessful
-                            ? "Password updated successfully."
-                            : "Failed to update password.");
+                        if (newPassword != null)
+                        {
+                            updateSuccessful = UserLogin.UserAccountServiceLogic.ManageAccount(account.Id, newPassword);
+                            Console.WriteLine(updateSuccessful ? "Password updated successfully." : "Failed to update password.");
+                        }
                         break;
 
-                    case 2:
+                    case 2: // First Name
                         Console.WriteLine($"Current First Name: {account.FirstName}");
-                        Console.WriteLine("Enter new first name:");
-                        string newFirstName = Console.ReadLine();
+                        Console.Write("Enter new first name: ");
+                        string newFirstName = GetInputWithEsc();
+                        if (newFirstName == null) return;
+
                         while (string.IsNullOrWhiteSpace(newFirstName))
                         {
                             Console.WriteLine("Invalid input. Please enter a valid first name.");
                             Console.Write("Enter new first name: ");
-                            newFirstName = Console.ReadLine();
+                            newFirstName = GetInputWithEsc();
+                            if (newFirstName == null) return;
                         }
 
-                        updateSuccessful =
-                            UserLogin.UserAccountServiceLogic.ManageAccount(account.Id, newFirstName: newFirstName);
-                        Console.WriteLine(
-                            updateSuccessful ? "First name updated successfully." : "Failed to update first name.");
+                        updateSuccessful = UserLogin.UserAccountServiceLogic.ManageAccount(account.Id, newFirstName: newFirstName);
+                        Console.WriteLine(updateSuccessful ? "First name updated successfully." : "Failed to update first name.");
                         break;
 
-                    case 3:
+                    case 3: // Last Name
                         Console.WriteLine($"Current Last Name: {account.LastName}");
-                        Console.WriteLine("Enter new last name:");
-                        updateSuccessful =
-                            UserLogin.UserAccountServiceLogic.ManageAccount(account.Id,
-                                newLastName: Console.ReadLine());
-                        Console.WriteLine(updateSuccessful
-                            ? "Last name updated successfully."
-                            : "Failed to update last name.");
+                        Console.Write("Enter new last name: ");
+                        string newLastName = GetInputWithEsc();
+                        if (newLastName == null) return;
+
+                        updateSuccessful = UserLogin.UserAccountServiceLogic.ManageAccount(account.Id, newLastName: newLastName);
+                        Console.WriteLine(updateSuccessful ? "Last name updated successfully." : "Failed to update last name.");
                         break;
 
-                    case 4:
+                    case 4: // Date of Birth
                         Console.WriteLine($"Current Date of Birth: {account.DateOfBirth:dd-MM-yyyy}");
-                        Console.WriteLine("Enter new date of birth (dd-MM-yyyy):");
-                        if (DateTime.TryParse(Console.ReadLine(), out DateTime newDateOfBirth))
+                        Console.Write("Enter new date of birth (dd-MM-yyyy): ");
+                        string dateStr = GetInputWithEsc();
+                        if (dateStr == null) return;
+
+                        if (DateTime.TryParse(dateStr, out DateTime newDateOfBirth))
                         {
-                            updateSuccessful =
-                                UserLogin.UserAccountServiceLogic.ManageAccount(account.Id,
-                                    newDateOfBirth: newDateOfBirth);
-                            Console.WriteLine(updateSuccessful
-                                ? "Date of birth updated successfully."
-                                : "Failed to update date of birth.");
+                            updateSuccessful = UserLogin.UserAccountServiceLogic.ManageAccount(account.Id, newDateOfBirth: newDateOfBirth);
+                            Console.WriteLine(updateSuccessful ? "Date of birth updated successfully." : "Failed to update date of birth.");
                         }
                         else
                         {
                             Console.WriteLine("Invalid date format. Date of birth not updated.");
                         }
-
                         break;
 
-                    case 5:
+                    case 5: // Gender
                         Console.WriteLine($"Current Gender: {account.Gender ?? "Not provided"}");
-                        Console.WriteLine("Enter new gender:");
-                        updateSuccessful =
-                            UserLogin.UserAccountServiceLogic.ManageAccount(account.Id, newGender: Console.ReadLine());
-                        Console.WriteLine(
-                            updateSuccessful ? "Gender updated successfully." : "Failed to update gender.");
+                        Console.Write("Enter new gender: ");
+                        string newGender = GetInputWithEsc();
+                        if (newGender == null) return;
+
+                        updateSuccessful = UserLogin.UserAccountServiceLogic.ManageAccount(account.Id, newGender: newGender);
+                        Console.WriteLine(updateSuccessful ? "Gender updated successfully." : "Failed to update gender.");
                         break;
 
-                    case 6:
+                    case 6: // Nationality
                         Console.WriteLine($"Current Nationality: {account.Nationality ?? "Not provided"}");
-                        Console.WriteLine("Enter new nationality:");
-                        updateSuccessful =
-                            UserLogin.UserAccountServiceLogic.ManageAccount(account.Id,
-                                newNationality: Console.ReadLine());
-                        Console.WriteLine(updateSuccessful
-                            ? "Nationality updated successfully."
-                            : "Failed to update nationality.");
+                        Console.Write("Enter new nationality: ");
+                        string newNationality = GetInputWithEsc();
+                        if (newNationality == null) return;
+
+                        updateSuccessful = UserLogin.UserAccountServiceLogic.ManageAccount(account.Id, newNationality: newNationality);
+                        Console.WriteLine(updateSuccessful ? "Nationality updated successfully." : "Failed to update nationality.");
                         break;
 
-                    case 7:
+                    case 7: // Phone Number
                         Console.WriteLine($"Current Phone Number: {account.PhoneNumber ?? "Not provided"}");
-                        Console.WriteLine("Enter new phone number:");
-                        updateSuccessful =
-                            UserLogin.UserAccountServiceLogic.ManageAccount(account.Id,
-                                newPhoneNumber: Console.ReadLine());
-                        Console.WriteLine(updateSuccessful
-                            ? "Phone number updated successfully."
-                            : "Failed to update phone number.");
+                        Console.Write("Enter new phone number: ");
+                        string newPhone = GetInputWithEsc();
+                        if (newPhone == null) return;
+
+                        updateSuccessful = UserLogin.UserAccountServiceLogic.ManageAccount(account.Id, newPhoneNumber: newPhone);
+                        Console.WriteLine(updateSuccessful ? "Phone number updated successfully." : "Failed to update phone number.");
                         break;
 
-                    case 8:
+                    case 8: // Address
                         Console.WriteLine($"Current Address: {account.Address ?? "Not provided"}");
-                        Console.WriteLine("Enter new Address:");
-                        updateSuccessful =
-                            UserLogin.UserAccountServiceLogic.ManageAccount(account.Id, newAddress: Console.ReadLine());
+                        Console.Write("Enter new Address: ");
+                        string newAddress = GetInputWithEsc();
+                        if (newAddress == null) return;
 
-                        Console.WriteLine(updateSuccessful
-                            ? "Address updated successfully."
-                            : "Failed to update address.");
+                        updateSuccessful = UserLogin.UserAccountServiceLogic.ManageAccount(account.Id, newAddress: newAddress);
+                        Console.WriteLine(updateSuccessful ? "Address updated successfully." : "Failed to update address.");
                         break;
 
-                    case 9:
-                        Console.WriteLine(
-                            $"Current Passport Number: {account.PassportDetails?.PassportNumber ?? "Not provided"}");
-                        Console.WriteLine("Enter new passport number:");
-                        string passportNumber = Console.ReadLine() ?? string.Empty;
+                    case 9: // Passport Details
+                        Console.WriteLine($"Current Passport Number: {account.PassportDetails?.PassportNumber ?? "Not provided"}");
+                        Console.Write("Enter new passport number: ");
+                        string passportNumber = GetInputWithEsc();
+                        if (passportNumber == null) return;
 
-                        Console.WriteLine(
-                            $"Current Issue Date: {account.PassportDetails?.IssueDate?.ToString("dd-MM-yyyy") ?? "Not provided"}");
-                        Console.WriteLine("Enter new passport issue date (dd-MM-yyyy):");
-                        DateTime.TryParse(Console.ReadLine(), out DateTime issueDate);
+                        Console.WriteLine($"Current Issue Date: {account.PassportDetails?.IssueDate?.ToString("dd-MM-yyyy") ?? "Not provided"}");
+                        Console.Write("Enter new passport issue date (dd-MM-yyyy): ");
+                        string issueDateStr = GetInputWithEsc();
+                        if (issueDateStr == null) return;
+                        DateTime.TryParse(issueDateStr, out DateTime issueDate);
 
-                        Console.WriteLine(
-                            $"Current Expiration Date: {account.PassportDetails?.ExpirationDate?.ToString("dd-MM-yyyy") ?? "Not provided"}");
-                        Console.WriteLine("Enter new passport expiration date (dd-MM-yyyy):");
-                        DateTime.TryParse(Console.ReadLine(), out DateTime expirationDate);
+                        Console.WriteLine($"Current Expiration Date: {account.PassportDetails?.ExpirationDate?.ToString("dd-MM-yyyy") ?? "Not provided"}");
+                        Console.Write("Enter new passport expiration date (dd-MM-yyyy): ");
+                        string expDateStr = GetInputWithEsc();
+                        if (expDateStr == null) return;
+                        DateTime.TryParse(expDateStr, out DateTime expirationDate);
 
-                        Console.WriteLine(
-                            $"Current Country of Issue: {account.PassportDetails?.CountryOfIssue ?? "Not provided"}");
-                        Console.WriteLine("Enter new country of issue:");
-                        string countryOfIssue = Console.ReadLine() ?? string.Empty;
+                        Console.WriteLine($"Current Country of Issue: {account.PassportDetails?.CountryOfIssue ?? "Not provided"}");
+                        Console.Write("Enter new country of issue: ");
+                        string countryOfIssue = GetInputWithEsc();
+                        if (countryOfIssue == null) return;
 
-                        var newPassportDetails =
-                            new PassportDetailsModel(passportNumber, issueDate, expirationDate, countryOfIssue);
-                        updateSuccessful =
-                            UserLogin.UserAccountServiceLogic.ManageAccount(account.Id,
-                                newPassportDetails: newPassportDetails);
-                        Console.WriteLine(updateSuccessful
-                            ? "Passport details updated successfully."
-                            : "Failed to update passport details.");
+                        var newPassportDetails = new PassportDetailsModel(passportNumber, issueDate, expirationDate, countryOfIssue);
+                        updateSuccessful = UserLogin.UserAccountServiceLogic.ManageAccount(account.Id, newPassportDetails: newPassportDetails);
+                        Console.WriteLine(updateSuccessful ? "Passport details updated successfully." : "Failed to update passport details.");
                         break;
-                    case 10:
+
+                    case 10: // Return to Account Management
                         break;
 
                     default:
                         Console.WriteLine("Invalid option selected.");
                         break;
                 }
-
                 break;
 
             case 1: // Payment Information
@@ -520,148 +523,126 @@ static class AccountManagement
 
                 string[] paymentOptions =
                 {
-                    "Update Payment Method",
-                    "Remove Payment Method",
-                    "Back to Account Management",
-                };
+                "Update Payment Method",
+                "Remove Payment Method",
+                "Back to Account Management",
+            };
 
                 int paymentOptionIndex = MenuNavigationService.NavigateMenu(paymentOptions, "Payment Details");
 
                 if (paymentOptionIndex == 0)
                 {
-                    bool isValidPaymentInformation = false;
                     PaymentInformationModel paymentInfo = null;
 
-                    while (!isValidPaymentInformation)
+                    // Card Holder Name
+                    Console.Write("\nEnter Card Holder Name: ");
+                    string cardHolder = GetInputWithEsc();
+                    if (cardHolder == null) return;
+
+                    while (!PaymentLogic.ValidateName(cardHolder))
                     {
-                        string _cardHolder;
-                        while (true)
-                        {
-                            Console.WriteLine("\nEnter Card Holder Name:");
-                            _cardHolder = Console.ReadLine();
-
-                            if (!PaymentLogic.ValidateName(_cardHolder))
-                            {
-                                Console.WriteLine("Card Holder Name cannot be empty, Please try again.");
-                                continue;
-                            }
-
-                            break;
-                        }
-
-                        string _cardNumber;
-                        while (true)
-                        {
-                            Console.WriteLine("\nEnter Card Number: (Must be 16 digits.)");
-                            _cardNumber = Console.ReadLine();
-
-                            if (!PaymentLogic.ValidateCardNumber(_cardNumber))
-                            {
-                                Console.WriteLine(
-                                    "Invalid Card number, Must be 16 characters long and only contain digits.");
-                                continue;
-                            }
-
-                            break;
-                        }
-
-                        string _cVV;
-                        while (true)
-                        {
-                            Console.WriteLine("\nEnter CVV: (Must be 3 or 4 digits)");
-                            _cVV = Console.ReadLine();
-
-                            if (!PaymentLogic.ValidateCVV(_cVV))
-                            {
-                                Console.WriteLine("Invalid CVV, Must be 3 or 4 digits.");
-                                continue;
-                            }
-
-                            break;
-                        }
-
-                        string _expirationDate;
-                        while (true)
-                        {
-                            Console.WriteLine("\nEnter Expiration Date: (MM/YY)");
-                            _expirationDate = Console.ReadLine();
-
-                            if (!PaymentLogic.ValidateExpirationDate(_expirationDate))
-                            {
-                                Console.WriteLine("Invalid expiration date, Must be in MM/YY format and not expired.");
-                                continue;
-                            }
-
-                            break;
-                        }
-
-                        string _billingAddress;
-                        while (true)
-                        {
-                            Console.WriteLine("\nEnter Billing Address:");
-                            _billingAddress = Console.ReadLine();
-
-                            if (!PaymentLogic.ValidateAddress(_billingAddress))
-                            {
-                                Console.WriteLine("Invalid billing address, Cannot be empty.");
-                                continue;
-                            }
-
-                            ;
-                            break;
-                        }
-
-                        Console.WriteLine("\nConfirm Payment Method Update:");
-                        Console.WriteLine($"Card Holder: {_cardHolder}");
-                        Console.WriteLine($"Card Number: {_cardNumber}");
-                        Console.WriteLine($"Expiration Date: {_expirationDate}");
-                        Console.WriteLine($"Billing Address: {_billingAddress}");
-
-                        Console.WriteLine("\nPress any key to confirm this payment method, or 'N' to cancel.");
-                        var confirmKey = Console.ReadKey(true);
-
-                        if (confirmKey.Key == ConsoleKey.N)
-                        {
-                            Console.WriteLine("Payment method update cancelled.");
-                            break;
-                        }
-
-                        paymentInfo = new PaymentInformationModel(_cardHolder, _cardNumber, _cVV, _expirationDate,
-                            _billingAddress);
-                        isValidPaymentInformation = true;
+                        Console.WriteLine("Card Holder Name cannot be empty, Please try again.");
+                        Console.Write("Enter Card Holder Name: ");
+                        cardHolder = GetInputWithEsc();
+                        if (cardHolder == null) return;
                     }
 
-                    if (paymentInfo != null)
+                    // Card Number
+                    Console.Write("\nEnter Card Number (Must be 16 digits): ");
+                    string cardNumber = GetInputWithEsc();
+                    if (cardNumber == null) return;
+
+                    while (!PaymentLogic.ValidateCardNumber(cardNumber))
                     {
+                        Console.WriteLine("Invalid Card number, Must be 16 characters long and only contain digits.");
+                        Console.Write("Enter Card Number: ");
+                        cardNumber = GetInputWithEsc();
+                        if (cardNumber == null) return;
+                    }
+
+                    // CVV
+                    Console.Write("\nEnter CVV (Must be 3 or 4 digits): ");
+                    string cvv = GetInputWithEsc();
+                    if (cvv == null) return;
+
+                    while (!PaymentLogic.ValidateCVV(cvv))
+                    {
+                        Console.WriteLine("Invalid CVV, Must be 3 or 4 digits.");
+                        Console.Write("Enter CVV: ");
+                        cvv = GetInputWithEsc();
+                        if (cvv == null) return;
+                    }
+
+                    // Expiration Date
+                    Console.Write("\nEnter Expiration Date (MM/YY): ");
+                    string expirationDate = GetInputWithEsc();
+                    if (expirationDate == null) return;
+
+                    while (!PaymentLogic.ValidateExpirationDate(expirationDate))
+                    {
+                        Console.WriteLine("Invalid expiration date, Must be in MM/YY format and not expired.");
+                        Console.Write("Enter Expiration Date: ");
+                        expirationDate = GetInputWithEsc();
+                        if (expirationDate == null) return;
+                    }
+
+                    // Billing Address
+                    Console.Write("\nEnter Billing Address: ");
+                    string billingAddress = GetInputWithEsc();
+                    if (billingAddress == null) return;
+
+                    while (!PaymentLogic.ValidateAddress(billingAddress))
+                    {
+                        Console.WriteLine("Invalid billing address, Cannot be empty.");
+                        Console.Write("Enter Billing Address: ");
+                        billingAddress = GetInputWithEsc();
+                        if (billingAddress == null) return;
+                    }
+
+                    Console.WriteLine("\nConfirm Payment Method Update:");
+                    Console.WriteLine($"Card Holder: {cardHolder}");
+                    Console.WriteLine($"Card Number: {cardNumber}");
+                    Console.WriteLine($"Expiration Date: {expirationDate}");
+                    Console.WriteLine($"Billing Address: {billingAddress}");
+
+                    Console.WriteLine("\nPress any key to confirm this payment method, or 'N' to cancel.");
+                    var confirmKey = Console.ReadKey(true);
+
+                    if (confirmKey.Key != ConsoleKey.N)
+                    {
+                        paymentInfo = new PaymentInformationModel(cardHolder, cardNumber, cvv, expirationDate, billingAddress);
                         accountToUpdate.PaymentInformation.Clear();
                         accountToUpdate.PaymentInformation.Add(paymentInfo);
-
                         AccountsAccess.WriteAll(accounts);
-
                         Console.WriteLine("Payment method updated successfully.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Payment method update cancelled.");
                     }
                 }
 
                 if (paymentOptionIndex == 1)
                 {
-                    accountToUpdate.PaymentInformation.Clear();
-                    AccountsAccess.WriteAll(accounts);
+                    Console.Write("\nAre you sure you want to remove the payment method? (Y/N): ");
+                    string response = GetInputWithEsc();
+                    if (response == null) return;
 
-                    Console.WriteLine("Payment method removed successfully.");
+                    if (response.Trim().ToUpper() == "Y")
+                    {
+                        accountToUpdate.PaymentInformation.Clear();
+                        AccountsAccess.WriteAll(accounts);
+                        Console.WriteLine("Payment method removed successfully.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Payment method removal cancelled.");
+                    }
                 }
-
-                if (paymentOptionIndex == 2)
-                {
-                    return;
-                }
-
-                Console.Clear();
                 break;
 
-            case 2: // Frequent Flyer Program enrollment/unenrollment
-
+            case 2: // Frequent Flyer Program
                 account = accounts.FirstOrDefault(a => a.Id == account.Id);
-
 
                 if (account.Miles != null && account.Miles.Count > 0)
                 {
@@ -675,18 +656,18 @@ static class AccountManagement
                         Console.WriteLine($"Total Points: {milesRecord.Points}\n");
                     }
 
-                    // Prompt for enrollment or unenrollment
                     Console.WriteLine(milesRecord.Enrolled
                         ? "You are currently enrolled in the Frequent Flyer Program."
                         : "You are not currently enrolled in the Frequent Flyer Program.");
 
-                    Console.WriteLine(milesRecord.Enrolled
-                        ? "Would you like to unenroll? (Y/N)"
-                        : "Would you like to enroll? (Y/N)");
+                    Console.Write(milesRecord.Enrolled
+                        ? "Would you like to unenroll? (Y/N): "
+                        : "Would you like to enroll? (Y/N): ");
 
-                    string response = Console.ReadLine()?.Trim().ToUpper();
+                    string ffpResponse = GetInputWithEsc();
+                    if (ffpResponse == null) return;
 
-                    if (response == "Y")
+                    if (ffpResponse.Trim().ToUpper() == "Y")
                     {
                         // Toggle enrollment status
                         milesRecord.Enrolled = !milesRecord.Enrolled;
@@ -707,7 +688,6 @@ static class AccountManagement
                 {
                     Console.WriteLine("Error: Miles information is not available.");
                 }
-
                 break;
 
             default:
@@ -715,10 +695,43 @@ static class AccountManagement
                 break;
         }
 
-        Console.WriteLine("\nPress any key to continue...");
-        Console.ReadKey();
+        if (updateSuccessful)
+        {
+            Console.WriteLine("\nPress any key to continue...");
+            Console.ReadKey();
+        }
     }
 
+
+
+    private static string GetInputWithEsc()
+    {
+        string input = "";
+        while (true)
+        {
+            var key = Console.ReadKey(intercept: true);
+            if (key.Key == ConsoleKey.Escape)
+            {
+                Console.WriteLine("\nOperation cancelled. Returning to menu...");
+                return null;
+            }
+            if (key.Key == ConsoleKey.Enter && !string.IsNullOrWhiteSpace(input))
+            {
+                Console.WriteLine();
+                return input;
+            }
+            if (key.Key == ConsoleKey.Backspace && input.Length > 0)
+            {
+                input = input.Substring(0, input.Length - 1);
+                Console.Write("\b \b");
+            }
+            else if (!char.IsControl(key.KeyChar))
+            {
+                input += key.KeyChar;
+                Console.Write(key.KeyChar);
+            }
+        }
+    }
     private static bool IsValidEmail(string email)
     {
         return !string.IsNullOrWhiteSpace(email) &&
