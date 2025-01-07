@@ -299,7 +299,7 @@ static class FlightDisplay
                 Console.Write($" | Special Luggage: {passenger.SpecialLuggage}");
             }
 
-            if (passenger.HasPet && passenger.PetDetails != null && passenger.PetDetails.Any())
+            if (passenger.HasPet && passenger.PetDetails.Count != 0)
             {
                 Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.Write(" | Pets: ");

@@ -7,7 +7,6 @@ static class UserLogin
     private static bool _isLoggedIn = true;
 
 
-
     public static void Start()
     {
         AccountModel? acc = null;
@@ -131,7 +130,6 @@ static class UserLogin
                     MenuNavigation.Start();
                     _isLoggedIn = false;
                     return;
-
             }
         }
     }
