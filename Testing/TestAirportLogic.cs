@@ -1,48 +1,111 @@
-// namespace Testing
-// {
-//     [TestClass]
-//     public class TestAirportLogic
-//     {
-//         // Test that GetAvailableAirports() only returns airports with a country code of NL.
-//         [TestMethod]
-//         public void GetAvailableAirports_OnlyReturnsAirportsFromNL()
-//         {
-//             // Arrange: Create a list of airports with the required constructor parameters.
-//             List<AirportModel> airports = new List<AirportModel>
-//             {
-//                 new AirportModel(1, "Netherlands", "RTM", "Rotterdam The Hague Airport", "NL", "010-4463444", "Rotterdam Airportplein 60, 3045 AP Rotterdam"),
-//                 new AirportModel(1, "Netherlands", "AMS", "Amsterdam Airport Schiphol", "NL", "020-7940800", "Evert van de Beekstraat 202, 1118 CP Schiphol"),
-//                 new AirportModel(2, "United Kingdom", "LHR", "London Heathrow Airport", "UK", "0844 335 1801", "Longford, Hounslow TW6")
-//             };
-//
-//             // Act: Filter airports with country code NL.
-//             var availableAirports = airports.Where(a => a.AirportID == 1).ToList();
-//
-//             // Assert: Check if only airports with NL as country code are returned.
-//             Assert.AreEqual(2, availableAirports.Count);
-//             Assert.IsTrue(availableAirports.All(a => a.Country == "Netherlands"));
-//         }
-//
-//         // Test that FilterAirportsByName() returns airports with the specified name.
-//         [TestMethod]
-//         [DataRow("Rotterdam The Hague Airport")]
-//         [DataRow("Amsterdam Airport Schiphol")]
-//         public void FilterAirportsByName_ReturnsAirportsWithName(string airportName)
-//         {
-//             // Arrange: Create a list of airports with the required constructor parameters.
-//             List<AirportModel> airports = new List<AirportModel>
-//             {
-//                 new AirportModel(1, "Netherlands", "RTM", "Rotterdam The Hague Airport", "NL", "010-4463444", "Rotterdam Airportplein 60, 3045 AP Rotterdam"),
-//                 new AirportModel(2, "Netherlands", "AMS", "Amsterdam Airport Schiphol", "NL", "020-7940800", "Evert van de Beekstraat 202, 1118 CP Schiphol"),
-//                 new AirportModel(3, "United Kingdom", "LHR", "London Heathrow Airport", "UK", "0844 335 1801", "Longford, Hounslow TW6")
-//             };
-//
-//             // Act: Filter airports by name.
-//             var filteredAirports = airports.Where(a => a.Name == airportName).ToList();
-//
-//             // Assert: Check if the airports have the specified name.
-//             Assert.AreEqual(1, filteredAirports.Count);
-//             Assert.IsTrue(filteredAirports.All(a => a.Name == airportName));
-//         }
-//     }
-// }
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Testing
+{
+    [TestClass]
+    public class TestAirportLogic
+    {
+        private AirportLogic _airportLogic;
+        private List<AirportModel> _testAirports;
+
+        [TestInitialize]
+        public void Setup()
+        {
+            _testAirports = new List<AirportModel>
+            {
+                new AirportModel(1, "Netherlands", "Rotterdam", "Rotterdam Airport", "RTM", "Public", "+31 10 123 4567", "Test Address 1"),
+                new AirportModel(2, "Ireland", "Dublin", "Dublin Airport", "DUB", "Public", "+353 1 814 1111", "Test Address 2"),
+                new AirportModel(3, "United Kingdom", "London", "London City Airport", "LCY", "Public", "+44 20 7646 0088", "Test Address 3")
+            };
+
+            _airportLogic = new AirportLogic();
+        }
+
+        [TestMethod]
+        public void GetAllAirports_ReturnsAllAirports()
+        {
+
+            var result = _airportLogic.GetAllAirports();
+
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.Any());
+        }
+
+        [TestMethod]
+        public void GetAirportById_ExistingId_ReturnsCorrectAirport()
+        {
+            int testId = 1;
+
+            var result = _airportLogic.GetAirportById(testId);
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(testId, result.AirportID);
+        }
+
+        [TestMethod]
+        public void GetAirportById_NonExistingId_ReturnsNull()
+        {
+            int nonExistingId = 999;
+
+            var result = _airportLogic.GetAirportById(nonExistingId);
+
+            Assert.IsNull(result);
+        }
+
+        [TestMethod]
+        public void UpdateAirport_ExistingAirport_ReturnsTrue()
+        {
+            var existingAirport = _airportLogic.GetAirportById(1);
+            existingAirport.Name = "Updated Airport Name";
+
+            bool result = _airportLogic.UpdateAirport(existingAirport);
+
+            Assert.IsTrue(result);
+            var updatedAirport = _airportLogic.GetAirportById(1);
+            Assert.AreEqual("Updated Airport Name", updatedAirport.Name);
+        }
+
+        [TestMethod]
+        public void UpdateAirport_NonExistingAirport_ReturnsFalse()
+        {
+            var nonExistingAirport = new AirportModel(
+                999, 
+                "Test Country", 
+                "Test City", 
+                "Test Airport", 
+                "TST", 
+                "Public",
+                "+1 234 567 8900",
+                "Test Address"
+            );
+
+            bool result = _airportLogic.UpdateAirport(nonExistingAirport);
+
+            Assert.IsFalse(result);
+        }
+
+        [TestMethod]
+        public void AddAirport_NewAirport_AddsSuccessfully()
+        {
+            var newAirport = new AirportModel(
+                8, 
+                "Germany", 
+                "Berlin", 
+                "Berlin Airport", 
+                "BER", 
+                "Public",
+                "+49 30 609 11150",
+                "Test Address"
+            );
+
+            _airportLogic.AddAirport(newAirport);
+            var result = _airportLogic.GetAirportById(8);
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(newAirport.Name, result.Name);
+            Assert.AreEqual(newAirport.Code, result.Code);
+        }
+    }
+}
