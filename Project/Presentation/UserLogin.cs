@@ -16,7 +16,7 @@ static class UserLogin
 
         bool showPassword = false;
 
-        string email = GetUserInput("Please enter your login details:\nEmail: ", false, ref showPassword);
+        string email = GetUserInput("Email: ", false, ref showPassword);
         if (email == null)
         {
             MenuNavigation.Start();
