@@ -5,9 +5,9 @@ public class FinancePanelUI
     public static void FinanceMainMenu()
     {
         string[] financeMenuOptions = {
-            "Year",
+            "Date",
             "Month",
-            "Day",
+            "Year",
             "Logout",
         };
 
@@ -18,18 +18,17 @@ public class FinancePanelUI
             switch (selectedMenuIndex)
             {
                 case 0:
-                    ShowYearlyDataUI();
+                    ShowDailyDataUI();
                     break;
                 case 1:
                     ShowMonthlyDataUI();
                     break;
                 case 2:
-                    ShowDailyDataUI();
+                    ShowYearlyDataUI();
                     break;
                 case 3:
                     Console.Clear();
                     UserAccountServiceLogic.Logout();
-                    Console.WriteLine("You have successfully logged out.\nReturning to the main menu....");
                     MenuNavigation.Start();
                     _isLoggedIn = false;
                     return;
