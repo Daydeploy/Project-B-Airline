@@ -6,25 +6,29 @@ static class UserLogin
     static public UserAccountServiceLogic UserAccountServiceLogic = new UserAccountServiceLogic();
     private static bool _isLoggedIn = true;
 
+
     public static void Start()
     {
         AccountModel? acc = null;
         Console.WriteLine("Welcome to the login page");
         Console.WriteLine("Note: You can press F2 to toggle password visibility while typing.");
-        Console.Write("Please enter your login details:\nEmail: ");
-        string email = Console.ReadLine();
-        while (!IsValidEmail(email))
-        {
-            Console.WriteLine("Invalid input. Please enter a valid email address.");
-            Console.Write("Email: ");
-            email = Console.ReadLine();
-        }
+        Console.WriteLine("Press ESC at any time to return to menu\n");
 
-        string password = "";
         bool showPassword = false;
 
-        Console.Write("Enter your password: ");
-        password = ReadPassword(ref showPassword);
+        string email = GetUserInput("Please enter your login details:\nEmail: ", false, ref showPassword);
+        if (email == null)
+        {
+            MenuNavigation.Start();
+            return;
+        }
+
+        string password = GetUserInput("Enter your password: ", true, ref showPassword);
+        if (password == null)
+        {
+            MenuNavigation.Start();
+            return;
+        }
 
         acc = UserAccountServiceLogic.Login(email, password);
 
@@ -38,13 +42,27 @@ static class UserLogin
         }
         else
         {
-            Console.WriteLine("No account found with that email and password");
+            Console.WriteLine("No account found with that email and password combination.");
+            Console.WriteLine("\nPress any key to return to the main menu...");
+            Console.ReadKey();
             MenuNavigation.Start();
         }
     }
 
     private static void ShowLoggedInMenu(AccountModel account)
     {
+        if (account.EmailAddress.ToLower() == "admin")
+        {
+            AdminAccountUI.ShowAdminMenu();
+            return;
+        }
+
+        if (account.Id == 0)
+        {
+            FinancePanelUI.FinanceMainMenu();
+            return;
+        }
+
         string[] menuItems = new[]
         {
             "Book a Flight",
@@ -58,6 +76,7 @@ static class UserLogin
             "Advanced flight booking",
             "Add Comfort Packages",
             "Add Entertainment",
+            "Finance panel",
             "Logout"
         };
 
@@ -68,7 +87,7 @@ static class UserLogin
             switch (selectedIndex)
             {
                 case 0: // Book a Flight
-                    FlightManagement.BookAFlight(account);
+                    PaymentAndAccountInformationCheck(account);
                     break;
                 case 1: // Book Private Jet
                     FlightManagement.BookPrivateJet(account.Id);
@@ -100,7 +119,10 @@ static class UserLogin
                 case 10: // Add Entertainment
                     EntertainmentUI.ShowEntertainment();
                     break;
-                case 11: // Logout
+                case 11: // Finance panel
+                    FinanceUserUI.FinanceMainMenu();
+                    break;
+                case 12: // Logout
                     Console.Clear();
                     UserAccountServiceLogic.Logout();
                     Console.WriteLine("You have successfully logged out.");
@@ -108,7 +130,6 @@ static class UserLogin
                     MenuNavigation.Start();
                     _isLoggedIn = false;
                     return;
-
             }
         }
     }
@@ -118,7 +139,46 @@ static class UserLogin
         return email.Contains("@") && email.Contains(".");
     }
 
-    public static string ReadPassword(ref bool showPassword)
+    // public static string ReadPassword(ref bool showPassword)
+    // {
+    //     string pass = "";
+    //     ConsoleKeyInfo key;
+
+    //     do
+    //     {
+    //         key = Console.ReadKey(true);
+
+    //         if (key.Key == ConsoleKey.F2)
+    //         {
+    //             showPassword = !showPassword;
+    //             Console.Write("\r" + new string(' ', Console.WindowWidth) + "\r");
+    //             Console.Write("Enter your password: " + (showPassword ? pass : new string('*', pass.Length)));
+    //         }
+    //         else if (key.Key == ConsoleKey.Backspace && pass.Length > 0)
+    //         {
+    //             pass = pass.Substring(0, pass.Length - 1);
+    //             Console.Write("\b \b");
+    //         }
+    //         else if (key.Key != ConsoleKey.Enter)
+    //         {
+    //             pass += key.KeyChar;
+    //             Console.Write(showPassword ? key.KeyChar : '*');
+    //         }
+    //     } while (key.Key != ConsoleKey.Enter);
+
+    //     Console.WriteLine();
+
+    //     if (!IsValidPassword(pass))
+    //     {
+    //         Console.WriteLine("Invalid password. Password must contain at least one uppercase letter, one number, and one special character.");
+    //         Console.Write("Enter your password: ");
+    //         return ReadPassword(ref showPassword);
+    //     }
+
+
+    //     return pass;
+    // }
+    private static string ReadPassword(ref bool showPassword)
     {
         string pass = "";
         ConsoleKeyInfo key;
@@ -126,11 +186,10 @@ static class UserLogin
         do
         {
             key = Console.ReadKey(true);
-
             if (key.Key == ConsoleKey.F2)
             {
                 showPassword = !showPassword;
-                Console.Write("\r" + new string(' ', Console.WindowWidth) + "\r");
+                Console.Write("\r" + new string(' ', Console.WindowWidth - 1) + "\r");
                 Console.Write("Enter your password: " + (showPassword ? pass : new string('*', pass.Length)));
             }
             else if (key.Key == ConsoleKey.Backspace && pass.Length > 0)
@@ -146,13 +205,6 @@ static class UserLogin
         } while (key.Key != ConsoleKey.Enter);
 
         Console.WriteLine();
-
-        if (!IsValidPassword(pass))
-        {
-            Console.WriteLine("Invalid password. Password must contain at least one uppercase letter, one number, and one special character.");
-            return ReadPassword(ref showPassword);
-        }
-
         return pass;
     }
 
@@ -161,5 +213,147 @@ static class UserLogin
         return password.Any(char.IsUpper) &&
                password.Any(char.IsDigit) &&
                password.Any(ch => !char.IsLetterOrDigit(ch));
+    }
+
+    public static void PaymentAndAccountInformationCheck(AccountModel account)
+    {
+        var accounts = AccountsAccess.LoadAll();
+        account = accounts.FirstOrDefault(x => x.Id == account.Id);
+
+        if (account.PaymentInformation == null)
+        {
+            Console.WriteLine("\nPayment information is required to complete a booking.");
+            Console.WriteLine("\nWould you like to add payment information now? (Y/N)");
+
+            string response = Console.ReadLine().ToUpper();
+
+            if (response == "Y")
+            {
+                AccountManagement.HandleManageAccountOption(1, account);
+
+                accounts = AccountsAccess.LoadAll();
+                account = accounts.FirstOrDefault(x => x.Id == account.Id);
+
+                if (account.PaymentInformation == null)
+                {
+                    Console.WriteLine("No payment information added, Booking cannot proceed.");
+                    return;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Booking process cancelled due to missing payment information.");
+                return;
+            }
+        }
+
+        if (!AccountsLogic.HasCompleteContactInformation(account.FirstName, account.LastName, account.EmailAddress,
+                account.PhoneNumber, account.Address))
+        {
+            Console.WriteLine("\nComplete contact information is required to complete a booking.");
+            Console.WriteLine("Please update the following missing details:\n");
+
+            if (string.IsNullOrEmpty(account.FirstName))
+            {
+                Console.WriteLine("- First Name");
+            }
+
+            if (string.IsNullOrEmpty(account.LastName))
+            {
+                Console.WriteLine("- Last Name");
+            }
+
+            if (string.IsNullOrEmpty(account.EmailAddress))
+            {
+                Console.WriteLine("- Email Address");
+            }
+
+            if (string.IsNullOrEmpty(account.PhoneNumber))
+            {
+                Console.WriteLine("- Phone Number");
+            }
+
+            if (string.IsNullOrEmpty(account.Address))
+            {
+                Console.WriteLine("- Address");
+            }
+
+            Console.WriteLine("Would you like to complete your contact information? (Y/N)");
+
+            string response = Console.ReadLine().ToUpper();
+
+            if (response == "Y")
+            {
+                AccountManagement.HandleManageAccountOption(0, account);
+
+                accounts = AccountsAccess.LoadAll();
+                account = accounts.FirstOrDefault(x => x.Id == account.Id);
+
+                if (!AccountsLogic.HasCompleteContactInformation(account.FirstName, account.LastName,
+                        account.EmailAddress, account.PhoneNumber, account.Address))
+                {
+                    Console.WriteLine("Contact information not updated completely. Booking cannot proceed.");
+                    return;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Booking process cancelled due to incomplete contact information.");
+                return;
+            }
+        }
+
+        FlightManagement.BookAFlight(account);
+    }
+
+    private static string GetUserInput(string prompt, bool isPassword, ref bool showPassword)
+    {
+        Console.Write(prompt);
+        string input = "";
+        ConsoleKeyInfo key;
+
+        while (true)
+        {
+            key = Console.ReadKey(true);
+
+            if (key.Key == ConsoleKey.Escape)
+            {
+                Console.WriteLine("\nReturning to menu...");
+                return null;
+            }
+
+            if (key.Key == ConsoleKey.Enter && input.Length > 0)
+            {
+                Console.WriteLine();
+                return input;
+            }
+
+            if (isPassword && key.Key == ConsoleKey.F2)
+            {
+                showPassword = !showPassword;
+                Console.Write("\r" + new string(' ', Console.WindowWidth - 1) + "\r");
+                Console.Write(prompt + (showPassword ? input : new string('*', input.Length)));
+                continue;
+            }
+
+            if (key.Key == ConsoleKey.Backspace && input.Length > 0)
+            {
+                input = input.Substring(0, input.Length - 1);
+                Console.Write("\r" + new string(' ', Console.WindowWidth - 1) + "\r");
+                Console.Write(prompt);
+                if (isPassword)
+                    Console.Write(showPassword ? input : new string('*', input.Length));
+                else
+                    Console.Write(input);
+            }
+            else if (!char.IsControl(key.KeyChar))
+            {
+                input += key.KeyChar;
+                if (isPassword)
+                    Console.Write(showPassword ? key.KeyChar : '*');
+                else
+                    Console.Write(key.KeyChar);
+            }
+        }
     }
 }

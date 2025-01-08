@@ -6,7 +6,7 @@
     "name": "Rotterdam South Airport",
     "code": "RSZ",
     "type": "Public",
-    "phoneNumber": "+31 10 123 4567",
+    "phoneNumber": "\u002B31 10 123 4567",
     "address": "Driemanssteeweg 107, 3011 WN Rotterdam, Netherlands"
   },
   {
@@ -16,7 +16,7 @@
     "name": "Dublin Airport",
     "code": "DUB",
     "type": "Public",
-    "phoneNumber": "+353 1 814 1111",
+    "phoneNumber": "\u002B353 1 814 1111",
     "address": "Dublin Airport, Co. Dublin, Ireland"
   },
   {
@@ -26,28 +26,28 @@
     "name": "London City Airport",
     "code": "LCY",
     "type": "Public",
-    "phoneNumber": "+44 20 7646 0088",
+    "phoneNumber": "\u002B44 20 7646 0088",
     "address": "Hartmann Rd, Royal Docks, London E16 2PX, United Kingdom"
   },
   {
     "airportId": 4,
     "country": "France",
     "city": "Nice",
-    "name": "Nice Côte d'Azur Airport",
+    "name": "Nice C\u00F4te d\u0027Azur Airport",
     "code": "NCE",
     "type": "Public",
-    "phoneNumber": "+33 820 423 333",
+    "phoneNumber": "\u002B33 820 423 333",
     "address": "Rue Costes et Bellonte, 06206 Nice, France"
   },
   {
     "airportId": 5,
     "country": "Spain",
-    "city": "Málaga",
-    "name": "Málaga–Costa del Sol Airport",
+    "city": "M\u00E1laga",
+    "name": "M\u00E1laga\u2013Costa del Sol Airport",
     "code": "AGP",
     "type": "Public",
-    "phoneNumber": "+34 913 211 000",
-    "address": "Av. del Comandante García Morato, s/n, 29004 Málaga, Spain"
+    "phoneNumber": "\u002B34 913 211 000",
+    "address": "Av. del Comandante Garc\u00EDa Morato, s/n, 29004 M\u00E1laga, Spain"
   },
   {
     "airportId": 6,
@@ -56,7 +56,7 @@
     "name": "Mykonos International Airport",
     "code": "JMK",
     "type": "Public",
-    "phoneNumber": "+30 2289 079100",
+    "phoneNumber": "\u002B30 2289 079100",
     "address": "Mykonos Airport, 846 00 Mykonos, Greece"
   },
   {
@@ -66,7 +66,7 @@
     "name": "Milan Malpensa Airport",
     "code": "MXP",
     "type": "Public",
-    "phoneNumber": "+39 02 232323",
+    "phoneNumber": "\u002B39 02 232323",
     "address": "21010 Ferno Varese, Italy"
   }
 ]

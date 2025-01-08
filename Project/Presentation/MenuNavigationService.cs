@@ -21,6 +21,7 @@
                 case ConsoleKey.Enter:
                     return selectedIndex;
                 case ConsoleKey.Backspace:
+                case ConsoleKey.Escape:
                     return -1;
             }
         }

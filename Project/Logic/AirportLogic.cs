@@ -19,4 +19,26 @@ public class AirportLogic
     {
         return _airports.FirstOrDefault(a => a.AirportID == id);
     }
+
+    public void AddAirport(AirportModel newAirport)
+    {
+        AirportAccess.AddAirport(newAirport);
+        _airports = AirportAccess.LoadAllAirports();
+    }
+
+    public bool UpdateAirport(AirportModel updatedAirport)
+    {
+        var existingAirport = _airports.FirstOrDefault(a => a.AirportID == updatedAirport.AirportID);
+        if (existingAirport == null)
+        {
+            return false;
+        }
+
+        int index = _airports.IndexOf(existingAirport);
+        _airports[index] = updatedAirport;
+
+        AirportAccess.WriteAllAirports(_airports);
+        _airports = AirportAccess.LoadAllAirports();
+        return true;
+    }
 }

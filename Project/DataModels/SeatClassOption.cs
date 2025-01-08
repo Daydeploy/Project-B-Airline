@@ -6,7 +6,7 @@ public class SeatClassOption
     public string SeatClass { get; set; }
 
     [JsonPropertyName("price")] 
-    public double Price { get; set; }
+    public int Price { get; set; }
 
     [JsonPropertyName("seasonalMultiplier")] 
     public SeasonalMultiplier? SeasonalMultiplier { get; set; }
@@ -15,7 +15,7 @@ public class SeatClassOption
     public SeatClassOption() { }
 
     // Constructor for creating new instances
-    public SeatClassOption(string seatClass, double price)
+    public SeatClassOption(string seatClass, int price)
     {
         SeatClass = seatClass;
         Price = price;

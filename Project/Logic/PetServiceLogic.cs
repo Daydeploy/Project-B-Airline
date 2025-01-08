@@ -12,10 +12,16 @@ public class PetServiceLogic
         };
     }
 
-    public void AddPetToBooking(int bookingId, PetModel petDetails)
+    public (bool success, string error) AddPetToBooking(int bookingId, PetModel petDetails)
     {
-        ValidatePetBooking(petDetails);
+        var validationResult = ValidatePetBooking(petDetails);
+        if (!validationResult.success)
+        {
+            return validationResult;
+        }
+
         PetDataAccess.SavePetBooking(petDetails, bookingId);
+        return (true, string.Empty);
     }
 
     public decimal CalculatePetFees(PetModel petDetails)
@@ -28,50 +34,33 @@ public class PetServiceLogic
         return new List<string> { "1A", "1B", "2A" };
     }
 
-    public void ValidatePetBooking(PetModel petDetails)
+    public (bool success, string error) ValidatePetBooking(PetModel petDetails)
     {
-        while (true)
+        if (!_petWeightLimits.ContainsKey(petDetails.Type))
         {
-            if (!_petWeightLimits.ContainsKey(petDetails.Type))
-            {
-                Console.WriteLine("Invalid pet type. Please enter a valid pet type (Dog, Cat, Other):");
-                petDetails.Type = Console.ReadLine();
-                continue;
-            }
-
-            var (maxCabinWeight, maxWeight) = _petWeightLimits[petDetails.Type];
-
-            if (petDetails.Weight > maxWeight)
-            {
-                Console.WriteLine($"Pet is too heavy. Maximum allowed weight is {maxWeight}kg. Please enter a valid weight:");
-                if (double.TryParse(Console.ReadLine(), out var newWeight))
-                {
-                    petDetails.Weight = newWeight;
-                }
-                else
-                {
-                    Console.WriteLine("Invalid input. Please enter a numerical value.");
-                }
-                continue;
-            }
-
-            if (petDetails.Weight > maxCabinWeight)
-            {
-                petDetails.SeatingLocation = "Luggage Room";
-                Console.WriteLine($"Due to weight ({petDetails.Weight}kg), the pet will be transported in the luggage compartment.");
-            }
-            else if (petDetails.Type == "Dog" || petDetails.Type == "Cat")
-            {
-                Console.WriteLine("Would you like the pet to travel in the cabin? (y/n):");
-                string? response = Console.ReadLine()?.ToLower();
-                petDetails.SeatingLocation = response == "y" ? "Seat" : "Luggage Room";
-            }
-            else
-            {
-                petDetails.SeatingLocation = "Luggage Room";
-            }
-
-            break;
+            return (false, $"Invalid pet type. Valid types are: {string.Join(", ", _petWeightLimits.Keys)}");
         }
+
+        var (maxCabinWeight, maxWeight) = _petWeightLimits[petDetails.Type];
+
+        if (petDetails.Weight > maxWeight)
+        {
+            return (false, $"Pet is too heavy. Maximum allowed weight is {maxWeight}kg.");
+        }
+
+        if (petDetails.Weight > maxCabinWeight)
+        {
+            petDetails.SeatingLocation = "Luggage Room";
+        }
+        else if ((petDetails.Type == "Dog" || petDetails.Type == "Cat") && string.IsNullOrEmpty(petDetails.SeatingLocation))
+        {
+            return (false, "Seating location must be specified for cats and dogs under cabin weight limit.");
+        }
+        else if (petDetails.Type == "Other")
+        {
+            petDetails.SeatingLocation = "Luggage Room";
+        }
+
+        return (true, string.Empty);
     }
 }

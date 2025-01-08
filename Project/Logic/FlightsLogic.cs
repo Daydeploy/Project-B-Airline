@@ -16,10 +16,11 @@ public class FlightsLogic
             .ToList();
     }
 
-    public FlightModel GetFlightsById(int flightId)
+    public FlightModel? GetFlightsById(int flightId)
     {
         return AvailableFlights
-            .FirstOrDefault(f => f.FlightId == flightId && DateTime.Parse(f.DepartureTime) >= DateTime.Now);
+            .FirstOrDefault(f => f.FlightId == flightId);
+            // .FirstOrDefault(f => f.FlightId == flightId && DateTime.Parse(f.DepartureTime) >= DateTime.Now);
     }
 
     public List<FlightModel> FilterFlightsByPriceUp(string origin, string destination, string seatClass)
@@ -27,7 +28,8 @@ public class FlightsLogic
         return AvailableFlights
             .Where(f => f.Origin.Equals(origin) && f.Destination.Equals(destination) &&
                         DateTime.Parse(f.DepartureTime) >= DateTime.Now)
-            .OrderBy(f => f.SeatClassOptions.FirstOrDefault(option => option.SeatClass == seatClass)?.Price ?? int.MaxValue)
+            .OrderBy(f =>
+                f.SeatClassOptions.FirstOrDefault(option => option.SeatClass == seatClass)?.Price ?? int.MaxValue)
             .ToList();
     }
 
@@ -57,6 +59,15 @@ public class FlightsLogic
         return AvailableFlights
             .Where(f => f.Origin.Equals(origin) && f.Destination.Equals(destination) &&
                         DateTime.Parse(f.DepartureTime) >= DateTime.Now)
+            .ToList();
+    }
+
+    public List<FlightModel> GetReturnFlights(FlightModel selectedFlight)
+    {
+        return AvailableFlights
+            .Where(f => f.Origin == selectedFlight.Destination &&
+                        f.Destination == selectedFlight.Origin &&
+                        DateTime.Parse(f.DepartureTime) > DateTime.Parse(selectedFlight.ArrivalTime))
             .ToList();
     }
 
@@ -129,5 +140,63 @@ public class FlightsLogic
                         f.Destination.Equals(destination) &&
                         DateTime.Parse(f.DepartureTime).Date == date.Date)
             .ToList();
+    }
+
+    public bool AddFlight(FlightModel newFlight)
+    {
+        if (!IsFlightValid(newFlight))
+            return false;
+
+        int newId = AvailableFlights.Count > 0 ? AvailableFlights.Max(f => f.FlightId) + 1 : 1;
+        newFlight.FlightId = newId;
+
+        AvailableFlights.Add(newFlight);
+        FlightsAccess.WriteAll(AvailableFlights);
+        return true;
+    }
+
+    public bool UpdateFlight(FlightModel updatedFlight)
+    {
+        if (!IsFlightValid(updatedFlight))
+            return false;
+
+        var existingFlight = AvailableFlights.FirstOrDefault(f => f.FlightId == updatedFlight.FlightId);
+        if (existingFlight == null)
+            return false;
+
+        int index = AvailableFlights.IndexOf(existingFlight);
+        AvailableFlights[index] = updatedFlight;
+
+        FlightsAccess.WriteAll(AvailableFlights);
+        return true;
+    }
+
+    public bool DeleteFlight(int flightId)
+    {
+        var flight = AvailableFlights.FirstOrDefault(f => f.FlightId == flightId);
+        if (flight == null)
+            return false;
+
+        AvailableFlights.Remove(flight);
+        FlightsAccess.WriteAll(AvailableFlights);
+        return true;
+    }
+
+    private bool IsFlightValid(FlightModel flight)
+    {
+        if (string.IsNullOrWhiteSpace(flight.Origin) ||
+            string.IsNullOrWhiteSpace(flight.Destination) ||
+            string.IsNullOrWhiteSpace(flight.FlightNumber) ||
+            string.IsNullOrWhiteSpace(flight.DepartureTime) ||
+            string.IsNullOrWhiteSpace(flight.ArrivalTime))
+            return false;
+
+        if (DateTime.Parse(flight.DepartureTime) >= DateTime.Parse(flight.ArrivalTime))
+            return false;
+
+        if (flight.SeatClassOptions == null || !flight.SeatClassOptions.Any())
+            return false;
+
+        return true;
     }
 }

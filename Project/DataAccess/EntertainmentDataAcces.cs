@@ -5,12 +5,16 @@ public class EntertainmentDataAccess
 
     public static List<EntertainmentModel> LoadAll()
     {
-        return _entertainmentAccess.LoadAll();
+        return _entertainmentAccess.LoadAll() ?? new List<EntertainmentModel>();
     }
 
-    public static void WriteAll(List<EntertainmentModel> entertainments)
+    public static bool WriteAll(List<EntertainmentModel> entertainments)
     {
+        if (entertainments == null)
+            return false;
+            
         _entertainmentAccess.WriteAll(entertainments);
+        return true;
     }
 
     public static EntertainmentModel? GetEntertainment(int entertainmentId)

@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.VisualBasic;
 
 static class FlightManagement
-{
+{   
+    private static AccountModel account = UserLogin.UserAccountServiceLogic.CurrentAccount;
     public static void ShowAvailableFlights()
     {
         FlightsLogic flights = new FlightsLogic();
@@ -23,94 +25,121 @@ static class FlightManagement
         }
 
         DisplayFlightsWithActions(flightsList, UserLogin.UserAccountServiceLogic.IsUserLoggedIn());
-        HandleFlightCommands(flightsList, origin, destination);
+        HandleFlightCommands(flightsList, origin, destination, account);
     }
 
     private static string SelectOrigin(FlightsLogic flights)
     {
-        var origins = flights.GetAllOrigins().ToArray();
-        if (!origins.Any())
+        var origins = flights.GetAllOrigins().ToList();
+        if (origins.Count == 0)
         {
             Console.WriteLine("No available origins found.");
             return null;
         }
 
-        Console.WriteLine("Select your starting location:");
-        int originIndex = MenuNavigationService.NavigateMenu(origins, "Available Origins");
+        origins.Add("Back to Main Menu");
 
-        return originIndex != -1 ? origins[originIndex] : null;
+        Console.WriteLine("Select your starting location:");
+        int originIndex = MenuNavigationService.NavigateMenu(origins.ToArray(), "Available Origins");
+
+        if (originIndex == -1 || originIndex == origins.Count - 1)
+        {
+            Console.WriteLine("\nReturning to the main menu...");
+            return null;
+        }
+
+        return origins[originIndex];
     }
+
 
     private static string SelectDestination(FlightsLogic flights, string origin)
     {
-        var destinations = flights.GetDestinationsByOrigin(origin).ToArray();
-        if (!destinations.Any())
+        var destinations = flights.GetDestinationsByOrigin(origin).ToList();
+        if (destinations.Count == 0)
         {
             Console.WriteLine($"No destinations available from {origin}.");
             return null;
         }
 
-        Console.WriteLine($"Available destinations from {origin}:");
-        int destinationIndex = MenuNavigationService.NavigateMenu(destinations, "Available Destinations");
+        destinations.Add("Back to Main Menu");
 
-        return destinationIndex != -1 ? destinations[destinationIndex] : null;
+        Console.WriteLine($"Available destinations from {origin}:");
+        int destinationIndex = MenuNavigationService.NavigateMenu(destinations.ToArray(), "Available Destinations");
+
+        if (destinationIndex == -1 || destinationIndex == destinations.Count - 1)
+        {
+            Console.WriteLine("\nReturning to the main menu...");
+            return null;
+        }
+
+        return destinations[destinationIndex];
     }
+
 
     private static void DisplayFlightsWithActions(List<FlightModel> flightsList, bool allowBooking)
     {
+
+        if (account.EmailAddress == "admin")
+        {   
+            allowBooking = false;
+        }
+        Console.CursorVisible = false;
         FlightDisplay.DisplayFlights(flightsList);
 
         Console.WriteLine("\nCommands:");
         Console.WriteLine("F - Filter flights");
         if (allowBooking)
             Console.WriteLine("B - Book a flight");
-        //todo: zet booking terug
         else
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("B - Book a flight (Login required)");
+            if(account.EmailAddress == "admin")
+            {
+                Console.WriteLine("B - Book a flight (Admin account cannot book flights)");
+            }
+            else
+            {
+                Console.WriteLine("B - Book a flight (Login required)");
+            }
             Console.ResetColor();
         }
 
         Console.WriteLine("ESC - Go back");
     }
 
-    private static void HandleFlightCommands(List<FlightModel> flightsList, string origin, string destination)
+    private static void HandleFlightCommands(List<FlightModel> flightsList, string origin, string destination,
+        AccountModel account)
     {
         while (true)
         {
             var key = Console.ReadKey(intercept: true);
 
-            if (key.Key == ConsoleKey.Escape)
-                return;
-
-            if (key.Key == ConsoleKey.F)
+            switch (key.Key)
             {
-                FilterFlightsByPriceUI(origin, destination);
-                return;
-            }
+                case ConsoleKey.Escape:
+                    Console.WriteLine("\nReturning to the main menu...");
+                    return;
+                case ConsoleKey.F:
+                    FilterFlightsByPriceUI(origin, destination, account);
+                    return;
+                case ConsoleKey.B:
+                    if (UserLogin.UserAccountServiceLogic.IsUserLoggedIn())
+                    {
+                        Console.Clear();
+                        AdvancedBooking(flightsList, account);
+                        return;
+                    }
 
-            if (key.Key == ConsoleKey.B)
-            {
-                if (UserLogin.UserAccountServiceLogic.IsUserLoggedIn())
-                {
-                    Console.Clear();
-                    //  BookFlight(flightsList);
-                }
-                else
-                {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("\nYou must be logged in to book a flight.");
                     Console.ResetColor();
-                }
-
-                return;
+                    continue;
             }
         }
     }
 
 
-    public static void FilterFlightsByPriceUI(string origin, string destination)
+    public static void FilterFlightsByPriceUI(string origin, string destination, AccountModel account)
     {
         FlightsLogic flights = new FlightsLogic();
         string[] filterOptions =
@@ -127,8 +156,11 @@ static class FlightManagement
         while (true)
         {
             int selectedIndex = MenuNavigationService.NavigateMenu(filterOptions, "Filter Flights:");
-            if (selectedIndex == 4)
+            if (selectedIndex == -1 || selectedIndex == 4)
+            {
+                Console.WriteLine("\nReturning to the main menu...");
                 return;
+            }
 
             List<FlightModel> filteredFlights = new List<FlightModel>();
             switch (selectedIndex)
@@ -143,14 +175,14 @@ static class FlightManagement
                     filteredFlights = FilterByPriceRange(flights, origin, destination, seatClassOptions);
                     break;
                 case 3:
-                    //filteredFlights = FilterByDateRange(flights, origin, destination);
+                    filteredFlights = FilterByDateRange(flights, origin, destination);
                     break;
             }
 
             if (filteredFlights.Count != 0)
             {
                 DisplayFlightsWithActions(filteredFlights, UserLogin.UserAccountServiceLogic.IsUserLoggedIn());
-                HandleFlightCommands(filteredFlights, origin, destination);
+                HandleFlightCommands(filteredFlights, origin, destination, account);
             }
             else
             {
@@ -161,10 +193,17 @@ static class FlightManagement
         }
     }
 
+
     private static List<FlightModel> FilterByPriceAscending(FlightsLogic flights, string origin, string destination,
         string[] seatClassOptions)
     {
         int seatClassIndex = MenuNavigationService.NavigateMenu(seatClassOptions, "Seat Class");
+        if (seatClassIndex == -1)
+        {
+            Console.WriteLine("\nReturning to the main menu...");
+            return new List<FlightModel>();
+        }
+
         string seatClass = seatClassOptions[seatClassIndex];
         return flights.FilterFlightsByPriceUp(origin, destination, seatClass).ToList();
     }
@@ -173,14 +212,27 @@ static class FlightManagement
         string[] seatClassOptions)
     {
         int seatClassIndex = MenuNavigationService.NavigateMenu(seatClassOptions, "Seat Class");
+        if (seatClassIndex == -1)
+        {
+            Console.WriteLine("\nReturning to the main menu...");
+            return new List<FlightModel>();
+        }
+
         string seatClass = seatClassOptions[seatClassIndex];
         return flights.FilterFlightsByPriceDown(origin, destination, seatClass).ToList();
     }
+
 
     private static List<FlightModel> FilterByPriceRange(FlightsLogic flights, string origin, string destination,
         string[] seatClassOptions)
     {
         int seatClassIndex = MenuNavigationService.NavigateMenu(seatClassOptions, "Seat Class");
+        if (seatClassIndex == -1)
+        {
+            Console.WriteLine("\nReturning to the main menu...");
+            return new List<FlightModel>();
+        }
+
         string seatClass = seatClassOptions[seatClassIndex];
 
         Console.WriteLine("Enter minimum price:");
@@ -197,12 +249,13 @@ static class FlightManagement
         return new List<FlightModel>();
     }
 
-    // private static List<FlightModel> FilterByDateRange(FlightsLogic flights, string origin, string destination)
-    // {
-    //     var calendarUI = new CalendarUI();
-    //     var (startDate, endDate) = calendarUI.SelectDateRange();
-    //     return flights.FilterByDateRange(origin, destination, startDate, endDate).ToList();
-    // }
+
+    private static List<FlightModel> FilterByDateRange(FlightsLogic flights, string origin, string destination)
+    {
+        var calendarUI = new CalendarUI();
+        var (startDate, endDate) = calendarUI.SelectDateRange();
+        return flights.FilterByDateRange(origin, destination, startDate, endDate).ToList();
+    }
 
     public static void BookAFlight(AccountModel account)
     {
@@ -216,9 +269,16 @@ static class FlightManagement
             return;
         }
 
+        origins.Add("Back to Main Menu");
+
         Console.WriteLine("Select your starting location:");
         int originIndex = MenuNavigationService.NavigateMenu(origins.ToArray(), "Available Origins");
-        if (originIndex == -1) return;
+        if (originIndex == -1 || originIndex == origins.Count - 1)
+        {
+            Console.WriteLine("\nReturning to the main menu...");
+            return;
+        }
+
         string origin = origins[originIndex];
 
         var destinations = flightsLogic.GetDestinationsByOrigin(origin);
@@ -228,16 +288,28 @@ static class FlightManagement
             return;
         }
 
+        destinations.Add("Back to Main Menu");
+
         Console.WriteLine($"Available destinations from {origin}:");
         int destinationIndex = MenuNavigationService.NavigateMenu(destinations.ToArray(), "Available Destinations");
-        if (destinationIndex == -1) return;
+        if (destinationIndex == -1 || destinationIndex == destinations.Count - 1)
+        {
+            Console.WriteLine("\nReturning to the main menu...");
+            return;
+        }
+
         string destination = destinations[destinationIndex];
 
         Console.Clear();
-        string[] tripOptions = { "Yes, it's a round-trip booking", "No, one-way trip only" };
+        string[] tripOptions = { "Yes, it's a round-trip booking", "No, one-way trip only", "Back to Main Menu" };
         int tripChoice = MenuNavigationService.NavigateMenu(tripOptions, "Is this a round-trip booking?");
-        bool isRoundTrip = tripChoice == 0;
+        if (tripChoice == -1 || tripChoice == 2)
+        {
+            Console.WriteLine("\nReturning to the main menu...");
+            return;
+        }
 
+        bool isRoundTrip = tripChoice == 0;
 
         DateTime departureDate = DateTime.Now;
         List<FlightModel> availableFlights;
@@ -266,7 +338,6 @@ static class FlightManagement
             Console.ReadKey();
         }
 
-
         Console.Clear();
         Console.WriteLine("\nAvailable flights:");
         string[] flightOptions = availableFlights
@@ -278,7 +349,7 @@ static class FlightManagement
         int selectedFlightIndex = MenuNavigationService.NavigateMenu(flightOptions, "Select a departure flight:");
         if (selectedFlightIndex == -1)
         {
-            Console.WriteLine("Flight selection cancelled.");
+            Console.WriteLine("\nReturning to the main menu...");
             return;
         }
 
@@ -333,7 +404,7 @@ static class FlightManagement
                     MenuNavigationService.NavigateMenu(returnFlightOptions, "Select a return flight:");
                 if (selectedReturnFlightIndex == -1)
                 {
-                    Console.WriteLine("Return flight selection cancelled.");
+                    Console.WriteLine("\nReturning to the main menu...");
                     return;
                 }
 
@@ -353,112 +424,122 @@ static class FlightManagement
     }
 
 
-    private static void HandlePassengerDetailsAndBooking(AccountModel account, FlightModel departureFlight,
-        FlightModel? returnFlight)
+    private static void AdvancedBooking(List<FlightModel> flightsList, AccountModel account)
     {
-        Console.WriteLine("How many passengers? (1-8):");
-        if (!int.TryParse(Console.ReadLine(), out int passengerCount) || passengerCount <= 0 || passengerCount > 8)
+        FlightsLogic flightsLogic = new FlightsLogic();
+
+        Console.WriteLine("Is this a round-trip booking? (y/n):");
+        bool isRoundTrip = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
+
+        Console.WriteLine("Enter the Flight ID for your departure flight:");
+        if (!int.TryParse(Console.ReadLine(), out int flightId))
         {
-            Console.WriteLine("Invalid number of passengers.");
+            Console.WriteLine("Invalid Flight ID entered.");
             return;
         }
 
+        var selectedFlight = flightsLogic.GetFlightsById(flightId);
+        if (selectedFlight == null)
+        {
+            Console.WriteLine("Flight not found. Please check the Flight ID and try again.");
+            return;
+        }
+
+        FlightModel returnFlight = null;
+
+        if (isRoundTrip)
+        {
+            Console.Clear();
+
+            var returnFlights = flightsLogic.GetReturnFlights(selectedFlight);
+
+            if (returnFlights.Count == 0)
+            {
+                Console.WriteLine("No return flights available. Round-trip booking cannot proceed.");
+                return;
+            }
+
+            Console.WriteLine("Available Return Flights:");
+            DisplayFlightsWithActions(returnFlights, allowBooking: true);
+
+            Console.WriteLine("\nEnter the Flight ID for your return flight:");
+            if (!int.TryParse(Console.ReadLine(), out int returnFlightId))
+            {
+                Console.WriteLine("Invalid Flight ID entered for the return flight.");
+                return;
+            }
+
+            returnFlight = flightsLogic.GetFlightsById(returnFlightId);
+            if (returnFlight == null)
+            {
+                Console.WriteLine("Return flight not found. Please check the Flight ID and try again.");
+                return;
+            }
+        }
+
+        HandlePassengerDetailsAndBooking(account, selectedFlight, returnFlight);
+
+        Console.WriteLine("\nBooking completed. Press any key to return to the menu...");
+        Console.ReadKey();
+    }
+
+
+    private static void HandlePassengerDetailsAndBooking(AccountModel account, FlightModel departureFlight,
+        FlightModel? returnFlight)
+    {
         var seatSelector = new SeatSelectionUI();
+        int availableSeats = seatSelector.GetAvailableSeatsCount(departureFlight.PlaneType, departureFlight.FlightId);
+
+        if (availableSeats == 0)
+        {
+            Console.WriteLine("\nSorry, this flight is fully booked.");
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+            return;
+        }
+
+        AccountsAccess.LoadAll();
+        int passengerCount;
+        bool isValidInput = false;
+
+        do
+        {
+            Console.WriteLine($"\nAvailable seats: {availableSeats}");
+            Console.WriteLine("How many passengers? (1-8):");
+
+            if (!int.TryParse(Console.ReadLine(), out passengerCount) ||
+                passengerCount <= 0 ||
+                passengerCount > 8 ||
+                passengerCount > availableSeats)
+            {
+                if (passengerCount > availableSeats)
+                {
+                    Console.WriteLine($"\nSorry, there are only {availableSeats} seats available on this flight.");
+                }
+                else
+                {
+                    Console.WriteLine("Invalid number of passengers. Please enter a number between 1 and 8.");
+                }
+
+                continue;
+            }
+
+            isValidInput = true;
+        } while (!isValidInput);
+
         var passengerDetails = CollectPassengerDetails(departureFlight, passengerCount, seatSelector);
 
         bool includeInsuranceForDeparture = PromptForInsurance(passengerCount, "departure");
 
-        if (account.PaymentInformation == null || !AccountsLogic.HasCompleteContactInformation(account.FirstName, account.LastName, account.EmailAddress, account.PhoneNumber, account.Address))
-        {
-            if (account.PaymentInformation == null)
-            {
-                Console.WriteLine("\nPayment information is required to complete a booking.");
-                Console.WriteLine("\nWould you like to add payment information now? (Y/N)");
-
-                string response = Console.ReadLine().ToUpper();
-
-                if (response == "Y")
-                {
-                    AccountManagement.HandleManageAccountOption(1, account);
-
-                    var accounts = AccountsAccess.LoadAll();
-                    account = accounts.FirstOrDefault(x => x.Id == account.Id);
-
-                    if (account.PaymentInformation == null)
-                    {
-                        Console.WriteLine("No payment information added, Booking cannot proceed.");
-                        return;
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Booking cancelled due to missing payment information.");
-                    return;
-                }
-            }
-
-            if (!AccountsLogic.HasCompleteContactInformation(account.FirstName, account.LastName, account.EmailAddress, account.PhoneNumber, account.Address))
-            {
-                Console.WriteLine("\nComplete contact information is required to complete a booking.");
-                Console.WriteLine("Please update the following missing details:\n");
-
-                if (string.IsNullOrEmpty(account.FirstName))
-                {
-                    Console.WriteLine("- First Name");
-                }
-                if (string.IsNullOrEmpty(account.LastName))
-                {
-                    Console.WriteLine("- Last Name");
-                }
-                if (string.IsNullOrEmpty(account.EmailAddress))
-                {
-                    Console.WriteLine("- Email Address");
-                }
-                if (string.IsNullOrEmpty(account.PhoneNumber))
-                {
-                    Console.WriteLine("- Phone Number");
-                }
-                if (string.IsNullOrEmpty(account.Address))
-                {
-                    Console.WriteLine("- Address");
-                }
-
-                Console.WriteLine("Would you like to complete your contact information? (Y/N)");
-
-                string response = Console.ReadLine().ToUpper();
-
-                if (response == "Y")
-                {
-                    AccountManagement.HandleManageAccountOption(0, account);
-
-                    var accounts = AccountsAccess.LoadAll();
-                    account = accounts.FirstOrDefault(x => x.Id == account.Id);
-
-                    if (!AccountsLogic.HasCompleteContactInformation(account.FirstName, account.LastName, account.EmailAddress, account.PhoneNumber, account.Address))
-                    {
-                        Console.WriteLine("Contact information not updated completely. Booking cannot proceed.");
-                        return;
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Booking cancelled due to incomplete contact information.");
-                    return;
-                }
-            }
-        }
-        else
-        {
-            CompleteBooking(departureFlight.FlightId, passengerDetails, departureFlight, seatSelector,
-                includeInsuranceForDeparture);
-        }
+        CompleteBooking(departureFlight.FlightId, passengerDetails, departureFlight, seatSelector,
+            includeInsuranceForDeparture);
 
         if (returnFlight != null)
         {
             foreach (var passenger in passengerDetails)
             {
                 Console.WriteLine($"\nSelect a seat for {passenger.Name} on the return flight:");
-                string seatNumber = seatSelector.SelectSeat(returnFlight.PlaneType);
+                string seatNumber = seatSelector.SelectSeat(returnFlight.PlaneType, returnFlight.FlightId);
                 seatSelector.SetSeatOccupied(seatNumber);
 
                 if (passenger.HasPet)
@@ -471,90 +552,8 @@ static class FlightManagement
 
             bool includeInsuranceForReturn = PromptForInsurance(passengerCount, "return");
 
-            if (account.PaymentInformation == null || !AccountsLogic.HasCompleteContactInformation(account.FirstName, account.LastName, account.EmailAddress, account.PhoneNumber, account.Address))
-            {
-                if (account.PaymentInformation == null)
-                {
-                    Console.WriteLine("\nPayment information is required to complete a booking.");
-                    Console.WriteLine("\nWould you like to add payment information now? (Y/N)");
-
-                    string response = Console.ReadLine().ToUpper();
-
-                    if (response == "Y")
-                    {
-                        AccountManagement.HandleManageAccountOption(1, account);
-
-                        var accounts = AccountsAccess.LoadAll();
-                        account = accounts.FirstOrDefault(x => x.Id == account.Id);
-
-                        if (account.PaymentInformation == null)
-                        {
-                            Console.WriteLine("No paymenr information added, Booking cannot proceed.");
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("Booking cancelled due to missing payment information.");
-                        return;
-                    }
-                }
-
-                if (!AccountsLogic.HasCompleteContactInformation(account.FirstName, account.LastName, account.EmailAddress, account.PhoneNumber, account.Address))
-                {
-                    Console.WriteLine("\nComplete contact information is required to complete a booking.");
-                    Console.WriteLine("Please update the following missing details:\n");
-
-                    if (string.IsNullOrEmpty(account.FirstName))
-                    {
-                        Console.WriteLine("- First Name");
-                    }
-                    if (string.IsNullOrEmpty(account.LastName))
-                    {
-                        Console.WriteLine("- Last Name");
-                    }
-                    if (string.IsNullOrEmpty(account.EmailAddress))
-                    {
-                        Console.WriteLine("- Email Address");
-                    }
-                    if (string.IsNullOrEmpty(account.PhoneNumber))
-                    {
-                        Console.WriteLine("- Phone Number");
-                    }
-                    if (string.IsNullOrEmpty(account.Address))
-                    {
-                        Console.WriteLine("- Address");
-                    }
-
-                    Console.WriteLine("Would you like to complete your contact information? (Y/N)");
-
-                    string response = Console.ReadLine().ToUpper();
-
-                    if (response == "Y")
-                    {
-                        AccountManagement.HandleManageAccountOption(0, account);
-
-                        var accounts = AccountsAccess.LoadAll();
-                        account = accounts.FirstOrDefault(x => x.Id == account.Id);
-
-                        if (!AccountsLogic.HasCompleteContactInformation(account.FirstName, account.LastName, account.EmailAddress, account.PhoneNumber, account.Address))
-                        {
-                            Console.WriteLine("Contact information not updated completely. Booking cannot proceed.");
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("Booking cancelled due to incomplete contact information.");
-                        return;
-                    }
-                }
-            }
-            else
-            {
-                CompleteBooking(returnFlight.FlightId, passengerDetails, returnFlight, seatSelector,
-                    includeInsuranceForReturn);
-            }
+            CompleteBooking(returnFlight.FlightId, passengerDetails, returnFlight, seatSelector,
+                includeInsuranceForReturn);
         }
     }
 
@@ -573,37 +572,88 @@ static class FlightManagement
         return response == "y";
     }
 
+    private static readonly string[] petTypes = { "Dog", "Cat", "Bird", "Rabbit", "Hamster" };
+
+    private static readonly Dictionary<string, double> maxWeights = new Dictionary<string, double>
+    {
+        { "Dog", 32.0 },
+        { "Cat", 15.0 },
+        { "Bird", 2.0 },
+        { "Rabbit", 8.0 },
+        { "Hamster", 1.0 }
+    };
+
     private static List<PassengerModel> CollectPassengerDetails(FlightModel selectedFlight, int passengerCount,
         SeatSelectionUI seatSelector)
     {
         List<PassengerModel> passengerDetails = new List<PassengerModel>();
-        string[] petTypes = { "Dog", "Cat", "Bird", "Rabbit", "Hamster" };
-        var maxWeights = new Dictionary<string, double>
+        string[] yesNoOptions = { "Yes", "No" };
+        const int MAX_BAGGAGE = 3;
+        const int BAGGAGE_PRICE = 30;
+
+        try
         {
-            { "Dog", 32.0 },
-            { "Cat", 15.0 },
-            { "Bird", 2.0 },
-            { "Rabbit", 8.0 },
-            { "Hamster", 1.0 }
-        };
+            seatSelector.ClearTemporarySeats();
 
-        for (int i = 0; i < passengerCount; i++)
-        {
-            Console.Clear();
-            Console.WriteLine($"Passenger {i + 1} Details:");
-            Console.WriteLine("Enter passenger name:");
-            string name = Console.ReadLine() ?? string.Empty;
-
-            Console.WriteLine("Does this passenger have checked baggage? (y/n):");
-            bool hasCheckedBaggage = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
-
-            string specialLuggage = "";
-
-            if (hasCheckedBaggage)
+            for (int i = 0; i < passengerCount; i++)
             {
-                Console.WriteLine("Do you have special luggage? (y/n):");
-                bool hasSpecialLuggage = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
+                Console.Clear();
+                Console.WriteLine($"Passenger {i + 1} Details:");
+                Console.WriteLine("Enter passenger name:");
+                string name = Console.ReadLine();
+                while (!AccountsLogic.IsValidName(name))
+                {
+                    Console.WriteLine(
+                        "Name must be between 2 and 20 characters long, start with a capital letter, and cannot contain numbers.");
+                    Console.WriteLine("Enter passenger name: ");
+                    name = Console.ReadLine();
+                }
 
+                int baggageChoice =
+                    MenuNavigationService.NavigateMenu(yesNoOptions, "Does this passenger have checked baggage?");
+                if (baggageChoice == -1)
+                {
+                    Console.WriteLine("\nReturning to the main menu...");
+                    return null;
+                }
+
+                bool hasCheckedBaggage = baggageChoice == 0;
+
+                int numberOfBaggage = 0;
+                if (hasCheckedBaggage)
+                {
+                    bool validInput = false;
+                    do
+                    {
+                        Console.WriteLine($"\nHow many pieces of baggage? (1-{MAX_BAGGAGE})");
+                        Console.WriteLine($"Price per baggage: {BAGGAGE_PRICE} EUR");
+                        if (int.TryParse(Console.ReadLine(), out numberOfBaggage) &&
+                            numberOfBaggage > 0 &&
+                            numberOfBaggage <= MAX_BAGGAGE)
+                        {
+                            validInput = true;
+                            Console.WriteLine($"\nTotal baggage cost: {numberOfBaggage * BAGGAGE_PRICE} EUR");
+                            Console.WriteLine("Press any key to continue...");
+                            Console.ReadKey();
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Please enter a number between 1 and {MAX_BAGGAGE}");
+                        }
+                    } while (!validInput);
+                }
+
+                int specialLuggageChoice =
+                    MenuNavigationService.NavigateMenu(yesNoOptions, "Do you have special luggage?");
+                if (specialLuggageChoice == -1)
+                {
+                    Console.WriteLine("\nReturning to the main menu...");
+                    return null;
+                }
+
+                bool hasSpecialLuggage = specialLuggageChoice == 0;
+
+                string specialLuggage = "";
                 if (hasSpecialLuggage)
                 {
                     Console.WriteLine("What special luggage do you have? (e.g. Ski equipment, Musical instrument):");
@@ -614,96 +664,148 @@ static class FlightManagement
                     Console.WriteLine("Press any key to continue...");
                     Console.ReadKey();
                 }
+
+                int petChoice = MenuNavigationService.NavigateMenu(yesNoOptions, "Does this passenger have any pets?");
+                if (petChoice == -1)
+                {
+                    Console.WriteLine("\nReturning to the main menu...");
+                    return null;
+                }
+
+                bool hasPet = petChoice == 0;
+
+                List<PetModel> petDetails = null;
+                if (hasPet)
+                {
+                    petDetails = SelectPetDetails(petTypes, maxWeights);
+                    if (petDetails.Any(p => p.StorageLocation == "Cabin"))
+                    {
+                        Console.WriteLine("Note: You will be assigned a suitable seat for traveling with a pet.");
+                    }
+                }
+
+                var passenger = new PassengerModel(
+                    name,
+                    null,
+                    hasCheckedBaggage,
+                    hasPet,
+                    petDetails,
+                    specialLuggage
+                )
+                {
+                    NumberOfBaggage = numberOfBaggage
+                };
+
+                Console.WriteLine("\nSelect a seat for the passenger:");
+                string seatNumber = seatSelector.SelectSeat(selectedFlight.PlaneType, selectedFlight.FlightId);
+                if (seatNumber == null)
+                {
+                    Console.WriteLine("\nSeat selection cancelled. Returning to the main menu...");
+                    return null;
+                }
+
+                seatSelector.SetSeatOccupied(seatNumber, name);
+                if (hasPet && petDetails.Any(p => p.StorageLocation == "Cabin"))
+                {
+                    seatSelector.SetPetSeat(seatNumber);
+                }
+
+                passenger.SeatNumber = seatNumber;
+                passengerDetails.Add(passenger);
             }
 
-            Console.WriteLine("Does this passenger have a pet? (y/n):");
-            bool hasPet = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
-
-            PetModel petDetails = null;
-            if (hasPet)
-            {
-                petDetails = SelectPetDetails(petTypes, maxWeights);
-            }
-
-            // In FlightManagement.cs, add some debug logging after passenger creation:
-            var passenger = new PassengerModel(name, null, hasCheckedBaggage, hasPet, petDetails, specialLuggage);
-            Console.WriteLine($"DEBUG: Special luggage set to: {passenger.SpecialLuggage}"); // Verify value is set\
-
-            Console.WriteLine("\nSelect a seat for the passenger:");
-            string seatNumber = seatSelector.SelectSeat(selectedFlight.PlaneType);
-            seatSelector.SetSeatOccupied(seatNumber);
-
-            if (hasPet)
-            {
-                seatSelector.SetPetSeat(seatNumber);
-            }
-
-            passenger.SeatNumber = seatNumber;
-            passengerDetails.Add(passenger);
+            seatSelector.CommitTemporarySeats();
+            return passengerDetails;
         }
-
-        return passengerDetails;
+        catch (Exception)
+        {
+            seatSelector.ClearTemporarySeats();
+            throw;
+        }
     }
 
-    private static PetModel SelectPetDetails(string[] petTypes, Dictionary<string, double> maxWeights)
+
+    private static List<PetModel> SelectPetDetails(string[] petTypes, Dictionary<string, double> maxWeights)
     {
-        int selectedIndex = 0;
-        ConsoleKey key;
+        List<PetModel> pets = new List<PetModel>();
+        int maxPets = 3;
+        bool cabinPetSelected = false;
 
-        do
+        Console.WriteLine($"\nYou can bring up to {maxPets} pets (one suitable pet in cabin, others in storage)");
+        Console.WriteLine("How many pets would you like to bring? (1-3):");
+
+        int petCount;
+        while (!int.TryParse(Console.ReadLine(), out petCount) || petCount < 1 || petCount > maxPets)
         {
-            Console.Clear();
-            Console.WriteLine("Select pet type:");
-            for (int i = 0; i < petTypes.Length; i++)
-            {
-                if (i == selectedIndex)
-                {
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.Write("> ");
-                }
-                else
-                {
-                    Console.Write("  ");
-                }
+            Console.WriteLine($"Please enter a number between 1 and {maxPets}:");
+        }
 
-                Console.WriteLine(petTypes[i]);
-                Console.ResetColor();
+        for (int i = 0; i < petCount; i++)
+        {
+            Console.WriteLine($"\nPet {i + 1} Details:");
+            int selectedIndex = MenuNavigationService.NavigateMenu(petTypes, "Select pet type:");
+            if (selectedIndex == -1)
+            {
+                Console.WriteLine("\nReturning to the main menu...");
+                return null;
             }
 
-            key = Console.ReadKey(true).Key;
-            if (key == ConsoleKey.UpArrow && selectedIndex > 0) selectedIndex--;
-            if (key == ConsoleKey.DownArrow && selectedIndex < petTypes.Length - 1) selectedIndex++;
-        } while (key != ConsoleKey.Enter);
+            string selectedPetType = petTypes[selectedIndex];
+            double maxWeight = maxWeights[selectedPetType];
 
-        string selectedPetType = petTypes[selectedIndex];
-        double maxWeight = maxWeights[selectedPetType];
+            Console.WriteLine($"\nEnter {selectedPetType}'s weight in kg (max {maxWeight}kg):");
+            double weight;
+            while (!double.TryParse(Console.ReadLine(), out weight) || weight <= 0 || weight > maxWeight)
+            {
+                Console.WriteLine($"Please enter a valid weight (0-{maxWeight}kg):");
+            }
 
-        Console.WriteLine($"\nEnter {selectedPetType}'s weight in kg (max {maxWeight}kg):");
-        double weight;
-        while (!double.TryParse(Console.ReadLine(), out weight) || weight <= 0 || weight > 100)
-        {
-            Console.WriteLine("Please enter a valid weight (0-100kg):");
+            string storageLocation = "Storage";
+
+            if (!cabinPetSelected && weight <= maxWeight / 2)
+            {
+                string[] locationOptions = { "Cabin", "Storage" };
+                int locationChoice = MenuNavigationService.NavigateMenu(locationOptions,
+                    $"This {selectedPetType} is eligible for cabin transport. Select location:");
+                if (locationChoice == -1)
+                {
+                    Console.WriteLine("\nReturning to the main menu...");
+                    return null;
+                }
+
+                if (locationChoice == 0)
+                {
+                    storageLocation = "Cabin";
+                    cabinPetSelected = true;
+                }
+            }
+            else
+            {
+                if (cabinPetSelected)
+                {
+                    Console.WriteLine(
+                        "Another pet is already assigned to the cabin. This pet will be placed in storage.");
+                }
+                else if (weight > maxWeight / 2)
+                {
+                    Console.WriteLine($"Due to weight restrictions, this {selectedPetType} must be placed in storage.");
+                }
+            }
+
+            var pet = new PetModel
+            {
+                Type = selectedPetType,
+                Weight = weight,
+                StorageLocation = storageLocation
+            };
+
+            pets.Add(pet);
+            Console.WriteLine($"{selectedPetType} will be transported in: {storageLocation}");
         }
 
-        string storageLocation = weight > maxWeight / 2 ? "Cargo" : "Storage";
-        if (weight > maxWeight)
-        {
-            Console.WriteLine($"\nWarning: Pet exceeds maximum weight for {selectedPetType}.");
-            Console.WriteLine("Pet must be transported in cargo area.");
-            storageLocation = "Cargo";
-        }
-        else
-        {
-            Console.WriteLine($"\nPet will be transported in {storageLocation}.");
-        }
-
-        return new PetModel
-        {
-            Type = selectedPetType,
-            Weight = weight,
-            StorageLocation = storageLocation
-        };
+        return pets;
     }
+
 
     private static void CompleteBooking(
         int departureFlightId,
@@ -714,126 +816,196 @@ static class FlightManagement
         FlightModel? returnFlight = null,
         int? returnFlightId = null)
     {
-        try
+        double totalBaggageCost = 0;
+        double totalBasePrice = 0;
+        const int BAGGAGE_PRICE = 30;
+
+        BookingModel booking = BookingLogic.CreateBooking(UserLogin.UserAccountServiceLogic.CurrentUserId,
+            departureFlightId,
+            passengerDetails,
+            new List<PetModel>());
+
+        if (booking == null)
         {
-            double totalBaggageCost = 0;
-            double totalBasePrice = 0;
+            Console.WriteLine("Error: Unable to create booking. Please try again.");
+            return;
+        }
 
-            BookingModel booking = BookingLogic.CreateBooking(UserLogin.UserAccountServiceLogic.CurrentUserId,
-                departureFlightId,
-                passengerDetails, new List<PetModel>());
+        totalBasePrice = booking.TotalPrice;
 
-            totalBasePrice = booking.TotalPrice;
+        Console.WriteLine("\nFlight booked successfully!\n");
+        Console.WriteLine($"Booking ID: {booking.BookingId}");
+        Console.WriteLine($"Flight: {departureFlight.Origin} to {departureFlight.Destination}");
+        Console.WriteLine($"Departure: {DateTime.Parse(departureFlight.DepartureTime):HH:mm dd MMM yyyy}");
 
-            Console.WriteLine("\nFlight booked successfully!\n");
-            Console.WriteLine($"Booking ID: {booking.BookingId}");
-            Console.WriteLine($"Flight: {departureFlight.Origin} to {departureFlight.Destination}");
-            Console.WriteLine($"Departure: {DateTime.Parse(departureFlight.DepartureTime):HH:mm dd MMM yyyy}");
+        foreach (var passenger in booking.Passengers)
+        {
+            Console.WriteLine($"\nPassenger: {passenger.Name}");
+            Console.WriteLine(
+                $"Seat: {passenger.SeatNumber} ({seatSelector.GetSeatClass(passenger.SeatNumber)} Class)");
 
-            // Shop items selection
-            for (int i = 0; i < booking.Passengers.Count; i++)
+            if (passenger.HasCheckedBaggage)
             {
-                var passenger = booking.Passengers[i];
-                Console.WriteLine($"\nPassenger: {passenger.Name}");
-                Console.WriteLine("Would you like to purchase items from our shop? (y/n):");
-                bool wantsItem = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
-
-                if (wantsItem)
-                {
-                    var shopUI = new ShopUI();
-                    var purchasedItems = shopUI.DisplaySmallItemsShop(booking.BookingId, i);
-                    foreach (var item in purchasedItems)
-                    {
-                        passenger.ShopItems.Add(item);
-                    }
-
-                    booking.TotalPrice += (int)purchasedItems.Sum(item => item.Price);
-                }
-
-                if (passenger.HasCheckedBaggage)
-                {
-                    totalBaggageCost += 30; // Standard baggage fee
-                }
-            }
-
-            // Update booking with new total price
-            var bookings = BookingAccess.LoadAll();
-            var bookingToUpdate = bookings.FirstOrDefault(b => b.BookingId == booking.BookingId);
-            if (bookingToUpdate != null)
-            {
-                bookingToUpdate.TotalPrice = booking.TotalPrice;
-                BookingAccess.WriteAll(bookings);
-            }
-
-            // Display final details
-            Console.WriteLine("\nPassengers:");
-            foreach (var passenger in booking.Passengers)
-            {
-                Console.WriteLine($"\nName: {passenger.Name}");
+                double passengerBaggageCost = passenger.NumberOfBaggage * BAGGAGE_PRICE;
+                totalBaggageCost += passengerBaggageCost;
                 Console.WriteLine(
-                    $"Seat: {passenger.SeatNumber} ({seatSelector.GetSeatClass(passenger.SeatNumber)} Class)");
-                Console.WriteLine($"Checked Baggage: {(passenger.HasCheckedBaggage ? "Yes" : "No")}");
-                Console.WriteLine($"Pet: {(passenger.HasPet ? "Yes" : "No")}");
-                if (passenger.HasPet && passenger.PetDetails != null)
-                {
-                    Console.WriteLine($"Pet Details: {passenger.PetDetails.Type} ({passenger.PetDetails.Weight}kg)");
-                }
+                    $"Checked Baggage: {passenger.NumberOfBaggage} piece(s) ({passengerBaggageCost:F2} EUR)");
+            }
+            else
+            {
+                Console.WriteLine("No Checked Baggage");
+            }
 
-                if (passenger.ShopItems.Any())
+            if (!string.IsNullOrEmpty(passenger.SpecialLuggage))
+            {
+                Console.WriteLine($"Special Luggage: {passenger.SpecialLuggage}");
+            }
+
+            if (passenger.HasPet && passenger.PetDetails != null)
+            {
+                foreach (var pet in passenger.PetDetails)
                 {
-                    Console.WriteLine("Shop Items:");
-                    foreach (var item in passenger.ShopItems)
+                    Console.WriteLine($"Pet: {pet.Type} ({pet.Weight}kg) - {pet.StorageLocation}");
+                    int petFee = pet.StorageLocation == "Cabin" ? 50 : 30;
+                    booking.TotalPrice += petFee;
+                    totalBaggageCost += petFee;
+                }
+            }
+
+            Console.WriteLine("Would you like to purchase items from our shop? (y/n):");
+            bool wantsItem = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
+
+            if (wantsItem)
+            {
+                var shopUI = new ShopUI();
+                var purchasedItems =
+                    shopUI.DisplaySmallItemsShop(booking.BookingId, booking.Passengers.IndexOf(passenger));
+                passenger.ShopItems.AddRange(purchasedItems);
+                booking.TotalPrice += (int)purchasedItems.Sum(item => item.Price);
+
+                if (purchasedItems.Any())
+                {
+                    Console.WriteLine("\nPurchased Items:");
+                    foreach (var item in purchasedItems)
                     {
                         Console.WriteLine($"- {item.Name} ({item.Price:F2} EUR)");
                     }
                 }
             }
-
-            // Calculate and display final price
-            int earnedMiles = MilesLogic.CalculateMilesFromBooking(UserLogin.UserAccountServiceLogic.CurrentUserId);
-            Console.WriteLine($"\nMiles Earned: {earnedMiles}");
-            booking.TotalPrice = MilesLogic.BasicPointsRedemption(UserLogin.UserAccountServiceLogic.CurrentUserId,
-                booking.TotalPrice, booking.BookingId);
-            if (totalBaggageCost > 0)
-            {
-                Console.WriteLine($"  Baggage Cost: {totalBaggageCost:F2} EUR");
-            }
-
-            if (includeInsurance)
-            {
-                double insuranceCost = passengerDetails.Count * 10.0;
-                totalBasePrice += insuranceCost;
-                Console.WriteLine($"  Cancellation Insurance: {insuranceCost:F2} EUR");
-            }
-
-            double finalTotalPrice = totalBasePrice + totalBaggageCost;
-            Console.WriteLine($"  Final Total Price: {finalTotalPrice:F2} EUR\n");
-
-            int roundedTotalPrice = (int)Math.Round(finalTotalPrice);
-
-            Console.WriteLine("------------------------------------------------------------");
-            Console.WriteLine("Rewards Summary:");
-            Console.WriteLine("------------------------------------------------------------");
-
-            int milesEarned = MilesLogic.CalculateMilesFromBooking(UserLogin.UserAccountServiceLogic.CurrentUserId);
-            Console.WriteLine($"  Miles Earned: {milesEarned}");
-
-            double discountedPrice = MilesLogic.BasicPointsRedemption(
-                UserLogin.UserAccountServiceLogic.CurrentUserId,
-                roundedTotalPrice,
-                booking.BookingId
-            );
-
-            Console.WriteLine($"  Discounted Total Price: {discountedPrice:F2} EUR\n");
-
-            Console.WriteLine("------------------------------------------------------------");
-            Console.WriteLine("Thank you for booking with us!");
-            Console.WriteLine("------------------------------------------------------------");
         }
-        catch (Exception ex)
+
+        // Update booking with new total price
+        var bookings = BookingAccess.LoadAll();
+        var bookingToUpdate = bookings.FirstOrDefault(b => b.BookingId == booking.BookingId);
+        if (bookingToUpdate != null)
         {
-            Console.WriteLine($"Error creating booking: {ex.Message}");
+            bookingToUpdate.TotalPrice = booking.TotalPrice;
+            BookingAccess.WriteAll(bookings);
         }
+
+        // Display Price Summary
+        Console.WriteLine("\nPrice Summary:");
+        Console.WriteLine(new string('-', 40));
+
+        if (totalBaggageCost > 0)
+        {
+            Console.WriteLine($"Base Price: {totalBasePrice - totalBaggageCost:F2} EUR");
+            Console.WriteLine($"Total Baggage Cost: {totalBaggageCost:F2} EUR");
+        }
+
+        if (includeInsurance)
+        {
+            double insuranceCost = passengerDetails.Count * 10.0;
+            totalBasePrice += insuranceCost;
+            Console.WriteLine($"Cancellation Insurance: {insuranceCost:F2} EUR");
+        }
+
+        Console.WriteLine(new string('-', 40));
+        Console.WriteLine($"Final Total Price: {totalBasePrice:F2} EUR\n");
+
+        int roundedTotalPrice = (int)Math.Round(totalBasePrice);
+
+        var accounts = AccountsAccess.LoadAll();
+        var currentAccount = accounts.FirstOrDefault(a => a.Id == UserLogin.UserAccountServiceLogic.CurrentUserId);
+
+        if (currentAccount != null && currentAccount.Miles.Count > 0)
+        {
+            var currentMiles = currentAccount.Miles[0];
+            Console.WriteLine("\nMiles Information:");
+            Console.WriteLine($"Current Miles Balance: {currentMiles.Points}");
+            Console.WriteLine($"Current Tier: {currentMiles.Level}");
+
+            var discountPercentage = 0;
+
+            if (currentMiles.Level == "Platinum")
+            {
+                discountPercentage = 20;
+            }
+            if (currentMiles.Level == "Gold")
+            {
+                discountPercentage = 15;
+            }
+            if (currentMiles.Level == "Silver")
+            {
+                discountPercentage = 10;
+            }
+            if (currentMiles.Level == "Bronze")
+            {
+                discountPercentage = 5;
+            }
+
+            Console.WriteLine($"\nYou can redeem 50,000 miles for a {discountPercentage}% discount!");
+            Console.WriteLine("Would you like to use your miles for a discount? (y/n):");
+
+            bool usePoints = false;
+
+            string? userInput = Console.ReadLine().ToLower();
+
+            if (userInput != null)
+            {
+                if (userInput == "y")
+                {
+                    usePoints = true;
+                }
+            }
+
+            if (currentMiles.Points >= 50000)
+            {
+                if (usePoints)
+                {
+                    var (discountedPrice, discountSuccess) = MilesLogic.BasicPointsRedemption(
+                        UserLogin.UserAccountServiceLogic.CurrentUserId,
+                        roundedTotalPrice,
+                        booking.BookingId
+                    );
+                    if (discountSuccess)
+                    {
+                        totalBasePrice = discountedPrice;
+                        Console.WriteLine($"\nUpdated Total Price after discount: {discountedPrice} EUR");
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine($"\nYou do not have enough points.\n");
+            }
+
+        }
+
+        Console.WriteLine("------------------------------------------------------------");
+        Console.WriteLine("Rewards Summary:");
+        Console.WriteLine("------------------------------------------------------------");
+
+        var (milesEarned, milesEarnedSuccess) =
+            MilesLogic.CalculateMilesFromBooking(UserLogin.UserAccountServiceLogic.CurrentUserId);
+        if (milesEarnedSuccess)
+        {
+            Console.WriteLine($"\n  Miles Earned: {milesEarned}");
+        }
+
+        Console.WriteLine("------------------------------------------------------------");
+        Console.WriteLine("Thank you for booking with us!");
+        Console.WriteLine("------------------------------------------------------------");
     }
 
     public static void ViewBookedFlights(int userId)
@@ -871,7 +1043,7 @@ static class FlightManagement
                 }
 
                 FlightDisplay.DisplayBookingDetails(booking, flight);
-                FlightDisplay.DisplayPassengerDetails(booking.Passengers);
+                FlightDisplay.DisplayPassengerDetails(booking.Passengers, booking);
                 Console.WriteLine(new string('─', Console.WindowWidth - 1));
             }
 
@@ -897,102 +1069,177 @@ static class FlightManagement
 
     public static void CheckInForFlight()
     {
-        Console.WriteLine("Enter the Flight ID to check in:");
-        if (int.TryParse(Console.ReadLine(), out int flightId))
+        var account = UserLogin.UserAccountServiceLogic.CurrentAccount;
+
+        var bookings = BookingLogic.GetAvailableCheckInBookings(account.Id);
+
+        if (bookings.Count == 0)
         {
-            bool success = UserLogin.UserAccountServiceLogic.CheckIn(flightId);
-            Console.WriteLine(
-                success ? "Check-in successful." : "Check-in failed. Please try again or contact support.");
+            Console.WriteLine("You have no upcoming flights available for check-in.");
+            Console.WriteLine("\nPress any key to continue...");
+            Console.ReadKey();
+            return;
         }
-        else
+
+        var flightsLogic = new FlightsLogic();
+        var flightOptions = new List<string>();
+
+        foreach (var booking in bookings)
         {
-            Console.WriteLine("Invalid Flight ID.");
+            var flight = flightsLogic.GetFlightsById(booking.FlightId);
+            if (flight != null)
+            {
+                string flightInfo = $"Flight {flight.FlightNumber}: {flight.Origin} → {flight.Destination}\n" +
+                                    $"Departure: {DateTime.Parse(flight.DepartureTime):dd MMM yyyy HH:mm}\n" +
+                                    $"Booking ID: {booking.BookingId}\n";
+                flightOptions.Add(flightInfo);
+            }
+        }
+
+        flightOptions.Add("Back to Main Menu");
+
+        while (true)
+        {
+            Console.Clear();
+            int selectedIndex =
+                MenuNavigationService.NavigateMenu(flightOptions.ToArray(), "Select Flight for Check-in");
+
+            if (selectedIndex == flightOptions.Count - 1 || selectedIndex == -1)
+            {
+                return;
+            }
+
+            var selectedBooking = bookings[selectedIndex];
+            var selectedFlight = flightsLogic.GetFlightsById(selectedBooking.FlightId);
+
+            if (selectedFlight != null)
+            {
+                Console.Clear();
+                Console.WriteLine($"Checking in for flight {selectedFlight.FlightNumber}");
+                Console.WriteLine($"From: {selectedFlight.Origin} To: {selectedFlight.Destination}");
+                Console.WriteLine($"Departure: {DateTime.Parse(selectedFlight.DepartureTime):dd MMM yyyy HH:mm}");
+                Console.WriteLine("\nPassengers:");
+
+                foreach (var passenger in selectedBooking.Passengers)
+                {
+                    Console.WriteLine($"- {passenger.Name} (Seat: {passenger.SeatNumber})");
+                }
+
+                Console.WriteLine("\nConfirm check-in? (Y/N):");
+                var key = Console.ReadKey(true);
+                if (key.Key == ConsoleKey.Y)
+                {
+                    if (BookingLogic.CheckInBooking(selectedBooking.BookingId))
+                    {
+                        UserLogin.UserAccountServiceLogic.CheckIn(selectedFlight.FlightId);
+                        Console.WriteLine("\nCheck-in successful!");
+                        Console.WriteLine("Your boarding passes have been generated.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nCheck-in failed. Please try again or contact support.");
+                    }
+
+                    Console.WriteLine("\nPress any key to continue...");
+                    Console.ReadKey();
+                    return;
+                }
+            }
         }
     }
 
     public static void BookPrivateJet(int userId)
     {
         var user = userId;
-        string jetType = "";
-        int maxPassengers = 0;
-        Console.Clear();
-        Console.WriteLine(
-            "We have two private jets. A Bombardier Learjet 75 with \x1B[4m6 seats\x1B[0m and a Bombardier Global 8280 with \x1B[4m8 seats\x1B[0m.");
-        Console.WriteLine("Which jet would you like to book? (1/2)");
-        if (int.TryParse(Console.ReadLine(), out int choice))
+        string[] jetOptions =
         {
-            if (choice == 1)
-            {
-                jetType = "Bombardier Learjet 75";
-                maxPassengers = 6;
-            }
-            else if (choice == 2)
-            {
-                jetType = "Bombardier Global 8280";
-                maxPassengers = 8;
-            }
-            else
-            {
-                Console.WriteLine("Invalid choice.");
-                return;
-            }
+            "Bombardier Learjet 75 (6 seats)",
+            "Bombardier Global 8280 (8 seats)",
+            "Back to Main Menu"
+        };
 
-            Console.WriteLine($"\nYou have selected the {jetType}.");
-            Console.WriteLine($"How many passengers? (1-{maxPassengers}):");
+        Console.Clear();
+        int jetChoice = MenuNavigationService.NavigateMenu(jetOptions, "Select Private Jet");
 
-            if (!int.TryParse(Console.ReadLine(), out int passengerCount) ||
-                passengerCount <= 0 ||
-                passengerCount > maxPassengers)
-            {
-                Console.WriteLine("Invalid number of passengers.");
-                return;
-            }
+        if (jetChoice == 2 || jetChoice == -1)
+        {
+            return;
+        }
 
-            List<PassengerModel> passengers = new List<PassengerModel>();
-            for (int i = 0; i < passengerCount; i++)
-            {
-                Console.Clear();
-                Console.WriteLine($"Passenger {i + 1} Details:");
-                Console.WriteLine("Enter passenger name:");
-                string name = Console.ReadLine();
-                if (name == null)
-                {
-                    name = string.Empty;
-                }
+        string jetType;
+        int maxPassengers;
 
-                var passenger = new PassengerModel(name, $"PJ{i + 1}", false);
-                passengers.Add(passenger);
-            }
-
-            try
-            {
-                BookingModel booking = BookingLogic.CreateBooking( // kan nog geen special items kopen of entertainment
-                    user,
-                    0, // speciale flightID for private jets
-                    passengers,
-                    new List<PetModel>(), // geen pets
-                    true,
-                    jetType
-                );
-
-                Console.WriteLine("\nPrivate jet booking completed successfully!");
-                Console.WriteLine($"Booking ID: {booking.BookingId}");
-                Console.WriteLine($"Aircraft: {booking.PlaneType}");
-                Console.WriteLine($"Total Price: {booking.TotalPrice:C}");
-                Console.WriteLine("\nPassenger Details:");
-                foreach (var passenger in passengers)
-                {
-                    Console.WriteLine($"- {passenger.Name} (Seat: {passenger.SeatNumber})");
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error creating booking: {ex.Message}");
-            }
+        if (jetChoice == 0)
+        {
+            jetType = "Bombardier Learjet 75";
+            maxPassengers = 6;
         }
         else
         {
-            Console.WriteLine("Invalid choice.");
+            jetType = "Bombardier Global 8280";
+            maxPassengers = 8;
+        }
+
+        Console.Clear();
+        Console.WriteLine($"Selected jet: {jetType}");
+        Console.WriteLine($"\nHow many passengers? (1-{maxPassengers}):");
+
+        int passengerCount;
+        while (!int.TryParse(Console.ReadLine(), out passengerCount) ||
+               passengerCount < 1 ||
+               passengerCount > maxPassengers)
+        {
+            Console.WriteLine($"Please enter a valid number between 1 and {maxPassengers}:");
+        }
+
+        // Collect passenger details
+        List<PassengerModel> passengers = new List<PassengerModel>();
+        for (int i = 0; i < passengerCount; i++)
+        {
+            Console.Clear();
+            Console.WriteLine($"Passenger {i + 1} Details:");
+            Console.WriteLine("Enter passenger name:");
+            string name = Console.ReadLine();
+            while (!AccountsLogic.IsValidName(name))
+            {
+                Console.WriteLine(
+                    "Name must be between 2 and 20 characters long, start with a capital letter, and cannot contain numbers.");
+                Console.WriteLine("Enter passenger name: ");
+                name = Console.ReadLine();
+            }
+
+            var passenger = new PassengerModel(name, $"PJ{i + 1}", false);
+            passengers.Add(passenger);
+        }
+
+        // Create booking
+        BookingModel booking = BookingLogic.CreateBooking(
+            user,
+            0, // special flightID for private jets
+            passengers,
+            new List<PetModel>(), // no pets
+            true,
+            jetType
+        );
+
+        if (booking == null)
+        {
+            Console.WriteLine("\nError: Unable to create private jet booking. Please try again.");
+            Console.WriteLine("\nPress any key to continue...");
+            Console.ReadKey();
+            return;
+        }
+
+        // Display booking confirmation
+        Console.Clear();
+        Console.WriteLine("\nPrivate jet booking completed successfully!");
+        Console.WriteLine($"Booking ID: {booking.BookingId}");
+        Console.WriteLine($"Aircraft: {booking.PlaneType}");
+        Console.WriteLine($"Total Price: {booking.TotalPrice:C}");
+        Console.WriteLine("\nPassenger Details:");
+        foreach (var passenger in passengers)
+        {
+            Console.WriteLine($"- {passenger.Name} (Seat: {passenger.SeatNumber})");
         }
 
         Console.WriteLine("\nPress any key to continue...");
