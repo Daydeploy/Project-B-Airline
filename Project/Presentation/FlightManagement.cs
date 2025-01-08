@@ -588,9 +588,7 @@ static class FlightManagement
     {
         List<PassengerModel> passengerDetails = new List<PassengerModel>();
         string[] yesNoOptions = { "Yes", "No" };
-        const int MAX_BAGGAGE = 3;
-        const int BAGGAGE_PRICE = 30;
-
+      
         try
         {
             seatSelector.ClearTemporarySeats();
@@ -625,20 +623,20 @@ static class FlightManagement
                     bool validInput = false;
                     do
                     {
-                        Console.WriteLine($"\nHow many pieces of baggage? (1-{MAX_BAGGAGE})");
-                        Console.WriteLine($"Price per baggage: {BAGGAGE_PRICE} EUR");
+                        Console.WriteLine($"\nHow many pieces of baggage? (1-3)");
+                        Console.WriteLine($"Price per baggage: {30} EUR");
                         if (int.TryParse(Console.ReadLine(), out numberOfBaggage) &&
                             numberOfBaggage > 0 &&
-                            numberOfBaggage <= MAX_BAGGAGE)
+                            numberOfBaggage <= 3)
                         {
                             validInput = true;
-                            Console.WriteLine($"\nTotal baggage cost: {numberOfBaggage * BAGGAGE_PRICE} EUR");
+                            Console.WriteLine($"\nTotal baggage cost: {numberOfBaggage * 30} EUR");
                             Console.WriteLine("Press any key to continue...");
                             Console.ReadKey();
                         }
                         else
                         {
-                            Console.WriteLine($"Please enter a number between 1 and {MAX_BAGGAGE}");
+                            Console.WriteLine($"Please enter a number between 1 and {3}");
                         }
                     } while (!validInput);
                 }
