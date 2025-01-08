@@ -602,6 +602,7 @@ static class AccountManagement
                     Console.WriteLine("\nConfirm Payment Method Update:");
                     Console.WriteLine($"Card Holder: {cardHolder}");
                     Console.WriteLine($"Card Number: {cardNumber}");
+                    Console.WriteLine($"CVV: {cvv}");
                     Console.WriteLine($"Expiration Date: {expirationDate}");
                     Console.WriteLine($"Billing Address: {billingAddress}");
 
