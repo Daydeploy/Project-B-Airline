@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.VisualBasic;
 
 static class FlightManagement
-{
+{   
+    private static AccountModel account = UserLogin.UserAccountServiceLogic.CurrentAccount;
     public static void ShowAvailableFlights()
     {
-        var account = UserLogin.UserAccountServiceLogic.CurrentAccount;
-
         FlightsLogic flights = new FlightsLogic();
         Console.Clear();
 
@@ -78,6 +78,11 @@ static class FlightManagement
 
     private static void DisplayFlightsWithActions(List<FlightModel> flightsList, bool allowBooking)
     {
+
+        if (account.EmailAddress == "admin")
+        {   
+            allowBooking = false;
+        }
         Console.CursorVisible = false;
         FlightDisplay.DisplayFlights(flightsList);
 
@@ -88,7 +93,14 @@ static class FlightManagement
         else
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("B - Book a flight (Login required)");
+            if(account.EmailAddress == "admin")
+            {
+                Console.WriteLine("B - Book a flight (Admin account cannot book flights)");
+            }
+            else
+            {
+                Console.WriteLine("B - Book a flight (Login required)");
+            }
             Console.ResetColor();
         }
 
