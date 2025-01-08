@@ -263,8 +263,6 @@ static class FlightDisplay
         Console.WriteLine("\nPassengers:");
         Console.ResetColor();
 
-        const int BAGGAGE_PRICE = 30;
-
         foreach (var passenger in passengers)
         {
             Console.Write($"• {passenger.Name}");
@@ -284,7 +282,7 @@ static class FlightDisplay
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
                 if (passenger.HasCheckedBaggage)
                 {
-                    double baggageCost = passenger.NumberOfBaggage * BAGGAGE_PRICE;
+                    double baggageCost = (passenger.NumberOfBaggage - 1) * 30;
                     Console.Write($" | Baggage: {passenger.NumberOfBaggage} piece(s) ({baggageCost:F2} EUR)");
                 }
                 else

@@ -4,8 +4,9 @@ using System.Linq;
 using Microsoft.VisualBasic;
 
 static class FlightManagement
-{   
+{
     private static AccountModel account = UserLogin.UserAccountServiceLogic.CurrentAccount;
+
     public static void ShowAvailableFlights()
     {
         FlightsLogic flights = new FlightsLogic();
@@ -78,11 +79,11 @@ static class FlightManagement
 
     private static void DisplayFlightsWithActions(List<FlightModel> flightsList, bool allowBooking)
     {
-
         if (account.EmailAddress == "admin")
-        {   
+        {
             allowBooking = false;
         }
+
         Console.CursorVisible = false;
         FlightDisplay.DisplayFlights(flightsList);
 
@@ -93,7 +94,7 @@ static class FlightManagement
         else
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            if(account.EmailAddress == "admin")
+            if (account.EmailAddress == "admin")
             {
                 Console.WriteLine("B - Book a flight (Admin account cannot book flights)");
             }
@@ -101,6 +102,7 @@ static class FlightManagement
             {
                 Console.WriteLine("B - Book a flight (Login required)");
             }
+
             Console.ResetColor();
         }
 
@@ -588,7 +590,7 @@ static class FlightManagement
     {
         List<PassengerModel> passengerDetails = new List<PassengerModel>();
         string[] yesNoOptions = { "Yes", "No" };
-      
+
         try
         {
             seatSelector.ClearTemporarySeats();
@@ -624,13 +626,15 @@ static class FlightManagement
                     do
                     {
                         Console.WriteLine($"\nHow many pieces of baggage? (1-3)");
-                        Console.WriteLine($"Price per baggage: {30} EUR");
+                        Console.WriteLine("First bag is Free. Additional bags cost: 30 EUR each");
                         if (int.TryParse(Console.ReadLine(), out numberOfBaggage) &&
                             numberOfBaggage > 0 &&
                             numberOfBaggage <= 3)
                         {
                             validInput = true;
-                            Console.WriteLine($"\nTotal baggage cost: {numberOfBaggage * 30} EUR");
+                            int extraBags = Math.Max(0, numberOfBaggage - 1);
+                            int totalCost = extraBags * 30;
+                            Console.WriteLine($"\nTotal baggage cost: {totalCost} EUR");
                             Console.WriteLine("Press any key to continue...");
                             Console.ReadKey();
                         }
@@ -844,7 +848,7 @@ static class FlightManagement
 
             if (passenger.HasCheckedBaggage)
             {
-                double passengerBaggageCost = passenger.NumberOfBaggage * BAGGAGE_PRICE;
+                double passengerBaggageCost = (passenger.NumberOfBaggage - 1) * 30;
                 totalBaggageCost += passengerBaggageCost;
                 Console.WriteLine(
                     $"Checked Baggage: {passenger.NumberOfBaggage} piece(s) ({passengerBaggageCost:F2} EUR)");
@@ -939,14 +943,17 @@ static class FlightManagement
             {
                 discountPercentage = 20;
             }
+
             if (currentMiles.Level == "Gold")
             {
                 discountPercentage = 15;
             }
+
             if (currentMiles.Level == "Silver")
             {
                 discountPercentage = 10;
             }
+
             if (currentMiles.Level == "Bronze")
             {
                 discountPercentage = 5;
@@ -987,7 +994,6 @@ static class FlightManagement
             {
                 Console.WriteLine($"\nYou do not have enough points.\n");
             }
-
         }
 
         Console.WriteLine("------------------------------------------------------------");
