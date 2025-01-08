@@ -7302,5 +7302,205 @@
     "planeType": null,
     "entertainment": null,
     "isCheckedIn": false
+  },
+  {
+    "bookingId": 7428,
+    "userId": 1,
+    "flightId": 1463,
+    "totalPrice": 4753,
+    "bookingDate": "2025-01-08T18:11:24.9593089+01:00",
+    "passengers": [
+      {
+        "name": "Jan",
+        "hasPet": true,
+        "petDetails": [
+          {
+            "petId": 0,
+            "bookingId": 0,
+            "type": "Dog",
+            "size": null,
+            "weight": 32,
+            "storageLocation": "Storage",
+            "maxWeight": 0,
+            "seatingLocation": null,
+            "fee": null
+          },
+          {
+            "petId": 0,
+            "bookingId": 0,
+            "type": "Dog",
+            "size": null,
+            "weight": 32,
+            "storageLocation": "Storage",
+            "maxWeight": 0,
+            "seatingLocation": null,
+            "fee": null
+          }
+        ],
+        "seatNumber": "5A",
+        "hasCheckedBaggage": true,
+        "numberOfBaggage": 3,
+        "shopItems": [
+          {
+            "name": "Godiva Gold Collection (24-piece box)",
+            "price": 65,
+            "category": "Luxury Chocolates \u0026 Gourmet Treats",
+            "description": "Premium Belgian chocolate selection"
+          }
+        ],
+        "specialLuggage": "Slee",
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      },
+      {
+        "name": "Klaas",
+        "hasPet": false,
+        "petDetails": [],
+        "seatNumber": "5B",
+        "hasCheckedBaggage": false,
+        "numberOfBaggage": 0,
+        "shopItems": [],
+        "specialLuggage": "",
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      },
+      {
+        "name": "Peter",
+        "hasPet": false,
+        "petDetails": [],
+        "seatNumber": "5C",
+        "hasCheckedBaggage": false,
+        "numberOfBaggage": 0,
+        "shopItems": [],
+        "specialLuggage": "",
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      },
+      {
+        "name": "Neltje",
+        "hasPet": true,
+        "petDetails": [
+          {
+            "petId": 0,
+            "bookingId": 0,
+            "type": "Cat",
+            "size": null,
+            "weight": 12,
+            "storageLocation": "Storage",
+            "maxWeight": 0,
+            "seatingLocation": null,
+            "fee": null
+          },
+          {
+            "petId": 0,
+            "bookingId": 0,
+            "type": "Bird",
+            "size": null,
+            "weight": 1,
+            "storageLocation": "Storage",
+            "maxWeight": 0,
+            "seatingLocation": null,
+            "fee": null
+          },
+          {
+            "petId": 0,
+            "bookingId": 0,
+            "type": "Rabbit",
+            "size": null,
+            "weight": 4,
+            "storageLocation": "Cabin",
+            "maxWeight": 0,
+            "seatingLocation": null,
+            "fee": null
+          }
+        ],
+        "seatNumber": "4D",
+        "hasCheckedBaggage": true,
+        "numberOfBaggage": 2,
+        "shopItems": [
+          {
+            "name": "Heineken Beer",
+            "price": 7.5,
+            "category": "Snacks \u0026 Drinks",
+            "description": "330 ml bottle"
+          },
+          {
+            "name": "Heineken Beer",
+            "price": 7.5,
+            "category": "Snacks \u0026 Drinks",
+            "description": "330 ml bottle"
+          },
+          {
+            "name": "Heineken Beer",
+            "price": 7.5,
+            "category": "Snacks \u0026 Drinks",
+            "description": "330 ml bottle"
+          },
+          {
+            "name": "Heineken Beer",
+            "price": 7.5,
+            "category": "Snacks \u0026 Drinks",
+            "description": "330 ml bottle"
+          },
+          {
+            "name": "Coca-Cola (12 oz can)",
+            "price": 3,
+            "category": "Snacks \u0026 Drinks",
+            "description": "Classic or Diet Coke options"
+          }
+        ],
+        "specialLuggage": "Slee nummer twee",
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      }
+    ],
+    "pets": [],
+    "comfortPackages": [
+      {
+        "id": 1,
+        "name": "Basic Package",
+        "contents": [
+          "Blanket",
+          "Pillow"
+        ],
+        "cost": 15.00,
+        "availableIn": [
+          "Economy",
+          "Business",
+          "First"
+        ]
+      }
+    ],
+    "planeType": null,
+    "entertainment": null,
+    "isCheckedIn": true
   }
 ]
