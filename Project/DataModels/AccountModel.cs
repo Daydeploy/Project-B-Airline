@@ -62,7 +62,7 @@ public class AccountModel
         Address = address;
         PassportDetails = passportDetails;
         Miles = miles;
-        PaymentInformation = paymentInformation ?? new List<PaymentInformationModel>();
+        PaymentInformation = paymentInformation;
     }
 
     // Parameterless constructor for JSON deserialization
