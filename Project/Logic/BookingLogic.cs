@@ -132,9 +132,6 @@ public class BookingLogic
             
             var baggageCost = p.HasCheckedBaggage ? (BAGGAGE_PRICE * p.NumberOfBaggage) : 0;
 
-            Console.WriteLine(
-                $"Debug - Passenger: {p.Name}, HasBaggage: {p.HasCheckedBaggage}, Number of Baggage: {p.NumberOfBaggage}, Baggage Cost: {baggageCost}"); // Debug line
-
             return basePrice + baggageCost;
         });
 

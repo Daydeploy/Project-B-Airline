@@ -695,7 +695,7 @@ static class FlightManagement
                 };
 
                 Console.WriteLine("\nSelect a seat for the passenger:");
-                string seatNumber = seatSelector.SelectSeat(selectedFlight.PlaneType, selectedFlight.FlightId);
+                string seatNumber = seatSelector.SelectSeat(selectedFlight.PlaneType, selectedFlight.FlightId, passengerDetails);
                 if (seatNumber == null)
                 {
                     Console.WriteLine("\nSeat selection cancelled. Returning to the main menu...");

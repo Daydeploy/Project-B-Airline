@@ -66,11 +66,7 @@ public class SeatSelectionUI
             {
                 if (!string.IsNullOrEmpty(passenger.SeatNumber))
                 {
-                    string initials = new string(passenger.Name.Split(' ')
-                        .Select(s => s[0])
-                        .Take(2)
-                        .ToArray());
-                    occupiedSeats[passenger.SeatNumber] = initials;
+                    occupiedSeats[passenger.SeatNumber] = "■";
 
                     if (passenger.HasPet)
                     {
@@ -80,7 +76,7 @@ public class SeatSelectionUI
             }
         }
     }
-    public string SelectSeat(string planeType, int flightId)
+    public string SelectSeat(string planeType, int flightId, List<PassengerModel> currentPassengers = null)
     {
         // Normalize plane type
         if (planeTypeAliases.TryGetValue(planeType, out string normalizedType))
@@ -91,6 +87,20 @@ public class SeatSelectionUI
         currentConfig = planeConfigs[planeType];
         LoadExistingBookings(flightId);
         
+        if (currentPassengers != null)
+        {
+            foreach (var passenger in currentPassengers)
+            {
+                if (!string.IsNullOrEmpty(passenger.SeatNumber))
+                {
+                    string initials = new string(passenger.Name.Split(' ')
+                        .Select(s => s[0])
+                        .Take(2)
+                        .ToArray());
+                    temporarySeats[passenger.SeatNumber] = initials;
+                }
+            }
+        }
         int currentRow = 1;
         int currentSeat = 0;
         bool seatSelected = false;
