@@ -913,6 +913,73 @@ static class FlightManagement
 
         int roundedTotalPrice = (int)Math.Round(totalBasePrice);
 
+        var accounts = AccountsAccess.LoadAll();
+        var currentAccount = accounts.FirstOrDefault(a => a.Id == UserLogin.UserAccountServiceLogic.CurrentUserId);
+
+        if (currentAccount != null && currentAccount.Miles.Count > 0)
+        {
+            var currentMiles = currentAccount.Miles[0];
+            Console.WriteLine("\nMiles Information:");
+            Console.WriteLine($"Current Miles Balance: {currentMiles.Points}");
+            Console.WriteLine($"Current Tier: {currentMiles.Level}");
+
+            var discountPercentage = 0;
+
+            if (currentMiles.Level == "Platinum")
+            {
+                discountPercentage = 20;
+            }
+            if (currentMiles.Level == "Gold")
+            {
+                discountPercentage = 15;
+            }
+            if (currentMiles.Level == "Silver")
+            {
+                discountPercentage = 10;
+            }
+            if (currentMiles.Level == "Bronze")
+            {
+                discountPercentage = 5;
+            }
+
+            Console.WriteLine($"\nYou can redeem 50,000 miles for a {discountPercentage}% discount!");
+            Console.WriteLine("Would you like to use your miles for a discount? (y/n):");
+
+            bool usePoints = false;
+
+            string? userInput = Console.ReadLine().ToLower();
+
+            if (userInput != null)
+            {
+                if (userInput == "y")
+                {
+                    usePoints = true;
+                }
+            }
+
+            if (currentMiles.Points >= 50000)
+            {
+                if (usePoints)
+                {
+                    var (discountedPrice, discountSuccess) = MilesLogic.BasicPointsRedemption(
+                        UserLogin.UserAccountServiceLogic.CurrentUserId,
+                        roundedTotalPrice,
+                        booking.BookingId
+                    );
+                    if (discountSuccess)
+                    {
+                        totalBasePrice = discountedPrice;
+                        Console.WriteLine($"\nUpdated Total Price after discount: {discountedPrice} EUR");
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine($"\nYou do not have enough points.\n");
+            }
+
+        }
+
         Console.WriteLine("------------------------------------------------------------");
         Console.WriteLine("Rewards Summary:");
         Console.WriteLine("------------------------------------------------------------");
@@ -921,17 +988,7 @@ static class FlightManagement
             MilesLogic.CalculateMilesFromBooking(UserLogin.UserAccountServiceLogic.CurrentUserId);
         if (milesEarnedSuccess)
         {
-            Console.WriteLine($"  Miles Earned: {milesEarned}");
-        }
-
-        var (discountedPrice, discountSuccess) = MilesLogic.BasicPointsRedemption(
-            UserLogin.UserAccountServiceLogic.CurrentUserId,
-            roundedTotalPrice,
-            booking.BookingId
-        );
-        if (discountSuccess)
-        {
-            Console.WriteLine($"  Discounted Total Price: {discountedPrice:F2} EUR\n");
+            Console.WriteLine($"\n  Miles Earned: {milesEarned}");
         }
 
         Console.WriteLine("------------------------------------------------------------");
