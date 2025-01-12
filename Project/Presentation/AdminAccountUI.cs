@@ -54,7 +54,7 @@ static class AdminAccountUI
             case "Add New Airport":
                 AirportInformation.AddNewAirport();
                 break;
-            case "Delete Airport":
+            case "Delete Airport Information":
                 DeleteAirport();
                 break;
             case "Exit":
