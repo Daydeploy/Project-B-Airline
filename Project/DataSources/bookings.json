@@ -7627,5 +7627,79 @@
     "planeType": null,
     "entertainment": null,
     "isCheckedIn": false
+  },
+  {
+    "bookingId": 8806,
+    "userId": 1,
+    "flightId": 1495,
+    "totalPrice": 1243,
+    "bookingDate": "2025-01-13T00:00:14.9170846+01:00",
+    "passengers": [
+      {
+        "name": "Kip",
+        "hasPet": true,
+        "petDetails": [
+          {
+            "petId": 0,
+            "bookingId": 0,
+            "type": "Cat",
+            "size": null,
+            "weight": 12,
+            "storageLocation": "Storage",
+            "maxWeight": 0,
+            "seatingLocation": null,
+            "fee": null
+          },
+          {
+            "petId": 0,
+            "bookingId": 0,
+            "type": "Dog",
+            "size": null,
+            "weight": 12,
+            "storageLocation": "Cabin",
+            "maxWeight": 0,
+            "seatingLocation": null,
+            "fee": null
+          },
+          {
+            "petId": 0,
+            "bookingId": 0,
+            "type": "Bird",
+            "size": null,
+            "weight": 2,
+            "storageLocation": "Storage",
+            "maxWeight": 0,
+            "seatingLocation": null,
+            "fee": null
+          }
+        ],
+        "seatNumber": "5C",
+        "hasCheckedBaggage": true,
+        "numberOfBaggage": 3,
+        "shopItems": [
+          {
+            "name": "Lays Potato Chips",
+            "price": 3.5,
+            "category": "Snacks \u0026 Drinks",
+            "description": "Small bag, Classic or Sour Cream \u0026 Onion flavors"
+          }
+        ],
+        "specialLuggage": "Guitar",
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      }
+    ],
+    "pets": [],
+    "comfortPackages": null,
+    "planeType": null,
+    "entertainment": null,
+    "isCheckedIn": false
   }
 ]

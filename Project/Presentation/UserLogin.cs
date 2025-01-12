@@ -140,12 +140,16 @@ static class UserLogin
         account = accounts.FirstOrDefault(x => x.Id == account.Id);
         bool updateNeeded = false;
 
-        Console.Clear();
-        Console.ForegroundColor = ConsoleColor.Cyan;
-        Console.WriteLine("\n╔════════════════════════════════════╗");
-        Console.WriteLine("║      PERSONAL INFORMATION          ║");
-        Console.WriteLine("╚════════════════════════════════════╝\n");
-        Console.ResetColor();
+        if (string.IsNullOrEmpty(account.PhoneNumber) || string.IsNullOrEmpty(account.Address) || account.PaymentInformation == null)
+        {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("\n╔════════════════════════════════════╗");
+            Console.WriteLine("║      PERSONAL INFORMATION          ║");
+            Console.WriteLine("╚════════════════════════════════════╝\n");
+            Console.ResetColor();
+        }
+        
 
         if (string.IsNullOrEmpty(account.PhoneNumber))
         {
@@ -273,10 +277,12 @@ static class UserLogin
             Console.WriteLine("\nInformation updated successfully!");
         }
 
-        
-        Console.WriteLine("\nPress any key to continue with booking...");
-        Console.ReadKey();
-        Console.Clear();
+        if (string.IsNullOrEmpty(account.PhoneNumber) || string.IsNullOrEmpty(account.Address) || account.PaymentInformation == null)
+        {
+            Console.WriteLine("\nPress any key to continue with booking...");
+            Console.ReadKey();
+            Console.Clear();
+        }
         FlightManagement.BookAFlight(account);
     }
 
