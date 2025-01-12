@@ -138,90 +138,145 @@ static class UserLogin
     {
         var accounts = AccountsAccess.LoadAll();
         account = accounts.FirstOrDefault(x => x.Id == account.Id);
+        bool updateNeeded = false;
 
-        if (account.PaymentInformation == null)
+        Console.Clear();
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.WriteLine("\n╔════════════════════════════════════╗");
+        Console.WriteLine("║      PERSONAL INFORMATION          ║");
+        Console.WriteLine("╚════════════════════════════════════╝\n");
+        Console.ResetColor();
+
+        if (string.IsNullOrEmpty(account.PhoneNumber))
         {
-            Console.WriteLine("\nPayment information is required to complete a booking.");
-            Console.WriteLine("\nWould you like to add payment information now? (Y/N)");
-
-            string response = Console.ReadLine().ToUpper();
-
-            if (response == "Y")
+            Console.WriteLine("\nPhone number is required to complete booking.");
+            Console.Write("Enter your phone number: ");
+            string phoneNumber;
+            do
             {
-                AccountManagement.HandleManageAccountOption(1, account);
-
-                accounts = AccountsAccess.LoadAll();
-                account = accounts.FirstOrDefault(x => x.Id == account.Id);
-
-                if (account.PaymentInformation == null)
+                phoneNumber = Console.ReadLine()?.Trim();
+                if (!AccountsLogic.IsValidPhoneNumber(phoneNumber))
                 {
-                    Console.WriteLine("No payment information added, Booking cannot proceed.");
-                    return;
+                    Console.WriteLine("Invalid phone number. Must be between 10-15 digits.");
+                    Console.Write("Enter your phone number: ");
                 }
+            } while (!AccountsLogic.IsValidPhoneNumber(phoneNumber));
+
+            UserAccountServiceLogic.ManageAccount(account.Id, newPhoneNumber: phoneNumber);
+            updateNeeded = true;
+        }
+
+        if (string.IsNullOrEmpty(account.Address))
+        {
+            Console.WriteLine("\nAddress is required to complete booking.");
+            Console.Write("Enter your address: ");
+            string address = Console.ReadLine()?.Trim();
+            while (string.IsNullOrWhiteSpace(address))
+            {
+                Console.WriteLine("Address cannot be empty.");
+                Console.Write("Enter your address: ");
+                address = Console.ReadLine()?.Trim();
+            }
+
+            UserAccountServiceLogic.ManageAccount(account.Id, newAddress: address);
+            updateNeeded = true;
+        }
+
+       if (account.PaymentInformation == null || !account.PaymentInformation.Any())
+        {
+            Console.WriteLine("\nPayment information is required to complete booking.");
+            Console.WriteLine("Would you like to:");
+            Console.WriteLine("1. Add and save payment information for future bookings");
+            Console.WriteLine("2. Use payment information only for this booking");
+            Console.WriteLine("3. Cancel booking");
+            
+            string choice;
+            do
+            {
+                Console.Write("\nEnter your choice (1-3): ");
+                choice = Console.ReadLine()?.Trim();
+            } while (choice != "1" && choice != "2" && choice != "3");
+
+            if (choice == "3")
+            {
+                Console.WriteLine("Booking process cancelled.");
+                return;
+            }
+
+            bool saveForFuture = choice == "1";
+
+            Console.Write("\nEnter Card Holder Name: ");
+            string cardHolder;
+            do
+            {
+                cardHolder = Console.ReadLine()?.Trim();
+                if (!PaymentLogic.ValidateName(cardHolder))
+                {
+                    Console.WriteLine("Card Holder Name cannot be empty.");
+                    Console.Write("Enter Card Holder Name: ");
+                }
+            } while (!PaymentLogic.ValidateName(cardHolder));
+                Console.Write("\nEnter Card Number (16 digits): ");
+                string cardNumber;
+                do
+                {
+                    cardNumber = Console.ReadLine()?.Trim();
+                    if (!PaymentLogic.ValidateCardNumber(cardNumber))
+                    {
+                        Console.WriteLine("Invalid card number. Must be 16 digits.");
+                        Console.Write("Enter Card Number: ");
+                    }
+                } while (!PaymentLogic.ValidateCardNumber(cardNumber));
+
+                Console.Write("\nEnter CVV (3 or 4 digits): ");
+                string cvv;
+                do
+                {
+                    cvv = Console.ReadLine()?.Trim();
+                    if (!PaymentLogic.ValidateCVV(cvv))
+                    {
+                        Console.WriteLine("Invalid CVV. Must be 3 or 4 digits.");
+                        Console.Write("Enter CVV: ");
+                    }
+                } while (!PaymentLogic.ValidateCVV(cvv));
+
+                Console.Write("\nEnter Expiration Date (MM/YY): ");
+                string expirationDate;
+                do
+                {
+                    expirationDate = Console.ReadLine()?.Trim();
+                    if (!PaymentLogic.ValidateExpirationDate(expirationDate))
+                    {
+                        Console.WriteLine("Invalid expiration date. Use MM/YY format.");
+                        Console.Write("Enter Expiration Date: ");
+                    }
+                } while (!PaymentLogic.ValidateExpirationDate(expirationDate));
+
+                 var paymentInfo = new PaymentInformationModel(cardHolder, cardNumber, cvv, expirationDate, account.Address);
+        
+            if (saveForFuture)
+            {
+                account.PaymentInformation = new List<PaymentInformationModel> { paymentInfo };
+                updateNeeded = true;
+                Console.WriteLine("\nPayment information saved for future bookings.");
             }
             else
             {
-                Console.WriteLine("Booking process cancelled due to missing payment information.");
-                return;
+                account.TemporaryPaymentInfo = paymentInfo;
+                Console.WriteLine("\nPayment information will be used only for this booking.");
             }
         }
 
-        if (!AccountsLogic.HasCompleteContactInformation(account.FirstName, account.LastName, account.EmailAddress,
-                account.PhoneNumber, account.Address))
+        if (updateNeeded)
         {
-            Console.WriteLine("\nComplete contact information is required to complete a booking.");
-            Console.WriteLine("Please update the following missing details:\n");
-
-            if (string.IsNullOrEmpty(account.FirstName))
-            {
-                Console.WriteLine("- First Name");
-            }
-
-            if (string.IsNullOrEmpty(account.LastName))
-            {
-                Console.WriteLine("- Last Name");
-            }
-
-            if (string.IsNullOrEmpty(account.EmailAddress))
-            {
-                Console.WriteLine("- Email Address");
-            }
-
-            if (string.IsNullOrEmpty(account.PhoneNumber))
-            {
-                Console.WriteLine("- Phone Number");
-            }
-
-            if (string.IsNullOrEmpty(account.Address))
-            {
-                Console.WriteLine("- Address");
-            }
-
-            Console.WriteLine("Would you like to complete your contact information? (Y/N)");
-
-            string response = Console.ReadLine().ToUpper();
-
-            if (response == "Y")
-            {
-                AccountManagement.HandleManageAccountOption(0, account);
-
-                accounts = AccountsAccess.LoadAll();
-                account = accounts.FirstOrDefault(x => x.Id == account.Id);
-
-                if (!AccountsLogic.HasCompleteContactInformation(account.FirstName, account.LastName,
-                        account.EmailAddress, account.PhoneNumber, account.Address))
-                {
-                    Console.WriteLine("Contact information not updated completely. Booking cannot proceed.");
-                    return;
-                }
-            }
-            else
-            {
-                Console.WriteLine("Booking process cancelled due to incomplete contact information.");
-                return;
-            }
+            AccountsAccess.WriteAll(accounts);
+            Console.WriteLine("\nInformation updated successfully!");
         }
 
+        
+        Console.WriteLine("\nPress any key to continue with booking...");
+        Console.ReadKey();
+        Console.Clear();
         FlightManagement.BookAFlight(account);
     }
 

@@ -204,5 +204,38 @@
     ],
     "privateJet": null,
     "shoppingCart": []
+  },
+  {
+    "id": 7,
+    "firstName": "even",
+    "lastName": "test",
+    "dateOfBirth": "2004-05-24T00:00:00",
+    "gender": null,
+    "nationality": null,
+    "phoneNumber": "0686388692",
+    "address": "Test",
+    "email": "even@test.nl",
+    "password": "Test@1",
+    "passportDetails": null,
+    "milesDetails": [
+      {
+        "Enrolled": false,
+        "Level": "",
+        "Experience": 0,
+        "Points": 0,
+        "History": ""
+      }
+    ],
+    "paymentInformation": [
+      {
+        "cardHolder": "Aaron",
+        "cardNumber": "1111111111111111",
+        "cVV": "123",
+        "expirationDate": "02/25",
+        "billingAddress": "Test"
+      }
+    ],
+    "privateJet": null,
+    "shoppingCart": []
   }
 ]

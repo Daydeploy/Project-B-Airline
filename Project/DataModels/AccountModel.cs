@@ -48,6 +48,9 @@ public class AccountModel
     [JsonPropertyName("shoppingCart")]
     public List<ShopItemModel> ShoppingCart { get; set; } = new List<ShopItemModel>();
 
+    [JsonIgnore]
+    public PaymentInformationModel TemporaryPaymentInfo{ get; set; }
+
     public AccountModel(int id, string firstName, string lastName, DateTime dateOfBirth,
         string emailAddress, string password, string gender, string nationality,
         string phoneNumber, string address, PassportDetailsModel passportDetails,
