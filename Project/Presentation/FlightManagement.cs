@@ -808,7 +808,6 @@ static class FlightManagement
         return pets;
     }
 
-
     private static void CompleteBooking(
         int departureFlightId,
         List<PassengerModel> passengerDetails,
@@ -821,162 +820,119 @@ static class FlightManagement
         double totalBaggageCost = 0;
         double totalBasePrice = 0;
         const int BAGGAGE_PRICE = 30;
-
+    
         BookingModel booking = BookingLogic.CreateBooking(UserLogin.UserAccountServiceLogic.CurrentUserId,
-            departureFlightId,
-            passengerDetails,
-            new List<PetModel>());
-
+            departureFlightId, passengerDetails, new List<PetModel>());
+    
         if (booking == null)
         {
             Console.WriteLine("Error: Unable to create booking. Please try again.");
             return;
         }
-
+    
         totalBasePrice = booking.TotalPrice;
-
-        Console.WriteLine("\nFlight booked successfully!\n");
-        Console.WriteLine($"Booking ID: {booking.BookingId}");
-        Console.WriteLine($"Flight: {departureFlight.Origin} to {departureFlight.Destination}");
-        Console.WriteLine($"Departure: {DateTime.Parse(departureFlight.DepartureTime):HH:mm dd MMM yyyy}");
-
+    
         foreach (var passenger in booking.Passengers)
         {
-            Console.WriteLine($"\nPassenger: {passenger.Name}");
-            Console.WriteLine(
-                $"Seat: {passenger.SeatNumber} ({seatSelector.GetSeatClass(passenger.SeatNumber)} Class)");
-
-            if (passenger.HasCheckedBaggage)
-            {
-                double passengerBaggageCost = (passenger.NumberOfBaggage - 1) * 30;
-                totalBaggageCost += passengerBaggageCost;
-                Console.WriteLine(
-                    $"Checked Baggage: {passenger.NumberOfBaggage} piece(s) ({passengerBaggageCost:F2} EUR)");
-            }
-            else
-            {
-                Console.WriteLine("No Checked Baggage");
-            }
-
-            if (!string.IsNullOrEmpty(passenger.SpecialLuggage))
-            {
-                Console.WriteLine($"Special Luggage: {passenger.SpecialLuggage}");
-            }
-
-            if (passenger.HasPet && passenger.PetDetails != null)
-            {
-                foreach (var pet in passenger.PetDetails)
-                {
-                    Console.WriteLine($"Pet: {pet.Type} ({pet.Weight}kg) - {pet.StorageLocation}");
-                    int petFee = pet.StorageLocation == "Cabin" ? 50 : 30;
-                    booking.TotalPrice += petFee;
-                    totalBaggageCost += petFee;
-                }
-            }
-
-            Console.WriteLine("Would you like to purchase items from our shop? (y/n):");
+            Console.WriteLine($"\nWould you like to purchase items from our shop for {passenger.Name}? (y/n):");
             bool wantsItem = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
-
+    
             if (wantsItem)
             {
                 var shopUI = new ShopUI();
-                var purchasedItems =
-                    shopUI.DisplaySmallItemsShop(booking.BookingId, booking.Passengers.IndexOf(passenger));
+                var purchasedItems = shopUI.DisplaySmallItemsShop(booking.BookingId, booking.Passengers.IndexOf(passenger));
                 passenger.ShopItems.AddRange(purchasedItems);
-                booking.TotalPrice += (int)purchasedItems.Sum(item => item.Price);
-
-                if (purchasedItems.Any())
+                totalBasePrice += (double)purchasedItems.Sum(item => item.Price);
+            }
+        }
+    
+        Console.Clear();
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.WriteLine("\n╔══════════════════════════════════╗");
+        Console.WriteLine("║        BOOKING SUMMARY           ║");
+        Console.WriteLine("╚══════════════════════════════════╝\n");
+        Console.ResetColor();
+    
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine("Flight Details:");
+        Console.ResetColor();
+        Console.WriteLine($"From: {departureFlight.Origin} To: {departureFlight.Destination}");
+        Console.WriteLine($"Date: {DateTime.Parse(departureFlight.DepartureTime):dd MMM yyyy HH:mm}");
+    
+        Console.WriteLine("\n" + new string('─', Console.WindowWidth - 1));
+    
+        foreach (var passenger in booking.Passengers)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"\nPassenger: {passenger.Name}");
+            Console.ResetColor();
+            Console.WriteLine($"Seat: {passenger.SeatNumber} ({seatSelector.GetSeatClass(passenger.SeatNumber)} Class)");
+    
+            if (passenger.HasCheckedBaggage)
+            {
+                double passengerBaggageCost = (passenger.NumberOfBaggage - 1) * BAGGAGE_PRICE;
+                totalBaggageCost += passengerBaggageCost;
+                Console.WriteLine($"Checked Baggage: {passenger.NumberOfBaggage} piece(s) ({passengerBaggageCost:C})");
+            }
+    
+            if (passenger.ShopItems?.Any() == true)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.WriteLine("Purchased Items:");
+                Console.ResetColor();
+                foreach (var item in passenger.ShopItems)
                 {
-                    Console.WriteLine("\nPurchased Items:");
-                    foreach (var item in purchasedItems)
-                    {
-                        Console.WriteLine($"- {item.Name} ({item.Price:F2} EUR)");
-                    }
+                    Console.WriteLine($"  • {item.Name}: {item.Price:C}");
                 }
             }
         }
-
-        // Update booking with new total price
-        var bookings = BookingAccess.LoadAll();
-        var bookingToUpdate = bookings.FirstOrDefault(b => b.BookingId == booking.BookingId);
-        if (bookingToUpdate != null)
-        {
-            bookingToUpdate.TotalPrice = booking.TotalPrice;
-            BookingAccess.WriteAll(bookings);
-        }
-
-        // Display Price Summary
+    
+        Console.WriteLine("\n" + new string('─', Console.WindowWidth - 1));
+        
+        Console.ForegroundColor = ConsoleColor.Magenta;
         Console.WriteLine("\nPrice Summary:");
-        Console.WriteLine(new string('-', 40));
-
+        Console.ResetColor();
+        Console.WriteLine($"Base Price: {totalBasePrice - totalBaggageCost:C}");
         if (totalBaggageCost > 0)
-        {
-            Console.WriteLine($"Base Price: {totalBasePrice - totalBaggageCost:F2} EUR");
-            Console.WriteLine($"Total Baggage Cost: {totalBaggageCost:F2} EUR");
-        }
-
+            Console.WriteLine($"Total Baggage Cost: {totalBaggageCost:C}");
+    
         if (includeInsurance)
         {
             double insuranceCost = passengerDetails.Count * 10.0;
             totalBasePrice += insuranceCost;
-            Console.WriteLine($"Cancellation Insurance: {insuranceCost:F2} EUR");
+            Console.WriteLine($"Cancellation Insurance: {insuranceCost:C}");
         }
-
-        Console.WriteLine(new string('-', 40));
-        Console.WriteLine($"Final Total Price: {totalBasePrice:F2} EUR\n");
-
+    
         int roundedTotalPrice = (int)Math.Round(totalBasePrice);
-
+    
         var accounts = AccountsAccess.LoadAll();
         var currentAccount = accounts.FirstOrDefault(a => a.Id == UserLogin.UserAccountServiceLogic.CurrentUserId);
-
-        if (currentAccount != null && currentAccount.Miles.Count > 0)
+    
+        if (currentAccount?.Miles?.Count > 0)
         {
             var currentMiles = currentAccount.Miles[0];
+            Console.WriteLine("\n" + new string('─', Console.WindowWidth - 1));
+            Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("\nMiles Information:");
+            Console.ResetColor();
             Console.WriteLine($"Current Miles Balance: {currentMiles.Points}");
             Console.WriteLine($"Current Tier: {currentMiles.Level}");
-
-            var discountPercentage = 0;
-
-            if (currentMiles.Level == "Platinum")
-            {
-                discountPercentage = 20;
-            }
-
-            if (currentMiles.Level == "Gold")
-            {
-                discountPercentage = 15;
-            }
-
-            if (currentMiles.Level == "Silver")
-            {
-                discountPercentage = 10;
-            }
-
-            if (currentMiles.Level == "Bronze")
-            {
-                discountPercentage = 5;
-            }
-
-            Console.WriteLine($"\nYou can redeem 50,000 miles for a {discountPercentage}% discount!");
-            Console.WriteLine("Would you like to use your miles for a discount? (y/n):");
-
-            bool usePoints = false;
-
-            string? userInput = Console.ReadLine().ToLower();
-
-            if (userInput != null)
-            {
-                if (userInput == "y")
-                {
-                    usePoints = true;
-                }
-            }
-
+    
             if (currentMiles.Points >= 50000)
             {
-                if (usePoints)
+                int discountPercentage = currentMiles.Level switch
+                {
+                    "Platinum" => 20,
+                    "Gold" => 15,
+                    "Silver" => 10,
+                    "Bronze" => 5,
+                    _ => 0
+                };
+    
+                Console.WriteLine($"\nYou can redeem 50,000 miles for a {discountPercentage}% discount!");
+                Console.WriteLine("Would you like to use your miles for a discount? (y/n):");
+    
+                if (Console.ReadLine()?.ToLower() == "y")
                 {
                     var (discountedPrice, discountSuccess) = MilesLogic.BasicPointsRedemption(
                         UserLogin.UserAccountServiceLogic.CurrentUserId,
@@ -986,30 +942,55 @@ static class FlightManagement
                     if (discountSuccess)
                     {
                         totalBasePrice = discountedPrice;
-                        Console.WriteLine($"\nUpdated Total Price after discount: {discountedPrice} EUR");
+                        Console.WriteLine($"\nUpdated Total Price after discount: {discountedPrice:C}");
                     }
                 }
             }
             else
             {
-                Console.WriteLine($"\nYou do not have enough points.\n");
+                Console.WriteLine("\nYou do not have enough miles for a discount (50,000 required).");
             }
         }
-
-        Console.WriteLine("------------------------------------------------------------");
-        Console.WriteLine("Rewards Summary:");
-        Console.WriteLine("------------------------------------------------------------");
-
-        var (milesEarned, milesEarnedSuccess) =
-            MilesLogic.CalculateMilesFromBooking(UserLogin.UserAccountServiceLogic.CurrentUserId);
+    
+        Console.WriteLine("\n" + new string('─', Console.WindowWidth - 1));
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine($"\nFinal Total Price: {totalBasePrice:C}");
+        Console.ResetColor();
+    
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.Write("\nWould you like to confirm this booking? (Y/N): ");
+        Console.ResetColor();
+        
+        if (Console.ReadLine()?.ToUpper() != "Y")
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\nBooking cancelled. Returning to menu...");
+            Console.ResetColor();
+            return;
+        }
+    
+        booking.TotalPrice = (int)Math.Round(totalBasePrice);
+        BookingAccess.WriteAll(BookingAccess.LoadAll());
+        
+        var (milesEarned, milesEarnedSuccess) = MilesLogic.CalculateMilesFromBooking(UserLogin.UserAccountServiceLogic.CurrentUserId);
+        
+        Console.Clear();
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine("\n╔══════════════════════════════════╗");
+        Console.WriteLine("║      BOOKING COMPLETED           ║");
+        Console.WriteLine("╚══════════════════════════════════╝\n");
+        Console.ResetColor();
+    
         if (milesEarnedSuccess)
         {
-            Console.WriteLine($"\n  Miles Earned: {milesEarned}");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine($"Miles Earned: {milesEarned}");
+            Console.ResetColor();
         }
-
-        Console.WriteLine("------------------------------------------------------------");
-        Console.WriteLine("Thank you for booking with us!");
-        Console.WriteLine("------------------------------------------------------------");
+    
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine("\nThank you for booking with us!");
+        Console.ResetColor();
     }
 
     public static void ViewBookedFlights(int userId)

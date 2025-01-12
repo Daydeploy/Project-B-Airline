@@ -7502,5 +7502,130 @@
     "planeType": null,
     "entertainment": null,
     "isCheckedIn": true
+  },
+  {
+    "bookingId": 808,
+    "userId": 1,
+    "flightId": 1495,
+    "totalPrice": 1674,
+    "bookingDate": "2025-01-12T22:30:19.9910734+01:00",
+    "passengers": [
+      {
+        "name": "Aaron",
+        "hasPet": false,
+        "petDetails": [],
+        "seatNumber": "3B",
+        "hasCheckedBaggage": true,
+        "numberOfBaggage": 1,
+        "shopItems": [],
+        "specialLuggage": "w",
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      }
+    ],
+    "pets": [],
+    "comfortPackages": null,
+    "planeType": null,
+    "entertainment": null,
+    "isCheckedIn": false
+  },
+  {
+    "bookingId": 6001,
+    "userId": 1,
+    "flightId": 1495,
+    "totalPrice": 1243,
+    "bookingDate": "2025-01-12T23:09:05.9191644+01:00",
+    "passengers": [
+      {
+        "name": "Jamsl",
+        "hasPet": false,
+        "petDetails": [],
+        "seatNumber": "4A",
+        "hasCheckedBaggage": true,
+        "numberOfBaggage": 3,
+        "shopItems": [
+          {
+            "name": "Lays Potato Chips",
+            "price": 3.5,
+            "category": "Snacks \u0026 Drinks",
+            "description": "Small bag, Classic or Sour Cream \u0026 Onion flavors"
+          }
+        ],
+        "specialLuggage": "",
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      }
+    ],
+    "pets": [],
+    "comfortPackages": null,
+    "planeType": null,
+    "entertainment": null,
+    "isCheckedIn": false
+  },
+  {
+    "bookingId": 1866,
+    "userId": 1,
+    "flightId": 1495,
+    "totalPrice": 1647,
+    "bookingDate": "2025-01-12T23:23:44.78878+01:00",
+    "passengers": [
+      {
+        "name": "Ujsd",
+        "hasPet": true,
+        "petDetails": [
+          {
+            "petId": 0,
+            "bookingId": 0,
+            "type": "Dog",
+            "size": null,
+            "weight": 12,
+            "storageLocation": "Cabin",
+            "maxWeight": 0,
+            "seatingLocation": null,
+            "fee": null
+          }
+        ],
+        "seatNumber": "3A",
+        "hasCheckedBaggage": false,
+        "numberOfBaggage": 0,
+        "shopItems": [
+          {
+            "name": "Lays Potato Chips",
+            "price": 3.5,
+            "category": "Snacks \u0026 Drinks",
+            "description": "Small bag, Classic or Sour Cream \u0026 Onion flavors"
+          }
+        ],
+        "specialLuggage": "2",
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      }
+    ],
+    "pets": [],
+    "comfortPackages": null,
+    "planeType": null,
+    "entertainment": null,
+    "isCheckedIn": false
   }
 ]
