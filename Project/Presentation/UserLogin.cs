@@ -256,7 +256,19 @@ static class UserLogin
                 }
             } while (!PaymentLogic.ValidateExpirationDate(expirationDate));
 
-            var paymentInfo = new PaymentInformationModel(cardHolder, cardNumber, cvv, expirationDate, account.Address);
+            Console.Write("\nEnter Billing Address: ");
+            string billingAdress;
+            do
+            {
+                billingAdress = Console.ReadLine()?.Trim();
+                if (!PaymentLogic.ValidateAddress(billingAdress))
+                {
+                    Console.WriteLine("Invalid billing address, Cannot be empty.");
+                    Console.Write("Enter Billing Address: ");
+                }
+            } while (!PaymentLogic.ValidateAddress(billingAdress));
+
+            var paymentInfo = new PaymentInformationModel(cardHolder, cardNumber, cvv, expirationDate, billingAdress);
 
             if (saveForFuture)
             {
