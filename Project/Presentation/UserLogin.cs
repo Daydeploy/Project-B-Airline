@@ -149,7 +149,7 @@ static class UserLogin
             Console.WriteLine("╚════════════════════════════════════╝\n");
             Console.ResetColor();
         }
-        
+
 
         if (string.IsNullOrEmpty(account.PhoneNumber))
         {
@@ -186,14 +186,14 @@ static class UserLogin
             updateNeeded = true;
         }
 
-       if (account.PaymentInformation == null || !account.PaymentInformation.Any())
+        if (account.PaymentInformation == null || !account.PaymentInformation.Any())
         {
             Console.WriteLine("\nPayment information is required to complete booking.");
             Console.WriteLine("Would you like to:");
             Console.WriteLine("1. Add and save payment information for future bookings");
             Console.WriteLine("2. Use payment information only for this booking");
             Console.WriteLine("3. Cancel booking");
-            
+
             string choice;
             do
             {
@@ -220,44 +220,44 @@ static class UserLogin
                     Console.Write("Enter Card Holder Name: ");
                 }
             } while (!PaymentLogic.ValidateName(cardHolder));
-                Console.Write("\nEnter Card Number (16 digits): ");
-                string cardNumber;
-                do
+            Console.Write("\nEnter Card Number (16 digits): ");
+            string cardNumber;
+            do
+            {
+                cardNumber = Console.ReadLine()?.Trim();
+                if (!PaymentLogic.ValidateCardNumber(cardNumber))
                 {
-                    cardNumber = Console.ReadLine()?.Trim();
-                    if (!PaymentLogic.ValidateCardNumber(cardNumber))
-                    {
-                        Console.WriteLine("Invalid card number. Must be 16 digits.");
-                        Console.Write("Enter Card Number: ");
-                    }
-                } while (!PaymentLogic.ValidateCardNumber(cardNumber));
+                    Console.WriteLine("Invalid card number. Must be 16 digits.");
+                    Console.Write("Enter Card Number: ");
+                }
+            } while (!PaymentLogic.ValidateCardNumber(cardNumber));
 
-                Console.Write("\nEnter CVV (3 or 4 digits): ");
-                string cvv;
-                do
+            Console.Write("\nEnter CVV (3 or 4 digits): ");
+            string cvv;
+            do
+            {
+                cvv = Console.ReadLine()?.Trim();
+                if (!PaymentLogic.ValidateCVV(cvv))
                 {
-                    cvv = Console.ReadLine()?.Trim();
-                    if (!PaymentLogic.ValidateCVV(cvv))
-                    {
-                        Console.WriteLine("Invalid CVV. Must be 3 or 4 digits.");
-                        Console.Write("Enter CVV: ");
-                    }
-                } while (!PaymentLogic.ValidateCVV(cvv));
+                    Console.WriteLine("Invalid CVV. Must be 3 or 4 digits.");
+                    Console.Write("Enter CVV: ");
+                }
+            } while (!PaymentLogic.ValidateCVV(cvv));
 
-                Console.Write("\nEnter Expiration Date (MM/YY): ");
-                string expirationDate;
-                do
+            Console.Write("\nEnter Expiration Date (MM/YY): ");
+            string expirationDate;
+            do
+            {
+                expirationDate = Console.ReadLine()?.Trim();
+                if (!PaymentLogic.ValidateExpirationDate(expirationDate))
                 {
-                    expirationDate = Console.ReadLine()?.Trim();
-                    if (!PaymentLogic.ValidateExpirationDate(expirationDate))
-                    {
-                        Console.WriteLine("Invalid expiration date. Use MM/YY format.");
-                        Console.Write("Enter Expiration Date: ");
-                    }
-                } while (!PaymentLogic.ValidateExpirationDate(expirationDate));
+                    Console.WriteLine("Invalid expiration date. Use MM/YY format.");
+                    Console.Write("Enter Expiration Date: ");
+                }
+            } while (!PaymentLogic.ValidateExpirationDate(expirationDate));
 
-                 var paymentInfo = new PaymentInformationModel(cardHolder, cardNumber, cvv, expirationDate, account.Address);
-        
+            var paymentInfo = new PaymentInformationModel(cardHolder, cardNumber, cvv, expirationDate, account.Address);
+
             if (saveForFuture)
             {
                 account.PaymentInformation = new List<PaymentInformationModel> { paymentInfo };
@@ -273,7 +273,7 @@ static class UserLogin
 
         if (updateNeeded)
         {
-            AccountsAccess.WriteAll(accounts);
+            UserLogin.UserAccountServiceLogic.ManageAccount(account.Id, newPaymentInformation: account.PaymentInformation);
             Console.WriteLine("\nInformation updated successfully!");
         }
 

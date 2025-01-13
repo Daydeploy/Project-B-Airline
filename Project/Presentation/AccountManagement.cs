@@ -324,9 +324,12 @@ static class AccountManagement
         bool updateSuccessful = false;
         var accounts = AccountsAccess.LoadAll();
 
+        var accountToUpdate = accounts.Find(a => a.Id == account.Id);
+
         switch (optionIndex)
         {
             case 0: // Personal Information
+                accountToUpdate = accounts.Find(a => a.Id == account.Id);
                 Console.WriteLine("\n--- Personal Information Management ---");
 
                 string[] personalOptions =
@@ -518,9 +521,9 @@ static class AccountManagement
                 break;
 
             case 1: // Payment Information
-                var accountToUpdate = accounts.Find(a => a.Id == account.Id);
-
                 Console.WriteLine("\n--- Payment Information Management ---");
+
+                accountToUpdate = accounts.Find(a => a.Id == account.Id);
 
                 if (accountToUpdate.PaymentInformation == null)
                     accountToUpdate.PaymentInformation = new List<PaymentInformationModel>();
@@ -616,10 +619,13 @@ static class AccountManagement
                     if (confirmKey.Key != ConsoleKey.N)
                     {
                         paymentInfo = new PaymentInformationModel(cardHolder, cardNumber, cvv, expirationDate, billingAddress);
-                        accountToUpdate.PaymentInformation.Clear();
-                        accountToUpdate.PaymentInformation.Add(paymentInfo);
-                        AccountsAccess.WriteAll(accounts);
-                        Console.WriteLine("Payment method updated successfully.");
+                        var newPaymentInfo = new List<PaymentInformationModel> { paymentInfo };
+
+                        updateSuccessful = UserLogin.UserAccountServiceLogic.ManageAccount(accountToUpdate.Id, newPaymentInformation: newPaymentInfo);
+
+                        Console.WriteLine(updateSuccessful
+                            ? "Payment method updated successfully."
+                            : "Failed to update payment method.");
                     }
                     else
                     {
@@ -635,9 +641,11 @@ static class AccountManagement
 
                     if (response.Trim().ToUpper() == "Y")
                     {
-                        accountToUpdate.PaymentInformation.Clear();
-                        AccountsAccess.WriteAll(accounts);
-                        Console.WriteLine("Payment method removed successfully.");
+                        updateSuccessful = UserLogin.UserAccountServiceLogic.ManageAccount(account.Id, newPaymentInformation: new List<PaymentInformationModel>());
+
+                        Console.WriteLine(updateSuccessful
+                            ? "Payment method removed successfully."
+                            : "Failed to remove payment method.");
                     }
                     else
                     {
@@ -647,7 +655,6 @@ static class AccountManagement
                 break;
 
             case 2: // Frequent Flyer Program
-                // var accountIndex = accounts.FindIndex(x => x.Id == account.Id);
                 account = accounts.FirstOrDefault(a => a.Id == account.Id);
 
                 if (account.Miles == null || account.Miles.Count == 0)
@@ -683,7 +690,6 @@ static class AccountManagement
 
                     milesRecord.History += $"\n{(milesRecord.Enrolled ? "Enrolled" : "Unenrolled")} at {DateTime.Now:yyyy-MM-dd-HH:mm:ss}";
 
-                    // accounts[accountIndex] = account;
 
                     updateSuccessful = UserLogin.UserAccountServiceLogic.ManageAccount(
                         account.Id,

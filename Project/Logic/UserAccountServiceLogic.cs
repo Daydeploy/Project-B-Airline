@@ -113,7 +113,7 @@ public class UserAccountServiceLogic
     public bool ManageAccount(int userId, string newEmail = null, string newPassword = null, string newFirstName = null,
         string newLastName = null, string newGender = null, string newNationality = null,
         string newPhoneNumber = null, string newAddress = null, PassportDetailsModel newPassportDetails = null,
-        DateTime? newDateOfBirth = null, List<MilesModel> newMiles = null)
+        DateTime? newDateOfBirth = null, List<MilesModel> newMiles = null, List<PaymentInformationModel> newPaymentInformation = null)
     {
         var account = _accountsLogic.GetById(userId);
         if (account == null)
@@ -151,6 +151,11 @@ public class UserAccountServiceLogic
         if (newMiles != null)
         {
             account.Miles = newMiles;
+        }
+
+        if (newPaymentInformation != null)
+        {
+            account.PaymentInformation = newPaymentInformation;
         }
 
         _accountsLogic.UpdateList(account);
