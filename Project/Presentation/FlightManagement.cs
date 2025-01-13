@@ -855,8 +855,10 @@ static class FlightManagement
                 var purchasedItems = shopUI.DisplaySmallItemsShop(booking.BookingId, booking.Passengers.IndexOf(passenger));
                 passenger.ShopItems.AddRange(purchasedItems);
                 totalBasePrice += (double)purchasedItems.Sum(item => item.Price);
-                BookingLogic.SaveBooking(booking);
             }
+
+            // BookingLogic.SaveBooking(booking);
+
         }
     
         Console.Clear();
@@ -984,6 +986,7 @@ static class FlightManagement
         }
     
         booking.TotalPrice = (int)Math.Round(totalBasePrice);
+        BookingLogic.SaveBooking(booking);
         BookingAccess.WriteAll(BookingAccess.LoadAll());
         
         var (milesEarned, milesEarnedSuccess) = MilesLogic.CalculateMilesFromBooking(UserLogin.UserAccountServiceLogic.CurrentUserId);
@@ -991,7 +994,7 @@ static class FlightManagement
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine("\n╔══════════════════════════════════╗");
-        Console.WriteLine("║      BOOKING COMPLETED           ║");
+        Console.WriteLine("║        BOOKING COMPLETED         ║");
         Console.WriteLine("╚══════════════════════════════════╝\n");
         Console.ResetColor();
     
