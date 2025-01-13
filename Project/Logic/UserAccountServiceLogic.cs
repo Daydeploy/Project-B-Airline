@@ -23,8 +23,8 @@ public class UserAccountServiceLogic
         get { return IsLoggedIn ? _accountsLogic.GetById(CurrentUserId) : null; }
     }
 
-    public bool CreateAccount(string firstName, string lastName, string email, string password, 
-    DateTime dateOfBirth, string gender, string nationality, string phoneNumber, 
+    public bool CreateAccount(string firstName, string lastName, string email, string password,
+    DateTime dateOfBirth, string gender, string nationality, string phoneNumber,
     string address, PassportDetailsModel passportDetails)
     {
         if (string.IsNullOrWhiteSpace(firstName) || string.IsNullOrWhiteSpace(lastName))
@@ -54,7 +54,7 @@ public class UserAccountServiceLogic
         var newAccount = new AccountModel(
             id: newId,
             firstName: firstName,
-            lastName: lastName, 
+            lastName: lastName,
             dateOfBirth: dateOfBirth,
             emailAddress: email,
             password: password,
@@ -146,6 +146,11 @@ public class UserAccountServiceLogic
 
             if (!string.IsNullOrWhiteSpace(newPassportDetails.CountryOfIssue))
                 account.PassportDetails.CountryOfIssue = newPassportDetails.CountryOfIssue;
+        }
+
+        if (newMiles != null)
+        {
+            account.Miles = newMiles;
         }
 
         _accountsLogic.UpdateList(account);

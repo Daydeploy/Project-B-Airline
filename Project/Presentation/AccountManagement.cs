@@ -340,10 +340,10 @@ static class AccountManagement
                     $"Update Nationality       Current: {account.Nationality ?? "Not provided"}",
                     $"Update Phone Number      Current: {account.PhoneNumber ?? "Not provided"}",
                     $"Update Address           Current: {account.Address ?? "Not provided"}",
-                    $"Update Passport Details", 
+                    $"Update Passport Details",
                     "Return to Account Management"
                 };
-                
+
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("\n=== Personal Information Management ===");
                 Console.ResetColor();
@@ -647,51 +647,60 @@ static class AccountManagement
                 break;
 
             case 2: // Frequent Flyer Program
+                // var accountIndex = accounts.FindIndex(x => x.Id == account.Id);
                 account = accounts.FirstOrDefault(a => a.Id == account.Id);
 
-                if (account.Miles != null && account.Miles.Count > 0)
+                if (account.Miles == null || account.Miles.Count == 0)
                 {
-                    var milesRecord = account.Miles[0];
+                    account.Miles = new List<MilesModel> { new MilesModel("Bronze", 0, 0, "Initial enrollment") };
+                }
 
-                    if (milesRecord.Enrolled)
-                    {
-                        Console.WriteLine("\n--- Frequent Flyer Program Details ---");
-                        Console.WriteLine($"Current Level: {milesRecord.Level}");
-                        Console.WriteLine($"Current XP: {milesRecord.Experience}");
-                        Console.WriteLine($"Total Points: {milesRecord.Points}\n");
-                    }
+                var milesRecord = account.Miles[0];
 
-                    Console.WriteLine(milesRecord.Enrolled
+                if (milesRecord.Enrolled)
+                {
+                    Console.WriteLine("\n--- Frequent Flyer Program Details ---");
+                    Console.WriteLine($"Current Level: {milesRecord.Level}");
+                    Console.WriteLine($"Current XP: {milesRecord.Experience}");
+                    Console.WriteLine($"Total Points: {milesRecord.Points}\n");
+                }
+
+                Console.WriteLine(milesRecord.Enrolled
                         ? "You are currently enrolled in the Frequent Flyer Program."
                         : "You are not currently enrolled in the Frequent Flyer Program.");
 
-                    Console.Write(milesRecord.Enrolled
-                        ? "Would you like to unenroll? (Y/N): "
-                        : "Would you like to enroll? (Y/N): ");
+                Console.Write(milesRecord.Enrolled
+                    ? "Would you like to unenroll? (Y/N): "
+                    : "Would you like to enroll? (Y/N): ");
 
-                    string ffpResponse = GetInputWithEsc();
-                    if (ffpResponse == null) return;
+                string ffpResponse = GetInputWithEsc();
+                if (ffpResponse == null) return;
 
-                    if (ffpResponse.Trim().ToUpper() == "Y")
-                    {
-                        // Toggle enrollment status
-                        milesRecord.Enrolled = !milesRecord.Enrolled;
-
-                        updateSuccessful = UserLogin.UserAccountServiceLogic.ManageAccount(
-                            account.Id,
-                            newMiles: account.Miles
-                        );
-
-                        Console.WriteLine(updateSuccessful
-                            ? (milesRecord.Enrolled
-                                ? "Successfully enrolled in the Frequent Flyer Program!"
-                                : "Successfully unenrolled from the Frequent Flyer Program.")
-                            : "Failed to update Frequent Flyer Program status.");
-                    }
-                }
-                else
+                if (ffpResponse.Trim().ToUpper() == "Y")
                 {
-                    Console.WriteLine("Error: Miles information is not available.");
+                    // Toggle enrollment status
+                    milesRecord.Enrolled = !milesRecord.Enrolled;
+
+                    milesRecord.History += $"\n{(milesRecord.Enrolled ? "Enrolled" : "Unenrolled")} at {DateTime.Now:yyyy-MM-dd-HH:mm:ss}";
+
+                    // accounts[accountIndex] = account;
+
+                    updateSuccessful = UserLogin.UserAccountServiceLogic.ManageAccount(
+                        account.Id,
+                        newMiles: account.Miles
+                    );
+
+                    if (updateSuccessful)
+                    {
+                        AccountsAccess.WriteAll(accounts);
+                        Console.WriteLine(milesRecord.Enrolled
+                            ? "Successfully enrolled in the Frequent Flyer Program!"
+                            : "Successfully unenrolled from the Frequent Flyer Program.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Failed to update Frequent Flyer Program status.");
+                    }
                 }
                 break;
 
