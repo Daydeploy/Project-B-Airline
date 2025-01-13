@@ -258,10 +258,10 @@
     "milesDetails": [
       {
         "Enrolled": true,
-        "Level": "",
+        "Level": "Bronze",
         "Experience": 0,
         "Points": 0,
-        "History": ""
+        "History": "\nLevel updated to Bronze at 2025-01-13 11:49:57"
       }
     ],
     "paymentInformation": [
