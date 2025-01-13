@@ -237,5 +237,43 @@
     ],
     "privateJet": null,
     "shoppingCart": []
+  },
+  {
+    "id": 8,
+    "firstName": "Deborah",
+    "lastName": "Teacher",
+    "dateOfBirth": "1995-03-20T00:00:00",
+    "gender": "Female",
+    "nationality": "Irish",
+    "phoneNumber": "0618734257",
+    "address": "Wijnhaven 105",
+    "email": "deborahteacher@hr.com",
+    "password": "Deborah01$",
+    "passportDetails": {
+      "passportNumber": "1634568",
+      "issueDate": "2028-10-10T00:00:00",
+      "expirationDate": "2029-10-10T00:00:00",
+      "countryOfIssue": "Ghana"
+    },
+    "milesDetails": [
+      {
+        "Enrolled": true,
+        "Level": "",
+        "Experience": 0,
+        "Points": 0,
+        "History": ""
+      }
+    ],
+    "paymentInformation": [
+      {
+        "cardHolder": "Deborah",
+        "cardNumber": "1234567888883452",
+        "cVV": "133",
+        "expirationDate": "10/29",
+        "billingAddress": "Wijnhaven 105"
+      }
+    ],
+    "privateJet": null,
+    "shoppingCart": []
   }
 ]
