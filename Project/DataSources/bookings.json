@@ -7507,7 +7507,7 @@
     "bookingId": 808,
     "userId": 1,
     "flightId": 1495,
-    "totalPrice": 1674,
+    "totalPrice": 1644,
     "bookingDate": "2025-01-12T22:30:19.9910734+01:00",
     "passengers": [
       {
@@ -7534,13 +7534,13 @@
     "comfortPackages": null,
     "planeType": null,
     "entertainment": null,
-    "isCheckedIn": false
+    "isCheckedIn": true
   },
   {
     "bookingId": 6001,
     "userId": 1,
     "flightId": 1495,
-    "totalPrice": 1243,
+    "totalPrice": 1213,
     "bookingDate": "2025-01-12T23:09:05.9191644+01:00",
     "passengers": [
       {
@@ -7580,7 +7580,7 @@
     "bookingId": 1866,
     "userId": 1,
     "flightId": 1495,
-    "totalPrice": 1647,
+    "totalPrice": 1697,
     "bookingDate": "2025-01-12T23:23:44.78878+01:00",
     "passengers": [
       {
@@ -7632,7 +7632,7 @@
     "bookingId": 8806,
     "userId": 1,
     "flightId": 1495,
-    "totalPrice": 1243,
+    "totalPrice": 1323,
     "bookingDate": "2025-01-13T00:00:14.9170846+01:00",
     "passengers": [
       {
@@ -7685,6 +7685,333 @@
           }
         ],
         "specialLuggage": "Guitar",
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      }
+    ],
+    "pets": [],
+    "comfortPackages": null,
+    "planeType": null,
+    "entertainment": null,
+    "isCheckedIn": false
+  },
+  {
+    "bookingId": 2032,
+    "userId": 1,
+    "flightId": 0,
+    "totalPrice": 15000,
+    "bookingDate": "2025-01-13T01:11:04.7524039+01:00",
+    "passengers": [
+      {
+        "name": "jamal",
+        "hasPet": false,
+        "petDetails": [],
+        "seatNumber": "PJ1",
+        "hasCheckedBaggage": false,
+        "numberOfBaggage": 0,
+        "shopItems": [],
+        "specialLuggage": "",
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      }
+    ],
+    "pets": [],
+    "comfortPackages": null,
+    "planeType": "Bombardier Learjet 75",
+    "entertainment": null,
+    "isCheckedIn": false
+  },
+  {
+    "bookingId": 2839,
+    "userId": 1,
+    "flightId": 1495,
+    "totalPrice": 1726,
+    "bookingDate": "2025-01-13T01:54:39.2501571+01:00",
+    "passengers": [
+      {
+        "name": "Hamal",
+        "hasPet": false,
+        "petDetails": [],
+        "seatNumber": "3C",
+        "hasCheckedBaggage": true,
+        "numberOfBaggage": 3,
+        "shopItems": [
+          {
+            "name": "Snickers Bar",
+            "price": 2.5,
+            "category": "Snacks \u0026 Drinks",
+            "description": "Standard size, caramel, nougat, and peanuts"
+          }
+        ],
+        "specialLuggage": "",
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      }
+    ],
+    "pets": [],
+    "comfortPackages": null,
+    "planeType": null,
+    "entertainment": null,
+    "isCheckedIn": false
+  },
+  {
+    "bookingId": 3931,
+    "userId": 1,
+    "flightId": 1495,
+    "totalPrice": 1215,
+    "bookingDate": "2025-01-13T02:02:34.7663942+01:00",
+    "passengers": [
+      {
+        "name": "Lebron James",
+        "hasPet": false,
+        "petDetails": [],
+        "seatNumber": "4B",
+        "hasCheckedBaggage": true,
+        "numberOfBaggage": 3,
+        "shopItems": [
+          {
+            "name": "Haribo Gummy Bears",
+            "price": 2.75,
+            "category": "Snacks \u0026 Drinks",
+            "description": "3.5 oz bag, assorted fruit flavors"
+          },
+          {
+            "name": "Haribo Gummy Bears",
+            "price": 2.75,
+            "category": "Snacks \u0026 Drinks",
+            "description": "3.5 oz bag, assorted fruit flavors"
+          }
+        ],
+        "specialLuggage": "",
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      }
+    ],
+    "pets": [],
+    "comfortPackages": null,
+    "planeType": null,
+    "entertainment": null,
+    "isCheckedIn": false
+  },
+  {
+    "bookingId": 5864,
+    "userId": 1,
+    "flightId": 1495,
+    "totalPrice": 1714,
+    "bookingDate": "2025-01-13T02:04:41.9147233+01:00",
+    "passengers": [
+      {
+        "name": "James",
+        "hasPet": false,
+        "petDetails": [],
+        "seatNumber": "1B",
+        "hasCheckedBaggage": true,
+        "numberOfBaggage": 3,
+        "shopItems": [
+          {
+            "name": "Haribo Gummy Bears",
+            "price": 2.75,
+            "category": "Snacks \u0026 Drinks",
+            "description": "3.5 oz bag, assorted fruit flavors"
+          },
+          {
+            "name": "Haribo Gummy Bears",
+            "price": 2.75,
+            "category": "Snacks \u0026 Drinks",
+            "description": "3.5 oz bag, assorted fruit flavors"
+          },
+          {
+            "name": "Haribo Gummy Bears",
+            "price": 2.75,
+            "category": "Snacks \u0026 Drinks",
+            "description": "3.5 oz bag, assorted fruit flavors"
+          }
+        ],
+        "specialLuggage": "",
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      }
+    ],
+    "pets": [],
+    "comfortPackages": null,
+    "planeType": null,
+    "entertainment": null,
+    "isCheckedIn": false
+  },
+  {
+    "bookingId": 6568,
+    "userId": 1,
+    "flightId": 1495,
+    "totalPrice": 1724,
+    "bookingDate": "2025-01-13T02:05:25.3446013+01:00",
+    "passengers": [
+      {
+        "name": "James",
+        "hasPet": false,
+        "petDetails": [],
+        "seatNumber": "2B",
+        "hasCheckedBaggage": true,
+        "numberOfBaggage": 3,
+        "shopItems": [
+          {
+            "name": "Lays Potato Chips",
+            "price": 3.5,
+            "category": "Snacks \u0026 Drinks",
+            "description": "Small bag, Classic or Sour Cream \u0026 Onion flavors"
+          },
+          {
+            "name": "Lays Potato Chips",
+            "price": 3.5,
+            "category": "Snacks \u0026 Drinks",
+            "description": "Small bag, Classic or Sour Cream \u0026 Onion flavors"
+          },
+          {
+            "name": "Lays Potato Chips",
+            "price": 3.5,
+            "category": "Snacks \u0026 Drinks",
+            "description": "Small bag, Classic or Sour Cream \u0026 Onion flavors"
+          }
+        ],
+        "specialLuggage": "",
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      }
+    ],
+    "pets": [],
+    "comfortPackages": null,
+    "planeType": null,
+    "entertainment": null,
+    "isCheckedIn": false
+  },
+  {
+    "bookingId": 1638,
+    "userId": 1,
+    "flightId": 1495,
+    "totalPrice": 1724,
+    "bookingDate": "2025-01-13T02:06:48.1620509+01:00",
+    "passengers": [
+      {
+        "name": "Gabriel",
+        "hasPet": false,
+        "petDetails": [],
+        "seatNumber": "1C",
+        "hasCheckedBaggage": true,
+        "numberOfBaggage": 3,
+        "shopItems": [
+          {
+            "name": "Lays Potato Chips",
+            "price": 3.5,
+            "category": "Snacks \u0026 Drinks",
+            "description": "Small bag, Classic or Sour Cream \u0026 Onion flavors"
+          },
+          {
+            "name": "Lays Potato Chips",
+            "price": 3.5,
+            "category": "Snacks \u0026 Drinks",
+            "description": "Small bag, Classic or Sour Cream \u0026 Onion flavors"
+          },
+          {
+            "name": "Lays Potato Chips",
+            "price": 3.5,
+            "category": "Snacks \u0026 Drinks",
+            "description": "Small bag, Classic or Sour Cream \u0026 Onion flavors"
+          }
+        ],
+        "specialLuggage": "",
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      }
+    ],
+    "pets": [],
+    "comfortPackages": null,
+    "planeType": null,
+    "entertainment": null,
+    "isCheckedIn": false
+  },
+  {
+    "bookingId": 3937,
+    "userId": 1,
+    "flightId": 1495,
+    "totalPrice": 1724,
+    "bookingDate": "2025-01-13T02:09:29.7637881+01:00",
+    "passengers": [
+      {
+        "name": "hamd",
+        "hasPet": false,
+        "petDetails": [],
+        "seatNumber": "1A",
+        "hasCheckedBaggage": true,
+        "numberOfBaggage": 3,
+        "shopItems": [
+          {
+            "name": "Lays Potato Chips",
+            "price": 3.5,
+            "category": "Snacks \u0026 Drinks",
+            "description": "Small bag, Classic or Sour Cream \u0026 Onion flavors"
+          },
+          {
+            "name": "Lays Potato Chips",
+            "price": 3.5,
+            "category": "Snacks \u0026 Drinks",
+            "description": "Small bag, Classic or Sour Cream \u0026 Onion flavors"
+          },
+          {
+            "name": "Lays Potato Chips",
+            "price": 3.5,
+            "category": "Snacks \u0026 Drinks",
+            "description": "Small bag, Classic or Sour Cream \u0026 Onion flavors"
+          }
+        ],
+        "specialLuggage": "",
         "firstName": null,
         "lastName": null,
         "dateOfBirth": "0001-01-01T00:00:00",

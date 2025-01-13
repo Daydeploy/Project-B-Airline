@@ -821,8 +821,8 @@ static class FlightManagement
         double totalBasePrice = 0;
         const int BAGGAGE_PRICE = 30;
     
-        BookingModel booking = BookingLogic.CreateBooking(UserLogin.UserAccountServiceLogic.CurrentUserId,
-            departureFlightId, passengerDetails, new List<PetModel>());
+        BookingModel booking = BookingLogic.CreateBooking(userId: UserLogin.UserAccountServiceLogic.CurrentUserId, flightId: departureFlight.FlightId, passengerDetails: passengerDetails,
+            petDetails: new List<PetModel>(), includeInsurance: includeInsurance, isPrivateJet: false);
     
         if (booking == null)
         {
@@ -898,7 +898,7 @@ static class FlightManagement
     
         if (includeInsurance)
         {
-            double insuranceCost = passengerDetails.Count * 10.0;
+            double insuranceCost = 10;
             totalBasePrice += insuranceCost;
             Console.WriteLine($"Cancellation Insurance: {insuranceCost:C}");
         }
@@ -1203,6 +1203,7 @@ static class FlightManagement
             0, // special flightID for private jets
             passengers,
             new List<PetModel>(), // no pets
+            true,
             true,
             jetType
         );
