@@ -166,7 +166,8 @@ static class FlightDisplay
         TimeSpan duration = arrivalDateTime - departureDateTime;
 
         Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine($"Booking ID: {booking.BookingId} | Flight ID: {flight.FlightId} | Aircraft type: {flight.PlaneType}");
+        Console.WriteLine(
+            $"Booking ID: {booking.BookingId} | Flight ID: {flight.FlightId} | Aircraft type: {flight.PlaneType}");
         Console.ResetColor();
 
         Console.Write($"Route: {flight.Origin} ");
@@ -195,7 +196,7 @@ static class FlightDisplay
             }
         }
         else
-        {   
+        {
             Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.WriteLine("\n\tNo entertainment purchased");
             Console.ResetColor();
@@ -230,10 +231,10 @@ static class FlightDisplay
 
             calculatedTotal += seatOption.Price;
             Console.WriteLine($"\nBase ticket price for {passenger.Name} ({seatClass}): {seatOption.Price:C}");
-            
+
             if (passenger.HasCheckedBaggage)
             {
-                decimal baggageCost = (passenger.NumberOfBaggage - 1) * 30m; // First bag free
+                decimal baggageCost = (passenger.NumberOfBaggage - 1) * 30m;
                 calculatedTotal += baggageCost;
                 Console.WriteLine($"Baggage fee ({passenger.NumberOfBaggage} pieces): {baggageCost:C}");
             }
@@ -262,6 +263,7 @@ static class FlightDisplay
             calculatedTotal += entertainmentTotal;
             Console.WriteLine($"\nEntertainment total: {entertainmentTotal:C}");
         }
+
         Console.WriteLine(new string('─', 50));
         Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine($"Calculated Total: {booking.TotalPrice:C}");
@@ -330,8 +332,7 @@ static class FlightDisplay
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
                 if (passenger.HasCheckedBaggage)
                 {
-                    double baggageCost = (passenger.NumberOfBaggage - 1) * 30;
-                    Console.Write($" | Baggage: {passenger.NumberOfBaggage} piece(s) ({baggageCost:F2} EUR)");
+                    Console.Write($" | Baggage: {passenger.NumberOfBaggage} piece(s)");
                 }
                 else
                 {

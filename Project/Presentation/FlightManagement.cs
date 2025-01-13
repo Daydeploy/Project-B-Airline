@@ -13,6 +13,7 @@ static class FlightManagement
         Console.Clear();
 
         string origin = SelectOrigin(flights);
+
         if (string.IsNullOrEmpty(origin)) return;
 
         string destination = SelectDestination(flights, origin);
