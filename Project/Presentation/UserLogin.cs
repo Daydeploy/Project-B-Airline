@@ -72,7 +72,7 @@ static class UserLogin
             "Manage Account",
             "View Airport Information",
             "Browse Destinations",
-            "Show Seat Upgrade Options",
+            // "Show Seat Upgrade Options",
             "Advanced flight booking",
             "Add Comfort Packages",
             "Add Entertainment",
@@ -107,22 +107,22 @@ static class UserLogin
                 case 6: // Browse Destinations
                     AirportInformation.BrowseDestinations();
                     break;
-                case 7: // Show Seat Upgrade Options
-                    SeatUpgradeOptions.ShowSeatUpgradeOptions();
-                    break;
-                case 8: // Advanced flight booking
+                // case 7: // Show Seat Upgrade Options
+                //     SeatUpgradeOptions.ShowSeatUpgradeOptions();
+                //     break;
+                case 7: // Advanced flight booking
                     FlightManagement.ShowAvailableFlights();
                     break;
-                case 9: // Add Comfort Packages
+                case 8: // Add Comfort Packages
                     PackagesUI.ShowPackages();
                     break;
-                case 10: // Add Entertainment
+                case 9: // Add Entertainment
                     EntertainmentUI.ShowEntertainment();
                     break;
-                case 11: // Finance panel
+                case 10: // Finance panel
                     FinanceUserUI.FinanceMainMenu();
                     break;
-                case 12: // Logout
+                case 11: // Logout
                     Console.Clear();
                     UserAccountServiceLogic.Logout();
                     Console.WriteLine("You have successfully logged out.");

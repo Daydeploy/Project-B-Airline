@@ -331,18 +331,22 @@ static class AccountManagement
 
                 string[] personalOptions =
                 {
-                "Update Email",
-                "Update Password",
-                "Update First Name",
-                "Update Last Name",
-                "Update Date of Birth",
-                "Update Gender",
-                "Update Nationality",
-                "Update Phone Number",
-                "Update Address",
-                "Update Passport Details",
-                "Return to Account Management"
-            };
+                    $"Update Email             Current: {account.EmailAddress}",
+                    $"Update Password          Current: {"*".PadRight(account.Password.Length, '*')}",
+                    $"Update First Name        Current: {account.FirstName}",
+                    $"Update Last Name         Current: {account.LastName}",
+                    $"Update Date of Birth     Current: {account.DateOfBirth:dd-MM-yyyy}",
+                    $"Update Gender            Current: {account.Gender ?? "Not provided"}",
+                    $"Update Nationality       Current: {account.Nationality ?? "Not provided"}",
+                    $"Update Phone Number      Current: {account.PhoneNumber ?? "Not provided"}",
+                    $"Update Address           Current: {account.Address ?? "Not provided"}",
+                    $"Update Passport Details", 
+                    "Return to Account Management"
+                };
+                
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("\n=== Personal Information Management ===");
+                Console.ResetColor();
 
                 int personalOptionIndex = MenuNavigationService.NavigateMenu(personalOptions, "Personal Details");
 
