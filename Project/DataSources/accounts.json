@@ -9,7 +9,7 @@
     "phoneNumber": null,
     "address": null,
     "email": "finance",
-    "password": "password",
+    "password": "FinancePassword0#",
     "passportDetails": null,
     "milesDetails": [],
     "paymentInformation": null,
@@ -152,7 +152,7 @@
     "phoneNumber": null,
     "address": null,
     "email": "admin",
-    "password": "password",
+    "password": "AdminPassword0#",
     "passportDetails": null,
     "milesDetails": [
       {
