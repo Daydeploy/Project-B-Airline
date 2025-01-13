@@ -720,6 +720,7 @@ static class FlightManagement
             seatSelector.CommitTemporarySeats();
             return passengerDetails;
         }
+        // try catch exception, aangezien het in een try catch block is zijn we van mening dat de exception kan blijven
         catch (Exception)
         {
             seatSelector.ClearTemporarySeats();
