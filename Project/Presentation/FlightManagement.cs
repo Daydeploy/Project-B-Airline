@@ -565,13 +565,16 @@ static class FlightManagement
         double insuranceCostPerPassenger = 10.0;
         double totalInsuranceCost = insuranceCostPerPassenger * passengerCount;
 
-        Console.WriteLine($"\nWould you like to add cancellation insurance for your {flightType} flight?");
-        Console.WriteLine(
-            $"Cost: {insuranceCostPerPassenger:F2} EUR per passenger, Total: {totalInsuranceCost:F2} EUR");
         Console.WriteLine("Enter Y to add insurance, or N to skip:");
-
-        string response = Console.ReadLine()?.Trim().ToLower();
-        return response == "y";
+        string? response = Console.ReadLine()?.Trim().ToLower();
+        bool addInsurance = false;
+        
+        if (response == "y" || response == "yes")
+        {
+            addInsurance = true;
+        }
+        
+        return addInsurance;
     }
 
     private static readonly string[] petTypes = { "Dog", "Cat", "Bird", "Rabbit", "Hamster" };
@@ -821,8 +824,9 @@ static class FlightManagement
         double totalBasePrice = 0;
         const int BAGGAGE_PRICE = 30;
     
-        BookingModel booking = BookingLogic.CreateBooking(userId: UserLogin.UserAccountServiceLogic.CurrentUserId, flightId: departureFlight.FlightId, passengerDetails: passengerDetails,
-            petDetails: new List<PetModel>(), includeInsurance: includeInsurance, isPrivateJet: false);
+        BookingModel booking = BookingLogic.CreateBooking(userId: UserLogin.UserAccountServiceLogic.CurrentUserId, flightId: departureFlight.FlightId, passengerDetails: passengerDetails, 
+            petDetails: new List<PetModel>(), includeInsurance: includeInsurance, isPrivateJet: false
+        );
     
         if (booking == null)
         {
@@ -839,10 +843,17 @@ static class FlightManagement
     
             if (wantsItem)
             {
+                if (!BookingLogic.SaveBooking(booking))
+                {
+                    Console.WriteLine("Error: Unable to save booking. Shop purchase cancelled.");
+                    continue;
+                }
+
                 var shopUI = new ShopUI();
                 var purchasedItems = shopUI.DisplaySmallItemsShop(booking.BookingId, booking.Passengers.IndexOf(passenger));
                 passenger.ShopItems.AddRange(purchasedItems);
                 totalBasePrice += (double)purchasedItems.Sum(item => item.Price);
+                BookingLogic.SaveBooking(booking);
             }
         }
     
@@ -871,7 +882,7 @@ static class FlightManagement
             if (passenger.HasCheckedBaggage)
             {
                 double passengerBaggageCost = (passenger.NumberOfBaggage - 1) * BAGGAGE_PRICE;
-                totalBaggageCost += passengerBaggageCost;
+                // totalBaggageCost += passengerBaggageCost;
                 Console.WriteLine($"Checked Baggage: {passenger.NumberOfBaggage} piece(s) ({passengerBaggageCost:C})");
             }
     
@@ -892,7 +903,7 @@ static class FlightManagement
         Console.ForegroundColor = ConsoleColor.Magenta;
         Console.WriteLine("\nPrice Summary:");
         Console.ResetColor();
-        Console.WriteLine($"Base Price: {totalBasePrice - totalBaggageCost:C}");
+        Console.WriteLine($"Base Price: {totalBasePrice:C}");
         if (totalBaggageCost > 0)
             Console.WriteLine($"Total Baggage Cost: {totalBaggageCost:C}");
     
@@ -902,6 +913,7 @@ static class FlightManagement
             totalBasePrice += insuranceCost;
             Console.WriteLine($"Cancellation Insurance: {insuranceCost:C}");
         }
+
     
         int roundedTotalPrice = (int)Math.Round(totalBasePrice);
     

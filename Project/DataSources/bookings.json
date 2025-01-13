@@ -8028,5 +8028,388 @@
     "planeType": null,
     "entertainment": null,
     "isCheckedIn": false
+  },
+  {
+    "bookingId": 615,
+    "userId": 1,
+    "flightId": 1495,
+    "totalPrice": 1220,
+    "bookingDate": "2025-01-13T09:19:06.022087+01:00",
+    "passengers": [
+      {
+        "name": "Sil",
+        "hasPet": false,
+        "petDetails": [],
+        "seatNumber": "7A",
+        "hasCheckedBaggage": true,
+        "numberOfBaggage": 3,
+        "shopItems": [],
+        "specialLuggage": "",
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      }
+    ],
+    "pets": [],
+    "comfortPackages": null,
+    "planeType": null,
+    "entertainment": null,
+    "isCheckedIn": false
+  },
+  {
+    "bookingId": 1723,
+    "userId": 1,
+    "flightId": 1495,
+    "totalPrice": 1160,
+    "bookingDate": "2025-01-13T09:20:12.7158677+01:00",
+    "passengers": [
+      {
+        "name": "Sil",
+        "hasPet": false,
+        "petDetails": [],
+        "seatNumber": "8A",
+        "hasCheckedBaggage": false,
+        "numberOfBaggage": 0,
+        "shopItems": [],
+        "specialLuggage": "",
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      }
+    ],
+    "pets": [],
+    "comfortPackages": null,
+    "planeType": null,
+    "entertainment": null,
+    "isCheckedIn": false
+  },
+  {
+    "bookingId": 3504,
+    "userId": 1,
+    "flightId": 1495,
+    "totalPrice": 1724,
+    "bookingDate": "2025-01-13T09:32:07.0746079+01:00",
+    "passengers": [
+      {
+        "name": "Hitler",
+        "hasPet": false,
+        "petDetails": [],
+        "seatNumber": "2A",
+        "hasCheckedBaggage": true,
+        "numberOfBaggage": 3,
+        "shopItems": [],
+        "specialLuggage": "",
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      }
+    ],
+    "pets": [],
+    "comfortPackages": null,
+    "planeType": null,
+    "entertainment": null,
+    "isCheckedIn": false
+  },
+  {
+    "bookingId": 8899,
+    "userId": 1,
+    "flightId": 1495,
+    "totalPrice": 1764,
+    "bookingDate": "2025-01-13T09:50:44.1892727+01:00",
+    "passengers": [
+      {
+        "name": "Adolf",
+        "hasPet": true,
+        "petDetails": [
+          {
+            "petId": 0,
+            "bookingId": 0,
+            "type": "Dog",
+            "size": null,
+            "weight": 10,
+            "storageLocation": "Cabin",
+            "maxWeight": 0,
+            "seatingLocation": null,
+            "fee": null
+          }
+        ],
+        "seatNumber": "2E",
+        "hasCheckedBaggage": true,
+        "numberOfBaggage": 3,
+        "shopItems": [
+          {
+            "name": "Lays Potato Chips",
+            "price": 3.5,
+            "category": "Snacks \u0026 Drinks",
+            "description": "Small bag, Classic or Sour Cream \u0026 Onion flavors"
+          },
+          {
+            "name": "Lays Potato Chips",
+            "price": 3.5,
+            "category": "Snacks \u0026 Drinks",
+            "description": "Small bag, Classic or Sour Cream \u0026 Onion flavors"
+          },
+          {
+            "name": "Lays Potato Chips",
+            "price": 3.5,
+            "category": "Snacks \u0026 Drinks",
+            "description": "Small bag, Classic or Sour Cream \u0026 Onion flavors"
+          }
+        ],
+        "specialLuggage": "Gas Bottles",
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      }
+    ],
+    "pets": [],
+    "comfortPackages": null,
+    "planeType": null,
+    "entertainment": null,
+    "isCheckedIn": false
+  },
+  {
+    "bookingId": 8899,
+    "userId": 1,
+    "flightId": 1495,
+    "totalPrice": 1764,
+    "bookingDate": "2025-01-13T09:50:44.1892727+01:00",
+    "passengers": [
+      {
+        "name": "Adolf",
+        "hasPet": true,
+        "petDetails": [
+          {
+            "petId": 0,
+            "bookingId": 0,
+            "type": "Dog",
+            "size": null,
+            "weight": 10,
+            "storageLocation": "Cabin",
+            "maxWeight": 0,
+            "seatingLocation": null,
+            "fee": null
+          }
+        ],
+        "seatNumber": "2E",
+        "hasCheckedBaggage": true,
+        "numberOfBaggage": 3,
+        "shopItems": [
+          {
+            "name": "Lays Potato Chips",
+            "price": 3.5,
+            "category": "Snacks \u0026 Drinks",
+            "description": "Small bag, Classic or Sour Cream \u0026 Onion flavors"
+          },
+          {
+            "name": "Lays Potato Chips",
+            "price": 3.5,
+            "category": "Snacks \u0026 Drinks",
+            "description": "Small bag, Classic or Sour Cream \u0026 Onion flavors"
+          },
+          {
+            "name": "Lays Potato Chips",
+            "price": 3.5,
+            "category": "Snacks \u0026 Drinks",
+            "description": "Small bag, Classic or Sour Cream \u0026 Onion flavors"
+          }
+        ],
+        "specialLuggage": "Gas Bottles",
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      }
+    ],
+    "pets": [],
+    "comfortPackages": null,
+    "planeType": null,
+    "entertainment": null,
+    "isCheckedIn": false
+  },
+  {
+    "bookingId": 9672,
+    "userId": 1,
+    "flightId": 1495,
+    "totalPrice": 1714,
+    "bookingDate": "2025-01-13T09:54:32.9985484+01:00",
+    "passengers": [
+      {
+        "name": "Friso",
+        "hasPet": false,
+        "petDetails": [],
+        "seatNumber": "1I",
+        "hasCheckedBaggage": true,
+        "numberOfBaggage": 3,
+        "shopItems": [
+          {
+            "name": "Lays Potato Chips",
+            "price": 3.5,
+            "category": "Snacks \u0026 Drinks",
+            "description": "Small bag, Classic or Sour Cream \u0026 Onion flavors"
+          },
+          {
+            "name": "Lays Potato Chips",
+            "price": 3.5,
+            "category": "Snacks \u0026 Drinks",
+            "description": "Small bag, Classic or Sour Cream \u0026 Onion flavors"
+          },
+          {
+            "name": "Lays Potato Chips",
+            "price": 3.5,
+            "category": "Snacks \u0026 Drinks",
+            "description": "Small bag, Classic or Sour Cream \u0026 Onion flavors"
+          }
+        ],
+        "specialLuggage": "",
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      }
+    ],
+    "pets": [],
+    "comfortPackages": null,
+    "planeType": null,
+    "entertainment": null,
+    "isCheckedIn": false
+  },
+  {
+    "bookingId": 9672,
+    "userId": 1,
+    "flightId": 1495,
+    "totalPrice": 1714,
+    "bookingDate": "2025-01-13T09:54:32.9985484+01:00",
+    "passengers": [
+      {
+        "name": "Friso",
+        "hasPet": false,
+        "petDetails": [],
+        "seatNumber": "1I",
+        "hasCheckedBaggage": true,
+        "numberOfBaggage": 3,
+        "shopItems": [
+          {
+            "name": "Lays Potato Chips",
+            "price": 3.5,
+            "category": "Snacks \u0026 Drinks",
+            "description": "Small bag, Classic or Sour Cream \u0026 Onion flavors"
+          },
+          {
+            "name": "Lays Potato Chips",
+            "price": 3.5,
+            "category": "Snacks \u0026 Drinks",
+            "description": "Small bag, Classic or Sour Cream \u0026 Onion flavors"
+          },
+          {
+            "name": "Lays Potato Chips",
+            "price": 3.5,
+            "category": "Snacks \u0026 Drinks",
+            "description": "Small bag, Classic or Sour Cream \u0026 Onion flavors"
+          }
+        ],
+        "specialLuggage": "",
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      }
+    ],
+    "pets": [],
+    "comfortPackages": null,
+    "planeType": null,
+    "entertainment": null,
+    "isCheckedIn": false
+  },
+  {
+    "bookingId": 4926,
+    "userId": 1,
+    "flightId": 1495,
+    "totalPrice": 1724,
+    "bookingDate": "2025-01-13T10:15:35.0637496+01:00",
+    "passengers": [
+      {
+        "name": "Uis",
+        "hasPet": false,
+        "petDetails": [],
+        "seatNumber": "1E",
+        "hasCheckedBaggage": true,
+        "numberOfBaggage": 3,
+        "shopItems": [
+          {
+            "name": "Lays Potato Chips",
+            "price": 3.5,
+            "category": "Snacks \u0026 Drinks",
+            "description": "Small bag, Classic or Sour Cream \u0026 Onion flavors"
+          },
+          {
+            "name": "Lays Potato Chips",
+            "price": 3.5,
+            "category": "Snacks \u0026 Drinks",
+            "description": "Small bag, Classic or Sour Cream \u0026 Onion flavors"
+          },
+          {
+            "name": "Lays Potato Chips",
+            "price": 3.5,
+            "category": "Snacks \u0026 Drinks",
+            "description": "Small bag, Classic or Sour Cream \u0026 Onion flavors"
+          }
+        ],
+        "specialLuggage": "",
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      }
+    ],
+    "pets": [],
+    "comfortPackages": null,
+    "planeType": null,
+    "entertainment": null,
+    "isCheckedIn": false
   }
 ]

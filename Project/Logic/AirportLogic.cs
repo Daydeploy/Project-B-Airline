@@ -42,34 +42,35 @@ public class AirportLogic
         return true;
     }
 
-    public bool DeleteAirport(string airportCode)
-    {
-        // Zoek de luchthaven die verwijderd moet worden en caps etc worden ignored
-        var airportToDelete = _airports.FirstOrDefault(a => a.Code.Equals(airportCode, StringComparison.OrdinalIgnoreCase));
-
-        // als de airport al niet bestaat returned die gewoon false
-        if (airportToDelete == null)
-            return false;
-
-        // Dit verwijderd de airport uit de airport list
-        _airports.Remove(airportToDelete);
-
-        // Dit slaat de nieuwe airport list op
-        AirportAccess.WriteAllAirports(_airports);
-
-        // dit loadt alle flights uit de json
-        var flights = FlightsAccess.LoadAll();
-
-        // filteren op de luchthaven die verwijderd moet worden
-        var updatedFlights = flights.Where(flight => 
-            !flight.Origin.Equals(airportToDelete.Name, StringComparison.OrdinalIgnoreCase) &&
-            !flight.Destination.Equals(airportToDelete.Name, StringComparison.OrdinalIgnoreCase))
-            .ToList();
-
-        // slaat de nieuwe flight list op dus alle flights die niet verwijderd moeten worden showed die dan
-        FlightsAccess.WriteAll(updatedFlights);
-
-        // als alles goed gegaan is returned die true
-        return true;
-    }
+    // public bool DeleteAirport(string airportCode)
+    // {
+    //     // Find airport to delete using code
+    //     var airportToDelete = _airports.FirstOrDefault(a => 
+    //         a.Code.Equals(airportCode, StringComparison.OrdinalIgnoreCase));
+    
+    //     if (airportToDelete == null)
+    //         return false;
+    
+    //     // Remove airport from airports list
+    //     _airports.Remove(airportToDelete);
+    //     AirportAccess.WriteAllAirports(_airports);
+    
+    //     // Load all flights and bookings
+    //     var flights = FlightsAccess.LoadAll();
+    //     var bookings = BookingAccess.LoadAll();
+    //     var bookedFlightIds = bookings.Select(b => b.FlightId).ToList();
+    
+    //     // Filter flights - keep only:
+    //     // 1. Flights not connected to deleted airport OR
+    //     // 2. Flights that have existing bookings
+    //     var updatedFlights = flights.Where(flight => 
+    //         (!flight.OriginCode.Equals(airportToDelete.Code, StringComparison.OrdinalIgnoreCase) &&
+    //         !flight.DestinationCode.Equals(airportToDelete.Code, StringComparison.OrdinalIgnoreCase)) ||
+    //         bookedFlightIds.Contains(flight.FlightId)
+    //     ).ToList();
+    
+    //     // Save updated flights list
+    //     FlightsAccess.WriteAll(updatedFlights);
+    //     return true;
+    // }
 }

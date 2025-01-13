@@ -63,11 +63,19 @@ public class BookingLogic
             newBooking.PlaneType = jetType;
         }
 
-        _bookings.Add(newBooking);
-        BookingAccess.WriteAll(_bookings);
+        // _bookings.Add(newBooking);
+        // BookingAccess.WriteAll(_bookings);
         return newBooking;
     }
 
+    public static bool SaveBooking(BookingModel booking)
+    {
+        if (booking == null) return false;
+        _bookings.Add(booking);
+        BookingAccess.WriteAll(_bookings);
+        return true;
+    }
+    
     private static int GenerateBookingId()
     {
         int bookingId;
