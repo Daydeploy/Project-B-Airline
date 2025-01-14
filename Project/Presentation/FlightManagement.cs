@@ -904,7 +904,7 @@ static class FlightManagement
 
 
         int roundedTotalPrice = (int)Math.Round(totalBasePrice);
-        BookingLogic.SaveBooking(booking);
+        // BookingLogic.SaveBooking(booking);
 
         var accounts = AccountsAccess.LoadAll();
         var currentAccount = accounts.FirstOrDefault(a => a.Id == UserLogin.UserAccountServiceLogic.CurrentUserId);

@@ -49,119 +49,130 @@ public class FinanceUserUI
         }
     }
 
-    private static void ShowPurchaseDetails(BookingModel booking, bool showVAT = true)
+    private static bool ShowPurchaseDetails(BookingModel booking, bool showVAT = true)
     {
-        if (booking == null) return;
-            
-        Console.Clear();
-
-        Console.WriteLine(new string('═', Console.WindowWidth - 1));
-        Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine("\nNavigation:");
-        Console.WriteLine("← Previous Page  |  → Next Page  ");
-        Console.ResetColor();
-
-        Console.ForegroundColor = ConsoleColor.Cyan;
-        Console.WriteLine("\n╔════════════════════════════════════╗");
-        Console.WriteLine("║         BOOKING DETAILS            ║");
-        Console.WriteLine("╚════════════════════════════════════╝\n");
-        Console.ResetColor();
-
-        Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine($"Booking ID: {booking.BookingId}");
-        Console.WriteLine($"Date: {booking.BookingDate:dd MMMM yyyy}");
-        Console.WriteLine($"Time: {booking.BookingDate:HH:mm}");
-        Console.ResetColor();
+        if (booking == null) return false;
         
-        Console.WriteLine(new string('─', Console.WindowWidth - 1));
-        
-        int calculatedTotal = 0;
-
-        if (booking.FlightId == 0)
+        while (true)
         {
-            Console.ForegroundColor = ConsoleColor.Magenta;
-            Console.WriteLine($"\nPrivate Jet Charter: {booking.PlaneType}");
+            Console.Clear();
+
+            Console.WriteLine(new string('═', Console.WindowWidth - 1));
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("\nNavigation:");
+            Console.WriteLine("← Previous Page  |  → Next Page  ");
+            Console.WriteLine("ESC: Exit to Menu\n");
             Console.ResetColor();
-            calculatedTotal = booking.TotalPrice;
-        }
-        else 
-        {
-            var flight = new FlightsLogic().GetFlightsById(booking.FlightId);
-            if (flight == null)
+
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("\n╔════════════════════════════════════╗");
+            Console.WriteLine("║         BOOKING DETAILS            ║");
+            Console.WriteLine("╚════════════════════════════════════╝\n");
+            Console.ResetColor();
+
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine($"Booking ID: {booking.BookingId}");
+            Console.WriteLine($"Date: {booking.BookingDate:dd MMMM yyyy}");
+            Console.WriteLine($"Time: {booking.BookingDate:HH:mm}");
+            Console.ResetColor();
+        
+            Console.WriteLine(new string('─', Console.WindowWidth - 1));
+        
+            int calculatedTotal = 0;
+
+            if (booking.FlightId == 0)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Error: Flight details not found");
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.WriteLine($"\nPrivate Jet Charter: {booking.PlaneType}");
                 Console.ResetColor();
-                return;
+                calculatedTotal = booking.TotalPrice;
             }
-
-            calculatedTotal = BookingLogic.CalculateTotalPrice(
-                flight.Destination, 
-                booking.Passengers,
-                BookingLogic.HasInsurance
-            );
-
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"Flight Details:");
-            Console.ResetColor();
-            Console.WriteLine($"From: {flight.Origin} to {flight.Destination}");
-            Console.WriteLine($"Departure: {DateTime.Parse(flight.DepartureTime):dd MMM yyyy HH:mm}");
-
-            if (booking.Passengers?.Any() == true)
+            else 
             {
-                Console.WriteLine(new string('─', Console.WindowWidth - 1));
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("\nPurchased Items:");
-                Console.ResetColor();
-
-                foreach (var passenger in booking.Passengers)
+                var flight = new FlightsLogic().GetFlightsById(booking.FlightId);
+                if (flight == null)
                 {
-                    if (passenger.ShopItems?.Any() == true)
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Error: Flight details not found");
+                    Console.ResetColor();
+                    return false;
+                }
+
+                calculatedTotal = BookingLogic.CalculateTotalPrice(
+                    flight.Destination, 
+                    booking.Passengers,
+                    BookingLogic.HasInsurance
+                );
+
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"Flight Details:");
+                Console.ResetColor();
+                Console.WriteLine($"From: {flight.Origin} to {flight.Destination}");
+                Console.WriteLine($"Departure: {DateTime.Parse(flight.DepartureTime):dd MMM yyyy HH:mm}");
+
+                if (booking.Passengers?.Any() == true)
+                {
+                    Console.WriteLine(new string('─', Console.WindowWidth - 1));
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("\nPurchased Items:");
+                    Console.ResetColor();
+
+                    foreach (var passenger in booking.Passengers)
                     {
-                        Console.WriteLine($"\n{passenger.Name}:");
-                        foreach (var item in passenger.ShopItems)
+                        if (passenger.ShopItems?.Any() == true)
                         {
-                            Console.WriteLine($"  • {item.Name}: €{item.Price:N2}");
+                            Console.WriteLine($"\n{passenger.Name}:");
+                            foreach (var item in passenger.ShopItems)
+                            {
+                                Console.WriteLine($"  • {item.Name}: €{item.Price:N2}");
+                            }
                         }
+                    }
+                }
+
+                if (booking.Entertainment?.Any() == true)
+                {
+                    Console.WriteLine(new string('─', Console.WindowWidth - 1));
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("\nEntertainment Purchases:");
+                    Console.ResetColor();
+                
+                    foreach (var item in booking.Entertainment)
+                    {
+                        Console.WriteLine($"  • {item.Name}: €{item.Cost:N2}");
                     }
                 }
             }
 
-            if (booking.Entertainment?.Any() == true)
-            {
-                Console.WriteLine(new string('─', Console.WindowWidth - 1));
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("\nEntertainment Purchases:");
-                Console.ResetColor();
-                
-                foreach (var item in booking.Entertainment)
-                {
-                    Console.WriteLine($"  • {item.Name}: €{item.Cost:N2}");
-                }
-            }
-        }
-
-        Console.WriteLine(new string('═', Console.WindowWidth - 1));
-        Console.ForegroundColor = ConsoleColor.Cyan;
-        Console.WriteLine("\nPrice Summary:");
-        Console.ResetColor();
-
-        if (showVAT)
-        {
-            decimal vat = calculatedTotal * 0.21m;
-            decimal totalWithVAT = calculatedTotal + vat;
-
-            Console.WriteLine($"Subtotal:          €{calculatedTotal:N2}");
-            Console.WriteLine($"VAT (21%):         €{vat:N2}");
-            Console.WriteLine(new string('─', 40));
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"Total with VAT:    €{totalWithVAT:N2}");
+            Console.WriteLine(new string('═', Console.WindowWidth - 1));
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("\nPrice Summary:");
             Console.ResetColor();
-        }
 
-        Console.WriteLine(new string('═', Console.WindowWidth - 1));
-        Console.WriteLine("\nPress any key to continue...");
-        Console.ReadKey();
+            if (showVAT)
+            {
+                decimal vat = calculatedTotal * 0.21m;
+                decimal totalWithVAT = calculatedTotal + vat;
+
+                Console.WriteLine($"Subtotal:          €{calculatedTotal:N2}");
+                Console.WriteLine($"VAT (21%):         €{vat:N2}");
+                Console.WriteLine(new string('─', 40));
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"Total with VAT:    €{totalWithVAT:N2}");
+                Console.ResetColor();
+            }
+
+            Console.WriteLine(new string('═', Console.WindowWidth - 1));
+            Console.WriteLine("\nPress ESC to return to menu, or any other key to continue...");
+        
+            var key = Console.ReadKey(true);
+            if (key.Key == ConsoleKey.Escape)
+            {
+                return true; // Signal to caller that user wants to exit
+            }
+        
+            return false; // Signal to continue normal flow
+        }
     }
         
     private static void ShowSpendingAnalysis()
@@ -535,7 +546,10 @@ public class FinanceUserUI
         decimal totalAmount = 0;
         foreach (var booking in bookings)
         {
-            ShowPurchaseDetails(booking);
+            if (ShowPurchaseDetails(booking))
+            {
+                return; 
+            }
             totalAmount += booking.TotalPrice;
             Console.WriteLine(new string('=', 40));
         }

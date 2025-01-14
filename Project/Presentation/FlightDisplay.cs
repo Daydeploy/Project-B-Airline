@@ -10,7 +10,6 @@ static class FlightDisplay
         { "Airbus A330", 75000 }
     };
 
-    // Add this new method
     private static (int usedWeight, int maxWeight) GetFlightWeightInfo(FlightModel flight)
     {
         var bookings = BookingAccess.LoadAll()
@@ -53,7 +52,6 @@ static class FlightDisplay
         Console.WriteLine(new string('─', Console.WindowWidth - 1));
     }
 
-    // Draws the header for the flight table
     public static void DrawTableHeader()
     {
         Console.WriteLine(new string('─', Console.WindowWidth - 1));
@@ -64,7 +62,6 @@ static class FlightDisplay
         Console.WriteLine(new string('─', Console.WindowWidth - 1));
     }
 
-    // Displays details of a single flight in a formatted manner
     public static void DisplayFlightDetails(FlightModel flight)
     {
         DateTime departureDateTime = DateTime.Parse(flight.DepartureTime);
@@ -203,6 +200,27 @@ static class FlightDisplay
         }
 
         Console.WriteLine(new string('-', 30));
+
+        Console.WriteLine("Purchased Comfort Packages:");
+        if (booking.ComfortPackages?.Any() == true)
+        {
+            foreach (var package in booking.ComfortPackages)
+            {
+                if (package != null)
+                {
+                    Console.WriteLine($" - {package.Name} | Price: {package.Cost} EUR");
+                }
+            }
+        }
+        else
+        {
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine("\n\tNo comport packages purchased");
+            Console.ResetColor();
+        }
+
+        Console.WriteLine(new string('-', 30));
+
         if (booking.Passengers?.Any() == true)
         {
             Console.WriteLine("\nPurchased items:\n");
