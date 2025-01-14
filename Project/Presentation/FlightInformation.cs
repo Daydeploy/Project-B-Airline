@@ -74,7 +74,7 @@ static class FlightInformation
                 "Back to Menu"
             };
 
-            int selectedOption = MenuNavigationService.NavigateMenu(editOptions, "Select field to edit:");
+            int selectedOption = MenuNavigationServiceLogic.NavigateMenu(editOptions, "Select field to edit:");
             if (selectedOption == -1 || selectedOption == editOptions.Length - 1) return;
 
             if (selectedOption == editOptions.Length - 2)
@@ -303,7 +303,7 @@ static class FlightInformation
 
         Console.WriteLine("\nSelect plane type:");
         string[] planeTypes = GetAvailablePlaneTypes();
-        int selectedIndex = MenuNavigationService.NavigateMenu(planeTypes, "Available Aircraft");
+        int selectedIndex = MenuNavigationServiceLogic.NavigateMenu(planeTypes, "Available Aircraft");
         
         if (selectedIndex == -1)
         {

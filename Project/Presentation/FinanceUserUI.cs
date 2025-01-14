@@ -27,7 +27,7 @@ public class FinanceUserUI
 
         while (true)
         {
-            int selectedMenuIndex = MenuNavigationService.NavigateMenu(financeMenuOptions, "Personal Finance Panel");
+            int selectedMenuIndex = MenuNavigationServiceLogic.NavigateMenu(financeMenuOptions, "Personal Finance Panel");
 
             switch (selectedMenuIndex)
             {
@@ -213,7 +213,7 @@ public class FinanceUserUI
 
         while (true)
         {
-            int selectedIndex = MenuNavigationService.NavigateMenu(periodOptions, "Select Period View");
+            int selectedIndex = MenuNavigationServiceLogic.NavigateMenu(periodOptions, "Select Period View");
 
             switch (selectedIndex)
             {
@@ -244,7 +244,7 @@ public class FinanceUserUI
 
         while (true)
         {
-            int selectedIndex = MenuNavigationService.NavigateMenu(periodOptions, "Select Period View");
+            int selectedIndex = MenuNavigationServiceLogic.NavigateMenu(periodOptions, "Select Period View");
 
             switch (selectedIndex)
             {
@@ -581,7 +581,7 @@ public class FinanceUserUI
 
         while (true)
         {
-            int selectedMenuIndex = MenuNavigationService.NavigateMenu(adminFinanceMenuOptions, "Admin Finance Panel");
+            int selectedMenuIndex = MenuNavigationServiceLogic.NavigateMenu(adminFinanceMenuOptions, "Admin Finance Panel");
 
             switch (selectedMenuIndex)
             {

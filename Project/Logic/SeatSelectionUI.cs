@@ -14,7 +14,7 @@ public class SeatSelectionUI
     
     private readonly Dictionary<string, PlaneConfig> planeConfigs = new Dictionary<string, PlaneConfig>(StringComparer.OrdinalIgnoreCase)
     {
-        ["Boeing 737"] = new PlaneConfig
+        ["Boeing 737"] = new PlaneConfig //dict met t 
         {
             Rows = 33,
             SeatsPerRow = 6,
@@ -23,7 +23,7 @@ public class SeatSelectionUI
                 (1, 4),     // First Class
                 (5, 12),    // Business Class
                 (13, 33)    // Economy Class
-            }
+            } 
         },
         
         ["Boeing 787"] = new PlaneConfig
@@ -76,6 +76,125 @@ public class SeatSelectionUI
             }
         }
     }
+
+    private bool AddAisleSpace(int seatIndex)
+    {
+        switch (currentConfig.SeatsPerRow)
+        {
+            case 6: 
+                return seatIndex == 2; // Boeing 737
+            case 9:  
+                return seatIndex == 2 || seatIndex == 5; // Boeing 787, Airbus A330
+            default:
+                return false;
+        }
+    }
+
+    private int GetTotalAisleSpaces()
+    {
+        switch (currentConfig.SeatsPerRow)
+        {
+            case 6:  return 1;
+            case 9:  return 2;
+            default: return 0;
+        }
+    }
+
+    public void SetSeatOccupied(string seatNumber, string passengerName = "", bool occupied = true)
+    {
+        if (occupied)
+        {
+            string initials = !string.IsNullOrEmpty(passengerName) 
+                ? new string(passengerName.Split(' ').Select(s => s[0]).Take(2).ToArray()).ToUpper() 
+                : "■";
+            occupiedSeats[seatNumber] = initials;
+        }
+        else
+        {
+            occupiedSeats.Remove(seatNumber);
+        }
+    }
+
+    public void SetPetSeat(string seatNumber, bool hasPet = true)
+    {
+        if (hasPet)
+            petSeats[seatNumber] = true;
+        else
+            petSeats.Remove(seatNumber);
+    }
+
+    public string GetSeatClass(string seatNumber)
+    {
+        if (currentConfig == null)
+            return string.Empty;
+        
+        if (!int.TryParse(new string(seatNumber.Where(char.IsDigit).ToArray()), out int row))
+            return string.Empty;
+        
+        if (row <= currentConfig.SeatClasses[0].EndRow)
+            return "First";
+        if (row <= currentConfig.SeatClasses[1].EndRow)
+            return "Business";
+        return "Economy";
+    }
+        
+    public string GetSeatClass(string seatNumber, string planeType)
+    {
+        if (string.IsNullOrEmpty(seatNumber) || string.IsNullOrEmpty(planeType))
+            return string.Empty;
+        
+        if (!planeConfigs.TryGetValue(planeType, out PlaneConfig planeConfig))
+            return string.Empty;
+        
+        if (!int.TryParse(new string(seatNumber.Where(char.IsDigit).ToArray()), out int row))
+            return string.Empty;
+
+        var (firstStart, firstEnd) = planeConfig.SeatClasses[0];
+        var (businessStart, businessEnd) = planeConfig.SeatClasses[1];
+        
+        if (row >= firstStart && row <= firstEnd)
+            return "First";
+        if (row >= businessStart && row <= businessEnd)
+            return "Business";
+
+        return "Economy";
+    }
+    
+    public int GetAvailableSeatsCount(string planeType, int flightId)
+    {
+        if (!planeConfigs.ContainsKey(planeType))
+        {
+            if (planeTypeAliases.TryGetValue(planeType, out string resolvedType))
+                planeType = resolvedType;
+        }
+
+        var config = planeConfigs[planeType];
+        var totalSeats = config.Rows * config.SeatsPerRow;
+
+        LoadExistingBookings(flightId);
+        return totalSeats - occupiedSeats.Count;
+    }
+
+    // Add these new methods
+    public void AddTemporarySeat(string seatNumber, string passengerName = "□")
+    {
+        temporarySeats[seatNumber] = passengerName;
+    }
+
+    public void ClearTemporarySeats()
+    {
+        temporarySeats.Clear();
+    }
+
+    public void CommitTemporarySeats()
+    {
+        foreach (var seat in temporarySeats)
+        {
+            occupiedSeats[seat.Key] = seat.Value;
+        }
+        temporarySeats.Clear();
+    }
+    
     public string SelectSeat(string planeType, int flightId, List<PassengerModel> currentPassengers = null)
     {
         // Normalize plane type
@@ -241,124 +360,6 @@ public class SeatSelectionUI
                 Console.WriteLine("     +" + new string('-', currentConfig.SeatsPerRow * 3 + GetTotalAisleSpaces()) + "+");
         }
         Console.WriteLine($"\nAircraft: {planeType}\n");
-    }
-
-    private bool AddAisleSpace(int seatIndex)
-    {
-        switch (currentConfig.SeatsPerRow)
-        {
-            case 6: 
-                return seatIndex == 2; // Boeing 737
-            case 9:  
-                return seatIndex == 2 || seatIndex == 5; // Boeing 787, Airbus A330
-            default:
-                return false;
-        }
-    }
-
-    private int GetTotalAisleSpaces()
-    {
-        switch (currentConfig.SeatsPerRow)
-        {
-            case 6:  return 1;
-            case 9:  return 2;
-            default: return 0;
-        }
-    }
-
-    public void SetSeatOccupied(string seatNumber, string passengerName = "", bool occupied = true)
-    {
-        if (occupied)
-        {
-            string initials = !string.IsNullOrEmpty(passengerName) 
-                ? new string(passengerName.Split(' ').Select(s => s[0]).Take(2).ToArray()).ToUpper() 
-                : "■";
-            occupiedSeats[seatNumber] = initials;
-        }
-        else
-        {
-            occupiedSeats.Remove(seatNumber);
-        }
-    }
-
-    public void SetPetSeat(string seatNumber, bool hasPet = true)
-    {
-        if (hasPet)
-            petSeats[seatNumber] = true;
-        else
-            petSeats.Remove(seatNumber);
-    }
-
-    public string GetSeatClass(string seatNumber)
-    {
-        if (currentConfig == null)
-            return string.Empty;
-        
-        if (!int.TryParse(new string(seatNumber.Where(char.IsDigit).ToArray()), out int row))
-            return string.Empty;
-        
-        if (row <= currentConfig.SeatClasses[0].EndRow)
-            return "First";
-        if (row <= currentConfig.SeatClasses[1].EndRow)
-            return "Business";
-        return "Economy";
-    }
-        
-    public string GetSeatClass(string seatNumber, string planeType)
-    {
-        if (string.IsNullOrEmpty(seatNumber) || string.IsNullOrEmpty(planeType))
-            return string.Empty;
-        
-        if (!planeConfigs.TryGetValue(planeType, out PlaneConfig planeConfig))
-            return string.Empty;
-        
-        if (!int.TryParse(new string(seatNumber.Where(char.IsDigit).ToArray()), out int row))
-            return string.Empty;
-
-        var (firstStart, firstEnd) = planeConfig.SeatClasses[0];
-        var (businessStart, businessEnd) = planeConfig.SeatClasses[1];
-        
-        if (row >= firstStart && row <= firstEnd)
-            return "First";
-        if (row >= businessStart && row <= businessEnd)
-            return "Business";
-
-        return "Economy";
-    }
-    
-    public int GetAvailableSeatsCount(string planeType, int flightId)
-    {
-        if (!planeConfigs.ContainsKey(planeType))
-        {
-            if (planeTypeAliases.TryGetValue(planeType, out string resolvedType))
-                planeType = resolvedType;
-        }
-
-        var config = planeConfigs[planeType];
-        var totalSeats = config.Rows * config.SeatsPerRow;
-
-        LoadExistingBookings(flightId);
-        return totalSeats - occupiedSeats.Count;
-    }
-
-    // Add these new methods
-    public void AddTemporarySeat(string seatNumber, string passengerName = "□")
-    {
-        temporarySeats[seatNumber] = passengerName;
-    }
-
-    public void ClearTemporarySeats()
-    {
-        temporarySeats.Clear();
-    }
-
-    public void CommitTemporarySeats()
-    {
-        foreach (var seat in temporarySeats)
-        {
-            occupiedSeats[seat.Key] = seat.Value;
-        }
-        temporarySeats.Clear();
     }
 
 }

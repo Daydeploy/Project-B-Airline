@@ -145,7 +145,7 @@ static class AirportInformation
 
         // Use MenuNavigationService for airport selection
         Console.WriteLine("=== Edit Airport Information ===\n");
-        int selectedIndex = MenuNavigationService.NavigateMenu(airportMenuItems, "Select Airport to Edit");
+        int selectedIndex = MenuNavigationServiceLogic.NavigateMenu(airportMenuItems, "Select Airport to Edit");
         
         if (selectedIndex == -1) return; // User pressed ESC
 
@@ -178,7 +178,7 @@ static class AirportInformation
                 "Back to Menu"
             };
 
-            int selectedOption = MenuNavigationService.NavigateMenu(editOptions, "Select field to edit:");
+            int selectedOption = MenuNavigationServiceLogic.NavigateMenu(editOptions, "Select field to edit:");
             if (selectedOption == -1 || selectedOption == editOptions.Length - 1) 
             {
                 Console.WriteLine("Returning to menu...");
@@ -355,7 +355,7 @@ static class AirportInformation
 
         // Use MenuNavigationService for airport selection
         Console.WriteLine("=== Delete Airport Information ===\n");
-        int selectedIndex = MenuNavigationService.NavigateMenu(airportMenuItems, "Select Airport to Delete");
+        int selectedIndex = MenuNavigationServiceLogic.NavigateMenu(airportMenuItems, "Select Airport to Delete");
 
         if (selectedIndex == -1 || selectedIndex == airportMenuItems.Length - 1)
         {

@@ -17,7 +17,7 @@ static class AccountManagement
 
         while (true)
         {
-            int selectedIndex = MenuNavigationService.NavigateMenu(options, "Manage Account");
+            int selectedIndex = MenuNavigationServiceLogic.NavigateMenu(options, "Manage Account");
 
             if (selectedIndex == 4) return;
             if (selectedIndex == 3) DisplayAccountDetails(account);
@@ -351,7 +351,7 @@ static class AccountManagement
                 Console.WriteLine("\n=== Personal Information Management ===");
                 Console.ResetColor();
 
-                int personalOptionIndex = MenuNavigationService.NavigateMenu(personalOptions, "Personal Details");
+                int personalOptionIndex = MenuNavigationServiceLogic.NavigateMenu(personalOptions, "Personal Details");
 
                 switch (personalOptionIndex)
                 {
@@ -535,7 +535,7 @@ static class AccountManagement
                 "Back to Account Management",
             };
 
-                int paymentOptionIndex = MenuNavigationService.NavigateMenu(paymentOptions, "Payment Details");
+                int paymentOptionIndex = MenuNavigationServiceLogic.NavigateMenu(paymentOptions, "Payment Details");
 
                 if (paymentOptionIndex == 0)
                 {

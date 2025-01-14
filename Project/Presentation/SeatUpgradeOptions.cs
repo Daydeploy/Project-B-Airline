@@ -17,7 +17,7 @@ static class SeatUpgradeOptions
 
         while (true)
         {
-            int selectedIndex = MenuNavigationService.NavigateMenu(upgradeOptions, "Seat Upgrade Options");
+            int selectedIndex = MenuNavigationServiceLogic.NavigateMenu(upgradeOptions, "Seat Upgrade Options");
             if (selectedIndex == 5) break;
 
             switch (selectedIndex)

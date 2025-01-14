@@ -82,7 +82,7 @@ static class UserLogin
 
         while (_isLoggedIn)
         {
-            int selectedIndex = MenuNavigationService.NavigateMenu(menuItems, "Logged In Menu");
+            int selectedIndex = MenuNavigationServiceLogic.NavigateMenu(menuItems, "Logged In Menu");
 
             switch (selectedIndex)
             {
@@ -107,9 +107,6 @@ static class UserLogin
                 case 6: // Browse Destinations
                     AirportInformation.BrowseDestinations();
                     break;
-                // case 7: // Show Seat Upgrade Options
-                //     SeatUpgradeOptions.ShowSeatUpgradeOptions();
-                //     break;
                 case 7: // Advanced flight booking
                     FlightManagement.ShowAvailableFlights();
                     break;

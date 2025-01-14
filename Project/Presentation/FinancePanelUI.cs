@@ -13,7 +13,7 @@ public class FinancePanelUI
 
         while (_isLoggedIn)
         {
-            int selectedMenuIndex = MenuNavigationService.NavigateMenu(financeMenuOptions, "Finance Panel Menu");
+            int selectedMenuIndex = MenuNavigationServiceLogic.NavigateMenu(financeMenuOptions, "Finance Panel Menu");
 
             switch (selectedMenuIndex)
             {

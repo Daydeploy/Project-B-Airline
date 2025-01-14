@@ -55,7 +55,7 @@ public class BookingLogic
             {
                 NumberOfBaggage = p.NumberOfBaggage,
                 ShopItems = p.ShopItems
-            }).ToList();
+            }).ToList(); 
 
         BookingModel newBooking = new BookingModel(bookingId, userId, flightId, totalPrice, passengers, petDetails);
         if (isPrivateJet)
@@ -64,9 +64,6 @@ public class BookingLogic
             _bookings.Add(newBooking);
             BookingAccess.WriteAll(_bookings);
         }
-
-        // _bookings.Add(newBooking);
-        // BookingAccess.WriteAll(_bookings);
         return newBooking;
     }
 
@@ -83,10 +80,10 @@ public class BookingLogic
         int bookingId;
         do
         {
-            bookingId = random.Next(0, 9999);
+            bookingId = random.Next(0, 9999); 
         } while (_bookings.Any(i => i.BookingId.Equals(bookingId)));
 
-        return bookingId;
+        return bookingId; 
     }
 
     public static (int userId, bool success) GetUserId(int id)
