@@ -4,11 +4,18 @@ public class PaymentLogic
 
     public static bool ValidateName(string name)
     {
-        if (!string.IsNullOrEmpty(name))
+        if (string.IsNullOrEmpty(name))
         {
-            return true;
+            return false;
         }
-        return false;
+
+        if (!name.All(c => char.IsLetter(c) || char.IsWhiteSpace(c)))
+        {
+            return false;
+        }
+
+
+        return true;
     }
 
     public static bool ValidateName(string firstName, string lastName)

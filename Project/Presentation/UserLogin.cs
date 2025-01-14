@@ -174,13 +174,16 @@ static class UserLogin
         {
             Console.WriteLine("\nAddress is required to complete booking.");
             Console.Write("Enter your address: ");
-            string address = Console.ReadLine()?.Trim();
-            while (string.IsNullOrWhiteSpace(address))
+            string address;
+            do
             {
-                Console.WriteLine("Address cannot be empty.");
-                Console.Write("Enter your address: ");
                 address = Console.ReadLine()?.Trim();
-            }
+                if (!AccountsLogic.IsValidAddress(address))
+                {
+                    Console.WriteLine("Address cannot be empty.");
+                    Console.Write("Enter your address: ");
+                }
+            } while (!AccountsLogic.IsValidAddress(address));
 
             UserAccountServiceLogic.ManageAccount(account.Id, newAddress: address);
             updateNeeded = true;
