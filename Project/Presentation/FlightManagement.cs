@@ -5,7 +5,11 @@ using Microsoft.VisualBasic;
 
 static class FlightManagement
 {
-    private static AccountModel account = UserLogin.UserAccountServiceLogic.CurrentAccount;
+    private static AccountModel account 
+    {
+        get { return UserLogin.UserAccountServiceLogic.CurrentAccount; }
+    }
+
 
     public static void ShowAvailableFlights()
     {
@@ -80,7 +84,8 @@ static class FlightManagement
 
     private static void DisplayFlightsWithActions(List<FlightModel> flightsList, bool allowBooking)
     {
-        if (account.EmailAddress == "admin")
+        var currentAccount = account;
+        if (currentAccount?.EmailAddress == "admin")
         {
             allowBooking = false;
         }
@@ -95,7 +100,7 @@ static class FlightManagement
         else
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            if (account.EmailAddress == "admin")
+            if (currentAccount?.EmailAddress == "admin")
             {
                 Console.WriteLine("B - Book a flight (Admin account cannot book flights)");
             }
@@ -159,11 +164,6 @@ static class FlightManagement
         while (true)
         {
             int selectedIndex = MenuNavigationService.NavigateMenu(filterOptions, "Filter Flights:");
-            if (selectedIndex == -1 || selectedIndex == 4)
-            {
-                Console.WriteLine("\nReturning to the main menu...");
-                return;
-            }
 
             List<FlightModel> filteredFlights = new List<FlightModel>();
             switch (selectedIndex)
@@ -180,6 +180,8 @@ static class FlightManagement
                 case 3:
                     filteredFlights = FilterByDateRange(flights, origin, destination);
                     break;
+                case 4:
+                    return;
             }
 
             if (filteredFlights.Count != 0)
@@ -187,12 +189,7 @@ static class FlightManagement
                 DisplayFlightsWithActions(filteredFlights, UserLogin.UserAccountServiceLogic.IsUserLoggedIn());
                 HandleFlightCommands(filteredFlights, origin, destination, account);
             }
-            else
-            {
-                Console.WriteLine("No flights found matching your criteria.");
-                Console.WriteLine("\nPress any key to return to the filter menu...");
-                Console.ReadKey();
-            }
+            return;
         }
     }
 
@@ -276,11 +273,7 @@ static class FlightManagement
 
         Console.WriteLine("Select your starting location:");
         int originIndex = MenuNavigationService.NavigateMenu(origins.ToArray(), "Available Origins");
-        if (originIndex == -1 || originIndex == origins.Count - 1)
-        {
-            Console.WriteLine("\nReturning to the main menu...");
-            return;
-        }
+        
 
         string origin = origins[originIndex];
 
@@ -295,22 +288,13 @@ static class FlightManagement
 
         Console.WriteLine($"Available destinations from {origin}:");
         int destinationIndex = MenuNavigationService.NavigateMenu(destinations.ToArray(), "Available Destinations");
-        if (destinationIndex == -1 || destinationIndex == destinations.Count - 1)
-        {
-            Console.WriteLine("\nReturning to the main menu...");
-            return;
-        }
+    
 
         string destination = destinations[destinationIndex];
 
         Console.Clear();
         string[] tripOptions = { "Yes, it's a round-trip booking", "No, one-way trip only", "Back to Main Menu" };
         int tripChoice = MenuNavigationService.NavigateMenu(tripOptions, "Is this a round-trip booking?");
-        if (tripChoice == -1 || tripChoice == 2)
-        {
-            Console.WriteLine("\nReturning to the main menu...");
-            return;
-        }
 
         bool isRoundTrip = tripChoice == 0;
 

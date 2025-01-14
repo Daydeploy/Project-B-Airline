@@ -61,6 +61,8 @@ public class BookingLogic
         if (isPrivateJet)
         {
             newBooking.PlaneType = jetType;
+            _bookings.Add(newBooking);
+            BookingAccess.WriteAll(_bookings);
         }
 
         // _bookings.Add(newBooking);
