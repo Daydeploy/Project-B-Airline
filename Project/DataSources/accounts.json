@@ -247,8 +247,8 @@
     "nationality": "Irish",
     "phoneNumber": "0618734257",
     "address": "Wijnhaven 105",
-    "email": "deborahteacher@hr1.com",
-    "password": "Deborah02$",
+    "email": "newteacher@hr.com",
+    "password": "Deborah01$",
     "passportDetails": {
       "passportNumber": "1634568",
       "issueDate": "2028-10-10T00:00:00",
@@ -291,10 +291,10 @@
     "milesDetails": [
       {
         "Enrolled": true,
-        "Level": "",
+        "Level": "Bronze",
         "Experience": 0,
         "Points": 0,
-        "History": ""
+        "History": "\nLevel updated to Bronze at 2025-01-15 13:17:02"
       }
     ],
     "paymentInformation": [
