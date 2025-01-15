@@ -10,7 +10,7 @@ public class FinancePanelUI
         string[] financeMenuOptions = {
             "Show Yearly Data",
             "Show Monthly Data",
-            "Show Dayily Data",
+            "Show Daily Data",
             "Logout",
         };
 
