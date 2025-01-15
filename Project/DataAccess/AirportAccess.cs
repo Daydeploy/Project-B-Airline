@@ -1,9 +1,9 @@
 public static class AirportAccess
 {
-    private static string _filePath =
-        System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/airports.json"));
+    private static readonly string _filePath =
+        Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/airports.json"));
 
-    private static GenericJsonAccess<AirportModel> _airportAccess = new GenericJsonAccess<AirportModel>(_filePath);
+    private static readonly GenericJsonAccess<AirportModel> _airportAccess = new(_filePath);
 
     public static List<AirportModel> LoadAllAirports()
     {

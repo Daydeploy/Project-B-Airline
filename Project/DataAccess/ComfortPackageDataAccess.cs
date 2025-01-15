@@ -1,16 +1,10 @@
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text.Json;
-
 public class ComfortPackageDataAccess
 {
-    private static string _filePath =
-        System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory,
+    private static readonly string _filePath =
+        Path.GetFullPath(Path.Combine(Environment.CurrentDirectory,
             @"DataSources/comfortPackages.json"));
 
-    private static GenericJsonAccess<ComfortPackageModel> _comfortPackages =
-        new GenericJsonAccess<ComfortPackageModel>(_filePath);
+    private static readonly GenericJsonAccess<ComfortPackageModel> _comfortPackages = new(_filePath);
 
     public static ComfortPackageModel? GetComfortPackage(int packageId)
     {

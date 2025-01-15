@@ -1,9 +1,6 @@
-using System;
-using System.Linq;
-
-static class UserLogin
+internal static class UserLogin
 {
-    static public UserAccountServiceLogic UserAccountServiceLogic = new UserAccountServiceLogic();
+    public static UserAccountServiceLogic UserAccountServiceLogic = new();
     private static bool _isLoggedIn = true;
 
 
@@ -14,16 +11,16 @@ static class UserLogin
         Console.WriteLine("Note: You can press F2 to toggle password visibility while typing.");
         Console.WriteLine("Press ESC at any time to return to menu\n");
 
-        bool showPassword = false;
+        var showPassword = false;
 
-        string email = GetUserInput("Email: ", false, ref showPassword);
+        var email = GetUserInput("Email: ", false, ref showPassword);
         if (email == null)
         {
             MenuNavigation.Start();
             return;
         }
 
-        string password = GetUserInput("Enter your password: ", true, ref showPassword);
+        var password = GetUserInput("Enter your password: ", true, ref showPassword);
         if (password == null)
         {
             MenuNavigation.Start();
@@ -63,7 +60,7 @@ static class UserLogin
             return;
         }
 
-        string[] menuItems = new[]
+        string[] menuItems =
         {
             "Book a Flight",
             "Book Private Jet",
@@ -81,7 +78,7 @@ static class UserLogin
 
         while (_isLoggedIn)
         {
-            int selectedIndex = MenuNavigationServiceLogic.NavigateMenu(menuItems, "Logged In Menu");
+            var selectedIndex = MenuNavigationServiceLogic.NavigateMenu(menuItems, "Logged In Menu");
 
             switch (selectedIndex)
             {
@@ -134,7 +131,7 @@ static class UserLogin
     {
         var accountsLogic = new AccountsLogic();
         account = accountsLogic.GetById(account.Id);
-        bool updateNeeded = false;
+        var updateNeeded = false;
 
         if (string.IsNullOrEmpty(account.PhoneNumber) || string.IsNullOrEmpty(account.Address) ||
             account.PaymentInformation == null)
@@ -207,7 +204,7 @@ static class UserLogin
                 return;
             }
 
-            bool saveForFuture = choice == "1";
+            var saveForFuture = choice == "1";
 
             Console.Write("\nEnter Card Holder Name: ");
             string cardHolder;
@@ -286,7 +283,7 @@ static class UserLogin
 
         if (updateNeeded)
         {
-            UserLogin.UserAccountServiceLogic.ManageAccount(account.Id,
+            UserAccountServiceLogic.ManageAccount(account.Id,
                 newPaymentInformation: account.PaymentInformation);
             Console.WriteLine("\nInformation updated successfully!");
         }
@@ -305,7 +302,7 @@ static class UserLogin
     private static string GetUserInput(string prompt, bool isPassword, ref bool showPassword)
     {
         Console.Write(prompt);
-        string input = "";
+        var input = "";
         ConsoleKeyInfo key;
 
         while (true)

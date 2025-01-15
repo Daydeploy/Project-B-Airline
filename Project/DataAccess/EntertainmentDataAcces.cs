@@ -1,11 +1,10 @@
 public class EntertainmentDataAccess
 {
-    private static string _filePath =
-        System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory,
+    private static readonly string _filePath =
+        Path.GetFullPath(Path.Combine(Environment.CurrentDirectory,
             @"DataSources/entertainment.json"));
 
-    private static GenericJsonAccess<EntertainmentModel> _entertainmentAccess =
-        new GenericJsonAccess<EntertainmentModel>(_filePath);
+    private static readonly GenericJsonAccess<EntertainmentModel> _entertainmentAccess = new(_filePath);
 
     public static List<EntertainmentModel> LoadAll()
     {

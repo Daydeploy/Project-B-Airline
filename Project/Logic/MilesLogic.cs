@@ -4,14 +4,6 @@ public class MilesLogic
     private const int _goldMin = 201;
     private const int _platinumMin = 301;
 
-    private enum Levels
-    {
-        Bronze,
-        Silver,
-        Gold,
-        Platinum
-    }
-
     private const int _short_Max = 500;
     private const int _medium_Max = 2500;
 
@@ -27,49 +19,36 @@ public class MilesLogic
 
         { ("Long", "Economy"), 10 },
         { ("Long", "Business"), 20 },
-        { ("Long", "First"), 30 },
+        { ("Long", "First"), 30 }
     };
 
     public static string CalculateLevel(int experience)
     {
         if (experience >= _platinumMin)
-        {
             return Levels.Platinum.ToString();
-        }
-        else if (experience >= _goldMin)
-        {
+        if (experience >= _goldMin)
             return Levels.Gold.ToString();
-        }
-        else if (experience >= _silverMin)
-        {
+        if (experience >= _silverMin)
             return Levels.Silver.ToString();
-        }
-        else
-        {
-            return Levels.Bronze.ToString();
-        }
+        return Levels.Bronze.ToString();
     }
 
     public static void UpdateAllAccountLevels()
     {
-        List<AccountModel> _accounts = AccountsAccess.LoadAll();
+        var _accounts = AccountsAccess.LoadAll();
 
 
         foreach (var account in _accounts)
-        {
-            foreach (var miles in account.Miles)
+        foreach (var miles in account.Miles)
+            if (miles.Enrolled)
             {
-                if (miles.Enrolled)
+                var newLevel = CalculateLevel(miles.Experience);
+                if (miles.Level != newLevel)
                 {
-                    string newLevel = CalculateLevel(miles.Experience);
-                    if (miles.Level != newLevel)
-                    {
-                        miles.Level = newLevel;
-                        miles.History += $"\nLevel updated to {newLevel} at {DateTime.Now:yyyy-MM-dd HH:mm:ss}";
-                    }
+                    miles.Level = newLevel;
+                    miles.History += $"\nLevel updated to {newLevel} at {DateTime.Now:yyyy-MM-dd HH:mm:ss}";
                 }
             }
-        }
 
         AccountsAccess.WriteAll(_accounts);
     }
@@ -88,18 +67,13 @@ public class MilesLogic
 
     public static int CalculateExperiencePoints(FlightModel flight, string seatClass)
     {
-        if (!DateTime.TryParse(flight.DepartureTime, out DateTime departureTime) ||
+        if (!DateTime.TryParse(flight.DepartureTime, out var departureTime) ||
             departureTime > DateTime.Now)
-        {
             return 0;
-        }
 
-        string flightType = DetermineFlightType(flight.Distance);
+        var flightType = DetermineFlightType(flight.Distance);
 
-        if (ExperiencePoints.TryGetValue((flightType, seatClass), out int xp))
-        {
-            return xp;
-        }
+        if (ExperiencePoints.TryGetValue((flightType, seatClass), out var xp)) return xp;
 
         return 0;
     }
@@ -111,17 +85,11 @@ public class MilesLogic
         var flights = FlightsAccess.LoadAll();
 
         var account = accounts.FirstOrDefault(a => a.Id == accountId);
-        if (account == null || account.Miles == null || account.Miles.Count == 0)
-        {
-            return false;
-        }
+        if (account == null || account.Miles == null || account.Miles.Count == 0) return false;
 
         var milesRecord = account.Miles[0];
 
-        if (!milesRecord.Enrolled)
-        {
-            return true;
-        }
+        if (!milesRecord.Enrolled) return true;
 
         var userBookings = bookings.Where(b => b.UserId == accountId).ToList();
 
@@ -134,7 +102,7 @@ public class MilesLogic
             {
                 var seatClass = DetermineSeatClass(flight, passenger);
 
-                int xp = CalculateExperiencePoints(flight, seatClass);
+                var xp = CalculateExperiencePoints(flight, seatClass);
 
                 if (xp > 0)
                 {
@@ -158,27 +126,21 @@ public class MilesLogic
 
         var account = accounts.FirstOrDefault(a => a.Id == accountId);
 
-        if (account == null || account.Miles == null || account.Miles.Count == 0)
-        {
-            return (0, false);
-        }
+        if (account == null || account.Miles == null || account.Miles.Count == 0) return (0, false);
 
         var milesRecord = account.Miles[0];
 
-        if (!milesRecord.Enrolled)
-        {
-            return (0, true);
-        }
+        if (!milesRecord.Enrolled) return (0, true);
 
         var currentLevel = milesRecord.Level;
 
         var userBookings = bookings.Where(b => b.UserId == accountId).ToList();
 
-        int totalMilesEarned = 0;
+        var totalMilesEarned = 0;
 
         foreach (var booking in userBookings)
         {
-            int milesMultiplier = currentLevel switch
+            var milesMultiplier = currentLevel switch
             {
                 "Bronze" => 4,
                 "Silver" => 6,
@@ -187,7 +149,7 @@ public class MilesLogic
                 _ => 4
             };
 
-            int bookingMiles = (int)(booking.TotalPrice * milesMultiplier);
+            var bookingMiles = booking.TotalPrice * milesMultiplier;
             totalMilesEarned += bookingMiles;
 
             milesRecord.History +=
@@ -205,22 +167,16 @@ public class MilesLogic
         var bookings = BookingAccess.LoadAll();
 
         var account = accounts.FirstOrDefault(a => a.Id == accountId);
-        if (account == null || account.Miles == null || account.Miles.Count == 0)
-        {
-            return (price, false);
-        }
+        if (account == null || account.Miles == null || account.Miles.Count == 0) return (price, false);
 
         var milesRecord = account.Miles[0];
         var booking = bookings.FirstOrDefault(b => b.BookingId == bookingId);
 
-        if (booking == null)
-        {
-            return (price, false);
-        }
+        if (booking == null) return (price, false);
 
         if (milesRecord.Points >= 50000)
         {
-            double discountPercentage = milesRecord.Level switch
+            var discountPercentage = milesRecord.Level switch
             {
                 "Bronze" => 0.05,
                 "Silver" => 0.10,
@@ -229,7 +185,7 @@ public class MilesLogic
                 _ => 0.05
             };
 
-            int discountAmount = (int)(price * discountPercentage);
+            var discountAmount = (int)(price * discountPercentage);
             milesRecord.Points -= 50000;
             milesRecord.History +=
                 $"\nRedeemed 50000 points for {discountAmount} euro discount at {DateTime.Now:yyyy-MM-dd HH:mm:ss}";
@@ -243,5 +199,13 @@ public class MilesLogic
         }
 
         return (price, true);
+    }
+
+    private enum Levels
+    {
+        Bronze,
+        Silver,
+        Gold,
+        Platinum
     }
 }

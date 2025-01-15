@@ -1,22 +1,13 @@
 public class FinancePanelLogic
 {
-    public class FinancialMetrics
-    {
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
-        public int TotalRevenue { get; set; }
-        public int BookingCount { get; set; }
-        public int AverageBookingValue { get; set; }
-    }
-
     public static FinancialMetrics GetFinancialMetrics(DateTime startDate, DateTime endDate)
     {
         var bookings = BookingAccess.LoadAll()
             .Where(b => b.BookingDate >= startDate && b.BookingDate <= endDate)
             .ToList();
 
-        int totalRevenue = bookings.Sum(b => b.TotalPrice);
-        int bookingCount = bookings.Count;
+        var totalRevenue = bookings.Sum(b => b.TotalPrice);
+        var bookingCount = bookings.Count;
 
         return new FinancialMetrics
         {
@@ -54,5 +45,14 @@ public class FinancePanelLogic
             : date.Date.AddHours(23).AddMinutes(59).AddSeconds(59);
 
         return GetFinancialMetrics(startDate, endDate);
+    }
+
+    public class FinancialMetrics
+    {
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public int TotalRevenue { get; set; }
+        public int BookingCount { get; set; }
+        public int AverageBookingValue { get; set; }
     }
 }

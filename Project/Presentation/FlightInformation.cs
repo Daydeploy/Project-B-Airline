@@ -1,7 +1,4 @@
-using System;
-using System.Linq;
-
-static class FlightInformation
+internal static class FlightInformation
 {
     public static void EditFlightInformation()
     {
@@ -15,7 +12,7 @@ static class FlightInformation
 
         // Get flight ID input
         Console.Write("\nEnter Flight ID to edit (0 to cancel): ");
-        if (!int.TryParse(Console.ReadLine(), out int flightId) || flightId == 0)
+        if (!int.TryParse(Console.ReadLine(), out var flightId) || flightId == 0)
         {
             Console.WriteLine("Operation cancelled.");
             Console.WriteLine("\nPress any key to continue...");
@@ -75,7 +72,7 @@ static class FlightInformation
                 "Back to Menu"
             };
 
-            int selectedOption = MenuNavigationServiceLogic.NavigateMenu(editOptions, "Select field to edit:");
+            var selectedOption = MenuNavigationServiceLogic.NavigateMenu(editOptions, "Select field to edit:");
             if (selectedOption == -1 || selectedOption == editOptions.Length - 1) return;
 
             if (selectedOption == editOptions.Length - 2)
@@ -88,15 +85,11 @@ static class FlightInformation
                 Console.Write("\nSave these changes? (Y/N): ");
                 if (Console.ReadLine()?.ToUpper() == "Y")
                 {
-                    bool success = flightsLogic.UpdateFlight(selectedFlight);
+                    var success = flightsLogic.UpdateFlight(selectedFlight);
                     if (success)
-                    {
                         Console.WriteLine("Flight information updated successfully!");
-                    }
                     else
-                    {
                         Console.WriteLine("Error: Unable to update flight information.");
-                    }
 
                     Console.WriteLine("\nPress any key to continue...");
                     Console.ReadKey();
@@ -120,15 +113,11 @@ static class FlightInformation
         var newFlight = CollectFlightDetails();
         if (newFlight == null) return;
 
-        bool success = flightsLogic.AddFlight(newFlight);
+        var success = flightsLogic.AddFlight(newFlight);
         if (success)
-        {
             Console.WriteLine("\nFlight added successfully!");
-        }
         else
-        {
             Console.WriteLine("\nError: Unable to add flight.");
-        }
 
         Console.WriteLine("\nPress any key to continue...");
         Console.ReadKey();
@@ -144,7 +133,7 @@ static class FlightInformation
         FlightDisplay.DisplayFlights(flights);
 
         Console.Write("\nEnter Flight ID to delete (0 to cancel): ");
-        if (!int.TryParse(Console.ReadLine(), out int flightId) || flightId == 0)
+        if (!int.TryParse(Console.ReadLine(), out var flightId) || flightId == 0)
         {
             Console.WriteLine("Operation cancelled.");
             Console.WriteLine("\nPress any key to continue...");
@@ -168,15 +157,11 @@ static class FlightInformation
         Console.Write($"\nAre you sure you want to delete flight {selectedFlight.FlightNumber}? (Y/N): ");
         if (Console.ReadLine()?.ToUpper() == "Y")
         {
-            bool success = flightsLogic.DeleteFlight(selectedFlight.FlightId);
+            var success = flightsLogic.DeleteFlight(selectedFlight.FlightId);
             if (success)
-            {
                 Console.WriteLine("\nFlight deleted successfully!");
-            }
             else
-            {
                 Console.WriteLine("\nError: Unable to delete flight.");
-            }
         }
         else
         {
@@ -205,11 +190,10 @@ static class FlightInformation
 
     private static void EditSelectedField(FlightModel flight, int selectedOption)
     {
-        Console.Write($"\nEnter new value (ESC to cancel): ");
-        string newValue = Console.ReadLine();
+        Console.Write("\nEnter new value (ESC to cancel): ");
+        var newValue = Console.ReadLine();
 
         if (!string.IsNullOrWhiteSpace(newValue))
-        {
             switch (selectedOption)
             {
                 case 0:
@@ -231,7 +215,6 @@ static class FlightInformation
                     flight.Status = newValue;
                     break;
             }
-        }
     }
 
     private static string[] GetAvailablePlaneTypes()
@@ -250,7 +233,7 @@ static class FlightInformation
         Console.WriteLine("=== Add New Flight ===\n");
 
         Console.Write("Enter flight number: ");
-        string flightNumber = Console.ReadLine();
+        var flightNumber = Console.ReadLine();
         if (string.IsNullOrWhiteSpace(flightNumber))
         {
             Console.WriteLine("\nError: Flight number is required.");
@@ -260,9 +243,9 @@ static class FlightInformation
         }
 
         Console.Write("Enter origin city: ");
-        string origin = Console.ReadLine();
+        var origin = Console.ReadLine();
         Console.Write("Enter origin airport code: ");
-        string originCode = Console.ReadLine()?.ToUpper();
+        var originCode = Console.ReadLine()?.ToUpper();
         if (string.IsNullOrWhiteSpace(origin) || string.IsNullOrWhiteSpace(originCode))
         {
             Console.WriteLine("\nError: Origin details are required.");
@@ -272,9 +255,9 @@ static class FlightInformation
         }
 
         Console.Write("Enter destination city: ");
-        string destination = Console.ReadLine();
+        var destination = Console.ReadLine();
         Console.Write("Enter destination airport code: ");
-        string destinationCode = Console.ReadLine()?.ToUpper();
+        var destinationCode = Console.ReadLine()?.ToUpper();
         if (string.IsNullOrWhiteSpace(destination) || string.IsNullOrWhiteSpace(destinationCode))
         {
             Console.WriteLine("\nError: Destination details are required.");
@@ -284,7 +267,7 @@ static class FlightInformation
         }
 
         Console.Write("Enter departure time (yyyy-MM-dd HH:mm): ");
-        if (!DateTime.TryParse(Console.ReadLine(), out DateTime departureTime))
+        if (!DateTime.TryParse(Console.ReadLine(), out var departureTime))
         {
             Console.WriteLine("\nError: Invalid departure time format.");
             Console.WriteLine("Press any key to continue...");
@@ -293,7 +276,7 @@ static class FlightInformation
         }
 
         Console.Write("Enter arrival time (yyyy-MM-dd HH:mm): ");
-        if (!DateTime.TryParse(Console.ReadLine(), out DateTime arrivalTime))
+        if (!DateTime.TryParse(Console.ReadLine(), out var arrivalTime))
         {
             Console.WriteLine("\nError: Invalid arrival time format.");
             Console.WriteLine("Press any key to continue...");
@@ -310,7 +293,7 @@ static class FlightInformation
         }
 
         Console.Write("Enter distance (km): ");
-        if (!int.TryParse(Console.ReadLine(), out int distance))
+        if (!int.TryParse(Console.ReadLine(), out var distance))
         {
             Console.WriteLine("\nError: Invalid distance.");
             Console.WriteLine("Press any key to continue...");
@@ -319,8 +302,8 @@ static class FlightInformation
         }
 
         Console.WriteLine("\nSelect plane type:");
-        string[] planeTypes = GetAvailablePlaneTypes();
-        int selectedIndex = MenuNavigationServiceLogic.NavigateMenu(planeTypes, "Available Aircraft");
+        var planeTypes = GetAvailablePlaneTypes();
+        var selectedIndex = MenuNavigationServiceLogic.NavigateMenu(planeTypes, "Available Aircraft");
 
         if (selectedIndex == -1)
         {
@@ -330,41 +313,35 @@ static class FlightInformation
             return null;
         }
 
-        string planeType = planeTypes[selectedIndex];
+        var planeType = planeTypes[selectedIndex];
 
         Console.Write("Enter departure terminal: ");
-        string departureTerminal = Console.ReadLine();
+        var departureTerminal = Console.ReadLine();
 
         Console.Write("Enter arrival terminal: ");
-        string arrivalTerminal = Console.ReadLine();
+        var arrivalTerminal = Console.ReadLine();
 
         Console.Write("Enter departure gate: ");
-        string departureGate = Console.ReadLine();
+        var departureGate = Console.ReadLine();
 
         Console.Write("Enter arrival gate: ");
-        string arrivalGate = Console.ReadLine();
+        var arrivalGate = Console.ReadLine();
 
         var seatClassOptions = new List<SeatClassOption>();
         string[] classes = { "Economy", "Business", "First" };
         foreach (var seatClass in classes)
         {
             Console.Write($"\nEnter price for {seatClass} class (or press Enter to skip): ");
-            if (int.TryParse(Console.ReadLine(), out int price))
+            if (int.TryParse(Console.ReadLine(), out var price))
             {
                 Console.WriteLine($"\nEnter seasonal multipliers for {seatClass} class:");
                 Console.Write("Summer multiplier (e.g. 1.2 for 20% increase): ");
-                double summerMultiplier = 1.0;
-                if (!double.TryParse(Console.ReadLine(), out summerMultiplier))
-                {
-                    summerMultiplier = 1.0;
-                }
+                var summerMultiplier = 1.0;
+                if (!double.TryParse(Console.ReadLine(), out summerMultiplier)) summerMultiplier = 1.0;
 
                 Console.Write("Winter multiplier (e.g. 0.8 for 20% decrease): ");
-                double winterMultiplier = 1.0;
-                if (!double.TryParse(Console.ReadLine(), out winterMultiplier))
-                {
-                    winterMultiplier = 1.0;
-                }
+                var winterMultiplier = 1.0;
+                if (!double.TryParse(Console.ReadLine(), out winterMultiplier)) winterMultiplier = 1.0;
 
                 var seasonalMultiplier = new SeasonalMultiplier(summerMultiplier, winterMultiplier);
                 seatClassOptions.Add(new SeatClassOption(seatClass, price) { SeasonalMultiplier = seasonalMultiplier });
@@ -380,21 +357,15 @@ static class FlightInformation
         }
 
         Console.Write("Enter flight status (Scheduled/On Time/Delayed): ");
-        string status = Console.ReadLine() ?? "Scheduled";
+        var status = Console.ReadLine() ?? "Scheduled";
 
         var mealService = new List<string>();
         Console.Write("Enter meal service options (comma-separated): ");
-        string mealInput = Console.ReadLine();
-        if (!string.IsNullOrWhiteSpace(mealInput))
-        {
-            mealService.AddRange(mealInput.Split(',').Select(m => m.Trim()));
-        }
+        var mealInput = Console.ReadLine();
+        if (!string.IsNullOrWhiteSpace(mealInput)) mealService.AddRange(mealInput.Split(',').Select(m => m.Trim()));
 
         Console.Write("Enter country tax rate (% as decimal, e.g. 0.21): ");
-        if (!double.TryParse(Console.ReadLine(), out double countryTax))
-        {
-            countryTax = 0.21;
-        }
+        if (!double.TryParse(Console.ReadLine(), out var countryTax)) countryTax = 0.21;
 
         var airportTaxes = new Dictionary<string, int>();
         airportTaxes[originCode] = 15;

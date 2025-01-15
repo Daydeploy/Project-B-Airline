@@ -1,25 +1,25 @@
-using System;
+using System.Text;
 
-static class MenuNavigation
+internal static class MenuNavigation
 {
     public static void Start()
     {
-        Console.OutputEncoding = System.Text.Encoding.UTF8;
+        Console.OutputEncoding = Encoding.UTF8;
         Console.CursorVisible = false;
         string[] menuItems = { "Login", "Create Account", "Show available Flights", "Exit" };
 
-        bool exit = false;
+        var exit = false;
 
         while (!exit)
         {
             Console.Clear();
-            int selectedIndex =
+            var selectedIndex =
                 MenuNavigationServiceLogic.NavigateMenu(menuItems, MenuNavigationServiceLogic.AirlineLogo());
             HandleSelection(menuItems[selectedIndex], ref exit);
         }
     }
 
-    static private void HandleSelection(string selectedOption, ref bool exit)
+    private static void HandleSelection(string selectedOption, ref bool exit)
     {
         Console.Clear();
         switch (selectedOption)

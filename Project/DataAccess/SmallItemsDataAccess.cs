@@ -1,15 +1,10 @@
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
-
 public class SmallItemsDataAccess
 {
-    private static string _filePath =
-        System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory,
+    private static readonly string _filePath =
+        Path.GetFullPath(Path.Combine(Environment.CurrentDirectory,
             @"DataSources/smallItems.json"));
 
-    private static GenericJsonAccess<SmallItemsModel> _smallItemsModel =
-        new GenericJsonAccess<SmallItemsModel>(_filePath);
+    private static readonly GenericJsonAccess<SmallItemsModel> _smallItemsModel = new(_filePath);
 
 
     public static List<SmallItemsModel> LoadAll()

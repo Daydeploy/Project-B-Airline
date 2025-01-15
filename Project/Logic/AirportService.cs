@@ -1,9 +1,6 @@
-using System.Collections.Generic;
-using System.Linq;
-
 public class AirportService
 {
-    private List<AirportModel> _airports;
+    private readonly List<AirportModel> _airports;
 
     public AirportService(List<AirportModel> airports)
     {

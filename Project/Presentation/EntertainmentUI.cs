@@ -1,6 +1,6 @@
-static class EntertainmentUI
+internal static class EntertainmentUI
 {
-    private static readonly EntertainmentLogic _entertainmentLogic = new EntertainmentLogic();
+    private static readonly EntertainmentLogic _entertainmentLogic = new();
 
     private static void DisplayEntertainmentOptions()
     {
@@ -25,8 +25,8 @@ static class EntertainmentUI
 
     public static void ShowEntertainment()
     {
-        int currentUserId = UserLogin.UserAccountServiceLogic.CurrentUserId;
-        List<BookingModel> bookedFlights = BookingAccess.LoadAll()
+        var currentUserId = UserLogin.UserAccountServiceLogic.CurrentUserId;
+        var bookedFlights = BookingAccess.LoadAll()
             .Where(b => b.UserId == currentUserId)
             .ToList();
 
@@ -56,8 +56,8 @@ static class EntertainmentUI
             if (flight != null)
             {
                 Console.WriteLine($"Booking ID: {booking.BookingId}");
-                System.Console.WriteLine($"Aircraft type: {flight.PlaneType}");
-                System.Console.WriteLine($"Seat Class: {flight.SeatClassOptions.FirstOrDefault()?.SeatClass}");
+                Console.WriteLine($"Aircraft type: {flight.PlaneType}");
+                Console.WriteLine($"Seat Class: {flight.SeatClassOptions.FirstOrDefault()?.SeatClass}");
                 Console.WriteLine($"Flight: {flight.Origin} to {flight.Destination}");
                 Console.WriteLine($"Date: {flight.DepartureTime}");
 
@@ -68,10 +68,7 @@ static class EntertainmentUI
         }
 
         Console.Write("\nEnter Booking ID to purchase entertainment (0 to cancel): ");
-        if (!int.TryParse(Console.ReadLine(), out int bookingId) || bookingId == 0)
-        {
-            return;
-        }
+        if (!int.TryParse(Console.ReadLine(), out var bookingId) || bookingId == 0) return;
 
         var selectedBooking = bookedFlights.FirstOrDefault(b => b.BookingId == bookingId);
         if (selectedBooking == null)
@@ -91,7 +88,7 @@ static class EntertainmentUI
             return;
         }
 
-        HashSet<int> selectedOptions = new HashSet<int>();
+        var selectedOptions = new HashSet<int>();
         decimal totalCost = 0;
 
         while (true)
@@ -110,10 +107,7 @@ static class EntertainmentUI
             }
 
             Console.WriteLine("\nEnter Package ID to add (0 to finish): ");
-            if (!int.TryParse(Console.ReadLine(), out int optionId) || optionId == 0)
-            {
-                break;
-            }
+            if (!int.TryParse(Console.ReadLine(), out var optionId) || optionId == 0) break;
 
             var selectedOption = options.FirstOrDefault(p => p.Id == optionId);
             if (selectedOption == null)
@@ -141,7 +135,7 @@ static class EntertainmentUI
 
         if (selectedOptions.Any())
         {
-            bool allSuccessful = true;
+            var allSuccessful = true;
             foreach (var selectedOptionId in selectedOptions)
             {
                 var (success, errorMessage) =
@@ -154,13 +148,9 @@ static class EntertainmentUI
             }
 
             if (allSuccessful)
-            {
                 Console.WriteLine("\nAll entertainment options added successfully!");
-            }
             else
-            {
                 Console.WriteLine("\nSome entertainment options could not be added.");
-            }
         }
 
         Console.WriteLine("\nPress any key to return to menu...");

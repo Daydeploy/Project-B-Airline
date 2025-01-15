@@ -1,6 +1,6 @@
 public class BookingLogic
 {
-    private static readonly Random random = new Random();
+    private static readonly Random random = new();
 
     private static readonly List<FlightModel> _flights = FlightsAccess.LoadAll();
     private static readonly List<AccountModel> _accounts = AccountsAccess.LoadAll();
@@ -26,8 +26,8 @@ public class BookingLogic
         List<PetModel> petDetails, bool includeInsurance = false,
         bool isPrivateJet = false, string jetType = null)
     {
-        int bookingId = GenerateBookingId();
-        int totalPrice = 0;
+        var bookingId = GenerateBookingId();
+        var totalPrice = 0;
 
         if (isPrivateJet && jetType != null)
         {
@@ -45,22 +45,19 @@ public class BookingLogic
             var flight = _flights.FirstOrDefault(f => f.FlightId == flightId);
             if (flight == null) return null;
 
-            if (includeInsurance)
-            {
-                HasInsurance = includeInsurance;
-            }
+            if (includeInsurance) HasInsurance = includeInsurance;
 
             totalPrice = CalculateTotalPrice(flight.Destination, passengerDetails, includeInsurance);
         }
 
-        List<PassengerModel> passengers = passengerDetails.Select(p =>
+        var passengers = passengerDetails.Select(p =>
             new PassengerModel(p.Name, p.SeatNumber, p.HasCheckedBaggage, p.HasPet, p.PetDetails, p.SpecialLuggage)
             {
                 NumberOfBaggage = p.NumberOfBaggage,
                 ShopItems = p.ShopItems
             }).ToList();
 
-        BookingModel newBooking = new BookingModel(bookingId, userId, flightId, totalPrice, passengers, petDetails);
+        var newBooking = new BookingModel(bookingId, userId, flightId, totalPrice, passengers, petDetails);
         if (isPrivateJet)
         {
             newBooking.PlaneType = jetType;
@@ -121,49 +118,34 @@ public class BookingLogic
 
         var total = passengers.Sum(p =>
         {
-            int passengerTotal = 0;
+            var passengerTotal = 0;
 
             var seatClass = GetSeatClass(p.SeatNumber);
             var seatOption = flight.SeatClassOptions
                 .FirstOrDefault(so => so.SeatClass.Equals(seatClass, StringComparison.OrdinalIgnoreCase));
 
-            if (seatOption != null)
-            {
-                passengerTotal += seatOption.Price;
-            }
+            if (seatOption != null) passengerTotal += seatOption.Price;
 
             if (p.HasCheckedBaggage && p.NumberOfBaggage > 1) // eerste tas gratis
-            {
                 passengerTotal += BAGGAGE_PRICE * (p.NumberOfBaggage - 1);
-            }
 
             if (p.HasPet && p.PetDetails != null)
-            {
                 foreach (var pet in p.PetDetails)
-                {
                     passengerTotal += pet.StorageLocation == "Cabin" ? CABIN_PET_FEE : CARGO_PET_FEE;
-                }
-            }
 
-            if (p.ShopItems?.Any() == true)
-            {
-                passengerTotal += p.ShopItems.Sum(item => (int)item.Price);
-            }
+            if (p.ShopItems?.Any() == true) passengerTotal += p.ShopItems.Sum(item => (int)item.Price);
 
             return passengerTotal;
         });
 
-        if (includeInsurance)
-        {
-            total += INSURANCE_FEE * passengers.Count;
-        }
+        if (includeInsurance) total += INSURANCE_FEE * passengers.Count;
 
         return total;
     }
 
     private static string GetSeatClass(string seatNumber)
     {
-        int row = int.Parse(new string(seatNumber.Where(char.IsDigit).ToArray()));
+        var row = int.Parse(new string(seatNumber.Where(char.IsDigit).ToArray()));
 
         if (row <= 3) return "First";
         if (row <= 8) return "Business";
@@ -173,10 +155,7 @@ public class BookingLogic
     public bool ModifyBooking(int flightId, int passengerId, BookingDetails newDetails)
     {
         var booking = _bookings.FirstOrDefault(b => b.FlightId == flightId);
-        if (booking == null || booking.Passengers == null || passengerId >= booking.Passengers.Count)
-        {
-            return false;
-        }
+        if (booking == null || booking.Passengers == null || passengerId >= booking.Passengers.Count) return false;
 
         var passenger = booking.Passengers[passengerId];
         passenger.SeatNumber = newDetails.SeatNumber;
@@ -208,10 +187,7 @@ public class BookingLogic
     public static bool CheckInBooking(int bookingId)
     {
         var booking = _bookings.FirstOrDefault(b => b.BookingId == bookingId);
-        if (booking == null || booking.IsCheckedIn)
-        {
-            return false;
-        }
+        if (booking == null || booking.IsCheckedIn) return false;
 
         booking.IsCheckedIn = true;
         BookingAccess.WriteAll(_bookings);
@@ -221,27 +197,15 @@ public class BookingLogic
     public static (bool success, string message) TryCheckIn(int bookingId)
     {
         var booking = _bookings.FirstOrDefault(b => b.BookingId == bookingId);
-        if (booking == null)
-        {
-            return (false, "Booking not found.");
-        }
+        if (booking == null) return (false, "Booking not found.");
 
-        if (booking.IsCheckedIn)
-        {
-            return (false, "Booking is already checked in.");
-        }
+        if (booking.IsCheckedIn) return (false, "Booking is already checked in.");
 
         var flightsLogic = new FlightsLogic();
         var flight = flightsLogic.GetFlightsById(booking.FlightId);
-        if (flight == null)
-        {
-            return (false, "Flight not found.");
-        }
+        if (flight == null) return (false, "Flight not found.");
 
-        if (DateTime.Parse(flight.DepartureTime) < DateTime.Now)
-        {
-            return (false, "Flight has already departed.");
-        }
+        if (DateTime.Parse(flight.DepartureTime) < DateTime.Now) return (false, "Flight has already departed.");
 
         booking.IsCheckedIn = true;
         BookingAccess.WriteAll(_bookings);

@@ -4,30 +4,19 @@ public class EntertainmentLogic
     {
         var bookings = BookingAccess.LoadAll();
         var booking = bookings.FirstOrDefault(b => b.BookingId == bookingId);
-        if (booking == null)
-        {
-            return (false, "Booking not found");
-        }
+        if (booking == null) return (false, "Booking not found");
 
         var entertainmentOption = EntertainmentDataAccess.GetEntertainment(entertainmentId);
-        if (entertainmentOption == null)
-        {
-            return (false, "Entertainment option not found");
-        }
+        if (entertainmentOption == null) return (false, "Entertainment option not found");
 
         var flight = new FlightsLogic().GetFlightsById(booking.FlightId);
-        if (flight == null)
-        {
-            return (false, "Flight not found");
-        }
+        if (flight == null) return (false, "Flight not found");
 
         var seatSelector = new SeatSelectionUI();
-        string seatClass = seatSelector.GetSeatClass(booking.Passengers[0].SeatNumber, flight.PlaneType);
+        var seatClass = seatSelector.GetSeatClass(booking.Passengers[0].SeatNumber, flight.PlaneType);
 
         if (!entertainmentOption.AvailableIn.Contains(seatClass, StringComparer.OrdinalIgnoreCase))
-        {
             return (false, $"Entertainment option not available for {seatClass} class");
-        }
 
         booking.Entertainment ??= new List<EntertainmentModel>();
 

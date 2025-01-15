@@ -1,6 +1,6 @@
 public class FlightsLogic
 {
-    public static List<FlightModel> AvailableFlights = new List<FlightModel>();
+    public static List<FlightModel> AvailableFlights = new();
 
     public static void AppendFlights()
     {
@@ -139,7 +139,7 @@ public class FlightsLogic
         if (!IsFlightValid(newFlight))
             return false;
 
-        int newId = AvailableFlights.Count > 0 ? AvailableFlights.Max(f => f.FlightId) + 1 : 1;
+        var newId = AvailableFlights.Count > 0 ? AvailableFlights.Max(f => f.FlightId) + 1 : 1;
         newFlight.FlightId = newId;
 
         AvailableFlights.Add(newFlight);
@@ -156,7 +156,7 @@ public class FlightsLogic
         if (existingFlight == null)
             return false;
 
-        int index = AvailableFlights.IndexOf(existingFlight);
+        var index = AvailableFlights.IndexOf(existingFlight);
         AvailableFlights[index] = updatedFlight;
 
         FlightsAccess.WriteAll(AvailableFlights);

@@ -1,7 +1,7 @@
 public class FinanceUserUI
 {
-    private static FinanceUserLogic _financeLogic = new FinanceUserLogic();
     private const int MIN_YEAR = 2024;
+    private static readonly FinanceUserLogic _financeLogic = new();
 
     private static bool IsAdmin()
     {
@@ -27,7 +27,7 @@ public class FinanceUserUI
 
         while (true)
         {
-            int selectedMenuIndex =
+            var selectedMenuIndex =
                 MenuNavigationServiceLogic.NavigateMenu(financeMenuOptions, "Personal Finance Panel");
 
             switch (selectedMenuIndex)
@@ -79,7 +79,7 @@ public class FinanceUserUI
 
             Console.WriteLine(new string('─', Console.WindowWidth - 1));
 
-            int calculatedTotal = 0;
+            var calculatedTotal = 0;
 
             if (booking.FlightId == 0)
             {
@@ -106,7 +106,7 @@ public class FinanceUserUI
                 );
 
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"Flight Details:");
+                Console.WriteLine("Flight Details:");
                 Console.ResetColor();
                 Console.WriteLine($"From: {flight.Origin} to {flight.Destination}");
                 Console.WriteLine($"Departure: {DateTime.Parse(flight.DepartureTime):dd MMM yyyy HH:mm}");
@@ -119,16 +119,12 @@ public class FinanceUserUI
                     Console.ResetColor();
 
                     foreach (var passenger in booking.Passengers)
-                    {
                         if (passenger.ShopItems?.Any() == true)
                         {
                             Console.WriteLine($"\n{passenger.Name}:");
                             foreach (var item in passenger.ShopItems)
-                            {
                                 Console.WriteLine($"  • {item.Name}: €{item.Price:N2}");
-                            }
                         }
-                    }
                 }
 
                 if (booking.Entertainment?.Any() == true)
@@ -138,10 +134,7 @@ public class FinanceUserUI
                     Console.WriteLine("\nEntertainment Purchases:");
                     Console.ResetColor();
 
-                    foreach (var item in booking.Entertainment)
-                    {
-                        Console.WriteLine($"  • {item.Name}: €{item.Cost:N2}");
-                    }
+                    foreach (var item in booking.Entertainment) Console.WriteLine($"  • {item.Name}: €{item.Cost:N2}");
                 }
             }
 
@@ -152,8 +145,8 @@ public class FinanceUserUI
 
             if (showVAT)
             {
-                decimal vat = calculatedTotal * 0.21m;
-                decimal totalWithVAT = calculatedTotal + vat;
+                var vat = calculatedTotal * 0.21m;
+                var totalWithVAT = calculatedTotal + vat;
 
                 Console.WriteLine($"Subtotal:          €{calculatedTotal:N2}");
                 Console.WriteLine($"VAT (21%):         €{vat:N2}");
@@ -167,12 +160,9 @@ public class FinanceUserUI
             Console.WriteLine("\nPress ESC to return to menu, or any other key to continue...");
 
             var key = Console.ReadKey(true);
-            if (key.Key == ConsoleKey.Escape)
-            {
-                return true;
-            }
+            if (key.Key == ConsoleKey.Escape) return true;
 
-            return false; 
+            return false;
         }
     }
 
@@ -214,7 +204,7 @@ public class FinanceUserUI
 
         while (true)
         {
-            int selectedIndex = MenuNavigationServiceLogic.NavigateMenu(periodOptions, "Select Period View");
+            var selectedIndex = MenuNavigationServiceLogic.NavigateMenu(periodOptions, "Select Period View");
 
             switch (selectedIndex)
             {
@@ -245,7 +235,7 @@ public class FinanceUserUI
 
         while (true)
         {
-            int selectedIndex = MenuNavigationServiceLogic.NavigateMenu(periodOptions, "Select Period View");
+            var selectedIndex = MenuNavigationServiceLogic.NavigateMenu(periodOptions, "Select Period View");
 
             switch (selectedIndex)
             {
@@ -266,11 +256,11 @@ public class FinanceUserUI
 
     private static void ShowPurchasesByYear()
     {
-        int currentYear = DateTime.Now.Year;
-        int selectedYear = currentYear;
-        bool done = false;
-        string message = "";
-        bool isAdmin = IsAdmin();
+        var currentYear = DateTime.Now.Year;
+        var selectedYear = currentYear;
+        var done = false;
+        var message = "";
+        var isAdmin = IsAdmin();
 
         while (!done)
         {
@@ -321,12 +311,12 @@ public class FinanceUserUI
 
     private static void ShowPurchasesByQuarter()
     {
-        int currentYear = DateTime.Now.Year;
-        int selectedYear = currentYear;
-        int selectedQuarter = (DateTime.Now.Month - 1) / 3 + 1;
-        bool done = false;
-        string message = "";
-        bool isAdmin = IsAdmin();
+        var currentYear = DateTime.Now.Year;
+        var selectedYear = currentYear;
+        var selectedQuarter = (DateTime.Now.Month - 1) / 3 + 1;
+        var done = false;
+        var message = "";
+        var isAdmin = IsAdmin();
 
         while (!done)
         {
@@ -347,19 +337,25 @@ public class FinanceUserUI
             {
                 case ConsoleKey.LeftArrow:
                     if (selectedQuarter > 1)
+                    {
                         selectedQuarter--;
+                    }
                     else if (selectedYear > MIN_YEAR)
                     {
                         selectedQuarter = 4;
                         selectedYear--;
                     }
                     else
+                    {
                         message = $"Cannot view years before {MIN_YEAR}";
+                    }
 
                     break;
                 case ConsoleKey.RightArrow:
                     if (selectedQuarter < 4)
+                    {
                         selectedQuarter++;
+                    }
                     else
                     {
                         selectedQuarter = 1;
@@ -400,13 +396,13 @@ public class FinanceUserUI
 
     private static void ShowPurchasesByMonth()
     {
-        int currentYear = DateTime.Now.Year;
-        int currentMonth = DateTime.Now.Month;
-        int selectedYear = currentYear;
-        int selectedMonth = currentMonth;
-        bool done = false;
-        string message = "";
-        bool isAdmin = IsAdmin();
+        var currentYear = DateTime.Now.Year;
+        var currentMonth = DateTime.Now.Month;
+        var selectedYear = currentYear;
+        var selectedMonth = currentMonth;
+        var done = false;
+        var message = "";
+        var isAdmin = IsAdmin();
 
         while (!done)
         {
@@ -427,19 +423,25 @@ public class FinanceUserUI
             {
                 case ConsoleKey.LeftArrow:
                     if (selectedMonth > 1)
+                    {
                         selectedMonth--;
+                    }
                     else if (selectedYear > MIN_YEAR)
                     {
                         selectedMonth = 12;
                         selectedYear--;
                     }
                     else
+                    {
                         message = $"Cannot view years before {MIN_YEAR}";
+                    }
 
                     break;
                 case ConsoleKey.RightArrow:
                     if (selectedMonth < 12)
+                    {
                         selectedMonth++;
+                    }
                     else
                     {
                         selectedMonth = 1;
@@ -551,19 +553,16 @@ public class FinanceUserUI
         decimal totalAmount = 0;
         foreach (var booking in bookings)
         {
-            if (ShowPurchaseDetails(booking))
-            {
-                return;
-            }
+            if (ShowPurchaseDetails(booking)) return;
 
             totalAmount += booking.TotalPrice;
             Console.WriteLine(new string('=', 40));
         }
 
-        decimal totalVAT = totalAmount * 0.21m;
-        decimal grandTotal = totalAmount + totalVAT;
+        var totalVAT = totalAmount * 0.21m;
+        var grandTotal = totalAmount + totalVAT;
 
-        Console.WriteLine($"\nPeriod Summary:");
+        Console.WriteLine("\nPeriod Summary:");
         Console.WriteLine($"Total Purchases: {bookings.Count}");
         Console.WriteLine($"Total Amount: €{totalAmount:N2}");
         Console.WriteLine($"Total VAT (21%): €{totalVAT:N2}");
@@ -587,7 +586,7 @@ public class FinanceUserUI
 
         while (true)
         {
-            int selectedMenuIndex =
+            var selectedMenuIndex =
                 MenuNavigationServiceLogic.NavigateMenu(adminFinanceMenuOptions, "Admin Finance Panel");
 
             switch (selectedMenuIndex)
@@ -625,8 +624,8 @@ public class FinanceUserUI
             return;
         }
 
-        int selectedIndex = 0;
-        bool done = false;
+        var selectedIndex = 0;
+        var done = false;
 
         while (!done)
         {
@@ -635,7 +634,7 @@ public class FinanceUserUI
             Console.WriteLine("↑ ↓ : Navigate    Enter : Select    Esc : Cancel\n");
 
             // Display users with selection highlight
-            for (int i = 0; i < users.Count; i++)
+            for (var i = 0; i < users.Count; i++)
             {
                 if (i == selectedIndex)
                     Console.Write("→ ");

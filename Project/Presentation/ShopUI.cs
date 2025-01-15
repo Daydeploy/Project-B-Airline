@@ -1,7 +1,7 @@
 public class ShopUI
 {
-    private readonly SmallItemsLogic smallItemsLogic;
     private readonly List<ShopItemModel> cart;
+    private readonly SmallItemsLogic smallItemsLogic;
     private int currentCategoryIndex;
     private int selectedItemIndex;
 
@@ -98,12 +98,12 @@ public class ShopUI
         Console.WriteLine(new string('─', 50));
         Console.ResetColor();
 
-        for (int i = 0; i < currentCategory.Items.Count; i++)
+        for (var i = 0; i < currentCategory.Items.Count; i++)
         {
             var item = currentCategory.Items[i];
             if (i == selectedItemIndex)
                 Console.BackgroundColor = ConsoleColor.DarkGray;
-            
+
             Console.WriteLine($"\n  • {item.Name,-35} {(decimal)item.Price:C}");
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.Gray;
@@ -120,10 +120,7 @@ public class ShopUI
 
         Console.WriteLine("\n=== Shopping Cart ===");
         Console.WriteLine(new string('─', 50));
-        foreach (var item in cart)
-        {
-            Console.WriteLine($"{item.Name,-35} {item.Price:C}");
-        }
+        foreach (var item in cart) Console.WriteLine($"{item.Name,-35} {item.Price:C}");
 
         Console.WriteLine(new string('─', 50));
         Console.WriteLine($"Total: {cart.Sum(i => i.Price):C}");
@@ -135,10 +132,7 @@ public class ShopUI
         Console.WriteLine("=== Complete Purchase ===");
         Console.WriteLine("\nShopping Cart:");
         Console.WriteLine(new string('─', 50));
-        foreach (var item in cart)
-        {
-            Console.WriteLine($"{item.Name,-35} {item.Price:C}");
-        }
+        foreach (var item in cart) Console.WriteLine($"{item.Name,-35} {item.Price:C}");
 
         Console.WriteLine(new string('─', 50));
         Console.WriteLine($"\nTotal Amount: {cart.Sum(i => i.Price):C}");
@@ -154,13 +148,11 @@ public class ShopUI
                 Console.ReadKey();
                 return true;
             }
-            else
-            {
-                Console.WriteLine("\nError: Failed to add items to passenger.");
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey();
-                return false;
-            }
+
+            Console.WriteLine("\nError: Failed to add items to passenger.");
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+            return false;
         }
 
         return false;

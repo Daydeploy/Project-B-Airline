@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
-
-static class AirportInformation
+internal static class AirportInformation
 {
     public static void ViewAirportInformation()
     {
@@ -11,7 +8,7 @@ static class AirportInformation
             var airportLogic = new AirportLogic();
             var airports = airportLogic.GetAllAirports();
 
-            int currentIndex = 0;
+            var currentIndex = 0;
             DisplayCurrentAirport();
 
             while (true)
@@ -62,10 +59,10 @@ static class AirportInformation
         while (true)
         {
             Console.Clear();
-            FlightsLogic flightsLogic = new FlightsLogic();
+            var flightsLogic = new FlightsLogic();
             var destinations = flightsLogic.GetAllDestinations().Distinct().ToList();
 
-            int currentIndex = 0;
+            var currentIndex = 0;
             DisplayCurrentDestination();
 
             while (true)
@@ -143,13 +140,13 @@ static class AirportInformation
         var airports = airportLogic.GetAllAirports();
 
         // Convert airports to menu items
-        string[] airportMenuItems = airports
+        var airportMenuItems = airports
             .Select(a => $"{a.Name} ({a.Code})")
             .ToArray();
 
         // Use MenuNavigationService for airport selection
         Console.WriteLine("=== Edit Airport Information ===\n");
-        int selectedIndex = MenuNavigationServiceLogic.NavigateMenu(airportMenuItems, "Select Airport to Edit");
+        var selectedIndex = MenuNavigationServiceLogic.NavigateMenu(airportMenuItems, "Select Airport to Edit");
 
         if (selectedIndex == -1) return; // User pressed ESC
 
@@ -183,7 +180,7 @@ static class AirportInformation
                 "Back to Menu"
             };
 
-            int selectedOption = MenuNavigationServiceLogic.NavigateMenu(editOptions, "Select field to edit:");
+            var selectedOption = MenuNavigationServiceLogic.NavigateMenu(editOptions, "Select field to edit:");
             if (selectedOption == -1 || selectedOption == editOptions.Length - 1)
             {
                 Console.WriteLine("Returning to menu...");
@@ -213,15 +210,11 @@ static class AirportInformation
                 Console.Write("\nSave these changes? (Y/N): ");
                 if (Console.ReadLine()?.ToUpper() == "Y")
                 {
-                    bool success = airportLogic.UpdateAirport(selectedAirport);
+                    var success = airportLogic.UpdateAirport(selectedAirport);
                     if (success)
-                    {
                         Console.WriteLine("Airport information updated successfully!");
-                    }
                     else
-                    {
                         Console.WriteLine("Error: Failed to update airport information.");
-                    }
 
                     Console.WriteLine("\nPress any key to continue...");
                     Console.ReadKey();
@@ -234,7 +227,7 @@ static class AirportInformation
             Console.Write($"\nEnter new {editOptions[selectedOption].Split(':')[0]} (ESC to cancel): ");
 
             ConsoleKeyInfo key;
-            string newValue = "";
+            var newValue = "";
             while ((key = Console.ReadKey(true)).Key != ConsoleKey.Enter)
             {
                 if (key.Key == ConsoleKey.Escape)
@@ -258,7 +251,6 @@ static class AirportInformation
             }
 
             if (!string.IsNullOrWhiteSpace(newValue))
-            {
                 switch (selectedOption)
                 {
                     case 0:
@@ -283,7 +275,6 @@ static class AirportInformation
                         selectedAirport.Address = newValue;
                         break;
                 }
-            }
         }
     }
 
@@ -295,16 +286,16 @@ static class AirportInformation
         var airports = airportLogic.GetAllAirports();
 
         Console.Write("Enter country: ");
-        string country = Console.ReadLine();
+        var country = Console.ReadLine();
 
         Console.Write("Enter city: ");
-        string city = Console.ReadLine();
+        var city = Console.ReadLine();
 
         Console.Write("Enter airport name: ");
-        string name = Console.ReadLine();
+        var name = Console.ReadLine();
 
         Console.Write("Enter airport code (e.g., LHR): ");
-        string code = Console.ReadLine()?.ToUpper();
+        var code = Console.ReadLine()?.ToUpper();
 
         // er word check gedaan of airport al bestaat gebasseerd op de airport code
         if (airports.Any(a => a.Code == code))
@@ -316,13 +307,13 @@ static class AirportInformation
         }
 
         Console.Write("Enter type (Public/Private): ");
-        string type = Console.ReadLine();
+        var type = Console.ReadLine();
 
         Console.Write("Enter phone number: ");
-        string phoneNumber = Console.ReadLine();
+        var phoneNumber = Console.ReadLine();
 
         Console.Write("Enter address: ");
-        string address = Console.ReadLine();
+        var address = Console.ReadLine();
 
         if (string.IsNullOrWhiteSpace(country) ||
             string.IsNullOrWhiteSpace(city) ||
@@ -335,7 +326,7 @@ static class AirportInformation
             return;
         }
 
-        int newId = airports.Count > 0 ? airports.Max(a => a.AirportID) + 1 : 1;
+        var newId = airports.Count > 0 ? airports.Max(a => a.AirportID) + 1 : 1;
 
         var newAirport = new AirportModel(
             newId,
@@ -350,13 +341,9 @@ static class AirportInformation
 
         airports.Add(newAirport);
         if (AirportAccess.WriteAllAirports(airports))
-        {
             Console.WriteLine("\nAirport added successfully!");
-        }
         else
-        {
             Console.WriteLine("\nError: Failed to add airport.");
-        }
 
         Console.WriteLine("\nPress any key to continue...");
         Console.ReadKey();

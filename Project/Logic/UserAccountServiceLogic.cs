@@ -1,14 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
 public class UserAccountServiceLogic
 {
     public AccountsLogic _accountsLogic;
-    private List<BookingModel> _bookings;
-
-    public bool IsLoggedIn { get; set; }
-    public int CurrentUserId { get; set; }
+    private readonly List<BookingModel> _bookings;
 
     public UserAccountServiceLogic()
     {
@@ -18,10 +11,10 @@ public class UserAccountServiceLogic
         CurrentUserId = -1;
     }
 
-    public AccountModel CurrentAccount
-    {
-        get { return IsLoggedIn ? _accountsLogic.GetById(CurrentUserId) : null; }
-    }
+    public bool IsLoggedIn { get; set; }
+    public int CurrentUserId { get; set; }
+
+    public AccountModel CurrentAccount => IsLoggedIn ? _accountsLogic.GetById(CurrentUserId) : null;
 
     public bool CreateAccount(string firstName, string lastName, string email, string password,
         DateTime dateOfBirth, string gender, string nationality, string phoneNumber,
@@ -42,40 +35,36 @@ public class UserAccountServiceLogic
         }
 
         Console.WriteLine("\nWould you like to enroll in our Frequent Flyer Program? (Y/N)");
-        string enrollResponse = Console.ReadLine()?.Trim().ToUpper();
-        bool isEnrolled = enrollResponse == "Y" || enrollResponse == "YES";
+        var enrollResponse = Console.ReadLine()?.Trim().ToUpper();
+        var isEnrolled = enrollResponse == "Y" || enrollResponse == "YES";
 
-        int newId = _accountsLogic._accounts.Max(a => a.Id) + 1;
+        var newId = _accountsLogic._accounts.Max(a => a.Id) + 1;
         CurrentUserId = newId;
 
         var initialMiles = new List<MilesModel>
-            { new MilesModel(string.Empty, 0, 0, string.Empty) { Enrolled = isEnrolled } };
+            { new(string.Empty, 0, 0, string.Empty) { Enrolled = isEnrolled } };
 
         var newAccount = new AccountModel(
-            id: newId,
-            firstName: firstName,
-            lastName: lastName,
-            dateOfBirth: dateOfBirth,
-            emailAddress: email,
-            password: password,
-            gender: gender,
-            nationality: nationality,
-            phoneNumber: phoneNumber,
-            address: address,
-            passportDetails: passportDetails,
-            miles: initialMiles
+            newId,
+            firstName,
+            lastName,
+            dateOfBirth,
+            email,
+            password,
+            gender,
+            nationality,
+            phoneNumber,
+            address,
+            passportDetails,
+            initialMiles
         );
 
         _accountsLogic.UpdateList(newAccount);
 
         if (isEnrolled)
-        {
             Console.WriteLine("Congratulations! You have been enrolled in the Frequent Flyer Program.");
-        }
         else
-        {
             Console.WriteLine("You have chosen not to enroll in the Frequent Flyer Program at this time.");
-        }
 
         return true;
     }
@@ -91,12 +80,10 @@ public class UserAccountServiceLogic
             MilesLogic.UpdateAllAccountLevels();
             return account;
         }
-        else
-        {
-            IsLoggedIn = false;
-            CurrentUserId = -1;
-            return null;
-        }
+
+        IsLoggedIn = false;
+        CurrentUserId = -1;
+        return null;
     }
 
     public void Logout()
@@ -117,10 +104,7 @@ public class UserAccountServiceLogic
         List<PaymentInformationModel> newPaymentInformation = null)
     {
         var account = _accountsLogic.GetById(userId);
-        if (account == null)
-        {
-            return false;
-        }
+        if (account == null) return false;
 
         if (!string.IsNullOrWhiteSpace(newEmail)) account.EmailAddress = newEmail;
         if (!string.IsNullOrWhiteSpace(newPassword)) account.Password = newPassword;
@@ -149,15 +133,9 @@ public class UserAccountServiceLogic
                 account.PassportDetails.CountryOfIssue = newPassportDetails.CountryOfIssue;
         }
 
-        if (newMiles != null)
-        {
-            account.Miles = newMiles;
-        }
+        if (newMiles != null) account.Miles = newMiles;
 
-        if (newPaymentInformation != null)
-        {
-            account.PaymentInformation = newPaymentInformation;
-        }
+        if (newPaymentInformation != null) account.PaymentInformation = newPaymentInformation;
 
         _accountsLogic.UpdateList(account);
         return true;
@@ -172,16 +150,13 @@ public class UserAccountServiceLogic
     public bool ModifyBooking(int flightId, int passengerId, BookingDetails newDetails)
     {
         var booking = _bookings.FirstOrDefault(b => b.FlightId == flightId);
-        if (booking == null || booking.Passengers == null || passengerId >= booking.Passengers.Count)
-        {
-            return false;
-        }
+        if (booking == null || booking.Passengers == null || passengerId >= booking.Passengers.Count) return false;
 
         var oldPassenger = booking.Passengers[passengerId];
         var updatedPassenger = new PassengerModel(
-            name: oldPassenger.Name,
-            seatNumber: newDetails.SeatNumber,
-            hasCheckedBaggage: newDetails.HasCheckedBaggage
+            oldPassenger.Name,
+            newDetails.SeatNumber,
+            newDetails.HasCheckedBaggage
         );
 
         booking.Passengers[passengerId] = updatedPassenger;

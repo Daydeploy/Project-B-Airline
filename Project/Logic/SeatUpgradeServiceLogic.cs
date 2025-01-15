@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 public class SeatUpgradeServiceLogic
 {
     public List<string> ViewAvailableUpgrades(int flightId)
