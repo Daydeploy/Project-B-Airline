@@ -7,12 +7,11 @@ public class FinancePanelUI
 
     public static void FinanceMainMenu()
     {
-        string[] financeMenuOptions =
-        {
-            "Date",
-            "Month",
-            "Year",
-            "Logout"
+        string[] financeMenuOptions = {
+            "Show Yearly Data",
+            "Show Monthly Data",
+            "Show Dayily Data",
+            "Logout",
         };
 
         while (_isLoggedIn)
