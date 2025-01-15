@@ -30,7 +30,7 @@ public class EntertainmentLogic
         }
 
         booking.Entertainment ??= new List<EntertainmentModel>();
-        
+
         booking.Entertainment.Add(entertainmentOption);
         booking.TotalPrice += (int)entertainmentOption.Cost;
 

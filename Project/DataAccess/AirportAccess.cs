@@ -1,6 +1,8 @@
 public static class AirportAccess
 {
-    private static string _filePath = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/airports.json"));
+    private static string _filePath =
+        System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/airports.json"));
+
     private static GenericJsonAccess<AirportModel> _airportAccess = new GenericJsonAccess<AirportModel>(_filePath);
 
     public static List<AirportModel> LoadAllAirports()
@@ -12,7 +14,7 @@ public static class AirportAccess
     {
         if (airports == null)
             return false;
-            
+
         _airportAccess.WriteAll(airports);
         return true;
     }
@@ -25,7 +27,7 @@ public static class AirportAccess
         var airports = LoadAllAirports();
         if (airports.Any(a => a.AirportID == newAirport.AirportID))
             return false;
-        
+
         airports.Add(newAirport);
         return WriteAllAirports(airports);
     }

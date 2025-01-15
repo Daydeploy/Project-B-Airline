@@ -25,6 +25,7 @@ static class AirportInformation
                             currentIndex++;
                             DisplayCurrentAirport();
                         }
+
                         break;
 
                     case ConsoleKey.LeftArrow:
@@ -33,6 +34,7 @@ static class AirportInformation
                             currentIndex--;
                             DisplayCurrentAirport();
                         }
+
                         break;
 
                     case ConsoleKey.Escape:
@@ -62,10 +64,10 @@ static class AirportInformation
             Console.Clear();
             FlightsLogic flightsLogic = new FlightsLogic();
             var destinations = flightsLogic.GetAllDestinations().Distinct().ToList();
-            
+
             int currentIndex = 0;
             DisplayCurrentDestination();
-    
+
             while (true)
             {
                 var key = Console.ReadKey(true);
@@ -77,25 +79,27 @@ static class AirportInformation
                             currentIndex++;
                             DisplayCurrentDestination();
                         }
+
                         break;
-    
+
                     case ConsoleKey.LeftArrow:
                         if (currentIndex > 0)
                         {
                             currentIndex--;
                             DisplayCurrentDestination();
                         }
+
                         break;
-    
+
                     case ConsoleKey.Escape:
                         return;
                 }
             }
-    
+
             void DisplayCurrentDestination()
             {
                 Console.Clear();
-                
+
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("=== Browse Destinations ===\n");
                 Console.ForegroundColor = ConsoleColor.Gray;
@@ -103,29 +107,29 @@ static class AirportInformation
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
                 Console.WriteLine("← → - Navigate between destinations");
                 Console.WriteLine("ESC - Return to main menu\n");
-                
+
                 Console.ForegroundColor = ConsoleColor.DarkMagenta;
                 Console.WriteLine(new string('═', Console.WindowWidth - 1));
-    
+
                 var currentDestination = destinations[currentIndex];
                 var flightCount = flightsLogic.GetAllFlights()
                     .Count(f => f.Destination.Equals(currentDestination, StringComparison.OrdinalIgnoreCase));
-    
+
                 Console.ForegroundColor = ConsoleColor.DarkGray;
                 Console.WriteLine($"\nDestination {currentIndex + 1} of {destinations.Count}");
-                
+
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine($"\n╔══ {currentDestination} ══╗");
-                
+
                 Console.ForegroundColor = flightCount > 0 ? ConsoleColor.Green : ConsoleColor.Red;
                 Console.WriteLine($"\nNumber of flights available: {flightCount}");
-                
+
                 Console.ForegroundColor = ConsoleColor.Gray;
                 Console.WriteLine("\nTo view detailed flight information, please use the Flight Search option.");
-                
+
                 Console.ForegroundColor = ConsoleColor.DarkMagenta;
                 Console.WriteLine(new string('═', Console.WindowWidth - 1));
-                
+
                 Console.ResetColor();
             }
         }
@@ -146,7 +150,7 @@ static class AirportInformation
         // Use MenuNavigationService for airport selection
         Console.WriteLine("=== Edit Airport Information ===\n");
         int selectedIndex = MenuNavigationServiceLogic.NavigateMenu(airportMenuItems, "Select Airport to Edit");
-        
+
         if (selectedIndex == -1) return; // User pressed ESC
 
         var selectedAirport = airports[selectedIndex];
@@ -166,7 +170,8 @@ static class AirportInformation
             Console.Clear();
             Console.WriteLine($"Editing: {selectedAirport.Name}\n");
 
-            string[] editOptions = {
+            string[] editOptions =
+            {
                 $"Country: {selectedAirport.Country}",
                 $"City: {selectedAirport.City}",
                 $"Name: {selectedAirport.Name}",
@@ -179,7 +184,7 @@ static class AirportInformation
             };
 
             int selectedOption = MenuNavigationServiceLogic.NavigateMenu(editOptions, "Select field to edit:");
-            if (selectedOption == -1 || selectedOption == editOptions.Length - 1) 
+            if (selectedOption == -1 || selectedOption == editOptions.Length - 1)
             {
                 Console.WriteLine("Returning to menu...");
                 return;
@@ -217,15 +222,17 @@ static class AirportInformation
                     {
                         Console.WriteLine("Error: Failed to update airport information.");
                     }
+
                     Console.WriteLine("\nPress any key to continue...");
                     Console.ReadKey();
                     return;
                 }
+
                 continue;
             }
 
             Console.Write($"\nEnter new {editOptions[selectedOption].Split(':')[0]} (ESC to cancel): ");
-        
+
             ConsoleKeyInfo key;
             string newValue = "";
             while ((key = Console.ReadKey(true)).Key != ConsoleKey.Enter)
@@ -236,7 +243,7 @@ static class AirportInformation
                     Console.ReadKey();
                     break;
                 }
-                
+
                 if (key.Key == ConsoleKey.Backspace && newValue.Length > 0)
                 {
                     newValue = newValue.Substring(0, newValue.Length - 1);
@@ -254,18 +261,32 @@ static class AirportInformation
             {
                 switch (selectedOption)
                 {
-                    case 0: selectedAirport.Country = newValue; break;
-                    case 1: selectedAirport.City = newValue; break;
-                    case 2: selectedAirport.Name = newValue; break;
-                    case 3: selectedAirport.Code = newValue; break;
-                    case 4: selectedAirport.Type = newValue; break;
-                    case 5: selectedAirport.PhoneNumber = newValue; break;
-                    case 6: selectedAirport.Address = newValue; break;
+                    case 0:
+                        selectedAirport.Country = newValue;
+                        break;
+                    case 1:
+                        selectedAirport.City = newValue;
+                        break;
+                    case 2:
+                        selectedAirport.Name = newValue;
+                        break;
+                    case 3:
+                        selectedAirport.Code = newValue;
+                        break;
+                    case 4:
+                        selectedAirport.Type = newValue;
+                        break;
+                    case 5:
+                        selectedAirport.PhoneNumber = newValue;
+                        break;
+                    case 6:
+                        selectedAirport.Address = newValue;
+                        break;
                 }
             }
         }
     }
-    
+
     public static void AddNewAirport()
     {
         Console.Clear();
@@ -275,13 +296,13 @@ static class AirportInformation
 
         Console.Write("Enter country: ");
         string country = Console.ReadLine();
-        
+
         Console.Write("Enter city: ");
         string city = Console.ReadLine();
-        
+
         Console.Write("Enter airport name: ");
         string name = Console.ReadLine();
-        
+
         Console.Write("Enter airport code (e.g., LHR): ");
         string code = Console.ReadLine()?.ToUpper();
 
@@ -293,19 +314,19 @@ static class AirportInformation
             Console.ReadKey();
             return;
         }
-        
+
         Console.Write("Enter type (Public/Private): ");
         string type = Console.ReadLine();
-        
+
         Console.Write("Enter phone number: ");
         string phoneNumber = Console.ReadLine();
-        
+
         Console.Write("Enter address: ");
         string address = Console.ReadLine();
 
-        if (string.IsNullOrWhiteSpace(country) || 
-            string.IsNullOrWhiteSpace(city) || 
-            string.IsNullOrWhiteSpace(name) || 
+        if (string.IsNullOrWhiteSpace(country) ||
+            string.IsNullOrWhiteSpace(city) ||
+            string.IsNullOrWhiteSpace(name) ||
             string.IsNullOrWhiteSpace(code))
         {
             Console.WriteLine("\nError: Country, city, name, and code are required fields.");
@@ -340,51 +361,4 @@ static class AirportInformation
         Console.WriteLine("\nPress any key to continue...");
         Console.ReadKey();
     }
-
-    public static void DeleteAirportInformation()
-    {
-        Console.Clear();
-        var airportLogic = new AirportLogic();
-        var airports = airportLogic.GetAllAirports();
-
-        // Convert airports to menu items
-        string[] airportMenuItems = airports
-            .Select(a => $"{a.Name} ({a.Code})")
-            .Concat(new[] { "Back to Menu" })
-            .ToArray();
-
-        // Use MenuNavigationService for airport selection
-        Console.WriteLine("=== Delete Airport Information ===\n");
-        int selectedIndex = MenuNavigationServiceLogic.NavigateMenu(airportMenuItems, "Select Airport to Delete");
-
-        if (selectedIndex == -1 || selectedIndex == airportMenuItems.Length - 1)
-        {
-            return; // back to menu
-        }
-        
-        if (selectedIndex == -1) return; // User pressed ESC
-
-        var selectedAirport = airports[selectedIndex];
-        Console.WriteLine($"\nAre you sure you want to delete {selectedAirport.Name} ({selectedAirport.Code})? (Y/N)");
-        
-        if (Console.ReadLine()?.ToUpper() == "Y")
-        {
-            bool success = AirportAccess.WriteAllAirports(airports);
-            if (success)
-            {
-                Console.WriteLine("\nAirport deleted successfully!");
-            }
-            else
-            {
-                Console.WriteLine("\nError: Failed to delete airport.");
-            }
-        }
-        else
-        {
-            Console.WriteLine("\nDeletion cancelled.");
-        }
-
-        Console.WriteLine("\nPress any key to continue...");
-        Console.ReadKey();
-    }
-} 
+}

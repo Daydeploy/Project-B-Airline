@@ -3,16 +3,16 @@ using System.Text.Json.Serialization;
 public class PassportDetailsModel
 {
     [JsonPropertyName("passportNumber")]
-    public string? PassportNumber { get; set; }  // Nullable
+    public string? PassportNumber { get; set; }  
 
     [JsonPropertyName("issueDate")]
-    public DateTime? IssueDate { get; set; }  // Nullable
+    public DateTime? IssueDate { get; set; }  
 
     [JsonPropertyName("expirationDate")]
-    public DateTime? ExpirationDate { get; set; }  // Nullable
+    public DateTime? ExpirationDate { get; set; } 
 
     [JsonPropertyName("countryOfIssue")]
-    public string? CountryOfIssue { get; set; }  // Nullable
+    public string? CountryOfIssue { get; set; }  
 
     public PassportDetailsModel(string? passportNumber = null, DateTime? issueDate = null, DateTime? expirationDate = null, string? countryOfIssue = null)
     {

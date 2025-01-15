@@ -807,7 +807,6 @@ static class FlightManagement
     {
         double totalBaggageCost = 0;
         double totalBasePrice = 0;
-        const int BAGGAGE_PRICE = 30;
 
         BookingModel booking = BookingLogic.CreateBooking(userId: UserLogin.UserAccountServiceLogic.CurrentUserId,
             flightId: departureFlight.FlightId, passengerDetails: passengerDetails,
@@ -868,8 +867,7 @@ static class FlightManagement
 
             if (passenger.HasCheckedBaggage)
             {
-                double passengerBaggageCost = (passenger.NumberOfBaggage - 1) * BAGGAGE_PRICE;
-                // totalBaggageCost += passengerBaggageCost;
+                double passengerBaggageCost = (passenger.NumberOfBaggage - 1) * 30;
                 Console.WriteLine($"Checked Baggage: {passenger.NumberOfBaggage} piece(s) ({passengerBaggageCost:C})");
             }
 
@@ -972,7 +970,7 @@ static class FlightManagement
             MilesLogic.CalculateMilesFromBooking(UserLogin.UserAccountServiceLogic.CurrentUserId);
 
         BookingLogic.SaveBooking(booking);
-        
+
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine("\n╔══════════════════════════════════╗");

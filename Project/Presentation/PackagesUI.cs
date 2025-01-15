@@ -5,13 +5,14 @@ static class PackagesUI
     private static void DisplayPackageOptions()
     {
         var packages = ComfortPackageDataAccess.LoadAll();
-        
+
         Console.WriteLine("\nAvailable Comfort Packages:");
         Console.WriteLine(new string('-', 50));
-        
+
         foreach (var package in packages)
         {
-            Console.WriteLine($"{package.Id}. {package.Name} - {string.Join(", ", package.Contents)} (€{package.Cost:F2})");
+            Console.WriteLine(
+                $"{package.Id}. {package.Name} - {string.Join(", ", package.Contents)} (€{package.Cost:F2})");
             Console.WriteLine($"   Available in: {string.Join(", ", package.AvailableIn)}");
             Console.WriteLine(new string('-', 50));
         }
@@ -21,7 +22,7 @@ static class PackagesUI
     {
         // Get current user ID
         int currentUserId = UserLogin.UserAccountServiceLogic.CurrentUserId;
-        
+
         // Use BookingAccess instead of BookingDataAccess
         List<BookingModel> bookedFlights = BookingAccess.LoadAll()
             .Where(b => b.UserId == currentUserId)
@@ -36,13 +37,13 @@ static class PackagesUI
         }
 
         Console.Clear();
-        
+
         Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine("=== Comfort Packages ===\n");
         Console.ResetColor();
 
         Console.WriteLine("Your Booked Flights:");
-        
+
         Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine(new string('-', 80));
         Console.ResetColor();
@@ -57,7 +58,7 @@ static class PackagesUI
                 System.Console.WriteLine($"Seat Class: {flight.SeatClassOptions.FirstOrDefault()?.SeatClass}");
                 Console.WriteLine($"Flight: {flight.Origin} to {flight.Destination}");
                 Console.WriteLine($"Date: {flight.DepartureTime}");
-                
+
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine(new string('-', 80));
                 Console.ResetColor();
@@ -88,7 +89,7 @@ static class PackagesUI
             Console.ReadKey();
             return;
         }
-            
+
         Console.Write("\nEnter Package ID to purchase (0 to cancel): ");
         if (!int.TryParse(Console.ReadLine(), out int packageId) || packageId == 0)
         {

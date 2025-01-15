@@ -5,8 +5,8 @@ public class BookingLogic
     private static readonly List<FlightModel> _flights = FlightsAccess.LoadAll();
     private static readonly List<AccountModel> _accounts = AccountsAccess.LoadAll();
     private static readonly List<BookingModel> _bookings = BookingAccess.LoadAll();
-    
-    public static bool HasInsurance { get; set; }	
+
+    public static bool HasInsurance { get; set; }
 
     public static List<BookingModel> GetBookingsForFlight(int flightId)
     {
@@ -22,7 +22,8 @@ public class BookingLogic
             .ToList();
     }
 
-    public static BookingModel CreateBooking(int userId, int flightId, List<PassengerModel> passengerDetails, List<PetModel> petDetails, bool includeInsurance = false, 
+    public static BookingModel CreateBooking(int userId, int flightId, List<PassengerModel> passengerDetails,
+        List<PetModel> petDetails, bool includeInsurance = false,
         bool isPrivateJet = false, string jetType = null)
     {
         int bookingId = GenerateBookingId();
@@ -44,18 +45,20 @@ public class BookingLogic
             var flight = _flights.FirstOrDefault(f => f.FlightId == flightId);
             if (flight == null) return null;
 
-            if (includeInsurance){
+            if (includeInsurance)
+            {
                 HasInsurance = includeInsurance;
             }
+
             totalPrice = CalculateTotalPrice(flight.Destination, passengerDetails, includeInsurance);
         }
 
-        List<PassengerModel> passengers = passengerDetails.Select(p => 
+        List<PassengerModel> passengers = passengerDetails.Select(p =>
             new PassengerModel(p.Name, p.SeatNumber, p.HasCheckedBaggage, p.HasPet, p.PetDetails, p.SpecialLuggage)
             {
                 NumberOfBaggage = p.NumberOfBaggage,
                 ShopItems = p.ShopItems
-            }).ToList(); 
+            }).ToList();
 
         BookingModel newBooking = new BookingModel(bookingId, userId, flightId, totalPrice, passengers, petDetails);
         if (isPrivateJet)
@@ -64,6 +67,7 @@ public class BookingLogic
             _bookings.Add(newBooking);
             BookingAccess.WriteAll(_bookings);
         }
+
         return newBooking;
     }
 
@@ -74,16 +78,16 @@ public class BookingLogic
         BookingAccess.WriteAll(_bookings);
         return true;
     }
-    
+
     private static int GenerateBookingId()
     {
         int bookingId;
         do
         {
-            bookingId = random.Next(0, 9999); 
+            bookingId = random.Next(0, 9999);
         } while (_bookings.Any(i => i.BookingId.Equals(bookingId)));
 
-        return bookingId; 
+        return bookingId;
     }
 
     public static (int userId, bool success) GetUserId(int id)
@@ -103,34 +107,36 @@ public class BookingLogic
             : (0, false);
     }
 
-    public static int CalculateTotalPrice(string destination, List<PassengerModel> passengers, bool includeInsurance = false)
+    public static int CalculateTotalPrice(string destination, List<PassengerModel> passengers,
+        bool includeInsurance = false)
     {
-        var flight = _flights.FirstOrDefault(f => f.Destination.Equals(destination, StringComparison.OrdinalIgnoreCase));
+        var flight =
+            _flights.FirstOrDefault(f => f.Destination.Equals(destination, StringComparison.OrdinalIgnoreCase));
         if (flight == null || flight.SeatClassOptions == null) return 0;
-    
+
         const int BAGGAGE_PRICE = 30;
         const int CABIN_PET_FEE = 50;
         const int CARGO_PET_FEE = 30;
         const int INSURANCE_FEE = 10;
-    
+
         var total = passengers.Sum(p =>
         {
             int passengerTotal = 0;
-    
+
             var seatClass = GetSeatClass(p.SeatNumber);
             var seatOption = flight.SeatClassOptions
                 .FirstOrDefault(so => so.SeatClass.Equals(seatClass, StringComparison.OrdinalIgnoreCase));
-            
+
             if (seatOption != null)
             {
                 passengerTotal += seatOption.Price;
             }
-    
+
             if (p.HasCheckedBaggage && p.NumberOfBaggage > 1) // eerste tas gratis
             {
                 passengerTotal += BAGGAGE_PRICE * (p.NumberOfBaggage - 1);
             }
-    
+
             if (p.HasPet && p.PetDetails != null)
             {
                 foreach (var pet in p.PetDetails)
@@ -138,20 +144,20 @@ public class BookingLogic
                     passengerTotal += pet.StorageLocation == "Cabin" ? CABIN_PET_FEE : CARGO_PET_FEE;
                 }
             }
-    
+
             if (p.ShopItems?.Any() == true)
             {
                 passengerTotal += p.ShopItems.Sum(item => (int)item.Price);
             }
-    
+
             return passengerTotal;
         });
-    
+
         if (includeInsurance)
         {
             total += INSURANCE_FEE * passengers.Count;
         }
-        
+
         return total;
     }
 

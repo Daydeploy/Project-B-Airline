@@ -4,9 +4,13 @@ using System.Text.Json;
 
 public class SmallItemsDataAccess
 {
-    private static string _filePath = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/smallItems.json"));
-    private static GenericJsonAccess<SmallItemsModel> _smallItemsModel = new GenericJsonAccess<SmallItemsModel>(_filePath);
-    
+    private static string _filePath =
+        System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory,
+            @"DataSources/smallItems.json"));
+
+    private static GenericJsonAccess<SmallItemsModel> _smallItemsModel =
+        new GenericJsonAccess<SmallItemsModel>(_filePath);
+
 
     public static List<SmallItemsModel> LoadAll()
     {
@@ -17,6 +21,4 @@ public class SmallItemsDataAccess
     {
         _smallItemsModel.WriteAll(smallItems);
     }
-    
-
 }

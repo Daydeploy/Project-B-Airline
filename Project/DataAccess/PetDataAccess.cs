@@ -2,7 +2,9 @@ using System.Collections.Generic;
 
 public static class PetDataAccess
 {
-    private static string _filePath = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/pets.json"));
+    private static string _filePath =
+        System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/pets.json"));
+
     private static GenericJsonAccess<PetModel> _petAccess = new GenericJsonAccess<PetModel>(_filePath);
 
     public static List<PetModel> LoadPetTypes()
@@ -27,4 +29,4 @@ public static class PetDataAccess
         var pet = petTypes.FirstOrDefault(p => p.Type.Equals(petType, StringComparison.OrdinalIgnoreCase));
         return pet?.Fee[location] ?? 0;
     }
-} 
+}

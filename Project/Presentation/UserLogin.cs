@@ -133,10 +133,11 @@ static class UserLogin
     public static void PaymentAndAccountInformationCheck(AccountModel account)
     {
         var accountsLogic = new AccountsLogic();
-        account = accountsLogic.GetById(account.Id); 
+        account = accountsLogic.GetById(account.Id);
         bool updateNeeded = false;
 
-        if (string.IsNullOrEmpty(account.PhoneNumber) || string.IsNullOrEmpty(account.Address) || account.PaymentInformation == null)
+        if (string.IsNullOrEmpty(account.PhoneNumber) || string.IsNullOrEmpty(account.Address) ||
+            account.PaymentInformation == null)
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Cyan;
@@ -219,6 +220,7 @@ static class UserLogin
                     Console.Write("Enter Card Holder Name: ");
                 }
             } while (!PaymentLogic.ValidateName(cardHolder));
+
             Console.Write("\nEnter Card Number (16 digits): ");
             string cardNumber;
             do
@@ -284,16 +286,19 @@ static class UserLogin
 
         if (updateNeeded)
         {
-            UserLogin.UserAccountServiceLogic.ManageAccount(account.Id, newPaymentInformation: account.PaymentInformation);
+            UserLogin.UserAccountServiceLogic.ManageAccount(account.Id,
+                newPaymentInformation: account.PaymentInformation);
             Console.WriteLine("\nInformation updated successfully!");
         }
 
-        if (string.IsNullOrEmpty(account.PhoneNumber) || string.IsNullOrEmpty(account.Address) || account.PaymentInformation == null)
+        if (string.IsNullOrEmpty(account.PhoneNumber) || string.IsNullOrEmpty(account.Address) ||
+            account.PaymentInformation == null)
         {
             Console.WriteLine("\nPress any key to continue with booking...");
             Console.ReadKey();
             Console.Clear();
         }
+
         FlightManagement.BookAFlight(account);
     }
 

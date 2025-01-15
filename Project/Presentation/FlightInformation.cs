@@ -5,7 +5,7 @@ static class FlightInformation
 {
     public static void EditFlightInformation()
     {
-         Console.Clear();
+        Console.Clear();
         var flightsLogic = new FlightsLogic();
         var flights = flightsLogic.GetAllFlights();
 
@@ -63,7 +63,8 @@ static class FlightInformation
             FlightDisplay.DisplayFlightDetails(selectedFlight);
             Console.WriteLine();
 
-            string[] editOptions = {
+            string[] editOptions =
+            {
                 $"Origin: {selectedFlight.Origin}",
                 $"Destination: {selectedFlight.Destination}",
                 $"Departure Time: {selectedFlight.DepartureTime}",
@@ -96,10 +97,12 @@ static class FlightInformation
                     {
                         Console.WriteLine("Error: Unable to update flight information.");
                     }
+
                     Console.WriteLine("\nPress any key to continue...");
                     Console.ReadKey();
                     return;
                 }
+
                 continue;
             }
 
@@ -136,10 +139,10 @@ static class FlightInformation
         Console.Clear();
         var flightsLogic = new FlightsLogic();
         var flights = flightsLogic.GetAllFlights();
-    
+
         Console.WriteLine("=== Delete Flight Information ===\n");
         FlightDisplay.DisplayFlights(flights);
-    
+
         Console.Write("\nEnter Flight ID to delete (0 to cancel): ");
         if (!int.TryParse(Console.ReadLine(), out int flightId) || flightId == 0)
         {
@@ -148,7 +151,7 @@ static class FlightInformation
             Console.ReadKey();
             return;
         }
-    
+
         var selectedFlight = flights.FirstOrDefault(f => f.FlightId == flightId);
         if (selectedFlight == null)
         {
@@ -157,11 +160,11 @@ static class FlightInformation
             Console.ReadKey();
             return;
         }
-    
+
         Console.Clear();
         Console.WriteLine("Selected Flight Details:");
         FlightDisplay.DisplayFlightDetails(selectedFlight);
-        
+
         Console.Write($"\nAre you sure you want to delete flight {selectedFlight.FlightNumber}? (Y/N): ");
         if (Console.ReadLine()?.ToUpper() == "Y")
         {
@@ -179,7 +182,7 @@ static class FlightInformation
         {
             Console.WriteLine("\nDeletion cancelled.");
         }
-    
+
         Console.WriteLine("\nPress any key to continue...");
         Console.ReadKey();
     }
@@ -204,30 +207,44 @@ static class FlightInformation
     {
         Console.Write($"\nEnter new value (ESC to cancel): ");
         string newValue = Console.ReadLine();
-        
+
         if (!string.IsNullOrWhiteSpace(newValue))
         {
             switch (selectedOption)
             {
-                case 0: flight.Origin = newValue; break;
-                case 1: flight.Destination = newValue; break;
-                case 2: flight.DepartureTime = newValue; break;
-                case 3: flight.ArrivalTime = newValue; break;
-                case 4: flight.PlaneType = newValue; break;
-                case 5: flight.Status = newValue; break;
+                case 0:
+                    flight.Origin = newValue;
+                    break;
+                case 1:
+                    flight.Destination = newValue;
+                    break;
+                case 2:
+                    flight.DepartureTime = newValue;
+                    break;
+                case 3:
+                    flight.ArrivalTime = newValue;
+                    break;
+                case 4:
+                    flight.PlaneType = newValue;
+                    break;
+                case 5:
+                    flight.Status = newValue;
+                    break;
             }
         }
     }
+
     private static string[] GetAvailablePlaneTypes()
     {
-        return new[] 
+        return new[]
         {
             "Boeing 737",
-            "Boeing 787", 
+            "Boeing 787",
             "Airbus A330"
         };
     }
-   private static FlightModel CollectFlightDetails()
+
+    private static FlightModel CollectFlightDetails()
     {
         Console.Clear();
         Console.WriteLine("=== Add New Flight ===\n");
@@ -289,7 +306,7 @@ static class FlightInformation
             Console.WriteLine("\nError: Departure time must be before arrival time.");
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
-             return null;
+            return null;
         }
 
         Console.Write("Enter distance (km): ");
@@ -304,7 +321,7 @@ static class FlightInformation
         Console.WriteLine("\nSelect plane type:");
         string[] planeTypes = GetAvailablePlaneTypes();
         int selectedIndex = MenuNavigationServiceLogic.NavigateMenu(planeTypes, "Available Aircraft");
-        
+
         if (selectedIndex == -1)
         {
             Console.WriteLine("\nPlane type selection cancelled.");
@@ -339,14 +356,14 @@ static class FlightInformation
                 double summerMultiplier = 1.0;
                 if (!double.TryParse(Console.ReadLine(), out summerMultiplier))
                 {
-                    summerMultiplier = 1.0;  // Default no change
+                    summerMultiplier = 1.0;
                 }
 
                 Console.Write("Winter multiplier (e.g. 0.8 for 20% decrease): ");
                 double winterMultiplier = 1.0;
                 if (!double.TryParse(Console.ReadLine(), out winterMultiplier))
                 {
-                    winterMultiplier = 1.0;  // Default no change
+                    winterMultiplier = 1.0;
                 }
 
                 var seasonalMultiplier = new SeasonalMultiplier(summerMultiplier, winterMultiplier);
@@ -373,16 +390,15 @@ static class FlightInformation
             mealService.AddRange(mealInput.Split(',').Select(m => m.Trim()));
         }
 
-       // Taxes
         Console.Write("Enter country tax rate (% as decimal, e.g. 0.21): ");
         if (!double.TryParse(Console.ReadLine(), out double countryTax))
         {
-            countryTax = 0.21; // Default VAT rate
+            countryTax = 0.21;
         }
 
         var airportTaxes = new Dictionary<string, int>();
-        airportTaxes[originCode] = 15; // Default departure tax
-        airportTaxes[destinationCode] = 15; // Default arrival tax
+        airportTaxes[originCode] = 15;
+        airportTaxes[destinationCode] = 15;
 
         var taxes = new Taxes(countryTax, airportTaxes);
 

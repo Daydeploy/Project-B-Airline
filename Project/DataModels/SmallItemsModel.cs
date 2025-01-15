@@ -10,8 +10,7 @@ public class SmallItemsModel
 
     // Parameterless constructor for JSON deserialization
     public SmallItemsModel() { }
-
-    // Constructor for creating new instances
+    
     public SmallItemsModel(string category, List<ItemDetailModel> items)
     {
         Category = category;

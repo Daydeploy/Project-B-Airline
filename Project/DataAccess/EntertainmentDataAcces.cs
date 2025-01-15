@@ -1,7 +1,11 @@
 public class EntertainmentDataAccess
 {
-    private static string _filePath = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/entertainment.json"));
-    private static GenericJsonAccess<EntertainmentModel> _entertainmentAccess = new GenericJsonAccess<EntertainmentModel>(_filePath);
+    private static string _filePath =
+        System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory,
+            @"DataSources/entertainment.json"));
+
+    private static GenericJsonAccess<EntertainmentModel> _entertainmentAccess =
+        new GenericJsonAccess<EntertainmentModel>(_filePath);
 
     public static List<EntertainmentModel> LoadAll()
     {
@@ -12,7 +16,7 @@ public class EntertainmentDataAccess
     {
         if (entertainments == null)
             return false;
-            
+
         _entertainmentAccess.WriteAll(entertainments);
         return true;
     }

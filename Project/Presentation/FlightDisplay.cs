@@ -92,9 +92,9 @@ static class FlightDisplay
         double weightPercentage = (double)usedWeight / maxWeight;
         Console.ForegroundColor = weightPercentage switch
         {
-            >= 0.9 => ConsoleColor.Red, // Over 90% capacity
-            >= 0.7 => ConsoleColor.Yellow, // Over 70% capacity
-            _ => ConsoleColor.DarkGreen // Under 70% capacity
+            >= 0.9 => ConsoleColor.Red, // over 90% capacity
+            >= 0.7 => ConsoleColor.Yellow, // over 70% capacity
+            _ => ConsoleColor.DarkGreen // onder 70% capacity
         };
         Console.Write($"{usedWeight}/{maxWeight,-7}  ");
         Console.ResetColor();

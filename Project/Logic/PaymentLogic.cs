@@ -18,11 +18,6 @@ public class PaymentLogic
         return true;
     }
 
-    public static bool ValidateName(string firstName, string lastName)
-    {
-        return ValidateName(firstName) && ValidateName(lastName);
-    }
-
     public static bool ValidateCardNumber(string cardNumber)
     {
         if (!string.IsNullOrEmpty(cardNumber))
@@ -35,6 +30,7 @@ public class PaymentLogic
                 }
             }
         }
+
         return false;
     }
 
@@ -50,6 +46,7 @@ public class PaymentLogic
                 }
             }
         }
+
         return false;
     }
 
@@ -97,7 +94,7 @@ public class PaymentLogic
         {
             return true;
         }
+
         return false;
     }
-
 }

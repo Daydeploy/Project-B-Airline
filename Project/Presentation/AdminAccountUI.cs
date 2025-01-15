@@ -30,7 +30,7 @@ static class AdminAccountUI
                 break;
             case "Manage Finance":
                 FinanceUserUI.FinanceMainMenu();
-                exit = true; 
+                exit = true;
                 break;
             case "Logout":
                 UserLogin.UserAccountServiceLogic.Logout();
@@ -160,54 +160,4 @@ static class AdminAccountUI
             }
         }
     }
-
-    // public static void DeleteAirport()
-    // {
-    //     Console.Clear();
-    //     var airportLogic = new AirportLogic();
-    //     var airports = airportLogic.GetAllAirports();
-
-    //     if (!airports.Any())
-    //     {
-    //         Console.WriteLine("No airports available to delete.");
-    //         Console.WriteLine("\nPress any key to continue...");
-    //         Console.ReadKey();
-    //         return;
-    //     }
-
-    //     Console.WriteLine("Available Airports:");
-    //     foreach (var airport in airports)
-    //     {
-    //         Console.WriteLine($"Code: {airport.Code} - Name: {airport.Name}");
-    //     }
-
-    //     Console.Write("\nEnter the airport code to delete: ");
-    //     string airportCode = Console.ReadLine()?.Trim().ToUpper() ?? "";
-
-    //     if (string.IsNullOrEmpty(airportCode))
-    //     {
-    //         Console.WriteLine("Invalid airport code.");
-    //         return;
-    //     }
-
-    //     Console.Write("\nAre you sure you want to delete this airport? This will also delete all related flights (Y/N): ");
-    //     if (Console.ReadLine()?.Trim().ToUpper() != "Y")
-    //     {
-    //         Console.WriteLine("Operation cancelled.");
-    //         return;
-    //     }
-
-    //     bool success = airportLogic.DeleteAirport(airportCode);
-    //     if (success)
-    //     {
-    //         Console.WriteLine("Airport and related flights successfully deleted.");
-    //     }
-    //     else
-    //     {
-    //         Console.WriteLine("Airport not found or could not be deleted.");
-    //     }
-
-    //     Console.WriteLine("\nPress any key to continue...");
-    //     Console.ReadKey();
-    // }
 }

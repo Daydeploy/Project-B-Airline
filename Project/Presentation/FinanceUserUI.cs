@@ -2,7 +2,7 @@ public class FinanceUserUI
 {
     private static FinanceUserLogic _financeLogic = new FinanceUserLogic();
     private const int MIN_YEAR = 2024;
-    
+
     private static bool IsAdmin()
     {
         return UserLogin.UserAccountServiceLogic.CurrentAccount?.EmailAddress.ToLower() == "admin";
@@ -27,7 +27,8 @@ public class FinanceUserUI
 
         while (true)
         {
-            int selectedMenuIndex = MenuNavigationServiceLogic.NavigateMenu(financeMenuOptions, "Personal Finance Panel");
+            int selectedMenuIndex =
+                MenuNavigationServiceLogic.NavigateMenu(financeMenuOptions, "Personal Finance Panel");
 
             switch (selectedMenuIndex)
             {
@@ -52,7 +53,7 @@ public class FinanceUserUI
     private static bool ShowPurchaseDetails(BookingModel booking, bool showVAT = true)
     {
         if (booking == null) return false;
-        
+
         while (true)
         {
             Console.Clear();
@@ -75,9 +76,9 @@ public class FinanceUserUI
             Console.WriteLine($"Date: {booking.BookingDate:dd MMMM yyyy}");
             Console.WriteLine($"Time: {booking.BookingDate:HH:mm}");
             Console.ResetColor();
-        
+
             Console.WriteLine(new string('─', Console.WindowWidth - 1));
-        
+
             int calculatedTotal = 0;
 
             if (booking.FlightId == 0)
@@ -87,7 +88,7 @@ public class FinanceUserUI
                 Console.ResetColor();
                 calculatedTotal = booking.TotalPrice;
             }
-            else 
+            else
             {
                 var flight = new FlightsLogic().GetFlightsById(booking.FlightId);
                 if (flight == null)
@@ -99,7 +100,7 @@ public class FinanceUserUI
                 }
 
                 calculatedTotal = BookingLogic.CalculateTotalPrice(
-                    flight.Destination, 
+                    flight.Destination,
                     booking.Passengers,
                     BookingLogic.HasInsurance
                 );
@@ -136,7 +137,7 @@ public class FinanceUserUI
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("\nEntertainment Purchases:");
                     Console.ResetColor();
-                
+
                     foreach (var item in booking.Entertainment)
                     {
                         Console.WriteLine($"  • {item.Name}: €{item.Cost:N2}");
@@ -164,17 +165,17 @@ public class FinanceUserUI
 
             Console.WriteLine(new string('═', Console.WindowWidth - 1));
             Console.WriteLine("\nPress ESC to return to menu, or any other key to continue...");
-        
+
             var key = Console.ReadKey(true);
             if (key.Key == ConsoleKey.Escape)
             {
-                return true; // Signal to caller that user wants to exit
+                return true;
             }
-        
-            return false; // Signal to continue normal flow
+
+            return false; 
         }
     }
-        
+
     private static void ShowSpendingAnalysis()
     {
         var userId = UserLogin.UserAccountServiceLogic.CurrentUserId;
@@ -309,6 +310,7 @@ public class FinanceUserUI
                         bookings = _financeLogic.GetPurchasesByYear(userId, selectedYear);
                         DisplayPurchases(bookings, $"Purchases for {selectedYear}");
                     }
+
                     done = true;
                     break;
                 case ConsoleKey.Escape:
@@ -316,6 +318,7 @@ public class FinanceUserUI
             }
         }
     }
+
     private static void ShowPurchasesByQuarter()
     {
         int currentYear = DateTime.Now.Year;
@@ -386,6 +389,7 @@ public class FinanceUserUI
                         bookings = _financeLogic.GetPurchasesByQuarter(userId, selectedYear, selectedQuarter);
                         DisplayPurchases(bookings, $"Purchases for Q{selectedQuarter} {selectedYear}");
                     }
+
                     done = true;
                     break;
                 case ConsoleKey.Escape:
@@ -467,6 +471,7 @@ public class FinanceUserUI
                             $"Purchases for {new DateTime(selectedYear, selectedMonth, 1):MMMM yyyy}");
                         done = true;
                     }
+
                     break;
                 case ConsoleKey.Escape:
                     return;
@@ -548,8 +553,9 @@ public class FinanceUserUI
         {
             if (ShowPurchaseDetails(booking))
             {
-                return; 
+                return;
             }
+
             totalAmount += booking.TotalPrice;
             Console.WriteLine(new string('=', 40));
         }
@@ -581,7 +587,8 @@ public class FinanceUserUI
 
         while (true)
         {
-            int selectedMenuIndex = MenuNavigationServiceLogic.NavigateMenu(adminFinanceMenuOptions, "Admin Finance Panel");
+            int selectedMenuIndex =
+                MenuNavigationServiceLogic.NavigateMenu(adminFinanceMenuOptions, "Admin Finance Panel");
 
             switch (selectedMenuIndex)
             {

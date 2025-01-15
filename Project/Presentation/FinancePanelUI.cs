@@ -100,7 +100,7 @@ public class FinancePanelUI
         Console.Clear();
         Console.Write("Enter date (DD/MM/YYYY): ");
         string userInput = Console.ReadLine();
-        
+
         if (!System.Text.RegularExpressions.Regex.IsMatch(userInput, @"^\d{2}/\d{2}/\d{4}$"))
         {
             Console.WriteLine("Invalid date format. Please use DD/MM/YYYY format with '/' separators.");

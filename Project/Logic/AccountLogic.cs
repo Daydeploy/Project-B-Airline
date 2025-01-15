@@ -49,15 +49,6 @@ public class AccountsLogic
         return CurrentAccount;
     }
 
-    public static bool HasCompleteContactInformation(string FirstName, string LastName, string Email, string PhoneNumber, string Address)
-    {
-        if (FirstName == null || LastName == null || Email == null || PhoneNumber == null || Address == null)
-        {
-            return false;
-        }
-        return true;
-    }
-
     public static bool IsValidPassword(string password)
     {
         if (string.IsNullOrEmpty(password))
@@ -157,13 +148,22 @@ public class AccountsLogic
 
     public static bool IsValidPhoneNumber(string phoneNumber)
     {
-        if (string.IsNullOrWhiteSpace(phoneNumber)) { return false; }
+        if (string.IsNullOrWhiteSpace(phoneNumber))
+        {
+            return false;
+        }
 
         phoneNumber = phoneNumber.Trim();
 
-        if (phoneNumber.StartsWith("+")) { phoneNumber = phoneNumber.Substring(1); }
+        if (phoneNumber.StartsWith("+"))
+        {
+            phoneNumber = phoneNumber.Substring(1);
+        }
 
-        if (!phoneNumber.All(char.IsDigit)) { return false; }
+        if (!phoneNumber.All(char.IsDigit))
+        {
+            return false;
+        }
 
         return phoneNumber.Length >= 10 && phoneNumber.Length <= 15;
     }
@@ -174,6 +174,7 @@ public class AccountsLogic
         {
             return false;
         }
+
         return true;
     }
 

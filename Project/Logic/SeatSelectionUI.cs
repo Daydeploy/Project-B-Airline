@@ -5,57 +5,59 @@ public class SeatSelectionUI
     private Dictionary<string, string> temporarySeats = new Dictionary<string, string>();
     private Dictionary<string, bool> petSeats = new Dictionary<string, bool>();
 
-    private readonly Dictionary<string, string> planeTypeAliases = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-    {
-        ["Airbus 330"] = "Airbus A330",
-        ["Airbus-330"] = "Airbus A330",
-        ["A330"] = "Airbus A330"
-    }; // omdat om een of ander reden airbus steeds niet werkt dfus dan maar zo
-    
-    private readonly Dictionary<string, PlaneConfig> planeConfigs = new Dictionary<string, PlaneConfig>(StringComparer.OrdinalIgnoreCase)
-    {
-        ["Boeing 737"] = new PlaneConfig //dict met t 
+    private readonly Dictionary<string, string> planeTypeAliases =
+        new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
         {
-            Rows = 33,
-            SeatsPerRow = 6,
-            SeatClasses = new[]
-            {
-                (1, 4),     // First Class
-                (5, 12),    // Business Class
-                (13, 33)    // Economy Class
-            } 
-        },
-        
-        ["Boeing 787"] = new PlaneConfig
+            ["Airbus 330"] = "Airbus A330",
+            ["Airbus-330"] = "Airbus A330",
+            ["A330"] = "Airbus A330"
+        }; // omdat om een of ander reden airbus steeds niet werkt dfus dan maar zo
+
+    private readonly Dictionary<string, PlaneConfig> planeConfigs =
+        new Dictionary<string, PlaneConfig>(StringComparer.OrdinalIgnoreCase)
         {
-            Rows = 38,
-            SeatsPerRow = 9,
-            SeatClasses = new[]
+            ["Boeing 737"] = new PlaneConfig //dict met t 
             {
-                (1, 6),     // First Class
-                (7, 16),    // Business Class
-                (17, 38)    // Economy Class
+                Rows = 33,
+                SeatsPerRow = 6,
+                SeatClasses = new[]
+                {
+                    (1, 4), // First Class
+                    (5, 12), // Business Class
+                    (13, 33) // Economy Class
+                }
+            },
+
+            ["Boeing 787"] = new PlaneConfig
+            {
+                Rows = 38,
+                SeatsPerRow = 9,
+                SeatClasses = new[]
+                {
+                    (1, 6), // First Class
+                    (7, 16), // Business Class
+                    (17, 38) // Economy Class
+                }
+            },
+
+            ["Airbus A330"] = new PlaneConfig
+            {
+                Rows = 50,
+                SeatsPerRow = 9,
+                SeatClasses = new[]
+                {
+                    (1, 4), // First Class
+                    (5, 14), // Business Class
+                    (15, 50) // Economy Class
+                } // tuple met start en eind rij 
             }
-        },
-        
-        ["Airbus A330"] = new PlaneConfig
-        {
-            Rows = 50,
-            SeatsPerRow = 9,
-            SeatClasses = new[]
-            {
-                (1, 4),     // First Class
-                (5, 14),    // Business Class
-                (15, 50)    // Economy Class
-            } // tuple met start en eind rij 
-        }
-    };
+        };
 
     public void LoadExistingBookings(int flightId)
     {
         occupiedSeats.Clear();
         petSeats.Clear();
-        
+
         var bookings = BookingAccess.LoadAll()
             .Where(b => b.FlightId == flightId)
             .ToList();
@@ -81,9 +83,9 @@ public class SeatSelectionUI
     {
         switch (currentConfig.SeatsPerRow)
         {
-            case 6: 
+            case 6:
                 return seatIndex == 2; // Boeing 737
-            case 9:  
+            case 9:
                 return seatIndex == 2 || seatIndex == 5; // Boeing 787, Airbus A330
             default:
                 return false;
@@ -94,8 +96,8 @@ public class SeatSelectionUI
     {
         switch (currentConfig.SeatsPerRow)
         {
-            case 6:  return 1;
-            case 9:  return 2;
+            case 6: return 1;
+            case 9: return 2;
             default: return 0;
         }
     }
@@ -104,8 +106,8 @@ public class SeatSelectionUI
     {
         if (occupied)
         {
-            string initials = !string.IsNullOrEmpty(passengerName) 
-                ? new string(passengerName.Split(' ').Select(s => s[0]).Take(2).ToArray()).ToUpper() 
+            string initials = !string.IsNullOrEmpty(passengerName)
+                ? new string(passengerName.Split(' ').Select(s => s[0]).Take(2).ToArray()).ToUpper()
                 : "■";
             occupiedSeats[seatNumber] = initials;
         }
@@ -127,31 +129,31 @@ public class SeatSelectionUI
     {
         if (currentConfig == null)
             return string.Empty;
-        
+
         if (!int.TryParse(new string(seatNumber.Where(char.IsDigit).ToArray()), out int row))
             return string.Empty;
-        
+
         if (row <= currentConfig.SeatClasses[0].EndRow)
             return "First";
         if (row <= currentConfig.SeatClasses[1].EndRow)
             return "Business";
         return "Economy";
     }
-        
+
     public string GetSeatClass(string seatNumber, string planeType)
     {
         if (string.IsNullOrEmpty(seatNumber) || string.IsNullOrEmpty(planeType))
             return string.Empty;
-        
+
         if (!planeConfigs.TryGetValue(planeType, out PlaneConfig planeConfig))
             return string.Empty;
-        
+
         if (!int.TryParse(new string(seatNumber.Where(char.IsDigit).ToArray()), out int row))
             return string.Empty;
 
         var (firstStart, firstEnd) = planeConfig.SeatClasses[0];
         var (businessStart, businessEnd) = planeConfig.SeatClasses[1];
-        
+
         if (row >= firstStart && row <= firstEnd)
             return "First";
         if (row >= businessStart && row <= businessEnd)
@@ -159,7 +161,7 @@ public class SeatSelectionUI
 
         return "Economy";
     }
-    
+
     public int GetAvailableSeatsCount(string planeType, int flightId)
     {
         if (!planeConfigs.ContainsKey(planeType))
@@ -192,9 +194,10 @@ public class SeatSelectionUI
         {
             occupiedSeats[seat.Key] = seat.Value;
         }
+
         temporarySeats.Clear();
     }
-    
+
     public string SelectSeat(string planeType, int flightId, List<PassengerModel> currentPassengers = null)
     {
         // Normalize plane type
@@ -205,7 +208,7 @@ public class SeatSelectionUI
 
         currentConfig = planeConfigs[planeType];
         LoadExistingBookings(flightId);
-        
+
         if (currentPassengers != null)
         {
             foreach (var passenger in currentPassengers)
@@ -220,6 +223,7 @@ public class SeatSelectionUI
                 }
             }
         }
+
         int currentRow = 1;
         int currentSeat = 0;
         bool seatSelected = false;
@@ -229,7 +233,7 @@ public class SeatSelectionUI
             Console.Clear();
             DisplayLegend();
             DisplayPlane(currentRow, currentSeat, planeType);
-            
+
             ConsoleKeyInfo key = Console.ReadKey(true);
             switch (key.Key)
             {
@@ -265,18 +269,19 @@ public class SeatSelectionUI
                         AddTemporarySeat(seatNumber);
                         return seatNumber;
                     }
+
                     break;
             }
         }
 
         return null;
     }
-    
+
     private void DisplayLegend()
     {
         Console.WriteLine("\n === Seat Selection === ");
         Console.WriteLine("Use arrow keys to navigate, ENTER to select and ESCAPE to cancel\n");
-        
+
         Console.ForegroundColor = ConsoleColor.Magenta;
         Console.Write("■ First Class  ");
         Console.ForegroundColor = ConsoleColor.Yellow;
@@ -289,7 +294,7 @@ public class SeatSelectionUI
         Console.Write("▲ With Pet  ");
         Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine("□ Available\n");
-        
+
         Console.Write("    ");
         for (char c = 'A'; c < 'A' + currentConfig.SeatsPerRow; c++)
         {
@@ -299,6 +304,7 @@ public class SeatSelectionUI
                 Console.Write("  ");
             }
         }
+
         Console.WriteLine("\n");
     }
 
@@ -307,7 +313,7 @@ public class SeatSelectionUI
         for (int row = 1; row <= currentConfig.Rows; row++)
         {
             Console.Write($" {row,2} |");
-            
+
             for (int seat = 0; seat < currentConfig.SeatsPerRow; seat++)
             {
                 string seatNumber = $"{row}{(char)('A' + seat)}";
@@ -317,24 +323,24 @@ public class SeatSelectionUI
 
                 // Set color based on seat class
                 if (row <= currentConfig.SeatClasses[0].EndRow)
-                    Console.ForegroundColor = ConsoleColor.Magenta;  // First Class
+                    Console.ForegroundColor = ConsoleColor.Magenta; // First Class
                 else if (row <= currentConfig.SeatClasses[1].EndRow)
-                    Console.ForegroundColor = ConsoleColor.Yellow;   // Business Class
+                    Console.ForegroundColor = ConsoleColor.Yellow; // Business Class
                 else
-                    Console.ForegroundColor = ConsoleColor.Cyan;     // Economy Class
+                    Console.ForegroundColor = ConsoleColor.Cyan; // Economy Class
 
                 if (isOccupied)
                 {
                     Console.ForegroundColor = hasPet ? ConsoleColor.DarkGray : ConsoleColor.Red;
                 }
-                
+
                 string displayChar = "□";
                 if (isOccupied)
                 {
                     displayChar = occupiedSeats.TryGetValue(seatNumber, out string permanent) ? permanent :
-                                temporarySeats.TryGetValue(seatNumber, out string temp) ? temp : "■";
+                        temporarySeats.TryGetValue(seatNumber, out string temp) ? temp : "■";
                 }
-                
+
                 if (isSelected)
                 {
                     Console.BackgroundColor = ConsoleColor.DarkGray;
@@ -345,23 +351,24 @@ public class SeatSelectionUI
                 {
                     Console.Write($" {displayChar} ");
                 }
-                
+
                 if (AddAisleSpace(seat))
                 {
                     Console.Write("  ");
                 }
             }
-            
+
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine(" |");
 
             // Add space between classes
             if (row == currentConfig.SeatClasses[0].EndRow || row == currentConfig.SeatClasses[1].EndRow)
-                Console.WriteLine("     +" + new string('-', currentConfig.SeatsPerRow * 3 + GetTotalAisleSpaces()) + "+");
+                Console.WriteLine("     +" + new string('-', currentConfig.SeatsPerRow * 3 + GetTotalAisleSpaces()) +
+                                  "+");
         }
+
         Console.WriteLine($"\nAircraft: {planeType}\n");
     }
-
 }
 
 public class PlaneConfig
@@ -369,5 +376,4 @@ public class PlaneConfig
     public int Rows { get; set; }
     public int SeatsPerRow { get; set; }
     public (int StartRow, int EndRow)[] SeatClasses { get; set; }
-
-} 
+}
