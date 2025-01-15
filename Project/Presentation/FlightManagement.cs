@@ -971,6 +971,8 @@ static class FlightManagement
         var (milesEarned, milesEarnedSuccess) =
             MilesLogic.CalculateMilesFromBooking(UserLogin.UserAccountServiceLogic.CurrentUserId);
 
+        BookingLogic.SaveBooking(booking);
+        
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine("\n╔══════════════════════════════════╗");
