@@ -5,7 +5,7 @@ using Microsoft.VisualBasic;
 
 static class FlightManagement
 {
-    private static AccountModel account 
+    private static AccountModel account
     {
         get { return UserLogin.UserAccountServiceLogic.CurrentAccount; }
     }
@@ -70,7 +70,8 @@ static class FlightManagement
         destinations.Add("Back to Main Menu");
 
         Console.WriteLine($"Available destinations from {origin}:");
-        int destinationIndex = MenuNavigationServiceLogic.NavigateMenu(destinations.ToArray(), "Available Destinations");
+        int destinationIndex =
+            MenuNavigationServiceLogic.NavigateMenu(destinations.ToArray(), "Available Destinations");
 
         if (destinationIndex == -1 || destinationIndex == destinations.Count - 1)
         {
@@ -189,6 +190,7 @@ static class FlightManagement
                 DisplayFlightsWithActions(filteredFlights, UserLogin.UserAccountServiceLogic.IsUserLoggedIn());
                 HandleFlightCommands(filteredFlights, origin, destination, account);
             }
+
             return;
         }
     }
@@ -291,7 +293,8 @@ static class FlightManagement
         destinations.Add("Back to Main Menu");
 
         Console.WriteLine($"Available destinations from {origin}:");
-        int destinationIndex = MenuNavigationServiceLogic.NavigateMenu(destinations.ToArray(), "Available Destinations");
+        int destinationIndex =
+            MenuNavigationServiceLogic.NavigateMenu(destinations.ToArray(), "Available Destinations");
         if (destinationIndex == -1 || destinationIndex == destinations.Count - 1)
         {
             Console.WriteLine("\nReturning to the main menu...");
@@ -308,7 +311,7 @@ static class FlightManagement
             Console.WriteLine("\nReturning to the main menu...");
             return;
         }
-        
+
         bool isRoundTrip = tripChoice == 0;
 
         DateTime departureDate = DateTime.Now;
@@ -590,7 +593,7 @@ static class FlightManagement
         SeatSelectionUI seatSelector)
     {
         List<PassengerModel> passengerDetails = new List<PassengerModel>();
-        string[] yesNoOptions = { "Yes", "No" }; 
+        string[] yesNoOptions = { "Yes", "No" };
 
         try
         {
@@ -644,7 +647,7 @@ static class FlightManagement
 
                 int specialLuggageChoice =
                     MenuNavigationServiceLogic.NavigateMenu(yesNoOptions, "Do you have special luggage?");
-        
+
                 bool hasSpecialLuggage = specialLuggageChoice == 0;
 
                 string specialLuggage = "";
@@ -659,7 +662,8 @@ static class FlightManagement
                     Console.ReadKey();
                 }
 
-                int petChoice = MenuNavigationServiceLogic.NavigateMenu(yesNoOptions, "Does this passenger have any pets?");
+                int petChoice =
+                    MenuNavigationServiceLogic.NavigateMenu(yesNoOptions, "Does this passenger have any pets?");
 
                 bool hasPet = petChoice == 0;
 
@@ -686,7 +690,8 @@ static class FlightManagement
                 };
 
                 Console.WriteLine("\nSelect a seat for the passenger:");
-                string seatNumber = seatSelector.SelectSeat(selectedFlight.PlaneType, selectedFlight.FlightId, passengerDetails);
+                string seatNumber =
+                    seatSelector.SelectSeat(selectedFlight.PlaneType, selectedFlight.FlightId, passengerDetails);
 
                 seatSelector.SetSeatOccupied(seatNumber, name);
                 if (hasPet && petDetails.Any(p => p.StorageLocation == "Cabin"))
@@ -804,7 +809,8 @@ static class FlightManagement
         double totalBasePrice = 0;
         const int BAGGAGE_PRICE = 30;
 
-        BookingModel booking = BookingLogic.CreateBooking(userId: UserLogin.UserAccountServiceLogic.CurrentUserId, flightId: departureFlight.FlightId, passengerDetails: passengerDetails,
+        BookingModel booking = BookingLogic.CreateBooking(userId: UserLogin.UserAccountServiceLogic.CurrentUserId,
+            flightId: departureFlight.FlightId, passengerDetails: passengerDetails,
             petDetails: new List<PetModel>(), includeInsurance: includeInsurance, isPrivateJet: false
         );
 
@@ -830,7 +836,8 @@ static class FlightManagement
                 }
 
                 var shopUI = new ShopUI();
-                var purchasedItems = shopUI.DisplaySmallItemsShop(booking.BookingId, booking.Passengers.IndexOf(passenger));
+                var purchasedItems =
+                    shopUI.DisplaySmallItemsShop(booking.BookingId, booking.Passengers.IndexOf(passenger));
                 passenger.ShopItems.AddRange(purchasedItems);
                 totalBasePrice += (double)purchasedItems.Sum(item => item.Price);
             }
@@ -856,7 +863,8 @@ static class FlightManagement
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"\nPassenger: {passenger.Name}");
             Console.ResetColor();
-            Console.WriteLine($"Seat: {passenger.SeatNumber} ({seatSelector.GetSeatClass(passenger.SeatNumber)} Class)");
+            Console.WriteLine(
+                $"Seat: {passenger.SeatNumber} ({seatSelector.GetSeatClass(passenger.SeatNumber)} Class)");
 
             if (passenger.HasCheckedBaggage)
             {
@@ -960,7 +968,8 @@ static class FlightManagement
             return;
         }
 
-        var (milesEarned, milesEarnedSuccess) = MilesLogic.CalculateMilesFromBooking(UserLogin.UserAccountServiceLogic.CurrentUserId);
+        var (milesEarned, milesEarnedSuccess) =
+            MilesLogic.CalculateMilesFromBooking(UserLogin.UserAccountServiceLogic.CurrentUserId);
 
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.Green;
