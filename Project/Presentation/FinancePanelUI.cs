@@ -5,11 +5,10 @@ public class FinancePanelUI
 
     public static void FinanceMainMenu()
     {
-        string[] financeMenuOptions =
-        {
-            "Date",
-            "Month",
-            "Year",
+        string[] financeMenuOptions = {
+            "Show Yearly Data",
+            "Show Monthly Data",
+            "Show Dayily Data",
             "Logout",
         };
 

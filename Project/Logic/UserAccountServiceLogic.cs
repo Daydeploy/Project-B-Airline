@@ -29,7 +29,6 @@ public class UserAccountServiceLogic
     {
         if (string.IsNullOrWhiteSpace(firstName) || string.IsNullOrWhiteSpace(lastName))
         {
-            Console.WriteLine("Error: First name and last name must be filled.");
             return false;
         }
 
@@ -37,7 +36,6 @@ public class UserAccountServiceLogic
             .FirstOrDefault(a => a.EmailAddress.Equals(email, StringComparison.OrdinalIgnoreCase));
         if (existingAccount != null)
         {
-            Console.WriteLine("Error: An account with this email already exists.");
             return false;
         }
 
