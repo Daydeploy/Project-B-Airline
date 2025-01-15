@@ -72,7 +72,6 @@ static class UserLogin
             "Manage Account",
             "View Airport Information",
             "Browse Destinations",
-            // "Show Seat Upgrade Options",
             "Advanced flight booking",
             "Add Comfort Packages",
             "Add Entertainment",
@@ -133,8 +132,8 @@ static class UserLogin
 
     public static void PaymentAndAccountInformationCheck(AccountModel account)
     {
-        var accounts = AccountsAccess.LoadAll();
-        account = accounts.FirstOrDefault(x => x.Id == account.Id);
+        var accountsLogic = new AccountsLogic();
+        account = accountsLogic.GetById(account.Id); 
         bool updateNeeded = false;
 
         if (string.IsNullOrEmpty(account.PhoneNumber) || string.IsNullOrEmpty(account.Address) || account.PaymentInformation == null)

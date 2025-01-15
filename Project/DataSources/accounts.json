@@ -275,5 +275,38 @@
     ],
     "privateJet": null,
     "shoppingCart": []
+  },
+  {
+    "id": 9,
+    "firstName": "test",
+    "lastName": "test",
+    "dateOfBirth": "2004-05-24T00:00:00",
+    "gender": null,
+    "nationality": null,
+    "phoneNumber": "0686388692",
+    "address": "halo",
+    "email": "test12@gmail.com",
+    "password": "Test@1",
+    "passportDetails": null,
+    "milesDetails": [
+      {
+        "Enrolled": true,
+        "Level": "",
+        "Experience": 0,
+        "Points": 0,
+        "History": ""
+      }
+    ],
+    "paymentInformation": [
+      {
+        "cardHolder": "aaron",
+        "cardNumber": "1111111111111111",
+        "cVV": "222",
+        "expirationDate": "12/27",
+        "billingAddress": "gs"
+      }
+    ],
+    "privateJet": null,
+    "shoppingCart": []
   }
 ]
