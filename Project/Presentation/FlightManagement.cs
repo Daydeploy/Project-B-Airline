@@ -273,7 +273,11 @@ static class FlightManagement
 
         Console.WriteLine("Select your starting location:");
         int originIndex = MenuNavigationServiceLogic.NavigateMenu(origins.ToArray(), "Available Origins");
-        
+        if (originIndex == -1 || originIndex == origins.Count - 1)
+        {
+            Console.WriteLine("\nReturning to the main menu...");
+            return;
+        }
 
         string origin = origins[originIndex];
 
@@ -288,14 +292,23 @@ static class FlightManagement
 
         Console.WriteLine($"Available destinations from {origin}:");
         int destinationIndex = MenuNavigationServiceLogic.NavigateMenu(destinations.ToArray(), "Available Destinations");
-    
+        if (destinationIndex == -1 || destinationIndex == destinations.Count - 1)
+        {
+            Console.WriteLine("\nReturning to the main menu...");
+            return;
+        }
 
         string destination = destinations[destinationIndex];
 
         Console.Clear();
         string[] tripOptions = { "Yes, it's a round-trip booking", "No, one-way trip only", "Back to Main Menu" };
         int tripChoice = MenuNavigationServiceLogic.NavigateMenu(tripOptions, "Is this a round-trip booking?");
-
+        if (tripChoice == -1 || tripChoice == 2)
+        {
+            Console.WriteLine("\nReturning to the main menu...");
+            return;
+        }
+        
         bool isRoundTrip = tripChoice == 0;
 
         DateTime departureDate = DateTime.Now;
