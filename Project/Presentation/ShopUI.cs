@@ -16,12 +16,12 @@ public class ShopUI
     public List<ShopItemModel> DisplaySmallItemsShop(int bookingId, int passengerIndex)
     {
         var categories = smallItemsLogic.FetchItemDetails().ToList();
-        
+
         while (true)
         {
             DisplayCurrentCategory();
             var key = Console.ReadKey(true);
-            
+
             switch (key.Key)
             {
                 case ConsoleKey.RightArrow:
@@ -30,6 +30,7 @@ public class ShopUI
                         currentCategoryIndex++;
                         selectedItemIndex = 0;
                     }
+
                     break;
 
                 case ConsoleKey.LeftArrow:
@@ -38,6 +39,7 @@ public class ShopUI
                         currentCategoryIndex--;
                         selectedItemIndex = 0;
                     }
+
                     break;
 
                 case ConsoleKey.UpArrow:
@@ -62,6 +64,7 @@ public class ShopUI
                         cart.Clear();
                         return purchasedItems;
                     }
+
                     break;
 
                 case ConsoleKey.Escape:
@@ -69,6 +72,7 @@ public class ShopUI
                         return new List<ShopItemModel>();
                     break;
             }
+
             DisplayCurrentCategory();
         }
     }
@@ -87,7 +91,7 @@ public class ShopUI
 
         var categories = smallItemsLogic.FetchItemDetails().ToList();
         var currentCategory = categories[currentCategoryIndex];
-        
+
         Console.WriteLine($"\nCategory {currentCategoryIndex + 1} of {categories.Count}");
         Console.ForegroundColor = ConsoleColor.Cyan;
         Console.WriteLine($"\n{currentCategory.Category}");
@@ -100,7 +104,6 @@ public class ShopUI
             if (i == selectedItemIndex)
                 Console.BackgroundColor = ConsoleColor.DarkGray;
             
-            // Cast price to decimal for currency formatting
             Console.WriteLine($"\n  • {item.Name,-35} {(decimal)item.Price:C}");
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.Gray;
@@ -121,6 +124,7 @@ public class ShopUI
         {
             Console.WriteLine($"{item.Name,-35} {item.Price:C}");
         }
+
         Console.WriteLine(new string('─', 50));
         Console.WriteLine($"Total: {cart.Sum(i => i.Price):C}");
     }
@@ -135,10 +139,11 @@ public class ShopUI
         {
             Console.WriteLine($"{item.Name,-35} {item.Price:C}");
         }
+
         Console.WriteLine(new string('─', 50));
         Console.WriteLine($"\nTotal Amount: {cart.Sum(i => i.Price):C}");
         Console.Write("\nConfirm purchase? (Y/N): ");
-        
+
         if (Console.ReadLine()?.ToUpper() == "Y")
         {
             var success = smallItemsLogic.AddItemsToPassenger(cart, bookingId, passengerIndex);
@@ -157,12 +162,14 @@ public class ShopUI
                 return false;
             }
         }
+
         return false;
     }
+
     private void AddToCart(ItemDetailModel item, string category)
     {
-        cart.Add(new ShopItemModel 
-        { 
+        cart.Add(new ShopItemModel
+        {
             Name = item.Name,
             Price = (decimal)item.Price,
             Category = category,
@@ -174,7 +181,7 @@ public class ShopUI
     private bool ConfirmExit()
     {
         if (!cart.Any()) return true;
-        
+
         Console.Write("\nYou have items in your cart. Are you sure you want to exit? (Y/N): ");
         return Console.ReadLine()?.ToUpper() == "Y";
     }

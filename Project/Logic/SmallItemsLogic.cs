@@ -13,7 +13,7 @@ public class SmallItemsLogic
     {
         var bookings = BookingAccess.LoadAll();
         var booking = bookings.FirstOrDefault(b => b.BookingId == bookingId);
-        
+
         if (booking == null)
             return false;
 
@@ -22,9 +22,9 @@ public class SmallItemsLogic
 
         var passenger = booking.Passengers[passengerIndex];
         passenger.ShopItems.AddRange(items);
-        
+
         booking.TotalPrice += (int)items.Sum(i => i.Price);
-        
+
         BookingAccess.WriteAll(bookings);
         return true;
     }

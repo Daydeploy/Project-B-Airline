@@ -7,17 +7,6 @@ public class SeatUpgradeServiceLogic
         return new List<string> { "Business Class", "First Class" };
     }
 
-    public bool RequestUpgrade(int userId, string newSeatClass)
-    {
-        UserAccountServiceLogic userAccountServiceLogic = new UserAccountServiceLogic();
-        int requiredMiles = CalculateMilesForUpgrade(newSeatClass);
-        if (userAccountServiceLogic.GetCurrentMiles(userId) >= requiredMiles)
-        {
-            UseMilesForUpgrade(userId, requiredMiles);
-        }
-        return false;
-    }
-
     public bool UseMilesForUpgrade(int userId, int milesAmount)
     {
         var accountsLogic = new AccountsLogic();
@@ -33,29 +22,12 @@ public class SeatUpgradeServiceLogic
                 return true;
             }
         }
-        return false;
-    }
 
-    public bool ConfirmUpgrade(int userId)
-    {
-        return true;
+        return false;
     }
 
     public string ViewUpgradeBenefits(string seatClass)
     {
         return $"Benefits of {seatClass}: Better legroom, in-flight services, etc.";
-    }
-
-    private int CalculateMilesForUpgrade(string newSeatClass)
-    {
-        switch (newSeatClass)
-        {
-            case "Business Class":
-                return 5000;
-            case "First Class":
-                return 10000;
-            default:
-                return 0;
-        }
     }
 }

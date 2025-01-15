@@ -49,15 +49,6 @@ public class AccountsLogic
         return CurrentAccount;
     }
 
-    public static bool HasCompleteContactInformation(string FirstName, string LastName, string Email, string PhoneNumber, string Address)
-    {
-        if (FirstName == null || LastName == null || Email == null || PhoneNumber == null || Address == null)
-        {
-            return false;
-        }
-        return true;
-    }
-
     public static bool IsValidPassword(string password)
     {
         if (string.IsNullOrEmpty(password))
@@ -104,22 +95,16 @@ public class AccountsLogic
 
     public static bool IsValidEmail(string email)
     {
-        if (string.IsNullOrWhiteSpace(email))
-        {
-            return false;
-        }
-
-        if (!email.Contains("@") || !email.Contains("."))
-        {
-            return false;
-        }
-        return true;
+        return !string.IsNullOrWhiteSpace(email) &&
+               email.Contains("@") &&
+               email.IndexOf("@") < email.LastIndexOf(".") &&
+               email.IndexOf(".") > email.IndexOf("@") + 1;
     }
 
     public bool DeleteAccount(int accountId)
     {
         var accountToDelete = _accounts.FirstOrDefault(a => a.Id == accountId);
-        if (accountToDelete == null || accountToDelete.EmailAddress.ToLower() == "admin") 
+        if (accountToDelete == null || accountToDelete.EmailAddress.ToLower() == "admin")
         {
             return false;
         }
@@ -141,18 +126,18 @@ public class AccountsLogic
 
     public static bool IsValidDateOfBirth(DateTime dateOfBirth)
     {
-        int minAge = 0;  
+        int minAge = 0;
         int maxAge = 150;
         var now = DateTime.Now;
         var age = now.Year - dateOfBirth.Year;
-        
+
         if (dateOfBirth.Date > now.AddYears(-age))
             age--;
 
         return age >= minAge && age <= maxAge;
     }
 
-   public static bool IsValidGender(string gender)
+    public static bool IsValidGender(string gender)
     {
         if (string.IsNullOrWhiteSpace(gender))
             return false;
@@ -164,16 +149,39 @@ public class AccountsLogic
     public static bool IsValidPhoneNumber(string phoneNumber)
     {
         if (string.IsNullOrWhiteSpace(phoneNumber))
+        {
             return false;
+        }
 
-        phoneNumber = new string(phoneNumber.Where(char.IsDigit).ToArray());
+        phoneNumber = phoneNumber.Trim();
+
+        if (phoneNumber.StartsWith("+"))
+        {
+            phoneNumber = phoneNumber.Substring(1);
+        }
+
+        if (!phoneNumber.All(char.IsDigit))
+        {
+            return false;
+        }
+
         return phoneNumber.Length >= 10 && phoneNumber.Length <= 15;
+    }
+
+    public static bool IsValidAddress(string address)
+    {
+        if (string.IsNullOrWhiteSpace(address))
+        {
+            return false;
+        }
+
+        return true;
     }
 
     public static bool IsValidPassportDetails(PassportDetailsModel passport)
     {
         if (passport == null)
-            return true; 
+            return true;
 
         if (string.IsNullOrWhiteSpace(passport.PassportNumber) ||
             string.IsNullOrWhiteSpace(passport.CountryOfIssue))
@@ -182,17 +190,17 @@ public class AccountsLogic
         if (!passport.IssueDate.HasValue || !passport.ExpirationDate.HasValue)
             return false;
 
-    
+
         var now = DateTime.Now.Date;
-        return passport.ExpirationDate.Value > now && 
+        return passport.ExpirationDate.Value > now &&
                passport.IssueDate.Value <= now &&
                passport.ExpirationDate.Value > passport.IssueDate.Value;
     }
 
     public bool ValidateAccountCreation(
-        string firstName, string lastName, string email, 
-        string password, DateTime dateOfBirth, string gender = null, 
-        string nationality = null, string phoneNumber = null, 
+        string firstName, string lastName, string email,
+        string password, DateTime dateOfBirth, string gender = null,
+        string nationality = null, string phoneNumber = null,
         string address = null, PassportDetailsModel passportDetails = null)
     {
         if (string.IsNullOrWhiteSpace(firstName) || !IsValidName(firstName))
@@ -221,7 +229,7 @@ public class AccountsLogic
 
         var existingAccount = _accounts
             .FirstOrDefault(a => a.EmailAddress.Equals(email, StringComparison.OrdinalIgnoreCase));
-        
+
         return existingAccount == null;
     }
 }

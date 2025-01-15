@@ -18,7 +18,7 @@ public class PetModel
     public double Weight { get; set; }
 
     [JsonPropertyName("storageLocation")]
-    public string StorageLocation { get; set; }  // "Cargo" or "Storage"
+    public string StorageLocation { get; set; }  // Cargo or Storage
 
     [JsonPropertyName("maxWeight")]
     public double MaxWeight { get; set; }

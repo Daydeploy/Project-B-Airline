@@ -2,6 +2,7 @@ public class FinancePanelUI
 {
     static public UserAccountServiceLogic UserAccountServiceLogic = new UserAccountServiceLogic();
     private static bool _isLoggedIn = true;
+
     public static void FinanceMainMenu()
     {
         string[] financeMenuOptions = {
@@ -13,23 +14,22 @@ public class FinancePanelUI
 
         while (_isLoggedIn)
         {
-            int selectedMenuIndex = MenuNavigationService.NavigateMenu(financeMenuOptions, "Finance Panel Menu");
+            int selectedMenuIndex = MenuNavigationServiceLogic.NavigateMenu(financeMenuOptions, "Finance Panel Menu");
 
             switch (selectedMenuIndex)
             {
                 case 0:
-                    ShowYearlyDataUI();
+                    ShowDailyDataUI();
                     break;
                 case 1:
                     ShowMonthlyDataUI();
                     break;
                 case 2:
-                    ShowDailyDataUI();
+                    ShowYearlyDataUI();
                     break;
                 case 3:
                     Console.Clear();
                     UserAccountServiceLogic.Logout();
-                    Console.WriteLine("You have successfully logged out.\nReturning to the main menu....");
                     MenuNavigation.Start();
                     _isLoggedIn = false;
                     return;
@@ -98,14 +98,34 @@ public class FinancePanelUI
     {
         Console.Clear();
         Console.Write("Enter date (DD/MM/YYYY): ");
-        if (DateTime.TryParse(Console.ReadLine(), out DateTime date))
+        string userInput = Console.ReadLine();
+
+        if (!System.Text.RegularExpressions.Regex.IsMatch(userInput, @"^\d{2}/\d{2}/\d{4}$"))
         {
+            Console.WriteLine("Invalid date format. Please use DD/MM/YYYY format with '/' separators.");
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+            Console.Clear();
+            return;
+        }
+
+        if (DateTime.TryParse(userInput, out DateTime date))
+        {
+            if (date > DateTime.Now)
+            {
+                Console.WriteLine("Date must be in the past.");
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+                Console.Clear();
+                return;
+            }
+
             var metrics = FinancePanelLogic.ShowDailyData(date);
             DisplayFinancialMetrics(metrics);
         }
         else
         {
-            Console.WriteLine("Invalid date format. Press any key to continue...");
+            Console.WriteLine("Invalid date. Press any key to continue...");
             Console.ReadKey();
             Console.Clear();
         }

@@ -9,7 +9,7 @@ static class AdminAccountUI
         while (!exit)
         {
             string[] menuItems = { "Manage Airports", "Manage Flights", "Manage Accounts", "Manage Finance", "Logout" };
-            int selectedIndex = MenuNavigationService.NavigateMenu(menuItems, "Admin Menu");
+            int selectedIndex = MenuNavigationServiceLogic.NavigateMenu(menuItems, "Admin Menu");
             HandleSelection(menuItems[selectedIndex], ref exit);
         }
     }
@@ -30,7 +30,7 @@ static class AdminAccountUI
                 break;
             case "Manage Finance":
                 FinanceUserUI.FinanceMainMenu();
-                exit = true; 
+                exit = true;
                 break;
             case "Logout":
                 UserLogin.UserAccountServiceLogic.Logout();
@@ -53,9 +53,6 @@ static class AdminAccountUI
                 break;
             case "Add New Airport":
                 AirportInformation.AddNewAirport();
-                break;
-            case "Delete Airport Information":
-                AirportInformation.DeleteAirportInformation();
                 break;
             case "Exit":
                 exit = true;
@@ -118,9 +115,9 @@ static class AdminAccountUI
         {
             string[] menuItems =
             {
-                "View Airports", "Edit Airport Information", "Add New Airport", "Delete Airport Information", "Exit"
+                "View Airports", "Edit Airport Information", "Add New Airport", "Exit"
             };
-            int selectedIndex = MenuNavigationService.NavigateMenu(menuItems, "Airport Menu");
+            int selectedIndex = MenuNavigationServiceLogic.NavigateMenu(menuItems, "Airport Menu");
 
             if (selectedIndex >= 0 && selectedIndex < menuItems.Length)
             {
@@ -138,7 +135,7 @@ static class AdminAccountUI
         {
             string[] menuItems =
                 { "View Flights", "Edit Flight Information", "Add New Flight", "Delete Flight Information", "Exit" };
-            int selectedIndex = MenuNavigationService.NavigateMenu(menuItems, "Flight Menu");
+            int selectedIndex = MenuNavigationServiceLogic.NavigateMenu(menuItems, "Flight Menu");
 
             if (selectedIndex >= 0 && selectedIndex < menuItems.Length)
             {
@@ -155,7 +152,7 @@ static class AdminAccountUI
         while (!exit)
         {
             string[] menuItems = { "View Accounts", "Add New Account", "Delete Account Information", "Exit" };
-            int selectedIndex = MenuNavigationService.NavigateMenu(menuItems, "Account Menu");
+            int selectedIndex = MenuNavigationServiceLogic.NavigateMenu(menuItems, "Account Menu");
 
             if (selectedIndex >= 0 && selectedIndex < menuItems.Length)
             {

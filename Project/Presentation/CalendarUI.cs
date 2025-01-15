@@ -244,7 +244,6 @@ public class CalendarUI
         Console.WriteLine("Esc        : Cancel");
     }
 
-    // [Rest of the class methods remain the same...]
     private void SelectYear(ref DateTime selectedDate)
     {
         bool done = false;

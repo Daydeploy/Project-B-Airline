@@ -23,9 +23,9 @@ public class UserAccountServiceLogic
         get { return IsLoggedIn ? _accountsLogic.GetById(CurrentUserId) : null; }
     }
 
-    public bool CreateAccount(string firstName, string lastName, string email, string password, 
-    DateTime dateOfBirth, string gender, string nationality, string phoneNumber, 
-    string address, PassportDetailsModel passportDetails)
+    public bool CreateAccount(string firstName, string lastName, string email, string password,
+        DateTime dateOfBirth, string gender, string nationality, string phoneNumber,
+        string address, PassportDetailsModel passportDetails)
     {
         if (string.IsNullOrWhiteSpace(firstName) || string.IsNullOrWhiteSpace(lastName))
         {
@@ -52,7 +52,7 @@ public class UserAccountServiceLogic
         var newAccount = new AccountModel(
             id: newId,
             firstName: firstName,
-            lastName: lastName, 
+            lastName: lastName,
             dateOfBirth: dateOfBirth,
             emailAddress: email,
             password: password,
@@ -111,7 +111,8 @@ public class UserAccountServiceLogic
     public bool ManageAccount(int userId, string newEmail = null, string newPassword = null, string newFirstName = null,
         string newLastName = null, string newGender = null, string newNationality = null,
         string newPhoneNumber = null, string newAddress = null, PassportDetailsModel newPassportDetails = null,
-        DateTime? newDateOfBirth = null, List<MilesModel> newMiles = null)
+        DateTime? newDateOfBirth = null, List<MilesModel> newMiles = null,
+        List<PaymentInformationModel> newPaymentInformation = null)
     {
         var account = _accountsLogic.GetById(userId);
         if (account == null)
@@ -146,27 +147,18 @@ public class UserAccountServiceLogic
                 account.PassportDetails.CountryOfIssue = newPassportDetails.CountryOfIssue;
         }
 
+        if (newMiles != null)
+        {
+            account.Miles = newMiles;
+        }
+
+        if (newPaymentInformation != null)
+        {
+            account.PaymentInformation = newPaymentInformation;
+        }
+
         _accountsLogic.UpdateList(account);
         return true;
-    }
-
-    public List<FlightBooking> GetBookedFlights(int userId)
-    {
-        var userBookings = _bookings.Where(b => b.UserId == userId).ToList();
-        var flightsLogic = new FlightsLogic();
-        var flights = flightsLogic.GetAllFlights();
-
-        return userBookings.Select(booking =>
-        {
-            var flight = flights.FirstOrDefault(f => f.FlightId == booking.FlightId);
-            return new FlightBooking
-            {
-                FlightId = booking.FlightId,
-                FlightNumber = flight?.FlightNumber ?? "Unknown",
-                DepartureTime = flight?.DepartureTime ?? DateTime.MinValue.ToString(),
-                ArrivalTime = flight?.ArrivalTime ?? DateTime.MinValue.ToString()
-            };
-        }).ToList();
     }
 
     public bool CheckIn(int flightId)
@@ -196,25 +188,6 @@ public class UserAccountServiceLogic
 
         return true;
     }
-
-    public int GetCurrentMiles(int userId)
-    {
-        var account = CurrentAccount;
-        if (account != null)
-        {
-            return account.Miles.Sum(m => m.Points);
-        }
-
-        return 0;
-    }
-}
-
-public class FlightBooking
-{
-    public int FlightId { get; set; }
-    public string FlightNumber { get; set; }
-    public string DepartureTime { get; set; }
-    public string ArrivalTime { get; set; }
 }
 
 public class BookingDetails

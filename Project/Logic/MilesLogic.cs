@@ -1,6 +1,5 @@
 public class MilesLogic
 {
-    private const int _bronzeMin = 0;
     private const int _silverMin = 101;
     private const int _goldMin = 201;
     private const int _platinumMin = 301;
@@ -18,17 +17,17 @@ public class MilesLogic
 
     private static readonly Dictionary<(string flightType, string seatClass), int> ExperiencePoints = new()
     {
-        {("Short", "Economy"), 3},
-        {("Short", "Business"), 6},
-        {("Short", "First"), 10},
+        { ("Short", "Economy"), 3 },
+        { ("Short", "Business"), 6 },
+        { ("Short", "First"), 10 },
 
-        {("Medium", "Economy"), 7},
-        {("Medium", "Business"), 14},
-        {("Medium", "First"), 20},
+        { ("Medium", "Economy"), 7 },
+        { ("Medium", "Business"), 14 },
+        { ("Medium", "First"), 20 },
 
-        {("Long", "Economy"), 10},
-        {("Long", "Business"), 20},
-        {("Long", "First"), 30},
+        { ("Long", "Economy"), 10 },
+        { ("Long", "Business"), 20 },
+        { ("Long", "First"), 30 },
     };
 
     public static string CalculateLevel(int experience)
@@ -51,30 +50,6 @@ public class MilesLogic
         }
     }
 
-    public static bool UpdateAccountLevel(int id)
-    {
-        List<AccountModel> _accounts = AccountsAccess.LoadAll();
-
-        var account = _accounts.FirstOrDefault(x => x.Id == id);
-        if (account == null) return false;
-
-        foreach (var miles in account.Miles)
-        {
-            if (miles.Enrolled)
-            {
-                string newLevel = CalculateLevel(miles.Experience);
-                if (miles.Level != newLevel)
-                {
-                    miles.Level = newLevel;
-                    miles.History += $"\nLevel updated to {newLevel} at {DateTime.Now:yyyy-MM-dd HH:mm:ss}";
-                }
-            }
-        }
-
-        AccountsAccess.WriteAll(_accounts);
-        return true;
-    }
-
     public static void UpdateAllAccountLevels()
     {
         List<AccountModel> _accounts = AccountsAccess.LoadAll();
@@ -95,6 +70,7 @@ public class MilesLogic
                 }
             }
         }
+
         AccountsAccess.WriteAll(_accounts);
     }
 
@@ -163,7 +139,8 @@ public class MilesLogic
                 if (xp > 0)
                 {
                     milesRecord.Experience += xp;
-                    milesRecord.History += $"\nEarned {xp} XP from flight {flight.FlightNumber} ({flight.Origin} to {flight.Destination}) - {seatClass} class at {DateTime.Now:yyyy-MM-dd HH:mm:ss}";
+                    milesRecord.History +=
+                        $"\nEarned {xp} XP from flight {flight.FlightNumber} ({flight.Origin} to {flight.Destination}) - {seatClass} class at {DateTime.Now:yyyy-MM-dd HH:mm:ss}";
                 }
             }
         }
@@ -213,8 +190,10 @@ public class MilesLogic
             int bookingMiles = (int)(booking.TotalPrice * milesMultiplier);
             totalMilesEarned += bookingMiles;
 
-            milesRecord.History += $"\nEarned {bookingMiles} Miles from booking {booking.BookingId} - {booking.TotalPrice} euros at {DateTime.Now:yyyy-MM-dd HH:mm:ss}";
+            milesRecord.History +=
+                $"\nEarned {bookingMiles} Miles from booking {booking.BookingId} - {booking.TotalPrice} euros at {DateTime.Now:yyyy-MM-dd HH:mm:ss}";
         }
+
         milesRecord.Points += totalMilesEarned;
         AccountsAccess.WriteAll(accounts);
         return (totalMilesEarned, true);
@@ -233,7 +212,7 @@ public class MilesLogic
 
         var milesRecord = account.Miles[0];
         var booking = bookings.FirstOrDefault(b => b.BookingId == bookingId);
-        
+
         if (booking == null)
         {
             return (price, false);
@@ -252,10 +231,11 @@ public class MilesLogic
 
             int discountAmount = (int)(price * discountPercentage);
             milesRecord.Points -= 50000;
-            milesRecord.History += $"\nRedeemed 50000 points for {discountAmount} euro discount at {DateTime.Now:yyyy-MM-dd HH:mm:ss}";
+            milesRecord.History +=
+                $"\nRedeemed 50000 points for {discountAmount} euro discount at {DateTime.Now:yyyy-MM-dd HH:mm:ss}";
 
             booking.TotalPrice -= discountAmount;
-            
+
             AccountsAccess.WriteAll(accounts);
             BookingAccess.WriteAll(bookings);
 
@@ -264,5 +244,4 @@ public class MilesLogic
 
         return (price, true);
     }
-
 }

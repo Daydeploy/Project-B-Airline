@@ -6,6 +6,8 @@ public class BookingLogic
     private static readonly List<AccountModel> _accounts = AccountsAccess.LoadAll();
     private static readonly List<BookingModel> _bookings = BookingAccess.LoadAll();
 
+    public static bool HasInsurance { get; set; }
+
     public static List<BookingModel> GetBookingsForFlight(int flightId)
     {
         return _bookings
@@ -21,7 +23,8 @@ public class BookingLogic
     }
 
     public static BookingModel CreateBooking(int userId, int flightId, List<PassengerModel> passengerDetails,
-        List<PetModel> petDetails, bool isPrivateJet = false, string jetType = null)
+        List<PetModel> petDetails, bool includeInsurance = false,
+        bool isPrivateJet = false, string jetType = null)
     {
         int bookingId = GenerateBookingId();
         int totalPrice = 0;
@@ -34,56 +37,47 @@ public class BookingLogic
                 { "Bombardier Global 8280", 25000 }
             };
 
-            if (privateJetPrices.ContainsKey(jetType))
-            {
-                totalPrice = privateJetPrices[jetType];
-            }
-            else
-            {
-                return null;
-            }
+            totalPrice = privateJetPrices.GetValueOrDefault(jetType, 0);
+            if (totalPrice == 0) return null;
         }
         else
         {
             var flight = _flights.FirstOrDefault(f => f.FlightId == flightId);
             if (flight == null) return null;
 
-            totalPrice = CalculateTotalPrice(flight.Destination, passengerDetails);
-
-            foreach (var pet in petDetails)
+            if (includeInsurance)
             {
-                var petFees = PetDataAccess.GetPetFees(pet.Type, pet.SeatingLocation);
-                if (petFees != 0)
-                {
-                    totalPrice += (int)petFees;
-                }
+                HasInsurance = includeInsurance;
             }
+
+            totalPrice = CalculateTotalPrice(flight.Destination, passengerDetails, includeInsurance);
         }
 
-        List<PassengerModel> passengers = passengerDetails
-            .Select(p => new PassengerModel(
-                p.Name,
-                p.SeatNumber,
-                p.HasCheckedBaggage,
-                p.HasPet,
-                p.PetDetails,
-                p.SpecialLuggage)
+        List<PassengerModel> passengers = passengerDetails.Select(p =>
+            new PassengerModel(p.Name, p.SeatNumber, p.HasCheckedBaggage, p.HasPet, p.PetDetails, p.SpecialLuggage)
             {
-                NumberOfBaggage = p.NumberOfBaggage
-            })
-            .ToList();
+                NumberOfBaggage = p.NumberOfBaggage,
+                ShopItems = p.ShopItems
+            }).ToList();
 
         BookingModel newBooking = new BookingModel(bookingId, userId, flightId, totalPrice, passengers, petDetails);
         if (isPrivateJet)
         {
             newBooking.PlaneType = jetType;
+            _bookings.Add(newBooking);
+            BookingAccess.WriteAll(_bookings);
         }
 
-        _bookings.Add(newBooking);
-        BookingAccess.WriteAll(_bookings);
         return newBooking;
     }
 
+    public static bool SaveBooking(BookingModel booking)
+    {
+        if (booking == null) return false;
+        _bookings.Add(booking);
+        BookingAccess.WriteAll(_bookings);
+        return true;
+    }
 
     private static int GenerateBookingId()
     {
@@ -113,32 +107,57 @@ public class BookingLogic
             : (0, false);
     }
 
-    private static int CalculateTotalPrice(string destination, List<PassengerModel> passengers)
+    public static int CalculateTotalPrice(string destination, List<PassengerModel> passengers,
+        bool includeInsurance = false)
     {
         var flight =
             _flights.FirstOrDefault(f => f.Destination.Equals(destination, StringComparison.OrdinalIgnoreCase));
         if (flight == null || flight.SeatClassOptions == null) return 0;
 
         const int BAGGAGE_PRICE = 30;
+        const int CABIN_PET_FEE = 50;
+        const int CARGO_PET_FEE = 30;
+        const int INSURANCE_FEE = 10;
 
         var total = passengers.Sum(p =>
         {
+            int passengerTotal = 0;
+
             var seatClass = GetSeatClass(p.SeatNumber);
+            var seatOption = flight.SeatClassOptions
+                .FirstOrDefault(so => so.SeatClass.Equals(seatClass, StringComparison.OrdinalIgnoreCase));
 
-            var basePrice = flight.SeatClassOptions
-                .FirstOrDefault(so => so.SeatClass.Equals(seatClass, StringComparison.OrdinalIgnoreCase))
-                ?.Price ?? 0;
+            if (seatOption != null)
+            {
+                passengerTotal += seatOption.Price;
+            }
 
-            
-            var baggageCost = p.HasCheckedBaggage ? (BAGGAGE_PRICE * p.NumberOfBaggage) : 0;
+            if (p.HasCheckedBaggage && p.NumberOfBaggage > 1) // eerste tas gratis
+            {
+                passengerTotal += BAGGAGE_PRICE * (p.NumberOfBaggage - 1);
+            }
 
-            Console.WriteLine(
-                $"Debug - Passenger: {p.Name}, HasBaggage: {p.HasCheckedBaggage}, Number of Baggage: {p.NumberOfBaggage}, Baggage Cost: {baggageCost}"); // Debug line
+            if (p.HasPet && p.PetDetails != null)
+            {
+                foreach (var pet in p.PetDetails)
+                {
+                    passengerTotal += pet.StorageLocation == "Cabin" ? CABIN_PET_FEE : CARGO_PET_FEE;
+                }
+            }
 
-            return basePrice + baggageCost;
+            if (p.ShopItems?.Any() == true)
+            {
+                passengerTotal += p.ShopItems.Sum(item => (int)item.Price);
+            }
+
+            return passengerTotal;
         });
 
-        BookingAccess.WriteAll(_bookings);
+        if (includeInsurance)
+        {
+            total += INSURANCE_FEE * passengers.Count;
+        }
+
         return total;
     }
 

@@ -1,6 +1,5 @@
 public class FlightsLogic
 {
-    public static readonly Random random = new Random();
     public static List<FlightModel> AvailableFlights = new List<FlightModel>();
 
     public static void AppendFlights()
@@ -20,7 +19,7 @@ public class FlightsLogic
     {
         return AvailableFlights
             .FirstOrDefault(f => f.FlightId == flightId);
-            // .FirstOrDefault(f => f.FlightId == flightId && DateTime.Parse(f.DepartureTime) >= DateTime.Now);
+        // .FirstOrDefault(f => f.FlightId == flightId && DateTime.Parse(f.DepartureTime) >= DateTime.Now);
     }
 
     public List<FlightModel> FilterFlightsByPriceUp(string origin, string destination, string seatClass)
@@ -105,13 +104,6 @@ public class FlightsLogic
                              DateTime.Parse(flight.DepartureTime) >= startDate &&
                              DateTime.Parse(flight.DepartureTime) <= endDate &&
                              DateTime.Parse(flight.DepartureTime) >= DateTime.Now)
-            .ToList();
-    }
-
-    public List<FlightModel> GetFlightsByOrigin(string origin)
-    {
-        return AvailableFlights
-            .Where(f => f.Origin.Equals(origin) && DateTime.Parse(f.DepartureTime) >= DateTime.Now)
             .ToList();
     }
 

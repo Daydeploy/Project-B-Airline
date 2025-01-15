@@ -1,5 +1,5 @@
 public class ComfortPackageServiceLogic
-{    
+{
     public (bool success, string error) AddPackageToBooking(int bookingId, int packageId)
     {
         var bookings = BookingAccess.LoadAll();
@@ -30,7 +30,7 @@ public class ComfortPackageServiceLogic
         }
 
         booking.ComfortPackages ??= new List<ComfortPackageModel>();
-        
+
         booking.ComfortPackages.Add(package);
         booking.TotalPrice += (int)package.Cost;
 

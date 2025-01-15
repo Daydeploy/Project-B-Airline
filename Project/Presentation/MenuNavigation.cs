@@ -13,7 +13,8 @@ static class MenuNavigation
         while (!exit)
         {
             Console.Clear();
-            int selectedIndex = MenuNavigationService.NavigateMenu(menuItems, MenuNavigationService.AirlineLogo());
+            int selectedIndex =
+                MenuNavigationServiceLogic.NavigateMenu(menuItems, MenuNavigationServiceLogic.AirlineLogo());
             HandleSelection(menuItems[selectedIndex], ref exit);
         }
     }

@@ -17,7 +17,7 @@ static class AccountManagement
 
         while (true)
         {
-            int selectedIndex = MenuNavigationService.NavigateMenu(options, "Manage Account");
+            int selectedIndex = MenuNavigationServiceLogic.NavigateMenu(options, "Manage Account");
 
             if (selectedIndex == 4) return;
             if (selectedIndex == 3) DisplayAccountDetails(account);
@@ -59,7 +59,7 @@ static class AccountManagement
         // Email
         string email = GetUserInput("Enter your email address: ", isPassword: false, ref showPassword);
         if (email == null) return;
-        while (string.IsNullOrWhiteSpace(email) || !IsValidEmail(email))
+        while (string.IsNullOrWhiteSpace(email) || !AccountsLogic.IsValidEmail(email))
         {
             Console.WriteLine("Error: Email must contain '@' and a domain (For instance: '.com').");
             email = GetUserInput("Please enter your email address again: ", isPassword: false, ref showPassword);
@@ -324,27 +324,34 @@ static class AccountManagement
         bool updateSuccessful = false;
         var accounts = AccountsAccess.LoadAll();
 
+        var accountToUpdate = accounts.Find(a => a.Id == account.Id);
+
         switch (optionIndex)
         {
             case 0: // Personal Information
+                accountToUpdate = accounts.Find(a => a.Id == account.Id);
                 Console.WriteLine("\n--- Personal Information Management ---");
 
                 string[] personalOptions =
                 {
-                "Update Email",
-                "Update Password",
-                "Update First Name",
-                "Update Last Name",
-                "Update Date of Birth",
-                "Update Gender",
-                "Update Nationality",
-                "Update Phone Number",
-                "Update Address",
-                "Update Passport Details",
-                "Return to Account Management"
-            };
+                    $"Update Email             Current: {account.EmailAddress}",
+                    $"Update Password          Current: {"*".PadRight(account.Password.Length, '*')}",
+                    $"Update First Name        Current: {account.FirstName}",
+                    $"Update Last Name         Current: {account.LastName}",
+                    $"Update Date of Birth     Current: {account.DateOfBirth:dd-MM-yyyy}",
+                    $"Update Gender            Current: {account.Gender ?? "Not provided"}",
+                    $"Update Nationality       Current: {account.Nationality ?? "Not provided"}",
+                    $"Update Phone Number      Current: {account.PhoneNumber ?? "Not provided"}",
+                    $"Update Address           Current: {account.Address ?? "Not provided"}",
+                    $"Update Passport Details",
+                    "Return to Account Management"
+                };
 
-                int personalOptionIndex = MenuNavigationService.NavigateMenu(personalOptions, "Personal Details");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("\n=== Personal Information Management ===");
+                Console.ResetColor();
+
+                int personalOptionIndex = MenuNavigationServiceLogic.NavigateMenu(personalOptions, "Personal Details");
 
                 switch (personalOptionIndex)
                 {
@@ -356,12 +363,12 @@ static class AccountManagement
                         {
                             newEmail = GetInputWithEsc();
                             if (newEmail == null) return;
-                            if (!IsValidEmail(newEmail))
+                            if (!AccountsLogic.IsValidEmail(newEmail))
                             {
                                 Console.WriteLine("Invalid email format. Please enter a valid email address.");
                                 Console.Write("Enter new email: ");
                             }
-                        } while (newEmail != null && !IsValidEmail(newEmail));
+                        } while (newEmail != null && !AccountsLogic.IsValidEmail(newEmail));
 
                         if (newEmail != null)
                         {
@@ -514,9 +521,9 @@ static class AccountManagement
                 break;
 
             case 1: // Payment Information
-                var accountToUpdate = accounts.Find(a => a.Id == account.Id);
-
                 Console.WriteLine("\n--- Payment Information Management ---");
+
+                accountToUpdate = accounts.Find(a => a.Id == account.Id);
 
                 if (accountToUpdate.PaymentInformation == null)
                     accountToUpdate.PaymentInformation = new List<PaymentInformationModel>();
@@ -528,7 +535,7 @@ static class AccountManagement
                 "Back to Account Management",
             };
 
-                int paymentOptionIndex = MenuNavigationService.NavigateMenu(paymentOptions, "Payment Details");
+                int paymentOptionIndex = MenuNavigationServiceLogic.NavigateMenu(paymentOptions, "Payment Details");
 
                 if (paymentOptionIndex == 0)
                 {
@@ -612,10 +619,13 @@ static class AccountManagement
                     if (confirmKey.Key != ConsoleKey.N)
                     {
                         paymentInfo = new PaymentInformationModel(cardHolder, cardNumber, cvv, expirationDate, billingAddress);
-                        accountToUpdate.PaymentInformation.Clear();
-                        accountToUpdate.PaymentInformation.Add(paymentInfo);
-                        AccountsAccess.WriteAll(accounts);
-                        Console.WriteLine("Payment method updated successfully.");
+                        var newPaymentInfo = new List<PaymentInformationModel> { paymentInfo };
+
+                        updateSuccessful = UserLogin.UserAccountServiceLogic.ManageAccount(accountToUpdate.Id, newPaymentInformation: newPaymentInfo);
+
+                        Console.WriteLine(updateSuccessful
+                            ? "Payment method updated successfully."
+                            : "Failed to update payment method.");
                     }
                     else
                     {
@@ -631,9 +641,11 @@ static class AccountManagement
 
                     if (response.Trim().ToUpper() == "Y")
                     {
-                        accountToUpdate.PaymentInformation.Clear();
-                        AccountsAccess.WriteAll(accounts);
-                        Console.WriteLine("Payment method removed successfully.");
+                        updateSuccessful = UserLogin.UserAccountServiceLogic.ManageAccount(account.Id, newPaymentInformation: new List<PaymentInformationModel>());
+
+                        Console.WriteLine(updateSuccessful
+                            ? "Payment method removed successfully."
+                            : "Failed to remove payment method.");
                     }
                     else
                     {
@@ -645,49 +657,56 @@ static class AccountManagement
             case 2: // Frequent Flyer Program
                 account = accounts.FirstOrDefault(a => a.Id == account.Id);
 
-                if (account.Miles != null && account.Miles.Count > 0)
+                if (account.Miles == null || account.Miles.Count == 0)
                 {
-                    var milesRecord = account.Miles[0];
+                    account.Miles = new List<MilesModel> { new MilesModel("Bronze", 0, 0, "Initial enrollment") };
+                }
 
-                    if (milesRecord.Enrolled)
-                    {
-                        Console.WriteLine("\n--- Frequent Flyer Program Details ---");
-                        Console.WriteLine($"Current Level: {milesRecord.Level}");
-                        Console.WriteLine($"Current XP: {milesRecord.Experience}");
-                        Console.WriteLine($"Total Points: {milesRecord.Points}\n");
-                    }
+                var milesRecord = account.Miles[0];
 
-                    Console.WriteLine(milesRecord.Enrolled
+                if (milesRecord.Enrolled)
+                {
+                    Console.WriteLine("\n--- Frequent Flyer Program Details ---");
+                    Console.WriteLine($"Current Level: {milesRecord.Level}");
+                    Console.WriteLine($"Current XP: {milesRecord.Experience}");
+                    Console.WriteLine($"Total Points: {milesRecord.Points}\n");
+                }
+
+                Console.WriteLine(milesRecord.Enrolled
                         ? "You are currently enrolled in the Frequent Flyer Program."
                         : "You are not currently enrolled in the Frequent Flyer Program.");
 
-                    Console.Write(milesRecord.Enrolled
-                        ? "Would you like to unenroll? (Y/N): "
-                        : "Would you like to enroll? (Y/N): ");
+                Console.Write(milesRecord.Enrolled
+                    ? "Would you like to unenroll? (Y/N): "
+                    : "Would you like to enroll? (Y/N): ");
 
-                    string ffpResponse = GetInputWithEsc();
-                    if (ffpResponse == null) return;
+                string ffpResponse = GetInputWithEsc();
+                if (ffpResponse == null) return;
 
-                    if (ffpResponse.Trim().ToUpper() == "Y")
-                    {
-                        // Toggle enrollment status
-                        milesRecord.Enrolled = !milesRecord.Enrolled;
-
-                        updateSuccessful = UserLogin.UserAccountServiceLogic.ManageAccount(
-                            account.Id,
-                            newMiles: account.Miles
-                        );
-
-                        Console.WriteLine(updateSuccessful
-                            ? (milesRecord.Enrolled
-                                ? "Successfully enrolled in the Frequent Flyer Program!"
-                                : "Successfully unenrolled from the Frequent Flyer Program.")
-                            : "Failed to update Frequent Flyer Program status.");
-                    }
-                }
-                else
+                if (ffpResponse.Trim().ToUpper() == "Y")
                 {
-                    Console.WriteLine("Error: Miles information is not available.");
+                    // Toggle enrollment status
+                    milesRecord.Enrolled = !milesRecord.Enrolled;
+
+                    milesRecord.History += $"\n{(milesRecord.Enrolled ? "Enrolled" : "Unenrolled")} at {DateTime.Now:yyyy-MM-dd-HH:mm:ss}";
+
+
+                    updateSuccessful = UserLogin.UserAccountServiceLogic.ManageAccount(
+                        account.Id,
+                        newMiles: account.Miles
+                    );
+
+                    if (updateSuccessful)
+                    {
+                        AccountsAccess.WriteAll(accounts);
+                        Console.WriteLine(milesRecord.Enrolled
+                            ? "Successfully enrolled in the Frequent Flyer Program!"
+                            : "Successfully unenrolled from the Frequent Flyer Program.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Failed to update Frequent Flyer Program status.");
+                    }
                 }
                 break;
 
@@ -732,12 +751,5 @@ static class AccountManagement
                 Console.Write(key.KeyChar);
             }
         }
-    }
-    private static bool IsValidEmail(string email)
-    {
-        return !string.IsNullOrWhiteSpace(email) &&
-               email.Contains("@") &&
-               email.IndexOf("@") < email.LastIndexOf(".") &&
-               email.IndexOf(".") > email.IndexOf("@") + 1;
     }
 }

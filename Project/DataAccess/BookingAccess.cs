@@ -1,6 +1,8 @@
 static class BookingAccess
 {
-    private static string _filePath = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/bookings.json"));
+    private static string _filePath =
+        System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/bookings.json"));
+
     private static GenericJsonAccess<BookingModel> _bookingAccess = new GenericJsonAccess<BookingModel>(_filePath);
 
     public static List<BookingModel> LoadAll()

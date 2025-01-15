@@ -22,7 +22,6 @@ public class AirportService
 
     public bool IsAirportLuxurious(AirportModel airport)
     {
-
         return airport.Name.Contains("Luxury") || airport.Name.Contains("VIP") || airport.Name.Contains("Executive");
     }
 

@@ -9,23 +9,24 @@
     "phoneNumber": null,
     "address": null,
     "email": "finance",
-    "password": "Test1!",
+    "password": "FinancePassword0#",
     "passportDetails": null,
     "milesDetails": [],
     "paymentInformation": null,
-    "privateJet": null
+    "privateJet": null,
+    "shoppingCart": []
   },
   {
     "id": 1,
-    "firstName": "Test",
-    "lastName": "Account",
+    "firstName": "Deborah one",
+    "lastName": "Teacher",
     "dateOfBirth": "1990-01-01T00:00:00",
     "gender": null,
     "nationality": null,
     "phoneNumber": "0686388692",
     "address": "test adress",
-    "email": "test",
-    "password": "test",
+    "email": "deborahteacher@hr.com",
+    "password": "Deborah01$",
     "passportDetails": {
       "passportNumber": "121212",
       "issueDate": "0001-01-01T00:00:00",
@@ -50,7 +51,8 @@
         "billingAddress": "Wijnhaven 106"
       }
     ],
-    "privateJet": null
+    "privateJet": null,
+    "shoppingCart": []
   },
   {
     "id": 2,
@@ -79,7 +81,8 @@
       }
     ],
     "paymentInformation": null,
-    "privateJet": null
+    "privateJet": null,
+    "shoppingCart": []
   },
   {
     "id": 3,
@@ -103,7 +106,8 @@
       }
     ],
     "paymentInformation": null,
-    "privateJet": null
+    "privateJet": null,
+    "shoppingCart": []
   },
   {
     "id": 4,
@@ -135,7 +139,8 @@
         "billingAddress": "Test Address 1"
       }
     ],
-    "privateJet": null
+    "privateJet": null,
+    "shoppingCart": []
   },
   {
     "id": 5,
@@ -147,7 +152,7 @@
     "phoneNumber": null,
     "address": null,
     "email": "admin",
-    "password": "password",
+    "password": "AdminPassword0@",
     "passportDetails": null,
     "milesDetails": [
       {
@@ -159,7 +164,8 @@
       }
     ],
     "paymentInformation": null,
-    "privateJet": null
+    "privateJet": null,
+    "shoppingCart": []
   },
   {
     "id": 6,
@@ -196,6 +202,111 @@
         "billingAddress": "Wijnhaven 106"
       }
     ],
-    "privateJet": null
+    "privateJet": null,
+    "shoppingCart": []
+  },
+  {
+    "id": 7,
+    "firstName": "even",
+    "lastName": "test",
+    "dateOfBirth": "2004-05-24T00:00:00",
+    "gender": null,
+    "nationality": null,
+    "phoneNumber": "0686388692",
+    "address": "Test",
+    "email": "even@test.nl",
+    "password": "Test@1",
+    "passportDetails": null,
+    "milesDetails": [
+      {
+        "Enrolled": false,
+        "Level": "",
+        "Experience": 0,
+        "Points": 0,
+        "History": ""
+      }
+    ],
+    "paymentInformation": [
+      {
+        "cardHolder": "Aaron",
+        "cardNumber": "1111111111111111",
+        "cVV": "123",
+        "expirationDate": "02/25",
+        "billingAddress": "Test"
+      }
+    ],
+    "privateJet": null,
+    "shoppingCart": []
+  },
+  {
+    "id": 8,
+    "firstName": "Deborah two",
+    "lastName": "Teacher",
+    "dateOfBirth": "1995-03-20T00:00:00",
+    "gender": "Female",
+    "nationality": "Irish",
+    "phoneNumber": "0618734257",
+    "address": "Wijnhaven 105",
+    "email": "newteacher@hr.com",
+    "password": "Deborah01$",
+    "passportDetails": {
+      "passportNumber": "1634568",
+      "issueDate": "2028-10-10T00:00:00",
+      "expirationDate": "2029-10-10T00:00:00",
+      "countryOfIssue": "Ghana"
+    },
+    "milesDetails": [
+      {
+        "Enrolled": true,
+        "Level": "Bronze",
+        "Experience": 0,
+        "Points": 0,
+        "History": "\nLevel updated to Bronze at 2025-01-13 11:49:57"
+      }
+    ],
+    "paymentInformation": [
+      {
+        "cardHolder": "Deborah",
+        "cardNumber": "1234567888883452",
+        "cVV": "133",
+        "expirationDate": "10/29",
+        "billingAddress": "Wijnhaven 105"
+      }
+    ],
+    "privateJet": null,
+    "shoppingCart": []
+  },
+  {
+    "id": 9,
+    "firstName": "test",
+    "lastName": "test",
+    "dateOfBirth": "2004-05-24T00:00:00",
+    "gender": null,
+    "nationality": null,
+    "phoneNumber": "0686388692",
+    "address": "halo",
+    "email": "test12@gmail.com",
+    "password": "Test@1",
+    "passportDetails": null,
+    "milesDetails": [
+      {
+        "Enrolled": true,
+        "Level": "Bronze",
+        "Experience": 0,
+        "Points": 0,
+        "History": "\nLevel updated to Bronze at 2025-01-15 13:17:02"
+      }
+    ],
+    "paymentInformation": [
+      {
+        "cardHolder": "aaron",
+        "cardNumber": "1111111111111111",
+        "cVV": "222",
+        "expirationDate": "12/27",
+        "billingAddress": "gs"
+      }
+    ],
+    "privateJet": null,
+    "shoppingCart": []
   }
 ]

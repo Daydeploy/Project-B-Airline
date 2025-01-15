@@ -3,7 +3,7 @@ public class AirportUI
     public static void DisplayAirportHeader()
     {
         Console.WriteLine("\n" + new string('-', 100));
-        Console.WriteLine("|{0,-20}|{1,-15}|{2,-20}|{3,-20}|{4,-18}|", 
+        Console.WriteLine("|{0,-20}|{1,-15}|{2,-20}|{3,-20}|{4,-18}|",
             " Airport", " Country", " City", " Phone", " Address");
         Console.WriteLine(new string('-', 100));
     }
@@ -25,7 +25,7 @@ public class AirportUI
         Console.ResetColor();
 
         var airportService = new AirportService(new List<AirportModel> { airport });
-        
+
         Console.WriteLine("\n🚗 Transportation:");
         foreach (var option in airportService.GetAirportTransportationOptions(airport).Split(','))
         {
@@ -47,6 +47,5 @@ public class AirportUI
         Console.WriteLine("\nDescription:");
         Console.WriteLine(airportService.GetAirportDescription(airport));
         Console.WriteLine(new string('─', Console.WindowWidth - 1));
-        
     }
 }

@@ -45,6 +45,12 @@ public class AccountModel
     [JsonPropertyName("privateJet")]
     public string PrivateJet { get; set; }
 
+    [JsonPropertyName("shoppingCart")]
+    public List<ShopItemModel> ShoppingCart { get; set; } = new List<ShopItemModel>();
+
+    [JsonIgnore]
+    public PaymentInformationModel TemporaryPaymentInfo{ get; set; }
+
     public AccountModel(int id, string firstName, string lastName, DateTime dateOfBirth,
         string emailAddress, string password, string gender, string nationality,
         string phoneNumber, string address, PassportDetailsModel passportDetails,
@@ -62,7 +68,7 @@ public class AccountModel
         Address = address;
         PassportDetails = passportDetails;
         Miles = miles;
-        PaymentInformation = paymentInformation ?? new List<PaymentInformationModel>();
+        PaymentInformation = paymentInformation;
     }
 
     // Parameterless constructor for JSON deserialization

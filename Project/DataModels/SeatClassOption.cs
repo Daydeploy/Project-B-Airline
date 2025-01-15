@@ -13,8 +13,7 @@ public class SeatClassOption
 
     // Parameterless constructor for JSON deserialization
     public SeatClassOption() { }
-
-    // Constructor for creating new instances
+    
     public SeatClassOption(string seatClass, int price)
     {
         SeatClass = seatClass;

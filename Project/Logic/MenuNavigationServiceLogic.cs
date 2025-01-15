@@ -1,4 +1,4 @@
-﻿public static class MenuNavigationService
+﻿public static class MenuNavigationServiceLogic
 {
     static public int NavigateMenu(string[] options, string title = "")
     {

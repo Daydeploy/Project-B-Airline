@@ -20,43 +20,11 @@ public static class AccountInformation
         Console.ReadKey();
     }
 
-    public static void EditAccountInformation()
-    {
-        Console.Clear();
-        var accountsLogic = new AccountsLogic();
-        var accounts = accountsLogic.GetAllAccounts();
-
-        Console.WriteLine("=== Edit Account Information ===\n");
-        
-        // Display accounts
-        foreach (var account in accounts)
-        {
-            Console.WriteLine($"{account.Id}. {account.FirstName} {account.LastName} ({account.EmailAddress})");
-        }
-
-        Console.Write("\nEnter Account ID to edit (0 to cancel): ");
-        if (!int.TryParse(Console.ReadLine(), out int accountId) || accountId == 0)
-        {
-            return;
-        }
-
-        var selectedAccount = accounts.FirstOrDefault(a => a.Id == accountId);
-        if (selectedAccount == null)
-        {
-            Console.WriteLine("Account not found.");
-            Console.WriteLine("\nPress any key to continue...");
-            Console.ReadKey();
-            return;
-        }
-
-        AccountManagement.ManageAccount(selectedAccount);
-    }
-
     public static void AddNewAccount()
     {
         Console.Clear();
         Console.WriteLine("=== Add New Account ===\n");
-        
+
         AccountManagement.CreateAccount();
     }
 
@@ -69,7 +37,7 @@ public static class AccountInformation
             .ToList();
 
         Console.WriteLine("=== Delete Account Information ===\n");
-        
+
         foreach (var account in accounts)
         {
             Console.WriteLine($"{account.Id}. {account.FirstName} {account.LastName} ({account.EmailAddress})");
@@ -90,7 +58,8 @@ public static class AccountInformation
             return;
         }
 
-        Console.Write($"\nAre you sure you want to delete account for {selectedAccount.FirstName} {selectedAccount.LastName}? (Y/N): ");
+        Console.Write(
+            $"\nAre you sure you want to delete account for {selectedAccount.FirstName} {selectedAccount.LastName}? (Y/N): ");
         if (Console.ReadLine()?.ToUpper() == "Y")
         {
             if (accountsLogic.DeleteAccount(accountId))

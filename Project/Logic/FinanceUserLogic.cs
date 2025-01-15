@@ -15,9 +15,9 @@ public class FinanceUserLogic
     {
         var (startDate, endDate) = GetQuarterDates(year, quarter);
         return BookingAccess.LoadAll()
-            .Where(b => b.UserId == userId && 
-                       b.BookingDate >= startDate && 
-                       b.BookingDate <= endDate)
+            .Where(b => b.UserId == userId &&
+                        b.BookingDate >= startDate &&
+                        b.BookingDate <= endDate)
             .OrderByDescending(b => b.BookingDate)
             .ToList();
     }
@@ -25,9 +25,9 @@ public class FinanceUserLogic
     public List<BookingModel> GetPurchasesByMonth(int userId, int year, int month)
     {
         return BookingAccess.LoadAll()
-            .Where(b => b.UserId == userId && 
-                       b.BookingDate.Year == year && 
-                       b.BookingDate.Month == month)
+            .Where(b => b.UserId == userId &&
+                        b.BookingDate.Year == year &&
+                        b.BookingDate.Month == month)
             .OrderByDescending(b => b.BookingDate)
             .ToList();
     }
@@ -92,11 +92,12 @@ public class FinanceUserLogic
 
     public bool IsValidYear(int year) => year >= MIN_YEAR;
 
-    public (decimal totalSpent, decimal avgPerBooking, decimal mostExpensive, string mostFrequentClass, int bookingCount) 
+    public (decimal totalSpent, decimal avgPerBooking, decimal mostExpensive, string mostFrequentClass, int bookingCount
+        )
         GetSpendingAnalysis(int userId)
     {
         var bookings = GetAllPurchases(userId);
-        
+
         if (!bookings.Any())
             return (0, 0, 0, string.Empty, 0);
 
@@ -111,7 +112,7 @@ public class FinanceUserLogic
 
         return (totalSpent, avgPerBooking, mostExpensive, mostFrequentClass, bookings.Count);
     }
-    
+
     public List<AccountModel> GetAllUsers()
     {
         return _accountsLogic.GetAllAccounts()

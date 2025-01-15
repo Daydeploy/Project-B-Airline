@@ -10,7 +10,6 @@ static class FlightDisplay
         { "Airbus A330", 75000 }
     };
 
-    // Add this new method
     private static (int usedWeight, int maxWeight) GetFlightWeightInfo(FlightModel flight)
     {
         var bookings = BookingAccess.LoadAll()
@@ -53,7 +52,6 @@ static class FlightDisplay
         Console.WriteLine(new string('─', Console.WindowWidth - 1));
     }
 
-    // Draws the header for the flight table
     public static void DrawTableHeader()
     {
         Console.WriteLine(new string('─', Console.WindowWidth - 1));
@@ -64,7 +62,6 @@ static class FlightDisplay
         Console.WriteLine(new string('─', Console.WindowWidth - 1));
     }
 
-    // Displays details of a single flight in a formatted manner
     public static void DisplayFlightDetails(FlightModel flight)
     {
         DateTime departureDateTime = DateTime.Parse(flight.DepartureTime);
@@ -95,9 +92,9 @@ static class FlightDisplay
         double weightPercentage = (double)usedWeight / maxWeight;
         Console.ForegroundColor = weightPercentage switch
         {
-            >= 0.9 => ConsoleColor.Red, // Over 90% capacity
-            >= 0.7 => ConsoleColor.Yellow, // Over 70% capacity
-            _ => ConsoleColor.DarkGreen // Under 70% capacity
+            >= 0.9 => ConsoleColor.Red, // over 90% capacity
+            >= 0.7 => ConsoleColor.Yellow, // over 70% capacity
+            _ => ConsoleColor.DarkGreen // onder 70% capacity
         };
         Console.Write($"{usedWeight}/{maxWeight,-7}  ");
         Console.ResetColor();
@@ -123,7 +120,6 @@ static class FlightDisplay
     }
 
 
-    // Draws the header for the bookings table
     public static void DrawBookingsTableHeader()
     {
         Console.WriteLine(new string('─', Console.WindowWidth - 1));
@@ -133,7 +129,6 @@ static class FlightDisplay
         Console.WriteLine(new string('─', Console.WindowWidth - 1));
     }
 
-    // Displays details for a specific booking
     public static void DisplayBookingDetails(BookingModel booking, FlightModel flight)
     {
         if (booking == null)
@@ -156,7 +151,6 @@ static class FlightDisplay
             return;
         }
 
-        // Validate date strings before parsing
         if (!DateTime.TryParse(flight.DepartureTime, out DateTime departureDateTime) ||
             !DateTime.TryParse(flight.ArrivalTime, out DateTime arrivalDateTime))
         {
@@ -184,7 +178,6 @@ static class FlightDisplay
         Console.Write("→");
         Console.ResetColor();
         Console.WriteLine($" Arrival: {arrivalDateTime:HH:mm dd MMM}");
-
         Console.WriteLine($"Duration: {duration.Hours}h {duration.Minutes}m");
 
         Console.WriteLine(new string('-', 30));
@@ -201,10 +194,33 @@ static class FlightDisplay
         }
         else
         {
-            Console.WriteLine("No entertainment purchased");
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine("\n\tNo entertainment purchased");
+            Console.ResetColor();
         }
 
         Console.WriteLine(new string('-', 30));
+
+        Console.WriteLine("Purchased Comfort Packages:");
+        if (booking.ComfortPackages?.Any() == true)
+        {
+            foreach (var package in booking.ComfortPackages)
+            {
+                if (package != null)
+                {
+                    Console.WriteLine($" - {package.Name} | Price: {package.Cost} EUR");
+                }
+            }
+        }
+        else
+        {
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine("\n\tNo comport packages purchased");
+            Console.ResetColor();
+        }
+
+        Console.WriteLine(new string('-', 30));
+
         if (booking.Passengers?.Any() == true)
         {
             Console.WriteLine("\nPurchased items:\n");
@@ -217,12 +233,64 @@ static class FlightDisplay
             }
         }
 
+        decimal calculatedTotal = 0;
+        Console.WriteLine("\nPrice Breakdown:");
+        Console.WriteLine(new string('─', 50));
+
+        foreach (var passenger in booking.Passengers)
+        {
+            if (passenger == null) continue;
+
+            // Base ticket price
+            var seatSelector = new SeatSelectionUI();
+            var seatClass = seatSelector.GetSeatClass(passenger.SeatNumber, flight.PlaneType);
+            var seatOption = flight.SeatClassOptions
+                .FirstOrDefault(so => so.SeatClass.Equals(seatClass, StringComparison.OrdinalIgnoreCase));
+
+            calculatedTotal += seatOption.Price;
+            Console.WriteLine($"\nBase ticket price for {passenger.Name} ({seatClass}): {seatOption.Price:C}");
+
+            if (passenger.HasCheckedBaggage)
+            {
+                decimal baggageCost = (passenger.NumberOfBaggage - 1) * 30m;
+                calculatedTotal += baggageCost;
+                Console.WriteLine($"Baggage fee ({passenger.NumberOfBaggage} pieces): {baggageCost:C}");
+            }
+
+            if (passenger.HasPet && passenger.PetDetails?.Any() == true)
+            {
+                foreach (var pet in passenger.PetDetails)
+                {
+                    decimal petFee = pet.StorageLocation == "Cabin" ? 50m : 30m;
+                    calculatedTotal += petFee;
+                    Console.WriteLine($"Pet fee ({pet.Type} - {pet.StorageLocation}): {petFee:C}");
+                }
+            }
+
+            if (passenger.ShopItems?.Any() == true)
+            {
+                decimal shopTotal = passenger.ShopItems.Sum(item => item.Price);
+                calculatedTotal += shopTotal;
+                Console.WriteLine($"Shop items total: {shopTotal:C}");
+            }
+        }
+
+        if (booking.Entertainment?.Any() == true)
+        {
+            decimal entertainmentTotal = booking.Entertainment.Sum(e => (decimal)e.Cost);
+            calculatedTotal += entertainmentTotal;
+            Console.WriteLine($"\nEntertainment total: {entertainmentTotal:C}");
+        }
+
+        Console.WriteLine(new string('─', 50));
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine($"Calculated Total: {booking.TotalPrice:C}");
+        Console.ResetColor();
         Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine($"Total Price including purchased items and taxes: {booking.TotalPrice} EUR");
+        Console.WriteLine($"Total Price including purchased items and taxes: {booking.TotalPrice:C} EUR");
         Console.ResetColor();
     }
 
-    // New helper method to handle passenger purchases display
     private static void DisplayPassengerPurchases(PassengerModel passenger, FlightModel flight)
     {
         Console.ForegroundColor = ConsoleColor.DarkGray;
@@ -263,8 +331,6 @@ static class FlightDisplay
         Console.WriteLine("\nPassengers:");
         Console.ResetColor();
 
-        const int BAGGAGE_PRICE = 30;
-
         foreach (var passenger in passengers)
         {
             Console.Write($"• {passenger.Name}");
@@ -284,8 +350,7 @@ static class FlightDisplay
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
                 if (passenger.HasCheckedBaggage)
                 {
-                    double baggageCost = passenger.NumberOfBaggage * BAGGAGE_PRICE;
-                    Console.Write($" | Baggage: {passenger.NumberOfBaggage} piece(s) ({baggageCost:F2} EUR)");
+                    Console.Write($" | Baggage: {passenger.NumberOfBaggage} piece(s)");
                 }
                 else
                 {
