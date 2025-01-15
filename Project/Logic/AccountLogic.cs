@@ -104,16 +104,10 @@ public class AccountsLogic
 
     public static bool IsValidEmail(string email)
     {
-        if (string.IsNullOrWhiteSpace(email))
-        {
-            return false;
-        }
-
-        if (!email.Contains("@") || !email.Contains("."))
-        {
-            return false;
-        }
-        return true;
+        return !string.IsNullOrWhiteSpace(email) &&
+               email.Contains("@") &&
+               email.IndexOf("@") < email.LastIndexOf(".") &&
+               email.IndexOf(".") > email.IndexOf("@") + 1;
     }
 
     public bool DeleteAccount(int accountId)

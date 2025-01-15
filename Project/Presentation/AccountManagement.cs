@@ -59,7 +59,7 @@ static class AccountManagement
         // Email
         string email = GetUserInput("Enter your email address: ", isPassword: false, ref showPassword);
         if (email == null) return;
-        while (string.IsNullOrWhiteSpace(email) || !IsValidEmail(email))
+        while (string.IsNullOrWhiteSpace(email) || !AccountsLogic.IsValidEmail(email))
         {
             Console.WriteLine("Error: Email must contain '@' and a domain (For instance: '.com').");
             email = GetUserInput("Please enter your email address again: ", isPassword: false, ref showPassword);
@@ -363,12 +363,12 @@ static class AccountManagement
                         {
                             newEmail = GetInputWithEsc();
                             if (newEmail == null) return;
-                            if (!IsValidEmail(newEmail))
+                            if (!AccountsLogic.IsValidEmail(newEmail))
                             {
                                 Console.WriteLine("Invalid email format. Please enter a valid email address.");
                                 Console.Write("Enter new email: ");
                             }
-                        } while (newEmail != null && !IsValidEmail(newEmail));
+                        } while (newEmail != null && !AccountsLogic.IsValidEmail(newEmail));
 
                         if (newEmail != null)
                         {
@@ -751,12 +751,5 @@ static class AccountManagement
                 Console.Write(key.KeyChar);
             }
         }
-    }
-    private static bool IsValidEmail(string email)
-    {
-        return !string.IsNullOrWhiteSpace(email) &&
-               email.Contains("@") &&
-               email.IndexOf("@") < email.LastIndexOf(".") &&
-               email.IndexOf(".") > email.IndexOf("@") + 1;
     }
 }
