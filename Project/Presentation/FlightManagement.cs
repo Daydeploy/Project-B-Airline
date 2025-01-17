@@ -483,7 +483,8 @@ internal static class FlightManagement
     private static void HandlePassengerDetailsAndBooking(AccountModel account, FlightModel departureFlight,
         FlightModel? returnFlight)
     {
-        var seatSelector = new SeatSelectionUI();
+        var seatSelector = new SeatSelectionLogic();
+        var seatSelection = new SeatSelectionUI(seatSelector);
         var availableSeats = seatSelector.GetAvailableSeatsCount(departureFlight.PlaneType, departureFlight.FlightId);
 
         if (availableSeats == 0)
@@ -531,7 +532,7 @@ internal static class FlightManagement
             foreach (var passenger in passengerDetails)
             {
                 Console.WriteLine($"\nSelect a seat for {passenger.Name} on the return flight:");
-                var seatNumber = seatSelector.SelectSeat(returnFlight.PlaneType, returnFlight.FlightId);
+                var seatNumber = seatSelection.SelectSeat(returnFlight.PlaneType, returnFlight.FlightId);
                 seatSelector.SetSeatOccupied(seatNumber);
 
                 if (passenger.HasPet) seatSelector.SetPetSeat(seatNumber);
@@ -562,9 +563,12 @@ internal static class FlightManagement
     }
 
     private static List<PassengerModel> CollectPassengerDetails(FlightModel selectedFlight, int passengerCount,
-        SeatSelectionUI seatSelector)
+        SeatSelectionLogic seatSelector)
     {
         var passengerDetails = new List<PassengerModel>();
+
+        var seatSelection = new SeatSelectionUI(seatSelector);
+
         string[] yesNoOptions = { "Yes", "No" };
 
         try
@@ -661,7 +665,7 @@ internal static class FlightManagement
 
                 Console.WriteLine("\nSelect a seat for the passenger:");
                 var seatNumber =
-                    seatSelector.SelectSeat(selectedFlight.PlaneType, selectedFlight.FlightId, passengerDetails);
+                    seatSelection.SelectSeat(selectedFlight.PlaneType, selectedFlight.FlightId, passengerDetails);
 
                 seatSelector.SetSeatOccupied(seatNumber, name);
                 if (hasPet && petDetails.Any(p => p.StorageLocation == "Cabin")) seatSelector.SetPetSeat(seatNumber);
@@ -759,7 +763,7 @@ internal static class FlightManagement
         int departureFlightId,
         List<PassengerModel> passengerDetails,
         FlightModel departureFlight,
-        SeatSelectionUI seatSelector,
+        SeatSelectionLogic seatSelector,
         bool includeInsurance,
         FlightModel? returnFlight = null,
         int? returnFlightId = null)

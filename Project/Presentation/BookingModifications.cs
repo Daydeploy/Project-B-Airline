@@ -167,17 +167,18 @@ public static class BookingModifications
             return;
         }
 
-        var seatSelector = new SeatSelectionUI();
+        var seatSelector = new SeatSelectionLogic();
+        var seatSelection = new SeatSelectionUI(seatSelector);
         // Load existing booked seats
         var existingBookings = BookingLogic.GetBookingsForFlight(booking.FlightId);
 
         foreach (var existingBooking in existingBookings)
-        foreach (var passenger in existingBooking.Passengers)
-            if (passenger != booking.Passengers[passengerChoice - 1]) // dit doe je om huidige passenger te skippen
-                seatSelector.SetSeatOccupied(passenger.SeatNumber);
+            foreach (var passenger in existingBooking.Passengers)
+                if (passenger != booking.Passengers[passengerChoice - 1]) // dit doe je om huidige passenger te skippen
+                    seatSelector.SetSeatOccupied(passenger.SeatNumber);
 
         Console.WriteLine("\nSelect new seat:");
-        var newSeat = seatSelector.SelectSeat(flight.PlaneType, booking.FlightId);
+        var newSeat = seatSelection.SelectSeat(flight.PlaneType, booking.FlightId);
 
         if (newSeat != null)
         {
