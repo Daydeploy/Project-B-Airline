@@ -3,13 +3,10 @@ public class UserAccountServiceLogic
     public AccountsLogic _accountsLogic;
     private readonly List<BookingModel> _bookings;
 
-    private readonly IBookingAccess _bookingAccess = new BookingAccess();
-    private readonly MilesLogic _milesLogic = new MilesLogic();
-
     public UserAccountServiceLogic()
     {
         _accountsLogic = new AccountsLogic();
-        _bookings = _bookingAccess.LoadAll();
+        _bookings = BookingAccess.LoadAll();
         IsLoggedIn = false;
         CurrentUserId = -1;
     }
@@ -78,7 +75,7 @@ public class UserAccountServiceLogic
         {
             IsLoggedIn = true;
             CurrentUserId = account.Id;
-            _milesLogic.UpdateAllAccountLevels();
+            MilesLogic.UpdateAllAccountLevels();
             return account;
         }
 
@@ -144,7 +141,7 @@ public class UserAccountServiceLogic
 
     public bool CheckIn(int flightId)
     {
-        _milesLogic.UpdateFlightExperience(CurrentUserId);
+        MilesLogic.UpdateFlightExperience(CurrentUserId);
         return true;
     }
 
@@ -162,7 +159,7 @@ public class UserAccountServiceLogic
 
         booking.Passengers[passengerId] = updatedPassenger;
 
-        _bookingAccess.WriteAll(_bookings);
+        BookingAccess.WriteAll(_bookings);
 
         return true;
     }

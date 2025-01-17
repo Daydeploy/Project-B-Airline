@@ -1,7 +1,5 @@
 public class SeatSelectionUI
 {
-
-    private readonly IBookingAccess _bookingAccess = new BookingAccess();
     private readonly Dictionary<string, PlaneConfig> planeConfigs =
         new(StringComparer.OrdinalIgnoreCase)
         {
@@ -60,18 +58,18 @@ public class SeatSelectionUI
         occupiedSeats.Clear();
         petSeats.Clear();
 
-        var bookings = _bookingAccess.LoadAll()
+        var bookings = BookingAccess.LoadAll()
             .Where(b => b.FlightId == flightId)
             .ToList();
 
         foreach (var booking in bookings)
-            foreach (var passenger in booking.Passengers)
-                if (!string.IsNullOrEmpty(passenger.SeatNumber))
-                {
-                    occupiedSeats[passenger.SeatNumber] = "■";
+        foreach (var passenger in booking.Passengers)
+            if (!string.IsNullOrEmpty(passenger.SeatNumber))
+            {
+                occupiedSeats[passenger.SeatNumber] = "■";
 
-                    if (passenger.HasPet) petSeats[passenger.SeatNumber] = true;
-                }
+                if (passenger.HasPet) petSeats[passenger.SeatNumber] = true;
+            }
     }
 
     private bool AddAisleSpace(int seatIndex)

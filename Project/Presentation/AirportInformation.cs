@@ -280,7 +280,6 @@ internal static class AirportInformation
 
     public static void AddNewAirport()
     {
-        IAirportAccess _airportAccess = new AirportAccess();
         Console.Clear();
         Console.WriteLine("=== Add New Airport ===\n");
         var airportLogic = new AirportLogic();
@@ -341,7 +340,7 @@ internal static class AirportInformation
         );
 
         airports.Add(newAirport);
-        if (_airportAccess.WriteAllAirports(airports))
+        if (AirportAccess.WriteAllAirports(airports))
             Console.WriteLine("\nAirport added successfully!");
         else
             Console.WriteLine("\nError: Failed to add airport.");

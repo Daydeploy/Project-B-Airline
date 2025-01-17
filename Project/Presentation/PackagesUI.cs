@@ -20,12 +20,11 @@ internal static class PackagesUI
 
     public static void ShowPackages()
     {
-        IBookingAccess _bookingAccess = new BookingAccess();
         // Get current user ID
         var currentUserId = UserLogin.UserAccountServiceLogic.CurrentUserId;
 
         // Use BookingAccess instead of BookingDataAccess
-        var bookedFlights = _bookingAccess.LoadAll()
+        var bookedFlights = BookingAccess.LoadAll()
             .Where(b => b.UserId == currentUserId)
             .ToList();
 

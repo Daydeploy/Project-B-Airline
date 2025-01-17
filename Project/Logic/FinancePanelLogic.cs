@@ -2,8 +2,7 @@ public class FinancePanelLogic
 {
     public static FinancialMetrics GetFinancialMetrics(DateTime startDate, DateTime endDate)
     {
-        IBookingAccess _bookingAccess = new BookingAccess();
-        var bookings = _bookingAccess.LoadAll()
+        var bookings = BookingAccess.LoadAll()
             .Where(b => b.BookingDate >= startDate && b.BookingDate <= endDate)
             .ToList();
 

@@ -2,8 +2,7 @@ public class EntertainmentLogic
 {
     public (bool success, string errorMessage) AddEntertainmentToBooking(int bookingId, int entertainmentId)
     {
-        IBookingAccess _bookingAccess = new BookingAccess();
-        var bookings = _bookingAccess.LoadAll();
+        var bookings = BookingAccess.LoadAll();
         var booking = bookings.FirstOrDefault(b => b.BookingId == bookingId);
         if (booking == null) return (false, "Booking not found");
 
@@ -24,7 +23,7 @@ public class EntertainmentLogic
         booking.Entertainment.Add(entertainmentOption);
         booking.TotalPrice += (int)entertainmentOption.Cost;
 
-        _bookingAccess.WriteAll(bookings);
+        BookingAccess.WriteAll(bookings);
         return (true, string.Empty);
     }
 }

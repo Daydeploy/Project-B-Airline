@@ -2,13 +2,11 @@ using System.Text.RegularExpressions;
 
 public class AccountsLogic
 {
-    private readonly IAccountsAccess _accountsAccess;
     public List<AccountModel> _accounts;
 
     public AccountsLogic()
     {
-        _accountsAccess = ServiceLocator.GetAccountsAccess();
-        _accounts = _accountsAccess.LoadAll();
+        _accounts = AccountsAccess.LoadAll();
     }
 
     public static AccountModel? CurrentAccount { get; private set; }
@@ -22,9 +20,9 @@ public class AccountsLogic
         else
             _accounts.Add(acc);
 
-        _accountsAccess.WriteAll(_accounts);
+        AccountsAccess.WriteAll(_accounts);
 
-        _accounts = _accountsAccess.LoadAll();
+        _accounts = AccountsAccess.LoadAll();
     }
 
     public AccountModel GetById(int id)
@@ -84,9 +82,9 @@ public class AccountsLogic
         if (accountToDelete == null || accountToDelete.EmailAddress.ToLower() == "admin") return false;
 
         _accounts.Remove(accountToDelete);
-        _accountsAccess.WriteAll(_accounts);
+        AccountsAccess.WriteAll(_accounts);
         // Reload accounts after deletion
-        _accounts = _accountsAccess.LoadAll();
+        _accounts = AccountsAccess.LoadAll();
         return true;
     }
 

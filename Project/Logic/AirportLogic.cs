@@ -1,12 +1,10 @@
 public class AirportLogic
 {
-    private readonly IAirportAccess _airportAccess;
     private List<AirportModel> _airports;
 
     public AirportLogic()
     {
-        _airportAccess = ServiceLocator.GetAirportAccess();
-        _airports = _airportAccess.LoadAll();
+        _airports = AirportAccess.LoadAllAirports();
     }
 
     public List<AirportModel> GetAllAirports()
@@ -21,8 +19,8 @@ public class AirportLogic
 
     public void AddAirport(AirportModel newAirport)
     {
-        _airportAccess.AddAirport(newAirport);
-        _airports = _airportAccess.LoadAll();
+        AirportAccess.AddAirport(newAirport);
+        _airports = AirportAccess.LoadAllAirports();
     }
 
     public bool UpdateAirport(AirportModel updatedAirport)
@@ -33,8 +31,8 @@ public class AirportLogic
         var index = _airports.IndexOf(existingAirport);
         _airports[index] = updatedAirport;
 
-        _airportAccess.WriteAllAirports(_airports);
-        _airports = _airportAccess.LoadAll();
+        AirportAccess.WriteAllAirports(_airports);
+        _airports = AirportAccess.LoadAllAirports();
         return true;
     }
 }

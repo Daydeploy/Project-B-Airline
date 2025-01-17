@@ -2,38 +2,27 @@ public class BookingLogic
 {
     private static readonly Random random = new();
 
-    private readonly IAccountsAccess _accountsAccess = new AccountsAccess();
-    private readonly IBookingAccess _bookingAccess = new BookingAccess();
-    private readonly IFlightAccess _flightAccess = new FlightsAccess();
-
-    private readonly List<FlightModel> _flights;
-    private readonly List<AccountModel> _accounts;
-    private readonly List<BookingModel> _bookings;
-
-    public BookingLogic()
-    {
-        _flights = _flightAccess.LoadAll();
-        _accounts = _accountsAccess.LoadAll();
-        _bookings = _bookingAccess.LoadAll();
-    }
+    private static readonly List<FlightModel> _flights = FlightsAccess.LoadAll();
+    private static readonly List<AccountModel> _accounts = AccountsAccess.LoadAll();
+    private static readonly List<BookingModel> _bookings = BookingAccess.LoadAll();
 
     public static bool HasInsurance { get; set; }
 
-    public List<BookingModel> GetBookingsForFlight(int flightId)
+    public static List<BookingModel> GetBookingsForFlight(int flightId)
     {
         return _bookings
             .Where(booking => booking.FlightId == flightId)
             .ToList();
     }
 
-    public List<BookingModel> GetBookingsForUser(int userId)
+    public static List<BookingModel> GetBookingsForUser(int userId)
     {
         return _bookings
             .Where(booking => booking.UserId == userId)
             .ToList();
     }
 
-    public BookingModel CreateBooking(int userId, int flightId, List<PassengerModel> passengerDetails,
+    public static BookingModel CreateBooking(int userId, int flightId, List<PassengerModel> passengerDetails,
         List<PetModel> petDetails, bool includeInsurance = false,
         bool isPrivateJet = false, string jetType = null)
     {
@@ -73,21 +62,21 @@ public class BookingLogic
         {
             newBooking.PlaneType = jetType;
             _bookings.Add(newBooking);
-            _bookingAccess.WriteAll(_bookings);
+            BookingAccess.WriteAll(_bookings);
         }
 
         return newBooking;
     }
 
-    public bool SaveBooking(BookingModel booking)
+    public static bool SaveBooking(BookingModel booking)
     {
         if (booking == null) return false;
         _bookings.Add(booking);
-        _bookingAccess.WriteAll(_bookings);
+        BookingAccess.WriteAll(_bookings);
         return true;
     }
 
-    private int GenerateBookingId()
+    private static int GenerateBookingId()
     {
         int bookingId;
         do
@@ -98,7 +87,7 @@ public class BookingLogic
         return bookingId;
     }
 
-    public (int userId, bool success) GetUserId(int id)
+    public static (int userId, bool success) GetUserId(int id)
     {
         var account = _accounts.FirstOrDefault(x => x.Id.Equals(id));
         return account != null
@@ -106,7 +95,7 @@ public class BookingLogic
             : (0, false);
     }
 
-    public (int flightId, bool success) GetFlightId(string destination)
+    public static (int flightId, bool success) GetFlightId(string destination)
     {
         var flight = _flights.FirstOrDefault(f =>
             f.Destination.Equals(destination, StringComparison.OrdinalIgnoreCase));
@@ -115,7 +104,7 @@ public class BookingLogic
             : (0, false);
     }
 
-    public int CalculateTotalPrice(string destination, List<PassengerModel> passengers,
+    public static int CalculateTotalPrice(string destination, List<PassengerModel> passengers,
         bool includeInsurance = false)
     {
         var flight =
@@ -177,11 +166,11 @@ public class BookingLogic
             booking.Passengers
         );
 
-        _bookingAccess.WriteAll(_bookings);
+        BookingAccess.WriteAll(_bookings);
         return true;
     }
 
-    public List<BookingModel> GetAvailableCheckInBookings(int userId)
+    public static List<BookingModel> GetAvailableCheckInBookings(int userId)
     {
         var flightsLogic = new FlightsLogic();
         return _bookings
@@ -195,17 +184,17 @@ public class BookingLogic
             .ToList();
     }
 
-    public bool CheckInBooking(int bookingId)
+    public static bool CheckInBooking(int bookingId)
     {
         var booking = _bookings.FirstOrDefault(b => b.BookingId == bookingId);
         if (booking == null || booking.IsCheckedIn) return false;
 
         booking.IsCheckedIn = true;
-        _bookingAccess.WriteAll(_bookings);
+        BookingAccess.WriteAll(_bookings);
         return true;
     }
 
-    public (bool success, string message) TryCheckIn(int bookingId)
+    public static (bool success, string message) TryCheckIn(int bookingId)
     {
         var booking = _bookings.FirstOrDefault(b => b.BookingId == bookingId);
         if (booking == null) return (false, "Booking not found.");
@@ -219,7 +208,7 @@ public class BookingLogic
         if (DateTime.Parse(flight.DepartureTime) < DateTime.Now) return (false, "Flight has already departed.");
 
         booking.IsCheckedIn = true;
-        _bookingAccess.WriteAll(_bookings);
+        BookingAccess.WriteAll(_bookings);
         return (true, "Successfully checked in.");
     }
 }

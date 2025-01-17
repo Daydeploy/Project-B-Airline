@@ -7,11 +7,7 @@ public class MilesLogic
     private const int _short_Max = 500;
     private const int _medium_Max = 2500;
 
-    private readonly IAccountsAccess _accountsAccess = new AccountsAccess();
-    private readonly IBookingAccess _bookingAccess = new BookingAccess();
-    private readonly IFlightAccess _flightAccess = new FlightsAccess();
-
-    private readonly Dictionary<(string flightType, string seatClass), int> ExperiencePoints = new()
+    private static readonly Dictionary<(string flightType, string seatClass), int> ExperiencePoints = new()
     {
         { ("Short", "Economy"), 3 },
         { ("Short", "Business"), 6 },
@@ -26,7 +22,7 @@ public class MilesLogic
         { ("Long", "First"), 30 }
     };
 
-    public string CalculateLevel(int experience)
+    public static string CalculateLevel(int experience)
     {
         if (experience >= _platinumMin)
             return Levels.Platinum.ToString();
@@ -37,39 +33,39 @@ public class MilesLogic
         return Levels.Bronze.ToString();
     }
 
-    public void UpdateAllAccountLevels()
+    public static void UpdateAllAccountLevels()
     {
-        var _accounts = _accountsAccess.LoadAll();
+        var _accounts = AccountsAccess.LoadAll();
 
 
         foreach (var account in _accounts)
-            foreach (var miles in account.Miles)
-                if (miles.Enrolled)
+        foreach (var miles in account.Miles)
+            if (miles.Enrolled)
+            {
+                var newLevel = CalculateLevel(miles.Experience);
+                if (miles.Level != newLevel)
                 {
-                    var newLevel = CalculateLevel(miles.Experience);
-                    if (miles.Level != newLevel)
-                    {
-                        miles.Level = newLevel;
-                        miles.History += $"\nLevel updated to {newLevel} at {DateTime.Now:yyyy-MM-dd HH:mm:ss}";
-                    }
+                    miles.Level = newLevel;
+                    miles.History += $"\nLevel updated to {newLevel} at {DateTime.Now:yyyy-MM-dd HH:mm:ss}";
                 }
+            }
 
-        _accountsAccess.WriteAll(_accounts);
+        AccountsAccess.WriteAll(_accounts);
     }
 
-    public string DetermineFlightType(int distance)
+    public static string DetermineFlightType(int distance)
     {
         if (distance <= _short_Max) return "Short";
         if (distance <= _medium_Max) return "Medium";
         return "Long";
     }
 
-    public string DetermineSeatClass(FlightModel flight, PassengerModel passenger)
+    public static string DetermineSeatClass(FlightModel flight, PassengerModel passenger)
     {
         return flight.SeatClassOptions.FirstOrDefault()?.SeatClass ?? "Economy";
     }
 
-    public int CalculateExperiencePoints(FlightModel flight, string seatClass)
+    public static int CalculateExperiencePoints(FlightModel flight, string seatClass)
     {
         if (!DateTime.TryParse(flight.DepartureTime, out var departureTime) ||
             departureTime > DateTime.Now)
@@ -82,11 +78,11 @@ public class MilesLogic
         return 0;
     }
 
-    public bool UpdateFlightExperience(int accountId)
+    public static bool UpdateFlightExperience(int accountId)
     {
-        var accounts = _accountsAccess.LoadAll();
-        var bookings = _bookingAccess.LoadAll();
-        var flights = _flightAccess.LoadAll();
+        var accounts = AccountsAccess.LoadAll();
+        var bookings = BookingAccess.LoadAll();
+        var flights = FlightsAccess.LoadAll();
 
         var account = accounts.FirstOrDefault(a => a.Id == accountId);
         if (account == null || account.Miles == null || account.Miles.Count == 0) return false;
@@ -119,14 +115,14 @@ public class MilesLogic
 
         milesRecord.Level = CalculateLevel(milesRecord.Experience);
 
-        _accountsAccess.WriteAll(accounts);
+        AccountsAccess.WriteAll(accounts);
         return true;
     }
 
-    public (int earnedMiles, bool success) CalculateMilesFromBooking(int accountId)
+    public static (int earnedMiles, bool success) CalculateMilesFromBooking(int accountId)
     {
-        var accounts = _accountsAccess.LoadAll();
-        var bookings = _bookingAccess.LoadAll();
+        var accounts = AccountsAccess.LoadAll();
+        var bookings = BookingAccess.LoadAll();
 
         var account = accounts.FirstOrDefault(a => a.Id == accountId);
 
@@ -161,15 +157,14 @@ public class MilesLogic
         }
 
         milesRecord.Points += totalMilesEarned;
-        _accountsAccess.WriteAll(accounts);
+        AccountsAccess.WriteAll(accounts);
         return (totalMilesEarned, true);
     }
 
-    public (int finalPrice, bool success) BasicPointsRedemption(int accountId, int price, int bookingId)
+    public static (int finalPrice, bool success) BasicPointsRedemption(int accountId, int price, int bookingId)
     {
-        var accounts = _accountsAccess.LoadAll();
-        var bookings = _bookingAccess.LoadAll();
-        var flights = _flightAccess.LoadAll();
+        var accounts = AccountsAccess.LoadAll();
+        var bookings = BookingAccess.LoadAll();
 
         var account = accounts.FirstOrDefault(a => a.Id == accountId);
         if (account == null || account.Miles == null || account.Miles.Count == 0) return (price, false);
@@ -197,8 +192,8 @@ public class MilesLogic
 
             booking.TotalPrice -= discountAmount;
 
-            _accountsAccess.WriteAll(accounts);
-            _bookingAccess.WriteAll(bookings);
+            AccountsAccess.WriteAll(accounts);
+            BookingAccess.WriteAll(bookings);
 
             return (price - discountAmount, true);
         }

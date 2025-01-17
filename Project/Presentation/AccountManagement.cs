@@ -1,6 +1,5 @@
 internal static class AccountManagement
 {
-
     // Manages the user's account, providing options to update various details
     public static void ManageAccount(AccountModel account)
     {
@@ -297,8 +296,7 @@ internal static class AccountManagement
     // Displays the account details for the user
     private static void DisplayAccountDetails(AccountModel account)
     {
-        IAccountsAccess _accountsAccess = new AccountsAccess();
-        _accountsAccess.LoadAll();
+        AccountsAccess.LoadAll();
 
         Console.WriteLine("\n--- Account Details ---");
         Console.WriteLine($"Email: {account.EmailAddress}");
@@ -332,9 +330,8 @@ internal static class AccountManagement
     // Handles changes to various account properties
     public static void HandleManageAccountOption(int optionIndex, AccountModel account)
     {
-        IAccountsAccess _accountsAccess = new AccountsAccess();
         var updateSuccessful = false;
-        var accounts = _accountsAccess.LoadAll();
+        var accounts = AccountsAccess.LoadAll();
 
         var accountToUpdate = accounts.Find(a => a.Id == account.Id);
 
@@ -752,7 +749,7 @@ internal static class AccountManagement
 
                     if (updateSuccessful)
                     {
-                        _accountsAccess.WriteAll(accounts);
+                        AccountsAccess.WriteAll(accounts);
                         Console.WriteLine(milesRecord.Enrolled
                             ? "Successfully enrolled in the Frequent Flyer Program!"
                             : "Successfully unenrolled from the Frequent Flyer Program.");

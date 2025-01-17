@@ -9,8 +9,7 @@ internal static class FlightDisplay
 
     private static (int usedWeight, int maxWeight) GetFlightWeightInfo(FlightModel flight)
     {
-        IBookingAccess _bookingAccess = new BookingAccess();
-        var bookings = _bookingAccess.LoadAll()
+        var bookings = BookingAccess.LoadAll()
             .Where(b => b.FlightId == flight.FlightId)
             .ToList();
 
