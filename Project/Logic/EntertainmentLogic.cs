@@ -12,7 +12,7 @@ public class EntertainmentLogic
         var flight = new FlightsLogic().GetFlightsById(booking.FlightId);
         if (flight == null) return (false, "Flight not found");
 
-        var seatSelector = new SeatSelectionUI();
+        var seatSelector = new SeatSelectionLogic();
         var seatClass = seatSelector.GetSeatClass(booking.Passengers[0].SeatNumber, flight.PlaneType);
 
         if (!entertainmentOption.AvailableIn.Contains(seatClass, StringComparer.OrdinalIgnoreCase))

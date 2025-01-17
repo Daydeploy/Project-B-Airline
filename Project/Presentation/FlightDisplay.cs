@@ -224,7 +224,7 @@ internal static class FlightDisplay
             if (passenger == null) continue;
 
             // Base ticket price
-            var seatSelector = new SeatSelectionUI();
+            var seatSelector = new SeatSelectionLogic();
             var seatClass = seatSelector.GetSeatClass(passenger.SeatNumber, flight.PlaneType);
             var seatOption = flight.SeatClassOptions
                 .FirstOrDefault(so => so.SeatClass.Equals(seatClass, StringComparison.OrdinalIgnoreCase));
@@ -289,7 +289,7 @@ internal static class FlightDisplay
 
         if (!string.IsNullOrEmpty(passenger.SeatNumber))
         {
-            var seatSelectionUI = new SeatSelectionUI();
+            var seatSelectionUI = new SeatSelectionLogic();
             var seatClass = seatSelectionUI.GetSeatClass(passenger.SeatNumber, flight.PlaneType);
             var seatOption = flight.SeatClassOptions?
                 .FirstOrDefault(so => so.SeatClass.Equals(seatClass, StringComparison.OrdinalIgnoreCase));
