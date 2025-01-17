@@ -44,7 +44,7 @@ public static class BookingModifications
         Console.WriteLine("=== Modify Booking ===\n");
         Console.WriteLine("Available bookings:");
 
-        for (int i = 0; i < bookings.Count; i++)
+        for (var i = 0; i < bookings.Count; i++)
         {
             var booking = bookings[i];
             Console.WriteLine($"\n{i + 1}. Booking ID: {booking.BookingId}");
@@ -66,22 +66,20 @@ public static class BookingModifications
                 }
                 else
                 {
-                    Console.WriteLine($"   Flight details not available");
+                    Console.WriteLine("   Flight details not available");
                 }
             }
 
             // Display passengers
             Console.WriteLine("\n   Passengers:");
             foreach (var passenger in booking.Passengers)
-            {
                 Console.WriteLine($"   - {passenger.Name} (Seat: {passenger.SeatNumber})");
-            }
 
             Console.WriteLine(new string('-', 50));
         }
 
         Console.Write("\nEnter number to modify (or 0 to cancel): ");
-        if (!int.TryParse(Console.ReadLine(), out int bookingChoice) ||
+        if (!int.TryParse(Console.ReadLine(), out var bookingChoice) ||
             bookingChoice < 0 ||
             bookingChoice > bookings.Count)
         {
@@ -108,7 +106,7 @@ public static class BookingModifications
             Console.WriteLine("4. Back to bookings view");
 
             Console.Write("\nSelect option (1-4): ");
-            if (!int.TryParse(Console.ReadLine(), out int choice))
+            if (!int.TryParse(Console.ReadLine(), out var choice))
             {
                 Console.WriteLine("Invalid selection. Press any key to continue...");
                 Console.ReadKey();
@@ -142,15 +140,13 @@ public static class BookingModifications
         Console.WriteLine("=== Change Seat Assignment ===\n");
 
         // Display passengers
-        for (int i = 0; i < booking.Passengers.Count; i++)
-        {
+        for (var i = 0; i < booking.Passengers.Count; i++)
             Console.WriteLine(
                 $"{i + 1}. {booking.Passengers[i].Name} - Current Seat: {booking.Passengers[i].SeatNumber}");
-        }
 
         // Get passenger selection
         Console.Write("\nSelect passenger number (or 0 to cancel): ");
-        if (!int.TryParse(Console.ReadLine(), out int passengerChoice) ||
+        if (!int.TryParse(Console.ReadLine(), out var passengerChoice) ||
             passengerChoice < 0 ||
             passengerChoice > booking.Passengers.Count)
         {
@@ -176,18 +172,12 @@ public static class BookingModifications
         var existingBookings = BookingLogic.GetBookingsForFlight(booking.FlightId);
 
         foreach (var existingBooking in existingBookings)
-        {
-            foreach (var passenger in existingBooking.Passengers)
-            {
-                if (passenger != booking.Passengers[passengerChoice - 1]) // dit doe je om huidige passenger te skippen
-                {
-                    seatSelector.SetSeatOccupied(passenger.SeatNumber);
-                }
-            }
-        }
+        foreach (var passenger in existingBooking.Passengers)
+            if (passenger != booking.Passengers[passengerChoice - 1]) // dit doe je om huidige passenger te skippen
+                seatSelector.SetSeatOccupied(passenger.SeatNumber);
 
         Console.WriteLine("\nSelect new seat:");
-        string newSeat = seatSelector.SelectSeat(flight.PlaneType, booking.FlightId);
+        var newSeat = seatSelector.SelectSeat(flight.PlaneType, booking.FlightId);
 
         if (newSeat != null)
         {
@@ -199,7 +189,7 @@ public static class BookingModifications
             };
 
             var userAccountService = new UserAccountServiceLogic();
-            bool success = userAccountService.ModifyBooking(booking.FlightId, passengerChoice - 1, newDetails);
+            var success = userAccountService.ModifyBooking(booking.FlightId, passengerChoice - 1, newDetails);
 
             if (success)
             {
@@ -222,14 +212,12 @@ public static class BookingModifications
         Console.Clear();
         Console.WriteLine("=== Update Baggage Options ===\n");
 
-        for (int i = 0; i < booking.Passengers.Count; i++)
-        {
+        for (var i = 0; i < booking.Passengers.Count; i++)
             Console.WriteLine(
                 $"{i + 1}. {booking.Passengers[i].Name} - Checked Baggage: {(booking.Passengers[i].HasCheckedBaggage ? "Yes" : "No")}");
-        }
 
         Console.Write("\nSelect passenger number (or 0 to cancel): ");
-        if (!int.TryParse(Console.ReadLine(), out int passengerChoice) ||
+        if (!int.TryParse(Console.ReadLine(), out var passengerChoice) ||
             passengerChoice < 0 ||
             passengerChoice > booking.Passengers.Count)
         {
@@ -259,13 +247,10 @@ public static class BookingModifications
         Console.Clear();
         Console.WriteLine("=== Modify Passenger Information ===\n");
 
-        for (int i = 0; i < booking.Passengers.Count; i++)
-        {
-            Console.WriteLine($"{i + 1}. {booking.Passengers[i].Name}");
-        }
+        for (var i = 0; i < booking.Passengers.Count; i++) Console.WriteLine($"{i + 1}. {booking.Passengers[i].Name}");
 
         Console.Write("\nSelect passenger number (or 0 to cancel): ");
-        if (!int.TryParse(Console.ReadLine(), out int passengerChoice) ||
+        if (!int.TryParse(Console.ReadLine(), out var passengerChoice) ||
             passengerChoice < 0 ||
             passengerChoice > booking.Passengers.Count)
         {
@@ -279,7 +264,7 @@ public static class BookingModifications
         var passenger = booking.Passengers[passengerChoice - 1];
         Console.WriteLine($"\nCurrent name: {passenger.Name}");
         Console.Write("Enter new name (or press Enter to keep current): ");
-        string newName = Console.ReadLine();
+        var newName = Console.ReadLine();
 
         if (!string.IsNullOrWhiteSpace(newName))
         {

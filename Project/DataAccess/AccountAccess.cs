@@ -1,9 +1,9 @@
 public static class AccountsAccess
 {
-    private static string _filePath =
-        System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/accounts.json"));
+    private static readonly string _filePath =
+        Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/accounts.json"));
 
-    private static GenericJsonAccess<AccountModel> _accountAccess = new GenericJsonAccess<AccountModel>(_filePath);
+    private static readonly GenericJsonAccess<AccountModel> _accountAccess = new(_filePath);
 
     public static List<AccountModel> LoadAll()
     {

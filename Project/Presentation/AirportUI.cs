@@ -28,21 +28,15 @@ public class AirportUI
 
         Console.WriteLine("\n🚗 Transportation:");
         foreach (var option in airportService.GetAirportTransportationOptions(airport).Split(','))
-        {
             Console.WriteLine($"  • {option.Trim()}");
-        }
 
         Console.WriteLine("\n🏨 Nearby Hotels:");
         foreach (var hotel in airportService.GetNearbyHotels(airport).Split(','))
-        {
             Console.WriteLine($"  • {hotel.Trim()}");
-        }
 
         Console.WriteLine("\n💼 Additional Services:");
         foreach (var service in airportService.GetAdditionalServices(airport).Split(','))
-        {
             Console.WriteLine($"  • {service.Trim()}");
-        }
 
         Console.WriteLine("\nDescription:");
         Console.WriteLine(airportService.GetAirportDescription(airport));

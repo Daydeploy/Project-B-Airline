@@ -1,20 +1,22 @@
-static class AdminAccountUI
+using System.Text;
+
+internal static class AdminAccountUI
 {
     public static void ShowAdminMenu()
     {
-        Console.OutputEncoding = System.Text.Encoding.UTF8;
+        Console.OutputEncoding = Encoding.UTF8;
         Console.CursorVisible = false;
 
-        bool exit = false;
+        var exit = false;
         while (!exit)
         {
             string[] menuItems = { "Manage Airports", "Manage Flights", "Manage Accounts", "Manage Finance", "Logout" };
-            int selectedIndex = MenuNavigationServiceLogic.NavigateMenu(menuItems, "Admin Menu");
+            var selectedIndex = MenuNavigationServiceLogic.NavigateMenu(menuItems, "Admin Menu");
             HandleSelection(menuItems[selectedIndex], ref exit);
         }
     }
 
-    static private void HandleSelection(string selectedOption, ref bool exit)
+    private static void HandleSelection(string selectedOption, ref bool exit)
     {
         Console.Clear();
         switch (selectedOption)
@@ -40,7 +42,7 @@ static class AdminAccountUI
         }
     }
 
-    static private void HandleSelectionAirportMenu(string selectedOption, ref bool exit)
+    private static void HandleSelectionAirportMenu(string selectedOption, ref bool exit)
     {
         Console.Clear();
         switch (selectedOption)
@@ -60,7 +62,7 @@ static class AdminAccountUI
         }
     }
 
-    static private void HandleSelectionFlightMenu(string selectedOption, ref bool exit)
+    private static void HandleSelectionFlightMenu(string selectedOption, ref bool exit)
     {
         Console.Clear();
         switch (selectedOption)
@@ -83,7 +85,7 @@ static class AdminAccountUI
         }
     }
 
-    static private void HandleSelectionAccountMenu(string selectedOption, ref bool exit)
+    private static void HandleSelectionAccountMenu(string selectedOption, ref bool exit)
     {
         Console.Clear();
         switch (selectedOption)
@@ -109,7 +111,7 @@ static class AdminAccountUI
     public static void ShowAirportMenu()
     {
         Console.CursorVisible = false;
-        bool exit = false;
+        var exit = false;
 
         while (!exit)
         {
@@ -117,47 +119,41 @@ static class AdminAccountUI
             {
                 "View Airports", "Edit Airport Information", "Add New Airport", "Exit"
             };
-            int selectedIndex = MenuNavigationServiceLogic.NavigateMenu(menuItems, "Airport Menu");
+            var selectedIndex = MenuNavigationServiceLogic.NavigateMenu(menuItems, "Airport Menu");
 
             if (selectedIndex >= 0 && selectedIndex < menuItems.Length)
-            {
                 HandleSelectionAirportMenu(menuItems[selectedIndex], ref exit);
-            }
         }
     }
 
     public static void ShowFlightMenu()
     {
         Console.CursorVisible = false;
-        bool exit = false;
+        var exit = false;
 
         while (!exit)
         {
             string[] menuItems =
                 { "View Flights", "Edit Flight Information", "Add New Flight", "Delete Flight Information", "Exit" };
-            int selectedIndex = MenuNavigationServiceLogic.NavigateMenu(menuItems, "Flight Menu");
+            var selectedIndex = MenuNavigationServiceLogic.NavigateMenu(menuItems, "Flight Menu");
 
             if (selectedIndex >= 0 && selectedIndex < menuItems.Length)
-            {
                 HandleSelectionFlightMenu(menuItems[selectedIndex], ref exit);
-            }
         }
     }
 
     public static void ShowAccountMenu()
     {
         Console.CursorVisible = false;
-        bool exit = false;
+        var exit = false;
 
         while (!exit)
         {
             string[] menuItems = { "View Accounts", "Add New Account", "Delete Account Information", "Exit" };
-            int selectedIndex = MenuNavigationServiceLogic.NavigateMenu(menuItems, "Account Menu");
+            var selectedIndex = MenuNavigationServiceLogic.NavigateMenu(menuItems, "Account Menu");
 
             if (selectedIndex >= 0 && selectedIndex < menuItems.Length)
-            {
                 HandleSelectionAccountMenu(menuItems[selectedIndex], ref exit);
-            }
         }
     }
 }

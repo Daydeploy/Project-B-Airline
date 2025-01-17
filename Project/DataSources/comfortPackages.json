@@ -1,47 +1,47 @@
 [
-    {
-        "id": 1,
-        "name": "Basic Package",
-        "contents": [
-            "Blanket",
-            "Pillow"
-        ],
-        "cost": 15.00,
-        "availableIn": [
-            "Economy",
-            "Business",
-            "First"
-        ]
-    },
-    {
-        "id": 2,
-        "name": "Premium Package",
-        "contents": [
-            "Blanket",
-            "Pillow",
-            "Headphones",
-            "Eye Mask"
-        ],
-        "cost": 25.00,
-        "availableIn": [
-            "Business",
-            "First"
-        ]
-    },
-    {
-        "id": 3,
-        "name": "Luxury Package",
-        "contents": [
-            "Blanket",
-            "Pillow",
-            "Headphones",
-            "Eye Mask",
-            "Champagne",
-            "Gourmet Snacks"
-        ],
-        "cost": 50.00,
-        "availableIn": [
-            "First"
-        ]
-    }
+  {
+    "id": 1,
+    "name": "Basic Package",
+    "contents": [
+      "Blanket",
+      "Pillow"
+    ],
+    "cost": 15.00,
+    "availableIn": [
+      "Economy",
+      "Business",
+      "First"
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Premium Package",
+    "contents": [
+      "Blanket",
+      "Pillow",
+      "Headphones",
+      "Eye Mask"
+    ],
+    "cost": 25.00,
+    "availableIn": [
+      "Business",
+      "First"
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Luxury Package",
+    "contents": [
+      "Blanket",
+      "Pillow",
+      "Headphones",
+      "Eye Mask",
+      "Champagne",
+      "Gourmet Snacks"
+    ],
+    "cost": 50.00,
+    "availableIn": [
+      "First"
+    ]
+  }
 ]

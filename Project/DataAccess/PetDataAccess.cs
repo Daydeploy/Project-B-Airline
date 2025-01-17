@@ -1,11 +1,9 @@
-using System.Collections.Generic;
-
 public static class PetDataAccess
 {
-    private static string _filePath =
-        System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/pets.json"));
+    private static readonly string _filePath =
+        Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/pets.json"));
 
-    private static GenericJsonAccess<PetModel> _petAccess = new GenericJsonAccess<PetModel>(_filePath);
+    private static readonly GenericJsonAccess<PetModel> _petAccess = new(_filePath);
 
     public static List<PetModel> LoadPetTypes()
     {

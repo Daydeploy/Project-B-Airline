@@ -1,6 +1,6 @@
-static class PackagesUI
+internal static class PackagesUI
 {
-    private static readonly ComfortPackageServiceLogic _comfortPackageServiceLogic = new ComfortPackageServiceLogic();
+    private static readonly ComfortPackageServiceLogic _comfortPackageServiceLogic = new();
 
     private static void DisplayPackageOptions()
     {
@@ -21,10 +21,10 @@ static class PackagesUI
     public static void ShowPackages()
     {
         // Get current user ID
-        int currentUserId = UserLogin.UserAccountServiceLogic.CurrentUserId;
+        var currentUserId = UserLogin.UserAccountServiceLogic.CurrentUserId;
 
         // Use BookingAccess instead of BookingDataAccess
-        List<BookingModel> bookedFlights = BookingAccess.LoadAll()
+        var bookedFlights = BookingAccess.LoadAll()
             .Where(b => b.UserId == currentUserId)
             .ToList();
 
@@ -54,8 +54,8 @@ static class PackagesUI
             if (flight != null)
             {
                 Console.WriteLine($"Booking ID: {booking.BookingId}");
-                System.Console.WriteLine($"Aircraft type: {flight.PlaneType}");
-                System.Console.WriteLine($"Seat Class: {flight.SeatClassOptions.FirstOrDefault()?.SeatClass}");
+                Console.WriteLine($"Aircraft type: {flight.PlaneType}");
+                Console.WriteLine($"Seat Class: {flight.SeatClassOptions.FirstOrDefault()?.SeatClass}");
                 Console.WriteLine($"Flight: {flight.Origin} to {flight.Destination}");
                 Console.WriteLine($"Date: {flight.DepartureTime}");
 
@@ -66,10 +66,7 @@ static class PackagesUI
         }
 
         Console.Write("\nEnter Booking ID to purchase a comfort package (0 to cancel): ");
-        if (!int.TryParse(Console.ReadLine(), out int bookingId) || bookingId == 0)
-        {
-            return;
-        }
+        if (!int.TryParse(Console.ReadLine(), out var bookingId) || bookingId == 0) return;
 
         var selectedBooking = bookedFlights.FirstOrDefault(b => b.BookingId == bookingId);
         if (selectedBooking == null)
@@ -91,10 +88,7 @@ static class PackagesUI
         }
 
         Console.Write("\nEnter Package ID to purchase (0 to cancel): ");
-        if (!int.TryParse(Console.ReadLine(), out int packageId) || packageId == 0)
-        {
-            return;
-        }
+        if (!int.TryParse(Console.ReadLine(), out var packageId) || packageId == 0) return;
 
         if (!packages.Any(p => p.Id == packageId))
         {
@@ -106,13 +100,9 @@ static class PackagesUI
 
         var (success, error) = _comfortPackageServiceLogic.AddPackageToBooking(bookingId, packageId);
         if (success)
-        {
             Console.WriteLine("\nComfort package added successfully!");
-        }
         else
-        {
             Console.WriteLine("\nFailed to add comfort package.");
-        }
 
         Console.WriteLine("\nPress any key to return to menu...");
         Console.ReadKey();

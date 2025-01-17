@@ -1,9 +1,9 @@
-static class FlightsAccess
+internal static class FlightsAccess
 {
-    private static string _filePath =
-        System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/flights.json"));
+    private static readonly string _filePath =
+        Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"DataSources/flights.json"));
 
-    private static GenericJsonAccess<FlightModel> _flightAccess = new GenericJsonAccess<FlightModel>(_filePath);
+    private static readonly GenericJsonAccess<FlightModel> _flightAccess = new(_filePath);
 
     public static List<FlightModel> LoadAll()
     {

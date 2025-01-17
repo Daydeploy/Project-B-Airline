@@ -1,21 +1,21 @@
 public class CalendarUI
 {
-    private DateTime currentDate;
     private const ConsoleColor SelectedColor = ConsoleColor.Cyan;
     private const ConsoleColor HighlightColor = ConsoleColor.DarkCyan;
     private const ConsoleColor RedHighlightColor = ConsoleColor.Red;
     private const ConsoleColor RangeStartColor = ConsoleColor.Green;
     private const ConsoleColor RangeEndColor = ConsoleColor.Yellow;
     private const ConsoleColor RangePreviewColor = ConsoleColor.DarkGray;
+    private readonly DateTime currentDate;
 
-    private DateTime? highlightDate;
-    private DateTime? rangeStart;
+    private readonly DateTime? highlightDate;
+    private readonly bool isRangeSelection;
     private DateTime? rangeEnd;
-    private bool isRangeSelection;
+    private DateTime? rangeStart;
 
     public CalendarUI(DateTime? startingDate = null, DateTime? highlightDate = null, bool isRangeSelection = false)
     {
-        this.currentDate = startingDate ?? DateTime.Now;
+        currentDate = startingDate ?? DateTime.Now;
         this.highlightDate = highlightDate;
         this.isRangeSelection = isRangeSelection;
     }
@@ -23,8 +23,8 @@ public class CalendarUI
     public DateTime SelectDate()
     {
         Console.CursorVisible = false;
-        DateTime selectedDate = currentDate.Date;
-        bool done = false;
+        var selectedDate = currentDate.Date;
+        var done = false;
 
         while (!done)
         {
@@ -76,10 +76,10 @@ public class CalendarUI
     public (DateTime startDate, DateTime endDate) SelectDateRange()
     {
         Console.CursorVisible = false;
-        DateTime selectedDate = currentDate.Date;
+        var selectedDate = currentDate.Date;
         rangeStart = null;
         rangeEnd = null;
-        bool done = false;
+        var done = false;
 
         while (!done)
         {
@@ -146,55 +146,42 @@ public class CalendarUI
         Console.WriteLine($"\n   {selectedDate:MMMM yyyy}\n");
         Console.WriteLine(" Su Mo Tu We Th Fr Sa");
 
-        int dayOfWeek = (int)firstDayOfMonth.DayOfWeek;
-        int currentDay = 1;
+        var dayOfWeek = (int)firstDayOfMonth.DayOfWeek;
+        var currentDay = 1;
 
-        for (int i = 0; i < 6; i++)
+        for (var i = 0; i < 6; i++)
         {
-            for (int j = 0; j < 7; j++)
+            for (var j = 0; j < 7; j++)
             {
-                if (i == 0 && j < dayOfWeek || currentDay > lastDayOfMonth.Day)
+                if ((i == 0 && j < dayOfWeek) || currentDay > lastDayOfMonth.Day)
                 {
                     Console.Write("   ");
                     continue;
                 }
 
                 var currentDate = new DateTime(selectedDate.Year, selectedDate.Month, currentDay);
-                bool isSelected = selectedDate.Date == currentDate.Date;
-                bool isToday = currentDate.Date == DateTime.Now.Date;
-                bool isHighlighted = highlightDate.HasValue && currentDate.Date == highlightDate.Value.Date;
-                bool isRangeStartDate = rangeStart.HasValue && currentDate.Date == rangeStart.Value.Date;
-                bool isInPreviewRange = rangeStart.HasValue && !rangeEnd.HasValue &&
-                                        currentDate.Date >= rangeStart.Value.Date &&
-                                        currentDate.Date <= selectedDate.Date;
-                bool isInFinalRange = rangeStart.HasValue && rangeEnd.HasValue &&
-                                      currentDate.Date >= rangeStart.Value.Date &&
-                                      currentDate.Date <= rangeEnd.Value.Date;
+                var isSelected = selectedDate.Date == currentDate.Date;
+                var isToday = currentDate.Date == DateTime.Now.Date;
+                var isHighlighted = highlightDate.HasValue && currentDate.Date == highlightDate.Value.Date;
+                var isRangeStartDate = rangeStart.HasValue && currentDate.Date == rangeStart.Value.Date;
+                var isInPreviewRange = rangeStart.HasValue && !rangeEnd.HasValue &&
+                                       currentDate.Date >= rangeStart.Value.Date &&
+                                       currentDate.Date <= selectedDate.Date;
+                var isInFinalRange = rangeStart.HasValue && rangeEnd.HasValue &&
+                                     currentDate.Date >= rangeStart.Value.Date &&
+                                     currentDate.Date <= rangeEnd.Value.Date;
 
                 if (isRangeStartDate)
-                {
                     Console.ForegroundColor = RangeStartColor;
-                }
                 else if (isSelected && rangeStart.HasValue && !rangeEnd.HasValue)
-                {
                     Console.ForegroundColor = RangeEndColor;
-                }
                 else if (isSelected)
-                {
                     Console.ForegroundColor = SelectedColor;
-                }
                 else if (isHighlighted)
-                {
                     Console.ForegroundColor = RedHighlightColor;
-                }
                 else if (isToday)
-                {
                     Console.ForegroundColor = HighlightColor;
-                }
-                else if (isInPreviewRange || isInFinalRange)
-                {
-                    Console.ForegroundColor = RangePreviewColor;
-                }
+                else if (isInPreviewRange || isInFinalRange) Console.ForegroundColor = RangePreviewColor;
 
                 Console.Write($"{currentDay,2} ");
                 Console.ResetColor();
@@ -232,13 +219,8 @@ public class CalendarUI
         if (isRangeSelection)
         {
             if (!rangeStart.HasValue)
-            {
                 Console.WriteLine("Enter      : Select start date");
-            }
-            else if (!rangeEnd.HasValue)
-            {
-                Console.WriteLine("Enter      : Confirm end date");
-            }
+            else if (!rangeEnd.HasValue) Console.WriteLine("Enter      : Confirm end date");
         }
 
         Console.WriteLine("Esc        : Cancel");
@@ -246,7 +228,7 @@ public class CalendarUI
 
     private void SelectYear(ref DateTime selectedDate)
     {
-        bool done = false;
+        var done = false;
         while (!done)
         {
             Console.Clear();
@@ -273,7 +255,7 @@ public class CalendarUI
 
     private void SelectMonth(ref DateTime selectedDate)
     {
-        bool done = false;
+        var done = false;
         while (!done)
         {
             Console.Clear();

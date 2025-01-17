@@ -8118,5 +8118,38 @@
     "planeType": "Bombardier Learjet 75",
     "entertainment": null,
     "isCheckedIn": false
+  },
+  {
+    "bookingId": 148,
+    "userId": 6,
+    "flightId": 1526,
+    "totalPrice": 1505,
+    "bookingDate": "2025-01-15T15:26:48.3658309+01:00",
+    "passengers": [
+      {
+        "name": "Sil",
+        "hasPet": false,
+        "petDetails": [],
+        "seatNumber": "1A",
+        "hasCheckedBaggage": false,
+        "numberOfBaggage": 0,
+        "shopItems": [],
+        "specialLuggage": "",
+        "firstName": null,
+        "lastName": null,
+        "dateOfBirth": "0001-01-01T00:00:00",
+        "gender": null,
+        "nationality": null,
+        "fullName": " ",
+        "phoneNumber": null,
+        "address": null,
+        "id": 0
+      }
+    ],
+    "pets": [],
+    "comfortPackages": null,
+    "planeType": null,
+    "entertainment": null,
+    "isCheckedIn": false
   }
 ]

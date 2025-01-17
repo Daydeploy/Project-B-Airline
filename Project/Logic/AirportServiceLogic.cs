@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
-
 public interface IAirportService
 {
     List<AirportModel> GetAvailableAirports();
@@ -10,7 +7,7 @@ public interface IAirportService
 
 public class AirportServiceLogic : IAirportService
 {
-    private List<AirportModel> _airports;
+    private readonly List<AirportModel> _airports;
 
     public AirportServiceLogic(List<AirportModel> airports)
     {

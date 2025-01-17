@@ -39,15 +39,10 @@ public static class AccountInformation
         Console.WriteLine("=== Delete Account Information ===\n");
 
         foreach (var account in accounts)
-        {
             Console.WriteLine($"{account.Id}. {account.FirstName} {account.LastName} ({account.EmailAddress})");
-        }
 
         Console.Write("\nEnter Account ID to delete (0 to cancel): ");
-        if (!int.TryParse(Console.ReadLine(), out int accountId) || accountId == 0)
-        {
-            return;
-        }
+        if (!int.TryParse(Console.ReadLine(), out var accountId) || accountId == 0) return;
 
         var selectedAccount = accounts.FirstOrDefault(a => a.Id == accountId);
         if (selectedAccount == null)
@@ -63,13 +58,9 @@ public static class AccountInformation
         if (Console.ReadLine()?.ToUpper() == "Y")
         {
             if (accountsLogic.DeleteAccount(accountId))
-            {
                 Console.WriteLine("Account deleted successfully!");
-            }
             else
-            {
                 Console.WriteLine("Failed to delete account.");
-            }
         }
         else
         {

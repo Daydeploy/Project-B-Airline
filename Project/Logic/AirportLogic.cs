@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
-
 public class AirportLogic
 {
     private List<AirportModel> _airports;
@@ -29,12 +26,9 @@ public class AirportLogic
     public bool UpdateAirport(AirportModel updatedAirport)
     {
         var existingAirport = _airports.FirstOrDefault(a => a.AirportID == updatedAirport.AirportID);
-        if (existingAirport == null)
-        {
-            return false;
-        }
+        if (existingAirport == null) return false;
 
-        int index = _airports.IndexOf(existingAirport);
+        var index = _airports.IndexOf(existingAirport);
         _airports[index] = updatedAirport;
 
         AirportAccess.WriteAllAirports(_airports);

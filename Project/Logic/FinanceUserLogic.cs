@@ -1,7 +1,7 @@
 public class FinanceUserLogic
 {
     private const int MIN_YEAR = 2024;
-    private readonly AccountsLogic _accountsLogic = new AccountsLogic();
+    private readonly AccountsLogic _accountsLogic = new();
 
     public List<BookingModel> GetPurchasesByYear(int userId, int year)
     {
@@ -90,7 +90,10 @@ public class FinanceUserLogic
         return (startDate, endDate);
     }
 
-    public bool IsValidYear(int year) => year >= MIN_YEAR;
+    public bool IsValidYear(int year)
+    {
+        return year >= MIN_YEAR;
+    }
 
     public (decimal totalSpent, decimal avgPerBooking, decimal mostExpensive, string mostFrequentClass, int bookingCount
         )

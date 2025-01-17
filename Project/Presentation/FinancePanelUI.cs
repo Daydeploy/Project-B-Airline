@@ -1,6 +1,8 @@
+using System.Text.RegularExpressions;
+
 public class FinancePanelUI
 {
-    static public UserAccountServiceLogic UserAccountServiceLogic = new UserAccountServiceLogic();
+    public static UserAccountServiceLogic UserAccountServiceLogic = new();
     private static bool _isLoggedIn = true;
 
     public static void FinanceMainMenu()
@@ -8,13 +10,13 @@ public class FinancePanelUI
         string[] financeMenuOptions = {
             "Show Yearly Data",
             "Show Monthly Data",
-            "Show Dayily Data",
+            "Show Daily Data",
             "Logout",
         };
 
         while (_isLoggedIn)
         {
-            int selectedMenuIndex = MenuNavigationServiceLogic.NavigateMenu(financeMenuOptions, "Finance Panel Menu");
+            var selectedMenuIndex = MenuNavigationServiceLogic.NavigateMenu(financeMenuOptions, "Finance Panel Menu");
 
             switch (selectedMenuIndex)
             {
@@ -56,7 +58,7 @@ public class FinancePanelUI
     {
         Console.Clear();
         Console.Write("Enter year (YYYY): ");
-        if (int.TryParse(Console.ReadLine(), out int year))
+        if (int.TryParse(Console.ReadLine(), out var year))
         {
             var metrics = FinancePanelLogic.ShowYearlyData(year);
             DisplayFinancialMetrics(metrics);
@@ -73,7 +75,7 @@ public class FinancePanelUI
     {
         Console.Clear();
         Console.Write("Enter year (YYYY): ");
-        if (!int.TryParse(Console.ReadLine(), out int year))
+        if (!int.TryParse(Console.ReadLine(), out var year))
         {
             Console.WriteLine("Invalid year format. Press any key to continue...");
             Console.ReadKey();
@@ -82,7 +84,7 @@ public class FinancePanelUI
         }
 
         Console.Write("Enter month (1-12): ");
-        if (!int.TryParse(Console.ReadLine(), out int month) || month < 1 || month > 12)
+        if (!int.TryParse(Console.ReadLine(), out var month) || month < 1 || month > 12)
         {
             Console.WriteLine("Invalid month format. Press any key to continue...");
             Console.ReadKey();
@@ -98,9 +100,9 @@ public class FinancePanelUI
     {
         Console.Clear();
         Console.Write("Enter date (DD/MM/YYYY): ");
-        string userInput = Console.ReadLine();
+        var userInput = Console.ReadLine();
 
-        if (!System.Text.RegularExpressions.Regex.IsMatch(userInput, @"^\d{2}/\d{2}/\d{4}$"))
+        if (!Regex.IsMatch(userInput, @"^\d{2}/\d{2}/\d{4}$"))
         {
             Console.WriteLine("Invalid date format. Please use DD/MM/YYYY format with '/' separators.");
             Console.WriteLine("Press any key to continue...");
@@ -109,7 +111,7 @@ public class FinancePanelUI
             return;
         }
 
-        if (DateTime.TryParse(userInput, out DateTime date))
+        if (DateTime.TryParse(userInput, out var date))
         {
             if (date > DateTime.Now)
             {
