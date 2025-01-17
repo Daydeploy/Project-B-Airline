@@ -30,8 +30,9 @@ public static class BookingModifications
 
     public static void ModifyBookingInteractive(int userId)
     {
+        IBookingAccess _bookingAccess = new BookingAccess();
         Console.Clear();
-        var bookings = BookingAccess.LoadAll().Where(b => b.UserId == userId).ToList();
+        var bookings = _bookingAccess.LoadAll().Where(b => b.UserId == userId).ToList();
 
         if (bookings.Count == 0)
         {
@@ -136,6 +137,10 @@ public static class BookingModifications
 
     private static void ModifySeatAssignment(BookingModel booking)
     {
+        IBookingAccess _bookingAccess = new BookingAccess();
+
+        BookingLogic _bookingLogic = new BookingLogic();
+
         Console.Clear();
         Console.WriteLine("=== Change Seat Assignment ===\n");
 
@@ -169,12 +174,12 @@ public static class BookingModifications
 
         var seatSelector = new SeatSelectionUI();
         // Load existing booked seats
-        var existingBookings = BookingLogic.GetBookingsForFlight(booking.FlightId);
+        var existingBookings = _bookingLogic.GetBookingsForFlight(booking.FlightId);
 
         foreach (var existingBooking in existingBookings)
-        foreach (var passenger in existingBooking.Passengers)
-            if (passenger != booking.Passengers[passengerChoice - 1]) // dit doe je om huidige passenger te skippen
-                seatSelector.SetSeatOccupied(passenger.SeatNumber);
+            foreach (var passenger in existingBooking.Passengers)
+                if (passenger != booking.Passengers[passengerChoice - 1]) // dit doe je om huidige passenger te skippen
+                    seatSelector.SetSeatOccupied(passenger.SeatNumber);
 
         Console.WriteLine("\nSelect new seat:");
         var newSeat = seatSelector.SelectSeat(flight.PlaneType, booking.FlightId);
@@ -194,7 +199,7 @@ public static class BookingModifications
             if (success)
             {
                 passenger.SeatNumber = newSeat;
-                BookingAccess.WriteAll(BookingAccess.LoadAll());
+                _bookingAccess.WriteAll(_bookingAccess.LoadAll());
                 Console.WriteLine($"\nSeat successfully changed to {newSeat}");
             }
             else
@@ -209,6 +214,7 @@ public static class BookingModifications
 
     private static void ModifyBaggageOptions(BookingModel booking)
     {
+        IBookingAccess _bookingAccess = new BookingAccess();
         Console.Clear();
         Console.WriteLine("=== Update Baggage Options ===\n");
 
@@ -233,7 +239,7 @@ public static class BookingModifications
         if (Console.ReadLine()?.ToUpper() == "Y")
         {
             passenger.HasCheckedBaggage = !passenger.HasCheckedBaggage;
-            BookingAccess.WriteAll(BookingAccess.LoadAll());
+            _bookingAccess.WriteAll(_bookingAccess.LoadAll());
             Console.WriteLine(
                 $"\nBaggage option updated. Checked baggage is now: {(passenger.HasCheckedBaggage ? "Yes" : "No")}");
         }
@@ -244,6 +250,7 @@ public static class BookingModifications
 
     private static void ModifyPassengerInfo(BookingModel booking)
     {
+        IBookingAccess _bookingAccess = new BookingAccess();
         Console.Clear();
         Console.WriteLine("=== Modify Passenger Information ===\n");
 
@@ -269,7 +276,7 @@ public static class BookingModifications
         if (!string.IsNullOrWhiteSpace(newName))
         {
             passenger.Name = newName;
-            BookingAccess.WriteAll(BookingAccess.LoadAll());
+            _bookingAccess.WriteAll(_bookingAccess.LoadAll());
             Console.WriteLine("\nPassenger name updated successfully");
         }
 

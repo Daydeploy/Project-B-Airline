@@ -25,8 +25,9 @@ internal static class EntertainmentUI
 
     public static void ShowEntertainment()
     {
+        IBookingAccess _bookingAccess = new BookingAccess();
         var currentUserId = UserLogin.UserAccountServiceLogic.CurrentUserId;
-        var bookedFlights = BookingAccess.LoadAll()
+        var bookedFlights = _bookingAccess.LoadAll()
             .Where(b => b.UserId == currentUserId)
             .ToList();
 

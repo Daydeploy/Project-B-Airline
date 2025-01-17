@@ -2,7 +2,8 @@ public class ComfortPackageServiceLogic
 {
     public (bool success, string error) AddPackageToBooking(int bookingId, int packageId)
     {
-        var bookings = BookingAccess.LoadAll();
+        IBookingAccess _bookingAccess = new BookingAccess();
+        var bookings = _bookingAccess.LoadAll();
         var booking = bookings.FirstOrDefault(b => b.BookingId == bookingId);
         if (booking == null) return (false, "Booking not found");
 
@@ -23,7 +24,7 @@ public class ComfortPackageServiceLogic
         booking.ComfortPackages.Add(package);
         booking.TotalPrice += (int)package.Cost;
 
-        BookingAccess.WriteAll(bookings);
+        _bookingAccess.WriteAll(bookings);
         return (true, string.Empty);
     }
 }

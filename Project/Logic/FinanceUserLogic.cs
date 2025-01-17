@@ -2,10 +2,11 @@ public class FinanceUserLogic
 {
     private const int MIN_YEAR = 2024;
     private readonly AccountsLogic _accountsLogic = new();
+    IBookingAccess _bookingAccess = new BookingAccess();
 
     public List<BookingModel> GetPurchasesByYear(int userId, int year)
     {
-        return BookingAccess.LoadAll()
+        return _bookingAccess.LoadAll()
             .Where(b => b.UserId == userId && b.BookingDate.Year == year)
             .OrderByDescending(b => b.BookingDate)
             .ToList();
@@ -14,7 +15,7 @@ public class FinanceUserLogic
     public List<BookingModel> GetPurchasesByQuarter(int userId, int year, int quarter)
     {
         var (startDate, endDate) = GetQuarterDates(year, quarter);
-        return BookingAccess.LoadAll()
+        return _bookingAccess.LoadAll()
             .Where(b => b.UserId == userId &&
                         b.BookingDate >= startDate &&
                         b.BookingDate <= endDate)
@@ -24,7 +25,7 @@ public class FinanceUserLogic
 
     public List<BookingModel> GetPurchasesByMonth(int userId, int year, int month)
     {
-        return BookingAccess.LoadAll()
+        return _bookingAccess.LoadAll()
             .Where(b => b.UserId == userId &&
                         b.BookingDate.Year == year &&
                         b.BookingDate.Month == month)
@@ -34,7 +35,7 @@ public class FinanceUserLogic
 
     public List<BookingModel> GetAllBookingsByYear(int year)
     {
-        return BookingAccess.LoadAll()
+        return _bookingAccess.LoadAll()
             .Where(b => b.BookingDate.Year == year)
             .OrderByDescending(b => b.BookingDate)
             .ToList();
@@ -43,7 +44,7 @@ public class FinanceUserLogic
     public List<BookingModel> GetAllBookingsByQuarter(int year, int quarter)
     {
         var (startDate, endDate) = GetQuarterDates(year, quarter);
-        return BookingAccess.LoadAll()
+        return _bookingAccess.LoadAll()
             .Where(b => b.BookingDate >= startDate && b.BookingDate <= endDate)
             .OrderByDescending(b => b.BookingDate)
             .ToList();
@@ -51,7 +52,7 @@ public class FinanceUserLogic
 
     public List<BookingModel> GetAllBookingsByMonth(int year, int month)
     {
-        return BookingAccess.LoadAll()
+        return _bookingAccess.LoadAll()
             .Where(b => b.BookingDate.Year == year && b.BookingDate.Month == month)
             .OrderByDescending(b => b.BookingDate)
             .ToList();
@@ -59,7 +60,7 @@ public class FinanceUserLogic
 
     public List<BookingModel> GetAllPurchases(int userId)
     {
-        return BookingAccess.LoadAll()
+        return _bookingAccess.LoadAll()
             .Where(b => b.UserId == userId)
             .OrderByDescending(b => b.BookingDate)
             .ToList();
@@ -67,7 +68,7 @@ public class FinanceUserLogic
 
     public List<BookingModel> GetRecentPurchases(int userId, int count = 5)
     {
-        return BookingAccess.LoadAll()
+        return _bookingAccess.LoadAll()
             .Where(b => b.UserId == userId)
             .OrderByDescending(b => b.BookingDate)
             .Take(count)
@@ -76,7 +77,7 @@ public class FinanceUserLogic
 
     public List<BookingModel> GetRecentPurchasesAdmin(int count = 5)
     {
-        return BookingAccess.LoadAll()
+        return _bookingAccess.LoadAll()
             .OrderByDescending(b => b.BookingDate)
             .Take(count)
             .ToList();

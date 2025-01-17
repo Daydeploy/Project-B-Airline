@@ -483,6 +483,7 @@ internal static class FlightManagement
     private static void HandlePassengerDetailsAndBooking(AccountModel account, FlightModel departureFlight,
         FlightModel? returnFlight)
     {
+        IAccountsAccess _accountsAccess = new AccountsAccess();
         var seatSelector = new SeatSelectionUI();
         var availableSeats = seatSelector.GetAvailableSeatsCount(departureFlight.PlaneType, departureFlight.FlightId);
 
@@ -494,7 +495,7 @@ internal static class FlightManagement
             return;
         }
 
-        AccountsAccess.LoadAll();
+        _accountsAccess.LoadAll();
         int passengerCount;
         var isValidInput = false;
 
@@ -764,10 +765,15 @@ internal static class FlightManagement
         FlightModel? returnFlight = null,
         int? returnFlightId = null)
     {
+        IAccountsAccess _accountAccess = new AccountsAccess();
+
+        BookingLogic _bookingLogic = new BookingLogic();
+
+        MilesLogic _milesLogic = new MilesLogic();
         double totalBaggageCost = 0;
         double totalBasePrice = 0;
 
-        var booking = BookingLogic.CreateBooking(UserLogin.UserAccountServiceLogic.CurrentUserId,
+        var booking = _bookingLogic.CreateBooking(UserLogin.UserAccountServiceLogic.CurrentUserId,
             departureFlight.FlightId, passengerDetails,
             new List<PetModel>(), includeInsurance
         );
@@ -787,7 +793,7 @@ internal static class FlightManagement
 
             if (wantsItem)
             {
-                if (!BookingLogic.SaveBooking(booking))
+                if (!_bookingLogic.SaveBooking(booking))
                 {
                     Console.WriteLine("Error: Unable to save booking. Shop purchase cancelled.");
                     continue;
@@ -858,7 +864,7 @@ internal static class FlightManagement
 
         var roundedTotalPrice = (int)Math.Round(totalBasePrice);
 
-        var accounts = AccountsAccess.LoadAll();
+        var accounts = _accountAccess.LoadAll();
         var currentAccount = accounts.FirstOrDefault(a => a.Id == UserLogin.UserAccountServiceLogic.CurrentUserId);
 
         if (currentAccount?.Miles?.Count > 0)
@@ -887,7 +893,7 @@ internal static class FlightManagement
 
                 if (Console.ReadLine()?.ToLower() == "y")
                 {
-                    var (discountedPrice, discountSuccess) = MilesLogic.BasicPointsRedemption(
+                    var (discountedPrice, discountSuccess) = _milesLogic.BasicPointsRedemption(
                         UserLogin.UserAccountServiceLogic.CurrentUserId,
                         roundedTotalPrice,
                         booking.BookingId
@@ -923,9 +929,9 @@ internal static class FlightManagement
         }
 
         var (milesEarned, milesEarnedSuccess) =
-            MilesLogic.CalculateMilesFromBooking(UserLogin.UserAccountServiceLogic.CurrentUserId);
+            _milesLogic.CalculateMilesFromBooking(UserLogin.UserAccountServiceLogic.CurrentUserId);
 
-        BookingLogic.SaveBooking(booking);
+        _bookingLogic.SaveBooking(booking);
 
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.Green;
@@ -948,10 +954,11 @@ internal static class FlightManagement
 
     public static void ViewBookedFlights(int userId)
     {
+        IBookingAccess _bookingAccess = new BookingAccess();
         while (true)
         {
             Console.Clear();
-            var bookings = BookingAccess.LoadAll().Where(b => b.UserId == userId).ToList();
+            var bookings = _bookingAccess.LoadAll().Where(b => b.UserId == userId).ToList();
 
             if (bookings.Count == 0)
             {
@@ -1003,9 +1010,11 @@ internal static class FlightManagement
 
     public static void CheckInForFlight()
     {
+        BookingLogic _bookingLogic = new BookingLogic();
+
         var account = UserLogin.UserAccountServiceLogic.CurrentAccount;
 
-        var bookings = BookingLogic.GetAvailableCheckInBookings(account.Id);
+        var bookings = _bookingLogic.GetAvailableCheckInBookings(account.Id);
 
         if (bookings.Count == 0)
         {
@@ -1058,7 +1067,7 @@ internal static class FlightManagement
                 var key = Console.ReadKey(true);
                 if (key.Key == ConsoleKey.Y)
                 {
-                    if (BookingLogic.CheckInBooking(selectedBooking.BookingId))
+                    if (_bookingLogic.CheckInBooking(selectedBooking.BookingId))
                     {
                         UserLogin.UserAccountServiceLogic.CheckIn(selectedFlight.FlightId);
                         Console.WriteLine("\nCheck-in successful!");
@@ -1079,6 +1088,7 @@ internal static class FlightManagement
 
     public static void BookPrivateJet(int userId)
     {
+        BookingLogic _bookingLogic = new BookingLogic();
         var user = userId;
         string[] jetOptions =
         {
@@ -1137,7 +1147,7 @@ internal static class FlightManagement
         }
 
         // Create booking
-        var booking = BookingLogic.CreateBooking(
+        var booking = _bookingLogic.CreateBooking(
             user,
             0, // special flightID for private jets
             passengers,

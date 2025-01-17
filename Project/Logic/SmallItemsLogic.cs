@@ -1,5 +1,6 @@
 public class SmallItemsLogic
 {
+    private readonly IBookingAccess _bookingAccess = new BookingAccess();
     public List<SmallItemsModel> FetchItemDetails()
     {
         return SmallItemsDataAccess.LoadAll();
@@ -7,7 +8,7 @@ public class SmallItemsLogic
 
     public bool AddItemsToPassenger(List<ShopItemModel> items, int bookingId, int passengerIndex)
     {
-        var bookings = BookingAccess.LoadAll();
+        var bookings = _bookingAccess.LoadAll();
         var booking = bookings.FirstOrDefault(b => b.BookingId == bookingId);
 
         if (booking == null)
@@ -21,7 +22,7 @@ public class SmallItemsLogic
 
         booking.TotalPrice += (int)items.Sum(i => i.Price);
 
-        BookingAccess.WriteAll(bookings);
+        _bookingAccess.WriteAll(bookings);
         return true;
     }
 }

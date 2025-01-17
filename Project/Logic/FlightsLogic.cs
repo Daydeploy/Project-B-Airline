@@ -1,30 +1,37 @@
 public class FlightsLogic
 {
-    public static List<FlightModel> AvailableFlights = new();
+    private readonly IFlightAccess _flightsAccess;
+    private List<FlightModel> _availableFlights;
 
-    public static void AppendFlights()
+    public FlightsLogic()
     {
-        AvailableFlights = FlightsAccess.LoadAll();
-        FlightsAccess.WriteAll(AvailableFlights);
+        _flightsAccess = ServiceLocator.GetFlightsAccess();
+        _availableFlights = _flightsAccess.LoadAll();
+    }
+
+    public void AppendFlights()
+    {
+        _availableFlights = _flightsAccess.LoadAll();
+        _flightsAccess.WriteAll(_availableFlights);
     }
 
     public List<FlightModel> GetAllFlights()
     {
-        return AvailableFlights
+        return _availableFlights
             .Where(f => DateTime.Parse(f.DepartureTime) >= DateTime.Now)
             .ToList();
     }
 
     public FlightModel? GetFlightsById(int flightId)
     {
-        return AvailableFlights
+        return _availableFlights
             .FirstOrDefault(f => f.FlightId == flightId);
         // .FirstOrDefault(f => f.FlightId == flightId && DateTime.Parse(f.DepartureTime) >= DateTime.Now);
     }
 
     public List<FlightModel> FilterFlightsByPriceUp(string origin, string destination, string seatClass)
     {
-        return AvailableFlights
+        return _availableFlights
             .Where(f => f.Origin.Equals(origin) && f.Destination.Equals(destination) &&
                         DateTime.Parse(f.DepartureTime) >= DateTime.Now)
             .OrderBy(f =>
@@ -34,7 +41,7 @@ public class FlightsLogic
 
     public List<FlightModel> FilterFlightsByPriceDown(string origin, string destination, string seatClass)
     {
-        return AvailableFlights
+        return _availableFlights
             .Where(f => f.Origin.Equals(origin) && f.Destination.Equals(destination) &&
                         DateTime.Parse(f.DepartureTime) >= DateTime.Now)
             .OrderByDescending(f =>
@@ -45,7 +52,7 @@ public class FlightsLogic
     public List<FlightModel> FilterFlightsByPriceRange(string origin, string destination, string seatClass,
         int minPrice, int maxPrice)
     {
-        return AvailableFlights
+        return _availableFlights
             .Where(f => f.Origin.Equals(origin) && f.Destination.Equals(destination) &&
                         f.SeatClassOptions.Any(option =>
                             option.SeatClass == seatClass && option.Price >= minPrice && option.Price <= maxPrice) &&
@@ -55,7 +62,7 @@ public class FlightsLogic
 
     public List<FlightModel> FilterFlightsByDestination(string origin, string destination)
     {
-        return AvailableFlights
+        return _availableFlights
             .Where(f => f.Origin.Equals(origin) && f.Destination.Equals(destination) &&
                         DateTime.Parse(f.DepartureTime) >= DateTime.Now)
             .ToList();
@@ -63,7 +70,7 @@ public class FlightsLogic
 
     public List<FlightModel> GetReturnFlights(FlightModel selectedFlight)
     {
-        return AvailableFlights
+        return _availableFlights
             .Where(f => f.Origin == selectedFlight.Destination &&
                         f.Destination == selectedFlight.Origin &&
                         DateTime.Parse(f.DepartureTime) > DateTime.Parse(selectedFlight.ArrivalTime))
@@ -72,7 +79,7 @@ public class FlightsLogic
 
     public List<string> GetDestinationsByOrigin(string origin)
     {
-        return AvailableFlights
+        return _availableFlights
             .Where(f => f.Origin.Equals(origin) && DateTime.Parse(f.DepartureTime) >= DateTime.Now)
             .Select(f => f.Destination)
             .Distinct()
@@ -81,7 +88,7 @@ public class FlightsLogic
 
     public List<string> GetAllDestinations()
     {
-        return AvailableFlights
+        return _availableFlights
             .Where(f => DateTime.Parse(f.DepartureTime) >= DateTime.Now)
             .Select(f => f.Destination)
             .Distinct()
@@ -90,7 +97,7 @@ public class FlightsLogic
 
     public List<string> GetAllOrigins()
     {
-        return AvailableFlights
+        return _availableFlights
             .Where(f => DateTime.Parse(f.DepartureTime) >= DateTime.Now)
             .Select(f => f.Origin)
             .Distinct()
@@ -99,7 +106,7 @@ public class FlightsLogic
 
     public List<FlightModel> FilterByDateRange(string origin, string destination, DateTime startDate, DateTime endDate)
     {
-        return AvailableFlights
+        return _availableFlights
             .Where(flight => flight.Origin.Equals(origin) && flight.Destination.Equals(destination) &&
                              DateTime.Parse(flight.DepartureTime) >= startDate &&
                              DateTime.Parse(flight.DepartureTime) <= endDate &&
@@ -109,7 +116,7 @@ public class FlightsLogic
 
     public List<FlightModel> GetFlightsByOriginAndDestination(string origin, string destination)
     {
-        return AvailableFlights
+        return _availableFlights
             .Where(f => f.Origin.Equals(origin) && f.Destination.Equals(destination) &&
                         DateTime.Parse(f.DepartureTime) >= DateTime.Now)
             .ToList();
@@ -117,7 +124,7 @@ public class FlightsLogic
 
     public List<FlightModel> FilterFlights(string origin, string destination, DateTime startDate, DateTime endDate)
     {
-        return AvailableFlights
+        return _availableFlights
             .Where(flight => flight.Origin.Equals(origin) && flight.Destination.Equals(destination) &&
                              DateTime.Parse(flight.DepartureTime) >= startDate &&
                              DateTime.Parse(flight.DepartureTime) <= endDate &&
@@ -127,7 +134,7 @@ public class FlightsLogic
 
     public List<FlightModel> FilterFlightsByDate(string origin, string destination, DateTime date)
     {
-        return AvailableFlights
+        return _availableFlights
             .Where(f => f.Origin.Equals(origin) &&
                         f.Destination.Equals(destination) &&
                         DateTime.Parse(f.DepartureTime).Date == date.Date)
@@ -139,11 +146,11 @@ public class FlightsLogic
         if (!IsFlightValid(newFlight))
             return false;
 
-        var newId = AvailableFlights.Count > 0 ? AvailableFlights.Max(f => f.FlightId) + 1 : 1;
+        var newId = _availableFlights.Count > 0 ? _availableFlights.Max(f => f.FlightId) + 1 : 1;
         newFlight.FlightId = newId;
 
-        AvailableFlights.Add(newFlight);
-        FlightsAccess.WriteAll(AvailableFlights);
+        _availableFlights.Add(newFlight);
+        _flightsAccess.WriteAll(_availableFlights);
         return true;
     }
 
@@ -152,25 +159,25 @@ public class FlightsLogic
         if (!IsFlightValid(updatedFlight))
             return false;
 
-        var existingFlight = AvailableFlights.FirstOrDefault(f => f.FlightId == updatedFlight.FlightId);
+        var existingFlight = _availableFlights.FirstOrDefault(f => f.FlightId == updatedFlight.FlightId);
         if (existingFlight == null)
             return false;
 
-        var index = AvailableFlights.IndexOf(existingFlight);
-        AvailableFlights[index] = updatedFlight;
+        var index = _availableFlights.IndexOf(existingFlight);
+        _availableFlights[index] = updatedFlight;
 
-        FlightsAccess.WriteAll(AvailableFlights);
+        _flightsAccess.WriteAll(_availableFlights);
         return true;
     }
 
     public bool DeleteFlight(int flightId)
     {
-        var flight = AvailableFlights.FirstOrDefault(f => f.FlightId == flightId);
+        var flight = _availableFlights.FirstOrDefault(f => f.FlightId == flightId);
         if (flight == null)
             return false;
 
-        AvailableFlights.Remove(flight);
-        FlightsAccess.WriteAll(AvailableFlights);
+        _availableFlights.Remove(flight);
+        _flightsAccess.WriteAll(_availableFlights);
         return true;
     }
 

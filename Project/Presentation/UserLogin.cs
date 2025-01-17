@@ -10,6 +10,7 @@ internal static class UserLogin
         Console.WriteLine("Welcome to the login page");
         Console.WriteLine("Note: You can press F2 to toggle password visibility while typing.");
         Console.WriteLine("Press ESC at any time to return to menu\n");
+        MilesLogic _milesLogic = new MilesLogic();
 
         var showPassword = false;
 
@@ -34,7 +35,7 @@ internal static class UserLogin
             Console.WriteLine($"Welcome back {acc.FirstName} {acc.LastName}");
             Console.WriteLine($"Your email is {acc.EmailAddress}");
             _isLoggedIn = true;
-            MilesLogic.UpdateAllAccountLevels();
+            _milesLogic.UpdateAllAccountLevels();
             ShowLoggedInMenu(acc);
         }
         else

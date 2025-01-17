@@ -1,6 +1,7 @@
 public class PaymentLogic
 {
-    private static readonly List<AccountModel> _accounts = AccountsAccess.LoadAll();
+    private readonly IAccountsAccess _accountsAccess;
+    private readonly List<AccountModel> _accounts;
 
     public static bool ValidateName(string name)
     {

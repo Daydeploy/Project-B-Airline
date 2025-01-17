@@ -1,5 +1,6 @@
 public class SeatUpgradeServiceLogic
 {
+    private readonly IAccountsAccess _accountsAccess = new AccountsAccess();
     public List<string> ViewAvailableUpgrades(int flightId)
     {
         return new List<string> { "Business Class", "First Class" };
@@ -16,7 +17,7 @@ public class SeatUpgradeServiceLogic
             if (milesEntry != null)
             {
                 milesEntry.Points -= milesAmount;
-                AccountsAccess.WriteAll(accountsLogic._accounts);
+                _accountsAccess.WriteAll(accountsLogic._accounts);
                 return true;
             }
         }

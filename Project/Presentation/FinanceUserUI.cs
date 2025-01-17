@@ -52,6 +52,8 @@ public class FinanceUserUI
 
     private static bool ShowPurchaseDetails(BookingModel booking, bool showVAT = true)
     {
+        BookingLogic _bookingLogic = new BookingLogic();
+
         if (booking == null) return false;
 
         while (true)
@@ -99,7 +101,7 @@ public class FinanceUserUI
                     return false;
                 }
 
-                calculatedTotal = BookingLogic.CalculateTotalPrice(
+                calculatedTotal = _bookingLogic.CalculateTotalPrice(
                     flight.Destination,
                     booking.Passengers,
                     BookingLogic.HasInsurance
@@ -506,8 +508,9 @@ public class FinanceUserUI
 
     private static void ShowAllPurchases()
     {
+        IBookingAccess _bookingAccess = new BookingAccess();
         var userId = UserLogin.UserAccountServiceLogic.CurrentUserId;
-        var bookings = BookingAccess.LoadAll()
+        var bookings = _bookingAccess.LoadAll()
             .Where(b => b.UserId == userId)
             .OrderByDescending(b => b.BookingDate)
             .ToList();
@@ -533,7 +536,8 @@ public class FinanceUserUI
 
     private static void ShowAllPurchasesAdmin()
     {
-        var bookings = BookingAccess.LoadAll();
+        IBookingAccess _bookingAccess = new BookingAccess();
+        var bookings = _bookingAccess.LoadAll();
         DisplayPurchases(bookings, "All Purchases");
     }
 
